@@ -100,6 +100,8 @@ AREA_TO_CITY = {
     "Chiba":    ["千葉", "舞浜", "幕張"],
     "Aomori":   ["青森", "Aomori", "弘前"],
     "Aichi":    ["愛知", "豊田"],
+    "Kochi":    ["高知", "Kochi"],
+    "Ishikawa": ["石川", "金沢", "金澤", "香林坊"],
     "Taipei":   ["台北", "臺北", "信義", "西門", "微風", "南山", "華山", "中山",
                  "松山", "內湖", "板橋", "101"],
     "Taichung": ["台中", "臺中", "草悟", "勤美"],
@@ -378,6 +380,40 @@ def best_search_query(ev: dict) -> str:
 def search_url(query: str) -> str:
     # 退路：Google 搜尋連結（永遠可開，用「地點+品牌」命中率高）
     return "https://www.google.com/search?q=" + requests.utils.quote(query)
+
+def _valid_md(mo: int, d: int) -> bool:
+    return 1 <= mo <= 12 and 1 <= d <= 31
+
+def extract_dates(html: str) -> tuple[str, str]:
+    """從來源頁面內文擷取活動期間。回傳 (startISO, endISO)，抓不到回 ('','')。
+    僅採用帶西元年的明確寫法（如「2026年5月27日(水)～6月14日(日)」），
+    避免誤抓貼文日期等雜訊。結束日缺年則沿用起始年；月份倒退視為跨年 +1。"""
+    if not html:
+        return "", ""
+    text = re.sub(r"<[^>]+>", " ", html).replace("　", " ")
+    sep = r"[^0-9]{0,14}?[～〜~\-−–—至]{1,3}[^0-9]{0,14}?"
+    # 範圍：20XX年M月D日 〜 [20XX年]M月D日
+    m = re.search(
+        r"(20\d{2})\s*[年./]\s*(\d{1,2})\s*[月./]\s*(\d{1,2})\s*日?"
+        + sep +
+        r"(?:(20\d{2})\s*[年./]\s*)?(\d{1,2})\s*[月./]\s*(\d{1,2})\s*日?",
+        text)
+    if m:
+        y1, mo1, d1, y2, mo2, d2 = m.groups()
+        y1, mo1, d1 = int(y1), int(mo1), int(d1)
+        y2 = int(y2) if y2 else y1
+        mo2, d2 = int(mo2), int(d2)
+        if _valid_md(mo1, d1) and _valid_md(mo2, d2):
+            if not m.group(4) and (mo2, d2) < (mo1, d1):
+                y2 = y1 + 1  # 結束月份比開始小且未標年 → 跨年
+            return f"{y1:04d}-{mo1:02d}-{d1:02d}", f"{y2:04d}-{mo2:02d}-{d2:02d}"
+    # 單一起始日：20XX年M月D日
+    m = re.search(r"(20\d{2})\s*[年./]\s*(\d{1,2})\s*[月./]\s*(\d{1,2})\s*日", text)
+    if m:
+        y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
+        if _valid_md(mo, d):
+            return f"{y:04d}-{mo:02d}-{d:02d}", ""
+    return "", ""
 
 _KANA = re.compile(r"[぀-ヿ]")  # 平假名 + 片假名
 
@@ -663,6 +699,16 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
                 if toks and not any(t in html for t in toks):
                     print(f"    ⚠️  來源未提到活動主題 {toks}，疑似誤萃取，整筆丟棄：{real}")
                     return None
+                # 補抓日期：AI 只看 RSS 短摘要常漏日期，從來源內文補（不額外花 API）
+                if not data.get("startDate") and not data.get("endDate"):
+                    s, e = extract_dates(html)
+                    # 防呆：起始日不早於約 400 天前（避免抓到舊報導/版權年份）
+                    age = _days_ago_iso(s) if s else None
+                    if s and age is not None and age <= 400:
+                        data["startDate"] = s
+                        if e:
+                            data["endDate"] = e
+                        print(f"    📅 從來源補抓日期：{s} ~ {e or '—'}")
         data["sourceUrl"]   = real if real else search_url(best_search_query(data))
         return data
     except RateLimitError:

@@ -359,30 +359,6 @@
     "sourceUrl": "https://the-outlets-shonan-hiratsuka.aeonmall.com/news/detail/5153"
   },
   {
-    "brand": "miffy",
-    "title": "Miffy首間正式主題咖啡廳",
-    "type": "cafe",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "Miffy Cafe",
-    "startDate": "",
-    "endDate": "",
-    "summaryZh": "日本首間正式Miffy主題咖啡廳登場，提供限定餐點與周邊商品，詳細日期與地點請參考官方資訊。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "Miffy",
-      "主題咖啡廳",
-      "東京",
-      "限定商品"
-    ],
-    "id": "mi-f9f74e",
-    "sourceTitle": "＜画像15 / 18＞限定グッズも充実！初の本格ミッフィーカフェに潜入 - ウォーカープラス",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-02",
-    "sourceUrl": "https://www.walkerplus.com/article/74592/image419155.html"
-  },
-  {
     "brand": "pokemon",
     "title": "Pokemon 新發售「もぐもぐウォッチング！」",
     "type": "new_product",
@@ -434,11 +410,11 @@
     "title": "Chiikawa POP UP STORE",
     "type": "popup",
     "country": "JP",
-    "city": "Tokyo",
-    "locationName": "蔦屋書店ポータル",
-    "startDate": "",
-    "endDate": "",
-    "summaryZh": "Chiikawa POP UP STORE 在蔦屋書店ポータル舉辦，具體日期和地點需進一步確認。",
+    "city": "Kochi",
+    "locationName": "高知 蔦屋書店",
+    "startDate": "2026-05-27",
+    "endDate": "2026-06-14",
+    "summaryZh": "ちいかわ POP UP STORE 於高知蔦屋書店1階中央廣場舉辦，販售限定周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": false,
     "tags": [
