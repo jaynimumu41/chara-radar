@@ -379,6 +379,22 @@ def search_url(query: str) -> str:
     # 退路：Google 搜尋連結（永遠可開，用「地點+品牌」命中率高）
     return "https://www.google.com/search?q=" + requests.utils.quote(query)
 
+_KANA = re.compile(r"[぀-ヿ]")  # 平假名 + 片假名
+
+def theme_tokens(*texts) -> list[str]:
+    """抽出「」『』中、含日文假名的主題詞（產品線/活動名）。
+    這類專有名詞會原樣出現在日文來源頁，可用來驗證活動是否真的對應來源。
+    只取含假名者：純英文/純中文詞在日文頁常以不同寫法出現，比對易誤殺，故略過。"""
+    toks = set()
+    for t in texts:
+        if not t:
+            continue
+        for m in re.findall(r"[「『]([^」』]{2,20})[」』]", t):
+            m = m.strip()
+            if _KANA.search(m):
+                toks.add(m)
+    return list(toks)
+
 def decode_google_news_url(gurl: str) -> str | None:
     """把 Google News 加密網址解回真實文章 URL；失敗回 None。"""
     try:
@@ -496,6 +512,7 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
     loc_keys: dict[str, int] = {}       # (brand, norm_location) -> kept index
     url_keys: dict[str, int] = {}       # 真實來源 URL -> kept index
     date_keys: dict[str, int] = {}      # (brand, city, startDate) -> kept index
+    theme_keys: dict[str, int] = {}     # (brand, 日文主題詞) -> kept index
     removed = 0
 
     def completeness(e: dict) -> int:
@@ -517,6 +534,7 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
         ukey = direct_url(ev)
         city, sd = ev.get("city", ""), ev.get("startDate", "")
         dkey = (b + "|" + city + "|" + sd) if (city and sd) else None  # 同品牌同城同開始日
+        thkeys = [b + "|" + t for t in theme_tokens(ev.get("title"), ev.get("summaryZh"))]
 
         hit = None
         if ukey and ukey in url_keys:        # 相同真實來源 = 同一活動
@@ -525,6 +543,8 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
             hit = title_keys[tkey]
         elif dkey and dkey in date_keys:     # 同品牌+同城市+同開始日 = 同一活動
             hit = date_keys[dkey]
+        elif any(tk in theme_keys for tk in thkeys):  # 同品牌+相同日文主題詞 = 同一活動
+            hit = theme_keys[next(tk for tk in thkeys if tk in theme_keys)]
         elif lkey and lkey in loc_keys:
             hit = loc_keys[lkey]
 
@@ -552,6 +572,8 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
             url_keys[ukey] = idx
         if dkey:
             date_keys[dkey] = idx
+        for tk in thkeys:
+            theme_keys.setdefault(tk, idx)
 
     # 收尾：模糊比對（同品牌，且「同知名場館」或「同城市」時，標題夠相似就合併）
     def tsim(a: str, b: str) -> float:
@@ -634,6 +656,13 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
             elif not page_mentions(html, BRAND_KEYWORDS.get(brand, [])):
                 print(f"    ⚠️  來源頁未提到 {brand}（關聯性不足），改用搜尋連結：{real}")
                 real = None
+            else:
+                # 來源是該品牌頁，再驗證「活動主題」真的出現在來源——
+                # 否則是 AI 把無關報導（如休業公告）誤萃取成活動，整筆丟棄。
+                toks = theme_tokens(data.get("title"), data.get("summaryZh"))
+                if toks and not any(t in html for t in toks):
+                    print(f"    ⚠️  來源未提到活動主題 {toks}，疑似誤萃取，整筆丟棄：{real}")
+                    return None
         data["sourceUrl"]   = real if real else search_url(best_search_query(data))
         return data
     except RateLimitError:
