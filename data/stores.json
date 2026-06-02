@@ -1,0 +1,117 @@
+{
+  "_note": "常設店清單（手動維護，不經爬蟲、不花 API）。只放營業中或已確定開幕日的店。資料來源：各品牌官方店舖頁。",
+  "pokemon": {
+    "groups": [
+      {
+        "label": "Pokémon Center",
+        "stores": [
+          { "name": "Pokémon Center 札幌", "area": "北海道・札幌", "country": "JP" },
+          { "name": "Pokémon Center 東北（仙台）", "area": "宮城・仙台", "country": "JP" },
+          { "name": "Pokémon Center 東京 DX", "area": "東京・日本橋", "country": "JP" },
+          { "name": "Pokémon Center Mega Tokyo", "area": "東京・池袋", "country": "JP" },
+          { "name": "Pokémon Center 澀谷", "area": "東京・澀谷", "country": "JP" },
+          { "name": "Pokémon Center 晴空塔城", "area": "東京・晴空塔", "country": "JP" },
+          { "name": "Pokémon Center 東京灣", "area": "千葉・船橋", "country": "JP" },
+          { "name": "Pokémon Center 橫濱", "area": "神奈川・橫濱", "country": "JP" },
+          { "name": "Pokémon Center 橫濱 Satellite", "area": "神奈川・橫濱", "country": "JP" },
+          { "name": "Pokémon Center 名古屋", "area": "愛知・名古屋", "country": "JP" },
+          { "name": "Pokémon Center 金澤", "area": "石川・金澤", "country": "JP" },
+          { "name": "Pokémon Center 京都", "area": "京都", "country": "JP" },
+          { "name": "Pokémon Center 大阪 DX", "area": "大阪・梅田", "country": "JP" },
+          { "name": "Pokémon Center 大阪", "area": "大阪・天保山", "country": "JP" },
+          { "name": "Pokémon Center 廣島", "area": "廣島", "country": "JP" },
+          { "name": "Pokémon Center 香川", "area": "香川・高松", "country": "JP" },
+          { "name": "Pokémon Center 福岡", "area": "福岡", "country": "JP" },
+          { "name": "Pokémon Center 沖繩", "area": "沖繩・那霸", "country": "JP" },
+          { "name": "Pokémon Center TAIPEI", "area": "台北・信義（微風南山）", "country": "TW" }
+        ]
+      },
+      {
+        "label": "Pokémon Store",
+        "stores": [
+          { "name": "Pokémon Store 新千歲機場", "area": "北海道・新千歲機場", "country": "JP" },
+          { "name": "Pokémon Store 東京車站", "area": "東京・東京車站", "country": "JP" },
+          { "name": "Pokémon Store 木更津 Outlet", "area": "千葉・木更津", "country": "JP" },
+          { "name": "Pokémon Store 成田機場", "area": "千葉・成田機場", "country": "JP" },
+          { "name": "Pokémon Store 御殿場", "area": "靜岡・御殿場", "country": "JP" }
+        ]
+      }
+    ]
+  },
+  "miffy": {
+    "groups": [
+      {
+        "label": "miffy style",
+        "stores": [
+          { "name": "miffy style 原宿店", "area": "東京・原宿", "country": "JP" },
+          { "name": "miffy style 新宿店", "area": "東京・新宿", "country": "JP" },
+          { "name": "miffy style 東京車站店", "area": "東京・東京車站", "country": "JP" },
+          { "name": "miffy style 吉祥寺店", "area": "東京・吉祥寺", "country": "JP" },
+          { "name": "miffy style 晴空塔城店", "area": "東京・晴空塔", "country": "JP" },
+          { "name": "miffy style 橫濱店", "area": "神奈川・橫濱", "country": "JP" },
+          { "name": "miffy style 越谷 LakeTown 店", "area": "埼玉・越谷", "country": "JP" },
+          { "name": "miffy style mimi 上小田井", "area": "愛知・名古屋", "country": "JP" },
+          { "name": "miffy style 名古屋 Gate Tower 店", "area": "愛知・名古屋", "country": "JP" },
+          { "name": "miffy style 名古屋 PARCO 店", "area": "愛知・名古屋", "country": "JP" },
+          { "name": "miffy style 大阪梅田店", "area": "大阪・梅田", "country": "JP" },
+          { "name": "miffy style 心齋橋 PARCO 店", "area": "大阪・心齋橋", "country": "JP" },
+          { "name": "miffy style mimi LaLaport EXPOCITY", "area": "大阪・吹田", "country": "JP" },
+          { "name": "miffy style 京都四条河原町店", "area": "京都", "country": "JP" },
+          { "name": "miffy style 神戶店", "area": "兵庫・神戶", "country": "JP" },
+          { "name": "miffy style mimi 三宮", "area": "兵庫・三宮", "country": "JP" },
+          { "name": "miffy style Piole 姬路店", "area": "兵庫・姬路", "country": "JP" },
+          { "name": "miffy style mimi 高松", "area": "香川・高松", "country": "JP" },
+          { "name": "miffy style mimi 福岡 PARCO", "area": "福岡", "country": "JP" },
+          { "name": "miffy style AMU PLAZA 熊本店", "area": "熊本", "country": "JP" }
+        ]
+      },
+      {
+        "label": "miffy kitchen & bakery",
+        "stores": [
+          { "name": "みっふぃー桜きっちん＆べーかりー 嵐山店", "area": "京都・嵐山", "country": "JP" },
+          { "name": "みっふぃー森のきっちん＆べーかりー 輕井澤店", "area": "長野・輕井澤", "country": "JP" },
+          { "name": "みっふぃー森のきっちん＆べーかりー 湯布院店", "area": "大分・湯布院", "country": "JP" },
+          { "name": "みっふぃー海のきっちん＆べーかりー 小樽店", "area": "北海道・小樽", "country": "JP" }
+        ]
+      }
+    ]
+  },
+  "chiikawa": {
+    "groups": [
+      {
+        "label": "ちいかわらんど（常設店）",
+        "stores": [
+          { "name": "ちいかわらんど 原宿店", "area": "東京・原宿", "country": "JP" },
+          { "name": "ちいかわらんど 新宿店", "area": "東京・新宿", "country": "JP" },
+          { "name": "ちいかわらんど TOKYO Station", "area": "東京・東京車站", "country": "JP" },
+          { "name": "ちいかわらんど 晴空塔城店", "area": "東京・晴空塔", "country": "JP" },
+          { "name": "ちいかわらんど 池袋 PARCO 店", "area": "東京・池袋", "country": "JP" },
+          { "name": "ちいかわらんど 橫濱店", "area": "神奈川・橫濱", "country": "JP" },
+          { "name": "ちいかわらんど 名古屋 PARCO 店", "area": "愛知・名古屋", "country": "JP" },
+          { "name": "ちいかわらんど 大阪梅田店", "area": "大阪・梅田", "country": "JP" },
+          { "name": "ちいかわらんど 心齋橋 PARCO 店", "area": "大阪・心齋橋", "country": "JP" },
+          { "name": "ちいかわらんど 京都四条河原町店", "area": "京都", "country": "JP" },
+          { "name": "ちいかわらんど 金澤 Forus 店", "area": "石川・金澤", "country": "JP" },
+          { "name": "ちいかわらんど 仙台 PARCO 店", "area": "宮城・仙台", "country": "JP" },
+          { "name": "ちいかわらんど 札幌 PARCO 店", "area": "北海道・札幌", "country": "JP" },
+          { "name": "ちいかわらんど 廣島 PARCO 店", "area": "廣島", "country": "JP" },
+          { "name": "ちいかわらんど 福岡 PARCO 店", "area": "福岡", "country": "JP" }
+        ]
+      },
+      {
+        "label": "台灣",
+        "stores": [
+          { "name": "CHIIKAWA SHOP in TAIPEI", "area": "台北・中山（長安西路19號）", "country": "TW" }
+        ]
+      }
+    ]
+  },
+  "sanrio": {
+    "linksOnly": true,
+    "note": "三麗鷗門市眾多，直接看官方門市一覽：",
+    "links": [
+      { "label": "日本 三麗鷗官方店舖一覽", "url": "https://stores.sanrio.co.jp/zh_hant" },
+      { "label": "台灣 三麗鷗門市一覽", "url": "https://www.sanrio.com.tw/shops/" }
+    ]
+  }
+}

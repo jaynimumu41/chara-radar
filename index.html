@@ -35,7 +35,7 @@
     <div class="stats-row">
       <div class="stat-card">
         <div class="stat-num" id="stat-total">—</div>
-        <div class="stat-label">目前有效情報</div>
+        <div class="stat-label" id="stat-total-label">目前有效情報</div>
       </div>
       <div class="stat-card urgent">
         <div class="stat-num" id="stat-urgent">—</div>
@@ -86,13 +86,24 @@
       </button>
     </div>
 
-    <div class="filter-bar">
+    <!-- 檢視切換：活動情報 / 常設店（手機上各佔一半） -->
+    <div class="view-tabs">
+      <button class="view-tab active" data-view="events">
+        <span class="vt-title">📋 活動情報</span>
+        <span class="vt-sub">快結束的排前</span>
+      </button>
+      <button class="view-tab" data-view="stores">
+        <span class="vt-title">🏬 常設店</span>
+        <span class="vt-sub">固定店舖一覽</span>
+      </button>
+    </div>
+
+    <div class="filter-bar" id="filter-bar">
       <select class="filter-select" id="filter-type">
         <option value="all">所有類型</option>
         <option value="popup">快閃店</option>
         <option value="new_product">新商品</option>
         <option value="campaign">活動</option>
-        <option value="store">常設店</option>
         <option value="cafe">咖啡廳</option>
         <option value="lottery">抽選</option>
       </select>
@@ -105,8 +116,8 @@
       <span class="filter-count" id="events-count"></span>
     </div>
 
-    <div class="section-title">📋 活動情報（最快結束的排前面）</div>
     <div class="events-grid" id="events-grid"></div>
+    <div class="stores-wrap" id="stores-wrap" style="display:none"></div>
 </div>
 
 <script src="js/app.js"></script>

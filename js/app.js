@@ -1,4 +1,6 @@
 let allEvents = [];
+let storeData = {};       // 常設店資料（data/stores.json）
+let activeView = 'events';// 'events' | 'stores'
 let activeBrand = null;   // null = 全部品牌
 let activeType = 'all';
 let activeCountry = 'all';
@@ -112,6 +114,17 @@ function renderCard(ev) {
 // ── Home render ───────────────────────────────────────────────────────────────
 
 function renderHome() {
+  if (activeView === 'stores') return renderStores();
+  return renderEvents();
+}
+
+function renderEvents() {
+  // 顯示活動相關 UI
+  document.getElementById('filter-bar').style.display = '';
+  document.getElementById('events-grid').style.display = '';
+  document.getElementById('stores-wrap').style.display = 'none';
+  document.getElementById('stat-total-label').textContent = '目前有效情報';
+
   const filtered = getFiltered();
 
   // 統計（隨篩選動態變化）
@@ -119,12 +132,10 @@ function renderHome() {
     const d = daysUntilEnd(ev.endDate);
     return d !== null && d <= 7 && d >= 0;
   }).length;
-  document.getElementById('stat-total').textContent = filtered.length;
-  document.getElementById('stat-urgent').textContent = urgentCount;
-  document.getElementById('stat-reservation').textContent = filtered.filter(e => e.needReservation).length;
-  document.getElementById('stat-limited').textContent = filtered.filter(e => e.hasLimitedGoods).length;
+  setStats(filtered.length, urgentCount,
+    filtered.filter(e => e.needReservation).length,
+    filtered.filter(e => e.hasLimitedGoods).length);
 
-  // 計數
   document.getElementById('events-count').textContent = `共 ${filtered.length} 筆`;
 
   // 排序：最快結束在前；無結束日（常設/未定）排最後
@@ -142,6 +153,75 @@ function renderHome() {
   grid.innerHTML = sorted.map(renderCard).join('');
 }
 
+function setStats(total, urgent, reservation, limited) {
+  const t = v => (v === null ? '—' : v);
+  document.getElementById('stat-total').textContent = t(total);
+  document.getElementById('stat-urgent').textContent = t(urgent);
+  document.getElementById('stat-reservation').textContent = t(reservation);
+  document.getElementById('stat-limited').textContent = t(limited);
+}
+
+// ── 常設店檢視 ──────────────────────────────────────────────────────────────────
+
+function brandStoreCount(brand) {
+  const b = storeData[brand];
+  if (!b) return 0;
+  if (b.linksOnly) return b.links.length;
+  return (b.groups || []).reduce((n, g) => n + g.stores.length, 0);
+}
+
+function renderStores() {
+  // 常設店不需要類型/國家/城市篩選
+  document.getElementById('filter-bar').style.display = 'none';
+  document.getElementById('events-grid').style.display = 'none';
+  const wrap = document.getElementById('stores-wrap');
+  wrap.style.display = '';
+
+  const brands = activeBrand ? [activeBrand] : ['pokemon', 'miffy', 'chiikawa', 'sanrio'];
+
+  // 統計：只顯示「目前有效情報」=常設店數量，其餘三欄留白
+  const total = brands.reduce((n, b) => n + brandStoreCount(b), 0);
+  setStats(total, null, null, null);
+  document.getElementById('stat-total-label').textContent = '常設店';
+  document.getElementById('events-count').textContent = `共 ${total} 間`;
+
+  const sections = brands.map(b => renderBrandStores(b)).filter(Boolean).join('');
+  wrap.innerHTML = sections ||
+    `<div class="no-results"><p>🏬</p><p>這個品牌暫無常設店資料</p></div>`;
+}
+
+function renderBrandStores(brand) {
+  const data = storeData[brand];
+  if (!data) return '';
+  const head = `<div class="store-brand-head"><span class="badge badge-brand-${brand}">${BRAND_LABELS[brand]}</span></div>`;
+
+  // 三麗鷗：只放官方門市連結
+  if (data.linksOnly) {
+    const links = data.links.map(l =>
+      `<a class="store-link" href="${l.url}" target="_blank" rel="noopener">${l.label} ↗</a>`).join('');
+    return `<div class="store-section">${head}
+      <div class="store-note">${data.note || ''}</div>
+      <div class="store-links">${links}</div></div>`;
+  }
+
+  const groups = (data.groups || []).map(g => {
+    const items = g.stores.map(s => {
+      const flag = s.country === 'TW' ? '🇹🇼' : '🇯🇵';
+      const open = s.opening ? `<span class="store-open">（${s.opening} 開幕）</span>` : '';
+      return `<div class="store-item">
+        <span class="store-name">${s.name}${open}</span>
+        <span class="store-area">${flag} ${s.area}</span>
+      </div>`;
+    }).join('');
+    return `<div class="store-group">
+      <div class="store-group-label">${g.label}<span class="store-group-count">${g.stores.length}</span></div>
+      <div class="store-items">${items}</div>
+    </div>`;
+  }).join('');
+
+  return `<div class="store-section">${head}${groups}</div>`;
+}
+
 function initCitySelect() {
   const cities = [...new Set(allEvents.filter(e => e.city).map(e => e.city))]
     .sort((a, b) => Object.keys(CITY_LABELS).indexOf(a) - Object.keys(CITY_LABELS).indexOf(b));
@@ -153,8 +233,22 @@ function initCitySelect() {
 // ── Init ──────────────────────────────────────────────────────────────────────
 
 async function init() {
-  const res = await fetch('data/events.json');
-  allEvents = await res.json();
+  const [evRes, stRes] = await Promise.all([
+    fetch('data/events.json'),
+    fetch('data/stores.json')
+  ]);
+  allEvents = await evRes.json();
+  storeData = await stRes.json();
+
+  // 檢視切換：活動情報 / 常設店
+  document.querySelectorAll('.view-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      activeView = tab.dataset.view;
+      document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      renderHome();
+    });
+  });
 
   // Brand pills — 可切換：再點一次取消（回到全部）
   document.querySelectorAll('.brand-pill').forEach(pill => {
