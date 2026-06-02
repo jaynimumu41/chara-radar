@@ -7,8 +7,8 @@ let activeCity = 'all';
 const BRAND_LABELS = {
   pokemon: 'Pokémon',
   miffy: 'Miffy',
-  chiikawa: '吉伊卡哇',
-  sanrio: '三麗鷗'
+  chiikawa: 'Chiikawa',
+  sanrio: 'Sanrio'
 };
 const TYPE_LABELS = {
   popup: '快閃店',

@@ -145,18 +145,18 @@ body {
   gap: 6px;
 }
 
-/* BRAND FILTER PILLS */
+/* BRAND FILTER PILLS — 2×2（手機）/ 4 欄（桌機），與上方統計卡對齊 */
 .brand-filters {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
   margin-bottom: 20px;
 }
 .brand-pill {
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 500;
+  padding: 10px 14px;
+  border-radius: 22px;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
   border: 2px solid transparent;
   transition: all .15s;
@@ -165,7 +165,8 @@ body {
   color: var(--text-muted);
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+  gap: 6px;
 }
 .brand-pill:hover { border-color: currentColor; }
 .brand-pill.active { color: #fff; border-color: transparent; }
@@ -174,7 +175,8 @@ body {
 .brand-pill[data-brand="miffy"] { --c: var(--miffy); }
 .brand-pill[data-brand="chiikawa"] { --c: var(--chiikawa); }
 .brand-pill[data-brand="sanrio"] { --c: var(--sanrio); }
-.brand-pill[data-brand="pokemon"].active { background: var(--pokemon); }
+/* Pokémon 選取：淡黃底 + 深字，避免黃色閃電被蓋掉看不見 */
+.brand-pill[data-brand="pokemon"].active { background: #ffdf80; color: #8a5400; }
 .brand-pill[data-brand="miffy"].active { background: var(--miffy); }
 .brand-pill[data-brand="chiikawa"].active { background: var(--chiikawa); }
 .brand-pill[data-brand="sanrio"].active { background: var(--sanrio); }
@@ -426,6 +428,7 @@ body {
 /* Responsive */
 @media (max-width: 700px) {
   .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .brand-filters { grid-template-columns: repeat(2, 1fr); }
   .travel-form { grid-template-columns: 1fr 1fr; }
   .events-grid { grid-template-columns: 1fr; }
 }

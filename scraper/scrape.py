@@ -28,6 +28,8 @@ from pathlib import Path
 
 import requests
 
+from verify_links import check_url, page_mentions  # 存檔前驗證來源連結：連得過去 + 內容與品牌相關
+
 # Windows 終端機 UTF-8 輸出 + 關閉緩衝（即時看到進度）
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace", line_buffering=True)
@@ -620,8 +622,18 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
         data["sourceType"]  = "official_social"
         data["createdAt"]   = TODAY
         data.setdefault("tags", [])
-        # 來源連結：優先解出真實文章 URL，失敗才退回「地點+品牌」搜尋
+        # 來源連結：優先解出真實文章 URL，並做兩道驗證才採用——
+        #   1) 連得過去（非 403/404…）  2) 頁面內容真的提到該品牌（關聯性）
+        # 任一不過，一律退回保證可開、且必定相關的「地點+品牌」搜尋連結。
         real = decode_google_news_url(item["link"])
+        if real:
+            ok, code, html = check_url(real, return_text=True)
+            if not ok:
+                print(f"    ⚠️  來源連不過（HTTP {code}），改用搜尋連結：{real}")
+                real = None
+            elif not page_mentions(html, BRAND_KEYWORDS.get(brand, [])):
+                print(f"    ⚠️  來源頁未提到 {brand}（關聯性不足），改用搜尋連結：{real}")
+                real = None
         data["sourceUrl"]   = real if real else search_url(best_search_query(data))
         return data
     except RateLimitError:

@@ -113,7 +113,7 @@
       "限定商品"
     ],
     "id": "mi-d039e6",
-    "sourceUrl": "https://news.nicovideo.jp/watch/nw19368887?news_ref",
+    "sourceUrl": "https://dtimes.jp/post-1242556/",
     "sourceType": "official_social",
     "createdAt": "2026-06-02",
     "sourceTitle": "ミッフィー・ワンダースクエア1周年デザイン！ ハウステンボス“ミッフィーバースデーマンス2026”グッズ - ニコニコニュース"
@@ -287,30 +287,6 @@
   },
   {
     "brand": "sanrio",
-    "title": "Sanrio Cafe Wagon Pom Pom Purin 30週年紀念版",
-    "type": "cafe",
-    "country": "JP",
-    "city": "Kanagawa",
-    "locationName": "ららぽーと湘南平塚",
-    "startDate": "",
-    "endDate": "",
-    "summaryZh": "Sanrio Cafe Wagon推出Pom Pom Purin 30週年紀念版，期間限定於ららぽーと湘南平塚登場。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "三麗鷗",
-      "布丁狗",
-      "期間限定",
-      "咖啡車"
-    ],
-    "id": "sa-3529c4",
-    "sourceTitle": "【平塚市】ららぽーと湘南平塚で「サンリオカフェワゴンポムポムプリン30周年記念版」が期間限定登場 - 湘南人",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-02",
-    "sourceUrl": "https://shonanjin.com/news/hiratsuka-sanrio-cafe-wagon-pompompurin-30th/"
-  },
-  {
-    "brand": "sanrio",
     "title": "Sanrio Fes 2026 in Minatomirai",
     "type": "campaign",
     "country": "JP",
@@ -387,7 +363,7 @@
     "type": "cafe",
     "country": "JP",
     "city": "Kanagawa",
-    "locationName": "THE OUTLET湘南平塚",
+    "locationName": "ジ アウトレット湘南平塚",
     "startDate": "2026-06-12",
     "endDate": "2026-06-14",
     "summaryZh": "Sanrio CAFE WAGON「MIRACLE GIFT PARADE GO!」將於6月12日至6月14日在THE OUTLET湘南平塚登場，提供限定飲品與點心。",
@@ -401,9 +377,9 @@
     ],
     "id": "sa-b9645e",
     "sourceTitle": "【平塚市】ジアウトレット湘南平塚にサンリオカフェワゴン「ミラクルギフトパレード号」が登場！ 6月12日～6月14日 - 湘南人",
-    "sourceType": "official_social",
+    "sourceType": "official_site",
     "createdAt": "2026-06-02",
-    "sourceUrl": "https://shonanjin.com/event/hiratsuka-sanrio-cafe-wagon-miracle-gift-parade/"
+    "sourceUrl": "https://the-outlets-shonan-hiratsuka.aeonmall.com/news/detail/5153"
   },
   {
     "brand": "miffy",
