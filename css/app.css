@@ -1,0 +1,431 @@
+:root {
+  --bg: #f8f7f5;
+  --surface: #ffffff;
+  --surface2: #f2f0ed;
+  --border: #e8e4df;
+  --text: #1a1a1a;
+  --text-muted: #6b6460;
+  --pokemon: #f5a623;
+  --pokemon-bg: #fff8ed;
+  --miffy: #4a90d9;
+  --miffy-bg: #edf4fd;
+  --chiikawa: #e8a0b0;
+  --chiikawa-bg: #fdf0f3;
+  --sanrio: #e05c9a;
+  --sanrio-bg: #fde8f3;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 2px 8px rgba(0,0,0,.07);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans TC', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* NAV */
+.nav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  gap: 24px;
+}
+.nav-logo {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -.3px;
+  color: var(--text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.logo-svg { width: 22px; height: 22px; flex-shrink: 0; }
+.bicon { width: 16px; height: 16px; flex-shrink: 0; }
+.logo-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+.nav-tabs {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav-tab { white-space: nowrap; }
+.nav-tabs::-webkit-scrollbar { display: none; }
+.nav-tab {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--text-muted);
+  border: none;
+  background: none;
+  transition: all .15s;
+}
+.nav-tab:hover { background: var(--surface2); color: var(--text); }
+.nav-tab.active { background: var(--text); color: #fff; }
+
+/* LAYOUT */
+.page { display: none; }
+.page.active { display: block; }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* HOME PAGE */
+.home-hero {
+  padding: 32px 0 0;
+}
+.home-hero h1 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.home-hero p {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 20px 0;
+}
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  text-align: center;
+}
+.stat-num {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.stat-card.urgent .stat-num { color: #e05c3a; }
+.stat-card.reservation .stat-num { color: var(--sanrio); }
+.stat-card.limited .stat-num { color: var(--pokemon); }
+
+.section-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 24px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* BRAND FILTER PILLS */
+.brand-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.brand-pill {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all .15s;
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.brand-pill:hover { border-color: currentColor; }
+.brand-pill.active { color: #fff; border-color: transparent; }
+.brand-pill[data-brand="all"].active { background: var(--text); }
+.brand-pill[data-brand="pokemon"] { --c: var(--pokemon); }
+.brand-pill[data-brand="miffy"] { --c: var(--miffy); }
+.brand-pill[data-brand="chiikawa"] { --c: var(--chiikawa); }
+.brand-pill[data-brand="sanrio"] { --c: var(--sanrio); }
+.brand-pill[data-brand="pokemon"].active { background: var(--pokemon); }
+.brand-pill[data-brand="miffy"].active { background: var(--miffy); }
+.brand-pill[data-brand="chiikawa"].active { background: var(--chiikawa); }
+.brand-pill[data-brand="sanrio"].active { background: var(--sanrio); }
+
+/* FILTER BAR */
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.filter-select {
+  padding: 7px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 13px;
+  color: var(--text);
+  cursor: pointer;
+}
+.filter-select:focus { outline: 2px solid var(--text); }
+.filter-count {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-left: auto;
+}
+
+/* EVENT CARDS */
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+  padding-bottom: 40px;
+}
+
+.event-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  cursor: pointer;
+  transition: box-shadow .15s, transform .1s;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  overflow: hidden;
+}
+.event-card:hover { box-shadow: var(--shadow); transform: translateY(-1px); }
+.event-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  border-radius: 4px 0 0 4px;
+}
+.event-card[data-brand="pokemon"]::before { background: var(--pokemon); }
+.event-card[data-brand="miffy"]::before { background: var(--miffy); }
+.event-card[data-brand="chiikawa"]::before { background: var(--chiikawa); }
+.event-card[data-brand="sanrio"]::before { background: var(--sanrio); }
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  justify-content: space-between;
+}
+.card-badges {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+.badge {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.badge-brand-pokemon { background: var(--pokemon-bg); color: #9a5f00; }
+.badge-brand-miffy { background: var(--miffy-bg); color: #1a5fa0; }
+.badge-brand-chiikawa { background: var(--chiikawa-bg); color: #9a3050; }
+.badge-brand-sanrio { background: var(--sanrio-bg); color: #9a1060; }
+
+.badge-type { background: var(--surface2); color: var(--text-muted); }
+.badge-urgent { background: #ffeaea; color: #c0392b; }
+.badge-reservation { background: #fde8f3; color: #9a1060; }
+.badge-limited { background: #fff8ed; color: #9a5f00; }
+.badge-tw { background: #e8f5e9; color: #2e7d32; }
+.badge-jp { background: #e3f2fd; color: #1565c0; }
+
+.card-title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.card-summary {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.card-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 6px;
+  border-top: 1px solid var(--border);
+}
+.card-tags {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  flex: 1;
+}
+.tag {
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--surface2);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+.card-link {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  transition: all .15s;
+  white-space: nowrap;
+}
+.card-link:hover { background: var(--text); color: #fff; border-color: var(--text); }
+
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-muted);
+  grid-column: 1/-1;
+}
+.no-results p:first-child { font-size: 32px; margin-bottom: 8px; }
+
+/* TRAVEL PAGE */
+.travel-hero {
+  padding: 32px 0 24px;
+}
+.travel-hero h1 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+.travel-hero p { color: var(--text-muted); font-size: 13px; }
+
+.travel-form {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 24px;
+}
+.form-group { display: flex; flex-direction: column; gap: 4px; }
+.form-label { font-size: 12px; font-weight: 600; color: var(--text-muted); }
+.form-input, .form-select {
+  padding: 9px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  font-size: 13px;
+  color: var(--text);
+  width: 100%;
+}
+.form-input:focus, .form-select:focus { outline: 2px solid var(--text); background: var(--surface); }
+.btn-search {
+  padding: 9px 20px;
+  background: var(--text);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity .15s;
+}
+.btn-search:hover { opacity: .85; }
+
+.travel-results-header {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.travel-results-header h2 { font-size: 15px; font-weight: 700; }
+.travel-results-header p { font-size: 13px; color: var(--text-muted); }
+
+/* EMPTY STATE */
+.empty-travel {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-muted);
+}
+.empty-travel .icon { font-size: 48px; margin-bottom: 12px; }
+.empty-travel h2 { font-size: 16px; color: var(--text); margin-bottom: 6px; }
+
+/* ABOUT */
+.about-page {
+  padding: 40px 0;
+  max-width: 640px;
+}
+.about-page h1 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.about-page p { color: var(--text-muted); font-size: 13px; margin-bottom: 16px; line-height: 1.7; }
+.about-page h2 { font-size: 15px; font-weight: 700; margin: 24px 0 8px; }
+.data-sources { display: flex; flex-direction: column; gap: 8px; }
+.data-source {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+.data-source .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .travel-form { grid-template-columns: 1fr 1fr; }
+  .events-grid { grid-template-columns: 1fr; }
+}

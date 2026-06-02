@@ -1,0 +1,13 @@
+# 機密：API 金鑰，絕不可進公開 repo
+scraper/.env
+
+# 快取與暫存
+scraper/__pycache__/
+scraper/logs/
+scraper/processed.json
+
+# 本機開發設定
+.claude/
+
+# 舊種子資料（不再使用）
+data/events.seed.json

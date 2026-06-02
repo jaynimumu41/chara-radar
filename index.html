@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>抓住 Pokémon Miffy Chiikawa Sanrio !</title>
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-logo" href="#">
+    <svg class="logo-svg" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 1.5c.6 6.4 3.6 9.4 10 10-6.4.6-9.4 3.6-10 10-.6-6.4-3.6-9.4-10-10 6.4-.6 9.4-3.6 10-10z" fill="#f6b73c"/>
+      <circle cx="19.5" cy="5" r="1.6" fill="#f7c95a"/>
+    </svg>
+    <span class="logo-text">抓住 Pokémon · Miffy · Chiikawa · Sanrio !</span>
+  </a>
+</nav>
+
+<!-- HOME -->
+<div class="container">
+    <div class="home-hero">
+      <h1>抓住 Pokémon · Miffy · Chiikawa · Sanrio !</h1>
+      <p>幫你蒐集日本與台灣的最新活動、快閃、新品、咖啡廳情報</p>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num" id="stat-total">—</div>
+        <div class="stat-label">目前有效情報</div>
+      </div>
+      <div class="stat-card urgent">
+        <div class="stat-num" id="stat-urgent">—</div>
+        <div class="stat-label">即將結束（7天內）</div>
+      </div>
+      <div class="stat-card reservation">
+        <div class="stat-num" id="stat-reservation">—</div>
+        <div class="stat-label">需要預約</div>
+      </div>
+      <div class="stat-card limited">
+        <div class="stat-num" id="stat-limited">—</div>
+        <div class="stat-label">有限定商品</div>
+      </div>
+    </div>
+
+    <div class="brand-filters">
+      <button class="brand-pill" data-brand="pokemon">
+        <svg class="bicon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2 5 13.5h5.2L9 22l9-12.5h-5.3L14.5 2z" fill="#f5a623"/></svg>
+        Pokémon
+      </button>
+      <button class="brand-pill" data-brand="miffy">
+        <svg class="bicon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12.2 21.3 8.4 9.6c2.4-1 5-1 7.4 0L12.2 21.3z" fill="#f59042"/>
+          <path d="M11 9c-.6-3-2.2-4.2-4.4-4.3 1 1.8 1.2 3.2 2.4 4.6L11 9z" fill="#5cb85c"/>
+          <path d="M12.4 8.6c-.2-3.2.7-5 2.8-5.6-.4 2.1-1.2 3.7-1.4 5.4l-1.4.2z" fill="#5cb85c"/>
+          <path d="M13.6 9.2c1-2.6 2.6-3.6 4.8-3.2-1.4 1.5-2.3 2.8-3.6 3.8l-1.2-.6z" fill="#5cb85c"/>
+        </svg>
+        Miffy
+      </button>
+      <button class="brand-pill" data-brand="chiikawa">
+        <svg class="bicon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" fill="#fff" stroke="#e7d8c6" stroke-width="1.2"/>
+          <circle cx="9.2" cy="11" r="1.15" fill="#4a4a4a"/>
+          <circle cx="14.8" cy="11" r="1.15" fill="#4a4a4a"/>
+          <ellipse cx="6.6" cy="13.8" rx="1.7" ry="1.1" fill="#f7b7c4"/>
+          <ellipse cx="17.4" cy="13.8" rx="1.7" ry="1.1" fill="#f7b7c4"/>
+          <path d="M10.4 14.2q1.6 1.6 3.2 0" stroke="#4a4a4a" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+        </svg>
+        吉伊卡哇
+      </button>
+      <button class="brand-pill" data-brand="sanrio">
+        <svg class="bicon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M11.6 12 4 7.5v9z" fill="#e05c9a"/>
+          <path d="M12.4 12 20 7.5v9z" fill="#e05c9a"/>
+          <circle cx="12" cy="12" r="2.3" fill="#c4477f"/>
+        </svg>
+        三麗鷗
+      </button>
+    </div>
+
+    <div class="filter-bar">
+      <select class="filter-select" id="filter-type">
+        <option value="all">所有類型</option>
+        <option value="popup">快閃店</option>
+        <option value="new_product">新商品</option>
+        <option value="campaign">活動</option>
+        <option value="store">常設店</option>
+        <option value="cafe">咖啡廳</option>
+        <option value="lottery">抽選</option>
+      </select>
+      <select class="filter-select" id="filter-country">
+        <option value="all">日本＋台灣</option>
+        <option value="JP">🇯🇵 日本</option>
+        <option value="TW">🇹🇼 台灣</option>
+      </select>
+      <select class="filter-select" id="filter-city"></select>
+      <span class="filter-count" id="events-count"></span>
+    </div>
+
+    <div class="section-title">📋 活動情報（最快結束的排前面）</div>
+    <div class="events-grid" id="events-grid"></div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
