@@ -71,7 +71,18 @@
           { "name": "みっふぃー桜きっちん＆べーかりー 嵐山店", "area": "京都・嵐山", "country": "JP" },
           { "name": "みっふぃー森のきっちん＆べーかりー 輕井澤店", "area": "長野・輕井澤", "country": "JP" },
           { "name": "みっふぃー森のきっちん＆べーかりー 湯布院店", "area": "大分・湯布院", "country": "JP" },
-          { "name": "みっふぃー海のきっちん＆べーかりー 小樽店", "area": "北海道・小樽", "country": "JP" }
+          { "name": "みっふぃー海のきっちん＆べーかりー 小樽店", "area": "北海道・小樽", "country": "JP" },
+          { "name": "みっふぃー蔵のきっちん＆べーかりー 川越店", "area": "埼玉・川越", "country": "JP" },
+          { "name": "みっふぃー蔵のきっちん＆べーかりー 倉敷店", "area": "岡山・倉敷", "country": "JP" }
+        ]
+      },
+      {
+        "label": "Flower Miffy（お花屋さん）",
+        "stores": [
+          { "name": "Flower Miffy サンシャインシティ アルパ店", "area": "東京・池袋", "country": "JP" },
+          { "name": "Flower Miffy 浅草店", "area": "東京・淺草", "country": "JP" },
+          { "name": "Flower Miffy ルクア大阪店", "area": "大阪・梅田", "country": "JP" },
+          { "name": "Flower Miffy 天王寺MIO店", "area": "大阪・天王寺", "country": "JP" }
         ]
       }
     ]
