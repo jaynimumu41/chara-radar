@@ -28,7 +28,7 @@ const CITY_LABELS = {
   Miyagi: '宮城', Chiba: '千葉', Aomori: '青森', Aichi: '愛知', Hyougo: '兵庫',
   Shizuoka: '靜岡', Ibaraki: '茨城', Tochigi: '栃木', Gunma: '群馬',
   Nara: '奈良', Shiga: '滋賀', Okayama: '岡山', Kumamoto: '熊本',
-  Ishikawa: '石川', Niigata: '新潟', Nagano: '長野', Gifu: '岐阜', Kochi: '高知',
+  Ishikawa: '石川', Niigata: '新潟', Nagano: '長野', Gifu: '岐阜', Kochi: '高知', Ehime: '愛媛',
   Taipei: '台北', Taichung: '台中', Kaohsiung: '高雄', Tainan: '台南',
   Taoyuan: '桃園', Hsinchu: '新竹', Keelung: '基隆'
 };

@@ -193,27 +193,27 @@
   },
   {
     "brand": "sanrio",
-    "title": "Sanrio Fes 2026 in Minatomirai",
-    "type": "campaign",
+    "title": "Sanrio CAFE WAGON「MIRACLE GIFT PARADE GO!」登場",
+    "type": "cafe",
     "country": "JP",
     "city": "Kanagawa",
-    "locationName": "Landmark Plaza, MARK IS Minatomirai",
+    "locationName": "ジ アウトレット湘南平塚",
     "startDate": "2026-06-12",
-    "endDate": "2026-06-28",
-    "summaryZh": "三麗鷗將於2026年在橫濱的Landmark Plaza和MARK IS Minatomirai舉辦「Sanrio Fes 2026 in Minatomirai」活動。",
+    "endDate": "2026-06-14",
+    "summaryZh": "Sanrio CAFE WAGON「MIRACLE GIFT PARADE GO!」將於6月12日至6月14日在THE OUTLET湘南平塚登場，提供限定飲品與點心。",
     "needReservation": false,
     "hasLimitedGoods": false,
     "tags": [
       "三麗鷗",
-      "橫濱",
-      "展覽",
-      "2026"
+      "咖啡車",
+      "期間限定",
+      "湘南平塚"
     ],
-    "id": "sa-353b65",
-    "sourceTitle": "『サンリオフェス2026 in みなとみらい』ランドマークプラザ・MARK IS みなとみらいで開催! - PR TIMES",
-    "sourceType": "official_social",
+    "id": "sa-b9645e",
+    "sourceTitle": "【平塚市】ジアウトレット湘南平塚にサンリオカフェワゴン「ミラクルギフトパレード号」が登場！ 6月12日～6月14日 - 湘南人",
+    "sourceType": "official_site",
     "createdAt": "2026-06-02",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000398.000043503.html"
+    "sourceUrl": "https://the-outlets-shonan-hiratsuka.aeonmall.com/news/detail/5153"
   },
   {
     "brand": "sanrio",
@@ -238,30 +238,6 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-02",
     "sourceUrl": "https://www.chiba-tv.com/plus/detail/2026061693392"
-  },
-  {
-    "brand": "sanrio",
-    "title": "Sanrio CAFE WAGON「MIRACLE GIFT PARADE GO!」登場",
-    "type": "cafe",
-    "country": "JP",
-    "city": "Kanagawa",
-    "locationName": "ジ アウトレット湘南平塚",
-    "startDate": "2026-06-12",
-    "endDate": "2026-06-14",
-    "summaryZh": "Sanrio CAFE WAGON「MIRACLE GIFT PARADE GO!」將於6月12日至6月14日在THE OUTLET湘南平塚登場，提供限定飲品與點心。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "三麗鷗",
-      "咖啡車",
-      "期間限定",
-      "湘南平塚"
-    ],
-    "id": "sa-b9645e",
-    "sourceTitle": "【平塚市】ジアウトレット湘南平塚にサンリオカフェワゴン「ミラクルギフトパレード号」が登場！ 6月12日～6月14日 - 湘南人",
-    "sourceType": "official_site",
-    "createdAt": "2026-06-02",
-    "sourceUrl": "https://the-outlets-shonan-hiratsuka.aeonmall.com/news/detail/5153"
   },
   {
     "brand": "pokemon",
@@ -500,5 +476,125 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-02",
     "sourceTitle": "ちいかわレストラン“討伐フェア”が福岡PARCOで開催 ドリンクスタンドとグッズショップ同時展開（リアルサウンド） - Yahoo!ニュース"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇 CHIIKAWA DAYS 台北特展",
+    "type": "popup",
+    "country": "TW",
+    "city": "Taipei",
+    "locationName": "華山1914文化創意產業園區 東2館",
+    "startDate": "2026-07-04",
+    "endDate": "2026-09-27",
+    "summaryZh": "吉伊卡哇大型特展「CHIIKAWA DAYS」登台，於華山1914東2館登場，推出作者Nagano親繪的「台灣夜市」限定系列（滷肉飯、珍奶、地瓜球、雞排造型）等台灣獨家商品。",
+    "needReservation": true,
+    "hasLimitedGoods": true,
+    "tags": [
+      "吉伊卡哇",
+      "特展",
+      "台北",
+      "台灣限定"
+    ],
+    "id": "ch-da7c01",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-03",
+    "sourceTitle": "2026吉伊卡哇台北特展攻略！CHIIKAWA DAYS時間、地點、票價整理 - 食尚玩家",
+    "sourceUrl": "https://supertaste.tvbs.com.tw/accessories/359723"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇袋著走 台北快閃店",
+    "type": "popup",
+    "country": "TW",
+    "city": "Taipei",
+    "locationName": "CHIIKAWA SHOP in TAIPEI 2F（台北中山·長安西路19號）",
+    "startDate": "2026-05-22",
+    "endDate": "2026-06-30",
+    "summaryZh": "手遊《吉伊卡哇袋著走》首度登台快閃，推出野餐、江戶、水果、奇幻四大主題限定周邊，採線上預約／號碼券入場。",
+    "needReservation": true,
+    "hasLimitedGoods": true,
+    "tags": [
+      "吉伊卡哇",
+      "快閃店",
+      "台北",
+      "限定周邊"
+    ],
+    "id": "ch-8e5b22",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-03",
+    "sourceTitle": "《吉伊卡哇袋著走》台北快閃店5/22開幕 人氣官方周邊商品陣容一次公開 - 4Gamers",
+    "sourceUrl": "https://www.4gamers.com.tw/news/detail/79119/chiikawa-pocket-pop-up-store-in-taipei-2026"
+  },
+  {
+    "brand": "miffy",
+    "title": "Miffy 台中 Lalaport 快閃店",
+    "type": "popup",
+    "country": "TW",
+    "city": "Taichung",
+    "locationName": "台中 Lalaport 南館 B1",
+    "startDate": "2026-04-24",
+    "endDate": "2026-07-25",
+    "summaryZh": "米飛兔台灣快閃店進駐台中 Lalaport 南館 B1，期間限定販售米飛兔周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "快閃店",
+      "台中",
+      "限定商品"
+    ],
+    "id": "mi-3a91c4",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-03",
+    "sourceTitle": "最新展場-快閃店資訊 - Iam我適文創 Miffy米飛兔台灣官方商城",
+    "sourceUrl": "https://www.iamcreative.com.tw/pages/pop-up-store"
+  },
+  {
+    "brand": "pokemon",
+    "title": "Pokemon Center 出張所 in AEON MALL 今治新都市",
+    "type": "popup",
+    "country": "JP",
+    "city": "Ehime",
+    "locationName": "イオンモール今治新都市 2階イオンホール",
+    "startDate": "2026-06-12",
+    "endDate": "2026-08-31",
+    "summaryZh": "愛媛縣今治的 AEON MALL 今治新都市舉辦期間限定 Pokemon Center 出張所，販售多樣寶可夢周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢",
+      "快閃店",
+      "日本",
+      "愛媛"
+    ],
+    "id": "po-6c1f88",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-03",
+    "sourceTitle": "全国のポケモンセンター出張所2026年開催スケジュール！会場・取扱商品一覧 - ポケモン情報調査隊",
+    "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
+  },
+  {
+    "brand": "pokemon",
+    "title": "Pokemon Center 出張所 in AEON MALL 神戸北",
+    "type": "popup",
+    "country": "JP",
+    "city": "Hyogo",
+    "locationName": "イオンモール神戸北",
+    "startDate": "2026-06-05",
+    "endDate": "2026-07-22",
+    "summaryZh": "兵庫縣的 AEON MALL 神戸北舉辦期間限定 Pokemon Center 出張所，販售多樣寶可夢周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢",
+      "快閃店",
+      "日本",
+      "兵庫"
+    ],
+    "id": "po-9d2a47",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-03",
+    "sourceTitle": "全国のポケモンセンター出張所2026年開催スケジュール！会場・取扱商品一覧 - ポケモン情報調査隊",
+    "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
   }
 ]

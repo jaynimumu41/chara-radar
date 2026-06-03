@@ -690,6 +690,11 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
         elif lkey and lkey in loc_keys:
             hit = loc_keys[lkey]
 
+        # 城市鐵則：兩筆城市都有值且不同 = 不同活動，即使同來源頁也不合併。
+        # （彙整/排程清單頁會列多個不同城市的場次共用同一 URL，如各地出張所）
+        if hit is not None and city and kept[hit].get("city") and city != kept[hit].get("city"):
+            hit = None
+
         if hit is not None:
             # 視為重複：保留資料較完整的那筆
             removed += 1
@@ -726,6 +731,11 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
         merged = False
         for k in result:
             if k.get("brand") != ev.get("brand"):
+                continue
+            # 兩筆城市都有值且不同 = 不同活動，絕不合併。
+            # （巡迴各地的快閃/出張所標題幾乎相同，如「Pokemon Center 出張所 in AEON MALL ○○」，
+            #   只能靠城市區分；放任 sim≥0.72 會把羽生/今治/神戸北併成一筆＝過度合併）
+            if k.get("city") and ev.get("city") and k.get("city") != ev.get("city"):
                 continue
             sim = tsim(k.get("title", ""), ev.get("title", ""))
             same_venue = (canon_venue(ev.get("locationName", ""), ev.get("title", "")) is not None
