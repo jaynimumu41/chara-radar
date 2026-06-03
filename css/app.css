@@ -523,3 +523,5 @@ body {
   .travel-form { grid-template-columns: 1fr 1fr; }
   .events-grid { grid-template-columns: 1fr; }
 }
+
+.grid-msg{grid-column:1/-1;text-align:center;color:#9aa;padding:48px 12px;font-size:15px;}

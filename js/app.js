@@ -232,12 +232,25 @@ function renderLastUpdated(iso) {
 }
 
 async function init() {
-  const [evRes, stRes] = await Promise.all([
-    fetch('data/events.json'),
-    fetch('data/stores.json')
-  ]);
-  allEvents = await evRes.json();
-  storeData = await stRes.json();
+  const grid = document.getElementById('events-grid');
+  if (grid) grid.innerHTML = '<p class="grid-msg">載入中…</p>';
+
+  // 活動情報優先載入；失敗就顯示提示，不要整頁空白
+  try {
+    const evRes = await fetch('data/events.json');
+    if (!evRes.ok) throw new Error('HTTP ' + evRes.status);
+    allEvents = await evRes.json();
+  } catch (e) {
+    if (grid) grid.innerHTML = '<p class="grid-msg">情報載入失敗，請稍後重新整理 🙏</p>';
+    return;
+  }
+  // 常設店資料載入失敗不影響活動顯示
+  try {
+    const stRes = await fetch('data/stores.json');
+    storeData = stRes.ok ? await stRes.json() : (storeData || {});
+  } catch (e) {
+    storeData = storeData || {};
+  }
 
   // 最後更新時間（每日 16:00 排程跑完寫入；讀不到就留空不顯示）
   fetch('data/last_updated.json')
