@@ -73,27 +73,27 @@
   },
   {
     "brand": "miffy",
-    "title": "Miffy 聯名下午茶",
+    "title": "米飛主題下午茶",
     "type": "cafe",
     "country": "JP",
     "city": "Nagoya",
     "locationName": "コートヤード・バイ・マリオット名古屋",
     "startDate": "2026-06-01",
-    "endDate": "",
-    "summaryZh": "名古屋首次Miffy聯名下午茶，於コートヤード・バイ・マリオット名古屋期間限定販售。",
+    "endDate": "2026-08-31",
+    "summaryZh": "日本名古屋的コートヤード・バイ・マリオット飯店推出首度與米飛兔合作的主題下午茶，期間限定販售。",
     "needReservation": false,
     "hasLimitedGoods": false,
     "tags": [
       "米飛兔",
       "下午茶",
-      "名古屋",
-      "聯名"
+      "主題餐廳",
+      "名古屋"
     ],
-    "id": "mi-c2d75c",
-    "sourceUrl": "https://www.fashion-press.net/news/146674",
+    "id": "mi-ff9097",
+    "sourceTitle": "【コートヤード・バイ・マリオット名古屋】初の「ミッフィー」コラボレーション アフタヌーンティー登場。6月1日（月）より期間限定販売",
     "sourceType": "official_social",
-    "createdAt": "2026-06-02",
-    "sourceTitle": "「ミッフィー」の誕生日を祝うアフタヌーンティーが名古屋で、苺のキャンドルケーキ＆顔型クッキー - ファッションプレス"
+    "createdAt": "2026-06-03",
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002686.000011305.html"
   },
   {
     "brand": "pokemon",
@@ -166,30 +166,6 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-02",
     "sourceTitle": "「ちいかわ☆星ふるスカイツリー®とひみつの島」開催決定！【公式】東京スカイツリー TOKYO SKYTREE - tokyo-skytree.jp"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "Chiikawa 討伐フェア 福岡PARCO",
-    "type": "campaign",
-    "country": "JP",
-    "city": "Fukuoka",
-    "locationName": "福岡PARCO",
-    "startDate": "2026-05-14",
-    "endDate": "",
-    "summaryZh": "Chiikawa 討伐フェア於福岡PARCO登場，推出使用博多甘王草莓的福岡限定奶油蘇打。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "Chiikawa",
-      "福岡",
-      "期間限定",
-      "PARCO"
-    ],
-    "id": "ch-0cfe71",
-    "sourceUrl": "https://news.yahoo.co.jp/articles/13620aa3d5209f4e618d8f4f3430f3f0b9d6f6eb",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-02",
-    "sourceTitle": "ちいかわレストラン“討伐フェア”が福岡PARCOで開催 ドリンクスタンドとグッズショップ同時展開（リアルサウンド） - Yahoo!ニュース"
   },
   {
     "brand": "miffy",
@@ -500,5 +476,77 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-03",
     "sourceUrl": "https://www.google.com/search?q=%E4%B8%89%E9%BA%97%E9%B7%97%E8%8A%B1%E8%8C%B6%E8%88%9E%E6%9C%83%E5%BF%AB%E9%96%83%E5%BA%97%20%E4%B8%89%E9%BA%97%E9%B7%97"
+  },
+  {
+    "brand": "miffy",
+    "title": "STEAMCREAM 米飛限定設計罐",
+    "type": "new_product",
+    "country": "JP",
+    "city": "",
+    "locationName": "",
+    "startDate": "2026-06-03",
+    "endDate": "",
+    "summaryZh": "STEAMCREAM推出米飛限定設計罐新商品，詳細販售資訊待公布。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛",
+      "限定設計罐",
+      "新商品",
+      "STEAMCREAM"
+    ],
+    "id": "mi-19be6b",
+    "sourceTitle": "STEAMCREAMから、「ミッフィー」限定デザイン缶の新作が登場！",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-03",
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000252.000011903.html"
+  },
+  {
+    "brand": "miffy",
+    "title": "豪斯登堡 米飛兔生日月",
+    "type": "campaign",
+    "country": "JP",
+    "city": "Nagasaki",
+    "locationName": "ハウステンボス (Huis Ten Bosch)",
+    "startDate": "",
+    "endDate": "",
+    "summaryZh": "豪斯登堡將舉辦「米飛兔生日月」活動，為期一個月，預計有特別的慶祝活動與商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "豪斯登堡",
+      "生日月",
+      "限定活動"
+    ],
+    "id": "mi-03f8b7",
+    "sourceTitle": "幸せが溢れる特別なひと月！ハウステンボス「ミッフィーバースデーマンス」 - Dtimes",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-03",
+    "sourceUrl": "https://dtimes.jp/post-1109280/"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "Chiikawa 討伐フェア 福岡PARCO",
+    "type": "campaign",
+    "country": "JP",
+    "city": "Fukuoka",
+    "locationName": "福岡PARCO",
+    "startDate": "2026-05-14",
+    "endDate": "",
+    "summaryZh": "Chiikawa 討伐フェア於福岡PARCO登場，推出使用博多甘王草莓的福岡限定奶油蘇打。",
+    "needReservation": false,
+    "hasLimitedGoods": false,
+    "tags": [
+      "Chiikawa",
+      "福岡",
+      "期間限定",
+      "PARCO"
+    ],
+    "id": "ch-0cfe71",
+    "sourceUrl": "https://news.yahoo.co.jp/articles/13620aa3d5209f4e618d8f4f3430f3f0b9d6f6eb",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-02",
+    "sourceTitle": "ちいかわレストラン“討伐フェア”が福岡PARCOで開催 ドリンクスタンドとグッズショップ同時展開（リアルサウンド） - Yahoo!ニュース"
   }
 ]

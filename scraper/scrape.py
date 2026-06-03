@@ -29,6 +29,7 @@ from pathlib import Path
 import requests
 
 from verify_links import check_url, page_mentions  # 存檔前驗證來源連結：連得過去 + 內容與品牌相關
+from official_sources import fetch_official         # 官方優先：先抓 PR TIMES 等權威來源
 
 # Windows 終端機 UTF-8 輸出 + 關閉緩衝（即時看到進度）
 if hasattr(sys.stdout, "reconfigure"):
@@ -135,9 +136,10 @@ NOISE_KEYWORDS = [
     # 媒體 / 動畫 / 手遊
     "映画", "予告", "声優", "主題歌", "アプリ", "ぽけっと", "ゲーム",
     "劇場版", "預告", "聲優", "手遊", "動畫", "電影",
-    # 隨機販售 / 開箱
+    # 隨機販售 / 開箱 / 夾娃娃機景品（非「去逛買」目標）
     "ガチャ", "カプセル", "扭蛋", "轉蛋", "盲盒", "開箱", "レビュー", "ガチレビュー",
-    "付録", "レポ",
+    "付録", "レポ", "夾娃娃機", "ナムコ", "景品", "プライズ", "クレーンゲーム",
+    "アミューズメント", "UFOキャッチャー",
     # 冷卻片 / 文具雜貨小物（順手買，非專程）
     "冷却シート", "スマ冷え", "チャーム", "シール",
     # 海外（非日台）
@@ -440,7 +442,8 @@ _START_CUE = (r"\s*日?\s*[（(]?[日月火水木金土]*[)）]?\s*"
               r"(?:から|スタート|開始|より|開幕|開催|販売|発売|登場|オープン|"
               r"起|開跑|開展|開賣|起跑|～|〜|~|－|—|–|-|至|到)")
 
-def extract_dates(text: str, ref_year: int | None = None, is_html: bool = True) -> tuple[str, str]:
+def extract_dates(text: str, ref_year: int | None = None, is_html: bool = True,
+                  scan_chars: int = 4000) -> tuple[str, str]:
     """從來源頁面（或摘要）擷取活動期間。回傳 (startISO, endISO)，抓不到回 ('','')。
 
     支援：
@@ -453,7 +456,7 @@ def extract_dates(text: str, ref_year: int | None = None, is_html: bool = True) 
         return "", ""
     if is_html:
         text = re.sub(r"<[^>]+>", " ", text)
-    text = re.sub(r"\s+", " ", text.replace("　", " "))[:4000]
+    text = re.sub(r"\s+", " ", text.replace("　", " "))[:scan_chars]
     ry = ref_year or datetime.now(timezone.utc).year
 
     ymd = r"(?:(20\d{2})\s*[年/.]\s*)?(\d{1,2})\s*[月/.]\s*(\d{1,2})"
@@ -492,12 +495,13 @@ def _pub_year(pub: str) -> int | None:
     except Exception:
         return None
 
-def apply_extracted_dates(data: dict, text: str, ref_year: int | None, is_html: bool) -> bool:
+def apply_extracted_dates(data: dict, text: str, ref_year: int | None, is_html: bool,
+                          scan_chars: int = 4000) -> bool:
     """從 text 補抓活動日期，只填入 data 中目前為空的 start/end 欄位。
     防呆：起始日不早於約 400 天前（避免抓到舊報導/版權年份）。回傳是否有補上。"""
     if data.get("startDate") and data.get("endDate"):
         return False
-    s, e = extract_dates(text, ref_year=ref_year, is_html=is_html)
+    s, e = extract_dates(text, ref_year=ref_year, is_html=is_html, scan_chars=scan_chars)
     if not s and not e:
         return False
     if s:
@@ -509,6 +513,10 @@ def apply_extracted_dates(data: dict, text: str, ref_year: int | None, is_html: 
         data["startDate"] = s; changed = True
     if e and not data.get("endDate"):
         data["endDate"] = e; changed = True
+    # 合理性檢查：結束日不可早於開始日（多半是抓錯第二個日期）→ 丟掉 endDate
+    sd, ed = data.get("startDate"), data.get("endDate")
+    if sd and ed and ed < sd:
+        data["endDate"] = ""
     if changed:
         print(f"    📅 補抓日期：{data.get('startDate') or '—'} ~ {data.get('endDate') or '—'}")
     return changed
@@ -871,7 +879,9 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
         # 來源連結：優先解出真實文章 URL，並做兩道驗證才採用——
         #   1) 連得過去（非 403/404…）  2) 頁面內容真的提到該品牌（關聯性）
         # 任一不過，一律退回保證可開、且必定相關的「地點+品牌」搜尋連結。
-        real = decode_google_news_url(item["link"])
+        gl = item["link"]
+        # 官方來源（official_sources.py）的 link 已是真實 URL；只有 Google News 才需解碼
+        real = decode_google_news_url(gl) if "news.google.com" in gl else (gl or None)
         if real:
             ok, code, html = check_url(real, return_text=True)
             if not ok:
@@ -889,8 +899,11 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
                     return None
                 # 補抓日期：只從「可信網域」（官方/新聞稿/場館頁）的內文補，避免一般新聞
                 # 內文夾雜公告日、巡迴各城市日期 → 抓錯。寧可日期未定，也不放錯的日期。
+                # 官方/新聞稿頁面常很長（PR TIMES ~75K），活動期間在內文深處 → 放大掃描範圍；
+                # 這類單一活動頁的第一個日期區間即為活動期間，誤判風險低。
                 if is_trusted_date_source(real):
-                    apply_extracted_dates(data, html, _pub_year(item["pubDate"]), is_html=True)
+                    apply_extracted_dates(data, html, _pub_year(item["pubDate"]),
+                                          is_html=True, scan_chars=90000)
         data["sourceUrl"]   = real if real else search_url(best_search_query(data))
         return data
     except RateLimitError:
@@ -935,6 +948,12 @@ def run(brands: list[str]):
             break
         print(f"\n🔍  {BRAND_LABELS[brand]}")
         all_items: list[dict] = []
+
+        # 官方優先：先抓 PR TIMES 等權威來源（網域可信、日期可靠），排在最前面處理
+        official = fetch_official(brand)
+        if official:
+            print(f"    🏛️  官方來源 PR TIMES → {len(official)} 筆")
+        all_items.extend(official)
 
         for query, is_tw in RSS_QUERIES[brand]:
             items = fetch_rss(query, is_tw)
