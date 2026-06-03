@@ -90,7 +90,91 @@ def fetch_prtimes(brand: str, limit: int = 8) -> list[dict]:
     return items
 
 
-# 官方來源總入口：目前只有 PR TIMES，之後新增來源在這裡串接
+# ─────────────────────────────────────────────────────────────────────────────
+# 結構化官方排程頁 → 直接產生「成品情報」（零 AI／零 Gemini 額度）
+# 這類官方頁已把「會場＋確切日期」列好，用 regex 解析 + 中文模板即可生成 events，
+# 不需經過 Gemini 萃取。回傳的是「最終 event dict」（非待萃取 item），由 scrape 直接併入。
+# ─────────────────────────────────────────────────────────────────────────────
+import hashlib
+from datetime import date
+
+READER = "https://r.jina.ai/"
+
+
+def _today_iso():
+    return date.today().isoformat()
+
+
+def _stable_id(prefix: str, key: str) -> str:
+    return f"{prefix}-{hashlib.md5(key.encode('utf-8')).hexdigest()[:6]}"
+
+
+def _proxy_markdown(url: str) -> str:
+    """用 reader 代理取頁面 markdown（官方站常擋 bot）。失敗回 ''。"""
+    try:
+        r = requests.get(READER + url, headers={"User-Agent": HEADERS_UA}, timeout=70)
+        return r.text if r.status_code == 200 else ""
+    except Exception:
+        return ""
+
+
+HEADERS_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+              "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
+
+_CHIIKAWA_PUS = "https://chiikawa-info.jp/pus.html"
+# 解析：### [ちいかわPOP UP STORE <會場>](https://chiikawa-info.jp/p26/.../index.html)  2026年6月5日(金)～6月22日(月)  <會場詳址>
+_PUS_ROW = re.compile(
+    r"\[ちいかわPOP ?UP ?STORE\s*([^\]]+?)\]"
+    r"\((https://chiikawa-info\.jp/p26/[^)]+)\)\s*"
+    r"(20\d\d)年(\d{1,2})月(\d{1,2})日[^〜～]*?[〜～]\s*"
+    r"(?:(20\d\d)年)?(\d{1,2})月(\d{1,2})日(?:\([^)]*\))?\s*"
+    r"([^\n\[]{0,60})"     # 會場詳址（日期後那段，含縣市/樓層）
+)
+
+
+def fetch_chiikawa_popups(correct_city=None) -> list[dict]:
+    """解析吉伊卡哇官方 pus.html，回傳「現行（未過期）」POP UP STORE 的成品情報清單。
+    零 Gemini。correct_city(可選)＝scrape.correct_city，用來判城市。"""
+    md = _proxy_markdown(_CHIIKAWA_PUS)
+    if not md:
+        print("    ⚠️  吉伊卡哇 pus.html 抓取失敗（直連＋代理都不行）")
+        return []
+    today = _today_iso()
+    out, seen = [], set()
+    for m in _PUS_ROW.finditer(md):
+        venue, url, sy, sm, sd, ey, em, ed, addr = m.groups()
+        venue = re.sub(r"\s+", " ", venue).strip()
+        addr = re.sub(r"\s+", " ", addr or "").strip()
+        if "【終了】" in venue or url in seen:
+            continue
+        sy, sm, sd, em, ed = int(sy), int(sm), int(sd), int(em), int(ed)
+        ey = int(ey) if ey else (sy + 1 if em < sm else sy)  # 結束月<開始月→跨年
+        start = f"{sy:04d}-{sm:02d}-{sd:02d}"
+        end = f"{ey:04d}-{em:02d}-{ed:02d}"
+        if end < today:          # 已過期不收
+            continue
+        seen.add(url)
+        # locationName 用較完整的會場詳址（含縣市/樓層）；城市從詳址＋會場名一起判
+        loc = addr if len(addr) >= len(venue) else venue
+        city = correct_city(addr, venue) if correct_city else None
+        out.append({
+            "brand": "chiikawa",
+            "title": f"吉伊卡哇 POP UP STORE {venue}",
+            "type": "popup", "country": "JP", "city": city or "",
+            "locationName": loc,
+            "startDate": start, "endDate": end,
+            "summaryZh": f"ちいかわ POP UP STORE 於{venue}期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
+            "needReservation": False, "hasLimitedGoods": True,
+            "tags": ["吉伊卡哇", "快閃店", "日本", "限定周邊"],
+            "id": _stable_id("ch", url),
+            "sourceType": "official_site", "createdAt": today,
+            "sourceTitle": f"ちいかわPOP UP STORE {venue}({start}～{end}) - ちいかわ公式",
+            "sourceUrl": url,
+        })
+    return out
+
+
+# 官方來源總入口：PR TIMES（待萃取 item）+ 之後新增來源在這裡串接
 def fetch_official(brand: str) -> list[dict]:
     return fetch_prtimes(brand)
 

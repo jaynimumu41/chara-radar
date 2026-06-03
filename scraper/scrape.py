@@ -29,7 +29,7 @@ from pathlib import Path
 import requests
 
 from verify_links import check_url, page_mentions  # 存檔前驗證來源連結：連得過去 + 內容與品牌相關
-from official_sources import fetch_official         # 官方優先：先抓 PR TIMES 等權威來源
+from official_sources import fetch_official, fetch_chiikawa_popups  # 官方來源：PR TIMES + 結構化排程頁
 
 # Windows 終端機 UTF-8 輸出 + 關閉緩衝（即時看到進度）
 if hasattr(sys.stdout, "reconfigure"):
@@ -91,16 +91,19 @@ AREA_TO_CITY = {
     "Nagasaki": ["長崎", "ハウステンボス", "豪斯登堡", "Huis Ten Bosch", "佐世保"],
     "Saitama":  ["埼玉", "羽生", "Hanyu", "大宮", "Omiya", "越谷", "Koshigaya",
                  "レイクタウン", "Laketown", "川越"],
-    "Hokkaido": ["北海道", "札幌", "小樽", "函館"],
-    "Okinawa":  ["沖縄", "沖繩", "那覇"],
+    "Hokkaido": ["北海道", "札幌", "小樽", "函館", "新千歳", "千歳"],
+    "Okinawa":  ["沖縄", "沖繩", "那覇", "ライカム"],
     "Kanagawa": ["神奈川", "横浜", "横濱", "橫濱", "川崎", "みなとみらい", "ワールドポーターズ"],
-    "Hyogo":    ["兵庫", "神戸", "神戶", "西宮", "三宮"],
+    "Hyogo":    ["兵庫", "神戸", "神戶", "西宮", "三宮", "伊丹", "姫路", "ピオレ"],
     "Hiroshima":["広島", "廣島", "Hiroshima"],
-    "Mie":      ["三重", "四日市"],
-    "Miyagi":   ["仙台", "宮城"],
+    "Mie":      ["三重", "四日市", "津南"],
+    "Miyagi":   ["仙台", "宮城", "名取"],
     "Chiba":    ["千葉", "舞浜", "幕張"],
     "Aomori":   ["青森", "Aomori", "弘前"],
-    "Aichi":    ["愛知", "豊田"],
+    "Aichi":    ["愛知", "豊田", "名古屋", "常滑"],
+    "Shizuoka": ["静岡", "靜岡", "富士宮", "浜松", "遠鉄", "セノバ"],
+    "Yamaguchi":["山口", "小野田", "おのだ"],
+    "Wakayama": ["和歌山", "Wakayama"],
     "Kochi":    ["高知", "Kochi"],
     "Ishikawa": ["石川", "金沢", "金澤", "香林坊"],
     "Taipei":   ["台北", "臺北", "信義", "西門", "微風", "南山", "華山", "中山",
@@ -956,6 +959,20 @@ def run(brands: list[str]):
     print(f"🤖  AI 後端：{name}　·　{len(keys)} 把 key{'（自動輪替）' if len(keys) > 1 else ''}")
 
     events    = load_events()
+
+    # ── 結構化官方來源（零 Gemini）：直接解析官方排程頁產生成品情報，每次跑都用官方最新版
+    #    覆蓋同來源 URL 的舊資料；過期的由後面的 clean_events 自動移除。 ──────────────
+    if "chiikawa" in brands:
+        try:
+            structured = fetch_chiikawa_popups(correct_city=correct_city)
+            if structured:
+                surls = {e["sourceUrl"] for e in structured}
+                events = [e for e in events if e.get("sourceUrl") not in surls] + structured
+                print(f"🏛️  吉伊卡哇官方排程（結構化，免 AI）→ {len(structured)} 筆現行")
+                save_events(events)
+        except Exception as e:
+            print(f"    ⚠️  吉伊卡哇結構化來源失敗（略過）：{e}")
+
     seen_ttls = {e.get("title", "") for e in events} | {e.get("sourceTitle", "") for e in events}
     seen_urls = {e.get("sourceUrl", "") for e in events}
     processed_cache = load_processed()  # 跑過的（採用或略過）原始標題，避免重複送 AI
