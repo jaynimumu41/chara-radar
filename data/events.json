@@ -572,5 +572,29 @@
     "createdAt": "2026-06-03",
     "sourceTitle": "全国のポケモンセンター出張所2026年開催スケジュール！会場・取扱商品一覧 - ポケモン情報調査隊",
     "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇 POP UP STORE 沖繩ライカム",
+    "type": "popup",
+    "country": "JP",
+    "city": "Okinawa",
+    "locationName": "イオンモール沖縄ライカム 2F「0%OKINAWA」",
+    "startDate": "2026-06-05",
+    "endDate": "2026-07-20",
+    "summaryZh": "ちいかわ POP UP STORE 進駐 AEON MALL 沖繩ライカム 2F「0%OKINAWA」，販售豐富的吉伊卡哇限定周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "吉伊卡哇",
+      "快閃店",
+      "沖繩",
+      "限定周邊"
+    ],
+    "id": "ch-7f0a55",
+    "sourceType": "official_site",
+    "createdAt": "2026-06-03",
+    "sourceTitle": "ちいかわPOP UP STORE 0%OKINAWA(2026/6/5～7/20) - ちいかわ公式",
+    "sourceUrl": "https://chiikawa-info.jp/p26/pus_aonr/index.html"
   }
 ]
