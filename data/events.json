@@ -223,7 +223,7 @@
     "city": "Tokyo",
     "locationName": "Sanrio Puroland",
     "startDate": "2026-07-10",
-    "endDate": "",
+    "endDate": "2026-09-01",
     "summaryZh": "三麗鷗樂園將於7月10日起舉辦夏日祭典「ピューロランドネオナツマツリⅢ」，Hello Kitty與Kuromi將以Y3K時尚造型首次登場。",
     "needReservation": false,
     "hasLimitedGoods": false,
@@ -234,10 +234,10 @@
       "限定登場"
     ],
     "id": "sa-999941",
-    "sourceTitle": "サンリオピューロランド、夏イベント「ピューロランドネオナツマツリⅢ」7月10日より開催！Y3Kファッションのハローキティ、クロミが初登場 | チバテレ＋プラス - 千葉テレビ放送",
-    "sourceType": "official_social",
+    "sourceTitle": "ピューロランドネオナツマツリⅢ｜サンリオピューロランド公式",
+    "sourceType": "official_site",
     "createdAt": "2026-06-02",
-    "sourceUrl": "https://www.chiba-tv.com/plus/detail/2026061693392"
+    "sourceUrl": "https://www.puroland.jp/event-campaign/2026_summer/"
   },
   {
     "brand": "pokemon",
@@ -308,30 +308,6 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-02",
     "sourceUrl": "https://store.tsite.jp/kochi/event/shop/54516-2134420518.html"
-  },
-  {
-    "brand": "miffy",
-    "title": "福岡Miffy主題咖啡廳",
-    "type": "cafe",
-    "country": "JP",
-    "city": "Fukuoka",
-    "locationName": "福岡パルコ",
-    "startDate": "",
-    "endDate": "",
-    "summaryZh": "福岡PARCO將開設Miffy主題咖啡廳，並有許多限定商品販售。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "Miffy",
-      "咖啡廳",
-      "福岡",
-      "限定商品"
-    ],
-    "id": "mi-5726b6",
-    "sourceTitle": "＜画像2 / 8＞福岡パルコにミッフィーカフェ登場！限定グッズも多数 - ウォーカープラス",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-03",
-    "sourceUrl": "https://www.google.com/search?q=%E7%A6%8F%E5%B2%A1%E3%83%91%E3%83%AB%E3%82%B3%20%E3%83%9F%E3%83%83%E3%83%95%E3%82%A3%E3%83%BC"
   },
   {
     "brand": "pokemon",
@@ -407,14 +383,14 @@
   },
   {
     "brand": "sanrio",
-    "title": "三麗鷗花茶舞會快閃店",
+    "title": "三麗鷗花茶舞會 台中快閃店",
     "type": "popup",
     "country": "TW",
     "city": "Taichung",
-    "locationName": "三麗鷗花茶舞會快閃店",
-    "startDate": "",
-    "endDate": "",
-    "summaryZh": "三麗鷗花茶舞會快閃店於台中登場，Hello Kitty 水果裝新品開賣，並有 60 公分絨毛大娃展出。",
+    "locationName": "台中驛鐵道文化園區（鐵鹿大街A2）",
+    "startDate": "2026-05-23",
+    "endDate": "2026-06-28",
+    "summaryZh": "Hello Kitty化身花茶舞會主人，台中驛鐵道文化園區限定快閃，以奶茶色花卉下午茶元素打造拍照牆與限定商品，滿額可抽60公分Kitty布偶。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -424,10 +400,10 @@
       "限定新品"
     ],
     "id": "sa-130daa",
-    "sourceTitle": "三麗鷗花茶舞會快閃店插旗台中！Hello Kitty 水果裝新品開賣、60 公分絨毛大娃再登場 - 上報Up Media",
+    "sourceTitle": "「花茶舞會」Hello Kitty化身茶會主人 台中限定快閃店掀打卡熱潮 - 聯合新聞網",
     "sourceType": "official_social",
     "createdAt": "2026-06-03",
-    "sourceUrl": "https://www.google.com/search?q=%E4%B8%89%E9%BA%97%E9%B7%97%E8%8A%B1%E8%8C%B6%E8%88%9E%E6%9C%83%E5%BF%AB%E9%96%83%E5%BA%97%20%E4%B8%89%E9%BA%97%E9%B7%97"
+    "sourceUrl": "https://travel.udn.com/travel/story/7934/9520634"
   },
   {
     "brand": "miffy",
@@ -461,7 +437,7 @@
     "city": "Fukuoka",
     "locationName": "福岡PARCO",
     "startDate": "2026-05-14",
-    "endDate": "",
+    "endDate": "2026-06-07",
     "summaryZh": "Chiikawa 討伐フェア於福岡PARCO登場，推出使用博多甘王草莓的福岡限定奶油蘇打。",
     "needReservation": false,
     "hasLimitedGoods": false,
