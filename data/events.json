@@ -30,8 +30,8 @@
     "country": "JP",
     "city": "Kyoto",
     "locationName": "ジェイアール京都伊勢丹",
-    "startDate": "",
-    "endDate": "",
+    "startDate": "2026-05-27",
+    "endDate": "2026-06-08",
     "summaryZh": "京都車站的JR京都伊勢丹集結了Miffy與彼得兔的限定商品，有值得關注的活動同時舉辦。",
     "needReservation": false,
     "hasLimitedGoods": true,
@@ -96,30 +96,6 @@
     "sourceTitle": "「ミッフィー」の誕生日を祝うアフタヌーンティーが名古屋で、苺のキャンドルケーキ＆顔型クッキー - ファッションプレス"
   },
   {
-    "brand": "miffy",
-    "title": "Miffy's 1st Anniversary at Huis Ten Bosch",
-    "type": "campaign",
-    "country": "JP",
-    "city": "Nagasaki",
-    "locationName": "Huis Ten Bosch",
-    "startDate": "",
-    "endDate": "",
-    "summaryZh": "為慶祝「Miffy Wondrous Square」一週年，豪斯登堡推出一系列可與 Miffy 享受同樂氣氛的周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "Miffy",
-      "豪斯登堡",
-      "週年慶",
-      "限定商品"
-    ],
-    "id": "mi-d039e6",
-    "sourceUrl": "https://dtimes.jp/post-1242556/",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-02",
-    "sourceTitle": "ミッフィー・ワンダースクエア1周年デザイン！ ハウステンボス“ミッフィーバースデーマンス2026”グッズ - ニコニコニュース"
-  },
-  {
     "brand": "pokemon",
     "title": "Pokemon 30週年「あう」主題商品登場",
     "type": "new_product",
@@ -175,7 +151,7 @@
     "city": "Tokyo",
     "locationName": "東京晴空塔",
     "startDate": "2026-07-10",
-    "endDate": "",
+    "endDate": "2026-10-31",
     "summaryZh": "Chiikawa 與東京晴空塔再度聯名，推出活動限定周邊商品與主題咖啡廳餐點，7月10日起登場。",
     "needReservation": false,
     "hasLimitedGoods": true,
@@ -286,30 +262,6 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-02",
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000398.000043503.html"
-  },
-  {
-    "brand": "sanrio",
-    "title": "HELLO KITTY'S SWEETS MARKET -Chocolate lovers-",
-    "type": "popup",
-    "country": "JP",
-    "city": "",
-    "locationName": "",
-    "startDate": "",
-    "endDate": "",
-    "summaryZh": "三麗鷗舉辦的大型購物活動「HELLO KITTY’S SWEETS MARKET -Chocolate lovers-」，集結Hello Kitty、布丁狗等角色，以可愛姿態登場。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "三麗鷗",
-      "快閃店",
-      "限定活動",
-      "角色集合"
-    ],
-    "id": "sa-f8ae8f",
-    "sourceTitle": "【サンリオ】ハローキティやポムポムプリンたちがカワイイ姿で大集合！ 大型ショッピングイベント『HELLO KITTY’S SWEETS MARKET -Chocolate lovers-』が開催 - PASH! PLUS",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-02",
-    "sourceUrl": "https://www.pashplus.jp/goods/480410/"
   },
   {
     "brand": "sanrio",
@@ -460,8 +412,8 @@
     "country": "TW",
     "city": "Taipei",
     "locationName": "",
-    "startDate": "2026-06-03",
-    "endDate": "",
+    "startDate": "2026-10-10",
+    "endDate": "2026-10-11",
     "summaryZh": "寶可夢亞洲慶典確定在台北舉辦，邀請玩家一同見證30週年。",
     "needReservation": false,
     "hasLimitedGoods": false,
@@ -476,30 +428,6 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-03",
     "sourceUrl": "https://game.ettoday.net/article/3177012.htm"
-  },
-  {
-    "brand": "pokemon",
-    "title": "寶可夢30週年快閃台北",
-    "type": "popup",
-    "country": "TW",
-    "city": "Taipei",
-    "locationName": "",
-    "startDate": "",
-    "endDate": "",
-    "summaryZh": "寶可夢30週年盛典快閃台北，為期兩天，具體地點與時間需進一步確認。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "寶可夢",
-      "快閃店",
-      "台北",
-      "30週年"
-    ],
-    "id": "po-30dc46",
-    "sourceTitle": "寶可夢30週年震撼彈！最大盛典快閃台北2天 - 中天新聞網",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-03",
-    "sourceUrl": "https://ctinews.com/news/items/kYaDRyKVn9"
   },
   {
     "brand": "chiikawa",
@@ -527,30 +455,6 @@
   },
   {
     "brand": "sanrio",
-    "title": "布丁狗 30 週年慶祝活動",
-    "type": "campaign",
-    "country": "TW",
-    "city": "Taipei",
-    "locationName": "大巨蛋",
-    "startDate": "",
-    "endDate": "",
-    "summaryZh": "布丁狗 30 週年慶祝活動，包含曬黑三麗鷗主題日於 6 月在大巨蛋登場，另有路跑派對於 7 月在北中南開跑。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "布丁狗",
-      "30週年",
-      "三麗鷗",
-      "主題日"
-    ],
-    "id": "sa-bade1e",
-    "sourceTitle": "布丁狗 30 週年慶祝活動總整理！曬黑三麗鷗主題日 6 月大巨蛋登場、路跑派對 7 月北中南開跑 - 上報Up Media",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-03",
-    "sourceUrl": "https://www.google.com/search?q=%E5%A4%A7%E5%B7%A8%E8%9B%8B%20%E4%B8%89%E9%BA%97%E9%B7%97"
-  },
-  {
-    "brand": "sanrio",
     "title": "三麗鷗 高雄快閃店",
     "type": "popup",
     "country": "TW",
@@ -572,30 +476,6 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-03",
     "sourceUrl": "https://eatmary.net/5766"
-  },
-  {
-    "brand": "sanrio",
-    "title": "三麗鷗遊樂園主題店快閃高雄",
-    "type": "popup",
-    "country": "TW",
-    "city": "Kaohsiung",
-    "locationName": "三麗鷗遊樂園主題店",
-    "startDate": "",
-    "endDate": "",
-    "summaryZh": "三麗鷗遊樂園主題店於高雄舉辦快閃活動，現場將有近40款新品同步登場。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "三麗鷗",
-      "快閃店",
-      "高雄",
-      "新品"
-    ],
-    "id": "sa-d65d22",
-    "sourceTitle": "三麗鷗遊樂園主題店快閃高雄　近40款新品同步登場 - 立報傳媒",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-03",
-    "sourceUrl": "https://www.limedia.tw/career/69714/"
   },
   {
     "brand": "sanrio",

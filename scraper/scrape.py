@@ -147,6 +147,51 @@ NOISE_KEYWORDS = [
 def is_noise(title: str) -> bool:
     return any(kw in title for kw in NOISE_KEYWORDS)
 
+# 體育 / 路跑 / 棒球：體驗活動非購物情報。這類關鍵字可安全地對「標題＋摘要＋內文」
+# 全面比對（不像食品/飲料字會誤殺「咖啡廳有飲料攤」之類的正當活動）。
+SPORTS_NOISE = [
+    "路跑", "マラソン", "ランニング", "ラン大会", "始球式", "開球", "開跑", "起跑",
+    "棒球", "野球", "プロ野球", "中職", "球團", "球場", "スタジアム", "ドーム主題",
+]
+
+def is_sports_noise(*texts) -> bool:
+    blob = " ".join(t for t in texts if t)
+    return any(kw in blob for kw in SPORTS_NOISE)
+
+# 官方／權威來源（新聞稿、品牌官方）——額度有限，這些先處理（資料一定正確、日期齊全）
+OFFICIAL_SOURCE_HINTS = [
+    "pr times", "prtimes", "プレスリリース", "press release",
+    "ポケモン", "pokemon", "サンリオ", "sanrio", "ちいかわ", "benelic",
+    "スカイツリー", "skytree", "ハウステンボス", "huis ten bosch",
+]
+
+def is_official_source(source: str) -> bool:
+    s = (source or "").lower()
+    return any(h in s for h in OFFICIAL_SOURCE_HINTS)
+
+# 只信任這些網域的「活動日期」：官方新聞稿、品牌官網、場館/百貨/商場的單一活動頁。
+# 一般新聞媒體的內文常夾雜公告日、巡迴各城市日期 → 容易抓錯，故不從其內文自動補日期
+# （寧可顯示「日期未定」，也不要顯示錯的日期）。
+TRUSTED_DATE_DOMAINS = [
+    # 新聞稿 / 官方
+    "prtimes.jp", "atpress.ne.jp", "dreamnews.jp",
+    "pokemon.co.jp", "pokemon.com.tw", "sanrio.co.jp", "sanrio.com.tw",
+    "chiikawa-info.jp", "chiikawa-market.com", "benelic.com", "kiddyland.co.jp",
+    "miffykitchenbakery.jp",
+    # 場館 / 百貨 / 商場 / Outlet（單一活動頁，日期通常只有該活動）
+    "tokyo-skytree.jp", "sunshinecity.jp", "parco.jp", "lucua.jp", "aeonmall.com",
+    "mitsui-shopping-park.com", "lalaport", "takashimaya", "isetan", "mistore",
+    "hankyu", "hankyu", "daimaru", "matsuzakaya", "sogo-seibu", "lumine",
+    "0101.co.jp", "marui", "tobu", "keio", "odakyu", "hep-five", "grandfront",
+    "huistenbosch", "leafkyoto.net", "store.tsite.jp", "the-outlets",
+]
+
+def is_trusted_date_source(url: str) -> bool:
+    u = (url or "").lower()
+    if not u or "google.com/search" in u:
+        return False
+    return any(d in u for d in TRUSTED_DATE_DOMAINS)
+
 GN_RSS    = "https://news.google.com/rss/search?q={q}&hl=ja&gl=JP&ceid=JP:ja"
 GN_RSS_TW = "https://news.google.com/rss/search?q={q}&hl=zh-TW&gl=TW&ceid=TW:zh-Hant"
 
@@ -200,19 +245,22 @@ def detect_ai_backend(env: dict):
 
 # ── AI 呼叫（支援 Claude 和 Gemini）────────────────────────────────────────────
 
-EXTRACT_PROMPT = """你是角色周邊情報萃取助手，專門幫旅人篩選「值得專程去逛」的活動。
+EXTRACT_PROMPT = """你是角色周邊情報萃取助手，專門幫旅人篩選「值得專程去逛、買得到限定商品」的活動。
 以下是一則新聞（可能日文或中文）。
 
-【必須全部符合才算 relevant】
-1. 關於 {brand_label} 的可信情報（非個人開箱/感想/評測文）
-2. 是「需要到特定地點」的活動：快閃店POP UP、期間限定特展、主題咖啡廳、
-   常設專賣店開幕、官方門市限定活動、店頭抽選/整理券販售
-3. 地點明確在日本（東京/大阪/京都/福岡/名古屋）或台灣（台北/台中/高雄）
+【relevant: true 只限這四種「去現場買得到東西」的情報】
+1. 快閃店 / POP UP STORE / 期間限定店（販售周邊商品）
+2. 新商品發售（在實體門市/官方店舖開賣的周邊新品）
+3. 活動限定商品（特展、聯名活動、週年慶現場的「限定販售」周邊）
+4. 限定餐飲：主題咖啡廳 / 限定菜單 / 限定甜點食物
+並且：必須是 {brand_label} 的可信情報、地點在日本或台灣。
 
-【一律判定 relevant: false（這些不是專程逛的目標）】
-- 超商/藥妝/百元店/量販店的聯名小商品（7-11、全家、唐吉訶德、DAISO、Seria、
-  Canddo、唐企鵝、驚安殿堂等）
-- 食品飲料聯名（醬油、優格、軟糖、糖果、寶礦力、力保美達等）
+【一律 relevant: false（即使有提到本品牌也不要）】
+- 體育/賽事類：棒球主題日、球場應援、始球式、開球、路跑、馬拉松、RUN 活動、運動賽事聯名出場
+- 純體驗/無商品：見面會、握手會、拍照打卡點、燈光秀、遊行(parade)本身、抽獎派對（除非主軸是限定商品販售）
+- 多活動「總整理/懶人包」式報導（內容雜揉很多無關活動，無單一明確的購物地點與檔期）
+- 超商/藥妝/百元店/量販店的聯名小商品（7-11、全家、唐吉訶德、DAISO、Seria、Canddo、驚安殿堂等）
+- 食品飲料聯名上架（醬油、優格、軟糖、糖果、寶礦力、力保美達等量販通路商品）
 - 麥當勞兒童餐、扭蛋、轉蛋、盲盒等隨機販售
 - 電影/動畫/聲優/主題曲/預告/手遊更新等媒體消息
 - 純線上販售、再販通知、商品開箱評測
@@ -384,36 +432,86 @@ def search_url(query: str) -> str:
 def _valid_md(mo: int, d: int) -> bool:
     return 1 <= mo <= 12 and 1 <= d <= 31
 
-def extract_dates(html: str) -> tuple[str, str]:
-    """從來源頁面內文擷取活動期間。回傳 (startISO, endISO)，抓不到回 ('','')。
-    僅採用帶西元年的明確寫法（如「2026年5月27日(水)～6月14日(日)」），
-    避免誤抓貼文日期等雜訊。結束日缺年則沿用起始年；月份倒退視為跨年 +1。"""
-    if not html:
+def _mk_iso(y: int, mo: int, d: int) -> str | None:
+    return f"{y:04d}-{mo:02d}-{d:02d}" if _valid_md(mo, d) else None
+
+# 起始日後常見的「開跑」提示語（用來提高單一日期的可信度，避免抓到隨機日期）
+_START_CUE = (r"\s*日?\s*[（(]?[日月火水木金土]*[)）]?\s*"
+              r"(?:から|スタート|開始|より|開幕|開催|販売|発売|登場|オープン|"
+              r"起|開跑|開展|開賣|起跑|～|〜|~|－|—|–|-|至|到)")
+
+def extract_dates(text: str, ref_year: int | None = None, is_html: bool = True) -> tuple[str, str]:
+    """從來源頁面（或摘要）擷取活動期間。回傳 (startISO, endISO)，抓不到回 ('','')。
+
+    支援：
+      - 帶西元年：2026年5月27日～6月14日 / 2026/5/27-6/14
+      - 無年份（日文常見）：5月27日(水)～6月14日(日) / 5/27〜6/14（年份用 ref_year 推定）
+      - 中文：4月17日至6月8日 / 6月12日～6月14日 / 即日起至6月8日
+      - 單一起始日（後接「から/スタート/起/開賣…」才採用，降低誤抓）
+    日期通常在頁面開頭，只掃前段，避免抓到頁尾版權/其他活動日期。"""
+    if not text:
         return "", ""
-    text = re.sub(r"<[^>]+>", " ", html).replace("　", " ")
-    sep = r"[^0-9]{0,14}?[～〜~\-−–—至]{1,3}[^0-9]{0,14}?"
-    # 範圍：20XX年M月D日 〜 [20XX年]M月D日
-    m = re.search(
-        r"(20\d{2})\s*[年./]\s*(\d{1,2})\s*[月./]\s*(\d{1,2})\s*日?"
-        + sep +
-        r"(?:(20\d{2})\s*[年./]\s*)?(\d{1,2})\s*[月./]\s*(\d{1,2})\s*日?",
-        text)
+    if is_html:
+        text = re.sub(r"<[^>]+>", " ", text)
+    text = re.sub(r"\s+", " ", text.replace("　", " "))[:4000]
+    ry = ref_year or datetime.now(timezone.utc).year
+
+    ymd = r"(?:(20\d{2})\s*[年/.]\s*)?(\d{1,2})\s*[月/.]\s*(\d{1,2})"
+    sep = r"\s*日?\s*[（(]?[日月火水木金土]*[)）]?\s*[～〜~\-−–—－至到]{1,2}\s*"
+    # 範圍：[年]M月D日 〜 [年]M月D日
+    m = re.search(ymd + sep + ymd + r"\s*日?", text)
     if m:
         y1, mo1, d1, y2, mo2, d2 = m.groups()
-        y1, mo1, d1 = int(y1), int(mo1), int(d1)
-        y2 = int(y2) if y2 else y1
-        mo2, d2 = int(mo2), int(d2)
-        if _valid_md(mo1, d1) and _valid_md(mo2, d2):
-            if not m.group(4) and (mo2, d2) < (mo1, d1):
-                y2 = y1 + 1  # 結束月份比開始小且未標年 → 跨年
-            return f"{y1:04d}-{mo1:02d}-{d1:02d}", f"{y2:04d}-{mo2:02d}-{d2:02d}"
-    # 單一起始日：20XX年M月D日
-    m = re.search(r"(20\d{2})\s*[年./]\s*(\d{1,2})\s*[月./]\s*(\d{1,2})\s*日", text)
+        mo1, d1, mo2, d2 = int(mo1), int(d1), int(mo2), int(d2)
+        Y1 = int(y1) if y1 else ry
+        Y2 = int(y2) if y2 else Y1
+        if not y2 and (mo2, d2) < (mo1, d1):
+            Y2 = Y1 + 1  # 結束月份比開始小且未標年 → 跨年
+        s, e = _mk_iso(Y1, mo1, d1), _mk_iso(Y2, mo2, d2)
+        if s and e:
+            return s, e
+    # 中文「(即日起)至/到 M月D日」→ 只有結束日
+    m = re.search(r"(?:即日起|即日|自即日|起)?\s*(?:至|到|截[至止])\s*" + ymd + r"\s*日?", text)
     if m:
-        y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
-        if _valid_md(mo, d):
-            return f"{y:04d}-{mo:02d}-{d:02d}", ""
+        y, mo, d = m.groups()
+        e = _mk_iso(int(y) if y else ry, int(mo), int(d))
+        if e:
+            return "", e
+    # 單一起始日：[年]M月D日 + 開跑提示語
+    m = re.search(ymd + _START_CUE, text)
+    if m:
+        y, mo, d = m.groups()
+        s = _mk_iso(int(y) if y else ry, int(mo), int(d))
+        if s:
+            return s, ""
     return "", ""
+
+def _pub_year(pub: str) -> int | None:
+    try:
+        return parsedate_to_datetime(pub).year
+    except Exception:
+        return None
+
+def apply_extracted_dates(data: dict, text: str, ref_year: int | None, is_html: bool) -> bool:
+    """從 text 補抓活動日期，只填入 data 中目前為空的 start/end 欄位。
+    防呆：起始日不早於約 400 天前（避免抓到舊報導/版權年份）。回傳是否有補上。"""
+    if data.get("startDate") and data.get("endDate"):
+        return False
+    s, e = extract_dates(text, ref_year=ref_year, is_html=is_html)
+    if not s and not e:
+        return False
+    if s:
+        age = _days_ago_iso(s)
+        if age is None or age > 400:
+            return False  # 起始日太舊，整組不採用（多半抓錯）
+    changed = False
+    if s and not data.get("startDate"):
+        data["startDate"] = s; changed = True
+    if e and not data.get("endDate"):
+        data["endDate"] = e; changed = True
+    if changed:
+        print(f"    📅 補抓日期：{data.get('startDate') or '—'} ~ {data.get('endDate') or '—'}")
+    return changed
 
 _KANA = re.compile(r"[぀-ヿ]")  # 平假名 + 片假名
 
@@ -650,6 +748,96 @@ def clean_events(events: list[dict]) -> tuple[list[dict], int, int]:
     deduped, dup_removed = dedup_events(fresh)
     return deduped, past_removed, dup_removed
 
+def _completeness(e: dict) -> int:
+    score = sum(bool(e.get(f)) for f in ("startDate", "endDate", "city", "locationName"))
+    if "google.com/search" not in e.get("sourceUrl", ""):
+        score += 2  # 有真實來源連結者優先保留
+    return score
+
+AI_DEDUP_PROMPT = """以下是已蒐集的角色周邊活動清單，每筆有編號。
+請找出指向「同一個真實活動」的重複編號群組（不同媒體報導同一檔活動）。
+
+判定為同一活動（必須同時成立）：
+- 同一品牌
+- 同一城市或同一場館
+- 同一檔活動：同一個快閃店/特展/咖啡廳/週年慶典本身
+
+⚠️ 下列情況屬於「不同活動」，絕對不要合併：
+- 不同主題/不同聯名（例如「30週年慶典」 vs 「6月新品·初音未來聯名」是兩回事）
+- 例行月度新品 vs 特別活動
+- 不同檔期（開始日相差很多）、不同分店、不同城市
+- 巡迴活動的不同城市場次
+
+寧可漏合併，也不要把不同活動硬湊在一起。
+
+清單：
+{rows}
+
+只回傳 JSON：{{"duplicates": [[編號, 編號, ...], ...]}}
+每個子陣列是一組互為重複的編號；沒有任何重複就回 {{"duplicates": []}}。"""
+
+def ai_dedup(events: list[dict], rotator: "KeyRotator") -> tuple[list[dict], int]:
+    """用一次 AI 呼叫，把啟發式漏掉的「改寫標題但同一活動」群組合併。
+    安全防呆：只合併同品牌、且城市相容（相同或一方留空）者。回傳（清理後, 合併數）。"""
+    if len(events) < 2:
+        return events, 0
+    rows = "\n".join(
+        f"[{i}] {e.get('brand','')} | {e.get('city') or '城市未定'} | "
+        f"{(e.get('startDate') or 'NA')}~{(e.get('endDate') or 'NA')} | "
+        f"{e.get('title','')} / {(e.get('sourceTitle') or '')[:40]}"
+        for i, e in enumerate(events))
+    try:
+        raw = rotator.call(AI_DEDUP_PROMPT.format(rows=rows))
+    except RateLimitError:
+        print("    ⚠️  AI 去重略過（配額用盡）")
+        return events, 0
+    m = re.search(r"\{.*\}", raw, re.DOTALL)
+    if not m:
+        return events, 0
+    try:
+        groups = json.loads(m.group()).get("duplicates", [])
+    except Exception:
+        return events, 0
+
+    removed_idx: set[int] = set()
+    n = len(events)
+    for group in groups:
+        ids = [i for i in group if isinstance(i, int) and 0 <= i < n and i not in removed_idx]
+        if len(ids) < 2:
+            continue
+        # 安全防呆：同品牌 + 城市相容（相同或一方空）才採信 AI 的判定
+        brands = {events[i].get("brand") for i in ids}
+        if len(brands) != 1:
+            continue
+        cities = {events[i].get("city") for i in ids if events[i].get("city")}
+        if len(cities) > 1:
+            continue
+        # 日期防呆：同一活動不可能開始日相差太遠（>21天視為不同檔期，整組不合併）
+        starts = []
+        for i in ids:
+            sd = events[i].get("startDate")
+            dt = _days_ago_iso(sd) if sd else None
+            if dt is not None:
+                starts.append(dt)
+        if starts and (max(starts) - min(starts)) > 21:
+            print(f"    ⚠️  AI 提議合併但開始日相差過大，保留不合併：{[events[i].get('title') for i in ids]}")
+            continue
+        keep = max(ids, key=lambda i: _completeness(events[i]))
+        for i in ids:
+            if i == keep:
+                continue
+            for f in ("startDate", "endDate", "city", "locationName"):
+                if not events[keep].get(f) and events[i].get(f):
+                    events[keep][f] = events[i][f]
+            # 保留較好的真實來源連結
+            if ("google.com/search" in events[keep].get("sourceUrl", "")
+                    and "google.com/search" not in events[i].get("sourceUrl", "")):
+                events[keep]["sourceUrl"] = events[i]["sourceUrl"]
+            removed_idx.add(i)
+    if not removed_idx:
+        return events, 0
+    return [e for i, e in enumerate(events) if i not in removed_idx], len(removed_idx)
+
 # ── 萃取單筆 ───────────────────────────────────────────────────────────────────
 
 def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
@@ -699,16 +887,10 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
                 if toks and not any(t in html for t in toks):
                     print(f"    ⚠️  來源未提到活動主題 {toks}，疑似誤萃取，整筆丟棄：{real}")
                     return None
-                # 補抓日期：AI 只看 RSS 短摘要常漏日期，從來源內文補（不額外花 API）
-                if not data.get("startDate") and not data.get("endDate"):
-                    s, e = extract_dates(html)
-                    # 防呆：起始日不早於約 400 天前（避免抓到舊報導/版權年份）
-                    age = _days_ago_iso(s) if s else None
-                    if s and age is not None and age <= 400:
-                        data["startDate"] = s
-                        if e:
-                            data["endDate"] = e
-                        print(f"    📅 從來源補抓日期：{s} ~ {e or '—'}")
+                # 補抓日期：只從「可信網域」（官方/新聞稿/場館頁）的內文補，避免一般新聞
+                # 內文夾雜公告日、巡迴各城市日期 → 抓錯。寧可日期未定，也不放錯的日期。
+                if is_trusted_date_source(real):
+                    apply_extracted_dates(data, html, _pub_year(item["pubDate"]), is_html=True)
         data["sourceUrl"]   = real if real else search_url(best_search_query(data))
         return data
     except RateLimitError:
@@ -767,6 +949,9 @@ def run(brands: list[str]):
                 seen_run.add(it["title"])
                 unique.append(it)
 
+        # 官方優先：把 PR TIMES／官方來源排到最前面先花配額（穩定排序保留原順序）
+        unique.sort(key=lambda it: 0 if is_official_source(it.get("source", "")) else 1)
+
         kws = BRAND_KEYWORDS[brand]
         new_for_brand = 0
         processed = 0
@@ -782,6 +967,8 @@ def run(brands: list[str]):
             if item["title"] in processed_cache:  # 之前已送 AI 判斷過，不重複花配額
                 continue
             if is_noise(item["title"]):  # 事前過濾雜訊，不浪費 API 額度
+                continue
+            if is_sports_noise(item["title"], item.get("description", "")):  # 體育/路跑非購物
                 continue
             age = pubdate_age_days(item["pubDate"])  # 過舊新聞跳過（多半已結束）
             if age is not None and age > MAX_NEWS_AGE_DAYS:
@@ -819,14 +1006,19 @@ def run(brands: list[str]):
             print("    本次無新情報")
 
     save_processed(processed_cache)
-    # 收尾：移除過期 + 同活動去重
+    # 收尾：移除過期 + 啟發式去重
     events, past_removed, dup_removed = clean_events(events)
+    # 再用一次 AI 群組去重，補抓改寫標題的同一活動（配額用盡則自動略過）
+    ai_removed = 0
+    if not rate_limited:
+        events, ai_removed = ai_dedup(events, rotator)
     save_events(events)
 
     status = "中途因配額停止" if rate_limited else "完成"
     print(f"\n✨  {status}！本次新增 {new_count} 筆")
-    if past_removed or dup_removed:
-        print(f"    清理：移除過期 {past_removed} 筆、去重 {dup_removed} 筆")
+    if past_removed or dup_removed or ai_removed:
+        print(f"    清理：移除過期 {past_removed} 筆、去重 {dup_removed + ai_removed} 筆"
+              f"（其中 AI 去重 {ai_removed} 筆）")
     print(f"    總計 {len(events)} 筆，寫入：{EVENTS_JSON}")
 
 def main():
