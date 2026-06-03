@@ -64,6 +64,31 @@ def check_url(url, timeout=20, return_text=False):
     return pack(False, code)
 
 
+def fetch_html(url, timeout=20):
+    """取得頁面原始 HTML（含 <meta og:>）字串；被 bot 防護擋住或失敗時，改用 reader 代理
+    並要求回 HTML 格式（X-Return-Format: html，保留 meta tag 供 regex 解析）。失敗回 ''。"""
+    if not url:
+        return ""
+    try:
+        ok, code, text = _raw_fetch(url, timeout, True)
+        if ok and text:
+            return text
+        blocked = code in _BLOCKED_CODES
+    except urllib.error.HTTPError as e:
+        blocked = e.code in _BLOCKED_CODES
+    except Exception:
+        blocked = True
+    if blocked:
+        try:
+            req = urllib.request.Request(READER_PROXY + url, headers={
+                "User-Agent": UA, "X-Return-Format": "html"})
+            with urllib.request.urlopen(req, timeout=max(timeout, 45), context=_CTX) as r:
+                return r.read(500000).decode("utf-8", "replace")
+        except Exception:
+            pass
+    return ""
+
+
 def page_mentions(text, keywords):
     """頁面內容（含 meta/og:title，多為伺服器端輸出）是否提到任一關鍵字。"""
     if not text:

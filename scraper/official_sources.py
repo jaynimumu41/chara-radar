@@ -15,12 +15,7 @@ from datetime import datetime, timezone, timedelta
 from email.utils import format_datetime
 
 import requests
-
-HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-                  "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-    "Accept-Language": "ja,zh-TW;q=0.9,en;q=0.8",
-}
+from verify_links import fetch_html  # 抓頁；被 bot 防護擋住時自動改用 reader 代理硬取
 
 # 每品牌在 PR TIMES 用的關鍵字（日文官方名稱命中率最高）+ 標題須含的關聯字
 PRTIMES_KEYWORD = {
@@ -63,24 +58,20 @@ def fetch_prtimes(brand: str, limit: int = 8) -> list[dict]:
     kw = PRTIMES_KEYWORD.get(brand)
     if not kw:
         return []
-    try:
-        r = requests.get("https://prtimes.jp/topics/keywords/" + requests.utils.quote(kw),
-                         headers=HEADERS, timeout=15)
-        r.raise_for_status()
-    except Exception as e:
-        print(f"    ⚠️  PR TIMES 列表失敗：{e}")
+    list_html = fetch_html("https://prtimes.jp/topics/keywords/" + requests.utils.quote(kw))
+    if not list_html:
+        print(f"    ⚠️  PR TIMES 列表抓取失敗（直連＋代理都不行）")
         return []
 
-    ids = list(dict.fromkeys(re.findall(r"/main/html/rd/p/(\d+\.\d+)\.html", r.text)))
+    ids = list(dict.fromkeys(re.findall(r"/main/html/rd/p/(\d+\.\d+)\.html", list_html)))
     must = TITLE_MUST_INCLUDE.get(brand, [])
     items: list[dict] = []
     for rid in ids:
         if len(items) >= limit:
             break
         url = f"https://prtimes.jp/main/html/rd/p/{rid}.html"
-        try:
-            h = requests.get(url, headers=HEADERS, timeout=15).text
-        except Exception:
+        h = fetch_html(url)
+        if not h:
             continue
         title = _og(h, "title")
         if not title:
