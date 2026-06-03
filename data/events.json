@@ -174,8 +174,8 @@
     "country": "JP",
     "city": "Aomori",
     "locationName": "AOMORI×Dick Bruna TABLE",
-    "startDate": "",
-    "endDate": "",
+    "startDate": "2026-04-18",
+    "endDate": "2026-06-21",
     "summaryZh": "AOMORI×Dick Bruna TABLE推出第二彈限定周邊商品，以米飛兔與蘋果為主題，設計易於日常使用的青森回憶商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
@@ -190,30 +190,6 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-02",
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000004280.000012759.html"
-  },
-  {
-    "brand": "miffy",
-    "title": "miffy 世界観をスイーツで表現 名古屋限定",
-    "type": "popup",
-    "country": "JP",
-    "city": "Nagoya",
-    "locationName": "",
-    "startDate": "",
-    "endDate": "",
-    "summaryZh": "於名古屋舉辦期間限定活動，以miffy的世界觀呈現甜點，並有機會獲得限定特典商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "期間限定",
-      "甜點",
-      "名古屋",
-      "限定特典"
-    ],
-    "id": "mi-15851d",
-    "sourceTitle": "ミッフィーの世界観をスイーツで表現 名古屋で期間限定 限定グッズの特典付き - 静岡ライフ",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-02",
-    "sourceUrl": "https://www.shizuoka-life.jp/post-13545/"
   },
   {
     "brand": "sanrio",
