@@ -741,5 +741,54 @@
     "createdAt": "2026-06-03",
     "sourceTitle": "60年分のカワイイに、会いにいく日。サンリオ展 FINAL ver. が六本木で開幕！ - POPAP",
     "sourceUrl": "https://www.popap.biz/popup-list/sanrio-final-0409"
+  },
+  {
+    "brand": "pokemon",
+    "title": "ポケピース POP UP STORE 埼玉",
+    "type": "popup",
+    "country": "JP",
+    "city": "Saitama",
+    "locationName": "イオンレイクタウン kaze",
+    "startDate": "2026-05-15",
+    "endDate": "2026-06-07",
+    "summaryZh": "寶可夢療癒系品牌「ポケピース」POP UP STORE by VILLAGE VANGUARD 於埼玉 永旺夢樂城 kaze 登場，販售會場限定先行商品與多款周邊。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢",
+      "ポケピース",
+      "快閃店",
+      "埼玉"
+    ],
+    "id": "po-pk5a15",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-03",
+    "sourceTitle": "ポケピース POP UP STORE by VILLAGE VANGUARD - ベストカレンダー/ヴィレッジヴァンガード",
+    "sourceUrl": "https://www.village-v.co.jp/popup/016402/"
+  },
+  {
+    "brand": "sanrio",
+    "title": "布丁狗30週年 CACO café 主題門市",
+    "type": "cafe",
+    "country": "TW",
+    "city": "",
+    "locationName": "全台4店同步（台南小西門/台南南紡/高雄夢時代/台中漢神洲際）",
+    "startDate": "2026-04-08",
+    "endDate": "2026-06-30",
+    "summaryZh": "CACO café 攜手布丁狗30週年推出春夏限定主題門市，全台4店同步登場，供應布丁狗聯名療癒餐點，並有加價購限定周邊。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "布丁狗",
+      "三麗鷗",
+      "限定餐飲",
+      "台灣",
+      "全台同步"
+    ],
+    "id": "sa-pn0408",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-03",
+    "sourceTitle": "全台只有4間！30週年「布丁狗主題店」快閃登場，療癒餐點＋限定周邊一次看 - 食尚玩家",
+    "sourceUrl": "https://supertaste.tvbs.com.tw/food/359205"
   }
 ]
