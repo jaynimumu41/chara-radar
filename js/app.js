@@ -4,7 +4,6 @@ let activeView = 'events';// 'events' | 'stores'
 let activeBrand = null;   // null = 全部品牌
 let activeType = 'all';
 let activeCountry = 'all';
-let activeCity = 'all';
 
 const BRAND_LABELS = {
   pokemon: 'Pokémon',
@@ -71,7 +70,6 @@ function getFiltered() {
     if (activeBrand && ev.brand !== activeBrand) return false;
     if (activeType !== 'all' && ev.type !== activeType) return false;
     if (activeCountry !== 'all' && ev.country !== activeCountry) return false;
-    if (activeCity !== 'all' && ev.city !== activeCity) return false;
     return true;
   });
 }
@@ -222,14 +220,6 @@ function renderBrandStores(brand) {
   return `<div class="store-section">${head}${groups}</div>`;
 }
 
-function initCitySelect() {
-  const cities = [...new Set(allEvents.filter(e => e.city).map(e => e.city))]
-    .sort((a, b) => Object.keys(CITY_LABELS).indexOf(a) - Object.keys(CITY_LABELS).indexOf(b));
-  const sel = document.getElementById('filter-city');
-  sel.innerHTML = `<option value="all">所有城市</option>` +
-    cities.map(c => `<option value="${c}">${CITY_LABELS[c] || c}</option>`).join('');
-}
-
 // ── Init ──────────────────────────────────────────────────────────────────────
 
 function renderLastUpdated(iso) {
@@ -282,10 +272,8 @@ async function init() {
   });
 
   // Dropdown filters
-  initCitySelect();
   document.getElementById('filter-type').addEventListener('change', e => { activeType = e.target.value; renderHome(); });
   document.getElementById('filter-country').addEventListener('change', e => { activeCountry = e.target.value; renderHome(); });
-  document.getElementById('filter-city').addEventListener('change', e => { activeCity = e.target.value; renderHome(); });
 
   renderHome();
 }
