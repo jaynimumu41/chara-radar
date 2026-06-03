@@ -165,6 +165,15 @@ def is_sports_noise(*texts) -> bool:
     blob = " ".join(t for t in texts if t)
     return any(kw in blob for kw in SPORTS_NOISE)
 
+# 多活動「彙整／懶人包」型報導：一篇雜揉多個活動、無單一明確檔期與地點。這類文章的價值在
+# 「列出有哪些活動」，而非單一可信來源——真正值得收的活動會由其官方頁或單一新聞各自帶入，
+# 故彙整文一律略過（符合「準確>覆蓋」：只有彙整文提到、無其他來源佐證者，本就該捨）。
+# 關鍵詞刻意收斂，避免誤殺正當的單一活動攻略文（如「特展攻略…票價整理」不含下列詞）。
+ROUNDUP_KEYWORDS = ["懶人包", "總整理", "行事曆", "整理包"]
+
+def is_roundup_title(title: str) -> bool:
+    return any(kw in (title or "") for kw in ROUNDUP_KEYWORDS)
+
 # 官方／權威來源（新聞稿、品牌官方）——額度有限，這些先處理（資料一定正確、日期齊全）
 OFFICIAL_SOURCE_HINTS = [
     "pr times", "prtimes", "プレスリリース", "press release",
@@ -741,6 +750,14 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
         if hit is not None and city and kept[hit].get("city") and city != kept[hit].get("city"):
             hit = None
 
+        # 日期鐵則：兩筆都有開始日且差距 >14 天 = 不同檔期，不合併（同場館的春檔/秋檔
+        # 巡迴標題常完全相同，僅靠日期區分）。同一真實來源 URL 視為同篇報導，為例外不套用。
+        hit_by_url = ukey is not None and url_keys.get(ukey) == hit
+        if hit is not None and not hit_by_url and sd and kept[hit].get("startDate"):
+            ga, gb = _days_ago_iso(sd), _days_ago_iso(kept[hit]["startDate"])
+            if ga is not None and gb is not None and abs(ga - gb) > 14:
+                hit = None
+
         if hit is not None:
             # 視為重複：保留資料較完整的那筆
             removed += 1
@@ -793,10 +810,24 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
             if ln_e and ln_k and not same_venue and tsim(ln_e, ln_k) < 0.5:
                 continue
             same_city = ev.get("city") and ev.get("city") == k.get("city")
+            # 日期區間一致性：兩筆都有開始日時，差距 >14 天 = 不同檔期，絕不合併
+            # （即使標題完全相同，如同一場館的春檔 vs 秋檔巡迴）。差距 ≤3 天 = 區間一致。
+            sa, sb = ev.get("startDate"), k.get("startDate")
+            date_conflict = date_aligned = False
+            if sa and sb:
+                ga, gb = _days_ago_iso(sa), _days_ago_iso(sb)
+                if ga is not None and gb is not None:
+                    gap = abs(ga - gb)
+                    date_conflict, date_aligned = gap > 14, gap <= 3
+            if date_conflict:
+                continue
+            # 場館字串相似（即使不在 VENUE_CANON 清單）：用於「同城+同活動但媒體標題寫法差很多」
+            venue_close = bool(ln_e and ln_k and tsim(ln_e, ln_k) >= 0.6)
             # 同品牌+同一已知場館，且其中一筆完全沒日期 → 幾乎一定是同活動的較不完整版本
             # （兩個不同檔期通常各自都有日期，故「一邊全無日期」可避免誤併不同檔期）
             one_dateless = not ev.get("startDate") or not k.get("startDate")
             if (same_venue and sim >= 0.4) or (same_venue and one_dateless and sim >= 0.2) \
+               or (same_city and venue_close and date_aligned) \
                or (same_city and sim >= 0.50) or sim >= 0.72:
                 # 合併到較完整者，補空欄位
                 base = k if completeness(k) >= completeness(ev) else ev
@@ -1097,6 +1128,8 @@ def run(brands: list[str]):
             if is_noise(item["title"]):  # 事前過濾雜訊，不浪費 API 額度
                 continue
             if is_sports_noise(item["title"], item.get("description", "")):  # 體育/路跑非購物
+                continue
+            if is_roundup_title(item["title"]):  # 多活動彙整/懶人包：略過（活動由單一來源/官方帶入）
                 continue
             if is_rejected_title(item["title"]):  # 標題在黑名單（已確認壞資料）
                 continue
