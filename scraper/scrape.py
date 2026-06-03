@@ -598,6 +598,40 @@ def save_processed(seen: set[str]):
     arr = list(seen)[-2000:]
     PROCESSED_JSON.write_text(json.dumps(arr, ensure_ascii=False), encoding="utf-8")
 
+# ── 壞資料黑名單（已確認移除的，新聞再抓到就自動擋，防反覆復活）──────────────────
+REJECTED_JSON = Path(__file__).parent / "rejected.json"
+
+def load_rejected() -> dict:
+    if REJECTED_JSON.exists():
+        try:
+            d = json.loads(REJECTED_JSON.read_text(encoding="utf-8"))
+            return {"url_contains": [s.lower() for s in d.get("url_contains", [])],
+                    "title_contains": d.get("title_contains", [])}
+        except Exception:
+            pass
+    return {"url_contains": [], "title_contains": []}
+
+_REJECTED = {"url_contains": [], "title_contains": []}  # run() 啟動時載入
+
+def is_rejected_url(url: str) -> bool:
+    u = (url or "").lower()
+    return any(s in u for s in _REJECTED["url_contains"])
+
+def is_rejected_title(title: str) -> bool:
+    t = title or ""
+    return any(s in t for s in _REJECTED["title_contains"])
+
+# ── 年份驗證：擋「舊文復活」。掃頁面前段的「20XX年」，若最大年份 < 今年 → 整篇是舊活動 ──
+# 抓「日期型年份」：20XX 後面接 年 / . / / / - 再接數字（如 2016年、2016.04.19、2026/6/1）
+_YEAR_RE = re.compile(r"(20\d{2})\s*[年./\-]\s*\d")
+CURRENT_YEAR = int(TODAY[:4])
+
+def stale_by_year(text: str, scan_chars: int = 4000) -> bool:
+    """頁面前段提到的最大「日期年份」< 今年 → 視為舊活動（如 2016 年的福岡咖啡廳被重新索引）。
+    找不到任何年份則不判定（回 False，交給其他守則）。"""
+    years = [int(y) for y in _YEAR_RE.findall((text or "")[:scan_chars])]
+    return bool(years) and max(years) < CURRENT_YEAR
+
 # ── 新聞時效過濾 ───────────────────────────────────────────────────────────────
 
 MAX_NEWS_AGE_DAYS = 45  # 只處理近 N 天發布的新聞（過舊的多半是已結束活動）
@@ -624,6 +658,13 @@ VENUE_CANON = [
     (["ハウステンボス", "huistenbosch", "豪斯登堡", "huistenbo"], "huistenbosch"),
     (["ピューロランド", "puroland", "彩虹樂園", "三麗鷗樂園", "サンリオピューロランド"], "puroland"),
     (["スカイツリー", "晴空塔", "ソラマチ", "skytree", "そらまち"], "skytree"),
+    # 台灣常見活動場館（同活動常被不同媒體用不同標題報導，靠場館統一去重）
+    (["夢時代", "統一時代", "時代會館", "統一夢時代", "dream mall"], "kaohsiung-dreammall"),
+    (["華山1914", "華山文創", "華山"], "huashan"),
+    (["松山文創", "松菸", "松山文化創意"], "matsuyama-bunka"),
+    (["駁二"], "pier2"),
+    (["勤美誠品", "草悟道", "勤美"], "taichung-cmp"),
+    (["新光三越台南", "南紡"], "tainan-skm"),
 ]
 
 def canon_venue(loc: str, title: str = "") -> str | None:
@@ -906,8 +947,14 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
         gl = item["link"]
         # 官方來源（official_sources.py）的 link 已是真實 URL；只有 Google News 才需解碼
         real = decode_google_news_url(gl) if "news.google.com" in gl else (gl or None)
+        if real and is_rejected_url(real):       # 黑名單來源：已確認的壞資料，整筆丟棄
+            print(f"    ⛔ 來源在黑名單（壞資料），丟棄：{real}")
+            return None
         if real:
             ok, code, html = check_url(real, return_text=True)
+            if ok and stale_by_year(html):       # 頁面年份過舊＝舊文復活，整筆丟棄
+                print(f"    ⛔ 來源頁年份過舊（舊活動復活），丟棄：{real}")
+                return None
             if not ok:
                 print(f"    ⚠️  來源連不過（HTTP {code}），改用搜尋連結：{real}")
                 real = None
@@ -1000,6 +1047,8 @@ def run(brands: list[str]):
     seen_ttls = {e.get("title", "") for e in events} | {e.get("sourceTitle", "") for e in events}
     seen_urls = {e.get("sourceUrl", "") for e in events}
     processed_cache = load_processed()  # 跑過的（採用或略過）原始標題，避免重複送 AI
+    global _REJECTED
+    _REJECTED = load_rejected()         # 壞資料黑名單（url/title 片段），防舊壞資料復活
     new_count = 0
     rate_limited = False
 
@@ -1048,6 +1097,8 @@ def run(brands: list[str]):
             if is_noise(item["title"]):  # 事前過濾雜訊，不浪費 API 額度
                 continue
             if is_sports_noise(item["title"], item.get("description", "")):  # 體育/路跑非購物
+                continue
+            if is_rejected_title(item["title"]):  # 標題在黑名單（已確認壞資料）
                 continue
             age = pubdate_age_days(item["pubDate"])  # 過舊新聞跳過（多半已結束）
             if age is not None and age > MAX_NEWS_AGE_DAYS:

@@ -1,0 +1,9 @@
+{
+  "_comment": "已確認的壞資料黑名單：新聞抓到就自動擋，防止反覆復活。url_contains=來源網址含此子字串即丟；title_contains=來源標題含此字即丟。新增壞資料時把對應網址/標題片段加進來。",
+  "url_contains": [
+    "walkerplus.com/article/76898",
+    "walkerplus.com/article/74592",
+    "tenjin.keizai.biz/headline/5404"
+  ],
+  "title_contains": []
+}
