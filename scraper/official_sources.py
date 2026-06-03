@@ -223,6 +223,71 @@ def fetch_pokemon_popups(correct_city=None) -> list[dict]:
     return out
 
 
+_MIFFY_LIST = "https://dickbruna.jp/event/"
+# 列表項：### <活動標題> 2026.05.27](https://dickbruna.jp/news/202605/46167/)
+_MIFFY_ROW = re.compile(
+    r"###\s*([^\n\]]+?)\s+(20\d\d)\.(\d{1,2})\.(\d{1,2})\]"
+    r"\((https://dickbruna\.jp/news/\d+/\d+/)\)")
+# 只收四類「去現場買得到」的：快閃/店舖/催事/咖啡廳/周邊
+_MIFFY_INCLUDE = ["dick bruna stand", "stand by miia", "zakka", "flower miffy",
+                  "pop-up", "pop up", "popup", "マルシェ", "table", "カフェ",
+                  "ショップ", "グッズ", "ストア", "miffy⁺", "おやつ", "kitchen"]
+
+
+def fetch_miffy_events(extract_dates, correct_city, max_articles=16, fresh_days=80) -> list[dict]:
+    """解析 Miffy 官方 dickbruna.jp/event/ 列表，逐篇抓開催期間，回傳現行成品情報。零 Gemini。
+    需傳入 scrape.extract_dates 與 scrape.correct_city。"""
+    md = _proxy_markdown(_MIFFY_LIST)
+    if not md:
+        print("    ⚠️  Miffy dickbruna 列表抓取失敗（直連＋代理都不行）")
+        return []
+    from datetime import date as _d
+    today = _today_iso()
+    out, seen = [], set()
+    rows = _MIFFY_ROW.findall(md)
+    for title, py, pm, pd, url in rows[:max_articles]:
+        title = re.sub(r"\s+", " ", title).strip()
+        if url in seen:
+            continue
+        # 類別過濾：只收購物型活動
+        if not any(k in title.lower() for k in _MIFFY_INCLUDE):
+            continue
+        # 發布太舊的略過（避免翻到去年活動）
+        try:
+            if (_d.today() - _d(int(py), int(pm), int(pd))).days > fresh_days:
+                continue
+        except ValueError:
+            pass
+        detail = _proxy_markdown(url)
+        if not detail:
+            continue
+        s, e = extract_dates(detail, ref_year=int(py), is_html=False, scan_chars=9000)
+        if not s or (e and e < today):     # 抓不到期間、或已過期 → 跳過
+            continue
+        seen.add(url)
+        name_m = re.search(r"「([^」]+)」", title)
+        name = name_m.group(1) if name_m else title
+        venue = re.split(r"(?:にて|に|で)「", title)[0].strip("・ ")
+        loc = venue or name
+        city = correct_city(venue, title)
+        out.append({
+            "brand": "miffy",
+            "title": f"Miffy {name}　{venue}".strip(),
+            "type": "cafe" if any(k in title.lower() for k in ["カフェ", "kitchen", "おやつ", "table"]) else "popup",
+            "country": "JP", "city": city or "",
+            "locationName": loc,
+            "startDate": s, "endDate": e or "",
+            "summaryZh": f"Miffy（米飛兔）官方活動「{name}」於{venue}期間限定登場，販售限定周邊／餐點。",
+            "needReservation": False, "hasLimitedGoods": True,
+            "tags": ["米飛兔", "期間限定", "日本"],
+            "id": _stable_id("mi", url),
+            "sourceType": "official_site", "createdAt": today,
+            "sourceTitle": f"{title} - dickbruna.jp",
+            "sourceUrl": url,
+        })
+    return out
+
+
 # 官方來源總入口：PR TIMES（待萃取 item）+ 之後新增來源在這裡串接
 def fetch_official(brand: str) -> list[dict]:
     return fetch_prtimes(brand)

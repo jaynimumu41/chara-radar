@@ -25,27 +25,26 @@
   },
   {
     "brand": "miffy",
-    "title": "Miffy與彼得兔限定商品展",
+    "title": "Miffy ミッフィーzakkaフェスタ　ジェイアール京都伊勢丹",
     "type": "popup",
     "country": "JP",
     "city": "Kyoto",
     "locationName": "ジェイアール京都伊勢丹",
     "startDate": "2026-05-27",
     "endDate": "2026-06-08",
-    "summaryZh": "京都車站的JR京都伊勢丹集結了Miffy與彼得兔的限定商品，有值得關注的活動同時舉辦。",
+    "summaryZh": "Miffy（米飛兔）官方活動「ミッフィーzakkaフェスタ」於ジェイアール京都伊勢丹期間限定登場，販售限定周邊／餐點。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "米飛兔",
-      "彼得兔",
-      "限定商品",
-      "京都"
+      "期間限定",
+      "日本"
     ],
-    "id": "mi-36bd5b",
-    "sourceUrl": "https://www.leafkyoto.net/event/260525-kyoto-isetan/",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-02",
-    "sourceTitle": "京都駅にミッフィーとピーターラビット™︎の限定グッズが集結！注目イベントが同時開催／ジェイアール京都伊勢丹 - Leaf KYOTO"
+    "id": "mi-ed43d0",
+    "sourceType": "official_site",
+    "createdAt": "2026-06-03",
+    "sourceTitle": "ジェイアール京都伊勢丹で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
+    "sourceUrl": "https://dickbruna.jp/news/202605/46117/"
   },
   {
     "brand": "miffy",
@@ -935,5 +934,51 @@
     "createdAt": "2026-06-03",
     "sourceTitle": "ポケモンセンター出張所inイオンモール羽生（2026-06-19～2026-08-22）",
     "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
+  },
+  {
+    "brand": "miffy",
+    "title": "Miffy DICK BRUNA STAND BY MIIA　北海道・大丸 札幌店",
+    "type": "popup",
+    "country": "JP",
+    "city": "Hokkaido",
+    "locationName": "北海道・大丸 札幌店",
+    "startDate": "2026-06-03",
+    "endDate": "2026-06-09",
+    "summaryZh": "Miffy（米飛兔）官方活動「DICK BRUNA STAND BY MIIA」於北海道・大丸 札幌店期間限定登場，販售限定周邊／餐點。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "期間限定",
+      "日本"
+    ],
+    "id": "mi-21f8c6",
+    "sourceType": "official_site",
+    "createdAt": "2026-06-03",
+    "sourceTitle": "北海道・大丸 札幌店に「DICK BRUNA STAND BY MIIA」期間限定オープン - dickbruna.jp",
+    "sourceUrl": "https://dickbruna.jp/news/202605/46167/"
+  },
+  {
+    "brand": "miffy",
+    "title": "Miffy DICK BRUNA STAND BY MIIA　ラフォーレ原宿",
+    "type": "popup",
+    "country": "JP",
+    "city": "Tokyo",
+    "locationName": "ラフォーレ原宿",
+    "startDate": "2026-05-26",
+    "endDate": "2026-06-22",
+    "summaryZh": "Miffy（米飛兔）官方活動「DICK BRUNA STAND BY MIIA」於ラフォーレ原宿期間限定登場，販售限定周邊／餐點。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "期間限定",
+      "日本"
+    ],
+    "id": "mi-ba3130",
+    "sourceType": "official_site",
+    "createdAt": "2026-06-03",
+    "sourceTitle": "ラフォーレ原宿に「DICK BRUNA STAND BY MIIA」期間限定オープン - dickbruna.jp",
+    "sourceUrl": "https://dickbruna.jp/news/202605/46293/"
   }
 ]

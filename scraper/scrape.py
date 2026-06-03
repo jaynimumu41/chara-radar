@@ -30,7 +30,7 @@ import requests
 
 from verify_links import check_url, page_mentions  # 存檔前驗證來源連結：連得過去 + 內容與品牌相關
 from official_sources import (fetch_official, fetch_chiikawa_popups,
-                              fetch_pokemon_popups)  # 官方來源：PR TIMES + 結構化排程頁
+                              fetch_pokemon_popups, fetch_miffy_events)  # 官方來源：PR TIMES + 結構化排程頁
 
 # Windows 終端機 UTF-8 輸出 + 關閉緩衝（即時看到進度）
 if hasattr(sys.stdout, "reconfigure"):
@@ -986,6 +986,16 @@ def run(brands: list[str]):
                 save_events(events)
         except Exception as e:
             print(f"    ⚠️  寶可夢結構化來源失敗（略過）：{e}")
+    if "miffy" in brands:
+        try:
+            mf = fetch_miffy_events(extract_dates, correct_city)
+            if mf:
+                surls = {e["sourceUrl"] for e in mf}
+                events = [e for e in events if e.get("sourceUrl") not in surls] + mf
+                print(f"🏛️  Miffy 官方活動（dickbruna，結構化，免 AI）→ {len(mf)} 筆現行")
+                save_events(events)
+        except Exception as e:
+            print(f"    ⚠️  Miffy 結構化來源失敗（略過）：{e}")
 
     seen_ttls = {e.get("title", "") for e in events} | {e.get("sourceTitle", "") for e in events}
     seen_urls = {e.get("sourceUrl", "") for e in events}
