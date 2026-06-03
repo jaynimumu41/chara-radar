@@ -15,6 +15,12 @@ Set-Location $dir
 "" | Out-File -FilePath $log -Append -Encoding utf8
 "========== START $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') ==========" | Out-File -FilePath $log -Append -Encoding utf8
 & $py scrape.py 2>&1 | Out-File -FilePath $log -Append -Encoding utf8
+# Capture python's real exit code (Out-File is a cmdlet, does not touch $LASTEXITCODE).
+# The later 'git push' writes progress to stderr which would otherwise make the task
+# report failure (result=1) even on success; we report python's code instead.
+$pyCode = $LASTEXITCODE
+if ($null -eq $pyCode) { $pyCode = 0 }
+("SCRAPE EXIT CODE: " + $pyCode) | Out-File -FilePath $log -Append -Encoding utf8
 
 # ---- Auto-deploy to GitHub Pages (viewable on phone) ----------------------
 # Every run writes last_updated.json (heartbeat: even if data is unchanged, the
@@ -41,3 +47,7 @@ if ($staged) {
 # Keep only the latest 14 daily logs
 Get-ChildItem $logDir -Filter "scrape-*.log" | Sort-Object LastWriteTime -Descending |
   Select-Object -Skip 14 | Remove-Item -Force -ErrorAction SilentlyContinue
+
+# Report python's exit code as the task result (ignore git-push stderr noise),
+# so result=0 means a real success and non-zero means a real scrape failure.
+exit $pyCode
