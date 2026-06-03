@@ -232,6 +232,15 @@ body {
 .view-tab.active { background: var(--text); color: #fff; border-color: var(--text); }
 .view-tab.active .vt-sub { color: rgba(255,255,255,.7); }
 
+/* 最後更新時間（小字） */
+.last-updated {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: right;
+  margin: -8px 0 14px;
+  min-height: 14px;
+}
+
 /* STORE LIST（常設店一覽） */
 .stores-wrap { padding-bottom: 40px; }
 .store-section { margin-bottom: 28px; }

@@ -232,6 +232,15 @@ function initCitySelect() {
 
 // ── Init ──────────────────────────────────────────────────────────────────────
 
+function renderLastUpdated(iso) {
+  const el = document.getElementById('last-updated');
+  if (!el) return;
+  const d = iso ? new Date(iso) : null;
+  if (!d || isNaN(d)) { el.textContent = ''; return; }
+  const pad = n => String(n).padStart(2, '0');
+  el.textContent = `最後更新時間：${d.getMonth() + 1}月${d.getDate()}日 ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
 async function init() {
   const [evRes, stRes] = await Promise.all([
     fetch('data/events.json'),
@@ -239,6 +248,12 @@ async function init() {
   ]);
   allEvents = await evRes.json();
   storeData = await stRes.json();
+
+  // 最後更新時間（每日 16:00 排程跑完寫入；讀不到就留空不顯示）
+  fetch('data/last_updated.json')
+    .then(r => r.ok ? r.json() : null)
+    .then(j => renderLastUpdated(j && j.updatedAt))
+    .catch(() => {});
 
   // 檢視切換：活動情報 / 常設店
   document.querySelectorAll('.view-tab').forEach(tab => {
