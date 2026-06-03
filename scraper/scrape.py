@@ -741,6 +741,11 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
             same_venue = (canon_venue(ev.get("locationName", ""), ev.get("title", "")) is not None
                           and canon_venue(ev.get("locationName", ""), ev.get("title", ""))
                               == canon_venue(k.get("locationName", ""), k.get("title", "")))
+            # 會場鐵則：兩筆都有 locationName、且明顯是不同會場(非同一已知場館、字串也不相近)
+            # = 同城市的不同場次(如兵庫的ピオレ姫路 vs イオンモール伊丹，標題幾乎相同)，不合併。
+            ln_e, ln_k = ev.get("locationName", ""), k.get("locationName", "")
+            if ln_e and ln_k and not same_venue and tsim(ln_e, ln_k) < 0.5:
+                continue
             same_city = ev.get("city") and ev.get("city") == k.get("city")
             # 同品牌+同一已知場館，且其中一筆完全沒日期 → 幾乎一定是同活動的較不完整版本
             # （兩個不同檔期通常各自都有日期，故「一邊全無日期」可避免誤併不同檔期）
