@@ -29,7 +29,8 @@ from pathlib import Path
 import requests
 
 from verify_links import check_url, page_mentions  # 存檔前驗證來源連結：連得過去 + 內容與品牌相關
-from official_sources import fetch_official, fetch_chiikawa_popups  # 官方來源：PR TIMES + 結構化排程頁
+from official_sources import (fetch_official, fetch_chiikawa_popups,
+                              fetch_pokemon_popups)  # 官方來源：PR TIMES + 結構化排程頁
 
 # Windows 終端機 UTF-8 輸出 + 關閉緩衝（即時看到進度）
 if hasattr(sys.stdout, "reconfigure"):
@@ -105,6 +106,7 @@ AREA_TO_CITY = {
     "Yamaguchi":["山口", "小野田", "おのだ"],
     "Wakayama": ["和歌山", "Wakayama"],
     "Kochi":    ["高知", "Kochi"],
+    "Ehime":    ["愛媛", "今治", "松山"],
     "Ishikawa": ["石川", "金沢", "金澤", "香林坊"],
     "Taipei":   ["台北", "臺北", "信義", "西門", "微風", "南山", "華山", "中山",
                  "松山", "內湖", "板橋", "101"],
@@ -972,6 +974,18 @@ def run(brands: list[str]):
                 save_events(events)
         except Exception as e:
             print(f"    ⚠️  吉伊卡哇結構化來源失敗（略過）：{e}")
+    if "pokemon" in brands:
+        try:
+            poke = fetch_pokemon_popups(correct_city=correct_city)
+            if poke:
+                # 出張所整批以官方排程為準：移除舊的出張所、換成最新清單
+                events = [e for e in events
+                          if not (e.get("brand") == "pokemon" and "出張所" in e.get("title", ""))]
+                events += poke
+                print(f"🏛️  寶可夢出張所排程（結構化，免 AI）→ {len(poke)} 筆現行")
+                save_events(events)
+        except Exception as e:
+            print(f"    ⚠️  寶可夢結構化來源失敗（略過）：{e}")
 
     seen_ttls = {e.get("title", "") for e in events} | {e.get("sourceTitle", "") for e in events}
     seen_urls = {e.get("sourceUrl", "") for e in events}

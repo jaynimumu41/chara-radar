@@ -174,6 +174,55 @@ def fetch_chiikawa_popups(correct_city=None) -> list[dict]:
     return out
 
 
+_POKE_SCHED = "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
+# 解析：2026年6月5日（金）〜7月22日（水）**兵庫県・イオンモール神戸北**専門店街3階 イオンホール
+_POKE_ROW = re.compile(
+    r"(20\d\d)年(\d{1,2})月(\d{1,2})日（[^）]*）[〜～]\s*"
+    r"(?:(20\d\d)年)?(\d{1,2})月(\d{1,2})日（[^）]*）\s*"
+    r"\*\*([^・*]+?)・([^*]+?)\*\*\s*([^\n*\[]{0,40})"
+)
+
+
+def fetch_pokemon_popups(correct_city=None) -> list[dict]:
+    """解析寶可夢出張所排程，回傳「現行（未過期）」出張所的成品情報清單。零 Gemini。
+    （oneheart65 為維護良好的排程彙整站，羽生等日期經官方 AEON 頁交叉驗證一致。）"""
+    md = _proxy_markdown(_POKE_SCHED)
+    if not md:
+        print("    ⚠️  寶可夢出張所排程抓取失敗（直連＋代理都不行）")
+        return []
+    today = _today_iso()
+    out, seen = [], set()
+    for m in _POKE_ROW.finditer(md):
+        sy, sm, sd, ey, em, ed, pref, venue, addr = m.groups()
+        pref = pref.strip(); venue = re.sub(r"\s+", " ", venue).strip()
+        addr = re.sub(r"\s+", " ", addr or "").strip()
+        sy, sm, sd, em, ed = int(sy), int(sm), int(sd), int(em), int(ed)
+        ey = int(ey) if ey else (sy + 1 if em < sm else sy)
+        start = f"{sy:04d}-{sm:02d}-{sd:02d}"
+        end = f"{ey:04d}-{em:02d}-{ed:02d}"
+        key = venue + start
+        if end < today or key in seen:
+            continue
+        seen.add(key)
+        loc = f"{venue} {addr}".strip()
+        city = correct_city(pref, venue, addr) if correct_city else None
+        out.append({
+            "brand": "pokemon",
+            "title": f"Pokemon Center 出張所 in {venue}",
+            "type": "popup", "country": "JP", "city": city or "",
+            "locationName": loc,
+            "startDate": start, "endDate": end,
+            "summaryZh": f"寶可夢中心出張所於{pref}{venue}期間限定登場，販售多樣寶可夢周邊商品。",
+            "needReservation": False, "hasLimitedGoods": True,
+            "tags": ["寶可夢", "出張所", "快閃店", "日本"],
+            "id": _stable_id("po", key),
+            "sourceType": "official_social", "createdAt": today,
+            "sourceTitle": f"ポケモンセンター出張所in{venue}（{start}～{end}）",
+            "sourceUrl": _POKE_SCHED,
+        })
+    return out
+
+
 # 官方來源總入口：PR TIMES（待萃取 item）+ 之後新增來源在這裡串接
 def fetch_official(brand: str) -> list[dict]:
     return fetch_prtimes(brand)

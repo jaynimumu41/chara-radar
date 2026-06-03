@@ -120,30 +120,6 @@
     "sourceUrl": "https://www.ndw.jp/pokemon-goods-260529-02/"
   },
   {
-    "brand": "pokemon",
-    "title": "Pokemon Center 出張所 in AEON MALL Hanyu",
-    "type": "popup",
-    "country": "JP",
-    "city": "Saitama",
-    "locationName": "AEON MALL Hanyu",
-    "startDate": "2026-06-19",
-    "endDate": "2026-08-22",
-    "summaryZh": "日本羽生市 AEON MALL Hanyu 將於6月19日起舉辦期間限定的 Pokemon Center 出張所，販售多樣寶可夢周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "寶可夢",
-      "快閃店",
-      "日本",
-      "羽生市"
-    ],
-    "id": "po-32652e",
-    "sourceUrl": "https://kazo-hanyu.goguynet.jp/2026/06/02/pokemon-center/",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-02",
-    "sourceTitle": "【羽生市】ポケモングッズが大集合！6月19日からイオンモール羽生で期間限定「ポケモンセンター出張所 in イオンモール羽生」オープン。 - 地域ニュースサイト号外NET"
-  },
-  {
     "brand": "chiikawa",
     "title": "Chiikawa x 東京晴空塔 聯名活動",
     "type": "campaign",
@@ -527,54 +503,6 @@
     "sourceUrl": "https://www.iamcreative.com.tw/pages/pop-up-store"
   },
   {
-    "brand": "pokemon",
-    "title": "Pokemon Center 出張所 in AEON MALL 今治新都市",
-    "type": "popup",
-    "country": "JP",
-    "city": "Ehime",
-    "locationName": "イオンモール今治新都市 2階イオンホール",
-    "startDate": "2026-06-12",
-    "endDate": "2026-08-31",
-    "summaryZh": "愛媛縣今治的 AEON MALL 今治新都市舉辦期間限定 Pokemon Center 出張所，販售多樣寶可夢周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "快閃店",
-      "日本",
-      "愛媛"
-    ],
-    "id": "po-6c1f88",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-03",
-    "sourceTitle": "全国のポケモンセンター出張所2026年開催スケジュール！会場・取扱商品一覧 - ポケモン情報調査隊",
-    "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
-  },
-  {
-    "brand": "pokemon",
-    "title": "Pokemon Center 出張所 in AEON MALL 神戸北",
-    "type": "popup",
-    "country": "JP",
-    "city": "Hyogo",
-    "locationName": "イオンモール神戸北",
-    "startDate": "2026-06-05",
-    "endDate": "2026-07-22",
-    "summaryZh": "兵庫縣的 AEON MALL 神戸北舉辦期間限定 Pokemon Center 出張所，販售多樣寶可夢周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "快閃店",
-      "日本",
-      "兵庫"
-    ],
-    "id": "po-9d2a47",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-03",
-    "sourceTitle": "全国のポケモンセンター出張所2026年開催スケジュール！会場・取扱商品一覧 - ポケモン情報調査隊",
-    "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
-  },
-  {
     "brand": "sanrio",
     "title": "サンリオ展 FINAL ver. 六本木",
     "type": "popup",
@@ -935,5 +863,77 @@
     "createdAt": "2026-06-03",
     "sourceTitle": "ちいかわPOP UP STORE キャナルシティオーパ(2026-05-16～2026-06-28) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_cnco/index.html"
+  },
+  {
+    "brand": "pokemon",
+    "title": "Pokemon Center 出張所 in イオンモール神戸北",
+    "type": "popup",
+    "country": "JP",
+    "city": "Hyogo",
+    "locationName": "イオンモール神戸北 専門店街3階 イオンホール",
+    "startDate": "2026-06-05",
+    "endDate": "2026-07-22",
+    "summaryZh": "寶可夢中心出張所於兵庫県イオンモール神戸北期間限定登場，販售多樣寶可夢周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢",
+      "出張所",
+      "快閃店",
+      "日本"
+    ],
+    "id": "po-2a73c0",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-03",
+    "sourceTitle": "ポケモンセンター出張所inイオンモール神戸北（2026-06-05～2026-07-22）",
+    "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
+  },
+  {
+    "brand": "pokemon",
+    "title": "Pokemon Center 出張所 in イオンモール今治新都市",
+    "type": "popup",
+    "country": "JP",
+    "city": "Ehime",
+    "locationName": "イオンモール今治新都市 2階 イオンホール",
+    "startDate": "2026-06-12",
+    "endDate": "2026-08-31",
+    "summaryZh": "寶可夢中心出張所於愛媛県イオンモール今治新都市期間限定登場，販售多樣寶可夢周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢",
+      "出張所",
+      "快閃店",
+      "日本"
+    ],
+    "id": "po-8e9be8",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-03",
+    "sourceTitle": "ポケモンセンター出張所inイオンモール今治新都市（2026-06-12～2026-08-31）",
+    "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
+  },
+  {
+    "brand": "pokemon",
+    "title": "Pokemon Center 出張所 in イオンモール羽生",
+    "type": "popup",
+    "country": "JP",
+    "city": "Saitama",
+    "locationName": "イオンモール羽生 専門店街2階 イオンホール",
+    "startDate": "2026-06-19",
+    "endDate": "2026-08-22",
+    "summaryZh": "寶可夢中心出張所於埼玉県イオンモール羽生期間限定登場，販售多樣寶可夢周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢",
+      "出張所",
+      "快閃店",
+      "日本"
+    ],
+    "id": "po-28053f",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-03",
+    "sourceTitle": "ポケモンセンター出張所inイオンモール羽生（2026-06-19～2026-08-22）",
+    "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
   }
 ]
