@@ -716,5 +716,30 @@
     "createdAt": "2026-06-03",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール伊丹(2026/05/29～06/08) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_aitm/index.html"
+  },
+  {
+    "brand": "sanrio",
+    "title": "サンリオ展 FINAL ver. 六本木",
+    "type": "popup",
+    "country": "JP",
+    "city": "Tokyo",
+    "locationName": "森アーツセンターギャラリー（六本木ヒルズ森タワー52F）",
+    "startDate": "2026-04-09",
+    "endDate": "2026-06-21",
+    "summaryZh": "三麗鷗創業60週年集大成特展「サンリオ展 FINAL ver.」於六本木Hills森藝術中心畫廊(52F)登場，集結200+角色、1500+件限定商品與特設商店。採日時指定券入場。",
+    "needReservation": true,
+    "hasLimitedGoods": true,
+    "tags": [
+      "三麗鷗",
+      "特展",
+      "東京",
+      "60週年",
+      "限定商品"
+    ],
+    "id": "sa-6021a9",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-03",
+    "sourceTitle": "60年分のカワイイに、会いにいく日。サンリオ展 FINAL ver. が六本木で開幕！ - POPAP",
+    "sourceUrl": "https://www.popap.biz/popup-list/sanrio-final-0409"
   }
 ]
