@@ -732,7 +732,11 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
                           and canon_venue(ev.get("locationName", ""), ev.get("title", ""))
                               == canon_venue(k.get("locationName", ""), k.get("title", "")))
             same_city = ev.get("city") and ev.get("city") == k.get("city")
-            if (same_venue and sim >= 0.4) or (same_city and sim >= 0.50) or sim >= 0.72:
+            # 同品牌+同一已知場館，且其中一筆完全沒日期 → 幾乎一定是同活動的較不完整版本
+            # （兩個不同檔期通常各自都有日期，故「一邊全無日期」可避免誤併不同檔期）
+            one_dateless = not ev.get("startDate") or not k.get("startDate")
+            if (same_venue and sim >= 0.4) or (same_venue and one_dateless and sim >= 0.2) \
+               or (same_city and sim >= 0.50) or sim >= 0.72:
                 # 合併到較完整者，補空欄位
                 base = k if completeness(k) >= completeness(ev) else ev
                 other = ev if base is k else k
