@@ -10,34 +10,58 @@ _CTX = ssl.create_default_context()
 _CTX.check_hostname = False
 _CTX.verify_mode = ssl.CERT_NONE
 
+# 官方網站常擋資料中心 IP 的 bot（多回 403/429/503）。被擋時改用 reader 代理硬取，
+# 不要直接放棄。r.jina.ai 會把目標頁轉成純文字 markdown（含標題/內文/日期），
+# 對 page_mentions 關鍵字比對與 extract_dates 日期掃描都夠用。
+READER_PROXY = "https://r.jina.ai/"
+_BLOCKED_CODES = {401, 403, 429, 451, 503}
+
+
+def _raw_fetch(url, timeout, want_text):
+    """單次抓取，回傳 (ok, code, text)。例外往外丟。"""
+    req = urllib.request.Request(url, headers={
+        "User-Agent": UA,
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "ja,en;q=0.8",
+    })
+    with urllib.request.urlopen(req, timeout=timeout, context=_CTX) as r:
+        text = ""
+        if want_text:
+            text = r.read(200000).decode("utf-8", "replace")
+        return (200 <= r.status < 400, r.status, text)
+
 
 def check_url(url, timeout=20, return_text=False):
     """回傳 (ok, code) 或 (ok, code, text)。ok=True 代表連得到（2xx/3xx）。
-    Google 搜尋連結視為可用（一定有結果頁）。"""
-    none_text = "" if return_text else None
+    Google 搜尋連結視為可用。**被 bot 防護擋住（403/429/503…）或連線失敗時，
+    自動改用 reader 代理再試一次，不直接放棄。**"""
     def pack(ok, code, text=""):
         return (ok, code, text) if return_text else (ok, code)
     if not url:
         return pack(False, 0)
     if "google.com/search" in url or "news.google.com" in url:
         return pack(True, 200)  # 搜尋頁一定開得了
-    req = urllib.request.Request(url, headers={
-        "User-Agent": UA,
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-        "Accept-Language": "ja,en;q=0.8",
-    })
+
+    code, blocked = -1, True
     try:
-        with urllib.request.urlopen(req, timeout=timeout, context=_CTX) as r:
-            text = ""
-            if return_text:
-                raw = r.read(200000)  # 讀前 200KB 足夠涵蓋標題/meta
-                text = raw.decode("utf-8", "replace")
-            return pack(200 <= r.status < 400, r.status, text)
+        ok, code, text = _raw_fetch(url, timeout, return_text)
+        if ok:
+            return pack(True, code, text)
+        blocked = code in _BLOCKED_CODES
     except urllib.error.HTTPError as e:
-        # 有些站對 bot 回 403，但內容存在——如實回報，交給呼叫端判斷
-        return pack(False, e.code)
+        code, blocked = e.code, e.code in _BLOCKED_CODES
     except Exception:
-        return pack(False, -1)
+        code, blocked = -1, True  # 連線/逾時等失敗也試代理
+
+    # 被擋或失敗 → reader 代理 fallback（代理回純文字，當作可達且取得內容）
+    if blocked:
+        try:
+            pok, _pcode, ptext = _raw_fetch(READER_PROXY + url, max(timeout, 45), True)
+            if pok and ptext.strip():
+                return pack(True, 200, ptext if return_text else "")
+        except Exception:
+            pass
+    return pack(False, code)
 
 
 def page_mentions(text, keywords):
