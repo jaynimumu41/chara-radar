@@ -935,54 +935,6 @@
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000169.000050227.html"
   },
   {
-    "brand": "miffy",
-    "title": "日本最大米飛兔活動限定商品",
-    "type": "campaign",
-    "country": "JP",
-    "city": "Nagasaki",
-    "locationName": "豪斯登堡",
-    "startDate": "",
-    "endDate": "",
-    "summaryZh": "日本最大規模的米飛兔主題活動於豪斯登堡舉行，現場販售限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "限定商品",
-      "豪斯登堡",
-      "日本"
-    ],
-    "id": "mi-287d58",
-    "sourceTitle": "日本最大のミッフィーイベントを開催中「ハウステンボスで人気のミッフィー限定グッズ」《長崎》 - 日テレNEWS NNN",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-04",
-    "sourceUrl": "https://news.ntv.co.jp/n/nib/category/society/niec1ca72cc1fc4a6bb75f9f6200afe454?p"
-  },
-  {
-    "brand": "miffy",
-    "title": "米飛兔生日紀念活動",
-    "type": "campaign",
-    "country": "JP",
-    "city": "",
-    "locationName": "",
-    "startDate": "",
-    "endDate": "",
-    "summaryZh": "為慶祝米飛兔生日而舉辦的活動，將集合多款可愛周邊商品與限定美食。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "生日",
-      "限定商品",
-      "限定美食"
-    ],
-    "id": "mi-ddcc31",
-    "sourceTitle": "【ミッフィー】“激かわグッズ＆グルメ”が大集合！ミッフィー誕生日記念イベント開催決定♪（ぴあ） - Yahoo!ニュース",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-04",
-    "sourceUrl": "https://news.yahoo.co.jp/articles/13a50a8ceb42c0696e92b5ad4c7a454ce5aae042"
-  },
-  {
     "brand": "pokemon",
     "title": "台北寶可夢中心 勞動節新品",
     "type": "new_product",
@@ -1055,54 +1007,6 @@
     "sourceUrl": "https://news.yahoo.co.jp/articles/ffe1b6f095aadadb2cbb48c357cd0c430e38cf4e"
   },
   {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇期間限定店",
-    "type": "popup",
-    "country": "JP",
-    "city": "Hokkaido",
-    "locationName": "新千歳空港国内線ターミナルビル２階",
-    "startDate": "",
-    "endDate": "",
-    "summaryZh": "吉伊卡哇期間限定店於新千歳機場國內線航廈2樓登場，現場販售超過1000種周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "期間限定店",
-      "新千歳空港",
-      "周邊商品"
-    ],
-    "id": "ch-b2f2eb",
-    "sourceTitle": "ちいかわ期間限定店オープン 新千歳国内線ターミナルビル２階 グッズ１０００種類並ぶ（苫小牧民報） - Yahoo!ニュース",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-04",
-    "sourceUrl": "https://news.yahoo.co.jp/articles/bb335d758dbb669e9d7d6710fed42006e2b5de5b"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "ちいかわ新商品登場",
-    "type": "new_product",
-    "country": "JP",
-    "city": "",
-    "locationName": "",
-    "startDate": "",
-    "endDate": "",
-    "summaryZh": "ちいかわ推出多款新商品，包含可愛的ぷっくりアップリケがかわいいポーチ、ルームウエア、寝具等，將陸續登場。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "周邊商品",
-      "新發售",
-      "居家用品",
-      "配件"
-    ],
-    "id": "ch-447023",
-    "sourceTitle": "「ちいかわ」ぷっくりアップリケがかわいいポーチに、ルームウエアや寝具も！新商品が続々登場 - アニメ！アニメ！",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-04",
-    "sourceUrl": "https://animeanime.jp/article/2026/06/03/99673.html"
-  },
-  {
     "brand": "sanrio",
     "title": "Sanrio characters Exhibition Hotel Floria Tokyo",
     "type": "campaign",
@@ -1149,30 +1053,6 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-04",
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000001795.000006521.html"
-  },
-  {
-    "brand": "sanrio",
-    "title": "庫洛米×plus eau 聯名設計",
-    "type": "new_product",
-    "country": "JP",
-    "city": "Nagoya",
-    "locationName": "スギ薬局",
-    "startDate": "",
-    "endDate": "",
-    "summaryZh": "庫洛米與plus eau聯名推出點狀修護系列，於日本杉藥局限定新發售。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "庫洛米",
-      "plus eau",
-      "聯名",
-      "限定"
-    ],
-    "id": "sa-8de4b4",
-    "sourceTitle": "【クロミ×plus eau】ポイントリペアシリーズから”クロミ コラボレーションデザイン”がスギ薬局限定で新登場！",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-04",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000065.000026461.html"
   },
   {
     "brand": "sanrio",

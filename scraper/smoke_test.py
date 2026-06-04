@@ -79,6 +79,14 @@ check("快閃一次看→不誤殺",
 check("單一快閃新品文→不誤殺",
       scrape.is_roundup_title("三麗鷗花茶舞會快閃店插旗台中！Hello Kitty 水果裝新品開賣"), False)
 
+# ── is_noise（藥妝/超商等非專程目標）──────────────────────────────────────────
+print("\n[is_noise] 藥妝/超商過濾")
+check("スギ薬局聯名→雜訊",
+      scrape.is_noise("【クロミ×plus eau】スギ薬局限定で新登場！"), True)
+check("マツキヨ→雜訊", scrape.is_noise("サンリオ×マツキヨ コラボグッズ"), True)
+check("正當快閃→不誤殺",
+      scrape.is_noise("吉伊卡哇 POP UP STORE キャナルシティオーパ"), False)
+
 # ── extract_dates ─────────────────────────────────────────────────────────────
 print("\n[extract_dates] 日期區間擷取")
 check("日文範圍含年", scrape.extract_dates("2026年5月27日（水）〜6月14日（日）", is_html=False),
