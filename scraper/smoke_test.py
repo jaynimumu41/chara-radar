@@ -93,6 +93,8 @@ check("PR TIMES→可信",
       scrape.is_trusted_date_source("https://www.prtimes.jp/main/html/rd/p/000000001.html"), True)
 check("晴空塔子網域→可信",
       scrape.is_trusted_date_source("https://event.tokyo-skytree.jp/news/abc"), True)
+check("Kiddy Land→可信",
+      scrape.is_trusted_date_source("https://www.kiddyland.co.jp/event/miffystyle_birthday2026/"), True)
 check("網址參數提到 prtimes.jp→不誤信",
       scrape.is_trusted_date_source("https://example.com/read?src=prtimes.jp"), False)
 

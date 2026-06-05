@@ -27,6 +27,7 @@ STRUCTURED_OFFICIAL_DOMAINS = (
     "chiikawa-info.jp",
     "oneheart65.net",
     "dickbruna.jp",
+    "kiddyland.co.jp",
 )
 
 GENERIC_TITLE_KEYWORDS = (
@@ -177,7 +178,7 @@ def print_markdown(candidates: list[dict], total_events: int, limit: int) -> Non
     print()
     print(f"- Total events: {total_events}")
     print(f"- Candidates: {len(candidates)}")
-    print("- Skip rule: structured official_site records from chiikawa-info.jp, oneheart65.net, and dickbruna.jp")
+    print("- Skip rule: structured official_site records from chiikawa-info.jp, oneheart65.net, dickbruna.jp, and kiddyland.co.jp")
     print()
     print("| Risk | Brand | Type | Title | Location | Dates | Source | Reasons | Search query |")
     print("| --: | -- | -- | -- | -- | -- | -- | -- | -- |")

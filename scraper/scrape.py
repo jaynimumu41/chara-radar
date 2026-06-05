@@ -51,6 +51,7 @@ RSS_QUERIES = {
     ],
     "miffy": [
         ("ミッフィー グッズ OR ポップアップ OR カフェ OR 期間限定", False),
+        ("miffy style OR ミッフィースタイル OR キデイランド ミッフィー 発売 OR フェア", False),
         ("Miffy 米飛 台灣 OR 台北 OR 台中 快閃 OR 展覧", True),
     ],
     "chiikawa": [

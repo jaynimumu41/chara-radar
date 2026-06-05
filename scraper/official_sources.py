@@ -11,6 +11,7 @@ link 已是真實 URL（非 Google News 加密網址），直接流進 scrape.ex
 """
 import re
 import time
+import html as html_lib
 from datetime import datetime, timezone, timedelta
 from email.utils import format_datetime
 
@@ -232,18 +233,163 @@ _MIFFY_ROW = re.compile(
 _MIFFY_INCLUDE = ["dick bruna stand", "stand by miia", "zakka", "flower miffy",
                   "pop-up", "pop up", "popup", "マルシェ", "table", "カフェ",
                   "ショップ", "グッズ", "ストア", "miffy⁺", "おやつ", "kitchen"]
+_KIDDY_MIFFY_SEARCH = "https://www.kiddyland.co.jp/?s=miffy"
+_KIDDY_MIFFY_LINK = re.compile(
+    r"(?:\]\(|href=[\"'])(https://www\.kiddyland\.co\.jp/event/miffy[^)\"']+/)"
+)
+_KIDDY_SKIP = ["お詫び", "延期", "入店方法", "緊急案内"]
+_KIDDY_SITE_SUFFIX = " | キデイランドへようこそ！"
+_KIDDY_RANGE = re.compile(
+    r"(?:(20\d{2})年)?(\d{1,2})月(\d{1,2})日[^。\n]{0,30}?"
+    r"(?:から|[〜～~-])[^。\n]{0,30}?"
+    r"(?:(20\d{2})年)?(\d{1,2})月(\d{1,2})日"
+)
+
+
+def _page_text(url: str) -> str:
+    """先直抓 HTML；失敗再走 reader markdown。"""
+    h = fetch_html(url)
+    return h or _proxy_markdown(url)
+
+
+def _plain_text(text: str) -> str:
+    text = re.sub(r"<script[\s\S]*?</script>|<style[\s\S]*?</style>", " ", text, flags=re.I)
+    text = re.sub(r"<[^>]+>", " ", text)
+    return re.sub(r"\s+", " ", html_lib.unescape(text)).strip()
+
+
+def _first_heading(md: str) -> str:
+    m = re.search(r"<h1[^>]*>([\s\S]*?)</h1>", md, re.I)
+    if m:
+        return _plain_text(m.group(1))
+    for line in md.splitlines():
+        line = line.strip()
+        if line.startswith("# "):
+            return re.sub(r"\s+", " ", line[2:]).strip()
+    return ""
+
+
+def _kiddy_display_title(title: str) -> str:
+    title = title.replace(_KIDDY_SITE_SUFFIX, "").strip()
+    title = re.sub(r"^20\d{2}年\d{1,2}月\d{1,2}日\([^)]*\)", "", title).strip()
+    title = re.sub(r"^(?:より開催|発売予定|～スタート|〜スタート|!|！)+", "", title).strip()
+    title = re.sub(r"^miffy style[^!！]*受注開始予定[!！]", "", title).strip()
+    return title or "miffy style 店頭活動"
+
+
+def _kiddy_period(title: str, detail: str, extract_dates) -> tuple[str, str]:
+    ref_year_m = re.search(r"(20\d{2})年", title)
+    ref_year = int(ref_year_m.group(1)) if ref_year_m else date.today().year
+    m = _KIDDY_RANGE.search(detail)
+    if m:
+        sy = int(m.group(1) or ref_year)
+        sm, sd = int(m.group(2)), int(m.group(3))
+        ey = int(m.group(4) or sy)
+        em, ed = int(m.group(5)), int(m.group(6))
+        if em < sm and not m.group(4):
+            ey += 1
+        return f"{sy:04d}-{sm:02d}-{sd:02d}", f"{ey:04d}-{em:02d}-{ed:02d}"
+    return extract_dates(title + "\n" + detail, ref_year=ref_year, is_html=False, scan_chars=7000)
+
+
+def _kiddy_location(title: str) -> tuple[str, str]:
+    if "Birthday Fair" in title or "各店" in title:
+        return "miffy style 各店＋キデイランド対象店", ""
+    if "原宿店" in title:
+        return "miffy style 原宿店", "Tokyo"
+    if "大阪梅田店" in title:
+        return "miffy style 大阪梅田店", "Osaka"
+    if "心斎橋" in title or "心齋橋" in title:
+        return "miffy style 心齋橋PARCO店", "Osaka"
+    return "miffy style 各店＋一部キデイランド店舗", ""
+
+
+def _kiddy_type(title: str) -> str:
+    low = title.lower()
+    if "受注" in title or "予約" in title:
+        return "reservation"
+    if "fair" in low or "フェア" in title or "ノベルティ" in title:
+        return "campaign"
+    if "pop up" in low or "popup" in low or "ポップアップ" in title:
+        return "popup"
+    return "new_product"
+
+
+def fetch_kiddyland_miffy_events(extract_dates, correct_city, max_articles=3, fresh_days=45) -> list[dict]:
+    """解析 Kiddy Land / miffy style 站內搜尋的近期 Miffy 店頭活動與新品。零 Gemini。"""
+    md = _page_text(_KIDDY_MIFFY_SEARCH)
+    if not md:
+        print("    ⚠️  Kiddy Land miffy 搜尋抓取失敗（直連＋代理都不行）")
+        return []
+    today = _today_iso()
+    out, seen = [], set()
+    urls = list(dict.fromkeys(_KIDDY_MIFFY_LINK.findall(md)))
+    for url in urls[:max_articles]:
+        if url in seen:
+            continue
+        detail = _page_text(url)
+        if not detail:
+            continue
+        detail_text = _plain_text(detail)
+        title = _first_heading(detail)
+        if not title or not any(k.lower() in title.lower() for k in ["miffy", "ミッフィー"]):
+            continue
+        if any(k in title for k in _KIDDY_SKIP):
+            continue
+        pub_m = re.search(r"On\s+(\d{1,2})月\s*(\d{1,2}),\s*(20\d{2})", detail_text)
+        if pub_m:
+            try:
+                pub = date(int(pub_m.group(3)), int(pub_m.group(1)), int(pub_m.group(2)))
+                if (date.today() - pub).days > fresh_days:
+                    continue
+            except ValueError:
+                pass
+        s, e = _kiddy_period(title, detail_text, extract_dates)
+        if not s:
+            continue
+        # 沒有結束日的 Kiddy Land 新品/店頭活動讓過期規則處理；有結束日且已過期則略過。
+        if e and e < today:
+            continue
+        loc, fallback_city = _kiddy_location(title)
+        city = correct_city(title, loc) or fallback_city
+        typ = _kiddy_type(title)
+        summary = "Miffy style / Kiddy Land 店頭活動，販售或受注 Miffy 相關新品與限定／先行商品。"
+        if "Birthday Fair" in title:
+            summary = "miffy’s Birthday 2026 生日活動於 miffy style 與 Kiddy Land 指定店舖登場，販售生日限定商品並提供店頭特典。"
+        elif typ == "reservation":
+            summary = "Miffy 聯名商品於 miffy style 店頭期間限定受注，需於指定期間到店辦理。"
+        display_title = _kiddy_display_title(title)
+        out.append({
+            "brand": "miffy",
+            "title": "Miffy " + display_title,
+            "type": typ,
+            "country": "JP", "city": city or "",
+            "locationName": loc,
+            "startDate": s, "endDate": e or "",
+            "summaryZh": summary,
+            "needReservation": typ == "reservation" or "抽選" in title or "予約" in title,
+            "hasLimitedGoods": True,
+            "tags": ["米飛兔", "miffy style", "日本"],
+            "id": _stable_id("mi", url),
+            "sourceType": "official_site", "createdAt": today,
+            "sourceTitle": f"{title} - キデイランド",
+            "sourceUrl": url,
+        })
+        seen.add(url)
+    return out
 
 
 def fetch_miffy_events(extract_dates, correct_city, max_articles=16, fresh_days=80) -> list[dict]:
     """解析 Miffy 官方 dickbruna.jp/event/ 列表，逐篇抓開催期間，回傳現行成品情報。零 Gemini。
     需傳入 scrape.extract_dates 與 scrape.correct_city。"""
+    out: list[dict] = []
     md = _proxy_markdown(_MIFFY_LIST)
     if not md:
         print("    ⚠️  Miffy dickbruna 列表抓取失敗（直連＋代理都不行）")
-        return []
+        return fetch_kiddyland_miffy_events(extract_dates, correct_city)
     from datetime import date as _d
     today = _today_iso()
-    out, seen = [], set()
+    seen = set()
     rows = _MIFFY_ROW.findall(md)
     for title, py, pm, pd, url in rows[:max_articles]:
         title = re.sub(r"\s+", " ", title).strip()
@@ -285,6 +431,7 @@ def fetch_miffy_events(extract_dates, correct_city, max_articles=16, fresh_days=
             "sourceTitle": f"{title} - dickbruna.jp",
             "sourceUrl": url,
         })
+    out.extend(fetch_kiddyland_miffy_events(extract_dates, correct_city))
     return out
 
 

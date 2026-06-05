@@ -32,12 +32,13 @@
 
 | 管線 | 來源 | 用 AI? | 品質 | 程式 |
 | -- | -- | -- | -- | -- |
-| **結構化官方頁** | 吉伊卡哇 `chiikawa-info.jp/pus.html`、寶可夢 `oneheart65.net` 出張所排程、Miffy `dickbruna.jp/event/` | 否（regex+模板） | **已達手動品質** | `scraper/official_sources.py` |
+| **結構化官方頁** | 吉伊卡哇 `chiikawa-info.jp/pus.html`、寶可夢 `oneheart65.net` 出張所排程、Miffy `dickbruna.jp/event/`＋Kiddy Land / miffy style 站內搜尋 | 否（regex+模板） | **已達手動品質** | `scraper/official_sources.py` |
 | **新聞段** | PR TIMES 關鍵字、Google News RSS（日＋中） | 是（Gemini 萃取） | **品質不穩，你的主戰場** | `scraper/scrape.py` |
 
 - 三麗鷗**沒有**可解析的結構化官方頁（`sanrio.co.jp` 503／JS 動態／REST 空，已確認不可行），且全靠新聞段＋Gemini，品質最弱；目前已暫停預設抓取與前端顯示。
 - 前端純靜態：`index.html` + `js/app.js` + `css/app.css`，讀 `data/events.json`、`data/stores.json`（常設店手動清單）、`data/last_updated.json`（心跳）。
 - **每日排程**：Windows 工作排程 `CharaRadar-DailyScrape` 每天 16:00 → `scraper/run_daily.ps1` → `python scrape.py` → 寫心跳 → git commit+push → GitHub Pages 自動重建。
+- **Miffy 補漏**：`dickbruna.jp/event/` 不含所有 miffy style / Kiddy Land 店頭新品，已新增 `kiddyland.co.jp/?s=miffy` 結構化解析，零 Gemini 抓官方店頭活動。
 
 ---
 
@@ -213,3 +214,13 @@ automation 的職責不是再跑一次爬蟲，而是依第 5 節對高風險筆
 - 前端品牌 filter 與 manifest 已移除 Sanrio；`data/events.json` 與 `data/stores.json` 也不保留 Sanrio 資料。
 - `scraper/data_lint.py` 會把 Sanrio 殘留視為錯誤，避免排程或人工誤加回來。
 - 如要恢復 Sanrio，需明確重開：恢復前端 filter、stores、`DEFAULT_BRANDS`，並先解決新聞段驗證成本。
+
+---
+
+## 14. 2026-06-05 Miffy 補源與排序修正
+
+- 問題：使用者在社群/網站看到 Miffy 新活動，但 16:00 自動更新後網站未出現。原因是現有 Miffy 結構化來源只抓 `dickbruna.jp/event/`，而 Kiddy Land / miffy style 官方站內活動不一定會進 Google News RSS。
+- 修正：`official_sources.fetch_miffy_events()` 追加 `fetch_kiddyland_miffy_events()`，解析 `https://www.kiddyland.co.jp/?s=miffy` 前 3 筆近期官方結果。新增來源會抓店頭新品、生日 Fair、原宿店受注商品；不花 Gemini。
+- 防脆弱：Kiddy Land 先直抓 HTML，失敗再走 `r.jina.ai` reader；即使 `dickbruna.jp` 抓取失敗，也會繼續跑 Kiddy Land。
+- 本次新增：Miffy `miffy style先行発売 マスコットビーンズコレクション`、`TENSHODO x miffy` ナインチェウォッチ、`miffy’s Birthday Fair2026`、`ミッフィーzakkaフェスタ 大丸札幌店`。
+- 前端排序：`js/app.js` 改為有 `endDate` 的活動仍按最快結束排序；沒有 `endDate` 的活動排在後段，並依 `startDate` 排序，避免 Pokémon 等開始日資料亂跳。

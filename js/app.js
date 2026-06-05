@@ -42,6 +42,33 @@ function daysUntilEnd(endDate) {
   return Math.ceil((new Date(endDate) - new Date(today())) / 86400000);
 }
 
+function dayKey(date) {
+  return date ? new Date(date).getTime() : Number.MAX_SAFE_INTEGER;
+}
+
+function eventSortKey(ev) {
+  const hasEnd = Boolean(ev.endDate);
+  const isFuture = ev.startDate && ev.startDate > today();
+  return [
+    hasEnd ? 0 : 1,                         // 有結束日：仍以快結束優先
+    hasEnd ? dayKey(ev.endDate) : dayKey(ev.startDate),
+    isFuture ? 0 : 1,                       // 同日排序時，未來開跑略優先
+    dayKey(ev.startDate),
+    BRAND_LABELS[ev.brand] || ev.brand,
+    ev.title || ''
+  ];
+}
+
+function compareEvents(a, b) {
+  const ka = eventSortKey(a);
+  const kb = eventSortKey(b);
+  for (let i = 0; i < ka.length; i++) {
+    if (ka[i] < kb[i]) return -1;
+    if (ka[i] > kb[i]) return 1;
+  }
+  return 0;
+}
+
 function isActive(ev) {
   const t = today();
   if (ev.endDate && ev.endDate < t) return false;
@@ -135,12 +162,8 @@ function renderEvents() {
 
   document.getElementById('events-count').textContent = `共 ${filtered.length} 筆`;
 
-  // 排序：最快結束在前；無結束日（常設/未定）排最後
-  const sorted = [...filtered].sort((a, b) => {
-    const da = daysUntilEnd(a.endDate) ?? 99999;
-    const db = daysUntilEnd(b.endDate) ?? 99999;
-    return da - db;
-  });
+  // 排序：有結束日的快結束在前；只有開始日的排在後段並依開始日排序。
+  const sorted = [...filtered].sort(compareEvents);
 
   const grid = document.getElementById('events-grid');
   if (sorted.length === 0) {
