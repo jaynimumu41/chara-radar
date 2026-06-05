@@ -25,6 +25,7 @@ from email.utils import parsedate_to_datetime
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import urlparse
 
 import requests
 
@@ -125,8 +126,9 @@ def correct_city(*texts) -> str | None:
                 return city
     return None
 
-# 預設抓取的品牌與順序
-DEFAULT_BRANDS = ["miffy", "pokemon", "chiikawa", "sanrio"]
+# 預設抓取的品牌與順序。Sanrio 先暫停：新聞/Gemini 來源品質不穩，
+# 會吃掉最多 agent 驗證時間；保留常數讓日後可用 --brand sanrio 手動復查。
+DEFAULT_BRANDS = ["miffy", "pokemon", "chiikawa"]
 
 # 標題含這些字 → 在打 AI 之前就先丟掉（明顯不是「專程去逛」的目標，省 API 額度）
 NOISE_KEYWORDS = [
@@ -200,17 +202,24 @@ TRUSTED_DATE_DOMAINS = [
     "miffykitchenbakery.jp",
     # 場館 / 百貨 / 商場 / Outlet（單一活動頁，日期通常只有該活動）
     "tokyo-skytree.jp", "sunshinecity.jp", "parco.jp", "lucua.jp", "aeonmall.com",
-    "mitsui-shopping-park.com", "lalaport", "takashimaya", "isetan", "mistore",
-    "hankyu", "hankyu", "daimaru", "matsuzakaya", "sogo-seibu", "lumine",
-    "0101.co.jp", "marui", "tobu", "keio", "odakyu", "hep-five", "grandfront",
-    "huistenbosch", "leafkyoto.net", "store.tsite.jp", "the-outlets",
+    "mitsui-shopping-park.com", "takashimaya.co.jp", "mistore.jp",
+    "hankyu-dept.co.jp", "hankyu-hanshin-dept.co.jp", "daimaru.co.jp",
+    "matsuzakaya.co.jp", "sogo-seibu.jp", "lumine.ne.jp",
+    "0101.co.jp", "tobu-dept.jp", "keionet.com", "odakyu-dept.co.jp",
+    "hep-five.com", "grandfront-osaka.jp", "huistenbosch.co.jp",
+    "leafkyoto.net", "store.tsite.jp",
 ]
 
 def is_trusted_date_source(url: str) -> bool:
-    u = (url or "").lower()
+    u = (url or "").strip().lower()
     if not u or "google.com/search" in u:
         return False
-    return any(d in u for d in TRUSTED_DATE_DOMAINS)
+    host = urlparse(u).netloc
+    if host.startswith("www."):
+        host = host[4:]
+    if not host:
+        return False
+    return any(host == d or host.endswith("." + d) for d in TRUSTED_DATE_DOMAINS)
 
 GN_RSS    = "https://news.google.com/rss/search?q={q}&hl=ja&gl=JP&ceid=JP:ja"
 GN_RSS_TW = "https://news.google.com/rss/search?q={q}&hl=zh-TW&gl=TW&ceid=TW:zh-Hant"

@@ -7,6 +7,10 @@ language-level judgement that Python/Gemini cannot safely do.
 Core rule: accuracy over coverage. It is better to remove a doubtful record than
 to keep a wrong, duplicate, expired, or out-of-scope record.
 
+Sanrio is paused for now to save verification time. The active brands are
+Pokemon, Miffy, and Chiikawa. Do not add Sanrio records back during the daily
+automation unless a human explicitly re-enables the brand.
+
 ## Schedule
 
 - Run daily at 16:30 Asia/Taipei, after `scraper/run_daily.ps1` finishes its
@@ -20,7 +24,18 @@ Read these before editing:
 
 1. `CODEX_HANDOFF.md`, especially section 5.
 2. `scraper/RULES.md`.
-3. Candidate list:
+3. Preflight and data lint:
+
+```powershell
+$env:PYTHONIOENCODING='utf-8'
+& 'C:\Users\USER\AppData\Local\Python\pythoncore-3.14-64\python.exe' scraper\agent_preflight.py
+& 'C:\Users\USER\AppData\Local\Python\pythoncore-3.14-64\python.exe' scraper\data_lint.py
+```
+
+Stop if preflight or lint fails; report the reason instead of editing old or
+dirty data.
+
+4. Candidate list:
 
 ```powershell
 $env:PYTHONIOENCODING='utf-8'
@@ -43,7 +58,7 @@ For each high-risk candidate:
 4. Extract only the main event/sale period. Never use the news publication date,
    page footer year, unrelated stamp-rally dates, or search-result snippets.
 5. Confirm all of these:
-   - Brand is one of Pokemon, Miffy, Chiikawa, Sanrio.
+   - Brand is one of Pokemon, Miffy, Chiikawa.
    - Location is in Japan or Taiwan.
    - It is one of the accepted four classes: popup/store event, physical-store
      new product sale, event-limited goods, or limited cafe/menu.
@@ -87,6 +102,7 @@ After edits:
 $env:PYTHONIOENCODING='utf-8'
 Set-Location scraper
 & 'C:\Users\USER\AppData\Local\Python\pythoncore-3.14-64\python.exe' smoke_test.py
+& 'C:\Users\USER\AppData\Local\Python\pythoncore-3.14-64\python.exe' data_lint.py
 ```
 
 Run `python verify_links.py` if any `sourceUrl` is changed.

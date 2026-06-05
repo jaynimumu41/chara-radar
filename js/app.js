@@ -8,8 +8,7 @@ let activeCountry = 'all';
 const BRAND_LABELS = {
   pokemon: 'Pokémon',
   miffy: 'Miffy',
-  chiikawa: 'Chiikawa',
-  sanrio: 'Sanrio'
+  chiikawa: 'Chiikawa'
 };
 const TYPE_LABELS = {
   popup: '快閃店',
@@ -175,7 +174,7 @@ function renderStores() {
   const wrap = document.getElementById('stores-wrap');
   wrap.style.display = '';
 
-  const brands = activeBrand ? [activeBrand] : ['pokemon', 'miffy', 'chiikawa', 'sanrio'];
+  const brands = activeBrand ? [activeBrand] : ['pokemon', 'miffy', 'chiikawa'];
 
   // 統計：只顯示「目前有效情報」=常設店數量，其餘三欄留白
   const total = brands.reduce((n, b) => n + brandStoreCount(b), 0);
@@ -193,7 +192,6 @@ function renderBrandStores(brand) {
   if (!data) return '';
   const head = `<div class="store-brand-head"><span class="badge badge-brand-${brand}">${BRAND_LABELS[brand]}</span></div>`;
 
-  // 三麗鷗：只放官方門市連結
   if (data.linksOnly) {
     const links = data.links.map(l =>
       `<a class="store-link" href="${l.url}" target="_blank" rel="noopener">${l.label} ↗</a>`).join('');

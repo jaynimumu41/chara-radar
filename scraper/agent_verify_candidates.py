@@ -22,8 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 EVENTS_JSON = ROOT / "data" / "events.json"
 
 # These official structured feeds are already parsed without AI and are treated
-# as hand-quality data. Sanrio official pages are not in this skip list because
-# Sanrio still depends on the news/Gemini path and campaign-type judgement.
+# as hand-quality data.
 STRUCTURED_OFFICIAL_DOMAINS = (
     "chiikawa-info.jp",
     "oneheart65.net",
@@ -50,7 +49,6 @@ BRAND_JA = {
     "pokemon": "ポケモン",
     "miffy": "ミッフィー",
     "chiikawa": "ちいかわ",
-    "sanrio": "サンリオ",
 }
 
 REASON_WEIGHTS = {
@@ -117,8 +115,6 @@ def risk_score(ev: dict, reasons: list[str]) -> int:
             score += 3
         else:
             score += REASON_WEIGHTS.get(reason, 1)
-    if ev.get("brand") == "sanrio":
-        score += 2
     if ev.get("sourceType") == "official_social":
         score += 1
     return score
@@ -171,7 +167,7 @@ def build_candidates(events: list[dict]) -> list[dict]:
             "sourceUrl": ev.get("sourceUrl", ""),
             "sourceTitle": ev.get("sourceTitle", ""),
         })
-    candidates.sort(key=lambda c: (-c["risk"], c["brand"] != "sanrio", c["brand"], c["title"]))
+    candidates.sort(key=lambda c: (-c["risk"], c["brand"], c["title"]))
     return candidates
 
 

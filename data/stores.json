@@ -116,13 +116,5 @@
         ]
       }
     ]
-  },
-  "sanrio": {
-    "linksOnly": true,
-    "note": "三麗鷗門市眾多，直接看官方門市一覽：",
-    "links": [
-      { "label": "日本 三麗鷗官方店舖一覽", "url": "https://stores.sanrio.co.jp/zh_hant" },
-      { "label": "台灣 三麗鷗門市一覽", "url": "https://www.sanrio.com.tw/shops/" }
-    ]
   }
 }

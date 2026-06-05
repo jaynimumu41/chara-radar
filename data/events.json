@@ -120,54 +120,6 @@
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000004280.000012759.html"
   },
   {
-    "brand": "sanrio",
-    "title": "Sanrio CAFE WAGON「MIRACLE GIFT PARADE GO!」登場",
-    "type": "cafe",
-    "country": "JP",
-    "city": "Kanagawa",
-    "locationName": "ジ アウトレット湘南平塚",
-    "startDate": "2026-06-12",
-    "endDate": "2026-06-14",
-    "summaryZh": "Sanrio CAFE WAGON「MIRACLE GIFT PARADE GO!」將於6月12日至6月14日在THE OUTLET湘南平塚登場，提供限定飲品與點心。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "三麗鷗",
-      "咖啡車",
-      "期間限定",
-      "湘南平塚"
-    ],
-    "id": "sa-b9645e",
-    "sourceTitle": "【平塚市】ジアウトレット湘南平塚にサンリオカフェワゴン「ミラクルギフトパレード号」が登場！ 6月12日～6月14日 - 湘南人",
-    "sourceType": "official_site",
-    "createdAt": "2026-06-02",
-    "sourceUrl": "https://the-outlets-shonan-hiratsuka.aeonmall.com/news/detail/5153"
-  },
-  {
-    "brand": "sanrio",
-    "title": "三麗鷗樂園夏日祭典",
-    "type": "campaign",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "Sanrio Puroland",
-    "startDate": "2026-07-10",
-    "endDate": "2026-09-01",
-    "summaryZh": "三麗鷗樂園將於7月10日起舉辦夏日祭典「ピューロランドネオナツマツリⅢ」，Hello Kitty與Kuromi將以Y3K時尚造型首次登場。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "三麗鷗",
-      "夏日祭典",
-      "主題活動",
-      "限定登場"
-    ],
-    "id": "sa-999941",
-    "sourceTitle": "ピューロランドネオナツマツリⅢ｜サンリオピューロランド公式",
-    "sourceType": "official_site",
-    "createdAt": "2026-06-02",
-    "sourceUrl": "https://www.puroland.jp/event-campaign/2026_summer/"
-  },
-  {
     "brand": "pokemon",
     "title": "寶可夢「もぐもぐウォッチング！」新商品",
     "type": "new_product",
@@ -262,54 +214,6 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-03",
     "sourceUrl": "https://news.yahoo.co.jp/articles/7e7c78da968f8940a31c6c76081c593b66d8cf8d"
-  },
-  {
-    "brand": "sanrio",
-    "title": "三麗鷗 高雄快閃店",
-    "type": "popup",
-    "country": "TW",
-    "city": "Kaohsiung",
-    "locationName": "夢時代",
-    "startDate": "2026-04-17",
-    "endDate": "2026-06-08",
-    "summaryZh": "三麗鷗高雄快閃店於夢時代登場，有酷洛米、大耳狗等角色，設有5大打卡點，並販售40款新品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "三麗鷗",
-      "快閃店",
-      "高雄",
-      "夢時代"
-    ],
-    "id": "sa-b539d8",
-    "sourceTitle": "【三麗鷗 高雄快閃店】酷洛米、大耳狗現身夢時代！5 大打卡點、40 款新品全攻略 - 吃貨瑪莉",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-03",
-    "sourceUrl": "https://eatmary.net/5766"
-  },
-  {
-    "brand": "sanrio",
-    "title": "三麗鷗花茶舞會 台中快閃店",
-    "type": "popup",
-    "country": "TW",
-    "city": "Taichung",
-    "locationName": "台中驛鐵道文化園區（鐵鹿大街A2）",
-    "startDate": "2026-05-23",
-    "endDate": "2026-06-28",
-    "summaryZh": "Hello Kitty化身花茶舞會主人，台中驛鐵道文化園區限定快閃，以奶茶色花卉下午茶元素打造拍照牆與限定商品，滿額可抽60公分Kitty布偶。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "三麗鷗",
-      "快閃店",
-      "台中",
-      "限定新品"
-    ],
-    "id": "sa-130daa",
-    "sourceTitle": "「花茶舞會」Hello Kitty化身茶會主人 台中限定快閃店掀打卡熱潮 - 聯合新聞網",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-03",
-    "sourceUrl": "https://travel.udn.com/travel/story/7934/9520634"
   },
   {
     "brand": "miffy",
@@ -432,31 +336,6 @@
     "sourceUrl": "https://www.iamcreative.com.tw/pages/pop-up-store"
   },
   {
-    "brand": "sanrio",
-    "title": "サンリオ展 FINAL ver. 六本木",
-    "type": "popup",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "森アーツセンターギャラリー（六本木ヒルズ森タワー52F）",
-    "startDate": "2026-04-09",
-    "endDate": "2026-06-21",
-    "summaryZh": "三麗鷗創業60週年集大成特展「サンリオ展 FINAL ver.」於六本木Hills森藝術中心畫廊(52F)登場，集結200+角色、1500+件限定商品與特設商店。採日時指定券入場。",
-    "needReservation": true,
-    "hasLimitedGoods": true,
-    "tags": [
-      "三麗鷗",
-      "特展",
-      "東京",
-      "60週年",
-      "限定商品"
-    ],
-    "id": "sa-6021a9",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-03",
-    "sourceTitle": "60年分のカワイイに、会いにいく日。サンリオ展 FINAL ver. が六本木で開幕！ - POPAP",
-    "sourceUrl": "https://www.popap.biz/popup-list/sanrio-final-0409"
-  },
-  {
     "brand": "pokemon",
     "title": "ポケピース POP UP STORE 埼玉",
     "type": "popup",
@@ -479,31 +358,6 @@
     "createdAt": "2026-06-03",
     "sourceTitle": "ポケピース POP UP STORE by VILLAGE VANGUARD - ベストカレンダー/ヴィレッジヴァンガード",
     "sourceUrl": "https://www.village-v.co.jp/popup/016402/"
-  },
-  {
-    "brand": "sanrio",
-    "title": "布丁狗30週年 CACO café 主題門市",
-    "type": "cafe",
-    "country": "TW",
-    "city": "",
-    "locationName": "全台4店同步（台南小西門/台南南紡/高雄夢時代/台中漢神洲際）",
-    "startDate": "2026-04-08",
-    "endDate": "2026-06-30",
-    "summaryZh": "CACO café 攜手布丁狗30週年推出春夏限定主題門市，全台4店同步登場，供應布丁狗聯名療癒餐點，並有加價購限定周邊。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "布丁狗",
-      "三麗鷗",
-      "限定餐飲",
-      "台灣",
-      "全台同步"
-    ],
-    "id": "sa-pn0408",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-03",
-    "sourceTitle": "全台只有4間！30週年「布丁狗主題店」快閃登場，療癒餐點＋限定周邊一次看 - 食尚玩家",
-    "sourceUrl": "https://supertaste.tvbs.com.tw/food/359205"
   },
   {
     "brand": "miffy",
@@ -600,125 +454,6 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-04",
     "sourceUrl": "https://news.yahoo.co.jp/articles/ffe1b6f095aadadb2cbb48c357cd0c430e38cf4e"
-  },
-  {
-    "brand": "sanrio",
-    "title": "Sanrio characters Exhibition Hotel Floria Tokyo",
-    "type": "campaign",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "Hotel Floria Tokyo",
-    "startDate": "2026-07-15",
-    "endDate": "2027-05-31",
-    "summaryZh": "於Hotel Floria Tokyo舉辦「Sanrio characters Exhibition Hotel Floria Tokyo」，以「三麗鷗角色構思的夢幻飯店」為主題，打造沉浸式視覺空間。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "三麗鷗",
-      "展覽",
-      "飯店",
-      "東京"
-    ],
-    "id": "sa-911e0a",
-    "sourceTitle": "“サンリオキャラクターが考える夢のホテル”をテーマにした没入感のあるビジュアル空間が登場『Sanrio characters Exhibition Hotel Floria Tokyo』",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-04",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000001.000184384.html"
-  },
-  {
-    "brand": "sanrio",
-    "title": "美樂蒂桃色下午茶派對",
-    "type": "cafe",
-    "country": "JP",
-    "city": "Miyagi",
-    "locationName": "ウェスティンホテル仙台",
-    "startDate": "2026-07-18",
-    "endDate": "2026-09-25",
-    "summaryZh": "日本仙台威斯汀飯店舉辦美樂蒂主題下午茶「My Melody Peach Tea Party」，提供限定餐點。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "美樂蒂",
-      "下午茶",
-      "主題餐廳",
-      "仙台"
-    ],
-    "id": "sa-e1aee0",
-    "sourceTitle": "マイメロディと過ごす夏の桃色アフタヌーンティー「My Melody Peach Tea Party」【ウェスティンホテル仙台】",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-04",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000001795.000006521.html"
-  },
-  {
-    "brand": "sanrio",
-    "title": "美樂蒂&酷洛米×The Body Shop 聯名活動",
-    "type": "campaign",
-    "country": "JP",
-    "city": "",
-    "locationName": "The Body Shop",
-    "startDate": "2026-06-04",
-    "endDate": "",
-    "summaryZh": "美樂蒂與酷洛米將與The Body Shop Japan合作推出聯名活動，有機會獲得限定設計迷你包和貼紙。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "三麗鷗",
-      "美樂蒂",
-      "酷洛米",
-      "The Body Shop"
-    ],
-    "id": "sa-e83396",
-    "sourceTitle": "限定デザインミニバッグやステッカーがもらえる！ マイメロディ&amp;クロミ×ザボディショップ コラボレーションキャンペーン 6月4日(木)開始",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-04",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000217.000019887.html"
-  },
-  {
-    "brand": "sanrio",
-    "title": "三麗鷗庫洛米主題下午茶",
-    "type": "cafe",
-    "country": "JP",
-    "city": "Fukuoka",
-    "locationName": "ホテルニューオータニ博多",
-    "startDate": "2026-07-01",
-    "endDate": "2026-08-30",
-    "summaryZh": "三麗鷗庫洛米主題下午茶於博多新大谷飯店登場，期間限定販售，可品嚐限定餐點。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "三麗鷗",
-      "庫洛米",
-      "下午茶",
-      "主題餐廳"
-    ],
-    "id": "sa-70fca7",
-    "sourceTitle": "サンリオ「クロミ」コラボレーションアフタヌーンティーがホテルニューオータニ博多に登場！ 7月1日（水）～8月30日（日）期間限定開催 - PR TIMES",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-04",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000272.000027824.html"
-  },
-  {
-    "brand": "sanrio",
-    "title": "Harmonyland 夏日派對",
-    "type": "campaign",
-    "country": "JP",
-    "city": "Oita",
-    "locationName": "ハーモニーランド (Harmony Land)",
-    "startDate": "2026-07-03",
-    "endDate": "2026-09-15",
-    "summaryZh": "大分Harmonyland將舉辦「はちゃめちゃサマーパーリー！」活動，首次登場日曬造型的庫洛米等角色。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "主題樂園",
-      "夏季活動",
-      "庫洛米"
-    ],
-    "id": "sa-fbfdc4",
-    "sourceTitle": "サンリオのテーマパーク史上初、日焼けをした姿のクロミたちが登場 大分 ハーモニーランド『はちゃめちゃサマーパーリー！』2026年7月3日（金）よりスタート - PR TIMES",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-04",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000514.000007643.html"
   },
   {
     "brand": "chiikawa",
@@ -1242,53 +977,5 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-05",
     "sourceUrl": "https://www.inside-games.jp/article/2026/06/05/182448.html"
-  },
-  {
-    "brand": "sanrio",
-    "title": "夏日向日葵系列玩偶",
-    "type": "new_product",
-    "country": "JP",
-    "city": "",
-    "locationName": "むにゅぐるみパティオ対象店舗",
-    "startDate": "2026-05-14",
-    "endDate": "2026-08-12",
-    "summaryZh": "三麗鷗角色推出夏日向日葵與草帽造型的「ぽかぽかひまわりむにゅぐるみマスコット」，於指定店舖販售。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "三麗鷗",
-      "玩偶",
-      "夏日限定",
-      "新品販售"
-    ],
-    "id": "sa-311d45",
-    "sourceTitle": "サンリオキャラクターズより向日葵と麦わら帽子で夏らしい「ぽかぽかひまわりむにゅぐるみマスコット」がむにゅぐるみパティオ対象店舗にて販売開始！",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-05",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000270.000092073.html"
-  },
-  {
-    "brand": "sanrio",
-    "title": "Sanrio 夢之酒店體驗展",
-    "type": "campaign",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "東京ドームシティ プリズムホール",
-    "startDate": "2026-07-17",
-    "endDate": "2026-09-05",
-    "summaryZh": "Sanrio 夢之酒店體驗展首次登陸日本東京，提供沉浸式房間導覽，並販售限定周邊商品。前賣票將於6月5日開賣。",
-    "needReservation": true,
-    "hasLimitedGoods": true,
-    "tags": [
-      "三麗鷗",
-      "體驗展",
-      "限定商品",
-      "東京"
-    ],
-    "id": "sa-e6ce7c",
-    "sourceTitle": "サンリオの体験型展示が日本初上陸。“夢のホテル”を没入ルームツアー＆限定グッズも！ 前売りチケット6月5日発売 - トラベル Watch",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-05",
-    "sourceUrl": "https://travel.watch.impress.co.jp/docs/news/2114127.html"
   }
 ]

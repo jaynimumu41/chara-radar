@@ -145,10 +145,10 @@ body {
   gap: 6px;
 }
 
-/* BRAND FILTER PILLS — 2×2（手機）/ 4 欄（桌機），與上方統計卡對齊 */
+/* BRAND FILTER PILLS — 2 欄（手機）/ 3 欄（桌機），與上方統計卡對齊 */
 .brand-filters {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   margin-bottom: 20px;
 }

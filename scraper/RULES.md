@@ -3,7 +3,8 @@
 > 給接手者的快速地圖。規則本體都在 `scrape.py`，本檔只做集中索引與說明，
 > 改規則時兩邊一起更新。核心原則：**準確 > 覆蓋**——寧可漏，不可錯／重複／過期。
 
-涵蓋品牌：Pokémon（寶可夢）、Miffy（米飛兔）、Chiikawa（吉伊卡哇）、Sanrio（三麗鷗）。
+目前涵蓋品牌：Pokémon（寶可夢）、Miffy（米飛兔）、Chiikawa（吉伊卡哇）。
+Sanrio（三麗鷗）先暫停，因無結構化來源、新聞/Gemini 污染最高，會消耗最多 agent 驗證時間。
 地區：日本 + 台灣。
 
 ---
@@ -16,7 +17,7 @@
 | 官方新聞稿 + 一般新聞 | PR TIMES 關鍵字、Google News RSS（日文 + 中文） | 是，Gemini 萃取 | `scrape.py` |
 
 - 結構化來源每次跑都以官方最新清單覆蓋同來源 URL 的舊資料（過期由 `clean_events` 移除）。
-- 三麗鷗無可解析的結構化官方頁（`sanrio.co.jp` 503／JS 動態／REST 空），維持新聞 + Gemini。
+- 三麗鷗無可解析的結構化官方頁（`sanrio.co.jp` 503／JS 動態／REST 空），目前暫停預設抓取與前端顯示。
 - 抓取被擋（403/429/503）時自動改走 reader 代理 `r.jina.ai`，不放棄（`verify_links.fetch_html` / `check_url`）。
 
 ---
@@ -100,6 +101,7 @@
 
 Agent 每日驗證另有固定 SOP：`scraper/AGENT_VERIFY.md`；候選清單可用
 `python scraper/agent_verify_candidates.py --format markdown` 產生。
+資料 schema 與暫停品牌檢查可用 `python scraper/data_lint.py`。
 
 ---
 
