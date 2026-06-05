@@ -695,16 +695,31 @@ def _days_ago_iso(iso_date: str) -> float | None:
     except Exception:
         return None
 
+# 無結束日時，依類型用「起始日距今天數」推估是否已過期（補洞：無 endDate 的活動
+# 原本永遠清不掉，導致過期活動殘留）。活動型檔期通常數天~數週；商品發售熱度約兩月。
+ACTIVITY_TYPES = {"popup", "cafe", "campaign"}      # 有明確檔期的活動
+SELLING_TYPES  = {"new_product", "lottery", "reservation"}  # 商品發售/抽選/預約
+
 def _is_past(ev: dict) -> bool:
-    """活動是否已結束：有結束日且已過；或有開始日、無結束日、且開始日距今超過 90 天"""
-    if ev.get("endDate") and ev["endDate"] < TODAY:
-        return True
+    """活動是否已結束。
+    - 有結束日：已過今天 = 過期。
+    - 無結束日（補洞，避免殘留）：
+        · 活動型(popup/cafe/campaign)：起始日距今 >30 天 = 過期；完全無日期 = 無法確認現行 → 當過期。
+        · 商品型(new_product/lottery/reservation)：起始日距今 >60 天 = 過期；完全無日期 → 當過期。
+        · 其他(常設 store 等)：沿用起始日 >90 天的寬鬆規則，完全無日期則保留。
+    未來日期(age<0)一律不算過期。"""
+    end = ev.get("endDate")
+    if end:
+        return end < TODAY
+    t = ev.get("type", "")
     sd = ev.get("startDate")
-    if sd and not ev.get("endDate"):
-        age = _days_ago_iso(sd)
-        if age is not None and age > 90:
-            return True
-    return False
+    age = _days_ago_iso(sd) if sd else None
+    if t in ACTIVITY_TYPES:
+        return True if age is None else age > 30
+    if t in SELLING_TYPES:
+        return True if age is None else age > 60
+    # store / 其他：常設性質，保守
+    return age is not None and age > 90
 
 def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
     """合併同一活動的重複條目。回傳（清理後清單, 移除數量）"""

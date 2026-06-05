@@ -1174,53 +1174,6 @@
     "sourceUrl": "https://dickbruna.jp/news/202605/46117/"
   },
   {
-    "brand": "miffy",
-    "title": "Miffy新品發售",
-    "type": "new_product",
-    "country": "JP",
-    "city": "",
-    "locationName": "アベイル",
-    "startDate": "",
-    "endDate": "",
-    "summaryZh": "日本服飾品牌アベイル推出Miffy系列新品，包含可愛的耳朵造型髮帶睡衣及日常穿搭涼鞋。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "服飾",
-      "居家服",
-      "涼鞋",
-      "新品"
-    ],
-    "id": "mi-07264e",
-    "sourceTitle": "アベイルより「ミッフィー」グッズが発売！お耳が可愛いヘアバンド付きルームウェアや、日常使いしやすいサンダルも - インサイド",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-05",
-    "sourceUrl": "https://www.inside-games.jp/article/2026/04/28/180645.html"
-  },
-  {
-    "brand": "miffy",
-    "title": "miffy 透明感新作周邊",
-    "type": "new_product",
-    "country": "JP",
-    "city": "",
-    "locationName": "",
-    "startDate": "",
-    "endDate": "",
-    "summaryZh": "miffy推出透明感新作周邊，包含透明口罩、透視便條紙等，質感清新可愛。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "miffy",
-      "周邊商品",
-      "文具"
-    ],
-    "id": "mi-cd170a",
-    "sourceTitle": "「ミッフィー」透明感あふれるキュートな新作グッズ登場！クリアマステ、透けるふせんなどラインナップ♪ 1枚目の写真・画像 - アニメ！アニメ！",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-05",
-    "sourceUrl": "https://animeanime.jp/article/img/2026/05/20/99109/882317.html"
-  },
-  {
     "brand": "pokemon",
     "title": "Pokémon accessory 系列新品發售",
     "type": "new_product",
@@ -1289,29 +1242,6 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-05",
     "sourceUrl": "https://www.inside-games.jp/article/2026/06/05/182448.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 新商品登場",
-    "type": "new_product",
-    "country": "JP",
-    "city": "",
-    "locationName": "",
-    "startDate": "",
-    "endDate": "",
-    "summaryZh": "吉伊卡哇推出「微醺與宿醉」系列新商品，包含公仔、Baby造型的筷架等，更多品項可於報導中查看。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "新商品",
-      "公仔",
-      "周邊"
-    ],
-    "id": "ch-45c609",
-    "sourceTitle": "「ちいかわ」ほろ酔い＆二日酔いマスコットほか新商品が続々登場！フィギュアや、Babyな箸置きなどラインナップをチェック - インサイド",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-05",
-    "sourceUrl": "https://www.inside-games.jp/article/2026/06/04/182425.html"
   },
   {
     "brand": "sanrio",

@@ -96,9 +96,28 @@ check("中文至/到（只結束日）",
       ("", "2026-06-08"))
 
 # ── _is_past ──────────────────────────────────────────────────────────────────
-print("\n[_is_past] 過期判定")
+print("\n[_is_past] 過期判定（含無結束日補洞）")
+from datetime import datetime as _dt, timezone as _tz, timedelta as _td
+def _iso_ago(days):  # 產生 N 天前的 ISO 日期
+    return (_dt.now(_tz.utc) - _td(days=days)).strftime("%Y-%m-%d")
 check("結束日已過→past", scrape._is_past(ev(endDate="2000-01-01")), True)
-check("無日期→不past", scrape._is_past(ev()), False)
+check("結束日未到→不past", scrape._is_past(ev(endDate=_iso_ago(-30))), False)
+check("活動型無結束日+起始40天前→past",
+      scrape._is_past(ev(type="popup", startDate=_iso_ago(40))), True)
+check("活動型無結束日+起始10天前→不past",
+      scrape._is_past(ev(type="popup", startDate=_iso_ago(10))), False)
+check("活動型完全無日期→past（無法確認現行）",
+      scrape._is_past(ev(type="cafe")), True)
+check("商品型完全無日期→past",
+      scrape._is_past(ev(type="new_product")), True)
+check("商品型起始40天前→不past（<60）",
+      scrape._is_past(ev(type="new_product", startDate=_iso_ago(40))), False)
+check("商品型起始70天前→past（>60）",
+      scrape._is_past(ev(type="new_product", startDate=_iso_ago(70))), True)
+check("未來活動→不past",
+      scrape._is_past(ev(type="popup", startDate=_iso_ago(-15))), False)
+check("常設store無日期→不past",
+      scrape._is_past(ev(type="store")), False)
 
 # ── dedup_events ──────────────────────────────────────────────────────────────
 print("\n[dedup_events] 去重")
