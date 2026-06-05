@@ -92,7 +92,14 @@
 ## 6. 過期判定（`_is_past`）
 
 - 有結束日且已過今天 → 過期。
-- 有開始日、無結束日、且開始日距今 > 90 天 → 視為過期。
+- 無結束日：
+  - 活動型（`popup` / `cafe` / `campaign`）完全無日期 → 過期；有開始日且距今 >30 天 → 過期。
+  - 商品型（`new_product` / `lottery` / `reservation`）完全無日期 → 過期；有開始日且距今 >60 天 → 過期。
+  - 常設 `store` 等其他類型沿用寬鬆規則：有開始日且距今 >90 天 → 過期；完全無日期保留。
+- 未來日期一律不算過期。
+
+Agent 每日驗證另有固定 SOP：`scraper/AGENT_VERIFY.md`；候選清單可用
+`python scraper/agent_verify_candidates.py --format markdown` 產生。
 
 ---
 

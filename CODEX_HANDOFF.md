@@ -188,3 +188,18 @@ python smoke_test.py      # 目前 35 項，exit 0 = 全過
 - `scraper/RULES.md` — 篩選與去重規則總覽（人類可讀版）。
 - `data/events.json` — 主資料（你讀寫的對象）。
 - `data/stores.json` — 常設店手動清單（不經爬蟲）。
+
+---
+
+## 12. Codex agent 驗證自動化（已建立）
+
+- Codex app automation：`chararadar-agent-verify-daily`
+- 名稱：`CharaRadar Agent Verify Daily`
+- 觸發：每天 16:30（台灣時間語境），在 16:00 Windows/Python 爬蟲之後。
+- 工作目錄：`C:\Users\USER\Documents\claude\chara-radar`
+- 固定 SOP：`scraper/AGENT_VERIFY.md`
+- 候選清單工具：`python scraper/agent_verify_candidates.py --format markdown`
+- 每日 agent log：`scraper/logs/agent-verify-YYYY-MM-DD.md`（`scraper/logs/` 已 gitignore，不進公開 repo）
+
+automation 的職責不是再跑一次爬蟲，而是依第 5 節對高風險筆做 WebSearch/WebFetch 多方查證，必要時修改
+`data/events.json`、更新 `scraper/rejected.json` 防復活，跑 `smoke_test.py`，通過後 commit + push。
