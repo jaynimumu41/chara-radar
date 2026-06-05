@@ -604,6 +604,30 @@ def load_events() -> list[dict]:
 def save_events(events: list[dict]):
     EVENTS_JSON.write_text(json.dumps(events, ensure_ascii=False, indent=2), encoding="utf-8")
 
+def replace_in_place(events: list[dict], fresh: list[dict], should_replace) -> list[dict]:
+    """Update structured-source events without moving unchanged records."""
+    by_id = {e.get("id"): e for e in fresh if e.get("id")}
+    used: set[str] = set()
+    out: list[dict] = []
+
+    for ev in events:
+        eid = ev.get("id")
+        if eid in by_id:
+            out.append(by_id[eid])
+            used.add(eid)
+        elif should_replace(ev):
+            continue
+        else:
+            out.append(ev)
+
+    for ev in fresh:
+        eid = ev.get("id")
+        if not eid or eid not in used:
+            out.append(ev)
+            if eid:
+                used.add(eid)
+    return out
+
 # ── 已處理新聞記錄（避免重跑時重複送 AI，省配額）──────────────────────────────
 
 PROCESSED_JSON = Path(__file__).parent / "processed.json"
@@ -675,6 +699,34 @@ def _norm(s: str) -> str:
     """正規化字串：轉小寫、去空白與符號，方便比對"""
     s = (s or "").lower()
     return re.sub(r"[\s\(\)（）®™☆★・·\-:：、。.,!！?？]", "", s)
+
+GENERIC_DEDUP_LOCATIONS = {
+    "ポケモンセンター",
+    "ポケモンセンター各店",
+    "台北寶可夢中心",
+    "台灣寶可夢中心",
+    "台湾宝可梦中心",
+    "pokemoncenter",
+    "pokemoncentertaipei",
+}
+GENERIC_DEDUP_LOCATION_HINTS = [
+    "各店",
+    "各店舗",
+    "対象店",
+    "一部店舗",
+    "一部キデイランド店舗",
+    "公式ショップ",
+    "ホビーショップ",
+]
+GENERIC_DEDUP_LOCATION_KEYS = {_norm(x) for x in GENERIC_DEDUP_LOCATIONS}
+
+def is_generic_dedup_location(loc: str) -> bool:
+    """Locations too broad to prove two product launches are the same event."""
+    text = loc or ""
+    norm = _norm(text)
+    return norm in GENERIC_DEDUP_LOCATION_KEYS or any(
+        hint.lower() in text.lower() for hint in GENERIC_DEDUP_LOCATION_HINTS
+    )
 
 # 知名場館別名 → 統一代號（讓同場館不同寫法能去重）
 VENUE_CANON = [
@@ -756,7 +808,9 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
         b = ev.get("brand", "")
         tkey = b + "|" + _norm(ev.get("title", ""))
         loc = ev.get("locationName", "")
-        lkey = (b + "|" + _norm(loc)) if loc and len(_norm(loc)) >= 3 else None
+        lkey = (b + "|" + _norm(loc)) if (
+            loc and len(_norm(loc)) >= 3 and not is_generic_dedup_location(loc)
+        ) else None
         ukey = direct_url(ev)
         city, sd = ev.get("city", ""), ev.get("startDate", "")
         dkey = (b + "|" + city + "|" + sd) if (city and sd) else None  # 同品牌同城同開始日
@@ -1085,10 +1139,12 @@ def run(brands: list[str]):
         try:
             poke = fetch_pokemon_popups(correct_city=correct_city)
             if poke:
-                # 出張所整批以官方排程為準：移除舊的出張所、換成最新清單
-                events = [e for e in events
-                          if not (e.get("brand") == "pokemon" and "出張所" in e.get("title", ""))]
-                events += poke
+                # 出張所以官方排程為準，但保留既有排序，避免每日產生只有順序變動的 diff。
+                events = replace_in_place(
+                    events,
+                    poke,
+                    lambda e: e.get("brand") == "pokemon" and "出張所" in e.get("title", ""),
+                )
                 print(f"🏛️  寶可夢出張所排程（結構化，免 AI）→ {len(poke)} 筆現行")
                 save_events(events)
         except Exception as e:

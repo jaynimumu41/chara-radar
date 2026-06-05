@@ -5,6 +5,8 @@ let activeBrand = null;   // null = 全部品牌
 let activeType = 'all';
 let activeCountry = 'all';
 
+const DATA_CACHE_BUST = Date.now().toString(36);
+
 const BRAND_LABELS = {
   pokemon: 'Pokémon',
   miffy: 'Miffy',
@@ -35,6 +37,11 @@ const CITY_LABELS = {
 
 function today() {
   return new Date().toISOString().slice(0, 10);
+}
+
+function dataUrl(path) {
+  const sep = path.includes('?') ? '&' : '?';
+  return `${path}${sep}v=${DATA_CACHE_BUST}`;
 }
 
 function daysUntilEnd(endDate) {
@@ -258,7 +265,7 @@ async function init() {
 
   // 活動情報優先載入；失敗就顯示提示，不要整頁空白
   try {
-    const evRes = await fetch('data/events.json');
+    const evRes = await fetch(dataUrl('data/events.json'), { cache: 'no-store' });
     if (!evRes.ok) throw new Error('HTTP ' + evRes.status);
     allEvents = await evRes.json();
   } catch (e) {
@@ -267,14 +274,14 @@ async function init() {
   }
   // 常設店資料載入失敗不影響活動顯示
   try {
-    const stRes = await fetch('data/stores.json');
+    const stRes = await fetch(dataUrl('data/stores.json'), { cache: 'no-store' });
     storeData = stRes.ok ? await stRes.json() : (storeData || {});
   } catch (e) {
     storeData = storeData || {};
   }
 
   // 最後更新時間（每日 16:00 排程跑完寫入；讀不到就留空不顯示）
-  fetch('data/last_updated.json')
+  fetch(dataUrl('data/last_updated.json'), { cache: 'no-store' })
     .then(r => r.ok ? r.json() : null)
     .then(j => renderLastUpdated(j && j.updatedAt))
     .catch(() => {});

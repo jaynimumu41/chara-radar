@@ -180,6 +180,17 @@ out, _ = scrape.dedup_events([
 ])
 check("同館不同檔期→不併（2筆）", len(out), 2)
 
+# 連鎖/各店販售點不能只靠 locationName 去重：同一家寶可夢中心可能連續推出不同新品
+out, _ = scrape.dedup_events([
+    ev(brand="pokemon", title="Pokémon accessory 系列新品發售", type="new_product",
+       startDate="2026-05-16", locationName="ポケモンセンター各店",
+       sourceUrl="https://www.famitsu.com/article/202605/74739"),
+    ev(brand="pokemon", title="寶可夢「もぐもぐウォッチング！」新商品", type="new_product",
+       startDate="2026-05-30", locationName="ポケモンセンター各店",
+       sourceUrl="https://www.pokemon.co.jp/goods/2026/05/260522_to01.html"),
+])
+check("泛用各店地點不同新品→不併（2筆）", len(out), 2)
+
 # 不破壞現況：實際線上 events.json 不應被誤併（筆數不變）
 try:
     real = scrape.load_events()
@@ -187,6 +198,27 @@ try:
     check(f"線上 events.json 去重無誤併（{len(real)}筆）", len(deduped), len(real))
 except Exception as e:
     print(f"  SKIP  線上 events.json 測試（讀取失敗：{e}）")
+
+# ── replace_in_place ──────────────────────────────────────────────────────────
+print("\n[replace_in_place] 結構化來源原地更新")
+old = [
+    ev(id="keep", brand="miffy", title="既有資料"),
+    ev(id="po-1", brand="pokemon", title="Pokemon Center 出張所 in A", endDate="2026-06-30"),
+    ev(id="stale", brand="pokemon", title="Pokemon Center 出張所 in OLD"),
+    ev(id="other", brand="pokemon", title="Pokémon 常設新品"),
+]
+fresh = [
+    ev(id="po-1", brand="pokemon", title="Pokemon Center 出張所 in A", endDate="2026-07-31"),
+    ev(id="po-2", brand="pokemon", title="Pokemon Center 出張所 in B"),
+]
+out = scrape.replace_in_place(
+    old,
+    fresh,
+    lambda e: e.get("brand") == "pokemon" and "出張所" in e.get("title", ""),
+)
+check("同id原地更新、舊資料移除、新資料append",
+      [(e["id"], e.get("endDate", "")) for e in out],
+      [("keep", ""), ("po-1", "2026-07-31"), ("other", ""), ("po-2", "")])
 
 # ── 結語 ──────────────────────────────────────────────────────────────────────
 print(f"\n{'=' * 40}\n結果：{_passed} 通過、{_failed} 失敗")

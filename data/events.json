@@ -124,11 +124,11 @@
     "title": "寶可夢「もぐもぐウォッチング！」新商品",
     "type": "new_product",
     "country": "JP",
-    "city": "Tokyo",
-    "locationName": "ポケモンセンター",
-    "startDate": "2026-05-29",
+    "city": "",
+    "locationName": "ポケモンセンター各店",
+    "startDate": "2026-05-30",
     "endDate": "",
-    "summaryZh": "寶可夢中心推出以寶可夢吃東西模樣為主題的新周邊「もぐもぐウォッチング！」系列，即日起於日本寶可夢中心販售。",
+    "summaryZh": "寶可夢中心推出以寶可夢吃東西模樣為主題的新周邊「もぐもぐウォッチング！」系列，5月30日起於日本寶可夢中心販售。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -138,10 +138,10 @@
       "周邊"
     ],
     "id": "po-e23c32",
-    "sourceTitle": "ポケモンたちのもぐもぐ姿にフォーカスしたグッズ「もぐもぐウォッチング！」がポケモンセンターにて本日発売 (GAME Watch) - Yahoo!ニュース",
-    "sourceType": "official_social",
+    "sourceTitle": "ポケモンたちの「もぐもぐ姿」にフォーカスしたグッズが、ポケモンセンターに登場！ - ポケットモンスターオフィシャルサイト",
+    "sourceType": "official_site",
     "createdAt": "2026-06-04",
-    "sourceUrl": "https://news.yahoo.co.jp/articles/be4e397be99bea92165930643d14468d246d709b/images/000"
+    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/05/260522_to01.html"
   },
   {
     "brand": "pokemon",
@@ -402,10 +402,10 @@
       "限定"
     ],
     "id": "po-e6f4e9",
-    "sourceTitle": "《台北寶可夢中心》勞動節新品！「Little Daydream」系列 5/1 療癒登場！ - Pokemon Hubs",
+    "sourceTitle": "寶可夢中心5月新品36款來了！超可愛皮丘玩偶、尾立擺鐘5/1開賣 - NOWnews今日新聞",
     "sourceType": "official_social",
     "createdAt": "2026-06-04",
-    "sourceUrl": "https://pokemonhubs.com/news/pokemon-center-taipei-little-daydream-merch-2026-may/"
+    "sourceUrl": "https://www.nownews.com/news/6811629"
   },
   {
     "brand": "pokemon",
@@ -426,10 +426,10 @@
       "台北"
     ],
     "id": "po-4eaa69",
-    "sourceTitle": "【台北寶可夢中心】城都地區寶可夢大集結「全國圖鑑金屬鑰匙圈」5/23 開賣！還有更多⋯⋯ - Pokemon Hubs",
+    "sourceTitle": "台灣寶可夢中心5月72款新品！全國圖鑑鑰匙圈、未知圖騰5/23開賣 - NOWnews今日新聞",
     "sourceType": "official_social",
     "createdAt": "2026-06-04",
-    "sourceUrl": "https://pokemonhubs.com/news/pokemon-center-taipei-johto-keychains-2026-may-23/"
+    "sourceUrl": "https://www.nownews.com/amp/news/6837722"
   },
   {
     "brand": "pokemon",
@@ -437,7 +437,7 @@
     "type": "lottery",
     "country": "JP",
     "city": "",
-    "locationName": "",
+    "locationName": "書店・ホビーショップ・一番くじ公式ショップ・ポケモンセンターなど",
     "startDate": "2026-05-30",
     "endDate": "",
     "summaryZh": "寶可夢30週年一番賞「Pokemon 30th ANNIVERSARY vol.1」將於5月30日發售，為限定商品抽獎活動。",
@@ -450,10 +450,10 @@
       "抽獎"
     ],
     "id": "po-291665",
-    "sourceTitle": "【ポケモン30周年】「一番くじ Pokemon 30th ANNIVERSARY vol.1」は5月30日発売（GAME Watch） - Yahoo!ニュース",
+    "sourceTitle": "【ポケモン30周年】「一番くじ Pokemon 30th ANNIVERSARY vol.1」は5月30日発売 - GAME Watch",
     "sourceType": "official_social",
     "createdAt": "2026-06-04",
-    "sourceUrl": "https://news.yahoo.co.jp/articles/ffe1b6f095aadadb2cbb48c357cd0c430e38cf4e"
+    "sourceUrl": "https://game.watch.impress.co.jp/docs/news/2110908.html"
   },
   {
     "brand": "chiikawa",
@@ -845,10 +845,10 @@
     "type": "new_product",
     "country": "JP",
     "city": "",
-    "locationName": "",
-    "startDate": "2026-05-14",
+    "locationName": "ポケモンセンター各店",
+    "startDate": "2026-05-16",
     "endDate": "",
-    "summaryZh": "寶可夢化身為飾品！『Pokémon accessory』系列將於5月14日起發售，包含精緻的米可利的耳環。",
+    "summaryZh": "寶可夢化身為飾品！『Pokémon accessory』系列於5月16日起在日本寶可夢中心店頭販售，包含多款耳環、髮飾與戒指等新品。",
     "needReservation": false,
     "hasLimitedGoods": false,
     "tags": [
