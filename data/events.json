@@ -699,30 +699,6 @@
   },
   {
     "brand": "sanrio",
-    "title": "三麗鷗「きゅあかわ！ふぇすてぃばる！」",
-    "type": "campaign",
-    "country": "JP",
-    "city": "Nagoya",
-    "locationName": "名古屋マリオットアソシアホテル",
-    "startDate": "2026-07-18",
-    "endDate": "",
-    "summaryZh": "三麗鷗角色「きゅあかわ」主題活動於名古屋萬豪飯店登場，預計販售限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "三麗鷗",
-      "主題活動",
-      "限定商品",
-      "名古屋"
-    ],
-    "id": "sa-3739d7",
-    "sourceTitle": "【名古屋マリオットで推し活】きゅあかわきゅーと！が集結♪サンリオキャラクターズ「きゅあかわ！ふぇすてぃばる！」2026年７月18日（土）開催！ - PR TIMES",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-04",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000236.000076395.html"
-  },
-  {
-    "brand": "sanrio",
     "title": "Harmonyland 夏日派對",
     "type": "campaign",
     "country": "JP",
@@ -743,30 +719,6 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-04",
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000514.000007643.html"
-  },
-  {
-    "brand": "sanrio",
-    "title": "SKINNYDIP LONDON x 三麗鷗聯名快閃店",
-    "type": "popup",
-    "country": "JP",
-    "city": "",
-    "locationName": "SKINNYDIP LONDON ポップアップストア",
-    "startDate": "2026-04-29",
-    "endDate": "",
-    "summaryZh": "SKINNYDIP LONDON 快閃店將推出三麗鷗聯名「Feeling Sweet」系列，並追加新款商品。活動於4月29日起登場。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "三麗鷗",
-      "SKINNYDIP LONDON",
-      "聯名",
-      "快閃店"
-    ],
-    "id": "sa-ef133a",
-    "sourceTitle": "SKINNYDIP LONDON ポップアップストアに新作コレクションの追加発売が決定！サンリオキャラクターズとの新作コラボレーション、『Feeling Sweet』コレクションが4月29日より登場！ - PR TIMES",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-04",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000032.000155886.html"
   },
   {
     "brand": "chiikawa",
@@ -1269,30 +1221,6 @@
     "sourceUrl": "https://animeanime.jp/article/img/2026/05/20/99109/882317.html"
   },
   {
-    "brand": "miffy",
-    "title": "米飛雜貨嘉年華",
-    "type": "popup",
-    "country": "JP",
-    "city": "Nagoya",
-    "locationName": "名古屋高島屋",
-    "startDate": "",
-    "endDate": "",
-    "summaryZh": "米飛周邊商品展售會，超過1,000件商品集合，於名古屋高島屋舉辦。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛",
-      "雜貨",
-      "展售會",
-      "限定商品"
-    ],
-    "id": "mi-db520b",
-    "sourceTitle": "ミッフィーのグッズが1,000点以上集合！ 「ミッフィーzakkaフェスタ」名古屋タカシマヤで開催♪ - アニメ！アニメ！",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-05",
-    "sourceUrl": "https://animeanime.jp/article/2026/05/09/98776.html"
-  },
-  {
     "brand": "pokemon",
     "title": "Pokémon accessory 系列新品發售",
     "type": "new_product",
@@ -1314,30 +1242,6 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-05",
     "sourceUrl": "https://www.famitsu.com/article/202605/74739"
-  },
-  {
-    "brand": "pokemon",
-    "title": "寶可夢 30 週年亞洲最大慶典 PokéXciting!",
-    "type": "campaign",
-    "country": "TW",
-    "city": "Taipei",
-    "locationName": "",
-    "startDate": "",
-    "endDate": "",
-    "summaryZh": "寶可夢 30 週年亞洲最大慶典「PokéXciting!」將於 10 月在台北登場，預計有豐富的活動內容。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "30週年",
-      "慶典",
-      "台北"
-    ],
-    "id": "po-e89190",
-    "sourceTitle": "寶可夢公布 30 週年亞洲最大慶典活動！台北「PokéXciting!」將於 10 月登場 - T客邦",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-05",
-    "sourceUrl": "https://www.techbang.com/posts/129936-pokexciting-pokemon-30th-anniversary-taipei"
   },
   {
     "brand": "chiikawa",
@@ -1432,30 +1336,6 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-05",
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000270.000092073.html"
-  },
-  {
-    "brand": "sanrio",
-    "title": "三麗鷗咖啡車POMPOMPURIN 30週年紀念版",
-    "type": "cafe",
-    "country": "JP",
-    "city": "Saitama",
-    "locationName": "ららぽーと湘南平塚",
-    "startDate": "",
-    "endDate": "",
-    "summaryZh": "三麗鷗咖啡車POMPOMPURIN 30週年紀念版於ららぽーと湘南平塚期間限定登場，販售限定餐飲與周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "三麗鷗",
-      "咖啡車",
-      "期間限定",
-      "湘南平塚"
-    ],
-    "id": "sa-b86aa5",
-    "sourceTitle": "【平塚市】ららぽーと湘南平塚で「サンリオカフェワゴンポムポムプリン30周年記念版」が期間限定登場 - 湘南人",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-05",
-    "sourceUrl": "https://shonanjin.com/news/hiratsuka-sanrio-cafe-wagon-pompompurin-30th/"
   },
   {
     "brand": "sanrio",
