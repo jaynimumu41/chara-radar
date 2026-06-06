@@ -31,7 +31,8 @@ import requests
 
 from verify_links import check_url, page_mentions  # 存檔前驗證來源連結：連得過去 + 內容與品牌相關
 from official_sources import (fetch_official, fetch_chiikawa_popups,
-                              fetch_pokemon_popups, fetch_miffy_events)  # 官方來源：PR TIMES + 結構化排程頁
+                              fetch_pokemon_popups, fetch_pokemon_tw_goods,
+                              fetch_miffy_events)  # 官方來源：PR TIMES + 結構化排程頁
 
 # Windows 終端機 UTF-8 輸出 + 關閉緩衝（即時看到進度）
 if hasattr(sys.stdout, "reconfigure"):
@@ -198,7 +199,8 @@ def is_official_source(source: str) -> bool:
 TRUSTED_DATE_DOMAINS = [
     # 新聞稿 / 官方
     "prtimes.jp", "atpress.ne.jp", "dreamnews.jp",
-    "pokemon.co.jp", "pokemon.com.tw", "sanrio.co.jp", "sanrio.com.tw",
+    "pokemon.co.jp", "pokemon.com.tw", "tw.portal-pokemon.com",
+    "sanrio.co.jp", "sanrio.com.tw",
     "chiikawa-info.jp", "chiikawa-market.com", "benelic.com", "kiddyland.co.jp",
     "miffykitchenbakery.jp",
     # 場館 / 百貨 / 商場 / Outlet（單一活動頁，日期通常只有該活動）
@@ -813,7 +815,9 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
         ) else None
         ukey = direct_url(ev)
         city, sd = ev.get("city", ""), ev.get("startDate", "")
-        dkey = (b + "|" + city + "|" + sd) if (city and sd) else None  # 同品牌同城同開始日
+        dkey = (b + "|" + city + "|" + sd) if (
+            city and sd and ev.get("type", "") in ACTIVITY_TYPES
+        ) else None  # 活動型同品牌同城同開始日；商品同日可能不同系列，不套用
         thkeys = [b + "|" + t for t in theme_tokens(ev.get("title"), ev.get("summaryZh"))]
 
         hit = None
@@ -904,14 +908,19 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
                     date_conflict, date_aligned = gap > 14, gap <= 3
             if date_conflict:
                 continue
+            fuzzy_allowed = (
+                ev.get("type", "") in ACTIVITY_TYPES
+                and k.get("type", "") in ACTIVITY_TYPES
+            )
             # 場館字串相似（即使不在 VENUE_CANON 清單）：用於「同城+同活動但媒體標題寫法差很多」
             venue_close = bool(ln_e and ln_k and tsim(ln_e, ln_k) >= 0.6)
             # 同品牌+同一已知場館，且其中一筆完全沒日期 → 幾乎一定是同活動的較不完整版本
             # （兩個不同檔期通常各自都有日期，故「一邊全無日期」可避免誤併不同檔期）
             one_dateless = not ev.get("startDate") or not k.get("startDate")
-            if (same_venue and sim >= 0.4) or (same_venue and one_dateless and sim >= 0.2) \
-               or (same_city and venue_close and date_aligned) \
-               or (same_city and sim >= 0.50) or sim >= 0.72:
+            if fuzzy_allowed and (
+               (same_venue and sim >= 0.4) or (same_venue and one_dateless and sim >= 0.2)
+               or (same_city and venue_close and date_aligned)
+               or (same_city and sim >= 0.50) or sim >= 0.72):
                 # 合併到較完整者，補空欄位
                 base = k if completeness(k) >= completeness(ev) else ev
                 other = ev if base is k else k
@@ -1149,6 +1158,21 @@ def run(brands: list[str]):
                 save_events(events)
         except Exception as e:
             print(f"    ⚠️  寶可夢結構化來源失敗（略過）：{e}")
+        try:
+            poke_tw = fetch_pokemon_tw_goods(correct_city=correct_city)
+            if poke_tw:
+                events = replace_in_place(
+                    events,
+                    poke_tw,
+                    lambda e: (
+                        e.get("brand") == "pokemon"
+                        and "tw.portal-pokemon.com/goods/" in e.get("sourceUrl", "")
+                    ),
+                )
+                print(f"🏛️  台灣寶可夢官方商品（結構化，免 AI）→ {len(poke_tw)} 筆現行")
+                save_events(events)
+        except Exception as e:
+            print(f"    ⚠️  台灣寶可夢官方商品來源失敗（略過）：{e}")
     if "miffy" in brands:
         try:
             mf = fetch_miffy_events(extract_dates, correct_city)

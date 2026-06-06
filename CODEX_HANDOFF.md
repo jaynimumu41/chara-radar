@@ -32,13 +32,14 @@
 
 | 管線 | 來源 | 用 AI? | 品質 | 程式 |
 | -- | -- | -- | -- | -- |
-| **結構化官方頁** | 吉伊卡哇 `chiikawa-info.jp/pus.html`、寶可夢 `oneheart65.net` 出張所排程、Miffy `dickbruna.jp/event/`＋Kiddy Land / miffy style 站內搜尋 | 否（regex+模板） | **已達手動品質** | `scraper/official_sources.py` |
+| **結構化官方頁** | 吉伊卡哇 `chiikawa-info.jp/pus.html`、寶可夢 `oneheart65.net` 出張所排程＋台灣官方商品頁 `tw.portal-pokemon.com/goods/`、Miffy `dickbruna.jp/event/`＋Kiddy Land / miffy style 站內搜尋 | 否（regex+模板） | **已達手動品質** | `scraper/official_sources.py` |
 | **新聞段** | PR TIMES 關鍵字、Google News RSS（日＋中） | 是（Gemini 萃取） | **品質不穩，你的主戰場** | `scraper/scrape.py` |
 
 - 三麗鷗**沒有**可解析的結構化官方頁（`sanrio.co.jp` 503／JS 動態／REST 空，已確認不可行），且全靠新聞段＋Gemini，品質最弱；目前已暫停預設抓取與前端顯示。
 - 前端純靜態：`index.html` + `js/app.js` + `css/app.css`，讀 `data/events.json`、`data/stores.json`（常設店手動清單）、`data/last_updated.json`（心跳）。
 - **每日排程**：Windows 工作排程 `CharaRadar-DailyScrape` 每天 16:00 → `scraper/run_daily.ps1` → `python scrape.py` → 寫心跳 → git commit+push → GitHub Pages 自動重建。
 - **Miffy 補漏**：`dickbruna.jp/event/` 不含所有 miffy style / Kiddy Land 店頭新品，已新增 `kiddyland.co.jp/?s=miffy` 結構化解析，零 Gemini 抓官方店頭活動。
+- **台灣寶可夢補漏**：`tw.portal-pokemon.com/goods/` 已新增結構化解析，僅收內頁明確寫 `Pokémon Center TAIPEI` 登場／販售的近期商品；LINE 貼圖/主題、卡牌、遊戲、純線上授權商品過濾。官方 Instagram `pokemon_taiwan` 適合 agent 驗證輔助，不適合純 Python 每日抓取主來源。
 
 ---
 
@@ -83,7 +84,7 @@
 - 來源網域**不在**可信清單 `TRUSTED_DATE_DOMAINS`（見 `scrape.py`；日期沒被程式驗證過）。
 - `type == "campaign"`（最容易混入展覽／見面會）。
 - 標題籠統（含「新商品登場」「新作グッズ」「續々」「大集合」等無檔期訊號）。
-- 結構化來源（`sourceType=="official_site"` 且來源是 chiikawa-info/oneheart65/dickbruna）→ **可信，略過**。
+- 結構化來源（`sourceType=="official_site"` 且來源是 chiikawa-info/oneheart65/tw.portal-pokemon/dickbruna/kiddyland）→ **可信，略過**。
 
 ### 5.2 對每一筆，用 WebSearch + WebFetch 多方查證
 1. **搜尋**：用「場館名 + 活動名 + 品牌日文名」當 query（品牌日文：ポケモン／ミッフィー／ちいかわ）。撈 2–3 個來源。

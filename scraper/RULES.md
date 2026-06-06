@@ -13,10 +13,11 @@ Sanrio（三麗鷗）先暫停，因無結構化來源、新聞/Gemini 污染最
 
 | 管線 | 來源 | 是否用 AI | 程式位置 |
 | -- | -- | -- | -- |
-| 結構化官方頁（零 Gemini） | 吉伊卡哇 `chiikawa-info.jp/pus.html`、寶可夢 `oneheart65.net` 出張所排程、Miffy `dickbruna.jp/event/`＋Kiddy Land / miffy style 站內搜尋 | 否，regex + 模板 | `official_sources.py` |
+| 結構化官方頁（零 Gemini） | 吉伊卡哇 `chiikawa-info.jp/pus.html`、寶可夢 `oneheart65.net` 出張所排程＋台灣官方商品頁 `tw.portal-pokemon.com/goods/`、Miffy `dickbruna.jp/event/`＋Kiddy Land / miffy style 站內搜尋 | 否，regex + 模板 | `official_sources.py` |
 | 官方新聞稿 + 一般新聞 | PR TIMES 關鍵字、Google News RSS（日文 + 中文） | 是，Gemini 萃取 | `scrape.py` |
 
 - 結構化來源每次跑都以官方最新清單覆蓋同來源 URL 的舊資料（過期由 `clean_events` 移除）。
+- 台灣寶可夢官方商品頁只收「內頁明確寫 Pokémon Center TAIPEI 登場／販售」的近期商品；LINE 貼圖/主題、卡牌、遊戲、純線上授權商品一律過濾。Instagram 僅作 agent/人工驗證輔助，不納入純 Python 抓取主來源。
 - Miffy 另補 Kiddy Land / miffy style 站內搜尋（`kiddyland.co.jp/?s=miffy`），抓近期官方店頭活動與新品，避免 Google News/RSS 漏掉官方店鋪消息。
 - 三麗鷗無可解析的結構化官方頁（`sanrio.co.jp` 503／JS 動態／REST 空），目前暫停預設抓取與前端顯示。
 - 抓取被擋（403/429/503）時自動改走 reader 代理 `r.jina.ai`，不放棄（`verify_links.fetch_html` / `check_url`）。
@@ -75,6 +76,7 @@ Sanrio（三麗鷗）先暫停，因無結構化來源、新聞/Gemini 污染最
    （同場館春檔／秋檔巡迴標題常完全相同，只能靠日期區分）。
    *例外*：同一真實來源 URL 視為同篇報導，不套此否決。
 3. **會場鐵則**：兩筆都有地點、非同一已知場館、字串相似度 < 0.5 → 同城不同場次，不併。
+4. **商品保守規則**：`new_product` / `lottery` / `reservation` 不用「同城同日」或 fuzzy similarity 合併；同一天同店可能開賣多個不同系列。只用相同 URL、相同標題等強訊號合併。
 
 **應併條件（任一成立）：**
 

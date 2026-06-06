@@ -12,8 +12,10 @@ link 已是真實 URL（非 Google News 加密網址），直接流進 scrape.ex
 import re
 import time
 import html as html_lib
+from html.parser import HTMLParser
 from datetime import datetime, timezone, timedelta
 from email.utils import format_datetime
+from urllib.parse import urljoin
 
 import requests
 from verify_links import fetch_html  # 抓頁；被 bot 防護擋住時自動改用 reader 代理硬取
@@ -108,6 +110,32 @@ def _today_iso():
 
 def _stable_id(prefix: str, key: str) -> str:
     return f"{prefix}-{hashlib.md5(key.encode('utf-8')).hexdigest()[:6]}"
+
+
+class _VisibleTextParser(HTMLParser):
+    """Extract visible text without pulling in Next.js scripts or CSS."""
+    def __init__(self):
+        super().__init__()
+        self._skip = 0
+        self.parts: list[str] = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag in ("script", "style", "svg"):
+            self._skip += 1
+
+    def handle_endtag(self, tag):
+        if tag in ("script", "style", "svg") and self._skip:
+            self._skip -= 1
+
+    def handle_data(self, data):
+        if not self._skip and data.strip():
+            self.parts.append(data.strip())
+
+
+def _visible_text(html_text: str) -> str:
+    parser = _VisibleTextParser()
+    parser.feed(html_text or "")
+    return re.sub(r"\s+", " ", html_lib.unescape(" ".join(parser.parts))).strip()
 
 
 def _proxy_markdown(url: str) -> str:
@@ -221,6 +249,134 @@ def fetch_pokemon_popups(correct_city=None) -> list[dict]:
             "sourceTitle": f"ポケモンセンター出張所in{venue}（{start}～{end}）",
             "sourceUrl": _POKE_SCHED,
         })
+    return out
+
+
+_POKE_TW_GOODS = "https://tw.portal-pokemon.com/goods/?p={page}"
+_POKE_TW_BASE = "https://tw.portal-pokemon.com"
+_POKE_TW_GOODS_LINK = re.compile(r'href="(/goods/post-[^"]+/)"[^>]*>(.*?)</a>', re.S)
+_POKE_TW_ALLOWED_CATEGORIES = (
+    "玩具、玩偶、模型類",
+    "文具類",
+    "食品類",
+    "寢具、家具、生活雜貨類",
+    "衣服、飾品類",
+)
+_POKE_TW_GOODS_NOISE = (
+    "LINE貼圖",
+    "LINE主題",
+    "Pokémon UNITE",
+    "寶可夢集換式卡牌",
+    "Trading Card Game",
+    "卡牌",
+)
+_POKE_TW_STORE_TEXT = "Pokémon Center TAIPEI"
+_POKE_TW_DATE = re.compile(r"(\d{2})\.(\d{2})\.(20\d{2})$")
+_POKE_TW_ENTRY = re.compile(
+    rf"(.+?)\s+({'|'.join(map(re.escape, _POKE_TW_ALLOWED_CATEGORIES + ('其他',)))})\s+"
+    r"(\d{2})\.(\d{2})\.(20\d{2})$"
+)
+_POKE_TW_STORE_DATE = re.compile(
+    r"(?:即將)?於\s*(\d{1,2})月(\d{1,2})日[^。！？]{0,90}?"
+    r"(?:在)?\s*Pokémon Center TAIPEI[^。！？]{0,30}?(?:登場|販售)"
+)
+
+
+def _dedupe_repeated_title(title: str) -> str:
+    title = re.sub(r"\s+", " ", title or "").strip()
+    if len(title) % 2 == 0:
+        half = len(title) // 2
+        if title[:half].strip() == title[half:].strip():
+            return title[:half].strip()
+    return title
+
+
+def _tw_goods_entries(max_pages: int = 2) -> list[dict]:
+    out, seen = [], set()
+    for page in range(1, max_pages + 1):
+        h = fetch_html(_POKE_TW_GOODS.format(page=page))
+        if not h:
+            break
+        for m in _POKE_TW_GOODS_LINK.finditer(h):
+            url = urljoin(_POKE_TW_BASE, m.group(1))
+            if url in seen:
+                continue
+            seen.add(url)
+            text = _plain_text(m.group(2))
+            mm = _POKE_TW_ENTRY.search(text)
+            if not mm:
+                continue
+            raw_title, category, mo, day, year = mm.groups()
+            out.append({
+                "url": url,
+                "title": _dedupe_repeated_title(raw_title),
+                "category": category,
+                "published": f"{year}-{mo}-{day}",
+            })
+    return out
+
+
+def _tw_store_sale_date(text: str, published: str) -> str:
+    pub_year = int(published[:4])
+    pub_month = int(published[5:7])
+    for m in _POKE_TW_STORE_DATE.finditer(text):
+        month, day = int(m.group(1)), int(m.group(2))
+        year = pub_year + 1 if pub_month >= 11 and month < pub_month else pub_year
+        return f"{year:04d}-{month:02d}-{day:02d}"
+    return ""
+
+
+def fetch_pokemon_tw_goods(correct_city=None, max_pages: int = 2, fresh_days: int = 75) -> list[dict]:
+    """Parse Taiwan Pokémon official goods pages for physical Pokémon Center TAIPEI launches.
+
+    The portal includes LINE stickers/themes, games, TCG and licensed online-only goods,
+    so this source only accepts pages whose detail text explicitly says the product
+    appears/sells at Pokémon Center TAIPEI.
+    """
+    today = _today_iso()
+    out: list[dict] = []
+    for entry in _tw_goods_entries(max_pages=max_pages):
+        title = entry["title"]
+        category = entry["category"]
+        if category not in _POKE_TW_ALLOWED_CATEGORIES:
+            continue
+        if any(noise.lower() in title.lower() for noise in _POKE_TW_GOODS_NOISE):
+            continue
+        h = fetch_html(entry["url"])
+        if not h:
+            continue
+        text = _visible_text(h)
+        if any(noise.lower() in text.lower() for noise in _POKE_TW_GOODS_NOISE):
+            continue
+        if _POKE_TW_STORE_TEXT not in text:
+            continue
+        start = _tw_store_sale_date(text, entry["published"])
+        if not start:
+            continue
+        age = (date.fromisoformat(today) - date.fromisoformat(start)).days
+        if age > fresh_days:
+            continue
+        city = correct_city("台北", _POKE_TW_STORE_TEXT) if correct_city else "Taipei"
+        out.append({
+            "brand": "pokemon",
+            "title": f"台灣寶可夢中心 {title}",
+            "type": "new_product",
+            "country": "TW",
+            "city": city or "Taipei",
+            "locationName": _POKE_TW_STORE_TEXT,
+            "startDate": start,
+            "endDate": "",
+            "summaryZh": f"台灣寶可夢官方公告「{title}」於{start}起在Pokémon Center TAIPEI登場／販售。",
+            "needReservation": False,
+            "hasLimitedGoods": True,
+            "tags": ["寶可夢", "新品", "台灣", "官方"],
+            "id": _stable_id("po", entry["url"]),
+            "sourceType": "official_site",
+            "createdAt": today,
+            "sourceTitle": f"{title} - 台灣寶可夢官方網站",
+            "sourceUrl": entry["url"],
+        })
+        time.sleep(0.4)
     return out
 
 
