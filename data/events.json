@@ -168,30 +168,6 @@
     "sourceUrl": "https://www.nownews.com/news/6842060"
   },
   {
-    "brand": "pokemon",
-    "title": "寶可夢亞洲慶典 台北場",
-    "type": "campaign",
-    "country": "TW",
-    "city": "Taipei",
-    "locationName": "",
-    "startDate": "2026-10-10",
-    "endDate": "2026-10-11",
-    "summaryZh": "寶可夢亞洲慶典確定在台北舉辦，邀請玩家一同見證30週年。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "寶可夢",
-      "亞洲慶典",
-      "台北",
-      "30週年"
-    ],
-    "id": "po-41bd63",
-    "sourceTitle": "寶可夢亞洲慶典「台北確定有」　撞期國慶邀玩家見證30週年 - ETtoday遊戲雲",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-03",
-    "sourceUrl": "https://game.ettoday.net/article/3177012.htm"
-  },
-  {
     "brand": "chiikawa",
     "title": "Chiikawa 沖繩主題餐廳",
     "type": "cafe",
@@ -214,30 +190,6 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-03",
     "sourceUrl": "https://news.yahoo.co.jp/articles/7e7c78da968f8940a31c6c76081c593b66d8cf8d"
-  },
-  {
-    "brand": "miffy",
-    "title": "STEAMCREAM 米飛限定設計罐",
-    "type": "new_product",
-    "country": "JP",
-    "city": "",
-    "locationName": "",
-    "startDate": "2026-06-03",
-    "endDate": "",
-    "summaryZh": "STEAMCREAM推出米飛限定設計罐新商品，詳細販售資訊待公布。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛",
-      "限定設計罐",
-      "新商品",
-      "STEAMCREAM"
-    ],
-    "id": "mi-19be6b",
-    "sourceTitle": "STEAMCREAMから、「ミッフィー」限定デザイン缶の新作が登場！",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-03",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000252.000011903.html"
   },
   {
     "brand": "chiikawa",
@@ -573,29 +525,6 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-05",
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000397.000001117.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 くりまんじゅう 炙燒鯖魚零食",
-    "type": "new_product",
-    "country": "JP",
-    "city": "",
-    "locationName": "",
-    "startDate": "2026-06-08",
-    "endDate": "",
-    "summaryZh": "吉伊卡哇（Chiikawa）推出くりまんじゅう（Kurimanju）口味的「炙燒鯖魚」零食，並附贈 ૧૦ 款隨機的零食包裝風格貼紙，預計於 6 月 8 日發售。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "零食",
-      "新品",
-      "貼紙"
-    ],
-    "id": "ch-c78421",
-    "sourceTitle": "「ちいかわ」くりまんじゅうの”炙りしめ鯖”スナックが6月8日発売！おつまみ風ステッカーは実際ありそうな商品デザイン全10種 - インサイド",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-05",
-    "sourceUrl": "https://www.inside-games.jp/article/2026/06/05/182448.html"
   },
   {
     "brand": "chiikawa",
@@ -1166,27 +1095,5 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-06",
     "sourceUrl": "https://collabo-cafe.com/events/collabo/chiikawa-obakenomori-odaiba2026/"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇新商品發售",
-    "type": "new_product",
-    "country": "JP",
-    "city": "",
-    "locationName": "",
-    "startDate": "2026-06-05",
-    "endDate": "",
-    "summaryZh": "吉伊卡哇（Chiikawa）將於6月5日發售包含刺繡貼片、計算機等新周邊商品，可與大圖T恤搭配。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "新商品",
-      "周邊商品"
-    ],
-    "id": "ch-d548cd",
-    "sourceTitle": "「ちいかわ」ビックプリントTシャツと合わせてトータルコーデ！アニメのししゅうワッペンや電卓など、新商品含むグッズが6月5日11時より発売 - インサイド",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-06",
-    "sourceUrl": "https://www.inside-games.jp/article/2026/06/04/182423.html"
   }
 ]
