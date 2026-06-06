@@ -22,6 +22,7 @@ if hasattr(sys.stdout, "reconfigure"):
 
 import scrape
 import official_sources
+import agent_verify_candidates
 
 _passed = 0
 _failed = 0
@@ -98,10 +99,27 @@ check("晴空塔子網域→可信",
       scrape.is_trusted_date_source("https://event.tokyo-skytree.jp/news/abc"), True)
 check("Kiddy Land→可信",
       scrape.is_trusted_date_source("https://www.kiddyland.co.jp/event/miffystyle_birthday2026/"), True)
+check("Collabo Cafe→可信",
+      scrape.is_trusted_date_source("https://collabo-cafe.com/events/collabo/chiikawa-obakenomori-odaiba2026/"), True)
 check("台灣寶可夢官方→可信",
       scrape.is_trusted_date_source("https://tw.portal-pokemon.com/goods/post-5343/"), True)
 check("網址參數提到 prtimes.jp→不誤信",
       scrape.is_trusted_date_source("https://example.com/read?src=prtimes.jp"), False)
+
+# ── agent_verify_candidates ─────────────────────────────────────────────────
+print("\n[agent_verify_candidates] 每日驗證候選")
+check("結構化官方活動缺 endDate→仍進候選",
+      "structured_activity_missing_endDate" in agent_verify_candidates.verification_reasons(
+          ev(type="campaign", sourceType="official_site",
+             sourceUrl="https://www.kiddyland.co.jp/event/miffystyle_birthday2026/",
+             startDate="2026-06-06", endDate="")),
+      True)
+check("結構化官方活動日期完整→略過",
+      agent_verify_candidates.verification_reasons(
+          ev(type="campaign", sourceType="official_site",
+             sourceUrl="https://www.kiddyland.co.jp/event/miffystyle_birthday2026/",
+             startDate="2026-06-06", endDate="2026-06-30")),
+      [])
 
 # ── extract_dates ─────────────────────────────────────────────────────────────
 print("\n[extract_dates] 日期區間擷取")

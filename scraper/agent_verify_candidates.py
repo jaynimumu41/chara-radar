@@ -56,6 +56,7 @@ BRAND_JA = {
 REASON_WEIGHTS = {
     "missing_dates": 6,
     "missing_endDate": 4,
+    "structured_activity_missing_endDate": 4,
     "campaign_type": 3,
     "generic_title": 2,
     "missing_location": 2,
@@ -85,12 +86,21 @@ def is_structured_official(ev: dict) -> bool:
     )
 
 
+def structured_activity_missing_end_date(ev: dict) -> bool:
+    return (
+        is_structured_official(ev)
+        and ev.get("type") in scrape.ACTIVITY_TYPES
+        and bool(ev.get("startDate"))
+        and not ev.get("endDate")
+    )
+
+
 def is_generic_title(title: str) -> bool:
     return any(kw in (title or "") for kw in GENERIC_TITLE_KEYWORDS)
 
 
 def verification_reasons(ev: dict) -> list[str]:
-    if is_structured_official(ev):
+    if is_structured_official(ev) and not structured_activity_missing_end_date(ev):
         return []
 
     reasons: list[str] = []
@@ -98,6 +108,8 @@ def verification_reasons(ev: dict) -> list[str]:
         reasons.append("missing_dates")
     if not ev.get("endDate"):
         reasons.append("missing_endDate")
+    if structured_activity_missing_end_date(ev):
+        reasons.append("structured_activity_missing_endDate")
     if not scrape.is_trusted_date_source(ev.get("sourceUrl", "")):
         source_domain = domain_of(ev.get("sourceUrl", "")) or "no_url"
         reasons.append(f"untrusted_date_domain:{source_domain}")
@@ -179,7 +191,8 @@ def print_markdown(candidates: list[dict], total_events: int, limit: int) -> Non
     print()
     print(f"- Total events: {total_events}")
     print(f"- Candidates: {len(candidates)}")
-    print("- Skip rule: structured official_site records from chiikawa-info.jp, oneheart65.net, tw.portal-pokemon.com, dickbruna.jp, and kiddyland.co.jp")
+    print("- Skip rule: complete structured official_site records from chiikawa-info.jp, oneheart65.net, tw.portal-pokemon.com, dickbruna.jp, and kiddyland.co.jp")
+    print("- Exception: activity-like structured official records with a startDate but no endDate stay in the queue for period verification")
     print()
     print("| Risk | Brand | Type | Title | Location | Dates | Source | Reasons | Search query |")
     print("| --: | -- | -- | -- | -- | -- | -- | -- | -- |")

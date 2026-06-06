@@ -212,7 +212,7 @@ TRUSTED_DATE_DOMAINS = [
     "matsuzakaya.co.jp", "sogo-seibu.jp", "lumine.ne.jp",
     "0101.co.jp", "tobu-dept.jp", "keionet.com", "odakyu-dept.co.jp",
     "hep-five.com", "grandfront-osaka.jp", "huistenbosch.co.jp",
-    "leafkyoto.net", "store.tsite.jp",
+    "leafkyoto.net", "store.tsite.jp", "collabo-cafe.com",
 ]
 
 def is_trusted_date_source(url: str) -> bool:

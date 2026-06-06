@@ -22,7 +22,7 @@
 - **線上**：https://jaynimumu41.github.io/chara-radar/ （GitHub Pages，手機可看）
 - **Repo**：`jaynimumu41/chara-radar`（**公開**，main 為 Pages 來源）
 - **本機路徑**：`C:\Users\USER\Documents\claude\chara-radar`
-- **目前狀態**：Sanrio 暫停後 `data/events.json` 共 41 筆。
+- **目前狀態**：Sanrio 暫停後 `data/events.json` 共 44 筆。
 
 ---
 
@@ -84,7 +84,8 @@
 - 來源網域**不在**可信清單 `TRUSTED_DATE_DOMAINS`（見 `scrape.py`；日期沒被程式驗證過）。
 - `type == "campaign"`（最容易混入展覽／見面會）。
 - 標題籠統（含「新商品登場」「新作グッズ」「續々」「大集合」等無檔期訊號）。
-- 結構化來源（`sourceType=="official_site"` 且來源是 chiikawa-info/oneheart65/tw.portal-pokemon/dickbruna/kiddyland）→ **可信，略過**。
+- 結構化來源（`sourceType=="official_site"` 且來源是 chiikawa-info/oneheart65/tw.portal-pokemon/dickbruna/kiddyland）若日期完整 → **可信，略過**。
+- 例外：`popup` / `cafe` / `campaign` 若有 `startDate` 但沒有 `endDate`，即使是結構化官方來源，也要進驗證隊列查是否其實有明確期間。
 
 ### 5.2 對每一筆，用 WebSearch + WebFetch 多方查證
 1. **搜尋**：用「場館名 + 活動名 + 品牌日文名」當 query（品牌日文：ポケモン／ミッフィー／ちいかわ）。撈 2–3 個來源。
