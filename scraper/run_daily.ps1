@@ -5,11 +5,18 @@ $ErrorActionPreference = "Continue"
 $dir = "C:\Users\USER\Documents\claude\chara-radar\scraper"
 $py  = "C:\Users\USER\AppData\Local\Python\pythoncore-3.14-64\python.exe"
 
+$utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+[Console]::InputEncoding = $utf8NoBom
+[Console]::OutputEncoding = $utf8NoBom
+$OutputEncoding = $utf8NoBom
+& "$env:SystemRoot\System32\chcp.com" 65001 > $null
+
 $logDir = Join-Path $dir "logs"
 if (-not (Test-Path $logDir)) { New-Item -ItemType Directory -Path $logDir | Out-Null }
 $log = Join-Path $logDir ("scrape-" + (Get-Date -Format "yyyy-MM-dd") + ".log")
 
 $env:PYTHONIOENCODING = "utf-8"
+$env:PYTHONUTF8 = "1"
 Set-Location $dir
 
 "" | Out-File -FilePath $log -Append -Encoding utf8

@@ -85,6 +85,8 @@ print("\n[is_noise] 藥妝/超商過濾")
 check("スギ薬局聯名→雜訊",
       scrape.is_noise("【クロミ×plus eau】スギ薬局限定で新登場！"), True)
 check("マツキヨ→雜訊", scrape.is_noise("サンリオ×マツキヨ コラボグッズ"), True)
+check("一番賞廣泛通路→雜訊",
+      scrape.is_noise("一番くじ Pokemon 30th ANNIVERSARY vol.1"), True)
 check("正當快閃→不誤殺",
       scrape.is_noise("吉伊卡哇 POP UP STORE キャナルシティオーパ"), False)
 

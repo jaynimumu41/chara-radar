@@ -385,30 +385,6 @@
   },
   {
     "brand": "pokemon",
-    "title": "一番くじ Pokemon 30th ANNIVERSARY vol.1",
-    "type": "lottery",
-    "country": "JP",
-    "city": "",
-    "locationName": "書店・ホビーショップ・一番くじ公式ショップ・ポケモンセンターなど",
-    "startDate": "2026-05-30",
-    "endDate": "",
-    "summaryZh": "寶可夢30週年一番賞「Pokemon 30th ANNIVERSARY vol.1」將於5月30日發售，為限定商品抽獎活動。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "一番くじ",
-      "30週年",
-      "限定商品",
-      "抽獎"
-    ],
-    "id": "po-291665",
-    "sourceTitle": "【ポケモン30周年】「一番くじ Pokemon 30th ANNIVERSARY vol.1」は5月30日発売 - GAME Watch",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-04",
-    "sourceUrl": "https://game.watch.impress.co.jp/docs/news/2110908.html"
-  },
-  {
-    "brand": "pokemon",
     "title": "Pokemon Center 出張所 in イオンモール神戸北",
     "type": "popup",
     "country": "JP",
@@ -478,29 +454,6 @@
     "createdAt": "2026-06-06",
     "sourceTitle": "ポケモンセンター出張所inイオンモール羽生（2026-06-19～2026-08-22）",
     "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
-  },
-  {
-    "brand": "pokemon",
-    "title": "Pokémon accessory 系列新品發售",
-    "type": "new_product",
-    "country": "JP",
-    "city": "",
-    "locationName": "ポケモンセンター各店",
-    "startDate": "2026-05-16",
-    "endDate": "",
-    "summaryZh": "寶可夢化身為飾品！『Pokémon accessory』系列於5月16日起在日本寶可夢中心店頭販售，包含多款耳環、髮飾與戒指等新品。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "飾品",
-      "寶可夢",
-      "新品"
-    ],
-    "id": "po-5e90f8",
-    "sourceTitle": "ポケモンたちがアクセサリーになった『Pokémon accessory』シリーズが5/14から発売。ミカルゲのイヤリングには“かなめいし”もちゃんとついている - ファミ通",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-05",
-    "sourceUrl": "https://www.famitsu.com/article/202605/74739"
   },
   {
     "brand": "chiikawa",
