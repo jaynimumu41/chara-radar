@@ -145,30 +145,6 @@
   },
   {
     "brand": "chiikawa",
-    "title": "Chiikawa 討伐フェア 福岡PARCO",
-    "type": "campaign",
-    "country": "JP",
-    "city": "Fukuoka",
-    "locationName": "福岡PARCO",
-    "startDate": "2026-05-14",
-    "endDate": "2026-06-07",
-    "summaryZh": "Chiikawa 討伐フェア於福岡PARCO登場，推出使用博多甘王草莓的福岡限定奶油蘇打。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "Chiikawa",
-      "福岡",
-      "期間限定",
-      "PARCO"
-    ],
-    "id": "ch-0cfe71",
-    "sourceUrl": "https://news.yahoo.co.jp/articles/13620aa3d5209f4e618d8f4f3430f3f0b9d6f6eb",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-02",
-    "sourceTitle": "ちいかわレストラン“討伐フェア”が福岡PARCOで開催 ドリンクスタンドとグッズショップ同時展開（リアルサウンド） - Yahoo!ニュース"
-  },
-  {
-    "brand": "chiikawa",
     "title": "吉伊卡哇 CHIIKAWA DAYS 台北特展",
     "type": "popup",
     "country": "TW",
@@ -240,30 +216,6 @@
     "sourceUrl": "https://www.iamcreative.com.tw/pages/pop-up-store"
   },
   {
-    "brand": "pokemon",
-    "title": "ポケピース POP UP STORE 埼玉",
-    "type": "popup",
-    "country": "JP",
-    "city": "Saitama",
-    "locationName": "イオンレイクタウン kaze",
-    "startDate": "2026-05-15",
-    "endDate": "2026-06-07",
-    "summaryZh": "寶可夢療癒系品牌「ポケピース」POP UP STORE by VILLAGE VANGUARD 於埼玉 永旺夢樂城 kaze 登場，販售會場限定先行商品與多款周邊。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "ポケピース",
-      "快閃店",
-      "埼玉"
-    ],
-    "id": "po-pk5a15",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-03",
-    "sourceTitle": "ポケピース POP UP STORE by VILLAGE VANGUARD - ベストカレンダー/ヴィレッジヴァンガード",
-    "sourceUrl": "https://www.village-v.co.jp/popup/016402/"
-  },
-  {
     "brand": "miffy",
     "title": "Miffy 70週年紀念最終章",
     "type": "popup",
@@ -307,7 +259,7 @@
     ],
     "id": "po-2a73c0",
     "sourceType": "official_social",
-    "createdAt": "2026-06-07",
+    "createdAt": "2026-06-08",
     "sourceTitle": "ポケモンセンター出張所inイオンモール神戸北（2026-06-05～2026-07-22）",
     "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
   },
@@ -331,7 +283,7 @@
     ],
     "id": "po-8e9be8",
     "sourceType": "official_social",
-    "createdAt": "2026-06-07",
+    "createdAt": "2026-06-08",
     "sourceTitle": "ポケモンセンター出張所inイオンモール今治新都市（2026-06-12～2026-08-31）",
     "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
   },
@@ -355,7 +307,7 @@
     ],
     "id": "po-28053f",
     "sourceType": "official_social",
-    "createdAt": "2026-06-07",
+    "createdAt": "2026-06-08",
     "sourceTitle": "ポケモンセンター出張所inイオンモール羽生（2026-06-19～2026-08-22）",
     "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
   },
@@ -427,7 +379,7 @@
     ],
     "id": "ch-7ae222",
     "sourceType": "official_site",
-    "createdAt": "2026-06-07",
+    "createdAt": "2026-06-08",
     "sourceTitle": "ちいかわPOP UP STORE パルクアベニュー・カワトク(2026-07-31～2026-08-17) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_pakt/index.html"
   },
@@ -451,7 +403,7 @@
     ],
     "id": "ch-6a6567",
     "sourceType": "official_site",
-    "createdAt": "2026-06-07",
+    "createdAt": "2026-06-08",
     "sourceTitle": "ちいかわPOP UP STORE 近鉄百貨店和歌山店(2026-06-26～2026-07-14) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_ktwk/index.html"
   },
@@ -475,7 +427,7 @@
     ],
     "id": "ch-5a2b60",
     "sourceType": "official_site",
-    "createdAt": "2026-06-07",
+    "createdAt": "2026-06-08",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール常滑(2026-06-12～2026-06-29) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_atkn/index.html"
   },
@@ -499,7 +451,7 @@
     ],
     "id": "ch-8954a0",
     "sourceType": "official_site",
-    "createdAt": "2026-06-07",
+    "createdAt": "2026-06-08",
     "sourceTitle": "ちいかわPOP UP STORE あべのキューズモール(2026-06-19～2026-06-28) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_abnq/index.html"
   },
@@ -523,7 +475,7 @@
     ],
     "id": "ch-25bbac",
     "sourceType": "official_site",
-    "createdAt": "2026-06-07",
+    "createdAt": "2026-06-08",
     "sourceTitle": "ちいかわPOP UP STORE 遠鉄百貨店(2026-06-16～2026-06-29) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_enth/index.html"
   },
@@ -547,7 +499,7 @@
     ],
     "id": "ch-66adb9",
     "sourceType": "official_site",
-    "createdAt": "2026-06-07",
+    "createdAt": "2026-06-08",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール名取(2026-06-12～2026-06-29) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_antr/index.html"
   },
@@ -571,7 +523,7 @@
     ],
     "id": "ch-06ef22",
     "sourceType": "official_site",
-    "createdAt": "2026-06-07",
+    "createdAt": "2026-06-08",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール富士宮(2026-06-05～2026-06-22) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_afjm/index.html"
   },
@@ -595,7 +547,7 @@
     ],
     "id": "ch-d9aab8",
     "sourceType": "official_site",
-    "createdAt": "2026-06-07",
+    "createdAt": "2026-06-08",
     "sourceTitle": "ちいかわPOP UP STORE おのだサンパーク(2026-06-05～2026-06-22) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_onsp/index.html"
   },
@@ -619,7 +571,7 @@
     ],
     "id": "ch-92d69c",
     "sourceType": "official_site",
-    "createdAt": "2026-06-07",
+    "createdAt": "2026-06-08",
     "sourceTitle": "ちいかわPOP UP STORE 0%OKINAWA(2026-06-05～2026-07-20) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_aonr/index.html"
   },
@@ -643,7 +595,7 @@
     ],
     "id": "ch-0713f9",
     "sourceType": "official_site",
-    "createdAt": "2026-06-07",
+    "createdAt": "2026-06-08",
     "sourceTitle": "ちいかわPOP UP STORE 新千歳空港(2026-06-03～2026-06-30) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_scts/index.html"
   },
@@ -667,7 +619,7 @@
     ],
     "id": "ch-575c53",
     "sourceType": "official_site",
-    "createdAt": "2026-06-07",
+    "createdAt": "2026-06-08",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール津南(2026-05-29～2026-06-14) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_atmn/index.html"
   },
@@ -691,7 +643,7 @@
     ],
     "id": "ch-8ce4a3",
     "sourceType": "official_site",
-    "createdAt": "2026-06-07",
+    "createdAt": "2026-06-08",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール伊丹(2026-05-29～2026-06-08) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_aitm/index.html"
   },
@@ -715,7 +667,7 @@
     ],
     "id": "ch-c221df",
     "sourceType": "official_site",
-    "createdAt": "2026-06-07",
+    "createdAt": "2026-06-08",
     "sourceTitle": "ちいかわPOP UP STORE ピオレ姫路(2026-05-27～2026-06-22) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_plhj/index.html"
   },
@@ -739,7 +691,7 @@
     ],
     "id": "ch-de73dd",
     "sourceType": "official_site",
-    "createdAt": "2026-06-07",
+    "createdAt": "2026-06-08",
     "sourceTitle": "ちいかわPOP UP STORE 高知 蔦屋書店(2026-05-27～2026-06-14) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_kcts/index.html"
   },
@@ -763,7 +715,7 @@
     ],
     "id": "ch-efe379",
     "sourceType": "official_site",
-    "createdAt": "2026-06-07",
+    "createdAt": "2026-06-08",
     "sourceTitle": "ちいかわPOP UP STORE キャナルシティオーパ(2026-05-16～2026-06-28) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_cnco/index.html"
   },
@@ -786,7 +738,7 @@
     ],
     "id": "mi-21f8c6",
     "sourceType": "official_site",
-    "createdAt": "2026-06-07",
+    "createdAt": "2026-06-08",
     "sourceTitle": "北海道・大丸 札幌店に「DICK BRUNA STAND BY MIIA」期間限定オープン - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202605/46167/"
   },
@@ -809,7 +761,7 @@
     ],
     "id": "mi-ba3130",
     "sourceType": "official_site",
-    "createdAt": "2026-06-07",
+    "createdAt": "2026-06-08",
     "sourceTitle": "ラフォーレ原宿に「DICK BRUNA STAND BY MIIA」期間限定オープン - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202605/46293/"
   },
@@ -832,7 +784,7 @@
     ],
     "id": "mi-ed43d0",
     "sourceType": "official_site",
-    "createdAt": "2026-06-07",
+    "createdAt": "2026-06-08",
     "sourceTitle": "ジェイアール京都伊勢丹で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202605/46117/"
   },
@@ -855,7 +807,7 @@
     ],
     "id": "mi-1b75b3",
     "sourceType": "official_site",
-    "createdAt": "2026-06-07",
+    "createdAt": "2026-06-08",
     "sourceTitle": "2026年6月6日(土)発売予定!miffy style先行発売 マスコットビーンズコレクション - キデイランド",
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_20260606/"
   },
@@ -878,8 +830,149 @@
     ],
     "id": "mi-ae2b20",
     "sourceType": "official_site",
-    "createdAt": "2026-06-07",
+    "createdAt": "2026-06-08",
     "sourceTitle": "2026年6月6日(土)miffy style原宿店にて受注開始予定!「TENSHODO x miffy」コラボ ナインチェウォッチ - キデイランド",
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_20260606_omokado/"
+  },
+  {
+    "brand": "pokemon",
+    "title": "台北寶可夢中心 Pokemon Pokopia 主題週邊",
+    "type": "new_product",
+    "country": "TW",
+    "city": "Taipei",
+    "locationName": "台北寶可夢中心",
+    "startDate": "2026-05-09",
+    "endDate": "",
+    "summaryZh": "台北寶可夢中心將於2026年5月9日推出慢活神作《Pokemon Pokopia》全新主題週邊商品，療癒登場。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢",
+      "主題週邊",
+      "台北",
+      "新品"
+    ],
+    "id": "po-30bf2c",
+    "sourceTitle": "【台北寶可夢中心】慢活神作《Pokemon Pokopia》全新主題週邊 2026年5月9日療癒登場！ - Pokemon Hubs",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-08",
+    "sourceUrl": "https://pokemonhubs.com/news/pokopia-pokemon-center-taipei-goods/"
+  },
+  {
+    "brand": "pokemon",
+    "title": "寶可夢中心5月新品開賣",
+    "type": "new_product",
+    "country": "TW",
+    "city": "",
+    "locationName": "寶可夢中心",
+    "startDate": "2026-05-01",
+    "endDate": "",
+    "summaryZh": "寶可夢中心將於5月1日開賣36款全新周邊商品，包含皮丘玩偶與尾立擺鐘等。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "新品",
+      "玩偶",
+      "擺鐘",
+      "周邊"
+    ],
+    "id": "po-facf30",
+    "sourceTitle": "寶可夢中心5月新品36款來了！超可愛皮丘玩偶、尾立擺鐘5/1開賣 - NOWnews今日新聞",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-08",
+    "sourceUrl": "https://www.nownews.com/news/6811629"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇 搖搖杯製作組",
+    "type": "new_product",
+    "country": "JP",
+    "city": "",
+    "locationName": "",
+    "startDate": "2026-06-29",
+    "endDate": "",
+    "summaryZh": "吉伊卡哇推出「搖搖杯製作組」，內含可愛的むちゃうマン設計杯子，共4種款式，預計6月29日發售。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "新品",
+      "周邊",
+      "日本"
+    ],
+    "id": "ch-495bcc",
+    "sourceTitle": "「ちいかわ」シェイク作成キットが6月29日発売！むちゃうマンたちデザインのかわいいカップ付き全4種 - インサイド",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-08",
+    "sourceUrl": "https://www.inside-games.jp/article/2026/06/08/182580.html"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇新商品發售",
+    "type": "new_product",
+    "country": "JP",
+    "city": "",
+    "locationName": "",
+    "startDate": "2026-06-05",
+    "endDate": "",
+    "summaryZh": "吉伊卡哇將於6月5日發售包含刺繡貼紙、計算機等新周邊商品，可與大圖T恤搭配。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "周邊商品",
+      "新發售",
+      "日本"
+    ],
+    "id": "ch-7960db",
+    "sourceTitle": "「ちいかわ」ビックプリントTシャツと合わせてトータルコーデ！アニメのししゅうワッペンや電卓など、新商品含むグッズが6月5日11時より発売（インサイド） - Yahoo!ニュース",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-08",
+    "sourceUrl": "https://news.yahoo.co.jp/articles/c0129c8ebfb156c30ca8a14c7fe108eb5fcd3c5d"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇快閃麵包店",
+    "type": "popup",
+    "country": "JP",
+    "city": "Osaka",
+    "locationName": "KITTE大阪",
+    "startDate": "2026-06-26",
+    "endDate": "",
+    "summaryZh": "吉伊卡哇主題麵包店於大阪梅田KITTE大阪開幕，販售限定周邊商品與麵包。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "快閃店",
+      "限定商品",
+      "大阪",
+      "麵包"
+    ],
+    "id": "ch-f5b311",
+    "sourceTitle": "大阪・梅田に“ちいかわのパン屋さん”誕生！ 6．26にKITTE大阪にオープン（クランクイン！） - Yahoo!ニュース",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-08",
+    "sourceUrl": "https://news.yahoo.co.jp/articles/9b89f94e4da5b52c9511a67168f676197a3671f5"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "Chiikawa くりまんじゅう 炙りしめ鯖零食",
+    "type": "new_product",
+    "country": "JP",
+    "city": "",
+    "locationName": "",
+    "startDate": "2026-06-08",
+    "endDate": "",
+    "summaryZh": "Chiikawa くりまんじゅう口味的「炙りしめ鯖」零食將於6月8日發售。另有10款仿真實感的零食包裝設計的貼紙。",
+    "needReservation": false,
+    "hasLimitedGoods": false,
+    "tags": [
+      "零食",
+      "新品發售",
+      "貼紙"
+    ],
+    "id": "ch-03e230",
+    "sourceTitle": "「ちいかわ」くりまんじゅうの”炙りしめ鯖”スナックが6月8日発売！おつまみ風ステッカーは実際ありそうな商品デザイン全10種 - Yahoo!ニュース",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-08",
+    "sourceUrl": "https://news.yahoo.co.jp/articles/bffef2a7f8d34ad23e02c78b1354afe7b8ba0a6e"
   }
 ]
