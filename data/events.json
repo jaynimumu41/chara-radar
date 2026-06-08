@@ -121,27 +121,27 @@
   },
   {
     "brand": "chiikawa",
-    "title": "Chiikawa 沖繩主題餐廳",
+    "title": "Chiikawa 沖繩餐廳 夏季限定「シーサーのかき氷」",
     "type": "cafe",
     "country": "JP",
     "city": "Okinawa",
     "locationName": "沖繩「ちいかわレストラン」",
     "startDate": "2026-06-06",
     "endDate": "2026-09-30",
-    "summaryZh": "沖繩限定的Chiikawa主題餐廳，推出期間限定的「シーサーのかき氷」，造型可愛，值得專程前往品嚐。",
+    "summaryZh": "沖繩 PARCO CITY 的「ちいかわレストラン」推出夏季限定菜單「シーサーのかき氷」，活動至 9 月 30 日。",
     "needReservation": false,
     "hasLimitedGoods": false,
     "tags": [
       "沖繩",
       "主題餐廳",
-      "期間限定",
+      "夏季限定",
       "Chiikawa"
     ],
     "id": "ch-d16fd8",
-    "sourceTitle": "沖縄「ちいかわレストラン」に“シーサーのかき氷”登場！ 浮き輪で浮かぶ様子を表現（クランクイン！） - Yahoo!ニュース",
-    "sourceType": "official_social",
+    "sourceTitle": "PARCO CITY - パルコシティ",
+    "sourceType": "official_site",
     "createdAt": "2026-06-03",
-    "sourceUrl": "https://news.yahoo.co.jp/articles/7e7c78da968f8940a31c6c76081c593b66d8cf8d"
+    "sourceUrl": "https://www.parcocity.jp/"
   },
   {
     "brand": "chiikawa",
@@ -186,10 +186,10 @@
       "限定周邊"
     ],
     "id": "ch-8e5b22",
-    "sourceType": "official_social",
+    "sourceType": "official_site",
     "createdAt": "2026-06-03",
-    "sourceTitle": "《吉伊卡哇袋著走》台北快閃店5/22開幕 人氣官方周邊商品陣容一次公開 - 4Gamers",
-    "sourceUrl": "https://www.4gamers.com.tw/news/detail/79119/chiikawa-pocket-pop-up-store-in-taipei-2026"
+    "sourceTitle": "ちいかわぽけっと POP UP STORE in TAIPEI(2026/5/22(金)～6/30(火))",
+    "sourceUrl": "https://chiikawa-info.jp/p26/chiikawa_pocket_taipei/index.html"
   },
   {
     "brand": "miffy",
@@ -863,8 +863,8 @@
     "title": "寶可夢中心5月新品開賣",
     "type": "new_product",
     "country": "TW",
-    "city": "",
-    "locationName": "寶可夢中心",
+    "city": "Taipei",
+    "locationName": "台北寶可夢中心",
     "startDate": "2026-05-01",
     "endDate": "",
     "summaryZh": "寶可夢中心將於5月1日開賣36款全新周邊商品，包含皮丘玩偶與尾立擺鐘等。",
@@ -884,95 +884,26 @@
   },
   {
     "brand": "chiikawa",
-    "title": "吉伊卡哇 搖搖杯製作組",
-    "type": "new_product",
-    "country": "JP",
-    "city": "",
-    "locationName": "",
-    "startDate": "2026-06-29",
-    "endDate": "",
-    "summaryZh": "吉伊卡哇推出「搖搖杯製作組」，內含可愛的むちゃうマン設計杯子，共4種款式，預計6月29日發售。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "新品",
-      "周邊",
-      "日本"
-    ],
-    "id": "ch-495bcc",
-    "sourceTitle": "「ちいかわ」シェイク作成キットが6月29日発売！むちゃうマンたちデザインのかわいいカップ付き全4種 - インサイド",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-08",
-    "sourceUrl": "https://www.inside-games.jp/article/2026/06/08/182580.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇新商品發售",
-    "type": "new_product",
-    "country": "JP",
-    "city": "",
-    "locationName": "",
-    "startDate": "2026-06-05",
-    "endDate": "",
-    "summaryZh": "吉伊卡哇將於6月5日發售包含刺繡貼紙、計算機等新周邊商品，可與大圖T恤搭配。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "周邊商品",
-      "新發售",
-      "日本"
-    ],
-    "id": "ch-7960db",
-    "sourceTitle": "「ちいかわ」ビックプリントTシャツと合わせてトータルコーデ！アニメのししゅうワッペンや電卓など、新商品含むグッズが6月5日11時より発売（インサイド） - Yahoo!ニュース",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-08",
-    "sourceUrl": "https://news.yahoo.co.jp/articles/c0129c8ebfb156c30ca8a14c7fe108eb5fcd3c5d"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇快閃麵包店",
-    "type": "popup",
+    "title": "吉伊卡哇麵包店 OSAKA 開幕",
+    "type": "store",
     "country": "JP",
     "city": "Osaka",
-    "locationName": "KITTE大阪",
+    "locationName": "ちいかわベーカリー OSAKA（KITTE大阪 3F）",
     "startDate": "2026-06-26",
     "endDate": "",
-    "summaryZh": "吉伊卡哇主題麵包店於大阪梅田KITTE大阪開幕，販售限定周邊商品與麵包。",
-    "needReservation": false,
+    "summaryZh": "「ちいかわベーカリー OSAKA」於 KITTE 大阪 3F 常設開幕，販售大阪限定麵包與周邊商品。",
+    "needReservation": true,
     "hasLimitedGoods": true,
     "tags": [
-      "快閃店",
+      "常設店",
       "限定商品",
       "大阪",
       "麵包"
     ],
     "id": "ch-f5b311",
-    "sourceTitle": "大阪・梅田に“ちいかわのパン屋さん”誕生！ 6．26にKITTE大阪にオープン（クランクイン！） - Yahoo!ニュース",
+    "sourceTitle": "“ちいかわのパン屋さん”が大阪・梅田にやってくる 2026年6月26日（金）「ちいかわベーカリー OSAKA」グランドオープン！！",
     "sourceType": "official_social",
     "createdAt": "2026-06-08",
-    "sourceUrl": "https://news.yahoo.co.jp/articles/9b89f94e4da5b52c9511a67168f676197a3671f5"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "Chiikawa くりまんじゅう 炙りしめ鯖零食",
-    "type": "new_product",
-    "country": "JP",
-    "city": "",
-    "locationName": "",
-    "startDate": "2026-06-08",
-    "endDate": "",
-    "summaryZh": "Chiikawa くりまんじゅう口味的「炙りしめ鯖」零食將於6月8日發售。另有10款仿真實感的零食包裝設計的貼紙。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "零食",
-      "新品發售",
-      "貼紙"
-    ],
-    "id": "ch-03e230",
-    "sourceTitle": "「ちいかわ」くりまんじゅうの”炙りしめ鯖”スナックが6月8日発売！おつまみ風ステッカーは実際ありそうな商品デザイン全10種 - Yahoo!ニュース",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-08",
-    "sourceUrl": "https://news.yahoo.co.jp/articles/bffef2a7f8d34ad23e02c78b1354afe7b8ba0a6e"
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000301.000086964.html"
   }
 ]
