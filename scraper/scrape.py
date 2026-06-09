@@ -204,7 +204,7 @@ TRUSTED_DATE_DOMAINS = [
     "pokemon.co.jp", "pokemon.com.tw", "tw.portal-pokemon.com",
     "sanrio.co.jp", "sanrio.com.tw",
     "chiikawa-info.jp", "chiikawa-market.com", "benelic.com", "kiddyland.co.jp",
-    "miffykitchenbakery.jp",
+    "dickbruna.jp", "miffykitchenbakery.jp",
     # 場館 / 百貨 / 商場 / Outlet（單一活動頁，日期通常只有該活動）
     "tokyo-skytree.jp", "sunshinecity.jp", "parco.jp", "lucua.jp", "aeonmall.com",
     "mitsui-shopping-park.com", "takashimaya.co.jp", "mistore.jp",

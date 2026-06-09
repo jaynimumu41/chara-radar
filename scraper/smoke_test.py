@@ -99,6 +99,8 @@ check("晴空塔子網域→可信",
       scrape.is_trusted_date_source("https://event.tokyo-skytree.jp/news/abc"), True)
 check("Kiddy Land→可信",
       scrape.is_trusted_date_source("https://www.kiddyland.co.jp/event/miffystyle_birthday2026/"), True)
+check("Dick Bruna 官方→可信",
+      scrape.is_trusted_date_source("https://dickbruna.jp/news/202605/46308/"), True)
 check("Collabo Cafe→可信",
       scrape.is_trusted_date_source("https://collabo-cafe.com/events/collabo/chiikawa-obakenomori-odaiba2026/"), True)
 check("台灣寶可夢官方→可信",

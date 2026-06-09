@@ -22,7 +22,7 @@
 - **線上**：https://jaynimumu41.github.io/chara-radar/ （GitHub Pages，手機可看）
 - **Repo**：`jaynimumu41/chara-radar`（**公開**，main 為 Pages 來源）
 - **本機路徑**：`C:\Users\USER\Documents\claude\chara-radar`
-- **目前狀態**：Sanrio 暫停後 `data/events.json` 共 44 筆。
+- **目前狀態**：Sanrio 暫停後 `data/events.json` 共 35 筆。
 
 ---
 
@@ -163,7 +163,7 @@ python smoke_test.py      # 目前 38 項，exit 0 = 全過
 - **金鑰**：`scraper/.env` 有 3 把 Gemini key（`GEMINI_API_KEY` / `_2` / `_3`）。**已 gitignore，repo 公開，絕不可 commit `.env`**。
 - Gemini 免費版每模型每天配額極低（~20 req/day/key），靠多 key 輪替；你的 agent 驗證**不該用 Gemini**，用你自己的搜尋/抓取能力。
 - `scraper/run_daily.ps1` **必須 ASCII-only**（PowerShell 5.1 編碼雷，非 ASCII 會 ParserError 靜默失敗）。
-- `git push` 的 stderr 進度訊息是正常雜訊，看末行 `old..new main -> main` 才是真結果。
+- `git push` 已改用 `--porcelain --no-progress` 降低 PowerShell 5.1 把正常 push 訊息寫成 `NativeCommandError` 的 log 雜訊；若仍看到 push 訊息，先看是否有 `old..new main -> main`。
 - git remote 內嵌 PAT 在本機 `.git/config`（非公開）。
 
 ---
@@ -226,3 +226,10 @@ automation 的職責不是再跑一次爬蟲，而是依第 5 節對高風險筆
 - 防脆弱：Kiddy Land 先直抓 HTML，失敗再走 `r.jina.ai` reader；即使 `dickbruna.jp` 抓取失敗，也會繼續跑 Kiddy Land。
 - 本次新增：Miffy `miffy style先行発売 マスコットビーンズコレクション`、`TENSHODO x miffy` ナインチェウォッチ、`miffy’s Birthday Fair2026`、`ミッフィーzakkaフェスタ 大丸札幌店`。
 - 前端排序：`js/app.js` 改為有 `endDate` 的活動仍按最快結束排序；沒有 `endDate` 的活動排在後段，並依 `startDate` 排序，避免 Pokémon 等開始日資料亂跳。
+
+## 15. 2026-06-09 Miffy 大阪フェルメール展誤刪修復
+
+- 問題：`mi-53a257`「米飛兔擔任《真珠の耳飾りの少女》展大使」在 2026-06-07 agent 驗證被移除，理由是被判成純展覽大使新聞。
+- 查證：Dick Bruna 官方頁 `https://dickbruna.jp/news/202605/46308/` 明確寫有展覽原創「真珠の耳飾りのミッフィー」玩偶與吊飾，符合「特展現場販售活動限定商品」。
+- 修正：恢復 `mi-53a257`，改標題為 `Miffy x《真珠の耳飾りの少女》展原創商品`，`hasLimitedGoods=true`，來源改為 Dick Bruna 官方頁。
+- 規則補強：`TRUSTED_DATE_DOMAINS` 加入 `dickbruna.jp`，`smoke_test.py` 加 Dick Bruna 官方可信日期來源測試。

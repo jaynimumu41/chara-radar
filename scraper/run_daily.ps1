@@ -44,7 +44,7 @@ $staged = & git -C $repo diff --cached --name-only
 if ($staged) {
   "DEPLOY: pushing to GitHub Pages ($($staged -join ', '))..." | Out-File -FilePath $log -Append -Encoding utf8
   & git -C $repo commit -m ("data update " + (Get-Date -Format 'yyyy-MM-dd HH:mm')) 2>&1 | Out-File -FilePath $log -Append -Encoding utf8
-  & git -C $repo push origin main 2>&1 | Out-File -FilePath $log -Append -Encoding utf8
+  & git -C $repo push --porcelain --no-progress origin main 2>&1 | Out-File -FilePath $log -Append -Encoding utf8
 } else {
   "DEPLOY: nothing changed, skip push." | Out-File -FilePath $log -Append -Encoding utf8
 }

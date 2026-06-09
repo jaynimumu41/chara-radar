@@ -25,6 +25,30 @@
   },
   {
     "brand": "miffy",
+    "title": "Miffy x《真珠の耳飾りの少女》展原創商品",
+    "type": "campaign",
+    "country": "JP",
+    "city": "Osaka",
+    "locationName": "大阪中之島美術館 5階展示室",
+    "startDate": "2026-08-21",
+    "endDate": "2026-09-27",
+    "summaryZh": "Miffy 擔任大阪中之島美術館「フェルメール《真珠の耳飾りの少女》展」大使，展覽現場將販售原創「真珠の耳飾りのミッフィー」玩偶與吊飾等限定商品。",
+    "needReservation": true,
+    "hasLimitedGoods": true,
+    "tags": [
+      "Miffy",
+      "真珠の耳飾りの少女",
+      "大阪中之島美術館",
+      "展覽限定商品"
+    ],
+    "id": "mi-53a257",
+    "sourceUrl": "https://dickbruna.jp/news/202605/46308/",
+    "sourceType": "official_site",
+    "createdAt": "2026-06-02",
+    "sourceTitle": "ミッフィーがフェルメール《真珠の耳飾りの少女》展のアンバサダーに - dickbruna.jp"
+  },
+  {
+    "brand": "miffy",
     "title": "米飛主題下午茶",
     "type": "cafe",
     "country": "JP",
