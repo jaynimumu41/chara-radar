@@ -202,6 +202,7 @@ TRUSTED_DATE_DOMAINS = [
     # 新聞稿 / 官方
     "prtimes.jp", "atpress.ne.jp", "dreamnews.jp",
     "pokemon.co.jp", "pokemon.com.tw", "tw.portal-pokemon.com",
+    "oneheart65.net",
     "sanrio.co.jp", "sanrio.com.tw",
     "chiikawa-info.jp", "chiikawa-market.com", "benelic.com", "kiddyland.co.jp",
     "dickbruna.jp", "miffykitchenbakery.jp",
@@ -898,6 +899,11 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
             ln_e, ln_k = ev.get("locationName", ""), k.get("locationName", "")
             if ln_e and ln_k and not same_venue and tsim(ln_e, ln_k) < 0.5:
                 continue
+            if (
+                (ev.get("type") in SELLING_TYPES or k.get("type") in SELLING_TYPES)
+                and (is_generic_dedup_location(ln_e) or is_generic_dedup_location(ln_k))
+            ):
+                continue
             same_city = ev.get("city") and ev.get("city") == k.get("city")
             # 日期區間一致性：兩筆都有開始日時，差距 >14 天 = 不同檔期，絕不合併
             # （即使標題完全相同，如同一場館的春檔 vs 秋檔巡迴）。差距 ≤3 天 = 區間一致。
@@ -1252,7 +1258,6 @@ def run(brands: list[str]):
             print(f"    → {item['title'][:55]}", end=" … ")
             try:
                 ev = extract_event(rotator, brand, item)
-                processed_cache.add(item["title"])  # 記錄已處理（不論結果）
             except RateLimitError:
                 print("⛔ 配額用盡")
                 print("\n⚠️  所有 key 的當日免費配額都用完，停止本次抓取（已抓到的會保留）。")
@@ -1262,15 +1267,19 @@ def run(brands: list[str]):
             time.sleep(4.5)  # 節流：免費版約 15 RPM，間隔 4.5s ≈ 13 RPM
 
             if ev is None:
+                processed_cache.add(item["title"])
                 print("略過")
                 continue
             if ev["sourceUrl"] in seen_urls:
+                processed_cache.add(item["title"])
                 print("重複")
                 continue
 
             events.append(ev)
             seen_ttls.add(item["title"])
             seen_urls.add(ev["sourceUrl"])
+            if "google.com/search" not in ev.get("sourceUrl", ""):
+                processed_cache.add(item["title"])
             new_count += 1
             new_for_brand += 1
             save_events(events)  # 即時存檔：中途中斷也不會丟失

@@ -22,7 +22,7 @@
 - **線上**：https://jaynimumu41.github.io/chara-radar/ （GitHub Pages，手機可看）
 - **Repo**：`jaynimumu41/chara-radar`（**公開**，main 為 Pages 來源）
 - **本機路徑**：`C:\Users\USER\Documents\claude\chara-radar`
-- **目前狀態**：Sanrio 暫停後 `data/events.json` 共 35 筆。
+- **目前狀態**：Sanrio 暫停後 `data/events.json` 共 39 筆（2026-06-10 修復後）。
 
 ---
 
@@ -50,7 +50,7 @@
 - 新增**藥妝雜訊**（`NOISE_KEYWORDS` 加 薬局/スギ薬局/マツキヨ/屈臣氏…）。
 - **修了過期漏洞**（`_is_past`）：無 endDate 的活動原本永遠清不掉→現在依類型＋起始日自動判過期：
   活動型(popup/cafe/campaign) 起始日>30天或完全無日期＝過期；商品型(new_product/lottery/reservation)>60天或無日期＝過期；常設 store 保留。
-- **離線測試** `scraper/smoke_test.py`：38 項全過，改規則前後必跑。
+- **離線測試** `scraper/smoke_test.py`：53 項全過，改規則前後必跑。
 - 今天用手動多方驗證移除 8 筆問題資料（過期殘留／重複／見面會型／藥妝／籠統新品）。
 
 ⚠️ **但這正是問題所在**：上述「手動多方驗證」是「我（agent）用 WebSearch/WebFetch 一筆筆查」做的，**沒有進到每日排程**。明天排程又會抓進新的無日期／過期／重複資料。**你的任務就是把它自動化。**
@@ -84,7 +84,7 @@
 - 來源網域**不在**可信清單 `TRUSTED_DATE_DOMAINS`（見 `scrape.py`；日期沒被程式驗證過）。
 - `type == "campaign"`（最容易混入展覽／見面會）。
 - 標題籠統（含「新商品登場」「新作グッズ」「續々」「大集合」等無檔期訊號）。
-- 結構化來源（`sourceType=="official_site"` 且來源是 chiikawa-info/oneheart65/tw.portal-pokemon/dickbruna/kiddyland）若日期完整 → **可信，略過**。
+- 結構化來源（chiikawa-info / oneheart65 / tw.portal-pokemon / dickbruna / kiddyland）若日期完整 → **可信，略過**。
 - 例外：`popup` / `cafe` / `campaign` 若有 `startDate` 但沒有 `endDate`，即使是結構化官方來源，也要進驗證隊列查是否其實有明確期間。
 
 ### 5.2 對每一筆，用 WebSearch + WebFetch 多方查證
@@ -148,7 +148,7 @@ X(twitter) 貼文用 snowflake ID 可推發文年。
 ```bash
 cd scraper
 set PYTHONIOENCODING=utf-8
-python smoke_test.py      # 目前 38 項，exit 0 = 全過
+python smoke_test.py      # 目前 53 項，exit 0 = 全過
 ```
 涵蓋：城市/場館/年份/彙整/日期擷取/過期判定/去重。
 **你新增任何規則，務必同步補一個正例＋一個「不可誤殺」反例。**
@@ -233,3 +233,30 @@ automation 的職責不是再跑一次爬蟲，而是依第 5 節對高風險筆
 - 查證：Dick Bruna 官方頁 `https://dickbruna.jp/news/202605/46308/` 明確寫有展覽原創「真珠の耳飾りのミッフィー」玩偶與吊飾，符合「特展現場販售活動限定商品」。
 - 修正：恢復 `mi-53a257`，改標題為 `Miffy x《真珠の耳飾りの少女》展原創商品`，`hasLimitedGoods=true`，來源改為 Dick Bruna 官方頁。
 - 規則補強：`TRUSTED_DATE_DOMAINS` 加入 `dickbruna.jp`，`smoke_test.py` 加 Dick Bruna 官方可信日期來源測試。
+
+## 16. 2026-06-10 Pokémon 台灣新品漏資料修復
+
+- 問題：2026-06-10 自動流程跑完後，Pokémon 只剩 4 筆；使用者回報「之前還有其他 Pokémon 情報，少了好幾筆」。
+- 查到原因：
+  - 16:05 Python 抓取有跑完，16:36 agent 驗證也有跑完，但 agent 對台灣 Pokémon Center 新品採「找不到官方商品頁就刪」過嚴。
+  - `scraper/scrape.py` 的 `processed.json` 快取曾把來源落到 Google 搜尋 placeholder 的標題也標記已處理，導致隔天不會重試。
+  - `dedup_events` 第二階段 fuzzy 去重會把同一泛用店名（例如台北寶可夢中心）的不同日期新品誤併。
+- 已恢復 5 筆台灣 Pokémon Center 新品：
+  - `po-7a20f0`：台灣寶可夢中心6月新品與初音未來聯名（NOWnews，2026-06-06 開賣）
+  - `po-4eaa69`：台北寶可夢中心 城都地區寶可夢大集結（NOWnews AMP，2026-05-23 開賣）
+  - `po-481cb8`：台北寶可夢中心 Pikachu's Sweet Delivery、婚禮系列新品（Pokemon Hubs，2026-05-16 開賣）
+  - `po-b32bd3`：寶可夢中心母親節新品開賣（NOWnews，2026-05-09 開賣）
+  - `po-e6f4e9`：台北寶可夢中心 勞動節新品（NOWnews，2026-05-01 開賣）
+- 已保留不恢復：
+  - Pokopia 5 月商品：官方 Pokopia 活動期與 5 月商品說法不一致，待確認。
+  - LoveChrome 聯名梳：官方為 EC / 授權通路，非明確 Pokémon Center 現場限定或門市新品。
+  - 卡牌、遊戲、LINE 貼圖／主題、Pokemon GO、廣泛通路一番賞或食玩：仍不收。
+- 規則修正：
+  - `official_sources.py`：台灣 Pokémon 官方商品頁改為解析 Next.js embedded data；目前官方商品頁可讀，但近期頁面未提供上述 5 筆 Pokémon Center TAIPEI 新品。
+  - `scrape.py`：若萃取結果的 `sourceUrl` 是 Google search placeholder，不再永久加入 `processed.json`；讓隔天可重試。
+  - `scrape.py`：`new_product` / `lottery` / `reservation` 且地點是泛用店名時，不走第二階段 fuzzy 合併，避免不同系列新品誤併。
+  - `rejected.json`：移除 `www.nownews.com/news/6811629`，避免已恢復資料再被黑名單擋掉。
+- 驗證結果：`smoke_test.py` 53 項全過、`data_lint.py` 0 error / 0 warning、`verify_links.py` 39/39 OK。
+- 之後 agent 判斷原則：
+  - 台灣 Pokémon Center 新品若來源不是官方，但內文明確寫 `Pokémon Center TAIPEI` / 台灣寶可夢中心、實體店開賣日與商品內容，且沒有官方來源或其他來源反證，可暫留並列入高風險候選，不要只因官方商品頁找不到就刪。
+  - 仍必須排除卡牌、遊戲、LINE、Pokemon GO、純線上、廣泛通路與非現場販售商品。

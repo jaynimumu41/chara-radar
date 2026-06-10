@@ -105,6 +105,8 @@ check("Collabo Cafe→可信",
       scrape.is_trusted_date_source("https://collabo-cafe.com/events/collabo/chiikawa-obakenomori-odaiba2026/"), True)
 check("台灣寶可夢官方→可信",
       scrape.is_trusted_date_source("https://tw.portal-pokemon.com/goods/post-5343/"), True)
+check("寶可夢出張所結構化排程→可信",
+      scrape.is_trusted_date_source("https://oneheart65.net/pokemoncenterbranch_schedule_2/"), True)
 check("網址參數提到 prtimes.jp→不誤信",
       scrape.is_trusted_date_source("https://example.com/read?src=prtimes.jp"), False)
 
@@ -122,6 +124,12 @@ check("結構化官方活動日期完整→略過",
              sourceUrl="https://www.kiddyland.co.jp/event/miffystyle_birthday2026/",
              startDate="2026-06-06", endDate="2026-06-30")),
       [])
+check("oneheart65 出張所日期完整→略過",
+      agent_verify_candidates.verification_reasons(
+          ev(brand="pokemon", type="popup", sourceType="official_social",
+             sourceUrl="https://oneheart65.net/pokemoncenterbranch_schedule_2/",
+             startDate="2026-06-05", endDate="2026-07-22")),
+      [])
 
 # ── extract_dates ─────────────────────────────────────────────────────────────
 print("\n[extract_dates] 日期區間擷取")
@@ -133,6 +141,20 @@ check("中文至/到（只結束日）",
 check("台灣寶可夢官方商品店頭發售日",
       official_sources._tw_store_sale_date("即將於3月14日(六)在Pokémon Center TAIPEI登場！", "2026-02-27"),
       "2026-03-14")
+sample_tw_next = (
+    r'\"item\":{\"postId\":5937,\"slug\":\"post-5937\",\"region\":\"TAIWAN\",'
+    r'\"model\":\"GOODS\",\"title\":\"克萊希寶可夢系列2026・全新上市\",'
+    r'\"startDateTime\":\"2026-06-05T04:00:00.000Z\",'
+    r'\"category\":{\"categoryName\":\"衣服、飾品類\"}}'
+)
+check("台灣寶可夢官方 Next.js 商品列表解析",
+      official_sources._tw_goods_entries_from_next_html(sample_tw_next),
+      [{
+          "url": "https://tw.portal-pokemon.com/goods/post-5937/",
+          "title": "克萊希寶可夢系列2026・全新上市",
+          "category": "衣服、飾品類",
+          "published": "2026-06-05",
+      }])
 
 # ── _is_past ──────────────────────────────────────────────────────────────────
 print("\n[_is_past] 過期判定（含無結束日補洞）")
@@ -229,6 +251,17 @@ out, _ = scrape.dedup_events([
        sourceUrl="https://b.example/wedding"),
 ])
 check("同城同日不同新品→不併（2筆）", len(out), 2)
+
+# 同城同泛用店名、日期不同的新品也不可被第二階段模糊去重併掉。
+out, _ = scrape.dedup_events([
+    ev(brand="pokemon", title="台北寶可夢中心 母親節新品", type="new_product",
+       city="Taipei", startDate="2026-05-09", locationName="台北寶可夢中心",
+       sourceUrl="https://a.example/mothers-day"),
+    ev(brand="pokemon", title="台北寶可夢中心 城都地區新品", type="new_product",
+       city="Taipei", startDate="2026-05-23", locationName="台北寶可夢中心",
+       sourceUrl="https://b.example/johto"),
+])
+check("同城泛用店名不同日期新品→不併（2筆）", len(out), 2)
 
 # 不破壞現況：實際線上 events.json 不應被誤併（筆數不變）
 try:

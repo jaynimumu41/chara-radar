@@ -11,6 +11,7 @@ link 已是真實 URL（非 Google News 加密網址），直接流進 scrape.ex
 """
 import re
 import time
+import json
 import html as html_lib
 from html.parser import HTMLParser
 from datetime import datetime, timezone, timedelta
@@ -255,6 +256,15 @@ def fetch_pokemon_popups(correct_city=None) -> list[dict]:
 _POKE_TW_GOODS = "https://tw.portal-pokemon.com/goods/?p={page}"
 _POKE_TW_BASE = "https://tw.portal-pokemon.com"
 _POKE_TW_GOODS_LINK = re.compile(r'href="(/goods/post-[^"]+/)"[^>]*>(.*?)</a>', re.S)
+_POKE_TW_NEXT_ITEM = re.compile(
+    r'\\"item\\":\{.*?'
+    r'\\"postId\\":(\d+).*?'
+    r'\\"slug\\":\\"(post-\d+)\\".*?'
+    r'\\"title\\":\\"(.*?)\\".*?'
+    r'\\"startDateTime\\":\\"(20\d\d-\d\d-\d\d).*?'
+    r'\\"category\\":\{.*?\\"categoryName\\":\\"([^"]+)\\"',
+    re.S,
+)
 _POKE_TW_ALLOWED_CATEGORIES = (
     "玩具、玩偶、模型類",
     "文具類",
@@ -291,12 +301,39 @@ def _dedupe_repeated_title(title: str) -> str:
     return title
 
 
+def _next_string(value: str) -> str:
+    try:
+        return json.loads(f'"{value}"')
+    except Exception:
+        return value.replace("\\t", " ").replace("\\n", " ").replace('\\"', '"')
+
+
+def _tw_goods_entries_from_next_html(h: str) -> list[dict]:
+    out, seen = [], set()
+    for post_id, slug, raw_title, published, category in _POKE_TW_NEXT_ITEM.findall(h):
+        if not slug.startswith("post-") or slug in seen:
+            continue
+        seen.add(slug)
+        out.append({
+            "url": urljoin(_POKE_TW_BASE, f"/goods/{slug}/"),
+            "title": _dedupe_repeated_title(_next_string(raw_title)),
+            "category": _next_string(category),
+            "published": published,
+        })
+    return out
+
+
 def _tw_goods_entries(max_pages: int = 2) -> list[dict]:
     out, seen = [], set()
     for page in range(1, max_pages + 1):
         h = fetch_html(_POKE_TW_GOODS.format(page=page))
         if not h:
             break
+        for entry in _tw_goods_entries_from_next_html(h):
+            if entry["url"] in seen:
+                continue
+            seen.add(entry["url"])
+            out.append(entry)
         for m in _POKE_TW_GOODS_LINK.finditer(h):
             url = urljoin(_POKE_TW_BASE, m.group(1))
             if url in seen:
@@ -326,7 +363,7 @@ def _tw_store_sale_date(text: str, published: str) -> str:
     return ""
 
 
-def fetch_pokemon_tw_goods(correct_city=None, max_pages: int = 2, fresh_days: int = 75) -> list[dict]:
+def fetch_pokemon_tw_goods(correct_city=None, max_pages: int = 5, fresh_days: int = 75) -> list[dict]:
     """Parse Taiwan Pokémon official goods pages for physical Pokémon Center TAIPEI launches.
 
     The portal includes LINE stickers/themes, games, TCG and licensed online-only goods,

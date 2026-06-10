@@ -80,10 +80,12 @@ def has_domain(url: str, domains: tuple[str, ...]) -> bool:
 
 
 def is_structured_official(ev: dict) -> bool:
-    return (
-        ev.get("sourceType") == "official_site"
-        and has_domain(ev.get("sourceUrl", ""), STRUCTURED_OFFICIAL_DOMAINS)
-    )
+    url = ev.get("sourceUrl", "")
+    if ev.get("sourceType") == "official_site" and has_domain(url, STRUCTURED_OFFICIAL_DOMAINS):
+        return True
+    # oneheart65 is a structured Pokemon Center branch schedule feed in this
+    # project, even though existing records keep the legacy official_social type.
+    return ev.get("brand") == "pokemon" and has_domain(url, ("oneheart65.net",))
 
 
 def structured_activity_missing_end_date(ev: dict) -> bool:
@@ -191,7 +193,7 @@ def print_markdown(candidates: list[dict], total_events: int, limit: int) -> Non
     print()
     print(f"- Total events: {total_events}")
     print(f"- Candidates: {len(candidates)}")
-    print("- Skip rule: complete structured official_site records from chiikawa-info.jp, oneheart65.net, tw.portal-pokemon.com, dickbruna.jp, and kiddyland.co.jp")
+    print("- Skip rule: complete structured-source records from chiikawa-info.jp, oneheart65.net, tw.portal-pokemon.com, dickbruna.jp, and kiddyland.co.jp")
     print("- Exception: activity-like structured official records with a startDate but no endDate stay in the queue for period verification")
     print()
     print("| Risk | Brand | Type | Title | Location | Dates | Source | Reasons | Search query |")
