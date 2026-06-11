@@ -283,7 +283,7 @@
     ],
     "id": "po-2a73c0",
     "sourceType": "official_social",
-    "createdAt": "2026-06-10",
+    "createdAt": "2026-06-11",
     "sourceTitle": "ポケモンセンター出張所inイオンモール神戸北（2026-06-05～2026-07-22）",
     "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
   },
@@ -307,7 +307,7 @@
     ],
     "id": "po-8e9be8",
     "sourceType": "official_social",
-    "createdAt": "2026-06-10",
+    "createdAt": "2026-06-11",
     "sourceTitle": "ポケモンセンター出張所inイオンモール今治新都市（2026-06-12～2026-08-31）",
     "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
   },
@@ -331,7 +331,7 @@
     ],
     "id": "po-28053f",
     "sourceType": "official_social",
-    "createdAt": "2026-06-10",
+    "createdAt": "2026-06-11",
     "sourceTitle": "ポケモンセンター出張所inイオンモール羽生（2026-06-19～2026-08-22）",
     "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
   },
@@ -523,7 +523,7 @@
     ],
     "id": "ch-7ae222",
     "sourceType": "official_site",
-    "createdAt": "2026-06-10",
+    "createdAt": "2026-06-11",
     "sourceTitle": "ちいかわPOP UP STORE パルクアベニュー・カワトク(2026-07-31～2026-08-17) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_pakt/index.html"
   },
@@ -547,9 +547,33 @@
     ],
     "id": "ch-6a6567",
     "sourceType": "official_site",
-    "createdAt": "2026-06-10",
+    "createdAt": "2026-06-11",
     "sourceTitle": "ちいかわPOP UP STORE 近鉄百貨店和歌山店(2026-06-26～2026-07-14) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_ktwk/index.html"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇 POP UP STORE グランデュオ立川",
+    "type": "popup",
+    "country": "JP",
+    "city": "Tokyo",
+    "locationName": "グランデュオ立川 4F イベントスペース",
+    "startDate": "2026-06-24",
+    "endDate": "2026-08-02",
+    "summaryZh": "ちいかわ POP UP STORE 於グランデュオ立川期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "吉伊卡哇",
+      "快閃店",
+      "日本",
+      "限定周邊"
+    ],
+    "id": "ch-6a10e3",
+    "sourceType": "official_site",
+    "createdAt": "2026-06-11",
+    "sourceTitle": "ちいかわPOP UP STORE グランデュオ立川(2026-06-24～2026-08-02) - ちいかわ公式",
+    "sourceUrl": "https://chiikawa-info.jp/p26/pus_grdo/index.html"
   },
   {
     "brand": "chiikawa",
@@ -571,7 +595,7 @@
     ],
     "id": "ch-5a2b60",
     "sourceType": "official_site",
-    "createdAt": "2026-06-10",
+    "createdAt": "2026-06-11",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール常滑(2026-06-12～2026-06-29) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_atkn/index.html"
   },
@@ -595,7 +619,7 @@
     ],
     "id": "ch-8954a0",
     "sourceType": "official_site",
-    "createdAt": "2026-06-10",
+    "createdAt": "2026-06-11",
     "sourceTitle": "ちいかわPOP UP STORE あべのキューズモール(2026-06-19～2026-06-28) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_abnq/index.html"
   },
@@ -619,7 +643,7 @@
     ],
     "id": "ch-25bbac",
     "sourceType": "official_site",
-    "createdAt": "2026-06-10",
+    "createdAt": "2026-06-11",
     "sourceTitle": "ちいかわPOP UP STORE 遠鉄百貨店(2026-06-16～2026-06-29) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_enth/index.html"
   },
@@ -643,7 +667,7 @@
     ],
     "id": "ch-66adb9",
     "sourceType": "official_site",
-    "createdAt": "2026-06-10",
+    "createdAt": "2026-06-11",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール名取(2026-06-12～2026-06-29) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_antr/index.html"
   },
@@ -667,7 +691,7 @@
     ],
     "id": "ch-06ef22",
     "sourceType": "official_site",
-    "createdAt": "2026-06-10",
+    "createdAt": "2026-06-11",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール富士宮(2026-06-05～2026-06-22) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_afjm/index.html"
   },
@@ -691,7 +715,7 @@
     ],
     "id": "ch-d9aab8",
     "sourceType": "official_site",
-    "createdAt": "2026-06-10",
+    "createdAt": "2026-06-11",
     "sourceTitle": "ちいかわPOP UP STORE おのだサンパーク(2026-06-05～2026-06-22) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_onsp/index.html"
   },
@@ -715,7 +739,7 @@
     ],
     "id": "ch-92d69c",
     "sourceType": "official_site",
-    "createdAt": "2026-06-10",
+    "createdAt": "2026-06-11",
     "sourceTitle": "ちいかわPOP UP STORE 0%OKINAWA(2026-06-05～2026-07-20) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_aonr/index.html"
   },
@@ -739,7 +763,7 @@
     ],
     "id": "ch-0713f9",
     "sourceType": "official_site",
-    "createdAt": "2026-06-10",
+    "createdAt": "2026-06-11",
     "sourceTitle": "ちいかわPOP UP STORE 新千歳空港(2026-06-03～2026-06-30) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_scts/index.html"
   },
@@ -763,7 +787,7 @@
     ],
     "id": "ch-575c53",
     "sourceType": "official_site",
-    "createdAt": "2026-06-10",
+    "createdAt": "2026-06-11",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール津南(2026-05-29～2026-06-14) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_atmn/index.html"
   },
@@ -787,7 +811,7 @@
     ],
     "id": "ch-c221df",
     "sourceType": "official_site",
-    "createdAt": "2026-06-10",
+    "createdAt": "2026-06-11",
     "sourceTitle": "ちいかわPOP UP STORE ピオレ姫路(2026-05-27～2026-06-22) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_plhj/index.html"
   },
@@ -811,7 +835,7 @@
     ],
     "id": "ch-de73dd",
     "sourceType": "official_site",
-    "createdAt": "2026-06-10",
+    "createdAt": "2026-06-11",
     "sourceTitle": "ちいかわPOP UP STORE 高知 蔦屋書店(2026-05-27～2026-06-14) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_kcts/index.html"
   },
@@ -835,7 +859,7 @@
     ],
     "id": "ch-efe379",
     "sourceType": "official_site",
-    "createdAt": "2026-06-10",
+    "createdAt": "2026-06-11",
     "sourceTitle": "ちいかわPOP UP STORE キャナルシティオーパ(2026-05-16～2026-06-28) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_cnco/index.html"
   },
@@ -858,7 +882,7 @@
     ],
     "id": "mi-ba3130",
     "sourceType": "official_site",
-    "createdAt": "2026-06-10",
+    "createdAt": "2026-06-11",
     "sourceTitle": "ラフォーレ原宿に「DICK BRUNA STAND BY MIIA」期間限定オープン - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202605/46293/"
   },
@@ -881,7 +905,7 @@
     ],
     "id": "mi-3b87f4",
     "sourceType": "official_site",
-    "createdAt": "2026-06-10",
+    "createdAt": "2026-06-11",
     "sourceTitle": "大丸札幌店で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202604/46016/"
   },
@@ -904,7 +928,7 @@
     ],
     "id": "mi-1b75b3",
     "sourceType": "official_site",
-    "createdAt": "2026-06-10",
+    "createdAt": "2026-06-11",
     "sourceTitle": "2026年6月6日(土)発売予定!miffy style先行発売 マスコットビーンズコレクション - キデイランド",
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_20260606/"
   },
@@ -927,8 +951,56 @@
     ],
     "id": "mi-ae2b20",
     "sourceType": "official_site",
-    "createdAt": "2026-06-10",
+    "createdAt": "2026-06-11",
     "sourceTitle": "2026年6月6日(土)miffy style原宿店にて受注開始予定!「TENSHODO x miffy」コラボ ナインチェウォッチ - キデイランド",
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_20260606_omokado/"
+  },
+  {
+    "brand": "pokemon",
+    "title": "台灣寶可夢中心夯品再到貨",
+    "type": "new_product",
+    "country": "TW",
+    "city": "Taipei",
+    "locationName": "台灣寶可夢中心",
+    "startDate": "2026-06-13",
+    "endDate": "",
+    "summaryZh": "台灣寶可夢中心補貨，包含「吃剩的東西」系列與皮卡丘包款於6月13日開賣。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢中心",
+      "新品販售",
+      "台灣",
+      "周邊商品"
+    ],
+    "id": "po-f6ddcc",
+    "sourceTitle": "台灣寶可夢中心超夯商品又到貨了！吃剩的東西、皮卡丘包6/13開賣 - NOWnews今日新聞",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-11",
+    "sourceUrl": "https://www.nownews.com/news/6844843"
+  },
+  {
+    "brand": "pokemon",
+    "title": "寶可夢中心5月底新品5款",
+    "type": "new_product",
+    "country": "TW",
+    "city": "Taipei",
+    "locationName": "寶可夢中心",
+    "startDate": "2026-05-30",
+    "endDate": "",
+    "summaryZh": "寶可夢中心將於5月30日發售5款全新周邊商品，包含超級進化雷丘的兩種型態。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢中心",
+      "新品",
+      "雷丘",
+      "周邊商品"
+    ],
+    "id": "po-450306",
+    "sourceTitle": "寶可夢中心5月底新品5款來了！超級進化雷丘「2型態」5/30開賣 - NOWnews今日新聞",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-11",
+    "sourceUrl": "https://www.nownews.com/news/6839787"
   }
 ]
