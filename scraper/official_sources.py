@@ -152,6 +152,8 @@ HEADERS_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
               "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
 
 _CHIIKAWA_PUS = "https://chiikawa-info.jp/pus.html"
+_CHIIKAWA_INFO_TOP = "https://chiikawa-info.jp/"
+_CHIIKAWA_MOGUMOGU_CASTELLA = "https://www.chiikawamogumogu.jp/stores/castella/"
 # 解析：### [ちいかわPOP UP STORE <會場>](https://chiikawa-info.jp/p26/.../index.html)  2026年6月5日(金)～6月22日(月)  <會場詳址>
 _PUS_ROW = re.compile(
     r"\[ちいかわPOP ?UP ?STORE\s*([^\]]+?)\]"
@@ -159,6 +161,12 @@ _PUS_ROW = re.compile(
     r"(20\d\d)年(\d{1,2})月(\d{1,2})日[^〜～]*?[〜～]\s*"
     r"(?:(20\d\d)年)?(\d{1,2})月(\d{1,2})日(?:\([^)]*\))?\s*"
     r"([^\n\[]{0,60})"     # 會場詳址（日期後那段，含縣市/樓層）
+)
+
+_CHIIKAWA_OTARU_CASTELLA = re.compile(
+    r"ちいかわベビーカステラ[\s\S]{0,600}?"
+    r"(20\d\d)年(\d{1,2})月(\d{1,2})日(?:\([^)]*\))?[〜～]\s*"
+    r"ちいかわもぐもぐ本舗\s*小樽店にオープン"
 )
 
 
@@ -202,6 +210,50 @@ def fetch_chiikawa_popups(correct_city=None) -> list[dict]:
             "sourceUrl": url,
         })
     return out
+
+
+def _chiikawa_otaru_castella_event(info_text: str, shop_text: str, correct_city=None) -> dict | None:
+    combined = "\n".join(t for t in (info_text, shop_text) if t)
+    m = _CHIIKAWA_OTARU_CASTELLA.search(combined)
+    if not m:
+        return None
+    if "小樽" not in combined or "ちいかわベビーカステラ" not in combined:
+        return None
+    if not any(k in combined for k in ("オリジナルグッズ", "グッズのご紹介", "GOODS")):
+        return None
+
+    sy, sm, sd = (int(x) for x in m.groups())
+    start = f"{sy:04d}-{sm:02d}-{sd:02d}"
+    address = "北海道小樽市堺町6-1" if ("堺町6-1" in combined) else "北海道・小樽"
+    city = correct_city(address, "小樽", "北海道") if correct_city else ""
+    need_reservation = ("事前予約" in combined) or ("入店予約" in combined)
+
+    return {
+        "brand": "chiikawa",
+        "title": "吉伊卡哇 小樽店 ちいかわベビーカステラ",
+        "type": "store", "country": "JP", "city": city or "",
+        "locationName": f"ちいかわベビーカステラ（{address}）",
+        "startDate": start, "endDate": "",
+        "summaryZh": "ちいかわもぐもぐ本舗的小樽店「ちいかわベビーカステラ」將開幕，販售店內現烤 Baby Castella、限定餐飲與原創周邊商品。",
+        "needReservation": need_reservation, "hasLimitedGoods": True,
+        "tags": ["吉伊卡哇", "小樽", "常設店", "限定餐飲", "限定周邊"],
+        "id": _stable_id("ch", _CHIIKAWA_MOGUMOGU_CASTELLA + start),
+        "sourceType": "official_site", "createdAt": _today_iso(),
+        "sourceTitle": "7月に北海道・小樽にオープン！テイクアウトショップ「ちいかわベビーカステラ」フードメニュー、グッズのご紹介 - ちいかわもぐもぐ本舗",
+        "sourceUrl": _CHIIKAWA_MOGUMOGU_CASTELLA,
+    }
+
+
+def fetch_chiikawa_mogumogu(correct_city=None) -> list[dict]:
+    """解析ちいかわインフォ首頁與もぐもぐ本舗店鋪頁，抓常設店／限定餐飲／原創周邊情報。"""
+    info_md = _proxy_markdown(_CHIIKAWA_INFO_TOP)
+    shop_md = _proxy_markdown(_CHIIKAWA_MOGUMOGU_CASTELLA)
+    if not info_md and not shop_md:
+        print("    ⚠️  吉伊卡哇もぐもぐ本舗頁抓取失敗（直連＋代理都不行）")
+        return []
+
+    event = _chiikawa_otaru_castella_event(info_md, shop_md, correct_city=correct_city)
+    return [event] if event else []
 
 
 _POKE_SCHED = "https://oneheart65.net/pokemoncenterbranch_schedule_2/"

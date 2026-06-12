@@ -31,6 +31,7 @@ import requests
 
 from verify_links import check_url, page_mentions  # 存檔前驗證來源連結：連得過去 + 內容與品牌相關
 from official_sources import (fetch_official, fetch_chiikawa_popups,
+                              fetch_chiikawa_mogumogu,
                               fetch_pokemon_popups, fetch_pokemon_tw_goods,
                               fetch_miffy_events)  # 官方來源：PR TIMES + 結構化排程頁
 
@@ -204,7 +205,7 @@ TRUSTED_DATE_DOMAINS = [
     "pokemon.co.jp", "pokemon.com.tw", "tw.portal-pokemon.com",
     "oneheart65.net",
     "sanrio.co.jp", "sanrio.com.tw",
-    "chiikawa-info.jp", "chiikawa-market.com", "benelic.com", "kiddyland.co.jp",
+    "chiikawa-info.jp", "chiikawa-market.com", "chiikawamogumogu.jp", "benelic.com", "kiddyland.co.jp",
     "dickbruna.jp", "miffykitchenbakery.jp",
     # 場館 / 百貨 / 商場 / Outlet（單一活動頁，日期通常只有該活動）
     "tokyo-skytree.jp", "sunshinecity.jp", "parco.jp", "lucua.jp", "aeonmall.com",
@@ -1144,11 +1145,14 @@ def run(brands: list[str]):
     #    覆蓋同來源 URL 的舊資料；過期的由後面的 clean_events 自動移除。 ──────────────
     if "chiikawa" in brands:
         try:
-            structured = fetch_chiikawa_popups(correct_city=correct_city)
+            structured = (
+                fetch_chiikawa_popups(correct_city=correct_city)
+                + fetch_chiikawa_mogumogu(correct_city=correct_city)
+            )
             if structured:
                 surls = {e["sourceUrl"] for e in structured}
                 events = [e for e in events if e.get("sourceUrl") not in surls] + structured
-                print(f"🏛️  吉伊卡哇官方排程（結構化，免 AI）→ {len(structured)} 筆現行")
+                print(f"🏛️  吉伊卡哇官方排程/店鋪（結構化，免 AI）→ {len(structured)} 筆現行")
                 save_events(events)
         except Exception as e:
             print(f"    ⚠️  吉伊卡哇結構化來源失敗（略過）：{e}")

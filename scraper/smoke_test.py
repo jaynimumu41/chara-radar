@@ -108,8 +108,27 @@ check("台灣寶可夢官方→可信",
       scrape.is_trusted_date_source("https://tw.portal-pokemon.com/goods/post-5343/"), True)
 check("寶可夢出張所結構化排程→可信",
       scrape.is_trusted_date_source("https://oneheart65.net/pokemoncenterbranch_schedule_2/"), True)
+check("吉伊卡哇もぐもぐ本舗→可信",
+      scrape.is_trusted_date_source("https://www.chiikawamogumogu.jp/stores/castella/"), True)
 check("網址參數提到 prtimes.jp→不誤信",
       scrape.is_trusted_date_source("https://example.com/read?src=prtimes.jp"), False)
+
+sample_otaru_info = (
+    "### [ちいかわベビーカステラ](https://www.chiikawamogumogu.jp/stores/castella/) "
+    "2026年7月18日(土)～ ちいかわもぐもぐ本舗 小樽店にオープン！"
+)
+sample_otaru_shop = (
+    "ちいかわベビーカステラは店内で焼き上げたふわふわベビーカステラや"
+    "ここだけのオリジナルグッズが楽しめるテイクアウトショップです。"
+    "現在、ご入店には事前予約が必要となります。住所：北海道小樽市堺町6-1"
+)
+otaru = official_sources._chiikawa_otaru_castella_event(
+    sample_otaru_info, sample_otaru_shop, correct_city=scrape.correct_city)
+check("吉伊卡哇小樽ベビーカステラ店鋪情報解析",
+      (otaru["type"], otaru["city"], otaru["startDate"], otaru["endDate"],
+       otaru["needReservation"], otaru["hasLimitedGoods"], otaru["sourceUrl"]),
+      ("store", "Hokkaido", "2026-07-18", "", True, True,
+       "https://www.chiikawamogumogu.jp/stores/castella/"))
 
 # ── agent_verify_candidates ─────────────────────────────────────────────────
 print("\n[agent_verify_candidates] 每日驗證候選")
@@ -130,6 +149,12 @@ check("oneheart65 出張所日期完整→略過",
           ev(brand="pokemon", type="popup", sourceType="official_social",
              sourceUrl="https://oneheart65.net/pokemoncenterbranch_schedule_2/",
              startDate="2026-06-05", endDate="2026-07-22")),
+      [])
+check("吉伊卡哇もぐもぐ本舗常設店無 endDate→略過",
+      agent_verify_candidates.verification_reasons(
+          ev(brand="chiikawa", type="store", sourceType="official_site",
+             sourceUrl="https://www.chiikawamogumogu.jp/stores/castella/",
+             startDate="2026-07-18", endDate="")),
       [])
 
 # ── source_reputation ────────────────────────────────────────────────────────

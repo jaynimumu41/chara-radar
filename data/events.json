@@ -1049,5 +1049,30 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-11",
     "sourceUrl": "https://www.nownews.com/news/6839787"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇 小樽店 ちいかわベビーカステラ",
+    "type": "store",
+    "country": "JP",
+    "city": "Hokkaido",
+    "locationName": "ちいかわベビーカステラ（北海道小樽市堺町6-1）",
+    "startDate": "2026-07-18",
+    "endDate": "",
+    "summaryZh": "ちいかわもぐもぐ本舗的小樽店「ちいかわベビーカステラ」將開幕，販售店內現烤 Baby Castella、限定餐飲與原創周邊商品。",
+    "needReservation": true,
+    "hasLimitedGoods": true,
+    "tags": [
+      "吉伊卡哇",
+      "小樽",
+      "常設店",
+      "限定餐飲",
+      "限定周邊"
+    ],
+    "id": "ch-5b992d",
+    "sourceType": "official_site",
+    "createdAt": "2026-06-12",
+    "sourceTitle": "7月に北海道・小樽にオープン！テイクアウトショップ「ちいかわベビーカステラ」フードメニュー、グッズのご紹介 - ちいかわもぐもぐ本舗",
+    "sourceUrl": "https://www.chiikawamogumogu.jp/stores/castella/"
   }
 ]

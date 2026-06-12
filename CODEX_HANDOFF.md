@@ -286,3 +286,15 @@ automation 的職責不是再跑一次爬蟲，而是依第 5 節對高風險筆
 - `data/source_reputation.json` 回寫：NOWnews 在 `pokemon` / `TW` / `new_product` 情境下已有 6 次 confirmed；Pokemon Hubs 有 1 次 confirmed，仍需繼續觀察。
 - `scraper/AGENT_VERIFY.md` 補強：台灣 Pokémon Center `new_product` 若來源明確寫店名、實體開賣/補貨日期、商品內容，且沒有反證或排除類型，應保留為高風險候選並回寫 reputation，不可預設刪除。
 - 修復後資料：44 筆，Pokemon 11、Miffy 10、Chiikawa 23。驗證：`smoke_test.py` 60 passed、`data_lint.py` 0 error / 0 warning、`verify_links.py` 44/44 OK（需實際網路；sandbox 會全 -1）。
+
+## 19. 2026-06-12 Chiikawa 小樽店漏抓修復
+
+- 問題：使用者回報今天網路上看到「吉伊卡哇 小樽店」商品情報，但 16:00 自動流程沒有新增。查證後確認官方 `chiikawa-info.jp/` 首頁已列出 `2026年7月18日(土)～ ちいかわもぐもぐ本舗 小樽店にオープン！`，`chiikawamogumogu.jp/stores/castella/` 也有フードメニュー、グッズ、事前予約、地址資訊。
+- 根因：既有 Chiikawa 結構化來源只解析 `chiikawa-info.jp/pus.html` 的 POP UP STORE 排程；官方首頁卡片與 `ちいかわもぐもぐ本舗` 專門店頁不一定進 Google News/RSS，因此漏掉常設店／限定餐飲／原創周邊型資訊。
+- 修正：
+  - `scraper/official_sources.py` 新增 `fetch_chiikawa_mogumogu()`，結合 `chiikawa-info.jp/` 首頁開幕日期與 `chiikawamogumogu.jp/stores/castella/` 店鋪頁內容，產生零 Gemini 結構化資料。
+  - `scraper/scrape.py` 將 `fetch_chiikawa_mogumogu()` 接入 Chiikawa 結構化流程，並把 `chiikawamogumogu.jp` 加入 `TRUSTED_DATE_DOMAINS`。
+  - `scraper/agent_verify_candidates.py` 把 `chiikawamogumogu.jp` 列為 structured official domain；`type=store` 無 endDate 不進每日高風險候選。
+  - `scraper/RULES.md` 與 `scraper/AGENT_VERIFY.md` 補上 Chiikawa 官方首頁卡片／もぐもぐ本舗店鋪頁規則。
+- 新增資料：`ch-5b992d`「吉伊卡哇 小樽店 ちいかわベビーカステラ」，Hokkaido，`2026-07-18` 開幕，地址 `北海道小樽市堺町6-1`，需預約，有限定餐飲與原創周邊。
+- 修復後資料：45 筆，Pokemon 11、Miffy 10、Chiikawa 24。驗證：`smoke_test.py` 63 passed、`data_lint.py` 0 error / 0 warning、`verify_links.py` 45/45 OK（需實際網路；sandbox 會全 -1）。

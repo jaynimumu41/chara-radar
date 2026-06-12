@@ -66,6 +66,12 @@ For each high-risk candidate:
    - It is not a duplicate of an existing event with the same brand, venue, and
      event period.
 
+Chiikawa official structured sources include `chiikawa-info.jp/pus.html`,
+`chiikawa-info.jp/` homepage cards, and `chiikawamogumogu.jp` shop pages.
+Permanent or semi-permanent shop openings such as `ちいかわベビーカステラ` should
+use `type=store`; an empty `endDate` is expected when the source presents an
+opening date rather than a limited run.
+
 Taiwan Pokemon Center goods need special handling. Official goods pages are
 often incomplete for Taiwan, while the first public signal may be a news article
 or an official social post. Do not remove a Taiwan Pokemon Center `new_product`
