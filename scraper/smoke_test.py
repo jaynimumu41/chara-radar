@@ -23,6 +23,7 @@ if hasattr(sys.stdout, "reconfigure"):
 import scrape
 import official_sources
 import agent_verify_candidates
+import source_reputation
 
 _passed = 0
 _failed = 0
@@ -130,6 +131,49 @@ check("oneheart65 出張所日期完整→略過",
              sourceUrl="https://oneheart65.net/pokemoncenterbranch_schedule_2/",
              startDate="2026-06-05", endDate="2026-07-22")),
       [])
+
+# ── source_reputation ────────────────────────────────────────────────────────
+print("\n[source_reputation] source trust memory")
+check("NOWnews domain identity",
+      source_reputation.source_identity("https://www.nownews.com/news/6811629")["id"],
+      "domain:nownews.com")
+check("Instagram handle identity",
+      source_reputation.source_identity("https://www.instagram.com/pokemon_taiwan/p/ABC123/")["id"],
+      "instagram:pokemon_taiwan")
+check("Instagram post URL can use title handle",
+      source_reputation.source_identity("https://www.instagram.com/p/ABC123/", "@pokemon_taiwan announcement")["id"],
+      "instagram:pokemon_taiwan")
+check("Threads handle identity",
+      source_reputation.source_identity("https://www.threads.net/@kawaii_news/post/ABC123")["id"],
+      "threads:kawaii_news")
+rep_data = source_reputation.new_reputation_data()
+for idx in range(3):
+    source_reputation.record_outcome(
+        rep_data,
+        url="https://example-verification.invalid/post",
+        outcome="confirmed",
+        brand="pokemon",
+        event_type="new_product",
+        country="TW",
+        event_id=f"po-test-{idx}",
+        evidence_count=2,
+    )
+rep_summary = source_reputation.summarize_source(rep_data, ev(
+    brand="pokemon", type="new_product", country="TW",
+    sourceUrl="https://example-verification.invalid/post"))
+check("Repeated confirmations promote source", rep_summary["tier"], "trusted")
+placeholder_summary = source_reputation.summarize_source(
+    rep_data, ev(sourceUrl="https://www.google.com/search?q=Pokemon+Center"))
+placeholder_policy = source_reputation.evidence_policy(
+    placeholder_summary, trusted_date_source=False, structured_source=False)
+check("Google placeholder must be replaced", placeholder_policy["label"], "find stable source")
+candidates = agent_verify_candidates.build_candidates([
+    ev(brand="pokemon", type="new_product", country="TW",
+       sourceUrl="https://untracked-source.invalid/post",
+       startDate="2026-06-13", endDate="",
+       locationName="Pokemon Center TAIPEI")
+])
+check("Candidate includes evidence requirement", candidates[0]["minIndependentSources"], 2)
 
 # ── extract_dates ─────────────────────────────────────────────────────────────
 print("\n[extract_dates] 日期區間擷取")

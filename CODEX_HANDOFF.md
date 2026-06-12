@@ -136,7 +136,7 @@ X(twitter) 貼文用 snowflake ID 可推發文年。
 
 - **觸發**：每天 16:30（純 Python 排程 16:00 跑完之後）。可用 codex 自己的排程/cron 機制。
 - **流程**：讀 `data/events.json` → 跑第 5 節演算法 → 改寫 events.json →
-  跑 `python scraper/smoke_test.py` 確認不破壞（exit 0）→ `git add data/events.json scraper/rejected.json` → commit → `git push origin main`。
+  跑 `python scraper/smoke_test.py` 確認不破壞（exit 0）→ `git add data/events.json scraper/rejected.json data/source_reputation.json` → commit → `git push origin main`。
 - **產出 log**：記錄每筆「驗證了什麼、補了什麼日期、移除了什麼及原因」，方便人工事後抽查。
 - **保守**：不確定的筆**寧可移除也不放錯**（準確>覆蓋）。合併時別把不同活動硬湊（過度合併和重複一樣糟）。
 - **commit 訊息**結尾不必加 Claude 署名（你是 codex）；但**保留人類可讀的中文說明**。
@@ -186,6 +186,7 @@ python smoke_test.py      # 目前 53 項，exit 0 = 全過
 - `scraper/verify_links.py` — 連結驗證＋reader 代理 fallback（`check_url`/`fetch_html`）。
 - `scraper/rejected.json` — 壞資料黑名單（`url_contains`/`title_contains`）。
 - `scraper/processed.json` — 已送 AI 的標題（省配額，自動維護）。
+- `scraper/source_reputation.py` / `data/source_reputation.json` — 非官方來源信譽、驗證結果回寫與候選風險調整。
 - `scraper/run_daily.ps1` — 每日排程腳本（ASCII-only）。
 - `scraper/smoke_test.py` — 離線回歸測試。
 - `scraper/RULES.md` — 篩選與去重規則總覽（人類可讀版）。
@@ -205,7 +206,7 @@ python smoke_test.py      # 目前 53 項，exit 0 = 全過
 - 每日 agent log：`scraper/logs/agent-verify-YYYY-MM-DD.md`（`scraper/logs/` 已 gitignore，不進公開 repo）
 
 automation 的職責不是再跑一次爬蟲，而是依第 5 節對高風險筆做 WebSearch/WebFetch 多方查證，必要時修改
-`data/events.json`、更新 `scraper/rejected.json` 防復活，跑 `smoke_test.py`，通過後 commit + push。
+`data/events.json`、更新 `scraper/rejected.json` 防復活、用 `scraper/source_reputation.py record` 回寫來源信譽，跑 `smoke_test.py`，通過後 commit + push。
 
 ---
 
@@ -260,3 +261,28 @@ automation 的職責不是再跑一次爬蟲，而是依第 5 節對高風險筆
 - 之後 agent 判斷原則：
   - 台灣 Pokémon Center 新品若來源不是官方，但內文明確寫 `Pokémon Center TAIPEI` / 台灣寶可夢中心、實體店開賣日與商品內容，且沒有官方來源或其他來源反證，可暫留並列入高風險候選，不要只因官方商品頁找不到就刪。
   - 仍必須排除卡牌、遊戲、LINE、Pokemon GO、純線上、廣泛通路與非現場販售商品。
+
+## 17. 2026-06-11 非官方來源信譽第一階段
+
+- 新增 `scraper/source_reputation.py` 與 `data/source_reputation.json`，把非官方來源從「一次性人工判斷」改成可累積的來源記憶。
+- `agent_verify_candidates.py` 現在會在候選中輸出來源 reputation、tier、score、需要幾個獨立佐證來源，並用信譽分數微調風險排序。
+- `source_reputation.py record` 可回寫 `confirmed` / `rejected` / `uncertain`，並分品牌、類型、國家累積表現；社群來源會追蹤到 IG / Threads handle，不只看平台網域。
+- 初始 watchlist 放入 `nownews.com`、`pokemonhubs.com`、`instagram:pokemon_taiwan`，分數維持中性 50，避免把二手來源直接當官方。
+- 規則補進 `scraper/RULES.md` 與 `scraper/AGENT_VERIFY.md`：非官方來源可收，但正式資料必須看證據強度與多方驗證；驗證後要回寫來源信譽。
+
+## 18. 2026-06-12 Pokémon 台灣新品二次誤刪修復
+
+- 問題：`b119cc1 agent verify events 2026-06-11` 又把 7 筆台灣 Pokémon Center 新品全刪，理由仍是「只找到二手新聞，未找到官方/場地方頁」。這違反 2026-06-10 已訂下的規則：不能只因台灣官方 goods 頁查不到就刪。
+- 2026-06-12 16:06 Python scraper 只補回其中 1 筆，且因 `scraper/rejected.json` 被加入錯誤黑名單，`nownews.com/news/6842060` 等來源被擋，導致線上 Pokémon 只剩 5 筆。
+- 已恢復 7 筆台灣 Pokémon Center 新品，並移除今日重抓出的低資訊重複 `po-0f77b8`：
+  - `po-7a20f0`：台灣寶可夢中心6月新品與初音未來聯名（NOWnews，2026-06-06）
+  - `po-4eaa69`：台北寶可夢中心 城都地區寶可夢大集結（NOWnews，2026-05-23；URL 改用非 AMP）
+  - `po-481cb8`：Pikachu's Sweet Delivery、婚禮系列新品（Pokemon Hubs，2026-05-16）
+  - `po-b32bd3`：母親節新品（NOWnews，2026-05-09）
+  - `po-e6f4e9`：勞動節新品（NOWnews，2026-05-01）
+  - `po-f6ddcc`：夯品再到貨（NOWnews，2026-06-13）
+  - `po-450306`：5月底新品5款／超級進化雷丘（NOWnews，2026-05-30）
+- 從 `scraper/rejected.json` 移除上述 NOWnews / Pokemon Hubs URL 片段；這些不是壞資料，不可因無官方 goods 頁而黑名單。
+- `data/source_reputation.json` 回寫：NOWnews 在 `pokemon` / `TW` / `new_product` 情境下已有 6 次 confirmed；Pokemon Hubs 有 1 次 confirmed，仍需繼續觀察。
+- `scraper/AGENT_VERIFY.md` 補強：台灣 Pokémon Center `new_product` 若來源明確寫店名、實體開賣/補貨日期、商品內容，且沒有反證或排除類型，應保留為高風險候選並回寫 reputation，不可預設刪除。
+- 修復後資料：44 筆，Pokemon 11、Miffy 10、Chiikawa 23。驗證：`smoke_test.py` 60 passed、`data_lint.py` 0 error / 0 warning、`verify_links.py` 44/44 OK（需實際網路；sandbox 會全 -1）。

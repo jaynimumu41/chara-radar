@@ -1,0 +1,183 @@
+{
+  "version": 1,
+  "updatedAt": "2026-06-12T10:59:37+00:00",
+  "sources": {
+    "domain:nownews.com": {
+      "confirmed": 6,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 6,
+      "score": 95,
+      "label": "nownews.com",
+      "kind": "news",
+      "host": "nownews.com",
+      "handle": "",
+      "firstSeen": "2026-06-11",
+      "lastReviewed": "2026-06-12",
+      "lastOutcome": "confirmed",
+      "notes": "Confirmed explicit Pokemon Center Taipei May 30 Mega Raichu goods article.",
+      "byBrand": {
+        "pokemon": {
+          "confirmed": 6,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 6,
+          "score": 95
+        }
+      },
+      "byType": {
+        "new_product": {
+          "confirmed": 6,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 6,
+          "score": 95
+        }
+      },
+      "byCountry": {
+        "tw": {
+          "confirmed": 6,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 6,
+          "score": 95
+        }
+      },
+      "history": [
+        {
+          "date": "2026-06-12",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-7a20f0",
+          "evidenceCount": 1,
+          "notes": "Confirmed explicit Pokemon Center Taipei June 6 goods article; source cites pokemon_taiwan imagery."
+        },
+        {
+          "date": "2026-06-12",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-4eaa69",
+          "evidenceCount": 1,
+          "notes": "Confirmed explicit Pokemon Center Taipei May 23 goods article; article states store sale date and product list."
+        },
+        {
+          "date": "2026-06-12",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-b32bd3",
+          "evidenceCount": 1,
+          "notes": "Confirmed explicit Pokemon Center Taipei May 9 goods article; article states store sale date and product list."
+        },
+        {
+          "date": "2026-06-12",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-e6f4e9",
+          "evidenceCount": 1,
+          "notes": "Confirmed explicit Pokemon Center Taipei May 1 goods article; article states store sale date and product list."
+        },
+        {
+          "date": "2026-06-12",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-f6ddcc",
+          "evidenceCount": 1,
+          "notes": "Confirmed explicit Pokemon Center Taipei June 13 restock/goods article."
+        },
+        {
+          "date": "2026-06-12",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-450306",
+          "evidenceCount": 1,
+          "notes": "Confirmed explicit Pokemon Center Taipei May 30 Mega Raichu goods article."
+        }
+      ]
+    },
+    "domain:pokemonhubs.com": {
+      "confirmed": 1,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 59,
+      "label": "pokemonhubs.com",
+      "kind": "news",
+      "host": "pokemonhubs.com",
+      "handle": "",
+      "firstSeen": "2026-06-11",
+      "lastReviewed": "2026-06-12",
+      "lastOutcome": "confirmed",
+      "notes": "Confirmed explicit Pokemon Center Taipei May 16 goods article with product lines and ticket dates.",
+      "byBrand": {
+        "pokemon": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "byType": {
+        "new_product": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "byCountry": {
+        "tw": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "history": [
+        {
+          "date": "2026-06-12",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-481cb8",
+          "evidenceCount": 1,
+          "notes": "Confirmed explicit Pokemon Center Taipei May 16 goods article with product lines and ticket dates."
+        }
+      ]
+    },
+    "instagram:pokemon_taiwan": {
+      "confirmed": 0,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 0,
+      "score": 50,
+      "label": "instagram @pokemon_taiwan",
+      "kind": "social",
+      "host": "instagram.com",
+      "handle": "pokemon_taiwan",
+      "firstSeen": "2026-06-11",
+      "lastReviewed": "",
+      "lastOutcome": "",
+      "notes": "Official social reference for TW Pokemon. Use for agent/manual verification; do not add IG scraping to the pure Python schedule yet.",
+      "byBrand": {},
+      "byType": {},
+      "byCountry": {},
+      "history": []
+    }
+  }
+}

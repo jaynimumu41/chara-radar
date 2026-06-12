@@ -20,9 +20,20 @@ Sanrio（三麗鷗）先暫停，因無結構化來源、新聞/Gemini 污染最
 - oneheart65 的 Pokémon Center 出張所不是品牌官方站，但本專案以結構化方式解析其排程，日期已列入可信日期來源；完整起訖日的出張所不再進每日 agent 高風險候選。
 - 台灣寶可夢官方商品頁會解析 Next.js embedded data，只收「內頁明確寫 Pokémon Center TAIPEI 登場／販售」的近期商品；LINE 貼圖/主題、卡牌、遊戲、純線上授權商品一律過濾。Instagram 僅作 agent/人工驗證輔助，不納入純 Python 抓取主來源。
 - 台灣 Pokémon Center 新品若只出現在 NOWnews / Pokemon Hubs 等二手來源，需列入 agent 高風險候選；但若內文明確寫台灣寶可夢中心 / Pokémon Center TAIPEI、實體店開賣日、商品內容，且沒有官方或其他來源反證，可暫留，不因官方商品頁查無同筆就直接刪除。
+- 這類二手來源 URL 不可只因「沒有官方 goods 頁」加入 `rejected.json`。只有確認為錯誤、重複、過期、不符類型或被官方反證時，才可加入黑名單。
 - Miffy 另補 Kiddy Land / miffy style 站內搜尋（`kiddyland.co.jp/?s=miffy`），抓近期官方店頭活動與新品，避免 Google News/RSS 漏掉官方店鋪消息。
 - 三麗鷗無可解析的結構化官方頁（`sanrio.co.jp` 503／JS 動態／REST 空），目前暫停預設抓取與前端顯示。
 - 抓取被擋（403/429/503）時自動改走 reader 代理 `r.jina.ai`，不放棄（`verify_links.fetch_html` / `check_url`）。
+
+### 非官方來源信譽
+
+- 非官方來源不是一律排除；它們先進候選與每日 agent 驗證，通過後才留在正式資料。
+- `data/source_reputation.json` 記錄來源信譽，`scraper/source_reputation.py` 負責查詢與回寫。
+- 信譽不只看網域，也要看品牌、類型、國家：同一來源可能在 `pokemon` / `TW` / `new_product` 準，但在其他品牌或活動型態仍是未驗證。
+- 候選清單會顯示來源分數、tier、需要幾個獨立佐證來源。高分來源可降低驗證摩擦，但不能免除原文檢查；低分或未驗證來源需要更多佐證。
+- IG / Threads 等社群來源以帳號 handle 追蹤，不以整個平台追蹤。合作方官方、商場官方、品牌官方社群可作強佐證；一般分享帳只能作輔助佐證。
+- 每次 agent 判斷後，用 `source_reputation.py record` 回寫 `confirmed` / `rejected` / `uncertain`，讓來源分數隨歷史表現變動。
+- 不手動把 NOWnews / Pokemon Hubs 等二手來源整站升為可信官方；若多次驗證準確，讓它們自然升為特定品牌/類型/地區的高分來源。
 
 ---
 

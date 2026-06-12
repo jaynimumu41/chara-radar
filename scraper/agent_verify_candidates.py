@@ -14,12 +14,14 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 import scrape
+import source_reputation
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 ROOT = Path(__file__).resolve().parents[1]
 EVENTS_JSON = ROOT / "data" / "events.json"
+REPUTATION_JSON = ROOT / "data" / "source_reputation.json"
 
 # These official structured feeds are already parsed without AI and are treated
 # as hand-quality data.
@@ -136,6 +138,37 @@ def risk_score(ev: dict, reasons: list[str]) -> int:
     return score
 
 
+def reputation_context(ev: dict, reputation_data: dict) -> dict:
+    summary = source_reputation.summarize_source(reputation_data, ev)
+    trusted_date_source = scrape.is_trusted_date_source(ev.get("sourceUrl", ""))
+    structured_source = is_structured_official(ev)
+    policy = source_reputation.evidence_policy(
+        summary,
+        trusted_date_source=trusted_date_source,
+        structured_source=structured_source,
+    )
+    source_tier = "trusted_date" if trusted_date_source else summary["tier"]
+    source_score = 100 if trusted_date_source else summary["score"]
+    source_reputation_label = (
+        "trusted-date source"
+        if trusted_date_source
+        else source_reputation.format_summary(summary)
+    )
+    return {
+        "sourceId": summary["id"],
+        "sourceKind": summary["kind"],
+        "sourceTier": source_tier,
+        "sourceScore": source_score,
+        "sourceReviews": summary["reviews"],
+        "sourceReputation": source_reputation_label,
+        "sourceNotes": summary["notes"],
+        "evidenceRequired": policy["label"],
+        "minIndependentSources": policy["minIndependentSources"],
+        "evidenceAction": policy["action"],
+        "reputationRisk": 0 if trusted_date_source else source_reputation.risk_adjustment(summary),
+    }
+
+
 def suggested_query(ev: dict) -> str:
     parts = [
         ev.get("locationName", ""),
@@ -162,13 +195,15 @@ def clean_cell(value) -> str:
 
 
 def build_candidates(events: list[dict]) -> list[dict]:
+    reputation_data = source_reputation.load_reputation(REPUTATION_JSON)
     candidates: list[dict] = []
     for ev in events:
         reasons = verification_reasons(ev)
         if not reasons:
             continue
+        rep = reputation_context(ev, reputation_data)
         candidates.append({
-            "risk": risk_score(ev, reasons),
+            "risk": max(0, risk_score(ev, reasons) + rep["reputationRisk"]),
             "reasons": reasons,
             "query": suggested_query(ev),
             "id": ev.get("id", ""),
@@ -182,6 +217,7 @@ def build_candidates(events: list[dict]) -> list[dict]:
             "sourceDomain": domain_of(ev.get("sourceUrl", "")),
             "sourceUrl": ev.get("sourceUrl", ""),
             "sourceTitle": ev.get("sourceTitle", ""),
+            **rep,
         })
     candidates.sort(key=lambda c: (-c["risk"], c["brand"], c["title"]))
     return candidates
@@ -195,15 +231,19 @@ def print_markdown(candidates: list[dict], total_events: int, limit: int) -> Non
     print(f"- Candidates: {len(candidates)}")
     print("- Skip rule: complete structured-source records from chiikawa-info.jp, oneheart65.net, tw.portal-pokemon.com, dickbruna.jp, and kiddyland.co.jp")
     print("- Exception: activity-like structured official records with a startDate but no endDate stay in the queue for period verification")
+    print("- Source reputation: data/source_reputation.json adjusts risk and states how much corroboration is needed")
     print()
-    print("| Risk | Brand | Type | Title | Location | Dates | Source | Reasons | Search query |")
-    print("| --: | -- | -- | -- | -- | -- | -- | -- | -- |")
+    print("| Risk | Reputation | Evidence | Brand | Type | Title | Location | Dates | Source | Reasons | Search query |")
+    print("| --: | -- | -- | -- | -- | -- | -- | -- | -- | -- | -- |")
     for c in shown:
         dates = f"{c['startDate'] or '?'} to {c['endDate'] or '?'}"
+        evidence = f"{c['evidenceRequired']} ({c['minIndependentSources']}+)"
         print(
             "| "
             + " | ".join([
                 str(c["risk"]),
+                clean_cell(c["sourceReputation"]),
+                clean_cell(evidence),
                 clean_cell(c["brand"]),
                 clean_cell(c["type"]),
                 clean_cell(c["title"]),

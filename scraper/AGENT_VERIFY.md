@@ -66,11 +66,59 @@ For each high-risk candidate:
    - It is not a duplicate of an existing event with the same brand, venue, and
      event period.
 
+Taiwan Pokemon Center goods need special handling. Official goods pages are
+often incomplete for Taiwan, while the first public signal may be a news article
+or an official social post. Do not remove a Taiwan Pokemon Center `new_product`
+record only because `tw.portal-pokemon.com/goods/` has no matching page. Keep it
+when the source text explicitly contains all of these:
+
+- `台灣寶可夢中心`, `台北寶可夢中心`, or `Pokémon Center TAIPEI`;
+- a concrete in-store sale/restock date;
+- a concrete product line or product list;
+- no conflicting official source and no out-of-scope category such as cards,
+  games, LINE, Pokemon GO, online-only, or broad retail.
+
+Such records remain high-risk if the source is secondary media, but high-risk
+means "review again and record reputation", not "delete by default". Do not add
+these source URLs to `scraper/rejected.json` unless the article itself is
+wrong, duplicate, expired, out of scope, or contradicted.
+
 Remove records that are expired, old-year traps, unverifiable, out of scope,
 duplicate, vague roundup/new-product summaries, meet-and-greet/photo-op/live
 show only, sports events, convenience/drugstore/mass-retail items, capsule toys,
 food/drink shelf launches, online-only sales, resale news, or non-Japan/Taiwan
 items.
+
+## Source Reputation Feedback
+
+`scraper/agent_verify_candidates.py` enriches each candidate with the source
+reputation tier and the minimum corroboration needed. The reputation file is
+`data/source_reputation.json`; it is intentionally separate from `events.json`.
+
+After a candidate is verified, update the source memory:
+
+```powershell
+$env:PYTHONIOENCODING='utf-8'
+& 'C:\Users\USER\AppData\Local\Python\pythoncore-3.14-64\python.exe' scraper\source_reputation.py record `
+  --url "https://example.com/source-article" `
+  --outcome confirmed `
+  --brand pokemon `
+  --type new_product `
+  --country TW `
+  --event-id po-example `
+  --evidence-count 2 `
+  --notes "Matched original article plus one independent social/venue signal"
+```
+
+Use `confirmed` only when the source's claim is kept or corrected and kept.
+Use `rejected` when the source claim caused a wrong, duplicate, expired, or
+out-of-scope record. Use `uncertain` when the record is left pending or needs
+human review. `evidence-count` means independent corroborating signals found
+beyond the original source, not search snippets.
+
+Do not promote a whole domain manually. Let repeated outcomes move it: a source
+can become trusted for Pokemon/TW/new_product over time while staying unproven
+for other brands or event types.
 
 When a removed record is likely to come back tomorrow because the source article
 is still fresh and the problem is type/source quality rather than ordinary
@@ -80,7 +128,8 @@ expiry, add a stable URL fragment to `scraper/rejected.json` under
 ## Edits
 
 - Edit only the necessary files, usually `data/events.json` and
-  `scraper/rejected.json`.
+  `scraper/rejected.json`; when verification changes source trust, also edit
+  `data/source_reputation.json` via `scraper/source_reputation.py record`.
 - Preserve event field names and JSON formatting.
 - Do not modify the structured official-source pipeline for Chiikawa, Pokemon,
   or Miffy unless a separate task explicitly asks for it.
@@ -110,7 +159,7 @@ Run `python verify_links.py` if any `sourceUrl` is changed.
 If files changed and tests pass, commit and push:
 
 ```powershell
-git add data/events.json scraper/rejected.json
+git add data/events.json scraper/rejected.json data/source_reputation.json
 git commit -m "agent verify events YYYY-MM-DD"
 git push origin main
 ```
