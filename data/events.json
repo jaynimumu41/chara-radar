@@ -385,29 +385,6 @@
   },
   {
     "brand": "chiikawa",
-    "title": "吉伊卡哇新商品發售",
-    "type": "new_product",
-    "country": "JP",
-    "city": "Chiba",
-    "locationName": "千葉テレビ放送株式会社",
-    "startDate": "2026-06-12",
-    "endDate": "",
-    "summaryZh": "吉伊卡哇推出新款「ぷっくりアップリケポーチ」及附贈零食風貼紙的新商品，於6月12日11時起發售。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "新商品",
-      "周邊",
-      "日本"
-    ],
-    "id": "ch-9ef8a0",
-    "sourceTitle": "「ちいかわ」ペアデザインの「ぷっくりアップリケポーチ」が可愛い！おつまみ風ステッカー付きスナック含む新商品が本日６月12日11時より発売 | チバテレ＋プラス - 千葉テレビ放送株式会社",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-12",
-    "sourceUrl": "https://www.chiba-tv.com/plus/detail/2026061733411"
-  },
-  {
-    "brand": "chiikawa",
     "title": "吉伊卡哇埼玉越谷首間常設店開幕",
     "type": "store",
     "country": "JP",
@@ -1075,29 +1052,5 @@
     "createdAt": "2026-06-13",
     "sourceTitle": "2026年6月6日(土)発売予定!miffy style先行発売 マスコットビーンズコレクション - キデイランド",
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_20260606/"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "GU x Chiikawa 聯名商品",
-    "type": "new_product",
-    "country": "JP",
-    "city": "",
-    "locationName": "GU",
-    "startDate": "2026-05-23",
-    "endDate": "",
-    "summaryZh": "GU與Chiikawa推出第四彈聯名商品，以「ちいかわたちの夏休み」為主題，推出夏日設計服飾。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "GU",
-      "聯名",
-      "服飾",
-      "夏日"
-    ],
-    "id": "ch-6721d6",
-    "sourceTitle": "| GU ちいかわ × ちいかわとのコラボレーションアイテム第４弾を発売 コラボ第3弾！ハチワレ・うさぎに、モモンガ GU(ジーユー)×ちいかわ 5月23日より発売! サマーデザインのウェア各種 ちいかわ×GUコラボ第4弾が5月23日発売。「ちいかわたちの夏休み」を 株式会社 (ジーユー) - cfecgc-orange.org",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-13",
-    "sourceUrl": "https://www.google.com/search?q=%7C%20GU%20%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%20%C3%97%20%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%E3%81%A8%E3%81%AE%E3%82%B3%E3%83%A9%E3%83%9C%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%82%A4%E3%83%86%E3%83%A0%E7%AC%AC%EF%BC%94%E5%BC%BE%E3%82%92%E7%99%BA%E5%A3%B2%20%E3%82%B3%E3%83%A9%E3%83%9C%E7%AC%AC3%E5%BC%BE%EF%BC%81%E3%83%8F%E3%83%81%E3%83%AF%E3%83%AC%E3%83%BB%E3%81%86%E3%81%95%E3%81%8E%E3%81%AB%E3%80%81%E3%83%A2%E3%83%A2%E3%83%B3%E3%82%AC%20GU%28%E3%82%B8%E3%83%BC%E3%83%A6%E3%83%BC%29%C3%97%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%205%E6%9C%8823%E6%97%A5%E3%82%88%E3%82%8A%E7%99%BA%E5%A3%B2%21%20%E3%82%B5%E3%83%9E%E3%83%BC%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%81%AE%E3%82%A6%E3%82%A7%E3%82%A2%E5%90%84%E7%A8%AE%20%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%C3%97GU%E3%82%B3%E3%83%A9%E3%83%9C%E7%AC%AC4%E5%BC%BE%E3%81%8C5%E6%9C%8823%E6%97%A5%E7%99%BA%E5%A3%B2%E3%80%82%E3%80%8C%E3%81%A1%E3%81%84%E3%81%8B%E3%82%8F%E3%81%9F%E3%81%A1%E3%81%AE%E5%A4%8F%E4%BC%91%E3%81%BF%E3%80%8D%E3%82%92%20%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BE%20%28%E3%82%B8%E3%83%BC%E3%83%A6%E3%83%BC%29%20-%20cfecgc-orange.org"
   }
 ]

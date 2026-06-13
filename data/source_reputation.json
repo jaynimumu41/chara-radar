@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-12T10:59:37+00:00",
+  "updatedAt": "2026-06-13T08:38:21+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 6,
@@ -178,6 +178,60 @@
       "byType": {},
       "byCountry": {},
       "history": []
+    },
+    "domain:chiba-tv.com": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 0,
+      "score": 39,
+      "label": "chiba-tv.com",
+      "kind": "site",
+      "host": "chiba-tv.com",
+      "handle": "",
+      "firstSeen": "2026-06-13",
+      "lastReviewed": "2026-06-13",
+      "lastOutcome": "rejected",
+      "notes": "Generic merchandise article with no physical venue; removed as out-of-scope new_product.",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "byType": {
+        "new_product": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "history": [
+        {
+          "date": "2026-06-13",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "ch-9ef8a0",
+          "evidenceCount": 0,
+          "notes": "Generic merchandise article with no physical venue; removed as out-of-scope new_product."
+        }
+      ]
     }
   }
 }
