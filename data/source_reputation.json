@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-13T08:38:21+00:00",
+  "updatedAt": "2026-06-14T08:34:25+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 6,
@@ -181,43 +181,43 @@
     },
     "domain:chiba-tv.com": {
       "confirmed": 0,
-      "rejected": 1,
+      "rejected": 2,
       "uncertain": 0,
       "crossChecked": 0,
-      "score": 39,
+      "score": 28,
       "label": "chiba-tv.com",
       "kind": "site",
       "host": "chiba-tv.com",
       "handle": "",
       "firstSeen": "2026-06-13",
-      "lastReviewed": "2026-06-13",
+      "lastReviewed": "2026-06-14",
       "lastOutcome": "rejected",
       "notes": "Generic merchandise article with no physical venue; removed as out-of-scope new_product.",
       "byBrand": {
         "chiikawa": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
           "crossChecked": 0,
-          "score": 39
+          "score": 28
         }
       },
       "byType": {
         "new_product": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
           "crossChecked": 0,
-          "score": 39
+          "score": 28
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
           "crossChecked": 0,
-          "score": 39
+          "score": 28
         }
       },
       "history": [
@@ -228,6 +228,16 @@
           "type": "new_product",
           "country": "JP",
           "eventId": "ch-9ef8a0",
+          "evidenceCount": 0,
+          "notes": "Generic merchandise article with no physical venue; removed as out-of-scope new_product."
+        },
+        {
+          "date": "2026-06-14",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "ch-04fe9b",
           "evidenceCount": 0,
           "notes": "Generic merchandise article with no physical venue; removed as out-of-scope new_product."
         }
