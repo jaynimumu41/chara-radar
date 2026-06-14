@@ -185,6 +185,70 @@ ROUNDUP_KEYWORDS = ["懶人包", "總整理", "行事曆", "整理包"]
 def is_roundup_title(title: str) -> bool:
     return any(kw in (title or "") for kw in ROUNDUP_KEYWORDS)
 
+GENERIC_MERCH_TITLE_KEYWORDS = (
+    "新商品登場", "新商品", "新作グッズ", "新作アイテム", "新グッズ",
+    "商品情報", "発売開始", "発売", "開賣", "登場", "グッズ",
+)
+
+PHYSICAL_STORE_SIGNALS = (
+    "pokemon center", "pokémon center", "ポケモンセンター", "寶可夢中心", "宝可梦中心",
+    "pokemon center taipei", "台灣寶可夢中心", "台北寶可夢中心",
+    "miffy style", "キデイランド", "kiddy land",
+    "ちいかわらんど", "ちいかわもぐもぐ本舗", "もぐもぐ本舗",
+    "pop up", "popup", "ポップアップ", "快閃", "期間限定店",
+    "店頭", "店舗", "店舖", "店鋪", "門市", "實體店", "実店舗", "各店",
+    "会場", "會場", "会期", "場館", "百貨", "商場", "モール", "mall",
+    "カフェ", "cafe", "レストラン", "restaurant", "ベーカリー", "出張所",
+)
+
+MEDIA_LOCATION_HINTS = (
+    "テレビ", "放送", "新聞", "ニュース", "通信", "メディア", "press", "times",
+    "tv", "news", "magazine", "web", "編集部",
+)
+
+def is_generic_merch_title(*texts) -> bool:
+    blob = " ".join(t for t in texts if t)
+    return any(kw.lower() in blob.lower() for kw in GENERIC_MERCH_TITLE_KEYWORDS)
+
+def has_physical_store_signal(*texts) -> bool:
+    blob = " ".join(t for t in texts if t).lower()
+    return any(kw.lower() in blob for kw in PHYSICAL_STORE_SIGNALS)
+
+def looks_like_media_location(location: str, source: str = "", source_title: str = "") -> bool:
+    loc = re.sub(r"\s+", "", location or "").lower()
+    if not loc:
+        return False
+    src = re.sub(r"\s+", "", " ".join([source or "", source_title or ""])).lower()
+    if len(loc) >= 4 and loc in src:
+        return True
+    return any(kw.lower() in loc for kw in MEDIA_LOCATION_HINTS)
+
+def is_venue_less_generic_new_product(ev: dict, source_title: str = "",
+                                      source: str = "", source_url: str = "",
+                                      page_text: str = "") -> bool:
+    """High-confidence pre-save reject for generic merchandise articles.
+
+    Keep this intentionally narrow: secondary media is allowed when it clearly
+    names a physical store/venue. This only rejects non-trusted new_product
+    records that look like generic merchandise coverage and lack store signals.
+    """
+    if ev.get("type") != "new_product":
+        return False
+    if is_trusted_date_source(source_url):
+        return False
+
+    loc = (ev.get("locationName") or "").strip()
+    physical = has_physical_store_signal(
+        loc, ev.get("title", ""), ev.get("summaryZh", ""),
+        source_title, page_text[:12000],
+    )
+    if physical:
+        return False
+
+    generic = is_generic_merch_title(ev.get("title", ""), source_title)
+    bad_location = (not loc) or looks_like_media_location(loc, source, source_title)
+    return generic and bad_location
+
 # 官方／權威來源（新聞稿、品牌官方）——額度有限，這些先處理（資料一定正確、日期齊全）
 OFFICIAL_SOURCE_HINTS = [
     "pr times", "prtimes", "プレスリリース", "press release",
@@ -1079,11 +1143,14 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
         gl = item["link"]
         # 官方來源（official_sources.py）的 link 已是真實 URL；只有 Google News 才需解碼
         real = decode_google_news_url(gl) if "news.google.com" in gl else (gl or None)
+        source_html = ""
         if real and is_rejected_url(real):       # 黑名單來源：已確認的壞資料，整筆丟棄
             print(f"    ⛔ 來源在黑名單（壞資料），丟棄：{real}")
             return None
         if real:
             ok, code, html = check_url(real, return_text=True)
+            if ok:
+                source_html = html
             if ok and stale_by_year(html):       # 頁面年份過舊＝舊文復活，整筆丟棄
                 print(f"    ⛔ 來源頁年份過舊（舊活動復活），丟棄：{real}")
                 return None
@@ -1107,6 +1174,15 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
                 if is_trusted_date_source(real):
                     apply_extracted_dates(data, html, _pub_year(item["pubDate"]),
                                           is_html=True, scan_chars=90000)
+        if is_venue_less_generic_new_product(
+            data,
+            source_title=item.get("title", ""),
+            source=item.get("source", ""),
+            source_url=real or "",
+            page_text=source_html,
+        ):
+            print("    ⛔ 泛商品新聞且無實體店/會場訊號，丟棄")
+            return None
         data["sourceUrl"]   = real if real else search_url(best_search_query(data))
         return data
     except RateLimitError:

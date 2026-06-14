@@ -59,12 +59,14 @@ Sanrio（三麗鷗）先暫停，因無結構化來源、新聞/Gemini 污染最
 | 體育／路跑 | `is_sports_noise` / `SPORTS_NOISE` | 棒球主題日、始球式、路跑、馬拉松等體驗非購物（比對標題＋摘要＋內文） |
 | 彙整／懶人包 | `is_roundup_title` / `ROUNDUP_KEYWORDS` | 「懶人包／總整理／行事曆／整理包」——多活動雜揉、無單一檔期。詞彙刻意收斂，**不**含「攻略／整理／一次看」以免誤殺單一活動攻略文 |
 | 壞資料黑名單 | `is_rejected_url` / `is_rejected_title` + `rejected.json` | 已確認移除的，再抓到自動擋，防復活 |
+| 泛商品無實體地點 | `is_venue_less_generic_new_product` | 非可信來源的 `new_product` 若標題很泛、缺少實體店/會場訊號，且 `locationName` 空白或像媒體/出版社名 → 入庫前丟棄 |
 | 新聞過舊 | `pubdate_age_days` > `MAX_NEWS_AGE_DAYS`(45) | 發布超過 45 天多半已結束 |
 | 已處理過 | `processed.json` | 跑過的原始標題不再重送 AI |
 
 萃取後還有兩道把關（`extract_event`）：
 - **舊文復活**：來源頁前段最大年份 < 今年 → 丟（`stale_by_year`）。
 - **誤萃取**：來源頁未提到品牌關鍵字、或未出現活動主題詞 → 丟（`page_mentions` / `theme_tokens`）。
+- **非官方泛商品防線**：`new_product` 來自非可信來源時，若沒有 `店頭` / `店舗` / `POP UP` / `Pokémon Center TAIPEI` / `ちいかわらんど` / 百貨商場等實體訊號，且地點像媒體名（例如電視台、新聞社）或空白，直接丟棄。這條規則刻意收窄，不會擋明確寫實體店開賣日與商品內容的 NOWnews / Pokemon Hubs 類型來源。
 
 ---
 

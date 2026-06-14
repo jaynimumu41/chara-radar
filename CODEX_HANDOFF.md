@@ -298,3 +298,15 @@ automation 的職責不是再跑一次爬蟲，而是依第 5 節對高風險筆
   - `scraper/RULES.md` 與 `scraper/AGENT_VERIFY.md` 補上 Chiikawa 官方首頁卡片／もぐもぐ本舗店鋪頁規則。
 - 新增資料：`ch-5b992d`「吉伊卡哇 小樽店 ちいかわベビーカステラ」，Hokkaido，`2026-07-18` 開幕，地址 `北海道小樽市堺町6-1`，需預約，有限定餐飲與原創周邊。
 - 修復後資料：45 筆，Pokemon 11、Miffy 10、Chiikawa 24。驗證：`smoke_test.py` 63 passed、`data_lint.py` 0 error / 0 warning、`verify_links.py` 45/45 OK（需實際網路；sandbox 會全 -1）。
+
+## 20. 2026-06-14 非官方泛商品早期過濾
+
+- 問題：使用者擔心「更早擋壞候選」會回到以前把非官方情報誤擋的狀態；同時 6/13、6/14 連續出現 `chiba-tv.com` 這類 Chiikawa 泛商品新聞，被 AI 填成 `new_product` 並把媒體名當 `locationName`，最後才由 agent 刪除。
+- 修正：`scraper/scrape.py` 新增 `is_venue_less_generic_new_product()`，只在高信心情境入庫前丟棄：
+  - `type=new_product`
+  - 來源不是 `TRUSTED_DATE_DOMAINS`
+  - 標題/來源標題是泛商品字眼（如 `新商品登場`、`グッズ`、`商品情報`）
+  - 來源內文與欄位沒有實體店/會場訊號（如 `店頭`、`店舗`、`POP UP`、`Pokémon Center TAIPEI`、`ちいかわらんど`、百貨商場等）
+  - `locationName` 空白或像媒體/出版社名（例如電視台、新聞社）
+- 保護非官方好來源：明確寫 `台灣寶可夢中心` / `Pokémon Center TAIPEI` / 店頭開賣/商品內容的 NOWnews、Pokemon Hubs 類來源不會被這條規則擋；仍走來源信譽與 agent 驗證。
+- `scraper/smoke_test.py` 新增 3 項測試：chiba-tv 類型應擋、NOWnews 台灣寶可夢中心新品不擋、可信官方商品來源不套此規則。驗證：`smoke_test.py` 66 passed、`data_lint.py` 0 error / 0 warning。

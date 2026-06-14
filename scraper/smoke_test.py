@@ -92,6 +92,38 @@ check("一番賞廣泛通路→雜訊",
 check("正當快閃→不誤殺",
       scrape.is_noise("吉伊卡哇 POP UP STORE キャナルシティオーパ"), False)
 
+# ── is_venue_less_generic_new_product ────────────────────────────────────────
+print("\n[is_venue_less_generic_new_product] 泛商品無實體地點過濾")
+check("媒體名被當地點的 Chiikawa 泛商品→擋",
+      scrape.is_venue_less_generic_new_product(
+          ev(brand="chiikawa", type="new_product", title="Chiikawa 新商品登場",
+             locationName="千葉テレビ放送株式会社",
+             summaryZh="ちいかわ雜貨新商品發售。"),
+          source_title="「ちいかわ」エコバッグにビーサン、ナップザック、トート…雑貨が目白押し♪ 新商品が登場",
+          source="チバテレ＋プラス - 千葉テレビ放送株式会社",
+          source_url="https://www.chiba-tv.com/plus/detail/2026061740471",
+          page_text="ちいかわ エコバッグ ビーサン ナップザック トート 雑貨 新商品 発売"),
+      True)
+check("NOWnews 明確台灣寶可夢中心店頭新品→不擋",
+      scrape.is_venue_less_generic_new_product(
+          ev(brand="pokemon", type="new_product", title="台灣寶可夢中心6月新品與初音未來聯名",
+             locationName="台灣寶可夢中心",
+             summaryZh="台灣寶可夢中心推出新品並於實體店開賣。"),
+          source_title="台灣寶可夢中心6月新品與初音未來聯名 6/6開賣",
+          source="NOWnews 今日新聞",
+          source_url="https://www.nownews.com/news/6842060",
+          page_text="Pokémon Center TAIPEI 台灣寶可夢中心 店頭 開賣 商品"),
+      False)
+check("可信官方商品來源→不套非官方泛商品擋法",
+      scrape.is_venue_less_generic_new_product(
+          ev(brand="pokemon", type="new_product", title="寶可夢新商品登場",
+             locationName="", summaryZh="ポケモンセンター新商品。"),
+          source_title="ポケモンセンター 新商品登場",
+          source="ポケットモンスターオフィシャルサイト",
+          source_url="https://www.pokemon.co.jp/goods/2026/05/260522_to01.html",
+          page_text=""),
+      False)
+
 # ── is_trusted_date_source ────────────────────────────────────────────────────
 print("\n[is_trusted_date_source] 可信日期網域（hostname 精準比對）")
 check("PR TIMES→可信",
