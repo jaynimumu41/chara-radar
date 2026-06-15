@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-14T08:34:25+00:00",
+  "updatedAt": "2026-06-15T08:37:19+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 6,
@@ -240,6 +240,60 @@
           "eventId": "ch-04fe9b",
           "evidenceCount": 0,
           "notes": "Generic merchandise article with no physical venue; removed as out-of-scope new_product."
+        }
+      ]
+    },
+    "domain:news.yahoo.co.jp": {
+      "confirmed": 1,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 59,
+      "label": "news.yahoo.co.jp",
+      "kind": "news",
+      "host": "news.yahoo.co.jp",
+      "handle": "",
+      "firstSeen": "2026-06-15",
+      "lastReviewed": "2026-06-15",
+      "lastOutcome": "confirmed",
+      "notes": "Matched official chiikawa-info.jp ck_land listing with 2026-06-19 opening date.",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "byType": {
+        "store": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "history": [
+        {
+          "date": "2026-06-15",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "store",
+          "country": "JP",
+          "eventId": "ch-119d19",
+          "evidenceCount": 1,
+          "notes": "Matched official chiikawa-info.jp ck_land listing with 2026-06-19 opening date."
         }
       ]
     }

@@ -402,10 +402,10 @@
       "限定贈品"
     ],
     "id": "ch-119d19",
-    "sourceTitle": "埼玉・越谷レイクタウンに大人気キャラのオフィシャルショップ 「ちいかわ」の約1万点の商品を取り扱う、県内初の常設店 開業を記念…ステッカーや缶バッジ、トートバッグもらえる 19日オープン（埼玉新聞） - Yahoo!ニュース",
-    "sourceType": "official_social",
+    "sourceTitle": "ちいかわらんど(常設店) ｜ スパイラルキュート",
+    "sourceType": "official_site",
     "createdAt": "2026-06-12",
-    "sourceUrl": "https://news.yahoo.co.jp/articles/8eb0976d55e14a179c508a0e4a951f3001545f8e"
+    "sourceUrl": "https://chiikawa-info.jp/ck_land.html"
   },
   {
     "brand": "pokemon",
@@ -1028,29 +1028,5 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-15",
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000004306.000012759.html"
-  },
-  {
-    "brand": "pokemon",
-    "title": "寶可夢中心香川開幕",
-    "type": "store",
-    "country": "JP",
-    "city": "Kagawa",
-    "locationName": "ポケモンセンターカガワ",
-    "startDate": "2026-10-24",
-    "endDate": "",
-    "summaryZh": "寶可夢中心香川於10月24日開幕，販售充滿當地特色的限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "香川",
-      "新店開幕",
-      "限定商品"
-    ],
-    "id": "po-5c029c",
-    "sourceTitle": "ヤドン×うどん！「ポケモンセンターカガワ」10月24日オープン決定！ご当地感あふれる限定グッズが一挙公開！ - 玩具人 TOY PEOPLE",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-15",
-    "sourceUrl": "https://www.google.com/search?q=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC%E3%82%AB%E3%82%AC%E3%83%AF%20%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3"
   }
 ]
