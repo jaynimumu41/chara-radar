@@ -91,6 +91,8 @@ check("一番賞廣泛通路→雜訊",
       scrape.is_noise("一番くじ Pokemon 30th ANNIVERSARY vol.1"), True)
 check("正當快閃→不誤殺",
       scrape.is_noise("吉伊卡哇 POP UP STORE キャナルシティオーパ"), False)
+check("Pokémon GO→雜訊",
+      scrape.is_noise("Pokémon GO Fest 2026：全球 心中山登場"), True)
 
 # ── is_venue_less_generic_new_product ────────────────────────────────────────
 print("\n[is_venue_less_generic_new_product] 泛商品無實體地點過濾")
@@ -144,6 +146,12 @@ check("吉伊卡哇もぐもぐ本舗→可信",
       scrape.is_trusted_date_source("https://www.chiikawamogumogu.jp/stores/castella/"), True)
 check("網址參數提到 prtimes.jp→不誤信",
       scrape.is_trusted_date_source("https://example.com/read?src=prtimes.jp"), False)
+check("Google 搜尋 placeholder→不穩定來源",
+      scrape.is_unstable_source_url("https://www.google.com/search?q=Pokemon+Center+Kagawa"), True)
+check("Google News placeholder→不穩定來源",
+      scrape.is_unstable_source_url("https://news.google.com/rss/articles/ABC"), True)
+check("NOWnews 真實 URL→穩定來源",
+      scrape.is_unstable_source_url("https://www.nownews.com/news/6842060"), False)
 
 sample_otaru_info = (
     "### [ちいかわベビーカステラ](https://www.chiikawamogumogu.jp/stores/castella/) "

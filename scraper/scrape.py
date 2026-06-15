@@ -150,6 +150,7 @@ NOISE_KEYWORDS = [
     # 媒體 / 動畫 / 手遊
     "映画", "予告", "声優", "主題歌", "アプリ", "ぽけっと", "ゲーム",
     "劇場版", "預告", "聲優", "手遊", "動畫", "電影",
+    "Pokémon GO", "Pokemon GO", "ポケモンGO", "寶可夢GO",
     # 隨機販售 / 開箱 / 夾娃娃機景品（非「去逛買」目標）
     "ガチャ", "カプセル", "扭蛋", "轉蛋", "盲盒", "開箱", "レビュー", "ガチレビュー",
     "付録", "レポ", "夾娃娃機", "ナムコ", "景品", "プライズ", "クレーンゲーム",
@@ -291,6 +292,10 @@ def is_trusted_date_source(url: str) -> bool:
     if not host:
         return False
     return any(host == d or host.endswith("." + d) for d in TRUSTED_DATE_DOMAINS)
+
+def is_unstable_source_url(url: str) -> bool:
+    u = (url or "").strip().lower()
+    return not u or "google.com/search" in u or "news.google.com" in u
 
 GN_RSS    = "https://news.google.com/rss/search?q={q}&hl=ja&gl=JP&ceid=JP:ja"
 GN_RSS_TW = "https://news.google.com/rss/search?q={q}&hl=zh-TW&gl=TW&ceid=TW:zh-Hant"
@@ -1139,7 +1144,7 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
         data.setdefault("tags", [])
         # 來源連結：優先解出真實文章 URL，並做兩道驗證才採用——
         #   1) 連得過去（非 403/404…）  2) 頁面內容真的提到該品牌（關聯性）
-        # 任一不過，一律退回保證可開、且必定相關的「地點+品牌」搜尋連結。
+        # 任一不過，不入庫；讓隔天可重試，而不是存成 Google 搜尋 placeholder。
         gl = item["link"]
         # 官方來源（official_sources.py）的 link 已是真實 URL；只有 Google News 才需解碼
         real = decode_google_news_url(gl) if "news.google.com" in gl else (gl or None)
@@ -1183,7 +1188,10 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
         ):
             print("    ⛔ 泛商品新聞且無實體店/會場訊號，丟棄")
             return None
-        data["sourceUrl"]   = real if real else search_url(best_search_query(data))
+        if is_unstable_source_url(real or ""):
+            print("    ⛔ 找不到穩定來源 URL，不入庫（保留隔天重試）")
+            return {"_skipNoProcess": True}
+        data["sourceUrl"]   = real
         return data
     except RateLimitError:
         raise  # 讓主程式接住、乾淨收工
@@ -1348,6 +1356,9 @@ def run(brands: list[str]):
 
             if ev is None:
                 processed_cache.add(item["title"])
+                print("略過")
+                continue
+            if ev.get("_skipNoProcess"):
                 print("略過")
                 continue
             if ev["sourceUrl"] in seen_urls:

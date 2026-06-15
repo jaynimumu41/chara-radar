@@ -310,3 +310,13 @@ automation 的職責不是再跑一次爬蟲，而是依第 5 節對高風險筆
   - `locationName` 空白或像媒體/出版社名（例如電視台、新聞社）
 - 保護非官方好來源：明確寫 `台灣寶可夢中心` / `Pokémon Center TAIPEI` / 店頭開賣/商品內容的 NOWnews、Pokemon Hubs 類來源不會被這條規則擋；仍走來源信譽與 agent 驗證。
 - `scraper/smoke_test.py` 新增 3 項測試：chiba-tv 類型應擋、NOWnews 台灣寶可夢中心新品不擋、可信官方商品來源不套此規則。驗證：`smoke_test.py` 66 passed、`data_lint.py` 0 error / 0 warning。
+
+## 21. 2026-06-15 線上資料錯誤與 placeholder 修復
+
+- 問題：16:04 Python scraper 將 `po-5c029c`「寶可夢中心香川開幕」加入資料，`sourceUrl` 是 Google Search placeholder，日期 `2026-10-24` 只來自搜尋/新聞候選訊號。16:35 agent 已確認官方 Pokémon Center Kagawa 頁面無此開幕日期佐證並刪除，但 agent commit `c824043` 一開始沒有推上遠端，導致線上仍短暫顯示錯資料。
+- 已處理：手動推上 `c824043 agent verify events 2026-06-15`，GitHub Pages 已刷新為 43 筆，`po-5c029c` 與 Google Search placeholder 已消失。
+- 程式修正：
+  - `scraper/scrape.py` 新增 `is_unstable_source_url()`；Google Search / Google News placeholder 不再進正式資料。
+  - `extract_event()` 找不到穩定原文 URL 時回傳 `_skipNoProcess`，主迴圈不入庫、也不寫入 `processed.json`，讓隔天可重試。
+  - `NOISE_KEYWORDS` 補 `Pokémon GO` / `Pokemon GO` / `ポケモンGO` / `寶可夢GO`，避免台北捷運/GO Fest 類資訊送 AI。
+- 測試新增：Pokémon GO 送 AI 前過濾、Google Search/News placeholder 判為不穩定、NOWnews 真實 URL 保留。驗證：`smoke_test.py` 70 passed、`data_lint.py` 0 error / 0 warning。
