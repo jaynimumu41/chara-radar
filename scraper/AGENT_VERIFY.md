@@ -165,10 +165,17 @@ Run `python verify_links.py` if any `sourceUrl` is changed.
 If files changed and tests pass, commit and push:
 
 ```powershell
+Set-Location 'C:\Users\USER\Documents\claude\chara-radar'
 git add data/events.json scraper/rejected.json data/source_reputation.json
 git commit -m "agent verify events YYYY-MM-DD"
-git push origin main
+git push --porcelain --no-progress origin main
+& 'C:\Users\USER\AppData\Local\Python\pythoncore-3.14-64\python.exe' scraper\verify_publish.py
 ```
+
+Do not report success until `verify_publish.py` prints `publish_ok=true`. If the
+remote HEAD differs from local HEAD, push again. If GitHub Pages is stale, keep
+polling via `verify_publish.py`; report a publish failure only after the script
+times out.
 
 If nothing changed, leave the repo clean and summarize the checked candidates in
 the automation result.

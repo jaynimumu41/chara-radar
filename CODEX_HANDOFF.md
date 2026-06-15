@@ -320,3 +320,12 @@ automation 的職責不是再跑一次爬蟲，而是依第 5 節對高風險筆
   - `extract_event()` 找不到穩定原文 URL 時回傳 `_skipNoProcess`，主迴圈不入庫、也不寫入 `processed.json`，讓隔天可重試。
   - `NOISE_KEYWORDS` 補 `Pokémon GO` / `Pokemon GO` / `ポケモンGO` / `寶可夢GO`，避免台北捷運/GO Fest 類資訊送 AI。
 - 測試新增：Pokémon GO 送 AI 前過濾、Google Search/News placeholder 判為不穩定、NOWnews 真實 URL 保留。驗證：`smoke_test.py` 70 passed、`data_lint.py` 0 error / 0 warning。
+
+## 22. 2026-06-15 Agent 發布確認防呆
+
+- 根因：`scraper/AGENT_VERIFY.md` 雖然要求 agent commit + push，但沒有機械檢查「遠端 main 是否等於本地 HEAD」與「GitHub Pages 的 `data/events.json` 是否已刷新」。6/14 與 6/15 都發生本地 agent commit 已建立、但遠端仍停在 16:04 Python data update 的狀況。
+- 修正：
+  - 新增 `scraper/verify_publish.py`。
+  - 檢查 `git rev-parse HEAD` 是否等於 `git ls-remote origin refs/heads/main`。
+  - 輪詢 `https://jaynimumu41.github.io/chara-radar/data/events.json`，直到線上 JSON 與本地 `data/events.json` 完全一致。
+  - `scraper/AGENT_VERIFY.md` 的 commit/push 區塊改為先 `Set-Location` 回 repo 根目錄，push 後必跑 `verify_publish.py`；沒看到 `publish_ok=true` 不可回報成功。
