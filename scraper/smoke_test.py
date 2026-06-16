@@ -22,6 +22,7 @@ if hasattr(sys.stdout, "reconfigure"):
 
 import scrape
 import official_sources
+import audit_chiikawa_subpages
 import agent_verify_candidates
 import source_reputation
 import verify_links
@@ -156,6 +157,40 @@ check("NOWnews 真實 URL→穩定來源",
 check("連結驗證網路 URL 去掉 fragment",
       verify_links._network_url("https://chiikawa-info.jp/p26/mck_scpus/index.html#abc123"),
       "https://chiikawa-info.jp/p26/mck_scpus/index.html")
+sample_chiikawa_home = """
+<a href="/p26/foo/index.html">Foo <span>Store</span></a>
+<a href="https://chiikawa-info.jp/p26/bar/">Bar</a>
+[Movie](https://chiikawa-info.jp/p26/mck_scpus/index.html#abc123)
+<a href="https://example.com/p26/nope/index.html">Nope</a>
+"""
+chiikawa_links = audit_chiikawa_subpages.extract_p26_links(sample_chiikawa_home)
+check("吉伊卡哇首頁 p26 子頁連結正規化",
+      [(l.url, l.title) for l in chiikawa_links],
+      [
+          ("https://chiikawa-info.jp/p26/bar/index.html", "Bar"),
+          ("https://chiikawa-info.jp/p26/foo/index.html", "Foo Store"),
+          ("https://chiikawa-info.jp/p26/mck_scpus/index.html", "Movie"),
+      ])
+audit_rows = audit_chiikawa_subpages.audit_links(
+    chiikawa_links,
+    parsed_pages={"https://chiikawa-info.jp/p26/foo/index.html": ["ch-test"]},
+    ignored_pages={"https://chiikawa-info.jp/p26/bar/index.html": "test ignore"},
+    details_by_url={
+        "https://chiikawa-info.jp/p26/mck_scpus/index.html":
+            "映画ちいかわ POP UP STORE 会場 イオンモール "
+            "2026年7月10日(金)～7月20日(月祝) 限定グッズ",
+    },
+)
+check("吉伊卡哇首頁 p26 子頁稽核分類",
+      [(r.url.rsplit("/p26/", 1)[1], r.status, r.risk, r.event_ids) for r in audit_rows],
+      [
+          ("bar/index.html", "ignored", "-", ()),
+          ("foo/index.html", "parsed", "-", ("ch-test",)),
+          ("mck_scpus/index.html", "needs_review", "high", ()),
+      ])
+check("吉伊卡哇首頁 p26 子頁高風險訊號",
+      audit_rows[2].signals.labels,
+      ["date", "date_range", "collectible", "venue"])
 
 sample_otaru_info = (
     "### [ちいかわベビーカステラ](https://www.chiikawamogumogu.jp/stores/castella/) "
@@ -191,6 +226,25 @@ check("電影吉伊卡哇 POP UP 解析城市與國家",
        ("Taipei", "TW", "2026-07-10", "2026-08-30")])
 check("電影吉伊卡哇 POP UP 每場 sourceUrl 不共用",
       len({e["sourceUrl"] for e in movie_events}), 3)
+sample_movie_goods = (
+    "映画ちいかわ POPUP in TOHOシネマズ "
+    "＜2026年7月10日(金)～8月31日(月)＞ "
+    "TOHOシネマズ南大沢 TOHOシネマズ仙台 "
+    "フジテレビ グッズ取扱い店舗 "
+    "＜2026年7月25日(土)～8月23日(日)＞ "
+    "お台場ファンライジング ちいかわお台場商店 22階店 "
+    "お台場ファンライジング ちいかわお台場商店 1階フジテレビ モール店"
+)
+movie_goods = official_sources._chiikawa_movie_goods_events_from_text(
+    sample_movie_goods, correct_city=scrape.correct_city)
+check("電影吉伊卡哇グッズ取扱店 高信心區塊解析數量",
+      len(movie_goods), 2)
+check("電影吉伊卡哇グッズ取扱店 解析類型城市日期",
+      [(e["type"], e["city"], e["startDate"], e["endDate"]) for e in movie_goods],
+      [("new_product", "", "2026-07-10", "2026-08-31"),
+       ("new_product", "Tokyo", "2026-07-25", "2026-08-23")])
+check("電影吉伊卡哇グッズ取扱店 sourceUrl 不共用",
+      len({e["sourceUrl"] for e in movie_goods}), 2)
 
 # ── agent_verify_candidates ─────────────────────────────────────────────────
 print("\n[agent_verify_candidates] 每日驗證候選")

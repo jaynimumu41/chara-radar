@@ -45,6 +45,19 @@ $env:PYTHONIOENCODING='utf-8'
 The candidate script is only a triage tool. It does not prove correctness and it
 does not replace web verification.
 
+5. Chiikawa official homepage subpage audit:
+
+```powershell
+$env:PYTHONIOENCODING='utf-8'
+& 'C:\Users\USER\AppData\Local\Python\pythoncore-3.14-64\python.exe' scraper\audit_chiikawa_subpages.py --format markdown
+```
+
+Treat `needs_review` rows as official-source coverage gaps. A high-risk row
+means the page appears to contain dates, venue/location signals, and collectible
+or store/cafe signals, so check it before concluding the daily data is complete.
+Do not add it automatically; either add a structured parser, mark it explicitly
+out of scope in the auditor, or leave it as an open risk in the daily note.
+
 ## Verification Loop
 
 For each high-risk candidate:
@@ -69,9 +82,10 @@ For each high-risk candidate:
 Chiikawa official structured sources include `chiikawa-info.jp/pus.html`,
 `chiikawa-info.jp/` homepage cards, `chiikawa-info.jp/p26/mck_scpus/index.html`
 movie POP UP venue schedules, and `chiikawamogumogu.jp` shop pages.
-Do not assume the Chiikawa official index is fully covered: if the homepage
-links a new `p26/.../index.html` page with concrete venue/date rows, audit
-whether `official_sources.py` already parses it or add a structured parser.
+Do not assume the Chiikawa official index is fully covered: use
+`audit_chiikawa_subpages.py` to find any `p26/.../index.html` page not currently
+represented by `events.json`, then audit whether `official_sources.py` already
+parses it or add a structured parser.
 Permanent or semi-permanent shop openings such as `ちいかわベビーカステラ` should
 use `type=store`; an empty `endDate` is expected when the source presents an
 opening date rather than a limited run.

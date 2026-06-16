@@ -32,6 +32,7 @@ import requests
 from verify_links import check_url, page_mentions  # 存檔前驗證來源連結：連得過去 + 內容與品牌相關
 from official_sources import (fetch_official, fetch_chiikawa_popups,
                               fetch_chiikawa_mogumogu,
+                              fetch_chiikawa_movie_goods,
                               fetch_chiikawa_movie_popups,
                               fetch_pokemon_popups, fetch_pokemon_tw_goods,
                               fetch_miffy_events)  # 官方來源：PR TIMES + 結構化排程頁
@@ -96,7 +97,7 @@ AREA_TO_CITY = {
     "Nagoya":   ["名古屋", "栄", "ラシック", "名駅", "大須"],
     "Nagasaki": ["長崎", "ハウステンボス", "豪斯登堡", "Huis Ten Bosch", "佐世保"],
     "Saitama":  ["埼玉", "羽生", "Hanyu", "大宮", "Omiya", "越谷", "Koshigaya",
-                 "レイクタウン", "Laketown", "川越"],
+                 "レイクタウン", "Laketown", "川越", "川口"],
     "Hokkaido": ["北海道", "札幌", "小樽", "函館", "新千歳", "千歳"],
     "Okinawa":  ["沖縄", "沖繩", "那覇", "ライカム"],
     "Kanagawa": ["神奈川", "横浜", "横濱", "橫濱", "川崎", "みなとみらい", "ワールドポーターズ"],
@@ -122,6 +123,7 @@ AREA_TO_CITY = {
     "Kochi":    ["高知", "Kochi"],
     "Ehime":    ["愛媛", "今治", "松山"],
     "Ishikawa": ["石川", "金沢", "金澤", "香林坊"],
+    "Ibaraki":  ["茨城", "水戸", "京成百貨店"],
     "Taipei":   ["台北", "臺北", "信義", "西門", "微風", "南山", "華山", "中山",
                  "松山", "內湖", "板橋", "101"],
     "Taichung": ["台中", "臺中", "草悟", "勤美"],
@@ -901,7 +903,10 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
         dkey = (b + "|" + city + "|" + sd) if (
             city and sd and ev.get("type", "") in ACTIVITY_TYPES
         ) else None  # 活動型同品牌同城同開始日；商品同日可能不同系列，不套用
-        thkeys = [b + "|" + t for t in theme_tokens(ev.get("title"), ev.get("summaryZh"))]
+        # 商品型同一品牌常在同日/同頁推出多個系列；不要只靠主題詞合併。
+        thkeys = [] if ev.get("type", "") in SELLING_TYPES else [
+            b + "|" + t for t in theme_tokens(ev.get("title"), ev.get("summaryZh"))
+        ]
 
         hit = None
         if ukey and ukey in url_keys:        # 相同真實來源 = 同一活動
@@ -1242,6 +1247,7 @@ def run(brands: list[str]):
             structured = (
                 fetch_chiikawa_popups(correct_city=correct_city)
                 + fetch_chiikawa_mogumogu(correct_city=correct_city)
+                + fetch_chiikawa_movie_goods(correct_city=correct_city)
                 + fetch_chiikawa_movie_popups(correct_city=correct_city)
             )
             if structured:

@@ -32,7 +32,7 @@
 
 | 管線 | 來源 | 用 AI? | 品質 | 程式 |
 | -- | -- | -- | -- | -- |
-| **結構化官方頁** | 吉伊卡哇 `chiikawa-info.jp/pus.html`＋官方首頁卡片＋`p26/mck_scpus/index.html` 電影 POP UP 多會場頁、寶可夢 `oneheart65.net` 出張所排程＋台灣官方商品頁 `tw.portal-pokemon.com/goods/`、Miffy `dickbruna.jp/event/`＋Kiddy Land / miffy style 站內搜尋 | 否（regex+模板） | **已達手動品質，但 Chiikawa 官方子頁仍需稽核器** | `scraper/official_sources.py` |
+| **結構化官方頁** | 吉伊卡哇 `chiikawa-info.jp/pus.html`＋官方首頁卡片＋`p26/mck_scpus/index.html` 電影 POP UP 多會場頁、寶可夢 `oneheart65.net` 出張所排程＋台灣官方商品頁 `tw.portal-pokemon.com/goods/`、Miffy `dickbruna.jp/event/`＋Kiddy Land / miffy style 站內搜尋 | 否（regex+模板） | **已達手動品質；Chiikawa 子頁另有稽核器找 coverage gap** | `scraper/official_sources.py` / `scraper/audit_chiikawa_subpages.py` |
 | **新聞段** | PR TIMES 關鍵字、Google News RSS（日＋中） | 是（Gemini 萃取） | **品質不穩，你的主戰場** | `scraper/scrape.py` |
 
 - 三麗鷗**沒有**可解析的結構化官方頁（`sanrio.co.jp` 503／JS 動態／REST 空，已確認不可行），且全靠新聞段＋Gemini，品質最弱；目前已暫停預設抓取與前端顯示。
@@ -153,6 +153,7 @@ python smoke_test.py      # 目前 53 項，exit 0 = 全過
 涵蓋：城市/場館/年份/彙整/日期擷取/過期判定/去重。
 **你新增任何規則，務必同步補一個正例＋一個「不可誤殺」反例。**
 另有 `python verify_links.py` 可稽核所有 sourceUrl 連得過去（不花配額）。
+Chiikawa 官方首頁子頁 coverage 可用 `python scraper/audit_chiikawa_subpages.py --format markdown` 稽核；`needs_review` 不代表可直接入庫，需人工確認或補結構化 parser。
 
 ---
 
@@ -342,4 +343,17 @@ automation 的職責不是再跑一次爬蟲，而是依第 5 節對高風險筆
   - `scraper/smoke_test.py` 新增電影 POP UP 多會場解析、sourceUrl 不共用、fragment URL 驗證 cache 測試。
 - 新增資料：16 筆官方 Chiikawa 電影 POP UP STORE（15 筆日本、1 筆台北華山），資料總量變為 59 筆：Chiikawa 38、Miffy 10、Pokémon 11。
 - 驗證：`smoke_test.py` 74 passed、`data_lint.py` 0 error / 0 warning、`verify_links.py` 59/59 OK、`agent_verify_candidates.py --format markdown --limit 20` 沒把這批完整官方結構化資料列成高風險。
-- 仍有風險：可能還有其他 `chiikawa-info.jp/index.html` 連出的官方子頁未被結構化解析。下一步應建立官方首頁子頁稽核：列出所有 `chiikawa-info.jp/p26/.../index.html`，標記「已解析 / 不符收錄 / 待確認」，並優先把有明確會場＋日期的頁面變成 generic parser。
+- 仍有風險：可能還有其他 `chiikawa-info.jp/index.html` 連出的官方子頁未被結構化解析。此風險已在第 24 節新增官方首頁子頁稽核器處理；後續每日應持續跑 audit，看到新的 `needs_review` 再補 parser 或標為不收。
+
+## 24. 2026-06-16 Chiikawa 官方首頁子頁稽核器
+
+- 新增 `scraper/audit_chiikawa_subpages.py`，從 `https://chiikawa-info.jp/index.html` 抽出所有 `chiikawa-info.jp/p26/.../index.html` 子頁，對照 `data/events.json` 的 Chiikawa `sourceUrl`，標記：
+  - `parsed`：目前正式資料已有同一官方子頁來源（含 `#fragment` 會正規化成實際網路 URL）。
+  - `ignored`：已由人工明確標為不收；目前清單預設空白，避免自動誤判。
+  - `needs_review`：首頁有連，但正式資料尚無同子頁；工具會用日期、日期區間、商品/店鋪、會場訊號提示 risk。
+- `needs_review` 不會自動新增資料；high risk 頁面應優先人工確認，若有明確會場＋日期＋限定商品/餐飲/實體店訊號，再補 `official_sources.py` 結構化 parser。
+- 2026-06-16 首次稽核結果：`ck_movie` 已補結構化 parser；`mck_scpus` 已解析；`ck_tokyo` 因 2026-02-06 取扱開始且無現行結束日，超過新品 60 天窗口，列為 `ignored`。
+- 新增資料：2 筆官方 Chiikawa 電影商品取扱店資料，資料總量 61 筆：Chiikawa 40、Miffy 10、Pokémon 11。
+- 驗證：`smoke_test.py` 80 passed、`data_lint.py` 0 error / 0 warning、`verify_links.py` 61/61 OK、`audit_chiikawa_subpages.py` found 3 / parsed 2 / ignored 1 / needs_review 0。
+- `scraper/smoke_test.py` 新增 p26 連結正規化、分類與 high-risk 訊號測試。
+- `scraper/RULES.md` 與 `scraper/AGENT_VERIFY.md` 已補每日 agent 應跑此稽核器。

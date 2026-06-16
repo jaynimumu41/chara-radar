@@ -1413,5 +1413,53 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-16",
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002083.000022901.html"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "電影吉伊卡哇 TOHOシネマズ 電影商品",
+    "type": "new_product",
+    "country": "JP",
+    "city": "",
+    "locationName": "TOHOシネマズ対象劇場",
+    "startDate": "2026-07-10",
+    "endDate": "2026-08-31",
+    "summaryZh": "「映画ちいかわ 人魚の島のひみつ」電影相關周邊於TOHOシネマズ対象劇場期間限定販售。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "吉伊卡哇",
+      "電影",
+      "限定周邊",
+      "實體店"
+    ],
+    "id": "ch-87217f",
+    "sourceType": "official_site",
+    "createdAt": "2026-06-16",
+    "sourceTitle": "映画ちいかわグッズ・取扱い店舗情報 電影吉伊卡哇 TOHOシネマズ 電影商品(2026-07-10～2026-08-31) - ちいかわ公式",
+    "sourceUrl": "https://chiikawa-info.jp/p26/ck_movie/index.html#c4172488"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "電影吉伊卡哇 フジテレビグッズ取扱い店舗",
+    "type": "new_product",
+    "country": "JP",
+    "city": "Tokyo",
+    "locationName": "お台場ファンライジング ちいかわお台場商店 22階店／1階フジテレビ モール店",
+    "startDate": "2026-07-25",
+    "endDate": "2026-08-23",
+    "summaryZh": "「映画ちいかわ 人魚の島のひみつ」電影相關周邊於お台場ファンライジング ちいかわお台場商店 22階店／1階フジテレビ モール店期間限定販售。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "吉伊卡哇",
+      "電影",
+      "限定周邊",
+      "實體店"
+    ],
+    "id": "ch-56b54b",
+    "sourceType": "official_site",
+    "createdAt": "2026-06-16",
+    "sourceTitle": "映画ちいかわグッズ・取扱い店舗情報 電影吉伊卡哇 フジテレビグッズ取扱い店舗(2026-07-25～2026-08-23) - ちいかわ公式",
+    "sourceUrl": "https://chiikawa-info.jp/p26/ck_movie/index.html#8ab6adf1"
   }
 ]

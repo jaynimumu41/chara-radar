@@ -18,7 +18,7 @@ Sanrio（三麗鷗）先暫停，因無結構化來源、新聞/Gemini 污染最
 
 - 結構化來源每次跑都以官方最新清單覆蓋同來源 URL 的舊資料（過期由 `clean_events` 移除）。
 - 吉伊卡哇除了 POP UP STORE 排程，也抓官方首頁上的活動/店鋪卡片、`p26/mck_scpus/index.html` 電影 POP UP 多會場頁與 `chiikawamogumogu.jp` 專門店頁；這類官方子頁、常設店開幕、限定餐飲與原創周邊不一定會進 Google News/RSS，需走結構化解析。
-- 目前尚未建立「巡覽 `chiikawa-info.jp/index.html` 全部子頁並自動判斷已解析/不收/待確認」的稽核器；新增官方子頁時仍可能漏抓，這是下一階段優先改善項。
+- `scraper/audit_chiikawa_subpages.py` 會巡覽 `chiikawa-info.jp/index.html` 連出的 `p26/.../index.html` 子頁，對照 `data/events.json` 標記 `parsed` / `ignored` / `needs_review`。`needs_review` 只是稽核提示，不會自動入庫；有明確會場＋日期＋商品/店鋪訊號的 high risk 頁面，應優先補結構化 parser 或人工標成不收。
 - oneheart65 的 Pokémon Center 出張所不是品牌官方站，但本專案以結構化方式解析其排程，日期已列入可信日期來源；完整起訖日的出張所不再進每日 agent 高風險候選。
 - 台灣寶可夢官方商品頁會解析 Next.js embedded data，只收「內頁明確寫 Pokémon Center TAIPEI 登場／販售」的近期商品；LINE 貼圖/主題、卡牌、遊戲、純線上授權商品一律過濾。Instagram 僅作 agent/人工驗證輔助，不納入純 Python 抓取主來源。
 - 台灣 Pokémon Center 新品若只出現在 NOWnews / Pokemon Hubs 等二手來源，需列入 agent 高風險候選；但若內文明確寫台灣寶可夢中心 / Pokémon Center TAIPEI、實體店開賣日、商品內容，且沒有官方或其他來源反證，可暫留，不因官方商品頁查無同筆就直接刪除。

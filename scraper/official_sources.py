@@ -154,6 +154,7 @@ HEADERS_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
 _CHIIKAWA_PUS = "https://chiikawa-info.jp/pus.html"
 _CHIIKAWA_INFO_TOP = "https://chiikawa-info.jp/"
 _CHIIKAWA_MOGUMOGU_CASTELLA = "https://www.chiikawamogumogu.jp/stores/castella/"
+_CHIIKAWA_MOVIE_GOODS = "https://chiikawa-info.jp/p26/ck_movie/index.html"
 _CHIIKAWA_MOVIE_POPUP = "https://chiikawa-info.jp/p26/mck_scpus/index.html"
 # 解析：### [ちいかわPOP UP STORE <會場>](https://chiikawa-info.jp/p26/.../index.html)  2026年6月5日(金)～6月22日(月)  <會場詳址>
 _PUS_ROW = re.compile(
@@ -181,11 +182,29 @@ _MOVIE_POPUP_PLAIN_ROW = re.compile(
     r"(?:(20\d\d)年)?(\d{1,2})月(\d{1,2})日",
     re.S,
 )
+_JP_DATE_RANGE = (
+    r"(20\d\d)年(\d{1,2})月(\d{1,2})日(?:\([^)]*\))?[〜～]\s*"
+    r"(?:(20\d\d)年)?(\d{1,2})月(\d{1,2})日(?:\([^)]*\))?"
+)
+_MOVIE_GOODS_TOHO = re.compile(
+    rf"映画ちいかわ\s*POPUP\s*in\s*TOHOシネマズ[\s\S]{{0,120}}?＜\s*{_JP_DATE_RANGE}\s*＞",
+    re.S,
+)
+_MOVIE_GOODS_FUJI = re.compile(
+    rf"フジテレビ\s*グッズ取扱い店舗[\s\S]{{0,120}}?＜\s*{_JP_DATE_RANGE}\s*＞",
+    re.S,
+)
 
 
 def _event_source_fragment(*parts: str) -> str:
     text = "|".join(p for p in parts if p)
     return hashlib.md5(text.encode("utf-8")).hexdigest()[:8]
+
+
+def _date_range_to_iso(sy, sm, sd, ey, em, ed) -> tuple[str, str]:
+    sy, sm, sd, em, ed = int(sy), int(sm), int(sd), int(em), int(ed)
+    ey = int(ey) if ey else (sy + 1 if em < sm else sy)
+    return f"{sy:04d}-{sm:02d}-{sd:02d}", f"{ey:04d}-{em:02d}-{ed:02d}"
 
 
 def fetch_chiikawa_popups(correct_city=None) -> list[dict]:
@@ -317,6 +336,72 @@ def _chiikawa_movie_popup_events_from_text(md: str, correct_city=None) -> list[d
         add_event(venue, f"{sy:04d}-{sm:02d}-{sd:02d}", f"{ey:04d}-{em:02d}-{ed:02d}")
 
     return out
+
+
+def _chiikawa_movie_goods_events_from_text(md: str, correct_city=None) -> list[dict]:
+    """Parse high-confidence physical-store movie goods blocks from ck_movie.
+
+    This intentionally skips broad web-shop/permanent-store handling rows and the
+    mck_scpus venue schedule, which is parsed by fetch_chiikawa_movie_popups().
+    """
+    today = _today_iso()
+    out: list[dict] = []
+
+    def add_event(kind: str, title: str, typ: str, location: str, start: str, end: str):
+        if end < today:
+            return
+        city = correct_city(location, title) if correct_city else ""
+        fragment = _event_source_fragment(kind, start, end)
+        out.append({
+            "brand": "chiikawa",
+            "title": title,
+            "type": typ,
+            "country": "JP", "city": city or "",
+            "locationName": location,
+            "startDate": start, "endDate": end,
+            "summaryZh": f"「映画ちいかわ 人魚の島のひみつ」電影相關周邊於{location}期間限定販售。",
+            "needReservation": False, "hasLimitedGoods": True,
+            "tags": ["吉伊卡哇", "電影", "限定周邊", "實體店"],
+            "id": _stable_id("ch", f"{_CHIIKAWA_MOVIE_GOODS}|{kind}|{start}|{end}"),
+            "sourceType": "official_site", "createdAt": today,
+            "sourceTitle": f"映画ちいかわグッズ・取扱い店舗情報 {title}({start}～{end}) - ちいかわ公式",
+            "sourceUrl": f"{_CHIIKAWA_MOVIE_GOODS}#{fragment}",
+        })
+
+    m = _MOVIE_GOODS_TOHO.search(md or "")
+    if m and "TOHOシネマズ" in (md or ""):
+        start, end = _date_range_to_iso(*m.groups())
+        add_event(
+            "toho-cinemas",
+            "電影吉伊卡哇 TOHOシネマズ 電影商品",
+            "new_product",
+            "TOHOシネマズ対象劇場",
+            start,
+            end,
+        )
+
+    m = _MOVIE_GOODS_FUJI.search(md or "")
+    if m:
+        start, end = _date_range_to_iso(*m.groups())
+        add_event(
+            "fujitv-goods",
+            "電影吉伊卡哇 フジテレビグッズ取扱い店舗",
+            "new_product",
+            "お台場ファンライジング ちいかわお台場商店 22階店／1階フジテレビ モール店",
+            start,
+            end,
+        )
+
+    return out
+
+
+def fetch_chiikawa_movie_goods(correct_city=None) -> list[dict]:
+    """解析映画ちいかわ官方商品取扱店頁的高信心實體販售區塊。"""
+    md = _proxy_markdown(_CHIIKAWA_MOVIE_GOODS)
+    if not md:
+        print("    ⚠️  映画ちいかわグッズ取扱店頁抓取失敗（直連＋代理都不行）")
+        return []
+    return _chiikawa_movie_goods_events_from_text(md, correct_city=correct_city)
 
 
 def fetch_chiikawa_movie_popups(correct_city=None) -> list[dict]:
