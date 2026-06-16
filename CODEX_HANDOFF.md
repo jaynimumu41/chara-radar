@@ -22,7 +22,7 @@
 - **線上**：https://jaynimumu41.github.io/chara-radar/ （GitHub Pages，手機可看）
 - **Repo**：`jaynimumu41/chara-radar`（**公開**，main 為 Pages 來源）
 - **本機路徑**：`C:\Users\USER\Documents\claude\chara-radar`
-- **目前狀態**：Sanrio 暫停後 `data/events.json` 共 39 筆（2026-06-10 修復後）。
+- **目前狀態**：Sanrio 暫停；最新資料量請以 `data/events.json` 為準。2026-06-16 修復 Chiikawa 電影 POP UP 官方頁後為 59 筆（Chiikawa 38、Miffy 10、Pokémon 11）。
 
 ---
 
@@ -32,7 +32,7 @@
 
 | 管線 | 來源 | 用 AI? | 品質 | 程式 |
 | -- | -- | -- | -- | -- |
-| **結構化官方頁** | 吉伊卡哇 `chiikawa-info.jp/pus.html`、寶可夢 `oneheart65.net` 出張所排程＋台灣官方商品頁 `tw.portal-pokemon.com/goods/`、Miffy `dickbruna.jp/event/`＋Kiddy Land / miffy style 站內搜尋 | 否（regex+模板） | **已達手動品質** | `scraper/official_sources.py` |
+| **結構化官方頁** | 吉伊卡哇 `chiikawa-info.jp/pus.html`＋官方首頁卡片＋`p26/mck_scpus/index.html` 電影 POP UP 多會場頁、寶可夢 `oneheart65.net` 出張所排程＋台灣官方商品頁 `tw.portal-pokemon.com/goods/`、Miffy `dickbruna.jp/event/`＋Kiddy Land / miffy style 站內搜尋 | 否（regex+模板） | **已達手動品質，但 Chiikawa 官方子頁仍需稽核器** | `scraper/official_sources.py` |
 | **新聞段** | PR TIMES 關鍵字、Google News RSS（日＋中） | 是（Gemini 萃取） | **品質不穩，你的主戰場** | `scraper/scrape.py` |
 
 - 三麗鷗**沒有**可解析的結構化官方頁（`sanrio.co.jp` 503／JS 動態／REST 空，已確認不可行），且全靠新聞段＋Gemini，品質最弱；目前已暫停預設抓取與前端顯示。
@@ -329,3 +329,17 @@ automation 的職責不是再跑一次爬蟲，而是依第 5 節對高風險筆
   - 檢查 `git rev-parse HEAD` 是否等於 `git ls-remote origin refs/heads/main`。
   - 輪詢 `https://jaynimumu41.github.io/chara-radar/data/events.json`，直到線上 JSON 與本地 `data/events.json` 完全一致。
   - `scraper/AGENT_VERIFY.md` 的 commit/push 區塊改為先 `Set-Location` 回 repo 根目錄，push 後必跑 `verify_publish.py`；沒看到 `publish_ok=true` 不可回報成功。
+
+## 23. 2026-06-16 Chiikawa 電影 POP UP 官方子頁漏抓修復
+
+- 問題：使用者提供 `https://chiikawa-info.jp/index.html` 與官方子頁 `https://chiikawa-info.jp/p26/mck_scpus/index.html`，確認「映画ちいかわ 人魚の島のひみつ POP UP STORE」頁面內有日本多地與台北華山的期間限定 POP UP STORE，但系統沒有抓到。
+- 根因：既有 Chiikawa 官方結構化來源只解析 `chiikawa-info.jp/pus.html`、首頁特定卡片與 `chiikawamogumogu.jp` 小樽店頁；沒有巡覽或解析 `chiikawa-info.jp/index.html` 連出的所有 `p26/.../index.html` 活動子頁。因此這不是非官方驗證問題，而是官方來源覆蓋不足。
+- 是否今天才出現：待確認。只能確認 2026-06-16 查詢時頁面已存在；但不論發布日為何，舊 parser 都不會抓到這個子頁。
+- 修正：
+  - `scraper/official_sources.py` 新增 `fetch_chiikawa_movie_popups()`，解析 `p26/mck_scpus/index.html` 的 linked venue rows 與台北華山 plain row，產生零 Gemini 官方結構化資料。
+  - `scraper/scrape.py` 將 `fetch_chiikawa_movie_popups()` 接入 Chiikawa 結構化流程，並補 `AREA_TO_CITY` 對新潟、岡山、鳥取、奈良、福島、長野、岐阜、宮崎、山梨、宮城等會場地名的城市判定。
+  - `scraper/verify_links.py` 對 sourceUrl fragment 做 `urldefrag` 與 cache；同一官方頁拆成多筆 `#hash` 來源時，只檢查實際網路 URL 一次，避免連續請求被 Cloudflare 擋成 403。
+  - `scraper/smoke_test.py` 新增電影 POP UP 多會場解析、sourceUrl 不共用、fragment URL 驗證 cache 測試。
+- 新增資料：16 筆官方 Chiikawa 電影 POP UP STORE（15 筆日本、1 筆台北華山），資料總量變為 59 筆：Chiikawa 38、Miffy 10、Pokémon 11。
+- 驗證：`smoke_test.py` 74 passed、`data_lint.py` 0 error / 0 warning、`verify_links.py` 59/59 OK、`agent_verify_candidates.py --format markdown --limit 20` 沒把這批完整官方結構化資料列成高風險。
+- 仍有風險：可能還有其他 `chiikawa-info.jp/index.html` 連出的官方子頁未被結構化解析。下一步應建立官方首頁子頁稽核：列出所有 `chiikawa-info.jp/p26/.../index.html`，標記「已解析 / 不符收錄 / 待確認」，並優先把有明確會場＋日期的頁面變成 generic parser。

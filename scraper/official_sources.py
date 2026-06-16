@@ -154,6 +154,7 @@ HEADERS_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
 _CHIIKAWA_PUS = "https://chiikawa-info.jp/pus.html"
 _CHIIKAWA_INFO_TOP = "https://chiikawa-info.jp/"
 _CHIIKAWA_MOGUMOGU_CASTELLA = "https://www.chiikawamogumogu.jp/stores/castella/"
+_CHIIKAWA_MOVIE_POPUP = "https://chiikawa-info.jp/p26/mck_scpus/index.html"
 # 解析：### [ちいかわPOP UP STORE <會場>](https://chiikawa-info.jp/p26/.../index.html)  2026年6月5日(金)～6月22日(月)  <會場詳址>
 _PUS_ROW = re.compile(
     r"\[ちいかわPOP ?UP ?STORE\s*([^\]]+?)\]"
@@ -168,6 +169,23 @@ _CHIIKAWA_OTARU_CASTELLA = re.compile(
     r"(20\d\d)年(\d{1,2})月(\d{1,2})日(?:\([^)]*\))?[〜～]\s*"
     r"ちいかわもぐもぐ本舗\s*小樽店にオープン"
 )
+_MOVIE_POPUP_LINK_ROW = re.compile(
+    r"\[([^\]]+?)\]\((https?://[^)]+)\)\s*"
+    r"(20\d\d)年(\d{1,2})月(\d{1,2})日(?:\([^)]*\))?[〜～]\s*"
+    r"(?:(20\d\d)年)?(\d{1,2})月(\d{1,2})日",
+    re.S,
+)
+_MOVIE_POPUP_PLAIN_ROW = re.compile(
+    r"(華山1914文創園區\s*藝術西街)\s*"
+    r"(20\d\d)年(\d{1,2})月(\d{1,2})日(?:\([^)]*\))?[〜～]\s*"
+    r"(?:(20\d\d)年)?(\d{1,2})月(\d{1,2})日",
+    re.S,
+)
+
+
+def _event_source_fragment(*parts: str) -> str:
+    text = "|".join(p for p in parts if p)
+    return hashlib.md5(text.encode("utf-8")).hexdigest()[:8]
 
 
 def fetch_chiikawa_popups(correct_city=None) -> list[dict]:
@@ -254,6 +272,60 @@ def fetch_chiikawa_mogumogu(correct_city=None) -> list[dict]:
 
     event = _chiikawa_otaru_castella_event(info_md, shop_md, correct_city=correct_city)
     return [event] if event else []
+
+
+def _chiikawa_movie_popup_events_from_text(md: str, correct_city=None) -> list[dict]:
+    today = _today_iso()
+    out, seen = [], set()
+
+    def add_event(venue: str, start: str, end: str, venue_url: str = ""):
+        venue_clean = re.sub(r"\s+", " ", venue or "").strip()
+        if not venue_clean:
+            return
+        key = f"{venue_clean}|{start}|{end}"
+        if key in seen or end < today:
+            return
+        seen.add(key)
+        city = correct_city(venue_clean) if correct_city else ""
+        fragment = _event_source_fragment(venue_clean, start, end)
+        is_tw = "華山" in venue_clean or "文創" in venue_clean
+        out.append({
+            "brand": "chiikawa",
+            "title": f"電影吉伊卡哇 POP UP STORE {venue_clean.split()[0]}",
+            "type": "popup", "country": "TW" if is_tw else "JP", "city": city or "",
+            "locationName": venue_clean,
+            "startDate": start, "endDate": end,
+            "summaryZh": f"「映画ちいかわ 人魚の島のひみつ」POP UP STORE 於{venue_clean}期間限定登場，販售電影相關限定周邊商品。",
+            "needReservation": False, "hasLimitedGoods": True,
+            "tags": ["吉伊卡哇", "電影", "快閃店", "限定周邊"],
+            "id": _stable_id("ch", f"{_CHIIKAWA_MOVIE_POPUP}|{key}"),
+            "sourceType": "official_site", "createdAt": today,
+            "sourceTitle": f"映画ちいかわ 人魚の島のひみつ POP UP STORE {venue_clean}({start}～{end}) - ちいかわ公式",
+            "sourceUrl": f"{_CHIIKAWA_MOVIE_POPUP}#{fragment}",
+        })
+
+    for m in _MOVIE_POPUP_LINK_ROW.finditer(md or ""):
+        venue, venue_url, sy, sm, sd, ey, em, ed = m.groups()
+        sy, sm, sd, em, ed = int(sy), int(sm), int(sd), int(em), int(ed)
+        ey = int(ey) if ey else (sy + 1 if em < sm else sy)
+        add_event(venue, f"{sy:04d}-{sm:02d}-{sd:02d}", f"{ey:04d}-{em:02d}-{ed:02d}", venue_url)
+
+    for m in _MOVIE_POPUP_PLAIN_ROW.finditer(md or ""):
+        venue, sy, sm, sd, ey, em, ed = m.groups()
+        sy, sm, sd, em, ed = int(sy), int(sm), int(sd), int(em), int(ed)
+        ey = int(ey) if ey else (sy + 1 if em < sm else sy)
+        add_event(venue, f"{sy:04d}-{sm:02d}-{sd:02d}", f"{ey:04d}-{em:02d}-{ed:02d}")
+
+    return out
+
+
+def fetch_chiikawa_movie_popups(correct_city=None) -> list[dict]:
+    """解析映画ちいかわ官方 POP UP STORE 多會場排程。"""
+    md = _proxy_markdown(_CHIIKAWA_MOVIE_POPUP)
+    if not md:
+        print("    ⚠️  映画ちいかわ POP UP STORE 頁抓取失敗（直連＋代理都不行）")
+        return []
+    return _chiikawa_movie_popup_events_from_text(md, correct_city=correct_city)
 
 
 _POKE_SCHED = "https://oneheart65.net/pokemoncenterbranch_schedule_2/"

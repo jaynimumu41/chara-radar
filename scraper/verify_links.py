@@ -1,7 +1,7 @@
 """驗證 events.json 每一筆的 sourceUrl 是否真的連得過去（不花 Gemini 配額）。
 用瀏覽器 UA、跟隨轉址。回報每一筆的 HTTP 狀態，列出壞掉的（非 2xx/3xx）。
 可被 scrape.py 匯入：check_url(url) -> (ok: bool, code: int)。"""
-import sys, json, urllib.request, urllib.error, ssl
+import sys, json, urllib.request, urllib.error, urllib.parse, ssl
 from pathlib import Path
 
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -15,6 +15,12 @@ _CTX.verify_mode = ssl.CERT_NONE
 # 對 page_mentions 關鍵字比對與 extract_dates 日期掃描都夠用。
 READER_PROXY = "https://r.jina.ai/"
 _BLOCKED_CODES = {401, 403, 429, 451, 503}
+_CHECK_CACHE = {}
+
+
+def _network_url(url: str) -> str:
+    """Fragments are client-side only; cache/check the actual network URL once."""
+    return urllib.parse.urldefrag(url or "")[0]
 
 
 def _raw_fetch(url, timeout, want_text):
@@ -41,11 +47,17 @@ def check_url(url, timeout=20, return_text=False):
         return pack(False, 0)
     if "google.com/search" in url or "news.google.com" in url:
         return pack(True, 200)  # 搜尋頁一定開得了
+    net_url = _network_url(url)
+    cache_key = (net_url, bool(return_text))
+    if cache_key in _CHECK_CACHE:
+        ok, code, text = _CHECK_CACHE[cache_key]
+        return pack(ok, code, text if return_text else "")
 
     code, blocked = -1, True
     try:
-        ok, code, text = _raw_fetch(url, timeout, return_text)
+        ok, code, text = _raw_fetch(net_url, timeout, return_text)
         if ok:
+            _CHECK_CACHE[cache_key] = (True, code, text)
             return pack(True, code, text)
         blocked = code in _BLOCKED_CODES
     except urllib.error.HTTPError as e:
@@ -56,11 +68,13 @@ def check_url(url, timeout=20, return_text=False):
     # 被擋或失敗 → reader 代理 fallback（代理回純文字，當作可達且取得內容）
     if blocked:
         try:
-            pok, _pcode, ptext = _raw_fetch(READER_PROXY + url, max(timeout, 45), True)
+            pok, _pcode, ptext = _raw_fetch(READER_PROXY + net_url, max(timeout, 45), True)
             if pok and ptext.strip():
+                _CHECK_CACHE[cache_key] = (True, 200, ptext if return_text else "")
                 return pack(True, 200, ptext if return_text else "")
         except Exception:
             pass
+    _CHECK_CACHE[cache_key] = (False, code, "")
     return pack(False, code)
 
 

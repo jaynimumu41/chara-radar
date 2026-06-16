@@ -24,6 +24,7 @@ import scrape
 import official_sources
 import agent_verify_candidates
 import source_reputation
+import verify_links
 
 _passed = 0
 _failed = 0
@@ -152,6 +153,9 @@ check("Google News placeholder→不穩定來源",
       scrape.is_unstable_source_url("https://news.google.com/rss/articles/ABC"), True)
 check("NOWnews 真實 URL→穩定來源",
       scrape.is_unstable_source_url("https://www.nownews.com/news/6842060"), False)
+check("連結驗證網路 URL 去掉 fragment",
+      verify_links._network_url("https://chiikawa-info.jp/p26/mck_scpus/index.html#abc123"),
+      "https://chiikawa-info.jp/p26/mck_scpus/index.html")
 
 sample_otaru_info = (
     "### [ちいかわベビーカステラ](https://www.chiikawamogumogu.jp/stores/castella/) "
@@ -169,6 +173,24 @@ check("吉伊卡哇小樽ベビーカステラ店鋪情報解析",
        otaru["needReservation"], otaru["hasLimitedGoods"], otaru["sourceUrl"]),
       ("store", "Hokkaido", "2026-07-18", "", True, True,
        "https://www.chiikawamogumogu.jp/stores/castella/"))
+sample_movie_popup = (
+    "[イオンモール新潟亀田インター 1F スカイコート](https://www.aeon.jp/sc/niigatakameda-inter/) "
+    "2026年7月10日(金)～7月20日(月祝) "
+    "華山1914文創園區 藝術西街 2026年7月10日(金)～8月30日(日) "
+    "[イオンモールKYOTO Sakura館1階 センターコート](https://kyoto.aeonmall.com/) "
+    "2026年8月21日(金)～9月6日(日)"
+)
+movie_events = official_sources._chiikawa_movie_popup_events_from_text(
+    sample_movie_popup, correct_city=scrape.correct_city)
+check("電影吉伊卡哇 POP UP 多會場解析數量",
+      len(movie_events), 3)
+check("電影吉伊卡哇 POP UP 解析城市與國家",
+      [(e["city"], e["country"], e["startDate"], e["endDate"]) for e in movie_events],
+      [("Niigata", "JP", "2026-07-10", "2026-07-20"),
+       ("Kyoto", "JP", "2026-08-21", "2026-09-06"),
+       ("Taipei", "TW", "2026-07-10", "2026-08-30")])
+check("電影吉伊卡哇 POP UP 每場 sourceUrl 不共用",
+      len({e["sourceUrl"] for e in movie_events}), 3)
 
 # ── agent_verify_candidates ─────────────────────────────────────────────────
 print("\n[agent_verify_candidates] 每日驗證候選")

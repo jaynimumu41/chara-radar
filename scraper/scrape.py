@@ -32,6 +32,7 @@ import requests
 from verify_links import check_url, page_mentions  # 存檔前驗證來源連結：連得過去 + 內容與品牌相關
 from official_sources import (fetch_official, fetch_chiikawa_popups,
                               fetch_chiikawa_mogumogu,
+                              fetch_chiikawa_movie_popups,
                               fetch_pokemon_popups, fetch_pokemon_tw_goods,
                               fetch_miffy_events)  # 官方來源：PR TIMES + 結構化排程頁
 
@@ -90,7 +91,7 @@ AREA_TO_CITY = {
                  "ピューロランド", "Puroland", "彩虹樂園", "サンリオピューロランド"],
     "Osaka":    ["大阪", "梅田", "心斎橋", "心齋橋", "なんば", "難波", "中之島", "天王寺",
                  "ルクア", "LUCUA", "グランフロント", "万博", "あべの"],
-    "Kyoto":    ["京都", "河原町", "嵐山", "四条"],
+    "Kyoto":    ["京都", "KYOTO", "河原町", "嵐山", "四条"],
     "Fukuoka":  ["福岡", "博多", "天神", "キャナルシティ", "キャナル"],
     "Nagoya":   ["名古屋", "栄", "ラシック", "名駅", "大須"],
     "Nagasaki": ["長崎", "ハウステンボス", "豪斯登堡", "Huis Ten Bosch", "佐世保"],
@@ -102,10 +103,19 @@ AREA_TO_CITY = {
     "Hyogo":    ["兵庫", "神戸", "神戶", "西宮", "三宮", "伊丹", "姫路", "ピオレ"],
     "Hiroshima":["広島", "廣島", "Hiroshima"],
     "Mie":      ["三重", "四日市", "津南"],
-    "Miyagi":   ["仙台", "宮城", "名取"],
+    "Miyagi":   ["仙台", "宮城", "名取", "新利府", "利府"],
     "Chiba":    ["千葉", "舞浜", "幕張"],
+    "Niigata":  ["新潟", "亀田"],
+    "Okayama":  ["岡山", "倉敷"],
+    "Tottori":  ["鳥取", "日吉津"],
+    "Nara":     ["奈良", "橿原"],
+    "Fukushima":["福島", "いわき", "ハワイアンズ"],
+    "Nagano":   ["長野", "須坂"],
+    "Gifu":     ["岐阜", "各務原"],
+    "Miyazaki": ["宮崎"],
+    "Yamanashi":["山梨", "甲府", "昭和"],
     "Aomori":   ["青森", "Aomori", "弘前"],
-    "Aichi":    ["愛知", "豊田", "名古屋", "常滑"],
+    "Aichi":    ["愛知", "豊田", "名古屋", "常滑", "大高"],
     "Shizuoka": ["静岡", "靜岡", "富士宮", "浜松", "遠鉄", "セノバ"],
     "Yamaguchi":["山口", "小野田", "おのだ"],
     "Wakayama": ["和歌山", "Wakayama"],
@@ -1232,6 +1242,7 @@ def run(brands: list[str]):
             structured = (
                 fetch_chiikawa_popups(correct_city=correct_city)
                 + fetch_chiikawa_mogumogu(correct_city=correct_city)
+                + fetch_chiikawa_movie_popups(correct_city=correct_city)
             )
             if structured:
                 surls = {e["sourceUrl"] for e in structured}

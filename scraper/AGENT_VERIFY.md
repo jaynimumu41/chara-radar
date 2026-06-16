@@ -67,7 +67,11 @@ For each high-risk candidate:
      event period.
 
 Chiikawa official structured sources include `chiikawa-info.jp/pus.html`,
-`chiikawa-info.jp/` homepage cards, and `chiikawamogumogu.jp` shop pages.
+`chiikawa-info.jp/` homepage cards, `chiikawa-info.jp/p26/mck_scpus/index.html`
+movie POP UP venue schedules, and `chiikawamogumogu.jp` shop pages.
+Do not assume the Chiikawa official index is fully covered: if the homepage
+links a new `p26/.../index.html` page with concrete venue/date rows, audit
+whether `official_sources.py` already parses it or add a structured parser.
 Permanent or semi-permanent shop openings such as `ちいかわベビーカステラ` should
 use `type=store`; an empty `endDate` is expected when the source presents an
 opening date rather than a limited run.
