@@ -283,7 +283,7 @@
     ],
     "id": "po-2a73c0",
     "sourceType": "official_social",
-    "createdAt": "2026-06-15",
+    "createdAt": "2026-06-16",
     "sourceTitle": "ポケモンセンター出張所inイオンモール神戸北（2026-06-05～2026-07-22）",
     "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
   },
@@ -307,7 +307,7 @@
     ],
     "id": "po-8e9be8",
     "sourceType": "official_social",
-    "createdAt": "2026-06-15",
+    "createdAt": "2026-06-16",
     "sourceTitle": "ポケモンセンター出張所inイオンモール今治新都市（2026-06-12～2026-08-31）",
     "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
   },
@@ -331,7 +331,7 @@
     ],
     "id": "po-28053f",
     "sourceType": "official_social",
-    "createdAt": "2026-06-15",
+    "createdAt": "2026-06-16",
     "sourceTitle": "ポケモンセンター出張所inイオンモール羽生（2026-06-19～2026-08-22）",
     "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
   },
@@ -576,6 +576,30 @@
     "sourceUrl": "https://www.nownews.com/news/6839787"
   },
   {
+    "brand": "miffy",
+    "title": "Miffy 神戶港塔聯名主題咖啡廳",
+    "type": "cafe",
+    "country": "JP",
+    "city": "Hyogo",
+    "locationName": "KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront",
+    "startDate": "2026-07-30",
+    "endDate": "2026-09-30",
+    "summaryZh": "神戶港塔與 Dick Bruna TABLE 合作，舉辦以「夜晚時光」為主題的 Miffy 聯名活動，預計有主題視覺與相關活動。",
+    "needReservation": false,
+    "hasLimitedGoods": false,
+    "tags": [
+      "Miffy",
+      "主題咖啡廳",
+      "神戶",
+      "聯名"
+    ],
+    "id": "mi-4f01c2",
+    "sourceTitle": "ミッフィーと出会う神戸の夏が帰ってくる。「KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront」がナイトタイムをテーマにしたビジュアルで開催決定！",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-15",
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000004306.000012759.html"
+  },
+  {
     "brand": "chiikawa",
     "title": "吉伊卡哇 POP UP STORE パルクアベニュー・カワトク",
     "type": "popup",
@@ -595,7 +619,7 @@
     ],
     "id": "ch-7ae222",
     "sourceType": "official_site",
-    "createdAt": "2026-06-15",
+    "createdAt": "2026-06-16",
     "sourceTitle": "ちいかわPOP UP STORE パルクアベニュー・カワトク(2026-07-31～2026-08-17) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_pakt/index.html"
   },
@@ -619,7 +643,7 @@
     ],
     "id": "ch-6a6567",
     "sourceType": "official_site",
-    "createdAt": "2026-06-15",
+    "createdAt": "2026-06-16",
     "sourceTitle": "ちいかわPOP UP STORE 近鉄百貨店和歌山店(2026-06-26～2026-07-14) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_ktwk/index.html"
   },
@@ -643,7 +667,7 @@
     ],
     "id": "ch-0023a3",
     "sourceType": "official_site",
-    "createdAt": "2026-06-15",
+    "createdAt": "2026-06-16",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール幕張新都心(2026-06-26～2026-07-13) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_amst/index.html"
   },
@@ -667,7 +691,7 @@
     ],
     "id": "ch-6a10e3",
     "sourceType": "official_site",
-    "createdAt": "2026-06-15",
+    "createdAt": "2026-06-16",
     "sourceTitle": "ちいかわPOP UP STORE グランデュオ立川(2026-06-24～2026-08-02) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_grdo/index.html"
   },
@@ -691,7 +715,7 @@
     ],
     "id": "ch-8954a0",
     "sourceType": "official_site",
-    "createdAt": "2026-06-15",
+    "createdAt": "2026-06-16",
     "sourceTitle": "ちいかわPOP UP STORE あべのキューズモール(2026-06-19～2026-06-28) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_abnq/index.html"
   },
@@ -715,7 +739,7 @@
     ],
     "id": "ch-25bbac",
     "sourceType": "official_site",
-    "createdAt": "2026-06-15",
+    "createdAt": "2026-06-16",
     "sourceTitle": "ちいかわPOP UP STORE 遠鉄百貨店(2026-06-16～2026-06-29) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_enth/index.html"
   },
@@ -739,7 +763,7 @@
     ],
     "id": "ch-5a2b60",
     "sourceType": "official_site",
-    "createdAt": "2026-06-15",
+    "createdAt": "2026-06-16",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール常滑(2026-06-12～2026-06-29) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_atkn/index.html"
   },
@@ -763,7 +787,7 @@
     ],
     "id": "ch-66adb9",
     "sourceType": "official_site",
-    "createdAt": "2026-06-15",
+    "createdAt": "2026-06-16",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール名取(2026-06-12～2026-06-29) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_antr/index.html"
   },
@@ -787,7 +811,7 @@
     ],
     "id": "ch-06ef22",
     "sourceType": "official_site",
-    "createdAt": "2026-06-15",
+    "createdAt": "2026-06-16",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール富士宮(2026-06-05～2026-06-22) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_afjm/index.html"
   },
@@ -811,7 +835,7 @@
     ],
     "id": "ch-d9aab8",
     "sourceType": "official_site",
-    "createdAt": "2026-06-15",
+    "createdAt": "2026-06-16",
     "sourceTitle": "ちいかわPOP UP STORE おのだサンパーク(2026-06-05～2026-06-22) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_onsp/index.html"
   },
@@ -835,7 +859,7 @@
     ],
     "id": "ch-92d69c",
     "sourceType": "official_site",
-    "createdAt": "2026-06-15",
+    "createdAt": "2026-06-16",
     "sourceTitle": "ちいかわPOP UP STORE 0%OKINAWA(2026-06-05～2026-07-20) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_aonr/index.html"
   },
@@ -859,7 +883,7 @@
     ],
     "id": "ch-0713f9",
     "sourceType": "official_site",
-    "createdAt": "2026-06-15",
+    "createdAt": "2026-06-16",
     "sourceTitle": "ちいかわPOP UP STORE 新千歳空港(2026-06-03～2026-06-30) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_scts/index.html"
   },
@@ -883,7 +907,7 @@
     ],
     "id": "ch-c221df",
     "sourceType": "official_site",
-    "createdAt": "2026-06-15",
+    "createdAt": "2026-06-16",
     "sourceTitle": "ちいかわPOP UP STORE ピオレ姫路(2026-05-27～2026-06-22) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_plhj/index.html"
   },
@@ -907,7 +931,7 @@
     ],
     "id": "ch-efe379",
     "sourceType": "official_site",
-    "createdAt": "2026-06-15",
+    "createdAt": "2026-06-16",
     "sourceTitle": "ちいかわPOP UP STORE キャナルシティオーパ(2026-05-16～2026-06-28) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_cnco/index.html"
   },
@@ -932,102 +956,9 @@
     ],
     "id": "ch-5b992d",
     "sourceType": "official_site",
-    "createdAt": "2026-06-15",
+    "createdAt": "2026-06-16",
     "sourceTitle": "7月に北海道・小樽にオープン！テイクアウトショップ「ちいかわベビーカステラ」フードメニュー、グッズのご紹介 - ちいかわもぐもぐ本舗",
     "sourceUrl": "https://www.chiikawamogumogu.jp/stores/castella/"
-  },
-  {
-    "brand": "miffy",
-    "title": "Miffy DICK BRUNA STAND BY MIIA　ラフォーレ原宿",
-    "type": "popup",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "ラフォーレ原宿",
-    "startDate": "2026-05-26",
-    "endDate": "2026-06-22",
-    "summaryZh": "Miffy（米飛兔）官方活動「DICK BRUNA STAND BY MIIA」於ラフォーレ原宿期間限定登場，販售限定周邊／餐點。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "期間限定",
-      "日本"
-    ],
-    "id": "mi-ba3130",
-    "sourceType": "official_site",
-    "createdAt": "2026-06-15",
-    "sourceTitle": "ラフォーレ原宿に「DICK BRUNA STAND BY MIIA」期間限定オープン - dickbruna.jp",
-    "sourceUrl": "https://dickbruna.jp/news/202605/46293/"
-  },
-  {
-    "brand": "miffy",
-    "title": "Miffy ミッフィーzakkaフェスタ　大丸札幌店",
-    "type": "popup",
-    "country": "JP",
-    "city": "Hokkaido",
-    "locationName": "大丸札幌店",
-    "startDate": "2026-06-03",
-    "endDate": "2026-06-15",
-    "summaryZh": "Miffy（米飛兔）官方活動「ミッフィーzakkaフェスタ」於大丸札幌店期間限定登場，販售限定周邊／餐點。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "期間限定",
-      "日本"
-    ],
-    "id": "mi-3b87f4",
-    "sourceType": "official_site",
-    "createdAt": "2026-06-15",
-    "sourceTitle": "大丸札幌店で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
-    "sourceUrl": "https://dickbruna.jp/news/202604/46016/"
-  },
-  {
-    "brand": "miffy",
-    "title": "Miffy miffy style先行発売 マスコットビーンズコレクション",
-    "type": "new_product",
-    "country": "JP",
-    "city": "",
-    "locationName": "miffy style 各店＋一部キデイランド店舗",
-    "startDate": "2026-06-27",
-    "endDate": "2026-07-07",
-    "summaryZh": "Miffy style / Kiddy Land 店頭活動，販售或受注 Miffy 相關新品與限定／先行商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "miffy style",
-      "日本"
-    ],
-    "id": "mi-1b75b3",
-    "sourceType": "official_site",
-    "createdAt": "2026-06-15",
-    "sourceTitle": "2026年6月6日(土)発売予定!miffy style先行発売 マスコットビーンズコレクション - キデイランド",
-    "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_20260606/"
-  },
-  {
-    "brand": "miffy",
-    "title": "Miffy 神戶港塔聯名主題咖啡廳",
-    "type": "cafe",
-    "country": "JP",
-    "city": "Hyogo",
-    "locationName": "KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront",
-    "startDate": "2026-07-30",
-    "endDate": "2026-09-30",
-    "summaryZh": "神戶港塔與 Dick Bruna TABLE 合作，舉辦以「夜晚時光」為主題的 Miffy 聯名活動，預計有主題視覺與相關活動。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "Miffy",
-      "主題咖啡廳",
-      "神戶",
-      "聯名"
-    ],
-    "id": "mi-4f01c2",
-    "sourceTitle": "ミッフィーと出会う神戸の夏が帰ってくる。「KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront」がナイトタイムをテーマにしたビジュアルで開催決定！",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-15",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000004306.000012759.html"
   },
   {
     "brand": "chiikawa",
@@ -1412,5 +1343,75 @@
     "createdAt": "2026-06-16",
     "sourceTitle": "映画ちいかわ 人魚の島のひみつ POP UP STORE 華山1914文創園區 藝術西街(2026-07-10～2026-08-30) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/mck_scpus/index.html#c2ca3342"
+  },
+  {
+    "brand": "miffy",
+    "title": "Miffy DICK BRUNA STAND BY MIIA　ラフォーレ原宿",
+    "type": "popup",
+    "country": "JP",
+    "city": "Tokyo",
+    "locationName": "ラフォーレ原宿",
+    "startDate": "2026-05-26",
+    "endDate": "2026-06-22",
+    "summaryZh": "Miffy（米飛兔）官方活動「DICK BRUNA STAND BY MIIA」於ラフォーレ原宿期間限定登場，販售限定周邊／餐點。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "期間限定",
+      "日本"
+    ],
+    "id": "mi-ba3130",
+    "sourceType": "official_site",
+    "createdAt": "2026-06-16",
+    "sourceTitle": "ラフォーレ原宿に「DICK BRUNA STAND BY MIIA」期間限定オープン - dickbruna.jp",
+    "sourceUrl": "https://dickbruna.jp/news/202605/46293/"
+  },
+  {
+    "brand": "miffy",
+    "title": "Miffy miffy style先行発売 マスコットビーンズコレクション",
+    "type": "new_product",
+    "country": "JP",
+    "city": "",
+    "locationName": "miffy style 各店＋一部キデイランド店舗",
+    "startDate": "2026-06-27",
+    "endDate": "2026-07-07",
+    "summaryZh": "Miffy style / Kiddy Land 店頭活動，販售或受注 Miffy 相關新品與限定／先行商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "miffy style",
+      "日本"
+    ],
+    "id": "mi-1b75b3",
+    "sourceType": "official_site",
+    "createdAt": "2026-06-16",
+    "sourceTitle": "2026年6月6日(土)発売予定!miffy style先行発売 マスコットビーンズコレクション - キデイランド",
+    "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_20260606/"
+  },
+  {
+    "brand": "miffy",
+    "title": "OUTDOOR PRODUCTS x 花のミッフィー 聯名商品",
+    "type": "new_product",
+    "country": "JP",
+    "city": "",
+    "locationName": "フラワーミッフィー",
+    "startDate": "2026-06-19",
+    "endDate": "",
+    "summaryZh": "OUTDOOR PRODUCTS與「フラワーミッフィー」聯名設計商品將於2026年6月19日起在フラワーミッフィー店舖發售。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "聯名",
+      "OUTDOOR PRODUCTS",
+      "日本"
+    ],
+    "id": "mi-c63d81",
+    "sourceTitle": "『OUTDOOR PRODUCTS』のフラワーミッフィーデザインが登場！人気絵本ミッフィーのお花屋さん「フラワーミッフィー」にて2026年6月19日(金)より発売！",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-16",
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002083.000022901.html"
   }
 ]
