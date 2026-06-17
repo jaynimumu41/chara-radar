@@ -601,30 +601,6 @@
   },
   {
     "brand": "miffy",
-    "title": "Miffy 神戶港塔聯名主題咖啡廳",
-    "type": "cafe",
-    "country": "JP",
-    "city": "Hyogo",
-    "locationName": "KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront",
-    "startDate": "2026-07-30",
-    "endDate": "2026-09-30",
-    "summaryZh": "神戶港塔與 Dick Bruna TABLE 合作，舉辦以「夜晚時光」為主題的 Miffy 聯名活動，預計有主題視覺與相關活動。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "Miffy",
-      "主題咖啡廳",
-      "神戶",
-      "聯名"
-    ],
-    "id": "mi-4f01c2",
-    "sourceTitle": "ミッフィーと出会う神戸の夏が帰ってくる。「KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront」がナイトタイムをテーマにしたビジュアルで開催決定！",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-15",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000004306.000012759.html"
-  },
-  {
-    "brand": "miffy",
     "title": "OUTDOOR PRODUCTS x 花のミッフィー 聯名商品",
     "type": "new_product",
     "country": "JP",
@@ -1513,20 +1489,21 @@
   },
   {
     "brand": "miffy",
-    "title": "Miffy KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront　「KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront」～Night Time～開催",
+    "title": "Miffy 神戶港塔 Night Time 聯名活動",
     "type": "cafe",
     "country": "JP",
-    "city": "",
-    "locationName": "「KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront」～Night Time～開催",
+    "city": "Hyogo",
+    "locationName": "KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront",
     "startDate": "2026-07-30",
     "endDate": "2026-09-30",
-    "summaryZh": "Miffy（米飛兔）官方活動「KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront」於「KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront」～Night Time～開催期間限定登場，販售限定周邊／餐點。",
+    "summaryZh": "Miffy（米飛兔）於神戶港塔與 Dick Bruna TABLE 舉辦 Night Time 主題聯名活動，期間限定推出主題餐飲與相關企劃。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "米飛兔",
-      "期間限定",
-      "日本"
+      "神戶",
+      "主題咖啡廳",
+      "期間限定"
     ],
     "id": "mi-ea7f4f",
     "sourceType": "official_site",

@@ -373,3 +373,17 @@ automation 的職責不是再跑一次爬蟲，而是依第 5 節對高風險筆
   - `scraper/rejected.json` 移除 Harper's BAZAAR 錯誤黑名單；`data/source_reputation.json` 將該來源改為本次 `confirmed`。
   - `scraper/AGENT_VERIFY.md` 與 `scraper/RULES.md` 補上：二手來源若原文明確標示活動期間，必須先驗證標籤區間，不可直接說缺日期。
 - 回歸測試：`scraper/smoke_test.py` 新增日文 `から/まで`、中文星期括號、非可信來源標籤區間補 endDate、起日不符不可補等案例。
+
+## 26. 2026-06-17 Miffy 神戶同檔期重複修復
+
+- 問題：線上同時出現兩筆 Miffy 神戶 `2026-07-30`～`2026-09-30`：
+  - PR TIMES：`mi-4f01c2`「Miffy 神戶港塔聯名主題咖啡廳」
+  - Dick Bruna 官方：`mi-ea7f4f`「KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront」Night Time
+- 根因：
+  - Dick Bruna 官方 parser 對不含 `で「...」` 的標題無法抽出場館，將整個活動標題塞進 `locationName`，且 `KOBE` 未被 `correct_city` 判成 Hyogo。
+  - `dedup_events` 的同場館同檔期規則要求同 city；當官方筆 city 空白時，即使場館文字與日期區間幾乎完全一致，也沒有合併。
+- 修正：
+  - 刪除 PR TIMES 重複筆，保留 Dick Bruna 官方來源 `mi-ea7f4f`，並修正 title、city、locationName、summary。
+  - `scraper/official_sources.py` 新增 Miffy KOBE 場館抽取 helper，避免官方頁再產生標題型 locationName。
+  - `scraper/scrape.py` 將 `KOBE`/`Kobe` 納入 Hyogo 判定，並補去重規則：活動型資料若場館字串相似且完整日期區間一致，即使其中一筆 city 空白也合併。
+  - `scraper/smoke_test.py` 新增 KOBE city、Miffy 官方標題場館抽取、同場館同完整區間 city 缺漏去重測試。

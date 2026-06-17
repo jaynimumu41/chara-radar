@@ -55,6 +55,9 @@ print("\n[correct_city] 城市判定")
 check("豪斯登堡→Nagasaki", scrape.correct_city("豪斯登堡"), "Nagasaki")
 check("夢時代→Kaohsiung", scrape.correct_city("高雄夢時代"), "Kaohsiung")
 check("羽生→Saitama", scrape.correct_city("イオンモール羽生"), "Saitama")
+check("KOBE PORT TOWER→Hyogo",
+      scrape.correct_city("KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront"),
+      "Hyogo")
 check("無關鍵字→None", scrape.correct_city("某不知名地點"), None)
 
 # ── canon_venue ───────────────────────────────────────────────────────────────
@@ -138,6 +141,18 @@ check("Kiddy Land→可信",
       scrape.is_trusted_date_source("https://www.kiddyland.co.jp/event/miffystyle_birthday2026/"), True)
 check("Dick Bruna 官方→可信",
       scrape.is_trusted_date_source("https://dickbruna.jp/news/202605/46308/"), True)
+check("Miffy KOBE 官方標題場館抽取",
+      official_sources._miffy_venue_from_title(
+          "「KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront」～Night Time～開催",
+          "KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront",
+      ),
+      "KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront")
+check("Miffy KOBE 官方標題顯示名",
+      official_sources._miffy_display_name(
+          "「KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront」～Night Time～開催",
+          "KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront",
+      ),
+      "神戶港塔 Night Time 聯名活動")
 check("Collabo Cafe→可信",
       scrape.is_trusted_date_source("https://collabo-cafe.com/events/collabo/chiikawa-obakenomori-odaiba2026/"), True)
 check("台灣寶可夢官方→可信",
@@ -430,6 +445,20 @@ out, _ = scrape.dedup_events([
        sourceUrl="https://c.example/3"),
 ])
 check("同城同活動3媒體→併（1筆）", len(out), 1)
+
+# 一筆官方資料 city 空白、locationName 含活動標題時，仍應和同場館同檔期的 PR TIMES 合併
+out, _ = scrape.dedup_events([
+    ev(brand="miffy", title="Miffy 神戶港塔聯名主題咖啡廳", type="cafe", city="Hyogo",
+       startDate="2026-07-30", endDate="2026-09-30",
+       locationName="KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront",
+       sourceType="official_social", sourceUrl="https://prtimes.jp/example"),
+    ev(brand="miffy",
+       title="Miffy KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront　「KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront」～Night Time～開催",
+       type="cafe", city="", startDate="2026-07-30", endDate="2026-09-30",
+       locationName="「KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront」～Night Time～開催",
+       sourceType="official_site", sourceUrl="https://dickbruna.jp/news/202606/46792/"),
+])
+check("同場館同完整區間 city 缺漏→併（1筆）", len(out), 1)
 
 # 反例（建議1 不可誤殺）：同城同場館但「不同檔期」(日期區間差很多) = 不同活動，不可併
 out, _ = scrape.dedup_events([

@@ -101,7 +101,7 @@ AREA_TO_CITY = {
     "Hokkaido": ["北海道", "札幌", "小樽", "函館", "新千歳", "千歳"],
     "Okinawa":  ["沖縄", "沖繩", "那覇", "ライカム"],
     "Kanagawa": ["神奈川", "横浜", "横濱", "橫濱", "川崎", "みなとみらい", "ワールドポーターズ"],
-    "Hyogo":    ["兵庫", "神戸", "神戶", "西宮", "三宮", "伊丹", "姫路", "ピオレ"],
+    "Hyogo":    ["兵庫", "神戸", "神戶", "Kobe", "KOBE", "西宮", "三宮", "伊丹", "姫路", "ピオレ"],
     "Hiroshima":["広島", "廣島", "Hiroshima"],
     "Mie":      ["三重", "四日市", "津南"],
     "Miyagi":   ["仙台", "宮城", "名取", "新利府", "利府"],
@@ -1046,12 +1046,15 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
             )
             # 場館字串相似（即使不在 VENUE_CANON 清單）：用於「同城+同活動但媒體標題寫法差很多」
             venue_close = bool(ln_e and ln_k and tsim(ln_e, ln_k) >= 0.6)
+            ea, eb = ev.get("endDate"), k.get("endDate")
+            range_aligned = date_aligned and (not ea or not eb or ea == eb)
             # 同品牌+同一已知場館，且其中一筆完全沒日期 → 幾乎一定是同活動的較不完整版本
             # （兩個不同檔期通常各自都有日期，故「一邊全無日期」可避免誤併不同檔期）
             one_dateless = not ev.get("startDate") or not k.get("startDate")
             if fuzzy_allowed and (
                (same_venue and sim >= 0.4) or (same_venue and one_dateless and sim >= 0.2)
                or (same_city and venue_close and date_aligned)
+               or (venue_close and range_aligned)
                or (same_city and sim >= 0.50) or sim >= 0.72):
                 # 合併到較完整者，補空欄位
                 base = k if completeness(k) >= completeness(ev) else ev

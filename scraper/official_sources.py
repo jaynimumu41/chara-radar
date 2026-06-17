@@ -39,6 +39,10 @@ TITLE_MUST_INCLUDE = {
 _REL_DATE = re.compile(r"（(20\d{2})年(\d{1,2})月(\d{1,2})日")
 
 
+def _norm(s: str) -> str:
+    return re.sub(r"[^0-9a-zA-Z一-龥ぁ-んァ-ンー]+", "", (s or "").lower())
+
+
 def _release_pubdate(html: str) -> str:
     """從 PR TIMES og:description「（2026年5月20日 10時00分）」取發稿日，回 RFC2822；失敗回 ''。"""
     m = _REL_DATE.search(html)
@@ -717,6 +721,31 @@ def _kiddy_type(title: str) -> str:
     return "new_product"
 
 
+_MIFFY_KNOWN_VENUES = [
+    (
+        ["KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront",
+         "KOBE PORT TOWER", "Dick Bruna TABLE in KOBE Waterfront"],
+        "KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront",
+    ),
+]
+
+
+def _miffy_venue_from_title(title: str, name: str = "") -> str:
+    m = re.search(r"^(.+?)(?:にて|に|で)「", title)
+    if m:
+        return m.group(1).strip("・ 　")
+    for aliases, venue in _MIFFY_KNOWN_VENUES:
+        if any(alias in title or alias in name for alias in aliases):
+            return venue
+    return ""
+
+
+def _miffy_display_name(title: str, name: str) -> str:
+    if "KOBE PORT TOWER" in title and "Night Time" in title:
+        return "神戶港塔 Night Time 聯名活動"
+    return name
+
+
 def fetch_kiddyland_miffy_events(extract_dates, correct_city, max_articles=3, fresh_days=45) -> list[dict]:
     """解析 Kiddy Land / miffy style 站內搜尋的近期 Miffy 店頭活動與新品。零 Gemini。"""
     md = _page_text(_KIDDY_MIFFY_SEARCH)
@@ -815,17 +844,23 @@ def fetch_miffy_events(extract_dates, correct_city, max_articles=16, fresh_days=
         seen.add(url)
         name_m = re.search(r"「([^」]+)」", title)
         name = name_m.group(1) if name_m else title
-        venue = re.split(r"(?:にて|に|で)「", title)[0].strip("・ ")
+        venue = _miffy_venue_from_title(title, name) or name
         loc = venue or name
         city = correct_city(venue, title)
+        display_name = _miffy_display_name(title, name)
+        short_title = "神戶港塔 Night Time" in display_name
+        display_title = (
+            f"Miffy {display_name}" if short_title or _norm(display_name) == _norm(venue)
+            else f"Miffy {display_name}　{venue}"
+        )
         out.append({
             "brand": "miffy",
-            "title": f"Miffy {name}　{venue}".strip(),
+            "title": display_title.strip(),
             "type": "cafe" if any(k in title.lower() for k in ["カフェ", "kitchen", "おやつ", "table"]) else "popup",
             "country": "JP", "city": city or "",
             "locationName": loc,
             "startDate": s, "endDate": e or "",
-            "summaryZh": f"Miffy（米飛兔）官方活動「{name}」於{venue}期間限定登場，販售限定周邊／餐點。",
+            "summaryZh": f"Miffy（米飛兔）官方活動「{display_name}」於{venue}期間限定登場，販售限定周邊／餐點。",
             "needReservation": False, "hasLimitedGoods": True,
             "tags": ["米飛兔", "期間限定", "日本"],
             "id": _stable_id("mi", url),

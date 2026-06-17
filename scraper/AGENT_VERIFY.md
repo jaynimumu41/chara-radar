@@ -81,6 +81,8 @@ For each high-risk candidate:
    - The record is not expired on the run date.
    - It is not a duplicate of an existing event with the same brand, venue, and
      event period.
+     Treat a blank city on one side as still duplicate-prone when the venue text
+     and complete date range clearly match.
 
 Chiikawa official structured sources include `chiikawa-info.jp/pus.html`,
 `chiikawa-info.jp/` homepage cards, `chiikawa-info.jp/p26/mck_scpus/index.html`
