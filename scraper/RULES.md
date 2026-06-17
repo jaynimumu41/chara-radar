@@ -13,19 +13,21 @@ Sanrio（三麗鷗）先暫停，因無結構化來源、新聞/Gemini 污染最
 
 | 管線 | 來源 | 是否用 AI | 程式位置 |
 | -- | -- | -- | -- |
-| 結構化官方頁（零 Gemini） | 吉伊卡哇 `chiikawa-info.jp/pus.html`＋`chiikawa-info.jp/` 首頁卡片＋`chiikawa-info.jp/p26/mck_scpus/index.html` 電影 POP UP 多會場頁＋`chiikawamogumogu.jp` 店鋪頁、寶可夢 `oneheart65.net` 出張所排程＋`pokemon-cafe.jp` 官方 café news＋台灣官方商品頁 `tw.portal-pokemon.com/goods/`、Miffy `dickbruna.jp/event/`＋Kiddy Land / miffy style 站內搜尋 | 否，regex + 模板 | `official_sources.py` |
+| 結構化官方頁（零 Gemini） | 吉伊卡哇 `chiikawa-info.jp/pus.html`＋`chiikawa-info.jp/` 首頁卡片＋`chiikawa-info.jp/p26/mck_scpus/index.html` 電影 POP UP 多會場頁＋`chiikawamogumogu.jp` 店鋪頁、寶可夢 `oneheart65.net` 出張所排程＋`pokemon-cafe.jp` 官方 café news＋台灣官方商品頁 `tw.portal-pokemon.com/goods/`、Miffy `dickbruna.jp/event/`＋`dickbruna.jp/news/` 指定活動＋Kiddy Land / miffy style 站內搜尋 | 否，regex + 模板 | `official_sources.py` |
 | 官方新聞稿 + 一般新聞 | PR TIMES 關鍵字、Google News RSS（日文 + 中文） | 是，Gemini 萃取 | `scrape.py` |
 
 - 結構化來源每次跑都以官方最新清單覆蓋同來源 URL 的舊資料（過期由 `clean_events` 移除）。
 - `data/today_updates.json` 是前端「今日更新」的依據：每日 scraper 會用跑前的公開資料與跑後資料比對，只列出前次版本沒有的新情報；`createdAt` 不能直接當作今日新增，因為結構化來源重建、修正或來源替換也可能寫成今天。
 - 吉伊卡哇除了 POP UP STORE 排程，也抓官方首頁上的活動/店鋪卡片、`p26/mck_scpus/index.html` 電影 POP UP 多會場頁與 `chiikawamogumogu.jp` 專門店頁；這類官方子頁、常設店開幕、限定餐飲與原創周邊不一定會進 Google News/RSS，需走結構化解析。
 - `scraper/audit_chiikawa_subpages.py` 會巡覽 `chiikawa-info.jp/index.html` 連出的 `p26/.../index.html` 子頁，對照 `data/events.json` 標記 `parsed` / `ignored` / `needs_review`。`needs_review` 只是稽核提示，不會自動入庫；有明確會場＋日期＋商品/店鋪訊號的 high risk 頁面，應優先補結構化 parser 或人工標成不收。
+- `scraper/audit_official_coverage.py` 會稽核 Pokémon / Miffy 官方入口（Pokémon Cafe、台灣 Pokémon goods、Pokemon Center 店鋪 news/events、Dick Bruna event/news、Kiddy Land/miffy style 搜尋），標記 `parsed` / `ignored` / `needs_review`。每天 agent 需看 high/medium risk；不是自動入庫，而是用來防「官方有但 parser 沒接」。
 - oneheart65 的 Pokémon Center 出張所不是品牌官方站，但本專案以結構化方式解析其排程，日期已列入可信日期來源；完整起訖日的出張所不再進每日 agent 高風險候選。
-- 台灣寶可夢官方商品頁會解析 Next.js embedded data，只收「內頁明確寫 Pokémon Center TAIPEI 登場／販售」的近期商品；LINE 貼圖/主題、卡牌、遊戲、純線上授權商品一律過濾。Instagram 僅作 agent/人工驗證輔助，不納入純 Python 抓取主來源。
+- 台灣寶可夢官方商品頁會解析 Next.js embedded data，只收「內頁明確寫 Pokémon Center TAIPEI 登場／販售」的近期商品；例外是官方頁明確列出 `POP UP Promotion`、活動期間與台灣實體活動店鋪者（例如 K.UNO / U-TREASURE）可收為 `popup`。LINE 貼圖/主題、卡牌、遊戲、純線上授權商品一律過濾。Instagram 僅作 agent/人工驗證輔助，不納入純 Python 抓取主來源。
 - 台灣 Pokémon Center 新品若只出現在 NOWnews / Pokemon Hubs 等二手來源，需列入 agent 高風險候選；但若內文明確寫台灣寶可夢中心 / Pokémon Center TAIPEI、實體店開賣日、商品內容，且沒有官方或其他來源反證，可暫留，不因官方商品頁查無同筆就直接刪除。
 - 這類二手來源 URL 不可只因「沒有官方 goods 頁」加入 `rejected.json`。只有確認為錯誤、重複、過期、不符類型或被官方反證時，才可加入黑名單。
 - Pokémon Cafe 官方 news（`pokemon-cafe.jp/ja/cafe/news/`）屬結構化官方來源；日本橋／心齋橋 café 重新開張、店內翻新、新菜單與 show 更新可收為 `store` 型情報，沒有明確結束日不可硬填 endDate。
 - Miffy 另補 Kiddy Land / miffy style 站內搜尋（`kiddyland.co.jp/?s=miffy`），抓近期官方店頭活動與新品，避免 Google News/RSS 漏掉官方店鋪消息。
+- Kiddy Land / Dick Bruna 頁面常把「最新記事／関連記事」放在本文後方；日期擷取必須先切出主文章，不能讓側欄或相關文章的日期污染活動期間。
 - Miffy 公開顯示欄位（`title` / `locationName` / `summaryZh` / `tags`）若出現 `フラワーミッフィー`，統一轉成 `Flower Miffy`；`sourceTitle` 保留原文，方便回查來源。
 - 三麗鷗無可解析的結構化官方頁（`sanrio.co.jp` 503／JS 動態／REST 空），目前暫停預設抓取與前端顯示。
 - 抓取被擋（403/429/503）時自動改走 reader 代理 `r.jina.ai`，不放棄（`verify_links.fetch_html` / `check_url`）。

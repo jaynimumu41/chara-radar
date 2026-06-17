@@ -625,6 +625,31 @@
     "sourceUrl": "https://www.pokemon-cafe.jp/ja/cafe/news/260529_3377.html"
   },
   {
+    "brand": "pokemon",
+    "title": "Pokémon K.UNO × U-TREASURE POP UP Promotion",
+    "type": "popup",
+    "country": "TW",
+    "city": "",
+    "locationName": "K.UNO台北忠孝旗艦店／K.UNO新光三越南西店／K.UNO新光三越台南新天地西門店",
+    "startDate": "2026-02-01",
+    "endDate": "2026-12-31",
+    "summaryZh": "台灣寶可夢官方公告 K.UNO／U-TREASURE 寶可夢珠寶展示活動，於台灣指定 K.UNO 店鋪期間限定展出並可試戴、購買。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢",
+      "台灣",
+      "POP UP",
+      "K.UNO",
+      "U-TREASURE"
+    ],
+    "id": "po-e4c3bc",
+    "sourceType": "official_site",
+    "createdAt": "2026-06-17",
+    "sourceTitle": "≪K.UNO × U-TREASURE POP UP Promotion≫開展！ - 台灣寶可夢官方網站",
+    "sourceUrl": "https://tw.portal-pokemon.com/goods/post-5267/"
+  },
+  {
     "brand": "miffy",
     "title": "OUTDOOR PRODUCTS x Flower Miffy 聯名商品",
     "type": "new_product",
@@ -1558,6 +1583,30 @@
     "createdAt": "2026-06-17",
     "sourceTitle": "ラフォーレ原宿に「DICK BRUNA STAND BY MIIA」期間限定オープン - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202605/46293/"
+  },
+  {
+    "brand": "miffy",
+    "title": "Miffy miffy’s Birthday 2026",
+    "type": "campaign",
+    "country": "JP",
+    "city": "",
+    "locationName": "miffy style 各店＋キデイランド対象店",
+    "startDate": "2026-06-06",
+    "endDate": "2026-06-30",
+    "summaryZh": "miffy’s Birthday 2026 生日活動於 miffy style 與 Kiddy Land 指定店舖登場，販售生日限定商品並提供店頭特典。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "miffy style",
+      "生日慶",
+      "日本"
+    ],
+    "id": "mi-c4885b",
+    "sourceType": "official_site",
+    "createdAt": "2026-06-17",
+    "sourceTitle": "miffy style ミッフィースタイル＆キデイランド対象店舗で「miffy's birthday 2026」フェア開催 - dickbruna.jp",
+    "sourceUrl": "https://dickbruna.jp/news/202606/46398/"
   },
   {
     "brand": "miffy",

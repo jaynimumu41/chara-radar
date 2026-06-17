@@ -22,7 +22,7 @@
 - **線上**：https://jaynimumu41.github.io/chara-radar/ （GitHub Pages，手機可看）
 - **Repo**：`jaynimumu41/chara-radar`（**公開**，main 為 Pages 來源）
 - **本機路徑**：`C:\Users\USER\Documents\claude\chara-radar`
-- **目前狀態**：Sanrio 暫停；最新資料量請以 `data/events.json` 為準。2026-06-17 更新後為 67 筆（Chiikawa 42、Miffy 12、Pokémon 13）。
+- **目前狀態**：Sanrio 暫停；最新資料量請以 `data/events.json` 為準。2026-06-17 更新後為 69 筆（Chiikawa 42、Miffy 13、Pokémon 14）。
 
 ---
 
@@ -32,14 +32,14 @@
 
 | 管線 | 來源 | 用 AI? | 品質 | 程式 |
 | -- | -- | -- | -- | -- |
-| **結構化官方頁** | 吉伊卡哇 `chiikawa-info.jp/pus.html`＋官方首頁卡片＋`p26/mck_scpus/index.html` 電影 POP UP 多會場頁、寶可夢 `oneheart65.net` 出張所排程＋台灣官方商品頁 `tw.portal-pokemon.com/goods/`、Miffy `dickbruna.jp/event/`＋Kiddy Land / miffy style 站內搜尋 | 否（regex+模板） | **已達手動品質；Chiikawa 子頁另有稽核器找 coverage gap** | `scraper/official_sources.py` / `scraper/audit_chiikawa_subpages.py` |
+| **結構化官方頁** | 吉伊卡哇 `chiikawa-info.jp/pus.html`＋官方首頁卡片＋`p26/mck_scpus/index.html` 電影 POP UP 多會場頁、寶可夢 `oneheart65.net` 出張所排程＋`pokemon-cafe.jp`＋台灣官方商品頁 `tw.portal-pokemon.com/goods/`、Miffy `dickbruna.jp/event/`＋`dickbruna.jp/news/` 指定活動＋Kiddy Land / miffy style 站內搜尋 | 否（regex+模板） | **已達手動品質；另有官方 coverage audit 找漏接子頁** | `scraper/official_sources.py` / `scraper/audit_chiikawa_subpages.py` / `scraper/audit_official_coverage.py` |
 | **新聞段** | PR TIMES 關鍵字、Google News RSS（日＋中） | 是（Gemini 萃取） | **品質不穩，你的主戰場** | `scraper/scrape.py` |
 
 - 三麗鷗**沒有**可解析的結構化官方頁（`sanrio.co.jp` 503／JS 動態／REST 空，已確認不可行），且全靠新聞段＋Gemini，品質最弱；目前已暫停預設抓取與前端顯示。
 - 前端純靜態：`index.html` + `js/app.js` + `css/app.css`，讀 `data/events.json`、`data/stores.json`（常設店手動清單）、`data/last_updated.json`（心跳）。
 - **每日排程**：Windows 工作排程 `CharaRadar-DailyScrape` 每天 16:00 → `scraper/run_daily.ps1` → `python scrape.py` → 寫心跳 → git commit+push → GitHub Pages 自動重建。
-- **Miffy 補漏**：`dickbruna.jp/event/` 不含所有 miffy style / Kiddy Land 店頭新品，已新增 `kiddyland.co.jp/?s=miffy` 結構化解析，零 Gemini 抓官方店頭活動。
-- **台灣寶可夢補漏**：`tw.portal-pokemon.com/goods/` 已新增結構化解析，僅收內頁明確寫 `Pokémon Center TAIPEI` 登場／販售的近期商品；LINE 貼圖/主題、卡牌、遊戲、純線上授權商品過濾。官方 Instagram `pokemon_taiwan` 適合 agent 驗證輔助，不適合純 Python 每日抓取主來源。
+- **Miffy 補漏**：`dickbruna.jp/event/` 不含所有 miffy style / Kiddy Land 店頭新品，已新增 `dickbruna.jp/news/` 指定活動與 `kiddyland.co.jp/?s=miffy` 結構化解析，零 Gemini 抓官方店頭活動。Kiddy/Dick Bruna 頁面需先切主文章，避免「最新記事／関連記事」日期污染。
+- **台灣寶可夢補漏**：`tw.portal-pokemon.com/goods/` 已新增結構化解析，收內頁明確寫 `Pokémon Center TAIPEI` 登場／販售的近期商品，並收官方頁明確列出活動期間與台灣實體店鋪的 POP UP Promotion（例如 K.UNO / U-TREASURE）；LINE 貼圖/主題、卡牌、遊戲、純線上授權商品過濾。官方 Instagram `pokemon_taiwan` 適合 agent 驗證輔助，不適合純 Python 每日抓取主來源。
 
 ---
 
@@ -408,3 +408,27 @@ automation 的職責不是再跑一次爬蟲，而是依第 5 節對高風險筆
   - `scraper/agent_verify_candidates.py` 將 `pokemon-cafe.jp` 視為結構化官方 domain。
   - 新增資料 `po-d0b8f9`「Pokémon Cafe TOKYO 日本橋店內翻新與新菜單」，`startDate=2026-06-17`，無硬填 endDate，`needReservation=true`。
 - 今日更新檢視改為 6 筆：Pokémon 2、Miffy 2、Chiikawa 2。
+
+## 29. 2026-06-17 Pokémon / Miffy 官方覆蓋稽核與補漏
+
+- 使用者擔心 Chiikawa 官方子頁漏抓後，Pokémon / Miffy 官方站也可能還有「官方有但 parser 沒接」的缺口。結論：擔心成立；不是 Google API 額度問題，而是官方入口覆蓋不足與頁面側欄日期污染。
+- 新增 `scraper/audit_official_coverage.py`，稽核 Pokémon / Miffy 官方入口並標記 `parsed` / `ignored` / `needs_review`：
+  - Pokémon Cafe news：`pokemon-cafe.jp/ja/cafe/news/`
+  - 台灣 Pokémon goods：`tw.portal-pokemon.com/goods/`
+  - Pokemon Center 店鋪 news/events：`shop.pokemon.co.jp`
+  - Dick Bruna event/news：`dickbruna.jp/event/`、`dickbruna.jp/news/`
+  - Kiddy Land / miffy style 搜尋：`kiddyland.co.jp/?s=miffy`
+- 稽核器只提示，不自動入庫；high/medium `needs_review` 必須人工確認是否是單一實體活動、是否有明確 JP/TW 場地與日期、是否屬四類情報。
+- 修正 Kiddy Land / miffy style parser：內頁會把「最新記事／関連記事」日期混在可見文字裡，之前可能把旁邊文章的 `6/27-7/7` 誤抓成商品頁日期，並讓 Birthday Fair 被判過期。新增主文章切片 `_main_article_text()`，只用正文抓日期。
+- 擴充 Miffy 官方 parser：
+  - 同時掃 `dickbruna.jp/event/` 與 `dickbruna.jp/news/` 的指定活動。
+  - 納入 `miffy style` / `フェア` / `birthday`；排除 LINE、BOOK、付錄、生日留言、シャンブル等不收類型。
+  - 新增官方資料 `mi-c4885b`：`Miffy miffy’s Birthday 2026`，`2026-06-06`～`2026-06-30`，來源 `https://dickbruna.jp/news/202606/46398/`。
+- 擴充台灣 Pokémon 官方 goods parser：
+  - `Pokémon Center TAIPEI` 店頭新品維持既有規則。
+  - 新增嚴格 POP UP Promotion 分支：官方頁需同時有 `POP UP Promotion`、活動期間、台灣實體活動店鋪、K.UNO/U-TREASURE 訊號。
+  - 修正全頁 header 的「卡牌」文字誤觸噪音過濾；K.UNO 分支先判斷，再套一般 noise。
+  - 新增官方資料 `po-e4c3bc`：`Pokémon K.UNO × U-TREASURE POP UP Promotion`，`2026-02-01`～`2026-12-31`，來源 `https://tw.portal-pokemon.com/goods/post-5267/`。
+- 今日更新檢視目前應為 8 筆：Pokémon 3、Miffy 3、Chiikawa 2；資料總數 69 筆。
+- 新增 smoke tests：官方覆蓋稽核 URL/分類、Kiddy Land 主文章日期切片、Birthday Fair 期間、台灣 Pokémon K.UNO POP UP。
+- 後續仍需人工稽核：`audit_official_coverage.py --format summary` 仍可能列出 Miffy 展覽頁（如廣島 70 周年展、鹿兒島美術館展）與官方 schedule page。不要直接全收；先確認是否有限定商品/實體特展、是否單一會場與日期完整，再補 parser 或標 ignored。

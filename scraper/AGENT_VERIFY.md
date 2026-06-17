@@ -58,6 +58,19 @@ or store/cafe signals, so check it before concluding the daily data is complete.
 Do not add it automatically; either add a structured parser, mark it explicitly
 out of scope in the auditor, or leave it as an open risk in the daily note.
 
+6. Pokemon / Miffy official coverage audit:
+
+```powershell
+$env:PYTHONIOENCODING='utf-8'
+& 'C:\Users\USER\AppData\Local\Python\pythoncore-3.14-64\python.exe' scraper\audit_official_coverage.py --format summary
+```
+
+Treat high/medium `needs_review` rows as official-source coverage gaps, not as
+automatic additions. First check whether the row is a real single event/product
+page, a broad schedule page, a store-entry notice, or out of scope. If it has a
+clear JP/TW physical venue, date range, and goods/store/cafe signal, add or fix
+a structured parser before reporting that official coverage is clean.
+
 ## Verification Loop
 
 For each high-risk candidate:
@@ -73,6 +86,9 @@ For each high-risk candidate:
    If a secondary-media page itself clearly labels a range as `活動期間`,
    `開催期間`, `会期`, or `期間`, verify that labeled range before calling the
    record date-less or rejecting it for missing period information.
+   On Dick Bruna / Kiddy Land pages, ignore `最新の記事` / `関連記事` blocks when
+   reading dates; those sidebars can contain other events and will corrupt the
+   period.
 5. Confirm all of these:
    - Brand is one of Pokemon, Miffy, Chiikawa.
    - Location is in Japan or Taiwan.

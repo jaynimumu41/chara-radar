@@ -23,6 +23,7 @@ if hasattr(sys.stdout, "reconfigure"):
 import scrape
 import official_sources
 import audit_chiikawa_subpages
+import audit_official_coverage
 import agent_verify_candidates
 import source_reputation
 import verify_links
@@ -223,6 +224,62 @@ check("吉伊卡哇首頁 p26 子頁高風險訊號",
       audit_rows[2].signals.labels,
       ["date", "date_range", "collectible", "venue"])
 
+sample_official_links = """
+<a href="/ja/cafe/news/260529_3377.html">ポケモンカフェ TOKYO は店内がリニューアル</a>
+<a href="https://www.kiddyland.co.jp/event/miffy_20260606/">miffy style先行発売</a>
+<a href="https://example.com/event/miffy/">Nope</a>
+"""
+official_links = audit_official_coverage.extract_links(
+    sample_official_links, "https://www.pokemon-cafe.jp/ja/cafe/news/")
+check("官方覆蓋稽核 URL 正規化",
+      official_links,
+      [
+          ("https://www.pokemon-cafe.jp/ja/cafe/news/260529_3377.html",
+           "ポケモンカフェ TOKYO は店内がリニューアル"),
+          ("https://www.kiddyland.co.jp/event/miffy_20260606/", "miffy style先行発売"),
+      ])
+official_candidates = [
+    audit_official_coverage.OfficialCandidate(
+        "pokemon", "pokemon-cafe-news",
+        "https://www.pokemon-cafe.jp/ja/cafe/news/260529_3377.html",
+        "ポケモンカフェ TOKYO は店内がリニューアル"),
+    audit_official_coverage.OfficialCandidate(
+        "miffy", "miffy-kiddyland-search",
+        "https://www.kiddyland.co.jp/event/miffy_20260606/",
+        "2026年6月6日(土)より開催miffy’s Birthday Fair2026"),
+    audit_official_coverage.OfficialCandidate(
+        "pokemon", "pokemon-store-events",
+        "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kagawa/events/202606/000001.html",
+        "6月28日（日）、ヒトカゲとピカチュウに会えるグリーティング"),
+]
+official_audit_rows = audit_official_coverage.audit_candidates(
+    official_candidates,
+    parsed_pages={"https://www.pokemon-cafe.jp/ja/cafe/news/260529_3377.html": ["po-test"]},
+    details_by_url={
+        "https://www.kiddyland.co.jp/event/miffy_20260606/":
+            "2026年6月6日(土)より開催 miffy style 店舗限定グッズ 発売 フェア",
+        "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kagawa/events/202606/000001.html":
+            "6月28日（日）、ヒトカゲとピカチュウに会えるグリーティング",
+    },
+)
+check("官方覆蓋稽核 parsed / needs_review / ignored",
+      [(r.status, r.risk, r.event_ids) for r in official_audit_rows],
+      [("parsed", "-", ("po-test",)), ("needs_review", "high", ()), ("ignored", "-", ())])
+kiddy_birthday_title = "2026年6月6日(土)より開催miffy’s Birthday Fair2026"
+kiddy_birthday_page = (
+    f"<h1>{kiddy_birthday_title}</h1>"
+    "<p>期間 2026年6月6日（土）～6月30日（火）</p>"
+    "<p>miffy style 店舗限定グッズとノベルティ。</p>"
+    "<h2>最新の記事</h2><p>2026年6月27日（土）～7月7日（火）別記事</p>"
+)
+kiddy_main = official_sources._main_article_text(kiddy_birthday_page, kiddy_birthday_title)
+check("Kiddy Land 本文切片排除最新記事日期污染",
+      ("6月30日" in kiddy_main, "7月7日" in kiddy_main),
+      (True, False))
+check("Kiddy Land Birthday Fair 期間解析",
+      official_sources._kiddy_period(kiddy_birthday_title, kiddy_main, scrape.extract_dates),
+      ("2026-06-06", "2026-06-30"))
+
 sample_otaru_info = (
     "### [ちいかわベビーカステラ](https://www.chiikawamogumogu.jp/stores/castella/) "
     "2026年7月18日(土)～ ちいかわもぐもぐ本舗 小樽店にオープン！"
@@ -381,6 +438,20 @@ check("活動期間起日不符時不可硬補", (mismatch_changed, mismatch_eve
 check("台灣寶可夢官方商品店頭發售日",
       official_sources._tw_store_sale_date("即將於3月14日(六)在Pokémon Center TAIPEI登場！", "2026-02-27"),
       "2026-03-14")
+tw_popup = official_sources._tw_partner_popup_event(
+    {
+        "title": "≪K.UNO × U-TREASURE POP UP Promotion≫開展！",
+        "url": "https://tw.portal-pokemon.com/goods/post-5267/",
+    },
+    "≪K.UNO × U-TREASURE POP UP Promotion≫ ＜活動期間＞2026年2月1日(日)～2026年12月31日(四) "
+    "＜活動店鋪＞ ・K.UNO台北忠孝旗艦店 ・K.UNO新光三越南西店 ・K.UNO新光三越台南新天地西門店",
+    correct_city=scrape.correct_city,
+)
+check("台灣寶可夢官方 K.UNO POP UP 解析",
+      (tw_popup["id"], tw_popup["type"], tw_popup["country"], tw_popup["startDate"],
+       tw_popup["endDate"], tw_popup["hasLimitedGoods"], tw_popup["sourceUrl"]),
+      ("po-e4c3bc", "popup", "TW", "2026-02-01", "2026-12-31", True,
+       "https://tw.portal-pokemon.com/goods/post-5267/"))
 sample_tw_next = (
     r'\"item\":{\"postId\":5937,\"slug\":\"post-5937\",\"region\":\"TAIWAN\",'
     r'\"model\":\"GOODS\",\"title\":\"克萊希寶可夢系列2026・全新上市\",'
