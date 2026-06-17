@@ -157,6 +157,8 @@ check("Collabo Cafe→可信",
       scrape.is_trusted_date_source("https://collabo-cafe.com/events/collabo/chiikawa-obakenomori-odaiba2026/"), True)
 check("台灣寶可夢官方→可信",
       scrape.is_trusted_date_source("https://tw.portal-pokemon.com/goods/post-5343/"), True)
+check("Pokémon Cafe 官方→可信",
+      scrape.is_trusted_date_source("https://www.pokemon-cafe.jp/ja/cafe/news/260529_3377.html"), True)
 check("寶可夢出張所結構化排程→可信",
       scrape.is_trusted_date_source("https://oneheart65.net/pokemoncenterbranch_schedule_2/"), True)
 check("吉伊卡哇もぐもぐ本舗→可信",
@@ -393,6 +395,17 @@ check("台灣寶可夢官方 Next.js 商品列表解析",
           "category": "衣服、飾品類",
           "published": "2026-06-05",
       }])
+pokemon_cafe = official_sources._pokemon_cafe_tokyo_renewal_event_from_text(
+    "2026.05.29 ポケモンカフェのメニューやショーが新しくなるよ！"
+    "「ポケモンカフェ TOKYO」は、店内がリニューアル！ "
+    "6月17日（水）、ポケモンカフェのメニューやショーが新しくなるよ！",
+    "https://www.pokemon-cafe.jp/ja/cafe/news/260529_3377.html",
+    correct_city=scrape.correct_city,
+)
+check("Pokémon Cafe TOKYO 日本橋翻新公告解析",
+      (pokemon_cafe["id"], pokemon_cafe["type"], pokemon_cafe["city"],
+       pokemon_cafe["startDate"], pokemon_cafe["endDate"], pokemon_cafe["needReservation"]),
+      ("po-d0b8f9", "store", "Tokyo", "2026-06-17", "", True))
 
 # ── _is_past ──────────────────────────────────────────────────────────────────
 print("\n[_is_past] 過期判定（含無結束日補洞）")

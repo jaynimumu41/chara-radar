@@ -22,7 +22,7 @@
 - **線上**：https://jaynimumu41.github.io/chara-radar/ （GitHub Pages，手機可看）
 - **Repo**：`jaynimumu41/chara-radar`（**公開**，main 為 Pages 來源）
 - **本機路徑**：`C:\Users\USER\Documents\claude\chara-radar`
-- **目前狀態**：Sanrio 暫停；最新資料量請以 `data/events.json` 為準。2026-06-17 更新後為 66 筆（Chiikawa 42、Miffy 12、Pokémon 12）。
+- **目前狀態**：Sanrio 暫停；最新資料量請以 `data/events.json` 為準。2026-06-17 更新後為 67 筆（Chiikawa 42、Miffy 12、Pokémon 13）。
 
 ---
 
@@ -394,4 +394,17 @@ automation 的職責不是再跑一次爬蟲，而是依第 5 節對高風險筆
 - `今日更新` 不可用 `createdAt` 判斷；`createdAt=今天` 可能只是結構化來源重建、資料修正或來源替換，不代表今天才新增。
 - 新增 `data/today_updates.json`，由 scraper 用跑前公開資料與跑後資料比對，只列出前次版本沒有的新情報；前端依目前類型/國家/品牌篩選這些 `newEventIds`。
 - Miffy 公開欄位若出現 `フラワーミッフィー`，統一顯示為 `Flower Miffy`；`sourceTitle` 保留原文供查證。
-- 2026-06-17 對比 2026-06-16 最後版本：實際新增 5 筆，Pokémon 1、Miffy 2、Chiikawa 2；Miffy 神戶官方筆是昨天同活動的來源/去重修正，不列入新增。
+- 此節修正當下，2026-06-17 對比 2026-06-16 最後版本為新增 5 筆；後續第 28 節補入 Pokémon Cafe 日本橋漏抓後，今日更新檢視變為 6 筆。Miffy 神戶官方筆是昨天同活動的來源/去重修正，不列入新增。
+
+## 28. 2026-06-17 Pokémon Cafe 日本橋重新開張漏抓修復
+
+- 問題：使用者回報近期看到日本橋 Pokémon Cafe 重新開張／翻新資訊，但資料未收錄。
+- 查證官方 `https://www.pokemon-cafe.jp/ja/cafe/news/260529_3377.html`：2026-05-29 公告寫 2026-06-17 起 Pokémon Cafe 的菜單與 show 更新，且 `Pokémon Cafe TOKYO`（東京・日本橋）店內翻新。
+- 5/11 官方公告 `260511_3404.html` 亦寫 `Pokémon Cafe TOKYO（東京・日本橋）` 臨時休業期間為 2026-03-23～2026-06-16，預約受付対象日程從 2026-06-17 開始。
+- 根因：既有 Pokémon 結構化來源只抓出張所排程與台灣官方商品頁，沒有抓 `pokemon-cafe.jp` 官方 café news；Google News 也沒有穩定補到。
+- 修正：
+  - `scraper/official_sources.py` 新增 `fetch_pokemon_cafe_events()`，解析 Pokémon Cafe TOKYO 日本橋翻新／新菜單公告，零 Gemini。
+  - `scraper/scrape.py` 接入 Pokémon 結構化流程，並把 `pokemon-cafe.jp` 加入可信日期來源。
+  - `scraper/agent_verify_candidates.py` 將 `pokemon-cafe.jp` 視為結構化官方 domain。
+  - 新增資料 `po-d0b8f9`「Pokémon Cafe TOKYO 日本橋店內翻新與新菜單」，`startDate=2026-06-17`，無硬填 endDate，`needReservation=true`。
+- 今日更新檢視改為 6 筆：Pokémon 2、Miffy 2、Chiikawa 2。

@@ -29,6 +29,7 @@ STRUCTURED_OFFICIAL_DOMAINS = (
     "chiikawa-info.jp",
     "chiikawamogumogu.jp",
     "oneheart65.net",
+    "pokemon-cafe.jp",
     "tw.portal-pokemon.com",
     "dickbruna.jp",
     "kiddyland.co.jp",
@@ -230,7 +231,7 @@ def print_markdown(candidates: list[dict], total_events: int, limit: int) -> Non
     print()
     print(f"- Total events: {total_events}")
     print(f"- Candidates: {len(candidates)}")
-    print("- Skip rule: complete structured-source records from chiikawa-info.jp, chiikawamogumogu.jp, oneheart65.net, tw.portal-pokemon.com, dickbruna.jp, and kiddyland.co.jp")
+    print("- Skip rule: complete structured-source records from chiikawa-info.jp, chiikawamogumogu.jp, oneheart65.net, pokemon-cafe.jp, tw.portal-pokemon.com, dickbruna.jp, and kiddyland.co.jp")
     print("- Exception: activity-like structured official records with a startDate but no endDate stay in the queue for period verification")
     print("- Source reputation: data/source_reputation.json adjusts risk and states how much corroboration is needed")
     print()

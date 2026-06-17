@@ -600,6 +600,31 @@
     "sourceUrl": "https://www.harpersbazaar.com/tw/life/home-improvement/g71597053/pizza-hut-pokemon-0616/"
   },
   {
+    "brand": "pokemon",
+    "title": "Pokémon Cafe TOKYO 日本橋店內翻新與新菜單",
+    "type": "store",
+    "country": "JP",
+    "city": "Tokyo",
+    "locationName": "Pokémon Cafe TOKYO（日本橋髙島屋S.C.東館 5階）",
+    "startDate": "2026-06-17",
+    "endDate": "",
+    "summaryZh": "東京・日本橋的 Pokémon Cafe TOKYO 於2026年6月17日起店內翻新，Pokémon Cafe 菜單與皮卡丘表演同步更新，採事前預約制。",
+    "needReservation": true,
+    "hasLimitedGoods": false,
+    "tags": [
+      "寶可夢",
+      "Pokémon Cafe",
+      "日本橋",
+      "新菜單",
+      "需預約"
+    ],
+    "id": "po-d0b8f9",
+    "sourceTitle": "ポケモンカフェのメニューやショーが新しくなるよ！「ポケモンカフェ TOKYO」は、店内がリニューアル！",
+    "sourceType": "official_site",
+    "createdAt": "2026-06-17",
+    "sourceUrl": "https://www.pokemon-cafe.jp/ja/cafe/news/260529_3377.html"
+  },
+  {
     "brand": "miffy",
     "title": "OUTDOOR PRODUCTS x Flower Miffy 聯名商品",
     "type": "new_product",

@@ -418,12 +418,58 @@ def fetch_chiikawa_movie_popups(correct_city=None) -> list[dict]:
 
 
 _POKE_SCHED = "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
+_POKEMON_CAFE_NEWS = "https://www.pokemon-cafe.jp/ja/cafe/news/"
+_POKEMON_CAFE_TOKYO_RENEWAL = "https://www.pokemon-cafe.jp/ja/cafe/news/260529_3377.html"
 # 解析：2026年6月5日（金）〜7月22日（水）**兵庫県・イオンモール神戸北**専門店街3階 イオンホール
 _POKE_ROW = re.compile(
     r"(20\d\d)年(\d{1,2})月(\d{1,2})日（[^）]*）[〜～]\s*"
     r"(?:(20\d\d)年)?(\d{1,2})月(\d{1,2})日（[^）]*）\s*"
     r"\*\*([^・*]+?)・([^*]+?)\*\*\s*([^\n*\[]{0,40})"
 )
+
+
+def _pokemon_cafe_tokyo_renewal_event_from_text(text: str, source_url: str,
+                                                correct_city=None) -> dict | None:
+    """Parse the official Tokyo/Nihonbashi Pokemon Cafe renewal notice."""
+    if not all(k in (text or "") for k in ("ポケモンカフェ TOKYO", "リニューアル", "6月17日")):
+        return None
+    pub_year = date.today().year
+    y_m = re.search(r"(20\d\d)\.\d{2}\.\d{2}", text or "")
+    if y_m:
+        pub_year = int(y_m.group(1))
+    m = re.search(r"(\d{1,2})月(\d{1,2})日[^、。]{0,8}、ポケモンカフェのメニューやショーが新しくなる", text or "")
+    if not m:
+        return None
+    mo, day = int(m.group(1)), int(m.group(2))
+    start = f"{pub_year:04d}-{mo:02d}-{day:02d}"
+    loc = "Pokémon Cafe TOKYO（日本橋髙島屋S.C.東館 5階）"
+    city = correct_city("東京都中央区日本橋", loc) if correct_city else "Tokyo"
+    return {
+        "brand": "pokemon",
+        "title": "Pokémon Cafe TOKYO 日本橋店內翻新與新菜單",
+        "type": "store", "country": "JP", "city": city or "Tokyo",
+        "locationName": loc,
+        "startDate": start, "endDate": "",
+        "summaryZh": "東京・日本橋的 Pokémon Cafe TOKYO 於2026年6月17日起店內翻新，Pokémon Cafe 菜單與皮卡丘表演同步更新，採事前預約制。",
+        "needReservation": True, "hasLimitedGoods": False,
+        "tags": ["寶可夢", "Pokémon Cafe", "日本橋", "新菜單", "需預約"],
+        "id": _stable_id("po", source_url),
+        "sourceType": "official_site", "createdAt": _today_iso(),
+        "sourceTitle": "ポケモンカフェのメニューやショーが新しくなるよ！「ポケモンカフェ TOKYO」は、店内がリニューアル！",
+        "sourceUrl": source_url,
+    }
+
+
+def fetch_pokemon_cafe_events(correct_city=None) -> list[dict]:
+    """Parse official Pokemon Cafe news for high-confidence physical cafe updates."""
+    html_text = fetch_html(_POKEMON_CAFE_TOKYO_RENEWAL)
+    if not html_text:
+        print("    ⚠️  Pokémon Cafe 官方公告抓取失敗（直連＋代理都不行）")
+        return []
+    text = _visible_text(html_text)
+    ev = _pokemon_cafe_tokyo_renewal_event_from_text(
+        text, _POKEMON_CAFE_TOKYO_RENEWAL, correct_city=correct_city)
+    return [ev] if ev else []
 
 
 def fetch_pokemon_popups(correct_city=None) -> list[dict]:

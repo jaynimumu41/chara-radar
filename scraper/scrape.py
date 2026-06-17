@@ -34,7 +34,8 @@ from official_sources import (fetch_official, fetch_chiikawa_popups,
                               fetch_chiikawa_mogumogu,
                               fetch_chiikawa_movie_goods,
                               fetch_chiikawa_movie_popups,
-                              fetch_pokemon_popups, fetch_pokemon_tw_goods,
+                              fetch_pokemon_popups, fetch_pokemon_cafe_events,
+                              fetch_pokemon_tw_goods,
                               fetch_miffy_events)  # 官方來源：PR TIMES + 結構化排程頁
 
 # Windows 終端機 UTF-8 輸出 + 關閉緩衝（即時看到進度）
@@ -282,7 +283,7 @@ def is_official_source(source: str) -> bool:
 TRUSTED_DATE_DOMAINS = [
     # 新聞稿 / 官方
     "prtimes.jp", "atpress.ne.jp", "dreamnews.jp",
-    "pokemon.co.jp", "pokemon.com.tw", "tw.portal-pokemon.com",
+    "pokemon.co.jp", "pokemon.com.tw", "tw.portal-pokemon.com", "pokemon-cafe.jp",
     "oneheart65.net",
     "sanrio.co.jp", "sanrio.com.tw",
     "chiikawa-info.jp", "chiikawa-market.com", "chiikawamogumogu.jp", "benelic.com", "kiddyland.co.jp",
@@ -1448,6 +1449,21 @@ def run(brands: list[str]):
         except Exception as e:
             print(f"    ⚠️  吉伊卡哇結構化來源失敗（略過）：{e}")
     if "pokemon" in brands:
+        try:
+            cafe = fetch_pokemon_cafe_events(correct_city=correct_city)
+            if cafe:
+                events = replace_in_place(
+                    events,
+                    cafe,
+                    lambda e: (
+                        e.get("brand") == "pokemon"
+                        and "pokemon-cafe.jp/ja/cafe/news/" in e.get("sourceUrl", "")
+                    ),
+                )
+                print(f"🏛️  Pokémon Cafe 官方公告（結構化，免 AI）→ {len(cafe)} 筆現行")
+                save_events(events)
+        except Exception as e:
+            print(f"    ⚠️  Pokémon Cafe 官方公告來源失敗（略過）：{e}")
         try:
             poke = fetch_pokemon_popups(correct_city=correct_city)
             if poke:
