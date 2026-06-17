@@ -1,7 +1,7 @@
 """驗證 events.json 每一筆的 sourceUrl 是否真的連得過去（不花 Gemini 配額）。
 用瀏覽器 UA、跟隨轉址。回報每一筆的 HTTP 狀態，列出壞掉的（非 2xx/3xx）。
 可被 scrape.py 匯入：check_url(url) -> (ok: bool, code: int)。"""
-import sys, json, urllib.request, urllib.error, urllib.parse, ssl
+import sys, json, urllib.request, urllib.error, urllib.parse, ssl, time
 from pathlib import Path
 
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -16,6 +16,11 @@ _CTX.verify_mode = ssl.CERT_NONE
 READER_PROXY = "https://r.jina.ai/"
 _BLOCKED_CODES = {401, 403, 429, 451, 503}
 _CHECK_CACHE = {}
+_LAST_REQUEST_AT = {}
+_HOST_MIN_INTERVAL = {
+    "chiikawa-info.jp": 0.8,
+    "r.jina.ai": 3.0,
+}
 
 
 def _network_url(url: str) -> str:
@@ -23,18 +28,46 @@ def _network_url(url: str) -> str:
     return urllib.parse.urldefrag(url or "")[0]
 
 
+def _polite_wait(url: str) -> None:
+    host = urllib.parse.urlparse(url).hostname or ""
+    delay = _HOST_MIN_INTERVAL.get(host, 0)
+    if delay <= 0:
+        return
+    now = time.monotonic()
+    last = _LAST_REQUEST_AT.get(host, 0)
+    wait = delay - (now - last)
+    if wait > 0:
+        time.sleep(wait)
+    _LAST_REQUEST_AT[host] = time.monotonic()
+
+
+def _prefer_reader_proxy(url: str) -> bool:
+    parsed = urllib.parse.urlparse(url)
+    host = parsed.hostname or ""
+    return host == "chiikawa-info.jp" and "/p26/" in parsed.path
+
+
 def _raw_fetch(url, timeout, want_text):
     """單次抓取，回傳 (ok, code, text)。例外往外丟。"""
-    req = urllib.request.Request(url, headers={
+    _polite_wait(url)
+    parsed = urllib.parse.urlparse(url)
+    headers = {
         "User-Agent": UA,
         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
         "Accept-Language": "ja,en;q=0.8",
-    })
+    }
+    if parsed.hostname == "chiikawa-info.jp":
+        headers["Referer"] = "https://chiikawa-info.jp/index.html"
+    req = urllib.request.Request(url, headers=headers)
     with urllib.request.urlopen(req, timeout=timeout, context=_CTX) as r:
         text = ""
         if want_text:
             text = r.read(200000).decode("utf-8", "replace")
         return (200 <= r.status < 400, r.status, text)
+
+
+def _proxy_fetch(url: str, timeout: int) -> tuple[bool, int, str]:
+    return _raw_fetch(READER_PROXY + url, max(timeout, 45), True)
 
 
 def check_url(url, timeout=20, return_text=False):
@@ -53,6 +86,15 @@ def check_url(url, timeout=20, return_text=False):
         ok, code, text = _CHECK_CACHE[cache_key]
         return pack(ok, code, text if return_text else "")
 
+    if _prefer_reader_proxy(net_url):
+        try:
+            pok, _pcode, ptext = _proxy_fetch(net_url, timeout)
+            if pok and ptext.strip():
+                _CHECK_CACHE[cache_key] = (True, 200, ptext if return_text else "")
+                return pack(True, 200, ptext if return_text else "")
+        except Exception:
+            pass
+
     code, blocked = -1, True
     try:
         ok, code, text = _raw_fetch(net_url, timeout, return_text)
@@ -68,7 +110,7 @@ def check_url(url, timeout=20, return_text=False):
     # 被擋或失敗 → reader 代理 fallback（代理回純文字，當作可達且取得內容）
     if blocked:
         try:
-            pok, _pcode, ptext = _raw_fetch(READER_PROXY + net_url, max(timeout, 45), True)
+            pok, _pcode, ptext = _proxy_fetch(net_url, timeout)
             if pok and ptext.strip():
                 _CHECK_CACHE[cache_key] = (True, 200, ptext if return_text else "")
                 return pack(True, 200, ptext if return_text else "")

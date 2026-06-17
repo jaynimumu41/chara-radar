@@ -70,6 +70,9 @@ For each high-risk candidate:
    fetch `https://r.jina.ai/<original URL>` before deciding.
 4. Extract only the main event/sale period. Never use the news publication date,
    page footer year, unrelated stamp-rally dates, or search-result snippets.
+   If a secondary-media page itself clearly labels a range as `活動期間`,
+   `開催期間`, `会期`, or `期間`, verify that labeled range before calling the
+   record date-less or rejecting it for missing period information.
 5. Confirm all of these:
    - Brand is one of Pokemon, Miffy, Chiikawa.
    - Location is in Japan or Taiwan.

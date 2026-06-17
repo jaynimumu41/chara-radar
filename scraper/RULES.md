@@ -77,6 +77,7 @@ Sanrio（三麗鷗）先暫停，因無結構化來源、新聞/Gemini 污染最
 
 - AI 只能填「內文明確寫出的活動日期」，**絕不可**把新聞發布日當活動日期；不明留空。
 - 程式補抓日期（`extract_dates` + `apply_extracted_dates`）**只限可信網域**（`TRUSTED_DATE_DOMAINS`：官方／新聞稿／場館百貨頁），一般新聞內文常夾雜公告日、巡迴各城市日期 → 不自動補。
+- 非可信媒體若原文附近明確標示 `活動期間` / `開催期間` / `会期` / `期間`，可用 `apply_labeled_extracted_dates` 只補完整起訖日；若既有 `startDate` 和標籤起日不一致，不可硬補。
 - `popup` / `cafe` / `campaign` 這類限時活動若有 `startDate` 但沒有 `endDate`，每日 agent 驗證仍要檢查活動頁是否其實有期間；即使來源是結構化官方頁也不能直接略過。
 - 防呆：補抓的起始日不早於約 400 天前；結束日不早於開始日則丟棄 endDate。
 - 城市修正：`correct_city` / `AREA_TO_CITY` 用地點關鍵字校正 AI 猜錯的城市；判不出留空，不亂猜。

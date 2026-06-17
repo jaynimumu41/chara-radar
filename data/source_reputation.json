@@ -298,56 +298,56 @@
       ]
     },
     "domain:harpersbazaar.com": {
-      "confirmed": 0,
-      "rejected": 1,
+      "confirmed": 1,
+      "rejected": 0,
       "uncertain": 0,
       "crossChecked": 0,
-      "score": 39,
+      "score": 57,
       "label": "harpersbazaar.com",
       "kind": "site",
       "host": "harpersbazaar.com",
       "handle": "",
       "firstSeen": "2026-06-17",
       "lastReviewed": "2026-06-17",
-      "lastOutcome": "rejected",
-      "notes": "Removed as fresh secondary campaign coverage without authoritative corroboration or explicit official event period.",
+      "lastOutcome": "confirmed",
+      "notes": "Corrected after direct page review: article has explicit activity period 2026-06-16 to 2026-07-27 for the Pizza Hut Pokemon campaign.",
       "byBrand": {
         "pokemon": {
-          "confirmed": 0,
-          "rejected": 1,
+          "confirmed": 1,
+          "rejected": 0,
           "uncertain": 0,
           "crossChecked": 0,
-          "score": 39
+          "score": 57
         }
       },
       "byType": {
         "campaign": {
-          "confirmed": 0,
-          "rejected": 1,
+          "confirmed": 1,
+          "rejected": 0,
           "uncertain": 0,
           "crossChecked": 0,
-          "score": 39
+          "score": 57
         }
       },
       "byCountry": {
         "tw": {
-          "confirmed": 0,
-          "rejected": 1,
+          "confirmed": 1,
+          "rejected": 0,
           "uncertain": 0,
           "crossChecked": 0,
-          "score": 39
+          "score": 57
         }
       },
       "history": [
         {
           "date": "2026-06-17",
-          "outcome": "rejected",
+          "outcome": "confirmed",
           "brand": "pokemon",
           "type": "campaign",
           "country": "TW",
           "eventId": "po-ec1f5e",
           "evidenceCount": 0,
-          "notes": "Removed as fresh secondary campaign coverage without authoritative corroboration or explicit official event period."
+          "notes": "Restored after direct page review; the article explicitly labels 活動期間：6/16（二）-7/27（一） for the campaign."
         }
       ]
     }

@@ -553,9 +553,12 @@ def _mk_iso(y: int, mo: int, d: int) -> str | None:
     return f"{y:04d}-{mo:02d}-{d:02d}" if _valid_md(mo, d) else None
 
 # 起始日後常見的「開跑」提示語（用來提高單一日期的可信度，避免抓到隨機日期）
-_START_CUE = (r"\s*日?\s*[（(]?[日月火水木金土]*[)）]?\s*"
+_WEEKDAY = r"[日月火水木金土一二三四五六]"
+_DAY_SUFFIX = rf"\s*日?\s*[（(]?{_WEEKDAY}*[)）]?\s*"
+_START_CUE = (rf"{_DAY_SUFFIX}"
               r"(?:から|スタート|開始|より|開幕|開催|販売|発売|登場|オープン|"
               r"起|開跑|開展|開賣|起跑|～|〜|~|－|—|–|-|至|到)")
+_DATE_RANGE_LABEL = re.compile(r"(?:活動期間|開催期間|會期|会期|期間)\s*[:：]?\s*.{0,160}", re.S)
 
 def extract_dates(text: str, ref_year: int | None = None, is_html: bool = True,
                   scan_chars: int = 4000) -> tuple[str, str]:
@@ -575,9 +578,9 @@ def extract_dates(text: str, ref_year: int | None = None, is_html: bool = True,
     ry = ref_year or datetime.now(timezone.utc).year
 
     ymd = r"(?:(20\d{2})\s*[年/.]\s*)?(\d{1,2})\s*[月/.]\s*(\d{1,2})"
-    sep = r"\s*日?\s*[（(]?[日月火水木金土]*[)）]?\s*[～〜~\-−–—－至到]{1,2}\s*"
+    sep = rf"(?:{_DAY_SUFFIX}(?:から|より)\s*|{_DAY_SUFFIX}[～〜~\-−–—－至到]{{1,2}}\s*)"
     # 範圍：[年]M月D日 〜 [年]M月D日
-    m = re.search(ymd + sep + ymd + r"\s*日?", text)
+    m = re.search(ymd + sep + ymd + rf"{_DAY_SUFFIX}(?:まで)?", text)
     if m:
         y1, mo1, d1, y2, mo2, d2 = m.groups()
         mo1, d1, mo2, d2 = int(mo1), int(d1), int(mo2), int(d2)
@@ -603,6 +606,42 @@ def extract_dates(text: str, ref_year: int | None = None, is_html: bool = True,
         if s:
             return s, ""
     return "", ""
+
+def apply_labeled_extracted_dates(data: dict, text: str, ref_year: int | None, is_html: bool,
+                                  scan_chars: int = 90000) -> bool:
+    """For untrusted media, only fill dates from explicit labeled ranges.
+
+    This is narrower than apply_extracted_dates(): the source text must say
+    活動期間/開催期間/会期/期間 near the date range, and if the event already has a
+    startDate, the extracted start must match it.
+    """
+    if data.get("startDate") and data.get("endDate"):
+        return False
+    if not text:
+        return False
+    if is_html:
+        text = re.sub(r"<[^>]+>", " ", text)
+    text = re.sub(r"\s+", " ", text.replace("　", " "))[:scan_chars]
+    for m in _DATE_RANGE_LABEL.finditer(text):
+        s, e = extract_dates(m.group(0), ref_year=ref_year, is_html=False,
+                             scan_chars=len(m.group(0)))
+        if not s or not e:
+            continue
+        if data.get("startDate") and data["startDate"] != s:
+            continue
+        if e < s:
+            continue
+        changed = False
+        if not data.get("startDate"):
+            data["startDate"] = s
+            changed = True
+        if not data.get("endDate"):
+            data["endDate"] = e
+            changed = True
+        if changed:
+            print(f"    📅 標籤區間補抓：{data.get('startDate') or '—'} ~ {data.get('endDate') or '—'}")
+            return True
+    return False
 
 def _pub_year(pub: str) -> int | None:
     try:
@@ -1194,6 +1233,9 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
                 if is_trusted_date_source(real):
                     apply_extracted_dates(data, html, _pub_year(item["pubDate"]),
                                           is_html=True, scan_chars=90000)
+                else:
+                    apply_labeled_extracted_dates(data, html, _pub_year(item["pubDate"]),
+                                                  is_html=True, scan_chars=90000)
         if is_venue_less_generic_new_product(
             data,
             source_title=item.get("title", ""),

@@ -357,3 +357,19 @@ automation 的職責不是再跑一次爬蟲，而是依第 5 節對高風險筆
 - 驗證：`smoke_test.py` 80 passed、`data_lint.py` 0 error / 0 warning、`verify_links.py` 61/61 OK、`audit_chiikawa_subpages.py` found 3 / parsed 2 / ignored 1 / needs_review 0。
 - `scraper/smoke_test.py` 新增 p26 連結正規化、分類與 high-risk 訊號測試。
 - `scraper/RULES.md` 與 `scraper/AGENT_VERIFY.md` 已補每日 agent 應跑此稽核器。
+
+## 25. 2026-06-17 活動期間漏抓修復
+
+- 問題：使用者抽查發現兩筆活動期間明確但資料不完整：
+  - Pokémon 必勝客百變怪活動頁明寫 `活動期間：6/16（二）-7/27（一）`，但自動資料只抓到 `startDate=2026-06-16`，agent 驗證還誤刪並加入 rejected。
+  - Miffy 松坂屋静岡店官方頁明寫 `2026年7月11日（土）から 7月28日（火）まで`，但資料只抓到 `startDate=2026-07-11`。
+- 根因：
+  - `extract_dates` 不支援日文 `から ... まで` 區間。
+  - 星期字元只含日文 `日月火水木金土`，未含中文 `一二三四五六`，導致 `6/16（二）-7/27（一）` 解析失敗。
+  - 非可信媒體來源即使原文明確標示 `活動期間`，也沒有窄幅補抓完整起訖；agent 因此誤判 Harper's BAZAAR 頁「沒有明確活動期間」。
+- 修正：
+  - `scraper/scrape.py` 新增中文星期支援、`から/より ... まで` 範圍解析，以及 `apply_labeled_extracted_dates()`；非可信媒體只有在原文附近明確標示 `活動期間` / `開催期間` / `会期` / `期間` 且起日一致時，才補完整起訖。
+  - `data/events.json` 補回 `po-ec1f5e`，活動期間 `2026-06-16`～`2026-07-27`；`mi-379534` 補 `endDate=2026-07-28`。
+  - `scraper/rejected.json` 移除 Harper's BAZAAR 錯誤黑名單；`data/source_reputation.json` 將該來源改為本次 `confirmed`。
+  - `scraper/AGENT_VERIFY.md` 與 `scraper/RULES.md` 補上：二手來源若原文明確標示活動期間，必須先驗證標籤區間，不可直接說缺日期。
+- 回歸測試：`scraper/smoke_test.py` 新增日文 `から/まで`、中文星期括號、非可信來源標籤區間補 endDate、起日不符不可補等案例。

@@ -576,6 +576,30 @@
     "sourceUrl": "https://www.nownews.com/news/6839787"
   },
   {
+    "brand": "pokemon",
+    "title": "必勝客《寶可夢》百變怪抱枕與卡包活動",
+    "type": "campaign",
+    "country": "TW",
+    "city": "",
+    "locationName": "必勝客",
+    "startDate": "2026-06-16",
+    "endDate": "2026-07-27",
+    "summaryZh": "必勝客與寶可夢聯名推出百變怪抱枕、購物袋、寶可夢卡牌特典卡包等周邊活動，活動期間為6月16日至7月27日。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢",
+      "必勝客",
+      "百變怪",
+      "限定周邊"
+    ],
+    "id": "po-ec1f5e",
+    "sourceTitle": "百變怪抱枕怎麼買？必勝客《寶可夢》周邊6/16開搶，購物袋、特典卡包全品項一次看 - Harper's BAZAAR",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-17",
+    "sourceUrl": "https://www.harpersbazaar.com/tw/life/home-improvement/g71597053/pizza-hut-pokemon-0616/"
+  },
+  {
     "brand": "miffy",
     "title": "Miffy 神戶港塔聯名主題咖啡廳",
     "type": "cafe",
@@ -1472,7 +1496,7 @@
     "city": "Shizuoka",
     "locationName": "松坂屋静岡店",
     "startDate": "2026-07-11",
-    "endDate": "",
+    "endDate": "2026-07-28",
     "summaryZh": "Miffy（米飛兔）官方活動「ミッフィーzakkaフェスタ」於松坂屋静岡店期間限定登場，販售限定周邊／餐點。",
     "needReservation": false,
     "hasLimitedGoods": true,
