@@ -22,7 +22,7 @@
 - **線上**：https://jaynimumu41.github.io/chara-radar/ （GitHub Pages，手機可看）
 - **Repo**：`jaynimumu41/chara-radar`（**公開**，main 為 Pages 來源）
 - **本機路徑**：`C:\Users\USER\Documents\claude\chara-radar`
-- **目前狀態**：Sanrio 暫停；最新資料量請以 `data/events.json` 為準。2026-06-16 修復 Chiikawa 電影 POP UP 官方頁後為 59 筆（Chiikawa 38、Miffy 10、Pokémon 11）。
+- **目前狀態**：Sanrio 暫停；最新資料量請以 `data/events.json` 為準。2026-06-17 更新後為 66 筆（Chiikawa 42、Miffy 12、Pokémon 12）。
 
 ---
 
@@ -387,3 +387,10 @@ automation 的職責不是再跑一次爬蟲，而是依第 5 節對高風險筆
   - `scraper/official_sources.py` 新增 Miffy KOBE 場館抽取 helper，避免官方頁再產生標題型 locationName。
   - `scraper/scrape.py` 將 `KOBE`/`Kobe` 納入 Hyogo 判定，並補去重規則：活動型資料若場館字串相似且完整日期區間一致，即使其中一筆 city 空白也合併。
   - `scraper/smoke_test.py` 新增 KOBE city、Miffy 官方標題場館抽取、同場館同完整區間 city 缺漏去重測試。
+
+## 27. 2026-06-17 今日更新檢視與 Flower Miffy 顯示
+
+- 使用者回報情報量變多後，不容易知道「今天多了什麼」；前端在國家篩選旁新增 `今日更新` 按鈕。
+- `今日更新` 會依目前類型/國家/品牌篩選，只顯示 `createdAt` 等於當天的情報，並在上方顯示 Pokémon / Miffy / Chiikawa 今日各新增幾筆。
+- Miffy 公開欄位若出現 `フラワーミッフィー`，統一顯示為 `Flower Miffy`；`sourceTitle` 保留原文供查證。
+- 目前資料量：66 筆，Chiikawa 42、Miffy 12、Pokémon 12；其中 `createdAt=2026-06-17`：Chiikawa 35、Miffy 5、Pokémon 4。

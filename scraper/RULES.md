@@ -24,6 +24,7 @@ Sanrio（三麗鷗）先暫停，因無結構化來源、新聞/Gemini 污染最
 - 台灣 Pokémon Center 新品若只出現在 NOWnews / Pokemon Hubs 等二手來源，需列入 agent 高風險候選；但若內文明確寫台灣寶可夢中心 / Pokémon Center TAIPEI、實體店開賣日、商品內容，且沒有官方或其他來源反證，可暫留，不因官方商品頁查無同筆就直接刪除。
 - 這類二手來源 URL 不可只因「沒有官方 goods 頁」加入 `rejected.json`。只有確認為錯誤、重複、過期、不符類型或被官方反證時，才可加入黑名單。
 - Miffy 另補 Kiddy Land / miffy style 站內搜尋（`kiddyland.co.jp/?s=miffy`），抓近期官方店頭活動與新品，避免 Google News/RSS 漏掉官方店鋪消息。
+- Miffy 公開顯示欄位（`title` / `locationName` / `summaryZh` / `tags`）若出現 `フラワーミッフィー`，統一轉成 `Flower Miffy`；`sourceTitle` 保留原文，方便回查來源。
 - 三麗鷗無可解析的結構化官方頁（`sanrio.co.jp` 503／JS 動態／REST 空），目前暫停預設抓取與前端顯示。
 - 抓取被擋（403/429/503）時自動改走 reader 代理 `r.jina.ai`，不放棄（`verify_links.fetch_html` / `check_url`）。
 

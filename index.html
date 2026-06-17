@@ -106,13 +106,15 @@
         <option value="JP">🇯🇵 日本</option>
         <option value="TW">🇹🇼 台灣</option>
       </select>
+      <button class="filter-toggle" id="filter-today" type="button" aria-pressed="false">今日更新</button>
       <span class="filter-count" id="events-count"></span>
     </div>
 
+    <div class="today-summary" id="today-summary" hidden></div>
     <div class="events-grid" id="events-grid"></div>
     <div class="stores-wrap" id="stores-wrap" style="display:none"></div>
 </div>
 
-<script src="js/app.js?v=20260605-cache-bust"></script>
+<script src="js/app.js?v=20260617-today-updates"></script>
 </body>
 </html>

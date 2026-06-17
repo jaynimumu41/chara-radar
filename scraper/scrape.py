@@ -727,7 +727,37 @@ def load_events() -> list[dict]:
         return json.loads(EVENTS_JSON.read_text(encoding="utf-8"))
     return []
 
+DISPLAY_REPLACEMENTS = {
+    "miffy": {
+        "フラワーミッフィー": "Flower Miffy",
+    },
+}
+
+def normalize_display_terms(ev: dict) -> dict:
+    """Normalize brand/place display terms before writing public data."""
+    replacements = DISPLAY_REPLACEMENTS.get(ev.get("brand", ""), {})
+    if not replacements:
+        return ev
+    for field in ("title", "locationName", "summaryZh"):
+        value = ev.get(field)
+        if isinstance(value, str):
+            for src, dst in replacements.items():
+                value = value.replace(src, dst)
+            ev[field] = value
+    tags = ev.get("tags")
+    if isinstance(tags, list):
+        normalized_tags = []
+        for tag in tags:
+            if isinstance(tag, str):
+                for src, dst in replacements.items():
+                    tag = tag.replace(src, dst)
+            normalized_tags.append(tag)
+        ev["tags"] = normalized_tags
+    return ev
+
 def save_events(events: list[dict]):
+    for ev in events:
+        normalize_display_terms(ev)
     EVENTS_JSON.write_text(json.dumps(events, ensure_ascii=False, indent=2), encoding="utf-8")
 
 def replace_in_place(events: list[dict], fresh: list[dict], should_replace) -> list[dict]:

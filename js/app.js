@@ -4,6 +4,7 @@ let activeView = 'events';// 'events' | 'stores'
 let activeBrand = null;   // null = 全部品牌
 let activeType = 'all';
 let activeCountry = 'all';
+let activeTodayOnly = false;
 
 const DATA_CACHE_BUST = Date.now().toString(36);
 
@@ -12,6 +13,7 @@ const BRAND_LABELS = {
   miffy: 'Miffy',
   chiikawa: 'Chiikawa'
 };
+const BRAND_ORDER = ['pokemon', 'miffy', 'chiikawa'];
 const TYPE_LABELS = {
   popup: '快閃店',
   new_product: '新商品',
@@ -76,6 +78,13 @@ function compareEvents(a, b) {
   return 0;
 }
 
+function compareTodayEvents(a, b) {
+  const ba = BRAND_ORDER.indexOf(a.brand);
+  const bb = BRAND_ORDER.indexOf(b.brand);
+  if (ba !== bb) return ba - bb;
+  return compareEvents(a, b);
+}
+
 function isActive(ev) {
   const t = today();
   if (ev.endDate && ev.endDate < t) return false;
@@ -103,8 +112,37 @@ function getFiltered() {
     if (activeBrand && ev.brand !== activeBrand) return false;
     if (activeType !== 'all' && ev.type !== activeType) return false;
     if (activeCountry !== 'all' && ev.country !== activeCountry) return false;
+    if (activeTodayOnly && ev.createdAt !== today()) return false;
     return true;
   });
+}
+
+function getTodaySummaryEvents() {
+  const t = today();
+  return allEvents.filter(ev => {
+    if (!isActive(ev)) return false;
+    if (activeType !== 'all' && ev.type !== activeType) return false;
+    if (activeCountry !== 'all' && ev.country !== activeCountry) return false;
+    return ev.createdAt === t;
+  });
+}
+
+function renderTodaySummary() {
+  const el = document.getElementById('today-summary');
+  if (!el) return;
+  if (!activeTodayOnly) {
+    el.hidden = true;
+    el.innerHTML = '';
+    return;
+  }
+  const counts = Object.fromEntries(BRAND_ORDER.map(brand => [brand, 0]));
+  getTodaySummaryEvents().forEach(ev => {
+    if (Object.prototype.hasOwnProperty.call(counts, ev.brand)) counts[ev.brand] += 1;
+  });
+  el.hidden = false;
+  el.innerHTML = BRAND_ORDER.map(brand =>
+    `<span class="today-chip today-${brand}">${BRAND_LABELS[brand]} ${counts[brand]}</span>`
+  ).join('');
 }
 
 // ── Card rendering ────────────────────────────────────────────────────────────
@@ -157,6 +195,7 @@ function renderEvents() {
   document.getElementById('stat-total-label').textContent = '目前有效情報';
 
   const filtered = getFiltered();
+  renderTodaySummary();
 
   // 統計（隨篩選動態變化）
   const urgentCount = filtered.filter(ev => {
@@ -167,14 +206,16 @@ function renderEvents() {
     filtered.filter(e => e.needReservation).length,
     filtered.filter(e => e.hasLimitedGoods).length);
 
-  document.getElementById('events-count').textContent = `共 ${filtered.length} 筆`;
+  document.getElementById('events-count').textContent =
+    activeTodayOnly ? `今日更新 ${filtered.length} 筆` : `共 ${filtered.length} 筆`;
 
   // 排序：有結束日的快結束在前；只有開始日的排在後段並依開始日排序。
-  const sorted = [...filtered].sort(compareEvents);
+  const sorted = [...filtered].sort(activeTodayOnly ? compareTodayEvents : compareEvents);
 
   const grid = document.getElementById('events-grid');
   if (sorted.length === 0) {
-    grid.innerHTML = `<div class="no-results"><p>🔍</p><p>目前沒有符合條件的情報</p></div>`;
+    const emptyText = activeTodayOnly ? '今天目前沒有符合條件的更新' : '目前沒有符合條件的情報';
+    grid.innerHTML = `<div class="no-results"><p>🔍</p><p>${emptyText}</p></div>`;
     return;
   }
   grid.innerHTML = sorted.map(renderCard).join('');
@@ -200,6 +241,11 @@ function brandStoreCount(brand) {
 function renderStores() {
   // 常設店不需要類型/國家/城市篩選
   document.getElementById('filter-bar').style.display = 'none';
+  const summary = document.getElementById('today-summary');
+  if (summary) {
+    summary.hidden = true;
+    summary.innerHTML = '';
+  }
   document.getElementById('events-grid').style.display = 'none';
   const wrap = document.getElementById('stores-wrap');
   wrap.style.display = '';
@@ -315,6 +361,15 @@ async function init() {
   // Dropdown filters
   document.getElementById('filter-type').addEventListener('change', e => { activeType = e.target.value; renderHome(); });
   document.getElementById('filter-country').addEventListener('change', e => { activeCountry = e.target.value; renderHome(); });
+  const todayBtn = document.getElementById('filter-today');
+  if (todayBtn) {
+    todayBtn.addEventListener('click', () => {
+      activeTodayOnly = !activeTodayOnly;
+      todayBtn.classList.toggle('active', activeTodayOnly);
+      todayBtn.setAttribute('aria-pressed', activeTodayOnly ? 'true' : 'false');
+      renderHome();
+    });
+  }
 
   renderHome();
 }

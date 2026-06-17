@@ -204,6 +204,45 @@ body {
   color: var(--text-muted);
   margin-left: auto;
 }
+.filter-toggle {
+  padding: 7px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s;
+}
+.filter-toggle:hover { border-color: var(--text); }
+.filter-toggle.active {
+  background: var(--text);
+  border-color: var(--text);
+  color: #fff;
+}
+.today-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: -6px 0 14px;
+}
+.today-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 26px;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+.today-pokemon { background: var(--pokemon-bg); color: #8a5400; border-color: #f5d18a; }
+.today-miffy { background: var(--miffy-bg); color: #1a5fa0; border-color: #c8def5; }
+.today-chiikawa { background: var(--chiikawa-bg); color: #9a3050; border-color: #f1ccd5; }
 
 /* VIEW TABS（活動情報 / 常設店，各佔一半） */
 .view-tabs {
@@ -522,6 +561,7 @@ body {
   .brand-filters { grid-template-columns: repeat(2, 1fr); }
   .travel-form { grid-template-columns: 1fr 1fr; }
   .events-grid { grid-template-columns: 1fr; }
+  .filter-count { margin-left: 0; width: 100%; }
 }
 
 .grid-msg{grid-column:1/-1;text-align:center;color:#9aa;padding:48px 12px;font-size:15px;}

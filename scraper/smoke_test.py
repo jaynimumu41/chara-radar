@@ -169,6 +169,17 @@ check("Google News placeholder→不穩定來源",
       scrape.is_unstable_source_url("https://news.google.com/rss/articles/ABC"), True)
 check("NOWnews 真實 URL→穩定來源",
       scrape.is_unstable_source_url("https://www.nownews.com/news/6842060"), False)
+flower_event = ev(
+    brand="miffy",
+    title="フラワーミッフィー限定活動",
+    locationName="フラワーミッフィー 浅草店",
+    summaryZh="フラワーミッフィー店舖限定商品",
+    tags=["フラワーミッフィー", "淺草店"],
+)
+scrape.normalize_display_terms(flower_event)
+check("Miffy フラワーミッフィー公開顯示→Flower Miffy",
+      (flower_event["title"], flower_event["locationName"], flower_event["summaryZh"], flower_event["tags"]),
+      ("Flower Miffy限定活動", "Flower Miffy 浅草店", "Flower Miffy店舖限定商品", ["Flower Miffy", "淺草店"]))
 check("連結驗證網路 URL 去掉 fragment",
       verify_links._network_url("https://chiikawa-info.jp/p26/mck_scpus/index.html#abc123"),
       "https://chiikawa-info.jp/p26/mck_scpus/index.html")
