@@ -1540,8 +1540,8 @@
     "country": "JP",
     "city": "",
     "locationName": "miffy style 各店＋一部キデイランド店舗",
-    "startDate": "2026-06-27",
-    "endDate": "2026-07-07",
+    "startDate": "2026-06-06",
+    "endDate": "",
     "summaryZh": "Miffy style / Kiddy Land 店頭活動，販售或受注 Miffy 相關新品與限定／先行商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
@@ -1579,53 +1579,5 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-17",
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002086.000022901.html"
-  },
-  {
-    "brand": "pokemon",
-    "title": "必勝客《寶可夢》周邊開搶",
-    "type": "campaign",
-    "country": "TW",
-    "city": "",
-    "locationName": "必勝客",
-    "startDate": "2026-06-16",
-    "endDate": "",
-    "summaryZh": "必勝客與寶可夢聯名推出周邊商品，包含百變怪抱枕、購物袋、特典卡包等，於6月16日開賣。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "必勝客",
-      "聯名",
-      "周邊商品"
-    ],
-    "id": "po-ec1f5e",
-    "sourceTitle": "百變怪抱枕怎麼買？必勝客《寶可夢》周邊6/16開搶，購物袋、特典卡包全品項一次看 - Harper's BAZAAR",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-17",
-    "sourceUrl": "https://www.harpersbazaar.com/tw/life/home-improvement/g71597053/pizza-hut-pokemon-0616/"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "ちいかわパーク1周年企画",
-    "type": "campaign",
-    "country": "JP",
-    "city": "Nagoya",
-    "locationName": "ちいかわパーク",
-    "startDate": "2026-07-24",
-    "endDate": "",
-    "summaryZh": "ちいかわパーク迎來一週年，推出特別企劃，可獲得「びんよよ」、入場特典為公仔，並有販售新周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "一週年",
-      "限定商品",
-      "公仔",
-      "企劃"
-    ],
-    "id": "ch-500ff7",
-    "sourceTitle": "「びんよよ」が手に入る！ ちいかわパーク1周年企画が7月24日始動、入場特典フィギュアや新商品も（リアルサウンド） - Yahoo!ニュース",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-17",
-    "sourceUrl": "https://news.yahoo.co.jp/articles/ae9777f70c3710c7f658eeaf40664444988e2d3e"
   }
 ]

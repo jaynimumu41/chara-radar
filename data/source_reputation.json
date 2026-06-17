@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-15T08:37:19+00:00",
+  "updatedAt": "2026-06-17T08:37:14+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 6,
@@ -294,6 +294,60 @@
           "eventId": "ch-119d19",
           "evidenceCount": 1,
           "notes": "Matched official chiikawa-info.jp ck_land listing with 2026-06-19 opening date."
+        }
+      ]
+    },
+    "domain:harpersbazaar.com": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 0,
+      "score": 39,
+      "label": "harpersbazaar.com",
+      "kind": "site",
+      "host": "harpersbazaar.com",
+      "handle": "",
+      "firstSeen": "2026-06-17",
+      "lastReviewed": "2026-06-17",
+      "lastOutcome": "rejected",
+      "notes": "Removed as fresh secondary campaign coverage without authoritative corroboration or explicit official event period.",
+      "byBrand": {
+        "pokemon": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "byType": {
+        "campaign": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "byCountry": {
+        "tw": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "history": [
+        {
+          "date": "2026-06-17",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "campaign",
+          "country": "TW",
+          "eventId": "po-ec1f5e",
+          "evidenceCount": 0,
+          "notes": "Removed as fresh secondary campaign coverage without authoritative corroboration or explicit official event period."
         }
       ]
     }
