@@ -470,6 +470,33 @@ out, _ = scrape.dedup_events([
        sourceType="official_site", sourceUrl="https://dickbruna.jp/news/202606/46792/"),
 ])
 check("同場館同完整區間 city 缺漏→併（1筆）", len(out), 1)
+check("更新差異：同來源不同城市仍是不同情報",
+      scrape.is_same_event_for_update_diff(
+          ev(brand="pokemon", title="Pokemon Center 出張所 in A", type="popup", city="Hyogo",
+             startDate="2026-06-05", endDate="2026-07-22",
+             locationName="イオンモール神戸北", sourceUrl="https://oneheart65.net/pokemoncenterbranch_schedule_2/"),
+          ev(brand="pokemon", title="Pokemon Center 出張所 in B", type="popup", city="Ehime",
+             startDate="2026-06-12", endDate="2026-08-31",
+             locationName="イオンモール今治新都市", sourceUrl="https://oneheart65.net/pokemoncenterbranch_schedule_2/"),
+      ),
+      False)
+kobe_diff = scrape.build_update_diff(
+    [ev(id="old-kobe", brand="miffy", title="Miffy 神戶港塔聯名主題咖啡廳", type="cafe", city="Hyogo",
+        startDate="2026-07-30", endDate="2026-09-30",
+        locationName="KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront")],
+    [
+        ev(id="new-kobe", brand="miffy", title="Miffy 神戶港塔 Night Time 聯名活動", type="cafe", city="Hyogo",
+           startDate="2026-07-30", endDate="2026-09-30",
+           locationName="KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront"),
+        ev(id="new-real", brand="miffy", title="Miffy 新活動", type="campaign", city="Tokyo",
+           startDate="2026-08-01", endDate="2026-08-10", locationName="Flower Miffy"),
+    ],
+    date="2026-06-17",
+    baseline_date="2026-06-16",
+)
+check("更新差異：同活動來源替換不算今日新增",
+      (kobe_diff["newEventIds"], kobe_diff["countsByBrand"]["miffy"], kobe_diff["replacements"]),
+      (["new-real"], 1, [{"from": "old-kobe", "to": "new-kobe"}]))
 
 # 反例（建議1 不可誤殺）：同城同場館但「不同檔期」(日期區間差很多) = 不同活動，不可併
 out, _ = scrape.dedup_events([

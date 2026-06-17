@@ -1,4 +1,5 @@
 let allEvents = [];
+let updateData = { newEventIds: [] };
 let storeData = {};       // 常設店資料（data/stores.json）
 let activeView = 'events';// 'events' | 'stores'
 let activeBrand = null;   // null = 全部品牌
@@ -107,23 +108,28 @@ function dateRange(ev) {
 // ── Filtering ─────────────────────────────────────────────────────────────────
 
 function getFiltered() {
+  const updateIds = getTodayUpdateIds();
   return allEvents.filter(ev => {
     if (!isActive(ev)) return false;
     if (activeBrand && ev.brand !== activeBrand) return false;
     if (activeType !== 'all' && ev.type !== activeType) return false;
     if (activeCountry !== 'all' && ev.country !== activeCountry) return false;
-    if (activeTodayOnly && ev.createdAt !== today()) return false;
+    if (activeTodayOnly && !updateIds.has(ev.id)) return false;
     return true;
   });
 }
 
+function getTodayUpdateIds() {
+  return new Set(Array.isArray(updateData.newEventIds) ? updateData.newEventIds : []);
+}
+
 function getTodaySummaryEvents() {
-  const t = today();
+  const updateIds = getTodayUpdateIds();
   return allEvents.filter(ev => {
     if (!isActive(ev)) return false;
     if (activeType !== 'all' && ev.type !== activeType) return false;
     if (activeCountry !== 'all' && ev.country !== activeCountry) return false;
-    return ev.createdAt === t;
+    return updateIds.has(ev.id);
   });
 }
 
@@ -207,14 +213,14 @@ function renderEvents() {
     filtered.filter(e => e.hasLimitedGoods).length);
 
   document.getElementById('events-count').textContent =
-    activeTodayOnly ? `今日更新 ${filtered.length} 筆` : `共 ${filtered.length} 筆`;
+    activeTodayOnly ? `今日新增 ${filtered.length} 筆` : `共 ${filtered.length} 筆`;
 
   // 排序：有結束日的快結束在前；只有開始日的排在後段並依開始日排序。
   const sorted = [...filtered].sort(activeTodayOnly ? compareTodayEvents : compareEvents);
 
   const grid = document.getElementById('events-grid');
   if (sorted.length === 0) {
-    const emptyText = activeTodayOnly ? '今天目前沒有符合條件的更新' : '目前沒有符合條件的情報';
+    const emptyText = activeTodayOnly ? '今天沒有比前次版本新增的情報' : '目前沒有符合條件的情報';
     grid.innerHTML = `<div class="no-results"><p>🔍</p><p>${emptyText}</p></div>`;
     return;
   }
@@ -324,6 +330,12 @@ async function init() {
     storeData = stRes.ok ? await stRes.json() : (storeData || {});
   } catch (e) {
     storeData = storeData || {};
+  }
+  try {
+    const upRes = await fetch(dataUrl('data/today_updates.json'), { cache: 'no-store' });
+    updateData = upRes.ok ? await upRes.json() : { newEventIds: [] };
+  } catch (e) {
+    updateData = { newEventIds: [] };
   }
 
   // 最後更新時間（每日 16:00 排程跑完寫入；讀不到就留空不顯示）

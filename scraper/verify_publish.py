@@ -3,6 +3,7 @@
 Checks:
 1. Local HEAD equals origin/main.
 2. GitHub Pages data/events.json eventually matches local data/events.json.
+3. GitHub Pages data/today_updates.json eventually matches local data/today_updates.json.
 
 This is meant for the daily agent verification step, where edits are committed
 after the normal scraper. Without this guard, a local agent commit can exist
@@ -20,7 +21,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 EVENTS_JSON = ROOT / "data" / "events.json"
+TODAY_UPDATES_JSON = ROOT / "data" / "today_updates.json"
 PAGES_EVENTS_URL = "https://jaynimumu41.github.io/chara-radar/data/events.json"
+PAGES_UPDATES_URL = "https://jaynimumu41.github.io/chara-radar/data/today_updates.json"
 
 
 def run_git(args: list[str]) -> str:
@@ -35,6 +38,10 @@ def run_git(args: list[str]) -> str:
 
 def load_local_events() -> list[dict]:
     return json.loads(EVENTS_JSON.read_text(encoding="utf-8"))
+
+
+def load_local_updates() -> dict:
+    return json.loads(TODAY_UPDATES_JSON.read_text(encoding="utf-8"))
 
 
 def fetch_json(url: str, timeout: int) -> list[dict]:
@@ -57,9 +64,14 @@ def canonical_events(events: list[dict]) -> str:
     )
 
 
+def canonical_json(data) -> str:
+    return json.dumps(data, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--pages-url", default=PAGES_EVENTS_URL)
+    parser.add_argument("--updates-url", default=PAGES_UPDATES_URL)
     parser.add_argument("--timeout", type=int, default=180)
     parser.add_argument("--interval", type=int, default=15)
     args = parser.parse_args()
@@ -75,6 +87,8 @@ def main() -> int:
 
     local_events = load_local_events()
     local_canon = canonical_events(local_events)
+    local_updates = load_local_updates()
+    local_updates_canon = canonical_json(local_updates)
     deadline = time.time() + args.timeout
     attempt = 0
     last_error = ""
@@ -83,15 +97,21 @@ def main() -> int:
         try:
             online_events = fetch_json(args.pages_url, timeout=45)
             online_canon = canonical_events(online_events)
-            print(f"attempt={attempt} online_total={len(online_events)} local_total={len(local_events)}")
-            if online_canon == local_canon:
+            online_updates = fetch_json(args.updates_url, timeout=45)
+            online_updates_canon = canonical_json(online_updates)
+            print(
+                f"attempt={attempt} online_total={len(online_events)} local_total={len(local_events)} "
+                f"online_new={online_updates.get('newEventCount')} local_new={local_updates.get('newEventCount')}"
+            )
+            if online_canon == local_canon and online_updates_canon == local_updates_canon:
                 print("publish_ok=true")
                 return 0
             local_ids = {e.get("id") for e in local_events}
             online_ids = {e.get("id") for e in online_events}
             missing = sorted(local_ids - online_ids)
             extra = sorted(online_ids - local_ids)
-            last_error = f"events mismatch missing={missing[:8]} extra={extra[:8]}"
+            update_match = online_updates_canon == local_updates_canon
+            last_error = f"events mismatch missing={missing[:8]} extra={extra[:8]} updates_match={update_match}"
         except Exception as exc:
             last_error = str(exc)
             print(f"attempt={attempt} error={last_error}")

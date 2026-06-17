@@ -17,6 +17,7 @@ Sanrio（三麗鷗）先暫停，因無結構化來源、新聞/Gemini 污染最
 | 官方新聞稿 + 一般新聞 | PR TIMES 關鍵字、Google News RSS（日文 + 中文） | 是，Gemini 萃取 | `scrape.py` |
 
 - 結構化來源每次跑都以官方最新清單覆蓋同來源 URL 的舊資料（過期由 `clean_events` 移除）。
+- `data/today_updates.json` 是前端「今日更新」的依據：每日 scraper 會用跑前的公開資料與跑後資料比對，只列出前次版本沒有的新情報；`createdAt` 不能直接當作今日新增，因為結構化來源重建、修正或來源替換也可能寫成今天。
 - 吉伊卡哇除了 POP UP STORE 排程，也抓官方首頁上的活動/店鋪卡片、`p26/mck_scpus/index.html` 電影 POP UP 多會場頁與 `chiikawamogumogu.jp` 專門店頁；這類官方子頁、常設店開幕、限定餐飲與原創周邊不一定會進 Google News/RSS，需走結構化解析。
 - `scraper/audit_chiikawa_subpages.py` 會巡覽 `chiikawa-info.jp/index.html` 連出的 `p26/.../index.html` 子頁，對照 `data/events.json` 標記 `parsed` / `ignored` / `needs_review`。`needs_review` 只是稽核提示，不會自動入庫；有明確會場＋日期＋商品/店鋪訊號的 high risk 頁面，應優先補結構化 parser 或人工標成不收。
 - oneheart65 的 Pokémon Center 出張所不是品牌官方站，但本專案以結構化方式解析其排程，日期已列入可信日期來源；完整起訖日的出張所不再進每日 agent 高風險候選。

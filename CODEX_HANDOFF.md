@@ -391,6 +391,7 @@ automation 的職責不是再跑一次爬蟲，而是依第 5 節對高風險筆
 ## 27. 2026-06-17 今日更新檢視與 Flower Miffy 顯示
 
 - 使用者回報情報量變多後，不容易知道「今天多了什麼」；前端在國家篩選旁新增 `今日更新` 按鈕。
-- `今日更新` 會依目前類型/國家/品牌篩選，只顯示 `createdAt` 等於當天的情報，並在上方顯示 Pokémon / Miffy / Chiikawa 今日各新增幾筆。
+- `今日更新` 不可用 `createdAt` 判斷；`createdAt=今天` 可能只是結構化來源重建、資料修正或來源替換，不代表今天才新增。
+- 新增 `data/today_updates.json`，由 scraper 用跑前公開資料與跑後資料比對，只列出前次版本沒有的新情報；前端依目前類型/國家/品牌篩選這些 `newEventIds`。
 - Miffy 公開欄位若出現 `フラワーミッフィー`，統一顯示為 `Flower Miffy`；`sourceTitle` 保留原文供查證。
-- 目前資料量：66 筆，Chiikawa 42、Miffy 12、Pokémon 12；其中 `createdAt=2026-06-17`：Chiikawa 35、Miffy 5、Pokémon 4。
+- 2026-06-17 對比 2026-06-16 最後版本：實際新增 5 筆，Pokémon 1、Miffy 2、Chiikawa 2；Miffy 神戶官方筆是昨天同活動的來源/去重修正，不列入新增。

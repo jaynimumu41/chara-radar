@@ -39,7 +39,7 @@ $repo = "C:\Users\USER\Documents\claude\chara-radar"
 $nowIso = Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz"
 '{ "updatedAt": "' + $nowIso + '" }' | Out-File -FilePath (Join-Path $repo "data\last_updated.json") -Encoding utf8 -NoNewline
 
-& git -C $repo add data/events.json data/last_updated.json 2>&1 | Out-File -FilePath $log -Append -Encoding utf8
+& git -C $repo add data/events.json data/today_updates.json data/last_updated.json 2>&1 | Out-File -FilePath $log -Append -Encoding utf8
 $staged = & git -C $repo diff --cached --name-only
 if ($staged) {
   "DEPLOY: pushing to GitHub Pages ($($staged -join ', '))..." | Out-File -FilePath $log -Append -Encoding utf8

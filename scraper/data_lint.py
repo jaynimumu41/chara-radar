@@ -16,6 +16,7 @@ if hasattr(sys.stdout, "reconfigure"):
 ROOT = Path(__file__).resolve().parents[1]
 EVENTS_JSON = ROOT / "data" / "events.json"
 STORES_JSON = ROOT / "data" / "stores.json"
+TODAY_UPDATES_JSON = ROOT / "data" / "today_updates.json"
 LAST_UPDATED_JSON = ROOT / "data" / "last_updated.json"
 
 ACTIVE_BRANDS = set(scrape.DEFAULT_BRANDS)
@@ -122,6 +123,29 @@ def main() -> int:
                 errors.append(f"paused brands remain in stores.json: {', '.join(paused)}")
         else:
             errors.append("data/stores.json must be a JSON object")
+
+    if TODAY_UPDATES_JSON.exists():
+        try:
+            updates = load_json(TODAY_UPDATES_JSON)
+            if not isinstance(updates, dict):
+                errors.append("data/today_updates.json must be a JSON object")
+            else:
+                event_ids = set(ids.keys())
+                new_event_ids = updates.get("newEventIds", [])
+                if not isinstance(new_event_ids, list):
+                    errors.append("today_updates.json newEventIds must be an array")
+                    new_event_ids = []
+                missing_update_ids = sorted(str(x) for x in new_event_ids if x not in event_ids)
+                if missing_update_ids:
+                    errors.append(f"today_updates.json references missing event ids: {', '.join(missing_update_ids)}")
+                counts = Counter(e.get("brand", "") for e in events if e.get("id") in set(new_event_ids))
+                counts_by_brand = updates.get("countsByBrand", {})
+                if isinstance(counts_by_brand, dict):
+                    for brand in ACTIVE_BRANDS:
+                        if int(counts_by_brand.get(brand, 0)) != counts.get(brand, 0):
+                            errors.append(f"today_updates.json count mismatch for {brand}")
+        except Exception as exc:
+            errors.append(f"today_updates.json is not parseable: {exc}")
 
     if LAST_UPDATED_JSON.exists():
         try:

@@ -42,7 +42,10 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace", line_buffering=True)
     sys.stderr.reconfigure(encoding="utf-8", errors="replace", line_buffering=True)
 
-EVENTS_JSON = Path(__file__).parent.parent / "data" / "events.json"
+DATA_DIR = Path(__file__).parent.parent / "data"
+EVENTS_JSON = DATA_DIR / "events.json"
+UPDATE_DIFF_JSON = DATA_DIR / "today_updates.json"
+LAST_UPDATED_JSON = DATA_DIR / "last_updated.json"
 TODAY = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 MAX_PER_BRAND = 13  # 每品牌單次最多用 AI 判斷幾筆（控制速度與額度）
 
@@ -760,6 +763,50 @@ def save_events(events: list[dict]):
         normalize_display_terms(ev)
     EVENTS_JSON.write_text(json.dumps(events, ensure_ascii=False, indent=2), encoding="utf-8")
 
+def load_last_updated_date() -> str:
+    try:
+        data = json.loads(LAST_UPDATED_JSON.read_text(encoding="utf-8"))
+        updated_at = data.get("updatedAt", "")
+        return updated_at[:10] if updated_at else ""
+    except Exception:
+        return ""
+
+def build_update_diff(previous: list[dict], current: list[dict], *,
+                      date: str = TODAY, baseline_date: str = "") -> dict:
+    """Build the public 'today updates' file from the previous visible data state."""
+    new_events: list[dict] = []
+    replacements: list[dict] = []
+    for ev in current:
+        match = next((old for old in previous if is_same_event_for_update_diff(old, ev)), None)
+        if match:
+            if match.get("id") != ev.get("id"):
+                replacements.append({"from": match.get("id", ""), "to": ev.get("id", "")})
+            continue
+        new_events.append(ev)
+
+    counts = {brand: 0 for brand in DEFAULT_BRANDS}
+    for ev in new_events:
+        brand = ev.get("brand", "")
+        if brand in counts:
+            counts[brand] += 1
+
+    return {
+        "date": date,
+        "baselineDate": baseline_date,
+        "generatedAt": datetime.now(timezone.utc).isoformat(),
+        "baselineEventCount": len(previous),
+        "currentEventCount": len(current),
+        "newEventCount": len(new_events),
+        "countsByBrand": counts,
+        "newEventIds": [ev.get("id", "") for ev in new_events if ev.get("id")],
+        "replacements": replacements,
+    }
+
+def save_update_diff(previous: list[dict], current: list[dict], baseline_date: str = "") -> dict:
+    diff = build_update_diff(previous, current, baseline_date=baseline_date)
+    UPDATE_DIFF_JSON.write_text(json.dumps(diff, ensure_ascii=False, indent=2), encoding="utf-8")
+    return diff
+
 def replace_in_place(events: list[dict], fresh: list[dict], should_replace) -> list[dict]:
     """Update structured-source events without moving unchanged records."""
     by_id = {e.get("id"): e for e in fresh if e.get("id")}
@@ -913,10 +960,76 @@ def _days_ago_iso(iso_date: str) -> float | None:
     except Exception:
         return None
 
+def _date_gap_days(a: str, b: str) -> int | None:
+    try:
+        da = datetime.strptime(a, "%Y-%m-%d")
+        db = datetime.strptime(b, "%Y-%m-%d")
+        return abs((da - db).days)
+    except Exception:
+        return None
+
 # 無結束日時，依類型用「起始日距今天數」推估是否已過期（補洞：無 endDate 的活動
 # 原本永遠清不掉，導致過期活動殘留）。活動型檔期通常數天~數週；商品發售熱度約兩月。
 ACTIVITY_TYPES = {"popup", "cafe", "campaign"}      # 有明確檔期的活動
 SELLING_TYPES  = {"new_product", "lottery", "reservation"}  # 商品發售/抽選/預約
+
+def _real_source_url(ev: dict) -> str:
+    url = ev.get("sourceUrl", "")
+    return "" if "google.com/search" in url else url
+
+def is_same_event_for_update_diff(old: dict, new: dict) -> bool:
+    """Whether `new` is the same real-world item as an older public entry."""
+    if old.get("id") and old.get("id") == new.get("id"):
+        return True
+    old_url, new_url = _real_source_url(old), _real_source_url(new)
+    if old_url and old_url == new_url:
+        old_city, new_city = old.get("city", ""), new.get("city", "")
+        if old_city and new_city and old_city != new_city:
+            return False
+        old_start, new_start = old.get("startDate", ""), new.get("startDate", "")
+        if old_start and new_start:
+            gap = _date_gap_days(old_start, new_start)
+            if gap is not None and gap > 14:
+                return False
+        return True
+    if old.get("brand") != new.get("brand"):
+        return False
+
+    old_title = old.get("title", "")
+    new_title = new.get("title", "")
+    old_norm, new_norm = _norm(old_title), _norm(new_title)
+    if old_norm and old_norm == new_norm:
+        return True
+
+    old_type, new_type = old.get("type", ""), new.get("type", "")
+    if old_type in SELLING_TYPES or new_type in SELLING_TYPES:
+        return False
+    if old_type not in ACTIVITY_TYPES or new_type not in ACTIVITY_TYPES:
+        return False
+
+    old_city, new_city = old.get("city", ""), new.get("city", "")
+    if old_city and new_city and old_city != new_city:
+        return False
+
+    old_start, new_start = old.get("startDate", ""), new.get("startDate", "")
+    if not old_start or not new_start:
+        return False
+    gap = _date_gap_days(old_start, new_start)
+    if gap is None or gap > 3:
+        return False
+
+    old_end, new_end = old.get("endDate", ""), new.get("endDate", "")
+    if old_end and new_end and old_end != new_end:
+        return False
+
+    old_loc, new_loc = old.get("locationName", ""), new.get("locationName", "")
+    old_canon = canon_venue(old_loc, old_title)
+    new_canon = canon_venue(new_loc, new_title)
+    if old_canon and old_canon == new_canon:
+        return True
+    if old_loc and new_loc and SequenceMatcher(None, _norm(old_loc), _norm(new_loc)).ratio() >= 0.6:
+        return True
+    return False
 
 def _is_past(ev: dict) -> bool:
     """活動是否已結束。
@@ -1313,7 +1426,9 @@ def run(brands: list[str]):
     name = "Claude (Anthropic)" if kind == "anthropic" else "Gemini (Google)"
     print(f"🤖  AI 後端：{name}　·　{len(keys)} 把 key{'（自動輪替）' if len(keys) > 1 else ''}")
 
-    events    = load_events()
+    events = load_events()
+    previous_events = json.loads(json.dumps(events, ensure_ascii=False))
+    baseline_date = load_last_updated_date()
 
     # ── 結構化官方來源（零 Gemini）：直接解析官方排程頁產生成品情報，每次跑都用官方最新版
     #    覆蓋同來源 URL 的舊資料；過期的由後面的 clean_events 自動移除。 ──────────────
@@ -1479,9 +1594,11 @@ def run(brands: list[str]):
     if not rate_limited:
         events, ai_removed = ai_dedup(events, rotator)
     save_events(events)
+    update_diff = save_update_diff(previous_events, events, baseline_date)
 
     status = "中途因配額停止" if rate_limited else "完成"
     print(f"\n✨  {status}！本次新增 {new_count} 筆")
+    print(f"    今日新增檢視：相對前次版本新增 {update_diff['newEventCount']} 筆")
     if past_removed or dup_removed or ai_removed:
         print(f"    清理：移除過期 {past_removed} 筆、去重 {dup_removed + ai_removed} 筆"
               f"（其中 AI 去重 {ai_removed} 筆）")
