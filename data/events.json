@@ -1558,29 +1558,6 @@
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_20260606/"
   },
   {
-    "brand": "miffy",
-    "title": "Miffy 新商品發售",
-    "type": "new_product",
-    "country": "JP",
-    "city": "",
-    "locationName": "フェリシモ（Felissimo）",
-    "startDate": "2026-06-18",
-    "endDate": "2026-09-30",
-    "summaryZh": "日本フェリシモ將於6月18日發售共19款Miffy新周邊商品，包含全球獨家的限定設計。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "新商品",
-      "限定設計",
-      "日本"
-    ],
-    "id": "mi-7a042b",
-    "sourceTitle": "カタログまるごと一冊ミッフィー！世界中でここだけのフェリシモ限定アイテムを含む新商品19点を、6/18から発売開始",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-18",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000004307.000012759.html"
-  },
-  {
     "brand": "chiikawa",
     "title": "Chiikawa Park 開幕一週年紀念活動",
     "type": "campaign",

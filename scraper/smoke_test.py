@@ -131,6 +131,22 @@ check("可信官方商品來源→不套非官方泛商品擋法",
           source_url="https://www.pokemon.co.jp/goods/2026/05/260522_to01.html",
           page_text=""),
       False)
+check("服裝類新品→擋",
+      scrape.is_apparel_new_product(
+          ev(brand="miffy", type="new_product", title="Miffy 新商品發售",
+             locationName="フェリシモ（Felissimo）",
+             summaryZh="日本フェリシモ將發售共19款Miffy新周邊商品。"),
+          source_title="ミッフィー限定アイテムを含む新商品19点を発売開始",
+          page_text="ミッフィー Tシャツ ワンピース ファッション アパレル"),
+      True)
+check("非服裝實體店新品→不擋",
+      scrape.is_apparel_new_product(
+          ev(brand="pokemon", type="new_product", title="寶可夢中心夯品再到貨",
+             locationName="台灣寶可夢中心",
+             summaryZh="店頭販售娃娃與周邊新品。"),
+          source_title="台灣寶可夢中心 6/13 開賣",
+          page_text="Pokémon Center TAIPEI 店頭 販售 娃娃 周邊"),
+      False)
 
 # ── is_trusted_date_source ────────────────────────────────────────────────────
 print("\n[is_trusted_date_source] 可信日期網域（hostname 精準比對）")

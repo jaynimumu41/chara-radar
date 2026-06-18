@@ -207,6 +207,13 @@ GENERIC_MERCH_TITLE_KEYWORDS = (
     "商品情報", "発売開始", "発売", "開賣", "登場", "グッズ",
 )
 
+APPAREL_PRODUCT_KEYWORDS = (
+    "服裝", "服装", "服飾", "衣服", "衣料", "衣類", "衣著",
+    "アパレル", "ファッション", "ウェア", "wear",
+    "tシャツ", "t-shirt", "tee", "シャツ", "パーカー", "スウェット",
+    "ワンピース", "ブラウス", "ジャケット", "コート", "カーディガン",
+)
+
 PHYSICAL_STORE_SIGNALS = (
     "pokemon center", "pokémon center", "ポケモンセンター", "寶可夢中心", "宝可梦中心",
     "pokemon center taipei", "台灣寶可夢中心", "台北寶可夢中心",
@@ -226,6 +233,23 @@ MEDIA_LOCATION_HINTS = (
 def is_generic_merch_title(*texts) -> bool:
     blob = " ".join(t for t in texts if t)
     return any(kw.lower() in blob.lower() for kw in GENERIC_MERCH_TITLE_KEYWORDS)
+
+def is_apparel_new_product(ev: dict, source_title: str = "", page_text: str = "") -> bool:
+    """Reject clothing/apparel product-only launches while keeping real events."""
+    if ev.get("type") != "new_product":
+        return False
+    parts = [
+        ev.get("title", ""),
+        ev.get("summaryZh", ""),
+        ev.get("locationName", ""),
+        source_title,
+        page_text[:12000],
+    ]
+    tags = ev.get("tags")
+    if isinstance(tags, list):
+        parts.extend(str(tag) for tag in tags)
+    blob = " ".join(part for part in parts if part).lower()
+    return any(kw.lower() in blob for kw in APPAREL_PRODUCT_KEYWORDS)
 
 def has_physical_store_signal(*texts) -> bool:
     blob = " ".join(t for t in texts if t).lower()
@@ -1465,6 +1489,13 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
             page_text=source_html,
         ):
             print("    ⛔ 泛商品新聞且無實體店/會場訊號，丟棄")
+            return None
+        if is_apparel_new_product(
+            data,
+            source_title=item.get("title", ""),
+            page_text=source_html,
+        ):
+            print("    ⛔ 服裝/衣服類新品，不收")
             return None
         if is_unstable_source_url(real or ""):
             print("    ⛔ 找不到穩定來源 URL，不入庫（保留隔天重試）")

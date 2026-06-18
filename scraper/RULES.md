@@ -66,6 +66,7 @@ Sanrio（三麗鷗）先暫停，因無結構化來源、新聞/Gemini 污染最
 | 彙整／懶人包 | `is_roundup_title` / `ROUNDUP_KEYWORDS` | 「懶人包／總整理／行事曆／整理包」——多活動雜揉、無單一檔期。詞彙刻意收斂，**不**含「攻略／整理／一次看」以免誤殺單一活動攻略文 |
 | 壞資料黑名單 | `is_rejected_url` / `is_rejected_title` + `rejected.json` | 已確認移除的，再抓到自動擋，防復活 |
 | 泛商品無實體地點 | `is_venue_less_generic_new_product` | 非可信來源的 `new_product` 若標題很泛、缺少實體店/會場訊號，且 `locationName` 空白或像媒體/出版社名 → 入庫前丟棄 |
+| 服裝類新品 | `is_apparel_new_product` | `new_product` 若只是衣服／服飾／アパレル／Tシャツ等新品發售 → 丟棄；只保留真正的快閃、展覽、咖啡廳等現場活動 |
 | 不穩定來源 URL | `is_unstable_source_url` | Google Search / Google News placeholder 不進正式資料；不寫 processed，隔天可重試找穩定原文 |
 | 新聞過舊 | `pubdate_age_days` > `MAX_NEWS_AGE_DAYS`(45) | 發布超過 45 天多半已結束 |
 | 已處理過 | `processed.json` | 跑過的原始標題不再重送 AI |
@@ -74,6 +75,7 @@ Sanrio（三麗鷗）先暫停，因無結構化來源、新聞/Gemini 污染最
 - **舊文復活**：來源頁前段最大年份 < 今年 → 丟（`stale_by_year`）。
 - **誤萃取**：來源頁未提到品牌關鍵字、或未出現活動主題詞 → 丟（`page_mentions` / `theme_tokens`）。
 - **非官方泛商品防線**：`new_product` 來自非可信來源時，若沒有 `店頭` / `店舗` / `POP UP` / `Pokémon Center TAIPEI` / `ちいかわらんど` / 百貨商場等實體訊號，且地點像媒體名（例如電視台、新聞社）或空白，直接丟棄。這條規則刻意收窄，不會擋明確寫實體店開賣日與商品內容的 NOWnews / Pokemon Hubs 類型來源。
+- **服裝新品防線**：衣服／服飾／アパレル／Tシャツ等單純 `new_product` 不收；若是快閃店、展覽、咖啡廳或週年活動現場販售服裝周邊，仍以活動本身判斷。
 - **穩定來源要求**：若 Google News 解不出真實原文，或原文不可達/不含品牌而只能退回 Google 搜尋連結，該筆不入庫，也不標記 processed；避免把搜尋摘要日期或錯誤 placeholder 當正式資料。
 
 ---
