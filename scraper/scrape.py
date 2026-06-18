@@ -923,6 +923,23 @@ GENERIC_DEDUP_LOCATION_HINTS = [
     "ホビーショップ",
 ]
 GENERIC_DEDUP_LOCATION_KEYS = {_norm(x) for x in GENERIC_DEDUP_LOCATIONS}
+CHAINWIDE_LOCATION_HINTS = [
+    "全国",
+    "全國",
+    "各店",
+    "各店舗",
+    "オンライン",
+    "online",
+]
+
+CHAIN_CAMPAIGN_ALIASES = {
+    "flower-miffy": ["Flower Miffy", "フラワーミッフィー"],
+}
+
+CHAIN_CAMPAIGN_CONCEPTS = [
+    ("birthday", ["birthday", "バースデー", "誕生日", "生日"]),
+    ("anniversary", ["anniversary", "周年", "週年"]),
+]
 
 def is_generic_dedup_location(loc: str) -> bool:
     """Locations too broad to prove two product launches are the same event."""
@@ -931,6 +948,50 @@ def is_generic_dedup_location(loc: str) -> bool:
     return norm in GENERIC_DEDUP_LOCATION_KEYS or any(
         hint.lower() in text.lower() for hint in GENERIC_DEDUP_LOCATION_HINTS
     )
+
+def is_chainwide_location(loc: str) -> bool:
+    text = loc or ""
+    lower = text.lower()
+    return any(hint.lower() in lower for hint in CHAINWIDE_LOCATION_HINTS)
+
+def _event_blob(ev: dict) -> str:
+    parts = []
+    for field in ("title", "locationName", "summaryZh", "sourceTitle"):
+        value = ev.get(field)
+        if isinstance(value, str):
+            parts.append(value)
+    tags = ev.get("tags")
+    if isinstance(tags, list):
+        parts.extend(str(tag) for tag in tags)
+    return _norm(" ".join(parts))
+
+def chain_campaign_key(ev: dict) -> str | None:
+    """Stable key for chain-wide activity pages that may mention one store first."""
+    if ev.get("type", "") not in ACTIVITY_TYPES:
+        return None
+    start = ev.get("startDate", "")
+    if not start:
+        return None
+    blob = _event_blob(ev)
+    chain = next(
+        (
+            name for name, aliases in CHAIN_CAMPAIGN_ALIASES.items()
+            if any(_norm(alias) in blob for alias in aliases)
+        ),
+        "",
+    )
+    if not chain:
+        return None
+    concept = next(
+        (
+            name for name, aliases in CHAIN_CAMPAIGN_CONCEPTS
+            if any(_norm(alias) in blob for alias in aliases)
+        ),
+        "",
+    )
+    if not concept:
+        return None
+    return "|".join([ev.get("brand", ""), chain, concept, start])
 
 # 知名場館別名 → 統一代號（讓同場館不同寫法能去重）
 VENUE_CANON = [
@@ -1023,6 +1084,11 @@ def is_same_event_for_update_diff(old: dict, new: dict) -> bool:
     if old_end and new_end and old_end != new_end:
         return False
 
+    old_chain = chain_campaign_key(old)
+    new_chain = chain_campaign_key(new)
+    if old_chain and old_chain == new_chain:
+        return True
+
     old_loc, new_loc = old.get("locationName", ""), new.get("locationName", "")
     old_canon = canon_venue(old_loc, old_title)
     new_canon = canon_venue(new_loc, new_title)
@@ -1061,6 +1127,7 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
     url_keys: dict[str, int] = {}       # 真實來源 URL -> kept index
     date_keys: dict[str, int] = {}      # (brand, city, startDate) -> kept index
     theme_keys: dict[str, int] = {}     # (brand, 日文主題詞) -> kept index
+    chain_campaign_keys: dict[str, int] = {}  # (brand, chain, concept, startDate)
     removed = 0
 
     def completeness(e: dict) -> int:
@@ -1086,6 +1153,7 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
         dkey = (b + "|" + city + "|" + sd) if (
             city and sd and ev.get("type", "") in ACTIVITY_TYPES
         ) else None  # 活動型同品牌同城同開始日；商品同日可能不同系列，不套用
+        ckey = chain_campaign_key(ev)
         # 商品型同一品牌常在同日/同頁推出多個系列；不要只靠主題詞合併。
         thkeys = [] if ev.get("type", "") in SELLING_TYPES else [
             b + "|" + t for t in theme_tokens(ev.get("title"), ev.get("summaryZh"))
@@ -1098,6 +1166,8 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
             hit = title_keys[tkey]
         elif dkey and dkey in date_keys:     # 同品牌+同城市+同開始日 = 同一活動
             hit = date_keys[dkey]
+        elif ckey and ckey in chain_campaign_keys:
+            hit = chain_campaign_keys[ckey]
         elif any(tk in theme_keys for tk in thkeys):  # 同品牌+相同日文主題詞 = 同一活動
             hit = theme_keys[next(tk for tk in thkeys if tk in theme_keys)]
         elif lkey and lkey in loc_keys:
@@ -1122,6 +1192,8 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
             if completeness(ev) > completeness(kept[hit]):
                 # 用新的取代，但補上舊的非空欄位
                 for f in ("startDate", "endDate", "city", "locationName"):
+                    if f == "city" and is_chainwide_location(ev.get("locationName", "")):
+                        continue
                     if not ev.get(f) and kept[hit].get(f):
                         ev[f] = kept[hit][f]
                 kept[hit] = ev
@@ -1140,6 +1212,8 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
             url_keys[ukey] = idx
         if dkey:
             date_keys[dkey] = idx
+        if ckey:
+            chain_campaign_keys.setdefault(ckey, idx)
         for tk in thkeys:
             theme_keys.setdefault(tk, idx)
 

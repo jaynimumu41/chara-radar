@@ -554,6 +554,21 @@ out, _ = scrape.dedup_events([
        sourceType="official_site", sourceUrl="https://dickbruna.jp/news/202606/46792/"),
 ])
 check("同場館同完整區間 city 缺漏→併（1筆）", len(out), 1)
+
+out, _ = scrape.dedup_events([
+    ev(brand="miffy", title="Miffy生日與Flower Miffy淺草店7週年慶活動", type="campaign", city="Tokyo",
+       startDate="2026-06-19", locationName="Flower Miffy 浅草店",
+       summaryZh="為慶祝Miffy生日與淺草店7週年，將於6月19日起舉辦限定活動。",
+       sourceType="official_social", sourceUrl="https://prtimes.jp/main/html/rd/p/000002086.000022901.html"),
+    ev(brand="miffy", title="Miffy Flower Miffy バースデーキャンペーン", type="campaign", city="",
+       startDate="2026-06-19",
+       locationName="全国のフラワーミッフィー、フラワーミッフィーオンラインショップ",
+       summaryZh="為慶祝 Miffy 生日與 Flower Miffy 浅草店 7 週年，Flower Miffy 全門市與線上商店推出生日活動。",
+       sourceType="official_site", sourceUrl="https://dickbruna.jp/news/202606/46872/"),
+])
+check("Flower Miffy生日活動官方替換→併且保留全店官方頁",
+      (len(out), out[0]["sourceType"], out[0].get("city", "")),
+      (1, "official_site", ""))
 check("更新差異：同來源不同城市仍是不同情報",
       scrape.is_same_event_for_update_diff(
           ev(brand="pokemon", title="Pokemon Center 出張所 in A", type="popup", city="Hyogo",
@@ -581,6 +596,21 @@ kobe_diff = scrape.build_update_diff(
 check("更新差異：同活動來源替換不算今日新增",
       (kobe_diff["newEventIds"], kobe_diff["countsByBrand"]["miffy"], kobe_diff["replacements"]),
       (["new-real"], 1, [{"from": "old-kobe", "to": "new-kobe"}]))
+flower_diff = scrape.build_update_diff(
+    [ev(id="old-flower", brand="miffy", title="Miffy生日與Flower Miffy淺草店7週年慶活動",
+        type="campaign", city="Tokyo", startDate="2026-06-19",
+        locationName="Flower Miffy 浅草店",
+        summaryZh="為慶祝Miffy生日與淺草店7週年，將於6月19日起舉辦限定活動。")],
+    [ev(id="new-flower", brand="miffy", title="Miffy Flower Miffy バースデーキャンペーン",
+        type="campaign", city="", startDate="2026-06-19",
+        locationName="全国のフラワーミッフィー、フラワーミッフィーオンラインショップ",
+        summaryZh="為慶祝 Miffy 生日與 Flower Miffy 浅草店 7 週年，Flower Miffy 全門市與線上商店推出生日活動。")],
+    date="2026-06-18",
+    baseline_date="2026-06-17",
+)
+check("更新差異：Flower Miffy官方頁替換不算今日新增",
+      (flower_diff["newEventIds"], flower_diff["countsByBrand"]["miffy"], flower_diff["replacements"]),
+      ([], 0, [{"from": "old-flower", "to": "new-flower"}]))
 
 # 反例（建議1 不可誤殺）：同城同場館但「不同檔期」(日期區間差很多) = 不同活動，不可併
 out, _ = scrape.dedup_events([
