@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-17T08:37:14+00:00",
+  "updatedAt": "2026-06-18T08:35:44+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 6,
@@ -245,25 +245,25 @@
     },
     "domain:news.yahoo.co.jp": {
       "confirmed": 1,
-      "rejected": 0,
+      "rejected": 1,
       "uncertain": 0,
       "crossChecked": 1,
-      "score": 59,
+      "score": 48,
       "label": "news.yahoo.co.jp",
       "kind": "news",
       "host": "news.yahoo.co.jp",
       "handle": "",
       "firstSeen": "2026-06-15",
-      "lastReviewed": "2026-06-15",
-      "lastOutcome": "confirmed",
-      "notes": "Matched official chiikawa-info.jp ck_land listing with 2026-06-19 opening date.",
+      "lastReviewed": "2026-06-18",
+      "lastOutcome": "rejected",
+      "notes": "Removed in 2026-06-18 agent verify: Yahoo/Inside article had no verifiable physical venue and did not meet physical-store scope.",
       "byBrand": {
         "chiikawa": {
           "confirmed": 1,
-          "rejected": 0,
+          "rejected": 1,
           "uncertain": 0,
           "crossChecked": 1,
-          "score": 59
+          "score": 48
         }
       },
       "byType": {
@@ -273,15 +273,22 @@
           "uncertain": 0,
           "crossChecked": 1,
           "score": 59
+        },
+        "new_product": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 1,
-          "rejected": 0,
+          "rejected": 1,
           "uncertain": 0,
           "crossChecked": 1,
-          "score": 59
+          "score": 48
         }
       },
       "history": [
@@ -294,6 +301,16 @@
           "eventId": "ch-119d19",
           "evidenceCount": 1,
           "notes": "Matched official chiikawa-info.jp ck_land listing with 2026-06-19 opening date."
+        },
+        {
+          "date": "2026-06-18",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "ch-2aff9a",
+          "evidenceCount": 0,
+          "notes": "Removed in 2026-06-18 agent verify: Yahoo/Inside article had no verifiable physical venue and did not meet physical-store scope."
         }
       ]
     },

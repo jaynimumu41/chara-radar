@@ -626,30 +626,6 @@
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002083.000022901.html"
   },
   {
-    "brand": "miffy",
-    "title": "Miffy生日與Flower Miffy淺草店7週年慶活動",
-    "type": "campaign",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "Flower Miffy 浅草店",
-    "startDate": "2026-06-19",
-    "endDate": "",
-    "summaryZh": "為慶祝Miffy生日與淺草店7週年，將於6月19日起舉辦限定活動，現場可能販售紀念商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "生日慶",
-      "限定活動",
-      "淺草店"
-    ],
-    "id": "mi-32e53c",
-    "sourceTitle": "6月21日はミッフィーの誕生日！人気絵本ミッフィーのお花屋さん「フラワーミッフィー」にて、ミッフィーの誕生日と浅草店7周年を記念したバースデーキャンペーンを6月19日(金)より開催",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-17",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002086.000022901.html"
-  },
-  {
     "brand": "chiikawa",
     "title": "吉伊卡哇 POP UP STORE パルクアベニュー・カワトク",
     "type": "popup",
@@ -1513,19 +1489,20 @@
   },
   {
     "brand": "miffy",
-    "title": "Miffy Flower Miffy Flower Miffy バースデーキャンペーン開催",
-    "type": "popup",
+    "title": "Miffy Flower Miffy バースデーキャンペーン",
+    "type": "campaign",
     "country": "JP",
     "city": "",
-    "locationName": "Flower Miffy Flower Miffy バースデーキャンペーン開催",
+    "locationName": "全国のフラワーミッフィー、フラワーミッフィーオンラインショップ",
     "startDate": "2026-06-19",
     "endDate": "",
-    "summaryZh": "Miffy（米飛兔）官方活動「Flower Miffy Flower Miffy バースデーキャンペーン開催」於Flower Miffy Flower Miffy バースデーキャンペーン開催期間限定登場，販售限定周邊／餐點。",
+    "summaryZh": "為慶祝 Miffy 生日與 Flower Miffy 浅草店 7 週年，Flower Miffy 全門市與線上商店自 2026 年 6 月 19 日起推出生日活動與滿額贈，贈品送完為止。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "米飛兔",
-      "期間限定",
+      "生日慶",
+      "限定活動",
       "日本"
     ],
     "id": "mi-d9539b",
@@ -1602,30 +1579,6 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-18",
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000004307.000012759.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "Chiikawa 服飾新品發售",
-    "type": "new_product",
-    "country": "JP",
-    "city": "",
-    "locationName": "",
-    "startDate": "2026-06-19",
-    "endDate": "",
-    "summaryZh": "Chiikawa 將於6月19日在實體店舖發售一系列服飾新品，包含復古設計、食物主題環保袋及印有光環的兔子T恤。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "服飾",
-      "新品",
-      "日本",
-      "周邊"
-    ],
-    "id": "ch-2aff9a",
-    "sourceTitle": "「ちいかわ」ヴィンテージデザインほか、アパレル新商品が6月19日発売！たべものモチーフエコBAGや、後光が輝くうさぎTシャツなど（インサイド） - Yahoo!ニュース",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-18",
-    "sourceUrl": "https://news.yahoo.co.jp/articles/1426a5c6fd5a66280a7fac61390171015f054b08"
   },
   {
     "brand": "chiikawa",
