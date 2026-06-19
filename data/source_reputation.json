@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-18T08:35:44+00:00",
+  "updatedAt": "2026-06-19T08:35:04+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 6,
@@ -365,6 +365,60 @@
           "eventId": "po-ec1f5e",
           "evidenceCount": 0,
           "notes": "Restored after direct page review; the article explicitly labels 活動期間：6/16（二）-7/27（一） for the campaign."
+        }
+      ]
+    },
+    "domain:dtimes.jp": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 41,
+      "label": "dtimes.jp",
+      "kind": "news",
+      "host": "dtimes.jp",
+      "handle": "",
+      "firstSeen": "2026-06-19",
+      "lastReviewed": "2026-06-19",
+      "lastOutcome": "rejected",
+      "notes": "Removed on 2026-06-19: could not corroborate 2026 run; current Huis Ten Bosch official Miffy event page shows ended 2024 page instead.",
+      "byBrand": {
+        "miffy": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byType": {
+        "campaign": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "history": [
+        {
+          "date": "2026-06-19",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "campaign",
+          "country": "JP",
+          "eventId": "mi-b0ae64",
+          "evidenceCount": 1,
+          "notes": "Removed on 2026-06-19: could not corroborate 2026 run; current Huis Ten Bosch official Miffy event page shows ended 2024 page instead."
         }
       ]
     }
