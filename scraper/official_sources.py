@@ -813,7 +813,10 @@ def _kiddy_period(title: str, detail: str, extract_dates) -> tuple[str, str]:
         if em < sm and not m.group(4):
             ey += 1
         return f"{sy:04d}-{sm:02d}-{sd:02d}", f"{ey:04d}-{em:02d}-{ed:02d}"
-    return extract_dates(title + "\n" + detail, ref_year=ref_year, is_html=False, scan_chars=7000)
+    s, e = extract_dates(title + "\n" + detail, ref_year=ref_year, is_html=False, scan_chars=7000)
+    if s and e == s and re.search(r"(?:[〜～~]\s*)?スタート|よりスタート", title):
+        return s, ""
+    return s, e
 
 
 def _kiddy_location(title: str) -> tuple[str, str]:
@@ -929,6 +932,8 @@ def fetch_kiddyland_miffy_events(extract_dates, correct_city, max_articles=3, fr
         summary = "Miffy style / Kiddy Land 店頭活動，販售或受注 Miffy 相關新品與限定／先行商品。"
         if "Birthday Fair" in title:
             summary = "miffy’s Birthday 2026 生日活動於 miffy style 與 Kiddy Land 指定店舖登場，販售生日限定商品並提供店頭特典。"
+        elif "ノベルティ" in title:
+            summary = f"miffy style 各店自 {s} 起舉辦店頭購入特典活動，贈品送完為止，線上店不適用。"
         elif typ == "reservation":
             summary = "Miffy 聯名商品於 miffy style 店頭期間限定受注，需於指定期間到店辦理。"
         elif typ == "new_product":

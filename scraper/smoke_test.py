@@ -295,6 +295,13 @@ check("Kiddy Land 本文切片排除最新記事日期污染",
 check("Kiddy Land Birthday Fair 期間解析",
       official_sources._kiddy_period(kiddy_birthday_title, kiddy_main, scrape.extract_dates),
       ("2026-06-06", "2026-06-30"))
+check("Kiddy Land ノベルティデイ ～スタート 不補同日結束",
+      official_sources._kiddy_period(
+          "2026年7月4日(土)～スタート!miffy style 各店ノベルティデイ",
+          "※なくなり次第終了となりますのでご了承くださいませ。",
+          scrape.extract_dates,
+      ),
+      ("2026-07-04", ""))
 check("Kiddy Land 東京駅店 location",
       official_sources._kiddy_location("2026年7月4日(土)発売予定!miffy style東京駅店限定 駅長さんミッフィー"),
       ("miffy style 東京駅店", "Tokyo"))
