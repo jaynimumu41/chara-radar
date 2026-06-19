@@ -295,6 +295,26 @@ check("Kiddy Land 本文切片排除最新記事日期污染",
 check("Kiddy Land Birthday Fair 期間解析",
       official_sources._kiddy_period(kiddy_birthday_title, kiddy_main, scrape.extract_dates),
       ("2026-06-06", "2026-06-30"))
+check("Kiddy Land 東京駅店 location",
+      official_sources._kiddy_location("2026年7月4日(土)発売予定!miffy style東京駅店限定 駅長さんミッフィー"),
+      ("miffy style 東京駅店", "Tokyo"))
+same_day_kiddy = official_sources._drop_same_day_kiddy_product_details([
+    ev(brand="miffy", type="campaign", title="Miffy miffy style 各店ノベルティデイ",
+       startDate="2026-07-04", locationName="miffy style 各店＋キデイランド対象店",
+       sourceUrl="https://www.kiddyland.co.jp/event/miffy_nove202607/"),
+    ev(brand="miffy", type="new_product", title="Miffy miffy style東京駅店限定 駅長さんミッフィー",
+       startDate="2026-07-04", locationName="miffy style 東京駅店",
+       sourceUrl="https://www.kiddyland.co.jp/event/miffy_tokyo20260704/"),
+    ev(brand="miffy", type="new_product", title="Miffy miffy style大阪梅田店限定商品",
+       startDate="2026-07-11", locationName="miffy style 大阪梅田店",
+       sourceUrl="https://www.kiddyland.co.jp/event/miffy_osaka20260711/"),
+])
+check("Kiddy Land同日活動已有campaign→單品頁不另列",
+      [e["sourceUrl"] for e in same_day_kiddy],
+      [
+          "https://www.kiddyland.co.jp/event/miffy_nove202607/",
+          "https://www.kiddyland.co.jp/event/miffy_osaka20260711/",
+      ])
 
 sample_otaru_info = (
     "### [ちいかわベビーカステラ](https://www.chiikawamogumogu.jp/stores/castella/) "

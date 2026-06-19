@@ -819,6 +819,8 @@ def _kiddy_period(title: str, detail: str, extract_dates) -> tuple[str, str]:
 def _kiddy_location(title: str) -> tuple[str, str]:
     if "Birthday Fair" in title or "各店" in title:
         return "miffy style 各店＋キデイランド対象店", ""
+    if "東京駅店" in title:
+        return "miffy style 東京駅店", "Tokyo"
     if "原宿店" in title:
         return "miffy style 原宿店", "Tokyo"
     if "大阪梅田店" in title:
@@ -837,6 +839,28 @@ def _kiddy_type(title: str) -> str:
     if "pop up" in low or "popup" in low or "ポップアップ" in title:
         return "popup"
     return "new_product"
+
+
+def _drop_same_day_kiddy_product_details(events: list[dict]) -> list[dict]:
+    """Keep broad miffy style campaign pages over same-day single-product pages."""
+    campaign_dates = {
+        e.get("startDate", "") for e in events
+        if e.get("type") == "campaign"
+        and e.get("startDate")
+        and "miffy style" in (e.get("title", "") + e.get("locationName", ""))
+    }
+    if not campaign_dates:
+        return events
+    out: list[dict] = []
+    for e in events:
+        is_same_day_product = (
+            e.get("type") == "new_product"
+            and e.get("startDate", "") in campaign_dates
+            and "miffy style" in (e.get("title", "") + e.get("locationName", ""))
+        )
+        if not is_same_day_product:
+            out.append(e)
+    return out
 
 
 _MIFFY_KNOWN_VENUES = [
@@ -907,6 +931,8 @@ def fetch_kiddyland_miffy_events(extract_dates, correct_city, max_articles=3, fr
             summary = "miffy’s Birthday 2026 生日活動於 miffy style 與 Kiddy Land 指定店舖登場，販售生日限定商品並提供店頭特典。"
         elif typ == "reservation":
             summary = "Miffy 聯名商品於 miffy style 店頭期間限定受注，需於指定期間到店辦理。"
+        elif typ == "new_product":
+            summary = "Miffy style 店頭限定新品發售；若同日已有較大的店頭活動，單品頁不另列為正式情報。"
         display_title = _kiddy_display_title(title)
         out.append({
             "brand": "miffy",
@@ -925,7 +951,7 @@ def fetch_kiddyland_miffy_events(extract_dates, correct_city, max_articles=3, fr
             "sourceUrl": url,
         })
         seen.add(url)
-    return out
+    return _drop_same_day_kiddy_product_details(out)
 
 
 def fetch_miffy_events(extract_dates, correct_city, max_articles=16, fresh_days=80) -> list[dict]:
