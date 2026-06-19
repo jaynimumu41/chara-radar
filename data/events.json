@@ -1583,6 +1583,30 @@
   },
   {
     "brand": "miffy",
+    "title": "Miffy Flower Miffy バースデーキャンペーン",
+    "type": "campaign",
+    "country": "JP",
+    "city": "",
+    "locationName": "全国のフラワーミッフィー、フラワーミッフィーオンラインショップ",
+    "startDate": "2026-06-19",
+    "endDate": "",
+    "summaryZh": "為慶祝 Miffy 生日與 Flower Miffy 浅草店 7 週年，Flower Miffy 全門市與線上商店自 2026 年 6 月 19 日起推出生日活動與滿額贈，贈品送完為止。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "生日慶",
+      "限定活動",
+      "日本"
+    ],
+    "id": "mi-d9539b",
+    "sourceType": "official_site",
+    "createdAt": "2026-06-18",
+    "sourceTitle": "Flower Miffy フラワーミッフィー バースデーキャンペーン開催 - dickbruna.jp",
+    "sourceUrl": "https://dickbruna.jp/news/202606/46872/"
+  },
+  {
+    "brand": "miffy",
     "title": "Miffy miffy’s Birthday 2026",
     "type": "campaign",
     "country": "JP",

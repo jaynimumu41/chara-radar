@@ -1327,6 +1327,28 @@ def _completeness(e: dict) -> int:
         score += 2  # 有真實來源連結者優先保留
     return score
 
+def _ai_dedup_locations_compatible(group: list[dict]) -> bool:
+    """AI dedup is allowed only when concrete locations look compatible."""
+    for i, left in enumerate(group):
+        for right in group[i + 1:]:
+            left_loc, right_loc = left.get("locationName", ""), right.get("locationName", "")
+            if not left_loc or not right_loc:
+                continue
+            left_chain = chain_campaign_key(left)
+            right_chain = chain_campaign_key(right)
+            if left_chain and left_chain == right_chain:
+                continue
+            if _norm(left_loc) == _norm(right_loc):
+                continue
+            left_canon = canon_venue(left_loc, left.get("title", ""))
+            right_canon = canon_venue(right_loc, right.get("title", ""))
+            if left_canon and left_canon == right_canon:
+                continue
+            if SequenceMatcher(None, _norm(left_loc), _norm(right_loc)).ratio() >= 0.55:
+                continue
+            return False
+    return True
+
 AI_DEDUP_PROMPT = """以下是已蒐集的角色周邊活動清單，每筆有編號。
 請找出指向「同一個真實活動」的重複編號群組（不同媒體報導同一檔活動）。
 
@@ -1384,6 +1406,9 @@ def ai_dedup(events: list[dict], rotator: "KeyRotator") -> tuple[list[dict], int
             continue
         cities = {events[i].get("city") for i in ids if events[i].get("city")}
         if len(cities) > 1:
+            continue
+        if not _ai_dedup_locations_compatible([events[i] for i in ids]):
+            print(f"    ⚠️  AI 提議合併但場館/店系不同，保留不合併：{[events[i].get('title') for i in ids]}")
             continue
         # 日期防呆：同一活動不可能開始日相差太遠（>21天視為不同檔期，整組不合併）
         starts = []

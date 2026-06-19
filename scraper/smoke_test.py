@@ -672,6 +672,28 @@ out, _ = scrape.dedup_events([
 ])
 check("同城泛用店名不同日期新品→不併（2筆）", len(out), 2)
 
+flower_birthday = ev(
+    brand="miffy", title="Miffy Flower Miffy バースデーキャンペーン",
+    type="campaign", startDate="2026-06-19",
+    locationName="全国のフラワーミッフィー、フラワーミッフィーオンラインショップ",
+)
+kiddy_birthday = ev(
+    brand="miffy", title="Miffy miffy’s Birthday 2026",
+    type="campaign", startDate="2026-06-06", endDate="2026-06-30",
+    locationName="miffy style 各店＋キデイランド対象店",
+)
+flower_pr = ev(
+    brand="miffy", title="Miffy生日與Flower Miffy淺草店7週年慶活動",
+    type="campaign", city="Tokyo", startDate="2026-06-19",
+    locationName="Flower Miffy 浅草店",
+)
+check("AI去重防呆：不同店系生日活動不可併",
+      scrape._ai_dedup_locations_compatible([flower_birthday, kiddy_birthday]),
+      False)
+check("AI去重防呆：同Flower Miffy活動可併",
+      scrape._ai_dedup_locations_compatible([flower_pr, flower_birthday]),
+      True)
+
 # 不破壞現況：實際線上 events.json 不應被誤併（筆數不變）
 try:
     real = scrape.load_events()
