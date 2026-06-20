@@ -1632,14 +1632,14 @@
   },
   {
     "brand": "miffy",
-    "title": "Miffy Flower Miffy Flower Miffy バースデーキャンペーン開催",
-    "type": "popup",
+    "title": "Miffy Flower Miffy バースデーキャンペーン",
+    "type": "campaign",
     "country": "JP",
     "city": "",
-    "locationName": "Flower Miffy Flower Miffy バースデーキャンペーン開催",
+    "locationName": "全国のフラワーミッフィー、フラワーミッフィーオンラインショップ",
     "startDate": "2026-06-19",
     "endDate": "",
-    "summaryZh": "Miffy（米飛兔）官方活動「Flower Miffy Flower Miffy バースデーキャンペーン開催」於Flower Miffy Flower Miffy バースデーキャンペーン開催期間限定登場，販售限定周邊／餐點。",
+    "summaryZh": "為慶祝 Miffy 生日與 Flower Miffy 浅草店 7 週年，Flower Miffy 全門市與線上商店推出生日活動。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1698,29 +1698,5 @@
     "createdAt": "2026-06-20",
     "sourceTitle": "2026年7月4日(土)～スタート!miffy style 各店ノベルティデイ - キデイランド",
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_nove202607/"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇專賣店新店開幕",
-    "type": "store",
-    "country": "JP",
-    "city": "Saitama",
-    "locationName": "越谷LakeTown",
-    "startDate": "2026-06-19",
-    "endDate": "",
-    "summaryZh": "吉伊卡哇專賣店「chiikawa land」於越谷LakeTown新開幕，現場將有新周邊商品販售。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "專賣店",
-      "新店開幕",
-      "日本"
-    ],
-    "id": "ch-bc2d4d",
-    "sourceTitle": "【ちいかわ】「ちいかわらんど」新店が越谷レイクタウンに本日オープン！ 新グッズもぞくぞく登場♪（ぴあ） - Yahoo!ニュース",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-20",
-    "sourceUrl": "https://news.yahoo.co.jp/articles/50811d3c1bbd7a3921d9150852ee8c973132beb7"
   }
 ]

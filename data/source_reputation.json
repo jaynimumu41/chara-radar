@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-19T08:35:04+00:00",
+  "updatedAt": "2026-06-20T08:34:23+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 6,
@@ -245,34 +245,34 @@
     },
     "domain:news.yahoo.co.jp": {
       "confirmed": 1,
-      "rejected": 1,
+      "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 1,
-      "score": 48,
+      "crossChecked": 2,
+      "score": 39,
       "label": "news.yahoo.co.jp",
       "kind": "news",
       "host": "news.yahoo.co.jp",
       "handle": "",
       "firstSeen": "2026-06-15",
-      "lastReviewed": "2026-06-18",
+      "lastReviewed": "2026-06-20",
       "lastOutcome": "rejected",
-      "notes": "Removed in 2026-06-18 agent verify: Yahoo/Inside article had no verifiable physical venue and did not meet physical-store scope.",
+      "notes": "Removed as duplicate of official chiikawa-info.jp LakeTown store record ch-119d19 with the same 2026-06-19 opening date.",
       "byBrand": {
         "chiikawa": {
           "confirmed": 1,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 48
+          "crossChecked": 2,
+          "score": 39
         }
       },
       "byType": {
         "store": {
           "confirmed": 1,
-          "rejected": 0,
+          "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 59
+          "crossChecked": 2,
+          "score": 50
         },
         "new_product": {
           "confirmed": 0,
@@ -285,10 +285,10 @@
       "byCountry": {
         "jp": {
           "confirmed": 1,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 48
+          "crossChecked": 2,
+          "score": 39
         }
       },
       "history": [
@@ -311,6 +311,16 @@
           "eventId": "ch-2aff9a",
           "evidenceCount": 0,
           "notes": "Removed in 2026-06-18 agent verify: Yahoo/Inside article had no verifiable physical venue and did not meet physical-store scope."
+        },
+        {
+          "date": "2026-06-20",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "store",
+          "country": "JP",
+          "eventId": "ch-bc2d4d",
+          "evidenceCount": 1,
+          "notes": "Removed as duplicate of official chiikawa-info.jp LakeTown store record ch-119d19 with the same 2026-06-19 opening date."
         }
       ]
     },
