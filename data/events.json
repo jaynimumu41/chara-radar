@@ -1632,14 +1632,14 @@
   },
   {
     "brand": "miffy",
-    "title": "Miffy Flower Miffy Flower Miffy バースデーキャンペーン開催",
-    "type": "popup",
+    "title": "Miffy Flower Miffy バースデーキャンペーン",
+    "type": "campaign",
     "country": "JP",
     "city": "",
-    "locationName": "Flower Miffy Flower Miffy バースデーキャンペーン開催",
+    "locationName": "全国のフラワーミッフィー",
     "startDate": "2026-06-19",
     "endDate": "",
-    "summaryZh": "Miffy（米飛兔）官方活動「Flower Miffy Flower Miffy バースデーキャンペーン開催」於Flower Miffy Flower Miffy バースデーキャンペーン開催期間限定登場，販售限定周邊／餐點。",
+    "summaryZh": "為慶祝 Miffy（米飛兔）生日，全國 Flower Miffy 門市自 6月19日起推出滿額贈限定斜背袋活動，並同步販售 Flower Miffy 新商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1698,29 +1698,5 @@
     "createdAt": "2026-06-21",
     "sourceTitle": "2026年7月4日(土)～スタート!miffy style 各店ノベルティデイ - キデイランド",
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_nove202607/"
-  },
-  {
-    "brand": "miffy",
-    "title": "米飛兔生日限定蛋糕",
-    "type": "cafe",
-    "country": "JP",
-    "city": "",
-    "locationName": "",
-    "startDate": "2026-06-21",
-    "endDate": "2026-06-28",
-    "summaryZh": "為慶祝米飛兔生日，推出三款期間限定的豪華精緻蛋糕，提供味蕾上的享受。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "米飛兔",
-      "生日",
-      "蛋糕",
-      "甜點"
-    ],
-    "id": "mi-67ed19",
-    "sourceTitle": "6/21「ミッフィーのお誕生日」を激かわケーキ3種でお祝い！期間限定の贅沢スイーツを紹介（ぴあ） - Yahoo!ニュース",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-21",
-    "sourceUrl": "https://news.yahoo.co.jp/articles/ee2ef5412db029c3327ba822355875432307cf78"
   }
 ]

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-20T08:34:23+00:00",
+  "updatedAt": "2026-06-21T08:37:17+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 6,
@@ -245,24 +245,31 @@
     },
     "domain:news.yahoo.co.jp": {
       "confirmed": 1,
-      "rejected": 2,
+      "rejected": 3,
       "uncertain": 0,
       "crossChecked": 2,
-      "score": 39,
+      "score": 28,
       "label": "news.yahoo.co.jp",
       "kind": "news",
       "host": "news.yahoo.co.jp",
       "handle": "",
       "firstSeen": "2026-06-15",
-      "lastReviewed": "2026-06-20",
+      "lastReviewed": "2026-06-21",
       "lastOutcome": "rejected",
-      "notes": "Removed as duplicate of official chiikawa-info.jp LakeTown store record ch-119d19 with the same 2026-06-19 opening date.",
+      "notes": "Roundup sweets article with no single physical venue; out of scope for CharaRadar.",
       "byBrand": {
         "chiikawa": {
           "confirmed": 1,
           "rejected": 2,
           "uncertain": 0,
           "crossChecked": 2,
+          "score": 39
+        },
+        "miffy": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
           "score": 39
         }
       },
@@ -280,15 +287,22 @@
           "uncertain": 0,
           "crossChecked": 0,
           "score": 39
+        },
+        "cafe": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 1,
-          "rejected": 2,
+          "rejected": 3,
           "uncertain": 0,
           "crossChecked": 2,
-          "score": 39
+          "score": 28
         }
       },
       "history": [
@@ -321,6 +335,16 @@
           "eventId": "ch-bc2d4d",
           "evidenceCount": 1,
           "notes": "Removed as duplicate of official chiikawa-info.jp LakeTown store record ch-119d19 with the same 2026-06-19 opening date."
+        },
+        {
+          "date": "2026-06-21",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "cafe",
+          "country": "JP",
+          "eventId": "mi-67ed19",
+          "evidenceCount": 0,
+          "notes": "Roundup sweets article with no single physical venue; out of scope for CharaRadar."
         }
       ]
     },
