@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-21T08:37:17+00:00",
+  "updatedAt": "2026-06-22T08:39:09+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 6,
@@ -453,6 +453,222 @@
           "eventId": "mi-b0ae64",
           "evidenceCount": 1,
           "notes": "Removed on 2026-06-19: could not corroborate 2026 run; current Huis Ten Bosch official Miffy event page shows ended 2024 page instead."
+        }
+      ]
+    },
+    "domain:iamcreative.com.tw": {
+      "confirmed": 1,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 0,
+      "score": 57,
+      "label": "iamcreative.com.tw",
+      "kind": "site",
+      "host": "iamcreative.com.tw",
+      "handle": "",
+      "firstSeen": "2026-06-22",
+      "lastReviewed": "2026-06-22",
+      "lastOutcome": "confirmed",
+      "notes": "Direct review of the official Iam Creative store page confirmed Taichung Lalaport South B1 and the explicit 2026-04-24 to 2026-07-25 period.",
+      "byBrand": {
+        "miffy": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
+        }
+      },
+      "byType": {
+        "popup": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
+        }
+      },
+      "byCountry": {
+        "tw": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
+        }
+      },
+      "history": [
+        {
+          "date": "2026-06-22",
+          "outcome": "confirmed",
+          "brand": "miffy",
+          "type": "popup",
+          "country": "TW",
+          "eventId": "mi-3a91c4",
+          "evidenceCount": 0,
+          "notes": "Direct review of the official Iam Creative store page confirmed Taichung Lalaport South B1 and the explicit 2026-04-24 to 2026-07-25 period."
+        }
+      ]
+    },
+    "domain:supertaste.tvbs.com.tw": {
+      "confirmed": 1,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 2,
+      "score": 61,
+      "label": "supertaste.tvbs.com.tw",
+      "kind": "news",
+      "host": "supertaste.tvbs.com.tw",
+      "handle": "",
+      "firstSeen": "2026-06-22",
+      "lastReviewed": "2026-06-22",
+      "lastOutcome": "confirmed",
+      "notes": "Supertaste dates matched the Huashan official event calendar and the linked Ticket Plus ticket page for CHIIKAWA DAYS Taipei.",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 61
+        }
+      },
+      "byType": {
+        "popup": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 61
+        }
+      },
+      "byCountry": {
+        "tw": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 61
+        }
+      },
+      "history": [
+        {
+          "date": "2026-06-22",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "TW",
+          "eventId": "ch-da7c01",
+          "evidenceCount": 2,
+          "notes": "Supertaste dates matched the Huashan official event calendar and the linked Ticket Plus ticket page for CHIIKAWA DAYS Taipei."
+        }
+      ]
+    },
+    "domain:traicy.com": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 0,
+      "score": 39,
+      "label": "traicy.com",
+      "kind": "site",
+      "host": "traicy.com",
+      "handle": "",
+      "firstSeen": "2026-06-22",
+      "lastReviewed": "2026-06-22",
+      "lastOutcome": "rejected",
+      "notes": "Fresh article gave only an end date and no corroborating official source was found; removed as unverifiable/incomplete.",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "byType": {
+        "popup": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "history": [
+        {
+          "date": "2026-06-22",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-54881e",
+          "evidenceCount": 0,
+          "notes": "Fresh article gave only an end date and no corroborating official source was found; removed as unverifiable/incomplete."
+        }
+      ]
+    },
+    "domain:fukuishimbun.co.jp": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 41,
+      "label": "fukuishimbun.co.jp",
+      "kind": "site",
+      "host": "fukuishimbun.co.jp",
+      "handle": "",
+      "firstSeen": "2026-06-22",
+      "lastReviewed": "2026-06-22",
+      "lastOutcome": "rejected",
+      "notes": "Removed as a duplicate of the existing Chiikawa Park anniversary record kept from another source with the same venue and 2026-07-28 to 2026-08-03 period.",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byType": {
+        "campaign": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "history": [
+        {
+          "date": "2026-06-22",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "campaign",
+          "country": "JP",
+          "eventId": "ch-2e1355",
+          "evidenceCount": 1,
+          "notes": "Removed as a duplicate of the existing Chiikawa Park anniversary record kept from another source with the same venue and 2026-07-28 to 2026-08-03 period."
         }
       ]
     }

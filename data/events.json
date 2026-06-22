@@ -1608,25 +1608,25 @@
   },
   {
     "brand": "miffy",
-    "title": "Miffy Flower Miffy Flower Miffy バースデーキャンペーン開催",
-    "type": "popup",
+    "title": "Flower Miffy ???????????",
+    "type": "campaign",
     "country": "JP",
     "city": "",
-    "locationName": "Flower Miffy Flower Miffy バースデーキャンペーン開催",
+    "locationName": "????????????",
     "startDate": "2026-06-19",
     "endDate": "",
-    "summaryZh": "Miffy（米飛兔）官方活動「Flower Miffy Flower Miffy バースデーキャンペーン開催」於Flower Miffy Flower Miffy バースデーキャンペーン開催期間限定登場，販售限定周邊／餐點。",
+    "summaryZh": "Flower Miffy ?? 2026 ? 6 ? 19 ????? Flower Miffy ????????????????????????????????",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
-      "米飛兔",
-      "期間限定",
-      "日本"
+      "Miffy",
+      "????",
+      "????"
     ],
     "id": "mi-d9539b",
     "sourceType": "official_site",
     "createdAt": "2026-06-22",
-    "sourceTitle": "Flower Miffy フラワーミッフィー バースデーキャンペーン開催 - dickbruna.jp",
+    "sourceTitle": "Flower Miffy ????????? ????????????? - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/46872/"
   },
   {
@@ -1676,30 +1676,6 @@
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_nove202607/"
   },
   {
-    "brand": "miffy",
-    "title": "豪斯登堡米飛兔新區域限定商品",
-    "type": "store",
-    "country": "JP",
-    "city": "Nagasaki",
-    "locationName": "豪斯登堡 (Huis Ten Bosch)",
-    "startDate": "",
-    "endDate": "",
-    "summaryZh": "日本豪斯登堡新開設的米飛兔區域，販售限定周邊商品，是粉絲必訪的購物地點。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "豪斯登堡",
-      "日本",
-      "限定商品"
-    ],
-    "id": "mi-6f7c42",
-    "sourceTitle": "ハウステンボスのミッフィー新エリアで限定グッズを買いました【LEE100人隊No015.ゆちこ】 - HAPPY PLUS（ハピプラ）",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-22",
-    "sourceUrl": "https://lee.hpplus.jp/100nintai/3636769/"
-  },
-  {
     "brand": "pokemon",
     "title": "台灣寶可夢中心卡娜赫拉皮卡丘家族玩偶新品開賣",
     "type": "new_product",
@@ -1722,52 +1698,5 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-22",
     "sourceUrl": "https://www.nownews.com/amp/news/6848992"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 新千歳空港快閃店",
-    "type": "popup",
-    "country": "JP",
-    "city": "Hokkaido",
-    "locationName": "新千歳空港",
-    "startDate": "",
-    "endDate": "2026-06-30",
-    "summaryZh": "吉伊卡哇將於新千歳空港舉辦快閃店，販售周邊商品，活動至6月30日止。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "快閃店",
-      "限定商品",
-      "新千歳空港"
-    ],
-    "id": "ch-54881e",
-    "sourceTitle": "新千歳空港に「ちいかわ POP UP STORE」、6月30日まで - TRAICY（トライシー）",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-22",
-    "sourceUrl": "https://www.traicy.com/posts/20260622371728/"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇公園週年慶活動",
-    "type": "campaign",
-    "country": "JP",
-    "city": "Fukui",
-    "locationName": "ちいかわパーク",
-    "startDate": "2026-07-28",
-    "endDate": "2026-08-03",
-    "summaryZh": "吉伊卡哇公園將於7月28日迎來開幕一週年，並舉辦紀念活動。購買商品還有機會獲得「びんよよ」贈品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "週年慶",
-      "限定贈品",
-      "日本"
-    ],
-    "id": "ch-2e1355",
-    "sourceTitle": "『ちいかわパーク』7・28にオープン1周年迎える 記念イベント開催＆商品購入で「びんよよ」のプレゼントも - 福井新聞社",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-22",
-    "sourceUrl": "https://www.fukuishimbun.co.jp/articles/-/2626799"
   }
 ]
