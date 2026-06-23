@@ -579,29 +579,6 @@
   },
   {
     "brand": "chiikawa",
-    "title": "Chiikawa Park 開幕一週年紀念活動",
-    "type": "campaign",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "ちいかわパーク",
-    "startDate": "2026-07-28",
-    "endDate": "2026-08-03",
-    "summaryZh": "為慶祝「Chiikawa Park」開幕一週年，將舉辦紀念活動，購買商品還有機會獲得「びんよよ」贈品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "週年慶",
-      "限定贈品",
-      "東京"
-    ],
-    "id": "ch-c431d9",
-    "sourceTitle": "『ちいかわパーク』7・28にオープン1周年迎える 記念イベント開催＆商品購入で「びんよよ」のプレゼントも（オリコン） - Yahoo!ニュース",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-18",
-    "sourceUrl": "https://news.yahoo.co.jp/articles/175037f2864cc1fd0ce1e91bea0abfcbf6435e19"
-  },
-  {
-    "brand": "chiikawa",
     "title": "吉伊卡哇造型年輪蛋糕搶先開賣",
     "type": "new_product",
     "country": "JP",

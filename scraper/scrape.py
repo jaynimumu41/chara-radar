@@ -788,11 +788,14 @@ def save_events(events: list[dict]):
         normalize_display_terms(ev)
     EVENTS_JSON.write_text(json.dumps(events, ensure_ascii=False, indent=2), encoding="utf-8")
 
+def parse_last_updated_date(raw: str) -> str:
+    data = json.loads((raw or "").lstrip("\ufeff"))
+    updated_at = data.get("updatedAt", "")
+    return updated_at[:10] if updated_at else ""
+
 def load_last_updated_date() -> str:
     try:
-        data = json.loads(LAST_UPDATED_JSON.read_text(encoding="utf-8"))
-        updated_at = data.get("updatedAt", "")
-        return updated_at[:10] if updated_at else ""
+        return parse_last_updated_date(LAST_UPDATED_JSON.read_text(encoding="utf-8-sig"))
     except Exception:
         return ""
 

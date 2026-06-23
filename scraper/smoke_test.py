@@ -188,6 +188,9 @@ check("Google News placeholder→不穩定來源",
       scrape.is_unstable_source_url("https://news.google.com/rss/articles/ABC"), True)
 check("NOWnews 真實 URL→穩定來源",
       scrape.is_unstable_source_url("https://www.nownews.com/news/6842060"), False)
+check("last_updated 含 BOM 仍可讀日期",
+      scrape.parse_last_updated_date('\ufeff{ "updatedAt": "2026-06-22T16:04:27+08:00" }'),
+      "2026-06-22")
 flower_event = ev(
     brand="miffy",
     title="フラワーミッフィー限定活動",
@@ -267,6 +270,14 @@ official_candidates = [
         "pokemon", "pokemon-store-events",
         "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kagawa/events/202606/000001.html",
         "6月28日（日）、ヒトカゲとピカチュウに会えるグリーティング"),
+    audit_official_coverage.OfficialCandidate(
+        "miffy", "miffy-dickbruna-news",
+        "https://dickbruna.jp/news/202606/46926/",
+        "ミッフィー LINE公式アカウントがオープン"),
+    audit_official_coverage.OfficialCandidate(
+        "miffy", "miffy-dickbruna-news",
+        "https://dickbruna.jp/news/202606/46921/",
+        "ユニクロよりディック・ブルーナPEACE FOR ALL Tシャツ発売"),
 ]
 official_audit_rows = audit_official_coverage.audit_candidates(
     official_candidates,
@@ -280,7 +291,13 @@ official_audit_rows = audit_official_coverage.audit_candidates(
 )
 check("官方覆蓋稽核 parsed / needs_review / ignored",
       [(r.status, r.risk, r.event_ids) for r in official_audit_rows],
-      [("parsed", "-", ("po-test",)), ("needs_review", "high", ()), ("ignored", "-", ())])
+      [
+          ("parsed", "-", ("po-test",)),
+          ("needs_review", "high", ()),
+          ("ignored", "-", ()),
+          ("ignored", "-", ()),
+          ("ignored", "-", ()),
+      ])
 kiddy_birthday_title = "2026年6月6日(土)より開催miffy’s Birthday Fair2026"
 kiddy_birthday_page = (
     f"<h1>{kiddy_birthday_title}</h1>"

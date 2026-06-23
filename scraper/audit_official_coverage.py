@@ -85,12 +85,12 @@ ALWAYS_IGNORE_RE = re.compile(
     r"カードゲーム|ポケモンカード|ポケカ|抽選販売商品|当選者|販売方法について|"
     r"ゲーム教室|グリーティング|#キミにあえた|ご来店予定|来店予定|"
     r"整理券|入場制限|入場整理券|付録|宝島社|BOOK|メッセージを送ろう|"
-    r"シャンブル",
+    r"シャンブル|LINE|Tシャツ|Ｔシャツ|T-shirt|tee|ユニクロ|UNIQLO",
     re.I,
 )
 CONDITIONAL_IGNORE_RE = re.compile(
     r"メンテナンス|休業|営業時間|お詫び|延期|入店方法|配送遅れ|"
-    r"LINE|Pok[eé]mon GO|ポケモンGO|アプリ",
+    r"Pok[eé]mon GO|ポケモンGO|アプリ",
     re.I,
 )
 
