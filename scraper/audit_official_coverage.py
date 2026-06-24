@@ -43,17 +43,89 @@ OFFICIAL_HOSTS = {
 # Pages here are official but either duplicate a richer canonical event source,
 # or are known out-of-scope after human review.
 IGNORED_OFFICIAL_PAGES: dict[str, str] = {
+    "https://www.pokemon-cafe.jp/ja/cafe/news/260619_3441.html": (
+        "Pokemon Cafe seat reservation schedule, not an event or goods launch"
+    ),
+    "https://www.pokemon-cafe.jp/ja/cafe/news/260601_3427.html": (
+        "Pokemon Cafe seat reservation schedule, not an event or goods launch"
+    ),
+    "https://www.pokemon-cafe.jp/ja/cafe/news/260529_3387.html": (
+        "same 2026-06-17 Pokemon Cafe menu/show renewal represented by 260529_3377"
+    ),
+    "https://www.pokemon-cafe.jp/ja/cafe/news/260525_3429.html": (
+        "Pokemon Cafe reservation-system maintenance notice"
+    ),
+    "https://www.pokemon-cafe.jp/ja/cafe/news/260514_3419.html": (
+        "Pokemon Cafe reservation-system maintenance notice"
+    ),
     "https://www.pokemon-cafe.jp/ja/cafe/news/260511_3376.html": (
         "same Pokemon Cafe TOKYO renewal represented by 260529_3377"
     ),
     "https://www.pokemon-cafe.jp/ja/cafe/news/260511_3404.html": (
         "same Pokemon Cafe TOKYO renewal represented by 260529_3377"
     ),
+    "https://www.pokemon-cafe.jp/ja/cafe/news/260424_3386.html": (
+        "Pokemon Cafe Osaka temporary-closure and reservation notice; menu renewal covered by 260529_3377"
+    ),
+    "https://www.pokemon-cafe.jp/ja/cafe/news/260209_3368.html": (
+        "old Pokemon Cafe TOKYO closure notice; reopening represented by 260529_3377"
+    ),
+    "https://www.pokemon-cafe.jp/ja/cafe/news/260122_3369.html": (
+        "Pokemon Cafe one-day closure notice"
+    ),
+    "https://www.pokemon-cafe.jp/ja/cafe/news/251126_3329.html": (
+        "Pokemon Cafe holiday business-hours notice"
+    ),
+    "https://www.pokemon-cafe.jp/ja/cafe/news/251107_3304.html": (
+        "historical Pokemon Cafe menu/tableware update outside current freshness window"
+    ),
+    "https://www.pokemon-cafe.jp/ja/cafe/news/251017_3303.html": (
+        "historical Pokemon Cafe placemat/coaster update outside current freshness window"
+    ),
+    "https://tw.portal-pokemon.com/goods/post-5937/": (
+        "apparel/medical uniform licensed product; not a target physical-store event"
+    ),
+    "https://tw.portal-pokemon.com/goods/post-5343/": (
+        "game music jukebox product, excluded by game/music rule"
+    ),
+    "https://tw.portal-pokemon.com/goods/post-5286/": (
+        "online jewelry product page, not a POP UP Promotion or Pokemon Center TAIPEI launch"
+    ),
+    "https://tw.portal-pokemon.com/goods/post-4794/": (
+        "broad online furniture product page, not a Pokemon Center TAIPEI launch"
+    ),
+    "https://dickbruna.jp/news/202606/46833/": (
+        "Miffy zakka Festa season schedule overview; individual venue pages are parsed when detailed dates publish"
+    ),
+    "https://dickbruna.jp/news/202605/46046/": (
+        "expired Yokohama Nature Week outdoor event, not current target coverage"
+    ),
     "https://www.kiddyland.co.jp/miffy_style/": (
         "miffy style top page, not a single event or product page"
     ),
+    "https://www.kiddyland.co.jp/event/miffy_tokyo20260704/": (
+        "same-day miffy style single-product page covered by the 2026-07-04 novelty campaign"
+    ),
+    "https://www.kiddyland.co.jp/event/miffy_20260704/": (
+        "same-day miffy style single-product page covered by the 2026-07-04 novelty campaign"
+    ),
+    "https://www.kiddyland.co.jp/event/miffy_20260606/": (
+        "same-day miffy style single-product page covered by Birthday Fair 2026"
+    ),
     "https://www.kiddyland.co.jp/event/miffystyle_birthday2026/": (
         "same Birthday Fair represented by dickbruna.jp/news/202606/46398/"
+    ),
+    "https://www.kiddyland.co.jp/event/miffy_nove202605/": (
+        "previous miffy style novelty day outside current freshness window"
+    ),
+    "https://www.kiddyland.co.jp/event/miffy_20260502/": (
+        "previous miffy style same-day single-product page outside current freshness window"
+    ),
+    "https://www.kiddyland.co.jp/event/miffy_20260424/": (
+        "previous miffy style single-product page outside current freshness window"
+    ),
+    "https://www.kiddyland.co.jp/event/miffy_harajuku202604/": (
+        "past miffy style Harajuku opening/reservation notice, not a current event"
     ),
 }
 
@@ -83,9 +155,10 @@ VENUE_RE = re.compile(
 )
 ALWAYS_IGNORE_RE = re.compile(
     r"カードゲーム|ポケモンカード|ポケカ|抽選販売商品|当選者|販売方法について|"
-    r"ゲーム教室|グリーティング|#キミにあえた|ご来店予定|来店予定|"
+    r"ゲーム教室|グリーティング|#キミにあえた|ご来店予定|来店予定|ご来店のお客様へ|"
     r"整理券|入場制限|入場整理券|付録|宝島社|BOOK|メッセージを送ろう|"
-    r"シャンブル|LINE|Tシャツ|Ｔシャツ|T-shirt|tee|ユニクロ|UNIQLO",
+    r"シャンブル|LINE|Tシャツ|Ｔシャツ|T-shirt|tee|ユニクロ|UNIQLO|"
+    r"Game Music|Jukebox|遊戲音樂機|音樂機|刷手衣|刷手服|醫療服",
     re.I,
 )
 CONDITIONAL_IGNORE_RE = re.compile(
@@ -244,6 +317,10 @@ def _page_title(page_text: str) -> str:
         m = re.search(pattern, page_text or "", re.I | re.M)
         if m:
             return clean_text(m.group(1))
+    visible = clean_text(page_text)
+    for sep in ("｜ニュース｜", " | 商品 |", " | dickbruna.jp"):
+        if sep in visible:
+            return visible.split(sep, 1)[0].strip()[:160]
     return ""
 
 
@@ -649,6 +726,13 @@ def main() -> int:
         args.brand = ["pokemon", "miffy"]
 
     candidates = fetch_candidates(args)
+    if not candidates:
+        print(
+            "Official coverage audit failed: no official candidates were fetched. "
+            "Check network/source availability instead of treating this as clean.",
+            file=sys.stderr,
+        )
+        return 3
     parsed_pages = load_parsed_event_pages()
     ignored_pages = {normalize_url(k): v for k, v in IGNORED_OFFICIAL_PAGES.items()}
     details = {} if args.no_fetch_details else fetch_review_details(candidates, parsed_pages)

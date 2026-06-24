@@ -59,6 +59,7 @@ check("羽生→Saitama", scrape.correct_city("イオンモール羽生"), "Sait
 check("KOBE PORT TOWER→Hyogo",
       scrape.correct_city("KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront"),
       "Hyogo")
+check("鹿児島市立美術館→Kagoshima", scrape.correct_city("鹿児島市立美術館"), "Kagoshima")
 check("無關鍵字→None", scrape.correct_city("某不知名地點"), None)
 
 # ── canon_venue ───────────────────────────────────────────────────────────────
@@ -170,6 +171,19 @@ check("Miffy KOBE 官方標題顯示名",
           "KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront",
       ),
       "神戶港塔 Night Time 聯名活動")
+check("Miffy 官方展覽場館抽取",
+      official_sources._miffy_venue_from_title(
+          "「誕生70周年記念　ミッフィー展」広島会場にて開催",
+          "誕生70周年記念　ミッフィー展",
+          "会場 公益財団法人 ひろしま美術館",
+      ),
+      "ひろしま美術館")
+check("Miffy 官方展覽類型判定",
+      official_sources._miffy_is_exhibition(
+          "鹿児島市立美術館にて「美術館に行こう！」展開催",
+          "美術館に行こう！",
+      ),
+      True)
 check("Collabo Cafe轉載→不直接信任日期",
       scrape.is_trusted_date_source("https://collabo-cafe.com/events/collabo/chiikawa-obakenomori-odaiba2026/"), False)
 check("台灣寶可夢官方→可信",

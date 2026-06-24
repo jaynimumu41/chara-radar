@@ -535,9 +535,16 @@ _POKE_TW_GOODS_NOISE = (
     "LINE貼圖",
     "LINE主題",
     "Pokémon UNITE",
+    "Game Music",
+    "Jukebox",
+    "遊戲音樂機",
+    "音樂機",
     "寶可夢集換式卡牌",
     "Trading Card Game",
     "卡牌",
+    "刷手衣",
+    "刷手服",
+    "醫療服",
 )
 _POKE_TW_STORE_TEXT = "Pokémon Center TAIPEI"
 _POKE_TW_DATE = re.compile(r"(\d{2})\.(\d{2})\.(20\d{2})$")
@@ -743,7 +750,8 @@ _MIFFY_CARD = re.compile(
 _MIFFY_INCLUDE = ["dick bruna stand", "stand by miia", "zakka", "flower miffy",
                   "pop-up", "pop up", "popup", "マルシェ", "table", "カフェ",
                   "ショップ", "グッズ", "ストア", "miffy⁺", "miffy style",
-                  "フェア", "birthday", "おやつ", "kitchen"]
+                  "フェア", "birthday", "おやつ", "kitchen", "ミッフィー展",
+                  "美術館", "展開催"]
 _MIFFY_EXCLUDE = ["line", "book", "付録", "宝島社", "メッセージ", "シャンブル"]
 _KIDDY_MIFFY_SEARCH = "https://www.kiddyland.co.jp/?s=miffy"
 _KIDDY_MIFFY_LINK = re.compile(
@@ -894,17 +902,31 @@ _MIFFY_KNOWN_VENUES = [
          "KOBE PORT TOWER", "Dick Bruna TABLE in KOBE Waterfront"],
         "KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront",
     ),
+    (
+        ["鹿児島市立美術館"],
+        "鹿児島市立美術館",
+    ),
+    (
+        ["ひろしま美術館", "広島会場"],
+        "ひろしま美術館",
+    ),
 ]
 
 
-def _miffy_venue_from_title(title: str, name: str = "") -> str:
+def _miffy_venue_from_title(title: str, name: str = "", detail: str = "") -> str:
     m = re.search(r"^(.+?)(?:にて|に|で)「", title)
     if m:
         return m.group(1).strip("・ 　")
+    blob = "\n".join(part for part in (title, name, detail) if part)
     for aliases, venue in _MIFFY_KNOWN_VENUES:
-        if any(alias in title or alias in name for alias in aliases):
+        if any(alias in blob for alias in aliases):
             return venue
     return ""
+
+
+def _miffy_is_exhibition(title: str, name: str, detail: str = "") -> bool:
+    blob = "\n".join(part for part in (title, name, detail[:1200]) if part)
+    return bool(re.search(r"ミッフィー展|美術館|展開催|「[^」]+」展", blob))
 
 
 def _miffy_display_name(title: str, name: str) -> str:
@@ -1016,21 +1038,25 @@ def fetch_miffy_events(extract_dates, correct_city, max_articles=16, fresh_days=
         detail = _proxy_markdown(url) or _page_text(url)
         if not detail:
             continue
-        s, e = extract_dates(detail, ref_year=int(py), is_html=False, scan_chars=9000)
+        detail_text = _main_article_text(detail, title)
+        s, e = extract_dates(detail_text, ref_year=int(py), is_html=False, scan_chars=9000)
         if not s or (e and e < today):     # 抓不到期間、或已過期 → 跳過
             continue
         seen.add(url)
         name_m = re.search(r"「([^」]+)」", title)
         name = name_m.group(1) if name_m else title
-        venue = _miffy_venue_from_title(title, name) or name
+        venue = _miffy_venue_from_title(title, name, detail_text) or name
         loc = venue or name
         city = correct_city(venue, title)
         display_name = _miffy_display_name(title, name)
         is_birthday_fair = "birthday" in title.lower() and "miffy style" in title.lower()
+        is_exhibition = _miffy_is_exhibition(title, name, detail_text)
         if is_birthday_fair:
             display_name = "miffy’s Birthday 2026"
             loc = "miffy style 各店＋キデイランド対象店"
             city = ""
+        elif is_exhibition and f"「{display_name}」展" in title and not display_name.endswith("展"):
+            display_name = f"{display_name}展"
         short_title = "神戶港塔 Night Time" in display_name
         display_title = (
             f"Miffy {display_name}" if is_birthday_fair or short_title or _norm(display_name) == _norm(venue)
@@ -1040,7 +1066,9 @@ def fetch_miffy_events(extract_dates, correct_city, max_articles=16, fresh_days=
             "brand": "miffy",
             "title": display_title.strip(),
             "type": "campaign" if is_birthday_fair else (
-                "cafe" if any(k in title.lower() for k in ["カフェ", "kitchen", "おやつ", "table"]) else "popup"
+                "campaign" if is_exhibition else (
+                    "cafe" if any(k in title.lower() for k in ["カフェ", "kitchen", "おやつ", "table"]) else "popup"
+                )
             ),
             "country": "JP", "city": city or "",
             "locationName": loc,
@@ -1048,10 +1076,14 @@ def fetch_miffy_events(extract_dates, correct_city, max_articles=16, fresh_days=
             "summaryZh": (
                 "miffy’s Birthday 2026 生日活動於 miffy style 與 Kiddy Land 指定店舖登場，販售生日限定商品並提供店頭特典。"
                 if is_birthday_fair
-                else f"Miffy（米飛兔）官方活動「{display_name}」於{venue}期間限定登場，販售限定周邊／餐點。"
+                else (
+                    f"Miffy（米飛兔）官方展覽「{display_name}」於{venue}舉辦，展期為{s}至{e or '未定'}。"
+                    if is_exhibition
+                    else f"Miffy（米飛兔）官方活動「{display_name}」於{venue}期間限定登場，販售限定周邊／餐點。"
+                )
             ),
-            "needReservation": False, "hasLimitedGoods": True,
-            "tags": ["米飛兔", "期間限定", "日本"],
+            "needReservation": False, "hasLimitedGoods": False if is_exhibition else True,
+            "tags": ["米飛兔", "展覽" if is_exhibition else "期間限定", "日本"],
             "id": _stable_id("mi", url),
             "sourceType": "official_site", "createdAt": today,
             "sourceTitle": f"{title} - dickbruna.jp",
