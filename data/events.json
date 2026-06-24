@@ -1583,26 +1583,26 @@
   },
   {
     "brand": "pokemon",
-    "title": "寶可夢中心30週年主題咖啡廳",
-    "type": "cafe",
+    "title": "Pokémon Center #キミにあえた！30週年活動",
+    "type": "campaign",
     "country": "JP",
-    "city": "Tokyo",
-    "locationName": "ポケモンセンター",
+    "city": "",
+    "locationName": "全国のポケモンセンター",
     "startDate": "2026-06-01",
     "endDate": "2026-06-30",
-    "summaryZh": "寶可夢中心為慶祝30週年，將於6月1日起舉辦特別活動，並推出限定主題咖啡廳，提供獨家餐飲。",
+    "summaryZh": "Pokémon Center 30週年「#キミにあえた！」店頭活動於日本全國 Pokémon Center 舉辦，包含御三家與 Pikachu 見面活動、店頭貼紙與 Pokémon HOME 特別獎章等企劃。",
     "needReservation": false,
-    "hasLimitedGoods": false,
+    "hasLimitedGoods": true,
     "tags": [
       "寶可夢",
       "30週年",
-      "主題咖啡廳",
+      "店頭活動",
       "期間限定"
     ],
     "id": "po-d56245",
-    "sourceTitle": "ポケモン30周年キャンペーン in ポケモンセンター 6月1日より開催! - コラボカフェ",
-    "sourceType": "official_social",
+    "sourceTitle": "ポケモンセンターで「#キミにあえた！」キャンペーンが開催",
+    "sourceType": "official_site",
     "createdAt": "2026-06-24",
-    "sourceUrl": "https://collabo-cafe.com/events/collabo/pocket-monster-30th-anniversary-campaign-kiminiaeta2026/"
+    "sourceUrl": "https://kiminiaeta.pokemon.co.jp/"
   }
 ]

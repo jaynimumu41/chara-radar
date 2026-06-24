@@ -170,8 +170,8 @@ check("Miffy KOBE 官方標題顯示名",
           "KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront",
       ),
       "神戶港塔 Night Time 聯名活動")
-check("Collabo Cafe→可信",
-      scrape.is_trusted_date_source("https://collabo-cafe.com/events/collabo/chiikawa-obakenomori-odaiba2026/"), True)
+check("Collabo Cafe轉載→不直接信任日期",
+      scrape.is_trusted_date_source("https://collabo-cafe.com/events/collabo/chiikawa-obakenomori-odaiba2026/"), False)
 check("台灣寶可夢官方→可信",
       scrape.is_trusted_date_source("https://tw.portal-pokemon.com/goods/post-5343/"), True)
 check("Pokémon Cafe 官方→可信",
