@@ -733,6 +733,12 @@ _MIFFY_NEWS_LIST = "https://dickbruna.jp/news/"
 _MIFFY_ROW = re.compile(
     r"###\s*([^\n\]]+?)\s+(20\d\d)\.(\d{1,2})\.(\d{1,2})\]"
     r"\((https://dickbruna\.jp/news/\d+/\d+/)\)")
+_MIFFY_CARD = re.compile(
+    r"<a\s+href=[\"'](https://dickbruna\.jp/news/\d+/\d+/)[\"'][\s\S]*?"
+    r"<h3[^>]*>([\s\S]*?)</h3>[\s\S]*?"
+    r"<date[^>]*>(20\d{2})\.(\d{1,2})\.(\d{1,2})</date>[\s\S]*?</a>",
+    re.I,
+)
 # 只收四類「去現場買得到」的：快閃/店舖/催事/咖啡廳/周邊
 _MIFFY_INCLUDE = ["dick bruna stand", "stand by miia", "zakka", "flower miffy",
                   "pop-up", "pop up", "popup", "マルシェ", "table", "カフェ",
@@ -762,6 +768,20 @@ def _plain_text(text: str) -> str:
     text = re.sub(r"<script[\s\S]*?</script>|<style[\s\S]*?</style>", " ", text, flags=re.I)
     text = re.sub(r"<[^>]+>", " ", text)
     return re.sub(r"\s+", " ", html_lib.unescape(text)).strip()
+
+
+def _miffy_rows(text: str) -> list[tuple[str, str, str, str, str]]:
+    rows: list[tuple[str, str, str, str, str]] = []
+    seen: set[str] = set()
+    for title, py, pm, pd, url in _MIFFY_ROW.findall(text or ""):
+        if url not in seen:
+            rows.append((title, py, pm, pd, url))
+            seen.add(url)
+    for url, title, py, pm, pd in _MIFFY_CARD.findall(text or ""):
+        if url not in seen:
+            rows.append((_plain_text(title), py, pm, pd, url))
+            seen.add(url)
+    return rows
 
 
 def _main_article_text(page_text: str, title: str = "") -> str:
@@ -812,6 +832,8 @@ def _kiddy_period(title: str, detail: str, extract_dates) -> tuple[str, str]:
         em, ed = int(m.group(5)), int(m.group(6))
         if em < sm and not m.group(4):
             ey += 1
+        if sy == ey and sm == em and sd == ed and re.search(r"(?:[〜～~]\s*)?スタート|よりスタート", title):
+            return f"{sy:04d}-{sm:02d}-{sd:02d}", ""
         return f"{sy:04d}-{sm:02d}-{sd:02d}", f"{ey:04d}-{em:02d}-{ed:02d}"
     s, e = extract_dates(title + "\n" + detail, ref_year=ref_year, is_html=False, scan_chars=7000)
     if s and e == s and re.search(r"(?:[〜～~]\s*)?スタート|よりスタート", title):
@@ -963,17 +985,17 @@ def fetch_miffy_events(extract_dates, correct_city, max_articles=16, fresh_days=
     """解析 Miffy 官方 dickbruna.jp/event/ 列表，逐篇抓開催期間，回傳現行成品情報。零 Gemini。
     需傳入 scrape.extract_dates 與 scrape.correct_city。"""
     out: list[dict] = []
-    md = _proxy_markdown(_MIFFY_LIST)
+    md = _proxy_markdown(_MIFFY_LIST) or _page_text(_MIFFY_LIST)
     if not md:
         print("    ⚠️  Miffy dickbruna 列表抓取失敗（直連＋代理都不行）")
         return fetch_kiddyland_miffy_events(extract_dates, correct_city)
     from datetime import date as _d
     today = _today_iso()
     seen = set()
-    rows = _MIFFY_ROW.findall(md)
-    news_md = _proxy_markdown(_MIFFY_NEWS_LIST)
+    rows = _miffy_rows(md)
+    news_md = _proxy_markdown(_MIFFY_NEWS_LIST) or _page_text(_MIFFY_NEWS_LIST)
     if news_md:
-        rows.extend(_MIFFY_ROW.findall(news_md))
+        rows.extend(_miffy_rows(news_md))
     for title, py, pm, pd, url in rows:
         if len(out) >= max_articles:
             break
@@ -991,7 +1013,7 @@ def fetch_miffy_events(extract_dates, correct_city, max_articles=16, fresh_days=
                 continue
         except ValueError:
             pass
-        detail = _proxy_markdown(url)
+        detail = _proxy_markdown(url) or _page_text(url)
         if not detail:
             continue
         s, e = extract_dates(detail, ref_year=int(py), is_html=False, scan_chars=9000)

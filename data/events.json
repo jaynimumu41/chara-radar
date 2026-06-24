@@ -602,6 +602,29 @@
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000134.000011956.html"
   },
   {
+    "brand": "miffy",
+    "title": "Miffy DICK BRUNA STAND BY MIIA　大阪・梅田エスト",
+    "type": "popup",
+    "country": "JP",
+    "city": "Osaka",
+    "locationName": "大阪・梅田エスト",
+    "startDate": "2026-07-01",
+    "endDate": "2026-07-14",
+    "summaryZh": "Miffy（米飛兔）官方活動「DICK BRUNA STAND BY MIIA」於大阪・梅田エスト期間限定登場，販售限定周邊／餐點。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "期間限定",
+      "日本"
+    ],
+    "id": "mi-5be0cc",
+    "sourceType": "official_site",
+    "createdAt": "2026-06-24",
+    "sourceTitle": "大阪・梅田エストに「DICK BRUNA STAND BY MIIA」期間限定オープン - dickbruna.jp",
+    "sourceUrl": "https://dickbruna.jp/news/202606/46298/"
+  },
+  {
     "brand": "pokemon",
     "title": "台灣寶可夢中心卡娜赫拉皮卡丘家族玩偶新品開賣",
     "type": "new_product",
@@ -1566,7 +1589,7 @@
     "city": "",
     "locationName": "miffy style 各店＋キデイランド対象店",
     "startDate": "2026-07-04",
-    "endDate": "2026-07-04",
+    "endDate": "",
     "summaryZh": "miffy style 各店自 2026-07-04 起舉辦店頭購入特典活動，贈品送完為止，線上店不適用。",
     "needReservation": false,
     "hasLimitedGoods": true,
