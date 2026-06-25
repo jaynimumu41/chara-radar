@@ -44,7 +44,9 @@ def _polite_wait(url: str) -> None:
 def _prefer_reader_proxy(url: str) -> bool:
     parsed = urllib.parse.urlparse(url)
     host = parsed.hostname or ""
-    return host == "chiikawa-info.jp" and "/p26/" in parsed.path
+    if host == "chiikawa-info.jp" and "/p26/" in parsed.path:
+        return True
+    return host == "pokemonhubs.com"
 
 
 def _raw_fetch(url, timeout, want_text):

@@ -651,6 +651,38 @@ out, _ = scrape.dedup_events([
 check("Flower Miffy生日活動官方替換→併且保留全店官方頁",
       (len(out), out[0]["sourceType"], out[0].get("city", "")),
       (1, "official_site", ""))
+
+out, _ = scrape.dedup_events([
+    ev(brand="chiikawa", title="吉伊卡哇袋著走 台北快閃店", type="popup",
+       city="Taipei", startDate="2026-05-22", endDate="2026-06-30",
+       locationName="CHIIKAWA SHOP in TAIPEI 2F",
+       sourceType="official_site",
+       sourceUrl="https://chiikawa-info.jp/p26/chiikawa_pocket_taipei/index.html"),
+    ev(brand="chiikawa", title="吉伊卡哇袋著走 台北快閃店", type="popup",
+       city="Taipei", startDate="2026-05-22", locationName="台北快閃店",
+       sourceType="official_social",
+       sourceUrl="https://n.yam.com/Article/20260513924105"),
+    ev(brand="chiikawa", title="吉伊卡哇袋著走快閃店", type="popup",
+       city="Taipei", startDate="2026-05-22", locationName="SouNova 少女星",
+       sourceType="official_social",
+       sourceUrl="https://sounova.com/news/chiikawa-pocket-pop-up-store-in-taipei"),
+])
+check("Chiikawa袋著走台北媒體重複→保留官方完整資料",
+      (len(out), out[0]["sourceType"], out[0]["endDate"]),
+      (1, "official_site", "2026-06-30"))
+
+out, _ = scrape.dedup_events([
+    ev(brand="chiikawa", title="吉伊卡哇 CHIIKAWA DAYS 台北特展", type="popup",
+       city="Taipei", startDate="2026-07-04", endDate="2026-09-27",
+       locationName="華山1914文化創意產業園區 東2館",
+       sourceUrl="https://supertaste.tvbs.com.tw/accessories/359723"),
+    ev(brand="chiikawa", title="吉伊卡哇台北特展 CHIIKAWA DAYS", type="campaign",
+       city="Taipei", startDate="2026-07-04", endDate="2026-09-27",
+       locationName="台北",
+       sourceUrl="https://www.4gamers.com.tw/news/detail/79182/chiikawa-days-taipei-2026-huashan1914"),
+])
+check("Chiikawa Days台北特展媒體重複→合併", len(out), 1)
+
 check("更新差異：同來源不同城市仍是不同情報",
       scrape.is_same_event_for_update_diff(
           ev(brand="pokemon", title="Pokemon Center 出張所 in A", type="popup", city="Hyogo",
@@ -693,6 +725,20 @@ flower_diff = scrape.build_update_diff(
 check("更新差異：Flower Miffy官方頁替換不算今日新增",
       (flower_diff["newEventIds"], flower_diff["countsByBrand"]["miffy"], flower_diff["replacements"]),
       ([], 0, [{"from": "old-flower", "to": "new-flower"}]))
+chiikawa_diff = scrape.build_update_diff(
+    [ev(id="old-pocket", brand="chiikawa", title="吉伊卡哇袋著走 台北快閃店",
+        type="popup", city="Taipei", startDate="2026-05-22", endDate="2026-06-30",
+        locationName="CHIIKAWA SHOP in TAIPEI 2F")],
+    [ev(id="new-pocket", brand="chiikawa", title="吉伊卡哇袋著走快閃店",
+        type="popup", city="Taipei", startDate="2026-05-22",
+        locationName="SouNova 少女星",
+        sourceUrl="https://sounova.com/news/chiikawa-pocket-pop-up-store-in-taipei")],
+    date="2026-06-25",
+    baseline_date="2026-06-24",
+)
+check("更新差異：Chiikawa台北重複媒體不算今日新增",
+      (chiikawa_diff["newEventIds"], chiikawa_diff["countsByBrand"]["chiikawa"], chiikawa_diff["replacements"]),
+      ([], 0, [{"from": "old-pocket", "to": "new-pocket"}]))
 
 # 反例（建議1 不可誤殺）：同城同場館但「不同檔期」(日期區間差很多) = 不同活動，不可併
 out, _ = scrape.dedup_events([
