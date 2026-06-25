@@ -1420,6 +1420,9 @@ def ai_dedup(events: list[dict], rotator: "KeyRotator") -> tuple[list[dict], int
     except RateLimitError:
         print("    ⚠️  AI 去重略過（配額用盡）")
         return events, 0
+    except Exception as exc:
+        print(f"    ⚠️  AI 去重略過（呼叫失敗）：{exc}")
+        return events, 0
     m = re.search(r"\{.*\}", raw, re.DOTALL)
     if not m:
         return events, 0

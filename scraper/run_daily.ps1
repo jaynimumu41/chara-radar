@@ -28,6 +28,11 @@ Set-Location $dir
 $pyCode = $LASTEXITCODE
 if ($null -eq $pyCode) { $pyCode = 0 }
 ("SCRAPE EXIT CODE: " + $pyCode) | Out-File -FilePath $log -Append -Encoding utf8
+if ($pyCode -ne 0) {
+  "DEPLOY: scrape failed, skip commit and push." | Out-File -FilePath $log -Append -Encoding utf8
+  "========== END $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') ==========" | Out-File -FilePath $log -Append -Encoding utf8
+  exit $pyCode
+}
 
 # ---- Auto-deploy to GitHub Pages (viewable on phone) ----------------------
 # Every run writes last_updated.json (heartbeat: even if data is unchanged, the
