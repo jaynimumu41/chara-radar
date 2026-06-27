@@ -97,30 +97,6 @@
   },
   {
     "brand": "chiikawa",
-    "title": "Chiikawa 沖繩餐廳 夏季限定「シーサーのかき氷」",
-    "type": "cafe",
-    "country": "JP",
-    "city": "Okinawa",
-    "locationName": "沖繩「ちいかわレストラン」",
-    "startDate": "2026-06-06",
-    "endDate": "2026-09-30",
-    "summaryZh": "沖繩 PARCO CITY 的「ちいかわレストラン」推出夏季限定菜單「シーサーのかき氷」，活動至 9 月 30 日。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "沖繩",
-      "主題餐廳",
-      "夏季限定",
-      "Chiikawa"
-    ],
-    "id": "ch-d16fd8",
-    "sourceTitle": "PARCO CITY - パルコシティ",
-    "sourceType": "official_site",
-    "createdAt": "2026-06-03",
-    "sourceUrl": "https://www.parcocity.jp/"
-  },
-  {
-    "brand": "chiikawa",
     "title": "吉伊卡哇 CHIIKAWA DAYS 台北特展",
     "type": "popup",
     "country": "TW",
@@ -481,30 +457,6 @@
   },
   {
     "brand": "pokemon",
-    "title": "必勝客《寶可夢》百變怪抱枕與卡包活動",
-    "type": "campaign",
-    "country": "TW",
-    "city": "",
-    "locationName": "必勝客",
-    "startDate": "2026-06-16",
-    "endDate": "2026-07-27",
-    "summaryZh": "必勝客與寶可夢聯名推出百變怪抱枕、購物袋、寶可夢卡牌特典卡包等周邊活動，活動期間為6月16日至7月27日。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "必勝客",
-      "百變怪",
-      "限定周邊"
-    ],
-    "id": "po-ec1f5e",
-    "sourceTitle": "百變怪抱枕怎麼買？必勝客《寶可夢》周邊6/16開搶，購物袋、特典卡包全品項一次看 - Harper's BAZAAR",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-17",
-    "sourceUrl": "https://www.harpersbazaar.com/tw/life/home-improvement/g71597053/pizza-hut-pokemon-0616/"
-  },
-  {
-    "brand": "pokemon",
     "title": "Pokémon Cafe TOKYO 日本橋店內翻新與新菜單",
     "type": "store",
     "country": "JP",
@@ -552,54 +504,6 @@
     "createdAt": "2026-06-27",
     "sourceTitle": "≪K.UNO × U-TREASURE POP UP Promotion≫開展！ - 台灣寶可夢官方網站",
     "sourceUrl": "https://tw.portal-pokemon.com/goods/post-5267/"
-  },
-  {
-    "brand": "miffy",
-    "title": "OUTDOOR PRODUCTS x Flower Miffy 聯名商品",
-    "type": "new_product",
-    "country": "JP",
-    "city": "",
-    "locationName": "Flower Miffy",
-    "startDate": "2026-06-19",
-    "endDate": "",
-    "summaryZh": "OUTDOOR PRODUCTS 與 Flower Miffy 聯名設計商品將於2026年6月19日起在 Flower Miffy 店舖發售。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "聯名",
-      "OUTDOOR PRODUCTS",
-      "日本"
-    ],
-    "id": "mi-c63d81",
-    "sourceTitle": "『OUTDOOR PRODUCTS』のフラワーミッフィーデザインが登場！人気絵本ミッフィーのお花屋さん「フラワーミッフィー」にて2026年6月19日(金)より発売！",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-16",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002083.000022901.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇造型年輪蛋糕搶先開賣",
-    "type": "new_product",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "ちいかわらんど",
-    "startDate": "2026-07-03",
-    "endDate": "",
-    "summaryZh": "吉伊卡哇、哈奇大、兔子造型的年輪蛋糕將於2026年7月3日起在「ちいかわらんど」搶先販售，可現場購買。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "年輪蛋糕",
-      "新品販售",
-      "日本"
-    ],
-    "id": "ch-09ece3",
-    "sourceTitle": "ちいかわたちを、ぱかっと型ぬくバウムクーヘン！ちいかわ、ハチワレ、うさぎの“型ぬきバウム”を2026年7月3日より「ちいかわらんど」にて先行販売",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-19",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000134.000011956.html"
   },
   {
     "brand": "pokemon",
@@ -705,19 +609,20 @@
     "locationName": "イオンモール盛岡",
     "startDate": "2026-07-03",
     "endDate": "2026-07-20",
-    "summaryZh": "まじかるちいかわ快閃店將於7月3日至7月20日在永旺夢樂城盛岡1樓イーハトーブ廣場舉辦，現場販售天使與惡魔主題限定商品。",
+    "summaryZh": "まじかるちいかわ POP UP STORE 將於 2026-07-03 至 2026-07-20 在イオンモール盛岡 1F イーハトーブ広場舉辦，販售天使與惡魔、魔法少女風格商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
-      "快閃店",
-      "限定商品",
-      "盛岡"
+      "まじかるちいかわ",
+      "POP UP STORE",
+      "イオンモール盛岡",
+      "限定商品"
     ],
     "id": "ch-55ba46",
-    "sourceTitle": "まじかるちいかわ ストア in イオンモール盛岡 7月3日より開催! - コラボカフェ",
-    "sourceType": "official_social",
+    "sourceTitle": "まじかるちいかわPOP UP STORE イオンモール盛岡(2026/7/3(金)～7/20(月祝))",
+    "sourceType": "official_site",
     "createdAt": "2026-06-26",
-    "sourceUrl": "https://collabo-cafe.com/events/collabo/magical-chiikawa-pop-up-store-aeon-iwate2026/"
+    "sourceUrl": "https://chiikawa-info.jp/p26/mg_amro/"
   },
   {
     "brand": "chiikawa",

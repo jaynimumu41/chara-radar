@@ -1,45 +1,45 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-22T08:39:09+00:00",
+  "updatedAt": "2026-06-27T14:21:20+00:00",
   "sources": {
     "domain:nownews.com": {
-      "confirmed": 6,
+      "confirmed": 7,
       "rejected": 0,
       "uncertain": 0,
-      "crossChecked": 6,
+      "crossChecked": 7,
       "score": 95,
       "label": "nownews.com",
       "kind": "news",
       "host": "nownews.com",
       "handle": "",
       "firstSeen": "2026-06-11",
-      "lastReviewed": "2026-06-12",
+      "lastReviewed": "2026-06-27",
       "lastOutcome": "confirmed",
-      "notes": "Confirmed explicit Pokemon Center Taipei May 30 Mega Raichu goods article.",
+      "notes": "Confirmed explicit Pokemon Center TAIPEI June 27 Pokemon Yurutto/Kanahei goods article; page states in-store sale date and product list, citing pokemon_taiwan imagery.",
       "byBrand": {
         "pokemon": {
-          "confirmed": 6,
+          "confirmed": 7,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 6,
+          "crossChecked": 7,
           "score": 95
         }
       },
       "byType": {
         "new_product": {
-          "confirmed": 6,
+          "confirmed": 7,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 6,
+          "crossChecked": 7,
           "score": 95
         }
       },
       "byCountry": {
         "tw": {
-          "confirmed": 6,
+          "confirmed": 7,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 6,
+          "crossChecked": 7,
           "score": 95
         }
       },
@@ -103,6 +103,16 @@
           "eventId": "po-450306",
           "evidenceCount": 1,
           "notes": "Confirmed explicit Pokemon Center Taipei May 30 Mega Raichu goods article."
+        },
+        {
+          "date": "2026-06-27",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-ff0050",
+          "evidenceCount": 1,
+          "notes": "Confirmed explicit Pokemon Center TAIPEI June 27 Pokemon Yurutto/Kanahei goods article; page states in-store sale date and product list, citing pokemon_taiwan imagery."
         }
       ]
     },
@@ -350,43 +360,43 @@
     },
     "domain:harpersbazaar.com": {
       "confirmed": 1,
-      "rejected": 0,
+      "rejected": 1,
       "uncertain": 0,
       "crossChecked": 0,
-      "score": 57,
+      "score": 46,
       "label": "harpersbazaar.com",
       "kind": "site",
       "host": "harpersbazaar.com",
       "handle": "",
       "firstSeen": "2026-06-17",
-      "lastReviewed": "2026-06-17",
-      "lastOutcome": "confirmed",
-      "notes": "Corrected after direct page review: article has explicit activity period 2026-06-16 to 2026-07-27 for the Pizza Hut Pokemon campaign.",
+      "lastReviewed": "2026-06-27",
+      "lastOutcome": "rejected",
+      "notes": "Removed on 2026-06-27: article dates are explicit, but the Pizza Hut tie-up is a broad food/retail promo with card-pack mechanics, outside the physical-store/event-limited scope.",
       "byBrand": {
         "pokemon": {
           "confirmed": 1,
-          "rejected": 0,
+          "rejected": 1,
           "uncertain": 0,
           "crossChecked": 0,
-          "score": 57
+          "score": 46
         }
       },
       "byType": {
         "campaign": {
           "confirmed": 1,
-          "rejected": 0,
+          "rejected": 1,
           "uncertain": 0,
           "crossChecked": 0,
-          "score": 57
+          "score": 46
         }
       },
       "byCountry": {
         "tw": {
           "confirmed": 1,
-          "rejected": 0,
+          "rejected": 1,
           "uncertain": 0,
           "crossChecked": 0,
-          "score": 57
+          "score": 46
         }
       },
       "history": [
@@ -399,6 +409,16 @@
           "eventId": "po-ec1f5e",
           "evidenceCount": 0,
           "notes": "Restored after direct page review; the article explicitly labels 活動期間：6/16（二）-7/27（一） for the campaign."
+        },
+        {
+          "date": "2026-06-27",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "campaign",
+          "country": "TW",
+          "eventId": "po-ec1f5e",
+          "evidenceCount": 0,
+          "notes": "Removed on 2026-06-27: article dates are explicit, but the Pizza Hut tie-up is a broad food/retail promo with card-pack mechanics, outside the physical-store/event-limited scope."
         }
       ]
     },
@@ -457,44 +477,44 @@
       ]
     },
     "domain:iamcreative.com.tw": {
-      "confirmed": 1,
+      "confirmed": 2,
       "rejected": 0,
       "uncertain": 0,
       "crossChecked": 0,
-      "score": 57,
+      "score": 64,
       "label": "iamcreative.com.tw",
       "kind": "site",
       "host": "iamcreative.com.tw",
       "handle": "",
       "firstSeen": "2026-06-22",
-      "lastReviewed": "2026-06-22",
+      "lastReviewed": "2026-06-27",
       "lastOutcome": "confirmed",
-      "notes": "Direct review of the official Iam Creative store page confirmed Taichung Lalaport South B1 and the explicit 2026-04-24 to 2026-07-25 period.",
+      "notes": "Direct review of the official Iam Creative popup page confirmed Taichung Lalaport South B1 and extension through 2026-09-24.",
       "byBrand": {
         "miffy": {
-          "confirmed": 1,
+          "confirmed": 2,
           "rejected": 0,
           "uncertain": 0,
           "crossChecked": 0,
-          "score": 57
+          "score": 64
         }
       },
       "byType": {
         "popup": {
-          "confirmed": 1,
+          "confirmed": 2,
           "rejected": 0,
           "uncertain": 0,
           "crossChecked": 0,
-          "score": 57
+          "score": 64
         }
       },
       "byCountry": {
         "tw": {
-          "confirmed": 1,
+          "confirmed": 2,
           "rejected": 0,
           "uncertain": 0,
           "crossChecked": 0,
-          "score": 57
+          "score": 64
         }
       },
       "history": [
@@ -507,6 +527,16 @@
           "eventId": "mi-3a91c4",
           "evidenceCount": 0,
           "notes": "Direct review of the official Iam Creative store page confirmed Taichung Lalaport South B1 and the explicit 2026-04-24 to 2026-07-25 period."
+        },
+        {
+          "date": "2026-06-27",
+          "outcome": "confirmed",
+          "brand": "miffy",
+          "type": "popup",
+          "country": "TW",
+          "eventId": "mi-3a91c4",
+          "evidenceCount": 0,
+          "notes": "Direct review of the official Iam Creative popup page confirmed Taichung Lalaport South B1 and extension through 2026-09-24."
         }
       ]
     },
@@ -669,6 +699,60 @@
           "eventId": "ch-2e1355",
           "evidenceCount": 1,
           "notes": "Removed as a duplicate of the existing Chiikawa Park anniversary record kept from another source with the same venue and 2026-07-28 to 2026-08-03 period."
+        }
+      ]
+    },
+    "domain:parcocity.jp": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 0,
+      "score": 39,
+      "label": "parcocity.jp",
+      "kind": "site",
+      "host": "parcocity.jp",
+      "handle": "",
+      "firstSeen": "2026-06-27",
+      "lastReviewed": "2026-06-27",
+      "lastOutcome": "rejected",
+      "notes": "Removed on 2026-06-27: record pointed only to generic PARCO CITY homepage and no verifiable page/search signal for the claimed シーサーのかき氷 period was found.",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "byType": {
+        "cafe": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "history": [
+        {
+          "date": "2026-06-27",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "cafe",
+          "country": "JP",
+          "eventId": "ch-d16fd8",
+          "evidenceCount": 0,
+          "notes": "Removed on 2026-06-27: record pointed only to generic PARCO CITY homepage and no verifiable page/search signal for the claimed シーサーのかき氷 period was found."
         }
       ]
     }

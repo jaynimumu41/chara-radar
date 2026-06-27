@@ -66,6 +66,12 @@ REASON_WEIGHTS = {
     "missing_location": 2,
 }
 
+REVIEWED_SKIP_REASONS = {
+    "missing_endDate",
+    "campaign_type",
+    "generic_title",
+}
+
 
 def load_events() -> list[dict]:
     return json.loads(EVENTS_JSON.read_text(encoding="utf-8"))
@@ -109,23 +115,39 @@ def verification_reasons(ev: dict) -> list[str]:
     if is_structured_official(ev) and not structured_activity_missing_end_date(ev):
         return []
 
+    trusted_date_source = scrape.is_trusted_date_source(ev.get("sourceUrl", ""))
     reasons: list[str] = []
     if not ev.get("startDate") and not ev.get("endDate"):
         reasons.append("missing_dates")
-    if not ev.get("endDate"):
+    if not ev.get("endDate") and not (ev.get("type") == "new_product" and ev.get("startDate")):
         reasons.append("missing_endDate")
     if structured_activity_missing_end_date(ev):
         reasons.append("structured_activity_missing_endDate")
-    if not scrape.is_trusted_date_source(ev.get("sourceUrl", "")):
+    if not trusted_date_source:
         source_domain = domain_of(ev.get("sourceUrl", "")) or "no_url"
         reasons.append(f"untrusted_date_domain:{source_domain}")
-    if ev.get("type") == "campaign":
+    if ev.get("type") == "campaign" and not (trusted_date_source and ev.get("startDate") and ev.get("endDate")):
         reasons.append("campaign_type")
-    if is_generic_title(ev.get("title", "")) or is_generic_title(ev.get("sourceTitle", "")):
+    if not trusted_date_source and (is_generic_title(ev.get("title", "")) or is_generic_title(ev.get("sourceTitle", ""))):
         reasons.append("generic_title")
     if not ev.get("locationName"):
         reasons.append("missing_location")
     return reasons
+
+
+def confirmed_event_ids(reputation_data: dict) -> set[str]:
+    ids: set[str] = set()
+    for entry in reputation_data.get("sources", {}).values():
+        for item in entry.get("history", []):
+            if item.get("outcome") == "confirmed" and item.get("eventId"):
+                ids.add(str(item["eventId"]))
+    return ids
+
+
+def is_reviewed_candidate(ev: dict, reasons: list[str], reviewed_ids: set[str]) -> bool:
+    if ev.get("id") not in reviewed_ids:
+        return False
+    return all(reason in REVIEWED_SKIP_REASONS or reason.startswith("untrusted_date_domain:") for reason in reasons)
 
 
 def risk_score(ev: dict, reasons: list[str]) -> int:
@@ -198,10 +220,13 @@ def clean_cell(value) -> str:
 
 def build_candidates(events: list[dict]) -> list[dict]:
     reputation_data = source_reputation.load_reputation(REPUTATION_JSON)
+    reviewed_ids = confirmed_event_ids(reputation_data)
     candidates: list[dict] = []
     for ev in events:
         reasons = verification_reasons(ev)
         if not reasons:
+            continue
+        if is_reviewed_candidate(ev, reasons, reviewed_ids):
             continue
         rep = reputation_context(ev, reputation_data)
         candidates.append({

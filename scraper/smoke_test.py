@@ -459,6 +459,28 @@ check("吉伊卡哇もぐもぐ本舗常設店無 endDate→略過",
              sourceUrl="https://www.chiikawamogumogu.jp/stores/castella/",
              startDate="2026-07-18", endDate="")),
       [])
+check("可信日期來源 campaign 日期完整→不因 campaign_type 進候選",
+      agent_verify_candidates.verification_reasons(
+          ev(brand="chiikawa", type="campaign", sourceType="official_social",
+             sourceUrl="https://www.tokyo-skytree.jp/press/post/712/",
+             locationName="東京スカイツリー",
+             startDate="2026-07-10", endDate="2026-10-31")),
+      [])
+product_reasons = agent_verify_candidates.verification_reasons(
+    ev(brand="pokemon", type="new_product", sourceType="official_social",
+       sourceUrl="https://www.nownews.com/news/test",
+       title="台灣寶可夢中心新商品",
+       locationName="台灣寶可夢中心",
+       startDate="2026-06-27", endDate=""))
+check("新品開賣無 endDate→不標 missing_endDate",
+      "missing_endDate" in product_reasons,
+      False)
+check("已確認過的非官方 event id→候選器可跳過",
+      agent_verify_candidates.is_reviewed_candidate(
+          ev(id="po-confirmed"),
+          ["untrusted_date_domain:nownews.com", "generic_title"],
+          {"po-confirmed"}),
+      True)
 
 # ── source_reputation ────────────────────────────────────────────────────────
 print("\n[source_reputation] source trust memory")
