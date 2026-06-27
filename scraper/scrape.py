@@ -110,7 +110,7 @@ AREA_TO_CITY = {
     "Kagoshima":["鹿児島", "鹿兒島", "Kagoshima"],
     "Mie":      ["三重", "四日市", "津南"],
     "Miyagi":   ["仙台", "宮城", "名取", "新利府", "利府"],
-    "Chiba":    ["千葉", "舞浜", "幕張"],
+    "Chiba":    ["千葉", "舞浜", "幕張", "柏高島屋"],
     "Niigata":  ["新潟", "亀田"],
     "Okayama":  ["岡山", "倉敷"],
     "Tottori":  ["鳥取", "日吉津"],
@@ -122,7 +122,7 @@ AREA_TO_CITY = {
     "Yamanashi":["山梨", "甲府", "昭和"],
     "Aomori":   ["青森", "Aomori", "弘前"],
     "Aichi":    ["愛知", "豊田", "名古屋", "常滑", "大高"],
-    "Shizuoka": ["静岡", "靜岡", "富士宮", "浜松", "遠鉄", "セノバ"],
+    "Shizuoka": ["静岡", "靜岡", "富士宮", "浜松", "遠鉄", "セノバ", "磐田"],
     "Yamaguchi":["山口", "小野田", "おのだ"],
     "Wakayama": ["和歌山", "Wakayama"],
     "Kochi":    ["高知", "Kochi"],
@@ -973,6 +973,9 @@ SPECIAL_ACTIVITY_ALIASES = [
     ("chiikawa-days-taipei", ["CHIIKAWA DAYS", "吉伊卡哇台北特展", "台北特展"]),
     ("chiikawa-pocket-taipei", ["袋著走", "pocket_taipei", "pocket pop up", "pocket-pop-up"]),
 ]
+SPECIAL_PRODUCT_ALIASES = [
+    ("pokemon-yurutto-taipei", ["Pokémon Yurutto", "Pokemon Yurutto", "ポケモンゆるっと", "卡娜赫拉"]),
+]
 
 def is_generic_dedup_location(loc: str) -> bool:
     """Locations too broad to prove two product launches are the same event."""
@@ -1028,17 +1031,27 @@ def chain_campaign_key(ev: dict) -> str | None:
 
 def special_activity_key(ev: dict) -> str | None:
     """Known activities where media titles vary too much for fuzzy title dedup."""
-    if ev.get("brand") != "chiikawa" or ev.get("type", "") not in ACTIVITY_TYPES:
-        return None
     start = ev.get("startDate", "")
     if not start:
         return None
     blob = _event_blob(ev) + _norm(ev.get("sourceUrl", ""))
-    if not any(token in blob for token in (_norm("台北"), _norm("臺北"), "taipei")):
-        return None
-    for concept, aliases in SPECIAL_ACTIVITY_ALIASES:
-        if any(_norm(alias) in blob for alias in aliases):
-            return "|".join([ev.get("brand", ""), concept, start])
+    brand = ev.get("brand")
+    ev_type = ev.get("type", "")
+    is_taipei = ev.get("city") == "Taipei" or any(
+        token in blob for token in (_norm("台北"), _norm("臺北"), "taipei")
+    )
+    if brand == "chiikawa" and ev_type in ACTIVITY_TYPES:
+        if not is_taipei:
+            return None
+        for concept, aliases in SPECIAL_ACTIVITY_ALIASES:
+            if any(_norm(alias) in blob for alias in aliases):
+                return "|".join([brand, concept, start])
+    if brand == "pokemon" and ev_type in SELLING_TYPES:
+        if not is_taipei:
+            return None
+        for concept, aliases in SPECIAL_PRODUCT_ALIASES:
+            if any(_norm(alias) in blob for alias in aliases):
+                return "|".join([brand, concept, start])
     return None
 
 # 知名場館別名 → 統一代號（讓同場館不同寫法能去重）
@@ -1112,6 +1125,10 @@ def is_same_event_for_update_diff(old: dict, new: dict) -> bool:
         return True
 
     old_type, new_type = old.get("type", ""), new.get("type", "")
+    old_special = special_activity_key(old)
+    new_special = special_activity_key(new)
+    if old_special and old_special == new_special:
+        return True
     if old_type in SELLING_TYPES or new_type in SELLING_TYPES:
         return False
     if old_type not in ACTIVITY_TYPES or new_type not in ACTIVITY_TYPES:
@@ -1136,11 +1153,6 @@ def is_same_event_for_update_diff(old: dict, new: dict) -> bool:
     new_chain = chain_campaign_key(new)
     if old_chain and old_chain == new_chain:
         return True
-    old_special = special_activity_key(old)
-    new_special = special_activity_key(new)
-    if old_special and old_special == new_special:
-        return True
-
     old_loc, new_loc = old.get("locationName", ""), new.get("locationName", "")
     old_canon = canon_venue(old_loc, old_title)
     new_canon = canon_venue(new_loc, new_title)

@@ -750,7 +750,7 @@ _MIFFY_CARD = re.compile(
 _MIFFY_INCLUDE = ["dick bruna stand", "stand by miia", "zakka", "flower miffy",
                   "pop-up", "pop up", "popup", "マルシェ", "table", "カフェ",
                   "ショップ", "グッズ", "ストア", "miffy⁺", "miffy style",
-                  "フェア", "birthday", "おやつ", "kitchen", "ミッフィー展",
+                  "フェア", "birthday", "バースデー", "ハウステンボス", "おやつ", "kitchen", "ミッフィー展",
                   "美術館", "展開催"]
 _MIFFY_EXCLUDE = ["line", "book", "付録", "宝島社", "メッセージ", "シャンブル"]
 _KIDDY_MIFFY_SEARCH = "https://www.kiddyland.co.jp/?s=miffy"
@@ -910,7 +910,25 @@ _MIFFY_KNOWN_VENUES = [
         ["ひろしま美術館", "広島会場"],
         "ひろしま美術館",
     ),
+    (
+        ["ハウステンボス", "Huis Ten Bosch"],
+        "ハウステンボス",
+    ),
 ]
+
+
+def _miffy_period(title: str, detail_text: str, ref_year: int, extract_dates) -> tuple[str, str]:
+    """Extract Miffy official event periods, respecting explicit extension notices."""
+    s, e = extract_dates(detail_text, ref_year=ref_year, is_html=False, scan_chars=9000)
+    ext = re.search(r"(20\d{2})年(\d{1,2})月(\d{1,2})日[^。]{0,30}?まで延長", detail_text)
+    if ext:
+        ey, em, ed = map(int, ext.groups())
+        e = f"{ey:04d}-{em:02d}-{ed:02d}"
+        start = re.search(r"(20\d{2})年(\d{1,2})月(\d{1,2})日[^。]{0,30}?から", detail_text)
+        if start:
+            sy, sm, sd = map(int, start.groups())
+            s = f"{sy:04d}-{sm:02d}-{sd:02d}"
+    return s, e
 
 
 def _miffy_venue_from_title(title: str, name: str = "", detail: str = "") -> str:
@@ -932,6 +950,8 @@ def _miffy_is_exhibition(title: str, name: str, detail: str = "") -> bool:
 def _miffy_display_name(title: str, name: str) -> str:
     if "KOBE PORT TOWER" in title and "Night Time" in title:
         return "神戶港塔 Night Time 聯名活動"
+    if "ハウステンボス" in title and "バースデー" in title:
+        return "ミッフィーバースデーシーズン"
     return name
 
 
@@ -1039,7 +1059,7 @@ def fetch_miffy_events(extract_dates, correct_city, max_articles=16, fresh_days=
         if not detail:
             continue
         detail_text = _main_article_text(detail, title)
-        s, e = extract_dates(detail_text, ref_year=int(py), is_html=False, scan_chars=9000)
+        s, e = _miffy_period(title, detail_text, int(py), extract_dates)
         if not s or (e and e < today):     # 抓不到期間、或已過期 → 跳過
             continue
         seen.add(url)

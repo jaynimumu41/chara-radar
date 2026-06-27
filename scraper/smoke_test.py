@@ -56,6 +56,8 @@ print("\n[correct_city] 城市判定")
 check("豪斯登堡→Nagasaki", scrape.correct_city("豪斯登堡"), "Nagasaki")
 check("夢時代→Kaohsiung", scrape.correct_city("高雄夢時代"), "Kaohsiung")
 check("羽生→Saitama", scrape.correct_city("イオンモール羽生"), "Saitama")
+check("柏高島屋→Chiba", scrape.correct_city("柏高島屋 本館地下2階 催会場"), "Chiba")
+check("ららぽーと磐田→Shizuoka", scrape.correct_city("ららぽーと磐田 1F 中央広場"), "Shizuoka")
 check("KOBE PORT TOWER→Hyogo",
       scrape.correct_city("KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront"),
       "Hyogo")
@@ -184,6 +186,21 @@ check("Miffy 官方展覽類型判定",
           "美術館に行こう！",
       ),
       True)
+check("Miffy 豪斯登堡官方場館抽取",
+      official_sources._miffy_venue_from_title(
+          "＜期間延長決定＞ハウステンボス「ミッフィーバースデーマンス」",
+          "ミッフィーバースデーマンス",
+      ),
+      "ハウステンボス")
+check("Miffy 豪斯登堡期間延長解析",
+      official_sources._miffy_period(
+          "＜期間延長決定＞ハウステンボス「ミッフィーバースデーマンス」",
+          "2026年8月30日（日）まで延長されることになりました。"
+          "2026年5月29日（金）から6月28日（日）まで、長崎県のテーマパークリゾート「ハウステンボス」では開催されます。",
+          2026,
+          scrape.extract_dates,
+      ),
+      ("2026-05-29", "2026-08-30"))
 check("Collabo Cafe轉載→不直接信任日期",
       scrape.is_trusted_date_source("https://collabo-cafe.com/events/collabo/chiikawa-obakenomori-odaiba2026/"), False)
 check("台灣寶可夢官方→可信",
@@ -772,6 +789,32 @@ out, _ = scrape.dedup_events([
        sourceUrl="https://b.example/wedding"),
 ])
 check("同城同日不同新品→不併（2筆）", len(out), 2)
+
+out, _ = scrape.dedup_events([
+    ev(brand="pokemon", title="台灣寶可夢中心卡娜赫拉皮卡丘家族玩偶新品開賣", type="new_product",
+       city="Taipei", startDate="2026-06-27", locationName="台灣寶可夢中心",
+       summaryZh="台灣寶可夢中心將於6月27日開賣卡娜赫拉與皮卡丘家族系列新品玩偶。",
+       sourceUrl="https://www.nownews.com/amp/news/6848992"),
+    ev(brand="pokemon", title="寶可夢X卡娜赫拉 台北限定復刻", type="new_product",
+       city="Taipei", startDate="2026-06-27", locationName="Pokémon Center TAIPEI",
+       summaryZh="台北寶可夢中心將於6月27日在信義區門市復刻販售《Pokémon Yurutto》系列商品。",
+       sourceUrl="https://www.marieclaire.com.tw/lifestyle/whats-hot/94241"),
+])
+check("寶可夢卡娜赫拉/Yurutto台北同日復刻→合併（1筆）", len(out), 1)
+
+kanahei_diff = scrape.build_update_diff(
+    [ev(id="old-kanahei", brand="pokemon", title="台灣寶可夢中心卡娜赫拉皮卡丘家族玩偶新品開賣",
+        type="new_product", city="Taipei", startDate="2026-06-27", locationName="台灣寶可夢中心",
+        summaryZh="台灣寶可夢中心將於6月27日開賣卡娜赫拉與皮卡丘家族系列新品玩偶。")],
+    [ev(id="new-kanahei", brand="pokemon", title="寶可夢X卡娜赫拉 台北限定復刻",
+        type="new_product", city="Taipei", startDate="2026-06-27", locationName="Pokémon Center TAIPEI",
+        summaryZh="台北寶可夢中心將於6月27日在信義區門市復刻販售《Pokémon Yurutto》系列商品。")],
+    date="2026-06-27",
+    baseline_date="2026-06-26",
+)
+check("更新差異：寶可夢卡娜赫拉/Yurutto重複媒體不算今日新增",
+      (kanahei_diff["newEventIds"], kanahei_diff["countsByBrand"]["pokemon"], kanahei_diff["replacements"]),
+      ([], 0, [{"from": "old-kanahei", "to": "new-kanahei"}]))
 
 # 同城同泛用店名、日期不同的新品也不可被第二階段模糊去重併掉。
 out, _ = scrape.dedup_events([

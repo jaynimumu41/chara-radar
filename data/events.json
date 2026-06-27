@@ -673,28 +673,28 @@
     "sourceUrl": "https://kiminiaeta.pokemon.co.jp/"
   },
   {
-    "brand": "chiikawa",
-    "title": "Q-pot. x 吉伊卡哇 甜點飾品聯名",
-    "type": "new_product",
+    "brand": "miffy",
+    "title": "Miffy ミッフィーバースデーシーズン　ハウステンボス",
+    "type": "campaign",
     "country": "JP",
-    "city": "Tokyo",
-    "locationName": "Q-pot.直營店",
-    "startDate": "2026-06-26",
-    "endDate": "",
-    "summaryZh": "吉伊卡哇與Q-pot.聯名推出甜點造型飾品，將於6月26日起在Q-pot.直營店發售，可愛設計引發話題。",
+    "city": "Nagasaki",
+    "locationName": "ハウステンボス",
+    "startDate": "2026-05-29",
+    "endDate": "2026-08-30",
+    "summaryZh": "Miffy 官方生日季活動於長崎豪斯登堡延長舉辦至 2026-08-30，集合限定餐飲、商品與合作店內容。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
-      "吉伊卡哇",
-      "Q-pot.",
-      "飾品",
-      "聯名"
+      "米飛兔",
+      "豪斯登堡",
+      "限定餐飲",
+      "期間限定"
     ],
-    "id": "ch-15d754",
-    "sourceTitle": "「かわいくて破産」と話題【キューポット】“ちいかわのスイーツアクセサリー”が6/26から発売 - 朝日新聞",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-26",
-    "sourceUrl": "https://www.asahi.com/and/w/article/16653562/30972168"
+    "id": "mi-88dac4",
+    "sourceTitle": "＜期間延長決定＞ハウステンボス「ミッフィーバースデーマンス」 - dickbruna.jp",
+    "sourceType": "official_site",
+    "createdAt": "2026-06-27",
+    "sourceUrl": "https://dickbruna.jp/news/202606/47004/"
   },
   {
     "brand": "chiikawa",
@@ -748,7 +748,7 @@
     "title": "吉伊卡哇 POP UP STORE 柏高島屋",
     "type": "popup",
     "country": "JP",
-    "city": "",
+    "city": "Chiba",
     "locationName": "柏高島屋 本館地下2階 催会場",
     "startDate": "2026-07-23",
     "endDate": "2026-08-12",
@@ -772,7 +772,7 @@
     "title": "吉伊卡哇 POP UP STORE ららぽーと磐田",
     "type": "popup",
     "country": "JP",
-    "city": "",
+    "city": "Shizuoka",
     "locationName": "ららぽーと磐田 1F 中央広場",
     "startDate": "2026-07-10",
     "endDate": "2026-07-26",
@@ -1768,29 +1768,5 @@
     "createdAt": "2026-06-27",
     "sourceTitle": "2026年7月4日(土)～スタート!miffy style 各店ノベルティデイ - キデイランド",
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_nove202607/"
-  },
-  {
-    "brand": "pokemon",
-    "title": "寶可夢X卡娜赫拉 台北限定復刻",
-    "type": "new_product",
-    "country": "TW",
-    "city": "Taipei",
-    "locationName": "Pokémon Center TAIPEI",
-    "startDate": "2026-06-27",
-    "endDate": "",
-    "summaryZh": "台北寶可夢中心將於6月27日在信義區門市復刻販售《Pokémon Yurutto》系列商品，6月27日至6月28日採入店整理券管制。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "卡娜赫拉",
-      "新品",
-      "限定復刻"
-    ],
-    "id": "po-f6bfe6",
-    "sourceTitle": "寶可夢X卡娜赫拉回來了！《Pokémon Yurutto》6/27台北限定復刻開賣，皮卡丘趴姿娃娃必搶 - Marie Claire 美麗佳人",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-27",
-    "sourceUrl": "https://www.marieclaire.com.tw/lifestyle/whats-hot/94241"
   }
 ]
