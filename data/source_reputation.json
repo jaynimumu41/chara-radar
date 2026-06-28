@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-27T14:21:20+00:00",
+  "updatedAt": "2026-06-28T08:34:51+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 7,
@@ -190,19 +190,19 @@
       "history": []
     },
     "domain:chiba-tv.com": {
-      "confirmed": 0,
+      "confirmed": 1,
       "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 0,
-      "score": 28,
+      "crossChecked": 1,
+      "score": 37,
       "label": "chiba-tv.com",
       "kind": "site",
       "host": "chiba-tv.com",
       "handle": "",
       "firstSeen": "2026-06-13",
-      "lastReviewed": "2026-06-14",
-      "lastOutcome": "rejected",
-      "notes": "Generic merchandise article with no physical venue; removed as out-of-scope new_product.",
+      "lastReviewed": "2026-06-28",
+      "lastOutcome": "confirmed",
+      "notes": "Matched official Kiddy Land event page for same Tokyo Station limited release and sale date.",
       "byBrand": {
         "chiikawa": {
           "confirmed": 0,
@@ -210,24 +210,31 @@
           "uncertain": 0,
           "crossChecked": 0,
           "score": 28
+        },
+        "miffy": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
         }
       },
       "byType": {
         "new_product": {
-          "confirmed": 0,
+          "confirmed": 1,
           "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 0,
-          "score": 28
+          "crossChecked": 1,
+          "score": 37
         }
       },
       "byCountry": {
         "jp": {
-          "confirmed": 0,
+          "confirmed": 1,
           "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 0,
-          "score": 28
+          "crossChecked": 1,
+          "score": 37
         }
       },
       "history": [
@@ -250,6 +257,16 @@
           "eventId": "ch-04fe9b",
           "evidenceCount": 0,
           "notes": "Generic merchandise article with no physical venue; removed as out-of-scope new_product."
+        },
+        {
+          "date": "2026-06-28",
+          "outcome": "confirmed",
+          "brand": "miffy",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "mi-77e947",
+          "evidenceCount": 1,
+          "notes": "Matched official Kiddy Land event page for same Tokyo Station limited release and sale date."
         }
       ]
     },
@@ -753,6 +770,60 @@
           "eventId": "ch-d16fd8",
           "evidenceCount": 0,
           "notes": "Removed on 2026-06-27: record pointed only to generic PARCO CITY homepage and no verifiable page/search signal for the claimed シーサーのかき氷 period was found."
+        }
+      ]
+    },
+    "domain:uptodate.tokyo": {
+      "confirmed": 1,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 0,
+      "score": 57,
+      "label": "uptodate.tokyo",
+      "kind": "site",
+      "host": "uptodate.tokyo",
+      "handle": "",
+      "firstSeen": "2026-06-28",
+      "lastReviewed": "2026-06-28",
+      "lastOutcome": "confirmed",
+      "notes": "Kept after confirming the article states Pokemon Center Online starts 2026-07-02 and nationwide Pokemon Center stores start 2026-07-04; normalized record to in-store sale date.",
+      "byBrand": {
+        "pokemon": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
+        }
+      },
+      "byType": {
+        "new_product": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
+        }
+      },
+      "history": [
+        {
+          "date": "2026-06-28",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "po-1cc734",
+          "evidenceCount": 0,
+          "notes": "Kept after confirming the article states Pokemon Center Online starts 2026-07-02 and nationwide Pokemon Center stores start 2026-07-04; normalized record to in-store sale date."
         }
       ]
     }
