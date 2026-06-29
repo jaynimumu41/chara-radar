@@ -1652,25 +1652,25 @@
   },
   {
     "brand": "miffy",
-    "title": "Miffy Flower Miffy Flower Miffy バースデーキャンペーン開催",
-    "type": "popup",
+    "title": "Miffy Flower Miffy ???????????",
+    "type": "campaign",
     "country": "JP",
     "city": "",
-    "locationName": "Flower Miffy Flower Miffy バースデーキャンペーン開催",
+    "locationName": "????????????",
     "startDate": "2026-06-19",
     "endDate": "",
-    "summaryZh": "Miffy（米飛兔）官方活動「Flower Miffy Flower Miffy バースデーキャンペーン開催」於Flower Miffy Flower Miffy バースデーキャンペーン開催期間限定登場，販售限定周邊／餐點。",
+    "summaryZh": "Flower Miffy ? 2026-06-19 ??????????????????????????????????????????????",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
-      "米飛兔",
-      "期間限定",
-      "日本"
+      "???",
+      "????",
+      "??"
     ],
     "id": "mi-d9539b",
     "sourceType": "official_site",
     "createdAt": "2026-06-29",
-    "sourceTitle": "Flower Miffy フラワーミッフィー バースデーキャンペーン開催 - dickbruna.jp",
+    "sourceTitle": "Flower Miffy ????????? ????????????? - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/46872/"
   },
   {
