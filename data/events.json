@@ -211,7 +211,7 @@
     ],
     "id": "po-2a73c0",
     "sourceType": "official_social",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "ポケモンセンター出張所inイオンモール神戸北（2026-06-05～2026-07-22）",
     "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
   },
@@ -235,7 +235,7 @@
     ],
     "id": "po-8e9be8",
     "sourceType": "official_social",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "ポケモンセンター出張所inイオンモール今治新都市（2026-06-12～2026-08-31）",
     "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
   },
@@ -259,7 +259,7 @@
     ],
     "id": "po-28053f",
     "sourceType": "official_social",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "ポケモンセンター出張所inイオンモール羽生（2026-06-19～2026-08-22）",
     "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
   },
@@ -385,30 +385,6 @@
   },
   {
     "brand": "pokemon",
-    "title": "台北寶可夢中心 勞動節新品",
-    "type": "new_product",
-    "country": "TW",
-    "city": "Taipei",
-    "locationName": "台北寶可夢中心",
-    "startDate": "2026-05-01",
-    "endDate": "",
-    "summaryZh": "台北寶可夢中心於勞動節推出「Little Daydream」系列新品，5月1日開始販售。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "新品",
-      "台北",
-      "限定"
-    ],
-    "id": "po-e6f4e9",
-    "sourceTitle": "寶可夢中心5月新品36款來了！超可愛皮丘玩偶、尾立擺鐘5/1開賣 - NOWnews今日新聞",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-04",
-    "sourceUrl": "https://www.nownews.com/news/6811629"
-  },
-  {
-    "brand": "pokemon",
     "title": "台灣寶可夢中心夯品再到貨",
     "type": "new_product",
     "country": "TW",
@@ -476,7 +452,7 @@
     ],
     "id": "po-d0b8f9",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "ポケモンカフェのメニューやショーが新しくなるよ！「ポケモンカフェ TOKYO」は、店内がリニューアル！",
     "sourceUrl": "https://www.pokemon-cafe.jp/ja/cafe/news/260529_3377.html"
   },
@@ -501,7 +477,7 @@
     ],
     "id": "po-e4c3bc",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "≪K.UNO × U-TREASURE POP UP Promotion≫開展！ - 台灣寶可夢官方網站",
     "sourceUrl": "https://tw.portal-pokemon.com/goods/post-5267/"
   },
@@ -648,6 +624,30 @@
     "sourceUrl": "https://uptodate.tokyo/pokemon-carry-case/"
   },
   {
+    "brand": "pokemon",
+    "title": "台灣寶可夢中心7月新品登場",
+    "type": "new_product",
+    "country": "TW",
+    "city": "Kaohsiung",
+    "locationName": "台灣寶可夢中心",
+    "startDate": "2026-07-04",
+    "endDate": "",
+    "summaryZh": "台灣寶可夢中心將於7月4日開賣18款復古風玩偶新品，台北及高雄皆可購買。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢",
+      "新品",
+      "玩偶",
+      "台灣"
+    ],
+    "id": "po-925d08",
+    "sourceTitle": "台灣寶可夢中心7月新品登場！18款復古風玩偶7/4開賣　高雄也能買 - NOWnews今日新聞",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-29",
+    "sourceUrl": "https://www.nownews.com/news/6851477"
+  },
+  {
     "brand": "chiikawa",
     "title": "吉伊卡哇 POP UP STORE パルクアベニュー・カワトク",
     "type": "popup",
@@ -667,7 +667,7 @@
     ],
     "id": "ch-7ae222",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "ちいかわPOP UP STORE パルクアベニュー・カワトク(2026-07-31～2026-08-17) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_pakt/index.html"
   },
@@ -691,9 +691,33 @@
     ],
     "id": "ch-dc48e2",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "ちいかわPOP UP STORE 柏高島屋(2026-07-23～2026-08-12) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_kstk/index.html"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇 POP UP STORE JR仙台駅",
+    "type": "popup",
+    "country": "JP",
+    "city": "Miyagi",
+    "locationName": "JR仙台駅 2階 ステンドグラス前催事場",
+    "startDate": "2026-07-13",
+    "endDate": "2026-07-23",
+    "summaryZh": "ちいかわ POP UP STORE 於JR仙台駅期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "吉伊卡哇",
+      "快閃店",
+      "日本",
+      "限定周邊"
+    ],
+    "id": "ch-99f709",
+    "sourceType": "official_site",
+    "createdAt": "2026-06-30",
+    "sourceTitle": "ちいかわPOP UP STORE JR仙台駅(2026-07-13～2026-07-23) - ちいかわ公式",
+    "sourceUrl": "https://chiikawa-info.jp/p26/pus_jrsn/index.html"
   },
   {
     "brand": "chiikawa",
@@ -715,7 +739,7 @@
     ],
     "id": "ch-6c63f6",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "ちいかわPOP UP STORE ららぽーと磐田(2026-07-10～2026-07-26) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_lliw/index.html"
   },
@@ -739,7 +763,7 @@
     ],
     "id": "ch-0023a3",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール幕張新都心(2026-06-26～2026-07-13) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_amst/index.html"
   },
@@ -763,7 +787,7 @@
     ],
     "id": "ch-6554b4",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "ちいかわPOP UP STORE ながの東急百貨店(2026-07-10～2026-07-20) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_ngtk/index.html"
   },
@@ -787,7 +811,7 @@
     ],
     "id": "ch-155d8d",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "ちいかわPOP UP STORE ららぽーと横浜(2026-07-03～2026-07-20) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_llyk/index.html"
   },
@@ -811,7 +835,7 @@
     ],
     "id": "ch-9abc64",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "ちいかわPOP UP STORE ペリエ千葉(2026-07-03～2026-07-14) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_cpre/index.html"
   },
@@ -835,7 +859,7 @@
     ],
     "id": "ch-6a6567",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "ちいかわPOP UP STORE 近鉄百貨店和歌山店(2026-06-26～2026-07-14) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_ktwk/index.html"
   },
@@ -859,7 +883,7 @@
     ],
     "id": "ch-6a10e3",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "ちいかわPOP UP STORE グランデュオ立川(2026-06-24～2026-08-02) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_grdo/index.html"
   },
@@ -883,7 +907,7 @@
     ],
     "id": "ch-efbb18",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール川口(2026-06-19～2026-07-06) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_akwg/index.html"
   },
@@ -907,81 +931,9 @@
     ],
     "id": "ch-956d87",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "ちいかわPOP UP STORE 京成百貨店(2026-06-18～2026-07-07) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_kisi/index.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE 遠鉄百貨店",
-    "type": "popup",
-    "country": "JP",
-    "city": "Shizuoka",
-    "locationName": "遠鉄百貨店 本館8階 催会場",
-    "startDate": "2026-06-16",
-    "endDate": "2026-06-29",
-    "summaryZh": "ちいかわ POP UP STORE 於遠鉄百貨店期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-25bbac",
-    "sourceType": "official_site",
-    "createdAt": "2026-06-29",
-    "sourceTitle": "ちいかわPOP UP STORE 遠鉄百貨店(2026-06-16～2026-06-29) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_enth/index.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE イオンモール常滑",
-    "type": "popup",
-    "country": "JP",
-    "city": "Aichi",
-    "locationName": "イオンモール常滑 1F スターバックス横区画",
-    "startDate": "2026-06-12",
-    "endDate": "2026-06-29",
-    "summaryZh": "ちいかわ POP UP STORE 於イオンモール常滑期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-5a2b60",
-    "sourceType": "official_site",
-    "createdAt": "2026-06-29",
-    "sourceTitle": "ちいかわPOP UP STORE イオンモール常滑(2026-06-12～2026-06-29) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_atkn/index.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE イオンモール名取",
-    "type": "popup",
-    "country": "JP",
-    "city": "Miyagi",
-    "locationName": "イオンモール名取 1F なとりコート",
-    "startDate": "2026-06-12",
-    "endDate": "2026-06-29",
-    "summaryZh": "ちいかわ POP UP STORE 於イオンモール名取期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-66adb9",
-    "sourceType": "official_site",
-    "createdAt": "2026-06-29",
-    "sourceTitle": "ちいかわPOP UP STORE イオンモール名取(2026-06-12～2026-06-29) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_antr/index.html"
   },
   {
     "brand": "chiikawa",
@@ -1003,7 +955,7 @@
     ],
     "id": "ch-92d69c",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "ちいかわPOP UP STORE 0%OKINAWA(2026-06-05～2026-07-20) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_aonr/index.html"
   },
@@ -1027,7 +979,7 @@
     ],
     "id": "ch-0713f9",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "ちいかわPOP UP STORE 新千歳空港(2026-06-03～2026-06-30) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_scts/index.html"
   },
@@ -1051,7 +1003,7 @@
     ],
     "id": "ch-efe379",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "ちいかわPOP UP STORE キャナルシティオーパ(2026-05-16～2026-07-26) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_cnco/index.html"
   },
@@ -1076,7 +1028,7 @@
     ],
     "id": "ch-5b992d",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "7月に北海道・小樽にオープン！テイクアウトショップ「ちいかわベビーカステラ」フードメニュー、グッズのご紹介 - ちいかわもぐもぐ本舗",
     "sourceUrl": "https://www.chiikawamogumogu.jp/stores/castella/"
   },
@@ -1100,7 +1052,7 @@
     ],
     "id": "ch-87217f",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "映画ちいかわグッズ・取扱い店舗情報 電影吉伊卡哇 TOHOシネマズ 電影商品(2026-07-10～2026-08-31) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/ck_movie/index.html#c4172488"
   },
@@ -1124,7 +1076,7 @@
     ],
     "id": "ch-56b54b",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "映画ちいかわグッズ・取扱い店舗情報 電影吉伊卡哇 フジテレビグッズ取扱い店舗(2026-07-25～2026-08-23) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/ck_movie/index.html#8ab6adf1"
   },
@@ -1148,7 +1100,7 @@
     ],
     "id": "ch-b43f08",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "映画ちいかわ 人魚の島のひみつ POP UP STORE イオンモール新潟亀田インター 1F スカイコート(2026-07-10～2026-07-20) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/mck_scpus/index.html#04fdd89e"
   },
@@ -1172,7 +1124,7 @@
     ],
     "id": "ch-08056a",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "映画ちいかわ 人魚の島のひみつ POP UP STORE イオンモール倉敷 2F サウスコート(2026-07-10～2026-07-20) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/mck_scpus/index.html#f66db025"
   },
@@ -1196,7 +1148,7 @@
     ],
     "id": "ch-58c603",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "映画ちいかわ 人魚の島のひみつ POP UP STORE イオンモール日吉津 1F ビレッジコート(2026-07-10～2026-07-20) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/mck_scpus/index.html#d6454251"
   },
@@ -1220,7 +1172,7 @@
     ],
     "id": "ch-2c891f",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "映画ちいかわ 人魚の島のひみつ POP UP STORE イオンモール橿原 3F ライトオン前(2026-07-10～2026-07-27) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/mck_scpus/index.html#3aaa421a"
   },
@@ -1244,7 +1196,7 @@
     ],
     "id": "ch-2f5f92",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "映画ちいかわ 人魚の島のひみつ POP UP STORE スパリゾート ハワイアンズ ビッグアロハ2階 特設会場(2026-07-17～2026-09-06) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/mck_scpus/index.html#2f7b2b0b"
   },
@@ -1268,7 +1220,7 @@
     ],
     "id": "ch-dffb0d",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "映画ちいかわ 人魚の島のひみつ POP UP STORE イオンレイクタウンkaze 3階 イオンホール(2026-07-24～2026-08-17) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/mck_scpus/index.html#77a0af28"
   },
@@ -1292,7 +1244,7 @@
     ],
     "id": "ch-f89e70",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "映画ちいかわ 人魚の島のひみつ POP UP STORE イオンモール須坂 3F イオンホール(2026-07-24～2026-08-03) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/mck_scpus/index.html#b82b02c4"
   },
@@ -1316,7 +1268,7 @@
     ],
     "id": "ch-023b5f",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "映画ちいかわ 人魚の島のひみつ POP UP STORE イオンモール福岡 1F 無印良品前(2026-07-24～2026-08-03) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/mck_scpus/index.html#192c1954"
   },
@@ -1340,7 +1292,7 @@
     ],
     "id": "ch-5d82d6",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "映画ちいかわ 人魚の島のひみつ POP UP STORE イオンモール大高 1F ブルーコート(2026-07-31～2026-08-17) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/mck_scpus/index.html#6a7a440d"
   },
@@ -1364,7 +1316,7 @@
     ],
     "id": "ch-8a444d",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "映画ちいかわ 人魚の島のひみつ POP UP STORE イオンモール各務原インター 1F センターコート(2026-08-07～2026-08-17) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/mck_scpus/index.html#5404e144"
   },
@@ -1388,7 +1340,7 @@
     ],
     "id": "ch-f63215",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "映画ちいかわ 人魚の島のひみつ POP UP STORE イオンモール宮崎 1F スペースコート(2026-08-07～2026-08-23) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/mck_scpus/index.html#3974b2ed"
   },
@@ -1412,7 +1364,7 @@
     ],
     "id": "ch-7ad31f",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "映画ちいかわ 人魚の島のひみつ POP UP STORE イオンモール広島府中 1F マシュパンギャラリー(2026-08-21～2026-09-06) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/mck_scpus/index.html#957ba069"
   },
@@ -1436,7 +1388,7 @@
     ],
     "id": "ch-73b080",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "映画ちいかわ 人魚の島のひみつ POP UP STORE イオンモールKYOTO Sakura館1階 センターコート(2026-08-21～2026-09-06) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/mck_scpus/index.html#e140a538"
   },
@@ -1460,7 +1412,7 @@
     ],
     "id": "ch-85cf00",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "映画ちいかわ 人魚の島のひみつ POP UP STORE イオンモール甲府昭和 1F ほたる広場(2026-08-21～2026-09-06) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/mck_scpus/index.html#0d170f49"
   },
@@ -1484,7 +1436,7 @@
     ],
     "id": "ch-008428",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "映画ちいかわ 人魚の島のひみつ POP UP STORE イオンモール新利府 南館1階 ライブスクエア(2026-08-28～2026-09-06) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/mck_scpus/index.html#7f143ec8"
   },
@@ -1508,7 +1460,7 @@
     ],
     "id": "ch-89ac9e",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "映画ちいかわ 人魚の島のひみつ POP UP STORE 華山1914文創園區 藝術西街(2026-07-10～2026-08-30) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/mck_scpus/index.html#c2ca3342"
   },
@@ -1531,7 +1483,7 @@
     ],
     "id": "mi-88dac4",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "＜期間延長決定＞ハウステンボス「ミッフィーバースデーマンス」 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/47004/"
   },
@@ -1554,7 +1506,7 @@
     ],
     "id": "mi-5be0cc",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "大阪・梅田エストに「DICK BRUNA STAND BY MIIA」期間限定オープン - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/46298/"
   },
@@ -1577,7 +1529,7 @@
     ],
     "id": "mi-379534",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "松坂屋静岡店で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/46825/"
   },
@@ -1600,7 +1552,7 @@
     ],
     "id": "mi-98d19d",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "鹿児島市立美術館にて「美術館に行こう！」展開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/46804/"
   },
@@ -1623,7 +1575,7 @@
     ],
     "id": "mi-ea7f4f",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "「KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront」～Night Time～開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/46792/"
   },
@@ -1646,31 +1598,31 @@
     ],
     "id": "mi-8b50be",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "「誕生70周年記念 ミッフィー展」広島会場にて開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/46634/"
   },
   {
     "brand": "miffy",
-    "title": "Miffy Flower Miffy Birthday Campaign",
-    "type": "campaign",
+    "title": "Miffy Flower Miffy Flower Miffy バースデーキャンペーン開催",
+    "type": "popup",
     "country": "JP",
     "city": "",
-    "locationName": "Flower Miffy stores nationwide",
+    "locationName": "Flower Miffy Flower Miffy バースデーキャンペーン開催",
     "startDate": "2026-06-19",
     "endDate": "",
-    "summaryZh": "Flower Miffy birthday campaign starts on 2026-06-19 at Flower Miffy stores nationwide, with a purchase novelty while supplies last and new floral-themed goods.",
+    "summaryZh": "Miffy（米飛兔）官方活動「Flower Miffy Flower Miffy バースデーキャンペーン開催」於Flower Miffy Flower Miffy バースデーキャンペーン開催期間限定登場，販售限定周邊／餐點。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
-      "miffy",
-      "birthday",
-      "Japan"
+      "米飛兔",
+      "期間限定",
+      "日本"
     ],
     "id": "mi-d9539b",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
-    "sourceTitle": "Flower Miffy birthday campaign - dickbruna.jp",
+    "createdAt": "2026-06-30",
+    "sourceTitle": "Flower Miffy フラワーミッフィー バースデーキャンペーン開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/46872/"
   },
   {
@@ -1692,32 +1644,54 @@
     ],
     "id": "mi-284bf0",
     "sourceType": "official_site",
-    "createdAt": "2026-06-29",
+    "createdAt": "2026-06-30",
     "sourceTitle": "2026年7月4日(土)～スタート!miffy style 各店ノベルティデイ - キデイランド",
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_nove202607/"
   },
   {
-    "brand": "pokemon",
-    "title": "台灣寶可夢中心7月新品登場",
-    "type": "new_product",
-    "country": "TW",
-    "city": "Kaohsiung",
-    "locationName": "台灣寶可夢中心",
-    "startDate": "2026-07-04",
-    "endDate": "",
-    "summaryZh": "台灣寶可夢中心將於7月4日開賣18款復古風玩偶新品，台北及高雄皆可購買。",
+    "brand": "miffy",
+    "title": "米飛主題客房與限定商品",
+    "type": "campaign",
+    "country": "JP",
+    "city": "Hyogo",
+    "locationName": "ホテルオークラ神戸",
+    "startDate": "2026-06-30",
+    "endDate": "2026-09-30",
+    "summaryZh": "神戶港景觀客房「米飛房」推出，入住可享米飛主題體驗，並有機會購買限定周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
-      "寶可夢",
-      "新品",
-      "玩偶",
-      "台灣"
+      "主題客房",
+      "限定商品",
+      "神戶",
+      "米飛"
     ],
-    "id": "po-925d08",
-    "sourceTitle": "台灣寶可夢中心7月新品登場！18款復古風玩偶7/4開賣　高雄也能買 - NOWnews今日新聞",
+    "id": "mi-aa3188",
+    "sourceTitle": "ホテルオークラ神戸”ミッフィー尽くし”の神戸港ビュー客室「ミッフィールーム」限定グッズも - ファッションプレス",
     "sourceType": "official_social",
-    "createdAt": "2026-06-29",
-    "sourceUrl": "https://www.nownews.com/news/6851477"
+    "createdAt": "2026-06-30",
+    "sourceUrl": "https://www.fashion-press.net/news/148061"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇 搖搖冰沙",
+    "type": "cafe",
+    "country": "JP",
+    "city": "",
+    "locationName": "",
+    "startDate": "2026-06-29",
+    "endDate": "2026-07-15",
+    "summaryZh": "吉伊卡哇與合作咖啡廳推出「搖搖冰沙」，附贈特製杯子，6月29日起登場。",
+    "needReservation": false,
+    "hasLimitedGoods": false,
+    "tags": [
+      "主題咖啡廳",
+      "限定商品"
+    ],
+    "id": "ch-7fe414",
+    "sourceTitle": "ちいかわ ふりふりシェイク 6月29日よりカップ付きで登場! - コラボカフェ",
+    "sourceType": "official_social",
+    "createdAt": "2026-06-30",
+    "sourceUrl": "https://collabo-cafe.com/events/collabo/chiikawa-heart-furifuri-shake2026/"
   }
 ]
