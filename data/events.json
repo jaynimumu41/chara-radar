@@ -1604,20 +1604,20 @@
   },
   {
     "brand": "miffy",
-    "title": "Miffy Flower Miffy Flower Miffy バースデーキャンペーン開催",
-    "type": "popup",
+    "title": "Miffy Flower Miffy バースデーキャンペーン",
+    "type": "campaign",
     "country": "JP",
     "city": "",
-    "locationName": "Flower Miffy Flower Miffy バースデーキャンペーン開催",
+    "locationName": "全国のフラワーミッフィー",
     "startDate": "2026-06-19",
     "endDate": "",
-    "summaryZh": "Miffy（米飛兔）官方活動「Flower Miffy Flower Miffy バースデーキャンペーン開催」於Flower Miffy Flower Miffy バースデーキャンペーン開催期間限定登場，販售限定周邊／餐點。",
+    "summaryZh": "Flower Miffy 於全國門市自 2026-06-19 起舉辦米飛生日活動，推出生日新商品並提供消費滿額贈品，贈完為止。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "米飛兔",
-      "期間限定",
-      "日本"
+      "Flower Miffy",
+      "生日活動"
     ],
     "id": "mi-d9539b",
     "sourceType": "official_site",
@@ -1671,27 +1671,5 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-30",
     "sourceUrl": "https://www.fashion-press.net/news/148061"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 搖搖冰沙",
-    "type": "cafe",
-    "country": "JP",
-    "city": "",
-    "locationName": "",
-    "startDate": "2026-06-29",
-    "endDate": "2026-07-15",
-    "summaryZh": "吉伊卡哇與合作咖啡廳推出「搖搖冰沙」，附贈特製杯子，6月29日起登場。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "主題咖啡廳",
-      "限定商品"
-    ],
-    "id": "ch-7fe414",
-    "sourceTitle": "ちいかわ ふりふりシェイク 6月29日よりカップ付きで登場! - コラボカフェ",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-30",
-    "sourceUrl": "https://collabo-cafe.com/events/collabo/chiikawa-heart-furifuri-shake2026/"
   }
 ]

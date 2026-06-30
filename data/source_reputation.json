@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-28T08:34:51+00:00",
+  "updatedAt": "2026-06-30T08:35:49+00:00",
   "sources": {
     "domain:nownews.com": {
-      "confirmed": 7,
+      "confirmed": 8,
       "rejected": 0,
       "uncertain": 0,
       "crossChecked": 7,
@@ -13,12 +13,12 @@
       "host": "nownews.com",
       "handle": "",
       "firstSeen": "2026-06-11",
-      "lastReviewed": "2026-06-27",
+      "lastReviewed": "2026-06-30",
       "lastOutcome": "confirmed",
-      "notes": "Confirmed explicit Pokemon Center TAIPEI June 27 Pokemon Yurutto/Kanahei goods article; page states in-store sale date and product list, citing pokemon_taiwan imagery.",
+      "notes": "Kept under Taiwan Pokemon Center goods policy: explicit in-store 2026-07-04 sale date, Taiwan Pokemon Center store scope, and concrete product line with no conflicting official source found.",
       "byBrand": {
         "pokemon": {
-          "confirmed": 7,
+          "confirmed": 8,
           "rejected": 0,
           "uncertain": 0,
           "crossChecked": 7,
@@ -27,7 +27,7 @@
       },
       "byType": {
         "new_product": {
-          "confirmed": 7,
+          "confirmed": 8,
           "rejected": 0,
           "uncertain": 0,
           "crossChecked": 7,
@@ -36,7 +36,7 @@
       },
       "byCountry": {
         "tw": {
-          "confirmed": 7,
+          "confirmed": 8,
           "rejected": 0,
           "uncertain": 0,
           "crossChecked": 7,
@@ -113,6 +113,16 @@
           "eventId": "po-ff0050",
           "evidenceCount": 1,
           "notes": "Confirmed explicit Pokemon Center TAIPEI June 27 Pokemon Yurutto/Kanahei goods article; page states in-store sale date and product list, citing pokemon_taiwan imagery."
+        },
+        {
+          "date": "2026-06-30",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-925d08",
+          "evidenceCount": 0,
+          "notes": "Kept under Taiwan Pokemon Center goods policy: explicit in-store 2026-07-04 sale date, Taiwan Pokemon Center store scope, and concrete product line with no conflicting official source found."
         }
       ]
     },
@@ -824,6 +834,60 @@
           "eventId": "po-1cc734",
           "evidenceCount": 0,
           "notes": "Kept after confirming the article states Pokemon Center Online starts 2026-07-02 and nationwide Pokemon Center stores start 2026-07-04; normalized record to in-store sale date."
+        }
+      ]
+    },
+    "domain:collabo-cafe.com": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 0,
+      "score": 39,
+      "label": "collabo-cafe.com",
+      "kind": "site",
+      "host": "collabo-cafe.com",
+      "handle": "",
+      "firstSeen": "2026-06-30",
+      "lastReviewed": "2026-06-30",
+      "lastOutcome": "rejected",
+      "notes": "Removed as out-of-scope mass-retail shake product page; no physical cafe venue or accepted popup/store signal.",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "byType": {
+        "cafe": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "history": [
+        {
+          "date": "2026-06-30",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "cafe",
+          "country": "JP",
+          "eventId": "ch-7fe414",
+          "evidenceCount": 0,
+          "notes": "Removed as out-of-scope mass-retail shake product page; no physical cafe venue or accepted popup/store signal."
         }
       ]
     }
