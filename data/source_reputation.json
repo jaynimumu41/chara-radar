@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-06-30T08:35:49+00:00",
+  "updatedAt": "2026-07-01T08:36:20+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 8,
@@ -888,6 +888,114 @@
           "eventId": "ch-7fe414",
           "evidenceCount": 0,
           "notes": "Removed as out-of-scope mass-retail shake product page; no physical cafe venue or accepted popup/store signal."
+        }
+      ]
+    },
+    "domain:prtimes.jp": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 0,
+      "score": 39,
+      "label": "prtimes.jp",
+      "kind": "news",
+      "host": "prtimes.jp",
+      "handle": "",
+      "firstSeen": "2026-07-01",
+      "lastReviewed": "2026-07-01",
+      "lastOutcome": "rejected",
+      "notes": "Broad product launch with no physical venue; out of scope for events.json",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "byType": {
+        "new_product": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "history": [
+        {
+          "date": "2026-07-01",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "ch-1e7fd2",
+          "evidenceCount": 0,
+          "notes": "Broad product launch with no physical venue; out of scope for events.json"
+        }
+      ]
+    },
+    "domain:fashion-press.net": {
+      "confirmed": 1,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 0,
+      "score": 57,
+      "label": "fashion-press.net",
+      "kind": "site",
+      "host": "fashion-press.net",
+      "handle": "",
+      "firstSeen": "2026-07-01",
+      "lastReviewed": "2026-07-01",
+      "lastOutcome": "confirmed",
+      "notes": "Kept after correcting from reservation-open date to stay period 2026-07-30 through 2026-09-30",
+      "byBrand": {
+        "miffy": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
+        }
+      },
+      "byType": {
+        "campaign": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
+        }
+      },
+      "history": [
+        {
+          "date": "2026-07-01",
+          "outcome": "confirmed",
+          "brand": "miffy",
+          "type": "campaign",
+          "country": "JP",
+          "eventId": "mi-aa3188",
+          "evidenceCount": 0,
+          "notes": "Kept after correcting from reservation-open date to stay period 2026-07-30 through 2026-09-30"
         }
       ]
     }

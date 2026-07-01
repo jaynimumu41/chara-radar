@@ -579,14 +579,14 @@
   {
     "brand": "miffy",
     "title": "米飛主題客房與限定商品",
-    "type": "campaign",
+    "type": "reservation",
     "country": "JP",
     "city": "Hyogo",
     "locationName": "ホテルオークラ神戸",
-    "startDate": "2026-06-30",
+    "startDate": "2026-07-30",
     "endDate": "2026-09-30",
-    "summaryZh": "神戶港景觀客房「米飛房」推出，入住可享米飛主題體驗，並有機會購買限定周邊商品。",
-    "needReservation": false,
+    "summaryZh": "神戶大倉飯店的「米飛房」住宿方案將於 2026-07-30 至 2026-09-30 提供，2026-06-30 起開放預約，並附住宿者限定周邊。",
+    "needReservation": true,
     "hasLimitedGoods": true,
     "tags": [
       "主題客房",
@@ -1533,20 +1533,20 @@
   },
   {
     "brand": "miffy",
-    "title": "Miffy Flower Miffy Flower Miffy バースデーキャンペーン開催",
-    "type": "popup",
+    "title": "Miffy Flower Miffy バースデーキャンペーン",
+    "type": "campaign",
     "country": "JP",
     "city": "",
-    "locationName": "Flower Miffy Flower Miffy バースデーキャンペーン開催",
+    "locationName": "全国のフラワーミッフィー",
     "startDate": "2026-06-19",
     "endDate": "",
-    "summaryZh": "Miffy（米飛兔）官方活動「Flower Miffy Flower Miffy バースデーキャンペーン開催」於Flower Miffy Flower Miffy バースデーキャンペーン開催期間限定登場，販售限定周邊／餐點。",
+    "summaryZh": "Flower Miffy 生日活動自 2026-06-19 起於全國 Flower Miffy 門市展開，單筆消費達指定金額可獲贈限定贈品，送完為止。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "米飛兔",
-      "期間限定",
-      "日本"
+      "生日活動",
+      "購入特典"
     ],
     "id": "mi-d9539b",
     "sourceType": "official_site",
@@ -1576,52 +1576,5 @@
     "createdAt": "2026-07-01",
     "sourceTitle": "2026年7月4日(土)～スタート!miffy style 各店ノベルティデイ - キデイランド",
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_nove202607/"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇設計的リフレッスー新發售",
-    "type": "new_product",
-    "country": "JP",
-    "city": "",
-    "locationName": "",
-    "startDate": "2026-07-15",
-    "endDate": "",
-    "summaryZh": "「リフレッスー」推出吉伊卡哇（Chiikawa）聯名設計款，將於2026年7月15日起新發售。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "新商品",
-      "日本",
-      "吉伊卡哇"
-    ],
-    "id": "ch-1e7fd2",
-    "sourceTitle": "新感覚リフレッシュアイテム「リフレッスー」に新たなラインナップ 2026年７月15日（水）より 「ちいかわ」デザインのリフレッスーが新発売",
-    "sourceType": "official_social",
-    "createdAt": "2026-07-01",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000599.000056322.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 x COCO'S 聯名活動",
-    "type": "cafe",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "COCO'S",
-    "startDate": "2026-07-16",
-    "endDate": "2026-07-30",
-    "summaryZh": "吉伊卡哇與 COCO'S 聯名活動於7月16日開始，點選聯名餐點可獲得限定公仔。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "COCO'S",
-      "聯名",
-      "限定公仔"
-    ],
-    "id": "ch-8c1793",
-    "sourceTitle": "【ちいかわ】ちいかわ×ココイチコラボ7月16日から開催！ コラボメニューを注文してフィギュアがその場でもらえる！ - 電撃オンライン",
-    "sourceType": "official_social",
-    "createdAt": "2026-07-01",
-    "sourceUrl": "https://dengekionline.com/article/202607/79997"
   }
 ]
