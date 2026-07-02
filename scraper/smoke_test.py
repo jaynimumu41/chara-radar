@@ -302,6 +302,14 @@ official_candidates = [
         "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kagawa/events/202606/000001.html",
         "6月28日（日）、ヒトカゲとピカチュウに会えるグリーティング"),
     audit_official_coverage.OfficialCandidate(
+        "pokemon", "pokemon-store-events",
+        "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-shibuya/events/202606/000368.html",
+        "「ポケモンセンター なりきりサマー！」イベントカレンダー"),
+    audit_official_coverage.OfficialCandidate(
+        "pokemon", "pokemon-store-events",
+        "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-skytreetown/events/202606/000370.html",
+        "「ポケモンセンタースカイツリータウンわくわく大冒険 2026 in 東京ソラマチ®」が開催！"),
+    audit_official_coverage.OfficialCandidate(
         "miffy", "miffy-dickbruna-news",
         "https://dickbruna.jp/news/202606/46926/",
         "ミッフィー LINE公式アカウントがオープン"),
@@ -325,6 +333,8 @@ check("官方覆蓋稽核 parsed / needs_review / ignored",
       [
           ("parsed", "-", ("po-test",)),
           ("needs_review", "high", ()),
+          ("ignored", "-", ()),
+          ("ignored", "-", ()),
           ("ignored", "-", ()),
           ("ignored", "-", ()),
           ("ignored", "-", ()),
