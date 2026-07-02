@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-01T08:36:20+00:00",
+  "updatedAt": "2026-07-02T08:35:32+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 8,
@@ -996,6 +996,60 @@
           "eventId": "mi-aa3188",
           "evidenceCount": 0,
           "notes": "Kept after correcting from reservation-open date to stay period 2026-07-30 through 2026-09-30"
+        }
+      ]
+    },
+    "domain:hira2.jp": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 0,
+      "score": 39,
+      "label": "hira2.jp",
+      "kind": "site",
+      "host": "hira2.jp",
+      "handle": "",
+      "firstSeen": "2026-07-02",
+      "lastReviewed": "2026-07-02",
+      "lastOutcome": "rejected",
+      "notes": "Removed on 2026-07-02: fresh local article claimed 2026-07-10 to 2026-08-31 Kuzu Mall popup, but current official chiikawa-info.jp POP UP listings fetched by agent did not show the venue or period, so the record was treated as unverifiable.",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "byType": {
+        "popup": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "history": [
+        {
+          "date": "2026-07-02",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-a0896e",
+          "evidenceCount": 0,
+          "notes": "Removed on 2026-07-02: fresh local article claimed 2026-07-10 to 2026-08-31 Kuzu Mall popup, but current official chiikawa-info.jp POP UP listings fetched by agent did not show the venue or period, so the record was treated as unverifiable."
         }
       ]
     }
