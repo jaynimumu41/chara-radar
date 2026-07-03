@@ -1585,10 +1585,10 @@
     "type": "popup",
     "country": "JP",
     "city": "",
-    "locationName": "Flower Miffy Flower Miffy バースデーキャンペーン開催",
+    "locationName": "全國 Flower Miffy 門市",
     "startDate": "2026-06-19",
     "endDate": "",
-    "summaryZh": "Miffy（米飛兔）官方活動「Flower Miffy Flower Miffy バースデーキャンペーン開催」於Flower Miffy Flower Miffy バースデーキャンペーン開催期間限定登場，販售限定周邊／餐點。",
+    "summaryZh": "Miffy（米飛兔）Flower Miffy 生日企劃自 2026-06-19 起於全國 Flower Miffy 門市展開，推出限定贈品與新商品，贈品送完為止。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1626,39 +1626,15 @@
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_nove202607/"
   },
   {
-    "brand": "pokemon",
-    "title": "寶可夢30週年紀念卡包",
-    "type": "campaign",
-    "country": "TW",
-    "city": "Taipei",
-    "locationName": "信義區",
-    "startDate": "2026-10-10",
-    "endDate": "2026-10-11",
-    "summaryZh": "寶可夢30週年活動於信義區舉辦，現場將有粉紅皮卡丘現身，並販售30th紀念卡包。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "30週年",
-      "紀念卡包",
-      "信義區"
-    ],
-    "id": "po-392b0b",
-    "sourceTitle": "寶可夢30週年活動攻略！粉紅皮卡丘現身信義區　30th紀念卡包必搶 - NOWnews今日新聞",
-    "sourceType": "official_social",
-    "createdAt": "2026-07-03",
-    "sourceUrl": "https://www.nownews.com/news/6852670"
-  },
-  {
     "brand": "chiikawa",
     "title": "Chiikawa x CoCo Ichibanya 聯名",
     "type": "cafe",
     "country": "JP",
     "city": "",
-    "locationName": "CoCo Ichibanya (全國)",
+    "locationName": "全國 CoCo壱番屋（部分店舖除外）",
     "startDate": "2026-07-16",
-    "endDate": "",
-    "summaryZh": "Chiikawa與CoCo Ichibanya聯名，點選指定套餐可獲得原創模型和貼紙。活動自7月16日起展開。",
+    "endDate": "2026-08-31",
+    "summaryZh": "Chiikawa 與 CoCo壱番屋聯名活動於 2026-07-16 11:00 至 2026-08-31 23:59 展開，推出合作咖哩、飲料組與限定贈品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1672,52 +1648,5 @@
     "sourceType": "official_social",
     "createdAt": "2026-07-03",
     "sourceUrl": "https://eeo.today/media/2026/07/01/364893/"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "ちいかわパーク 新商品限定グッズ",
-    "type": "popup",
-    "country": "JP",
-    "city": "",
-    "locationName": "ちいかわパーク",
-    "startDate": "2026-07-24",
-    "endDate": "",
-    "summaryZh": "「ちいかわパーク」將於7月24日發售新作限定周邊商品，現場還有特典與活動。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "限定商品",
-      "快閃店",
-      "新品"
-    ],
-    "id": "ch-67411d",
-    "sourceTitle": "「ちいかわパーク」7/24発売の新作限定グッズに注目！特典、イベントも充実♪ - ぴあエンタメ情報",
-    "sourceType": "official_social",
-    "createdAt": "2026-07-03",
-    "sourceUrl": "https://lp.p.pia.jp/article/news/487376/index.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 x COCO'S 聯名",
-    "type": "cafe",
-    "country": "JP",
-    "city": "",
-    "locationName": "COCO'S (ココス)",
-    "startDate": "2026-07-16",
-    "endDate": "2026-07-30",
-    "summaryZh": "吉伊卡哇與日本連鎖餐廳COCO'S推出聯名活動，提供原創周邊商品餐點及限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "COCO'S",
-      "聯名",
-      "限定商品"
-    ],
-    "id": "ch-4b414d",
-    "sourceTitle": "ちいかわ×ココイチのコラボ！ ファン必見のオリジナルグッズ付きメニューや限定グッズが登場 - アニメ！アニメ！",
-    "sourceType": "official_social",
-    "createdAt": "2026-07-03",
-    "sourceUrl": "https://animeanime.jp/article/2026/07/01/100588.html"
   }
 ]

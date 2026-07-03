@@ -1,27 +1,27 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-02T08:35:32+00:00",
+  "updatedAt": "2026-07-03T08:36:27+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 8,
-      "rejected": 0,
+      "rejected": 1,
       "uncertain": 0,
-      "crossChecked": 7,
+      "crossChecked": 9,
       "score": 95,
       "label": "nownews.com",
       "kind": "news",
       "host": "nownews.com",
       "handle": "",
       "firstSeen": "2026-06-11",
-      "lastReviewed": "2026-06-30",
-      "lastOutcome": "confirmed",
-      "notes": "Kept under Taiwan Pokemon Center goods policy: explicit in-store 2026-07-04 sale date, Taiwan Pokemon Center store scope, and concrete product line with no conflicting official source found.",
+      "lastReviewed": "2026-07-03",
+      "lastOutcome": "rejected",
+      "notes": "Article is a broad 30th roundup; official pages confirm PokéXciting Taipei on 2026-10-10 to 2026-10-11 and a separate card release on 2026-09-16, so this record was removed as wrong/misclassified.",
       "byBrand": {
         "pokemon": {
           "confirmed": 8,
-          "rejected": 0,
+          "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 7,
+          "crossChecked": 9,
           "score": 95
         }
       },
@@ -32,14 +32,21 @@
           "uncertain": 0,
           "crossChecked": 7,
           "score": 95
+        },
+        "campaign": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 43
         }
       },
       "byCountry": {
         "tw": {
           "confirmed": 8,
-          "rejected": 0,
+          "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 7,
+          "crossChecked": 9,
           "score": 95
         }
       },
@@ -123,6 +130,16 @@
           "eventId": "po-925d08",
           "evidenceCount": 0,
           "notes": "Kept under Taiwan Pokemon Center goods policy: explicit in-store 2026-07-04 sale date, Taiwan Pokemon Center store scope, and concrete product line with no conflicting official source found."
+        },
+        {
+          "date": "2026-07-03",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "campaign",
+          "country": "TW",
+          "eventId": "po-392b0b",
+          "evidenceCount": 2,
+          "notes": "Article is a broad 30th roundup; official pages confirm PokéXciting Taipei on 2026-10-10 to 2026-10-11 and a separate card release on 2026-09-16, so this record was removed as wrong/misclassified."
         }
       ]
     },
@@ -1050,6 +1067,114 @@
           "eventId": "ch-a0896e",
           "evidenceCount": 0,
           "notes": "Removed on 2026-07-02: fresh local article claimed 2026-07-10 to 2026-08-31 Kuzu Mall popup, but current official chiikawa-info.jp POP UP listings fetched by agent did not show the venue or period, so the record was treated as unverifiable."
+        }
+      ]
+    },
+    "domain:eeo.today": {
+      "confirmed": 1,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 59,
+      "label": "eeo.today",
+      "kind": "site",
+      "host": "eeo.today",
+      "handle": "",
+      "firstSeen": "2026-07-03",
+      "lastReviewed": "2026-07-03",
+      "lastOutcome": "confirmed",
+      "notes": "Matched House Foods official CoCo壱番屋 campaign page with explicit 2026-07-16 to 2026-08-31 period and venue scope.",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "byType": {
+        "cafe": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "history": [
+        {
+          "date": "2026-07-03",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "cafe",
+          "country": "JP",
+          "eventId": "ch-06f647",
+          "evidenceCount": 1,
+          "notes": "Matched House Foods official CoCo壱番屋 campaign page with explicit 2026-07-16 to 2026-08-31 period and venue scope."
+        }
+      ]
+    },
+    "domain:lp.p.pia.jp": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 0,
+      "score": 39,
+      "label": "lp.p.pia.jp",
+      "kind": "site",
+      "host": "lp.p.pia.jp",
+      "handle": "",
+      "firstSeen": "2026-07-03",
+      "lastReviewed": "2026-07-03",
+      "lastOutcome": "rejected",
+      "notes": "Fresh secondary roundup without authoritative corroboration or explicit sale period beyond a 2026-07-24 goods launch mention; removed under accuracy-over-coverage.",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "byType": {
+        "popup": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "history": [
+        {
+          "date": "2026-07-03",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-67411d",
+          "evidenceCount": 0,
+          "notes": "Fresh secondary roundup without authoritative corroboration or explicit sale period beyond a 2026-07-24 goods launch mention; removed under accuracy-over-coverage."
         }
       ]
     }
