@@ -1653,14 +1653,14 @@
   },
   {
     "brand": "miffy",
-    "title": "Miffy Flower Miffy Flower Miffy バースデーキャンペーン開催",
-    "type": "popup",
+    "title": "Miffy Flower Miffy バースデーキャンペーン",
+    "type": "campaign",
     "country": "JP",
     "city": "",
-    "locationName": "Flower Miffy Flower Miffy バースデーキャンペーン開催",
+    "locationName": "全国のフラワーミッフィー、フラワーミッフィーオンラインショップ",
     "startDate": "2026-06-19",
     "endDate": "",
-    "summaryZh": "Miffy（米飛兔）官方活動「Flower Miffy Flower Miffy バースデーキャンペーン開催」於Flower Miffy Flower Miffy バースデーキャンペーン開催期間限定登場，販售限定周邊／餐點。",
+    "summaryZh": "為慶祝 Miffy 生日與 Flower Miffy 浅草店 7 週年，Flower Miffy 全門市與線上商店自 2026-06-19 起推出生日活動，贈品送完為止並同步販售新商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1699,14 +1699,14 @@
   },
   {
     "brand": "pokemon",
-    "title": "寶可夢 Pokemon Center 變身系列新品",
+    "title": "寶可夢：變身！百變怪系列新品",
     "type": "new_product",
     "country": "JP",
     "city": "Tokyo",
     "locationName": "ポケモンセンター",
     "startDate": "2026-07-11",
     "endDate": "",
-    "summaryZh": "寶可夢中心將於7月11日發售變身系列新品，包含變身成喵喵的變形怪（メタモン）的絨毛娃娃與吊飾。",
+    "summaryZh": "寶可夢中心將於 2026-07-11 發售「變身！百變怪」系列新品，包含百變怪變身成夢妖魔、索羅亞、洗翠索羅亞、淚眼蜥、新葉喵與厄鬼椪的絨毛娃娃與吊飾。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1720,29 +1720,5 @@
     "sourceType": "official_social",
     "createdAt": "2026-07-04",
     "sourceUrl": "https://www.famitsu.com/article/202607/80315"
-  },
-  {
-    "brand": "pokemon",
-    "title": "寶可夢：變身！伊布系列新作登場",
-    "type": "new_product",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "ポケモンセンター",
-    "startDate": "2026-07-11",
-    "endDate": "",
-    "summaryZh": "寶可夢中心將於7月11日發售變身！伊布系列新款絨毛玩偶與吊飾，伊布將變身成伊布、火球鼠、水躍魚、淚眼蜥等。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "伊布",
-      "絨毛玩偶",
-      "新品"
-    ],
-    "id": "po-67e262",
-    "sourceTitle": "【ポケモン】メタモンがやゾロアやメッソン、ニャオハたちに!? “へんしん！メタモン”シリーズの新作ぬいぐるみ・マスコットが7月11日よりポケセンで発売 - 電撃オンライン",
-    "sourceType": "official_social",
-    "createdAt": "2026-07-04",
-    "sourceUrl": "https://dengekionline.com/article/202607/80288"
   }
 ]

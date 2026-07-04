@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-03T08:36:27+00:00",
+  "updatedAt": "2026-07-04T08:36:38+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 8,
@@ -1175,6 +1175,114 @@
           "eventId": "ch-67411d",
           "evidenceCount": 0,
           "notes": "Fresh secondary roundup without authoritative corroboration or explicit sale period beyond a 2026-07-24 goods launch mention; removed under accuracy-over-coverage."
+        }
+      ]
+    },
+    "domain:famitsu.com": {
+      "confirmed": 1,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 59,
+      "label": "famitsu.com",
+      "kind": "news",
+      "host": "famitsu.com",
+      "handle": "",
+      "firstSeen": "2026-07-04",
+      "lastReviewed": "2026-07-04",
+      "lastOutcome": "confirmed",
+      "notes": "Matched Dengeki duplicate and embedded Pokemon official X post for 2026-07-11 in-store release.",
+      "byBrand": {
+        "pokemon": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "byType": {
+        "new_product": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "history": [
+        {
+          "date": "2026-07-04",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "po-1be27e",
+          "evidenceCount": 1,
+          "notes": "Matched Dengeki duplicate and embedded Pokemon official X post for 2026-07-11 in-store release."
+        }
+      ]
+    },
+    "domain:dengekionline.com": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 41,
+      "label": "dengekionline.com",
+      "kind": "site",
+      "host": "dengekionline.com",
+      "handle": "",
+      "firstSeen": "2026-07-04",
+      "lastReviewed": "2026-07-04",
+      "lastOutcome": "rejected",
+      "notes": "Claim matched same 2026-07-11 Henshin Metamon release already kept from Famitsu; removed as duplicate and prior title/summary were wrong.",
+      "byBrand": {
+        "pokemon": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byType": {
+        "new_product": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "history": [
+        {
+          "date": "2026-07-04",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "po-67e262",
+          "evidenceCount": 1,
+          "notes": "Claim matched same 2026-07-11 Henshin Metamon release already kept from Famitsu; removed as duplicate and prior title/summary were wrong."
         }
       ]
     }
