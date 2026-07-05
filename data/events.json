@@ -1678,13 +1678,13 @@
   {
     "brand": "miffy",
     "title": "Miffy Flower Miffy Flower Miffy バースデーキャンペーン開催",
-    "type": "popup",
+    "type": "campaign",
     "country": "JP",
     "city": "",
-    "locationName": "Flower Miffy Flower Miffy バースデーキャンペーン開催",
+    "locationName": "全国のフラワーミッフィー",
     "startDate": "2026-06-19",
     "endDate": "",
-    "summaryZh": "Miffy（米飛兔）官方活動「Flower Miffy Flower Miffy バースデーキャンペーン開催」於Flower Miffy Flower Miffy バースデーキャンペーン開催期間限定登場，販售限定周邊／餐點。",
+    "summaryZh": "Miffy（米飛兔）官方於全國 Flower Miffy 門市自 2026-06-19 起舉辦生日檔期活動，推出限定贈品與新商品，贈品送完為止。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1723,74 +1723,26 @@
   },
   {
     "brand": "chiikawa",
-    "title": "ちいかわパーク 新商品限定グッズ",
-    "type": "popup",
-    "country": "JP",
-    "city": "",
-    "locationName": "ちいかわパーク",
-    "startDate": "2026-07-24",
-    "endDate": "",
-    "summaryZh": "ちいかわパーク將於7/24發售新作限定周邊商品，現場還有特典與活動。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "限定商品",
-      "快閃店",
-      "日本"
-    ],
-    "id": "ch-133d70",
-    "sourceTitle": "「ちいかわパーク」7/24発売の新作限定グッズに注目！特典、イベントも充実♪（ぴあ） - Yahoo!ニュース",
-    "sourceType": "official_social",
-    "createdAt": "2026-07-05",
-    "sourceUrl": "https://news.yahoo.co.jp/articles/cf389a1694fc766d93828ea9b2d0141cd9c609b2"
-  },
-  {
-    "brand": "chiikawa",
     "title": "Chiikawa Baby 快閃店",
     "type": "popup",
     "country": "JP",
     "city": "Kyoto",
-    "locationName": "",
+    "locationName": "京都髙島屋S.C. 7階 催会場",
     "startDate": "2026-07-08",
     "endDate": "2026-07-20",
-    "summaryZh": "Chiikawa Baby 快閃店於京都舉辦，販售周邊商品，並設有主題咖啡廳。",
+    "summaryZh": "Chiikawa Baby POP UP SHOP 於京都髙島屋 S.C. 7 樓催會場限期登場，販售 baby 視覺限定周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "快閃店",
       "限定商品",
       "京都",
-      "主題咖啡廳"
+      "京都髙島屋S.C."
     ],
     "id": "ch-618644",
-    "sourceTitle": "ちいかわ Chiikawa Baby ストア in 京都 7月8日より開催! - コラボカフェ",
-    "sourceType": "official_social",
+    "sourceTitle": "Chiikawa Baby POP UP SHOP 京都髙島屋(2026/7/8(水)～7/20(月祝))",
+    "sourceType": "official_site",
     "createdAt": "2026-07-05",
-    "sourceUrl": "https://collabo-cafe.com/events/collabo/chiikawa-baby-pop-up-store-takashimaya-kyoto2026/"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇與Panasonic合作乾電池登場",
-    "type": "cafe",
-    "country": "JP",
-    "city": "",
-    "locationName": "",
-    "startDate": "2026-07-10",
-    "endDate": "2026-08-31",
-    "summaryZh": "吉伊卡哇與Panasonic合作推出乾電池，並有主題咖啡廳活動。預計7月10日起發售。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "吉伊卡哇",
-      "Panasonic",
-      "乾電池",
-      "主題咖啡廳"
-    ],
-    "id": "ch-4f1855",
-    "sourceTitle": "ちいかわ “あの乾電池”がパナソニックより登場! 7月10日より発売! - コラボカフェ",
-    "sourceType": "official_social",
-    "createdAt": "2026-07-05",
-    "sourceUrl": "https://collabo-cafe.com/events/collabo/chiikawa-panasonic-aabattery-2026/"
+    "sourceUrl": "https://chiikawa-info.jp/p26/ck_baby/kyoto/"
   }
 ]

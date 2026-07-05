@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-04T08:36:38+00:00",
+  "updatedAt": "2026-07-05T08:34:50+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 8,
@@ -299,25 +299,25 @@
     },
     "domain:news.yahoo.co.jp": {
       "confirmed": 1,
-      "rejected": 3,
+      "rejected": 4,
       "uncertain": 0,
       "crossChecked": 2,
-      "score": 28,
+      "score": 17,
       "label": "news.yahoo.co.jp",
       "kind": "news",
       "host": "news.yahoo.co.jp",
       "handle": "",
       "firstSeen": "2026-06-15",
-      "lastReviewed": "2026-06-21",
+      "lastReviewed": "2026-07-05",
       "lastOutcome": "rejected",
-      "notes": "Roundup sweets article with no single physical venue; out of scope for CharaRadar.",
+      "notes": "Removed under accuracy-over-coverage: Yahoo/Pia goods roundup gave only a 2026-07-24 launch signal and no authoritative page with an explicit event period was confirmed.",
       "byBrand": {
         "chiikawa": {
           "confirmed": 1,
-          "rejected": 2,
+          "rejected": 3,
           "uncertain": 0,
           "crossChecked": 2,
-          "score": 39
+          "score": 28
         },
         "miffy": {
           "confirmed": 0,
@@ -348,15 +348,22 @@
           "uncertain": 0,
           "crossChecked": 0,
           "score": 39
+        },
+        "popup": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 1,
-          "rejected": 3,
+          "rejected": 4,
           "uncertain": 0,
           "crossChecked": 2,
-          "score": 28
+          "score": 17
         }
       },
       "history": [
@@ -399,6 +406,16 @@
           "eventId": "mi-67ed19",
           "evidenceCount": 0,
           "notes": "Roundup sweets article with no single physical venue; out of scope for CharaRadar."
+        },
+        {
+          "date": "2026-07-05",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-133d70",
+          "evidenceCount": 0,
+          "notes": "Removed under accuracy-over-coverage: Yahoo/Pia goods roundup gave only a 2026-07-24 launch signal and no authoritative page with an explicit event period was confirmed."
         }
       ]
     },
@@ -855,43 +872,50 @@
       ]
     },
     "domain:collabo-cafe.com": {
-      "confirmed": 0,
-      "rejected": 1,
+      "confirmed": 1,
+      "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 0,
+      "crossChecked": 2,
       "score": 39,
       "label": "collabo-cafe.com",
       "kind": "site",
       "host": "collabo-cafe.com",
       "handle": "",
       "firstSeen": "2026-06-30",
-      "lastReviewed": "2026-06-30",
+      "lastReviewed": "2026-07-05",
       "lastOutcome": "rejected",
-      "notes": "Removed as out-of-scope mass-retail shake product page; no physical cafe venue or accepted popup/store signal.",
+      "notes": "Rejected after review against Panasonic special page: broad goods sale across market, land, theaters, and popups; no single cafe/menu or accepted venue-bounded event.",
       "byBrand": {
         "chiikawa": {
-          "confirmed": 0,
-          "rejected": 1,
+          "confirmed": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 0,
+          "crossChecked": 2,
           "score": 39
         }
       },
       "byType": {
         "cafe": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 0,
-          "score": 39
+          "crossChecked": 1,
+          "score": 30
+        },
+        "popup": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
         }
       },
       "byCountry": {
         "jp": {
-          "confirmed": 0,
-          "rejected": 1,
+          "confirmed": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 0,
+          "crossChecked": 2,
           "score": 39
         }
       },
@@ -905,6 +929,26 @@
           "eventId": "ch-7fe414",
           "evidenceCount": 0,
           "notes": "Removed as out-of-scope mass-retail shake product page; no physical cafe venue or accepted popup/store signal."
+        },
+        {
+          "date": "2026-07-05",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-618644",
+          "evidenceCount": 1,
+          "notes": "Matched official chiikawa-info.jp Kyoto Takashimaya popup page with explicit 2026-07-08 to 2026-07-20 period and 7F venue."
+        },
+        {
+          "date": "2026-07-05",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "cafe",
+          "country": "JP",
+          "eventId": "ch-4f1855",
+          "evidenceCount": 1,
+          "notes": "Rejected after review against Panasonic special page: broad goods sale across market, land, theaters, and popups; no single cafe/menu or accepted venue-bounded event."
         }
       ]
     },
@@ -1283,6 +1327,114 @@
           "eventId": "po-67e262",
           "evidenceCount": 1,
           "notes": "Claim matched same 2026-07-11 Henshin Metamon release already kept from Famitsu; removed as duplicate and prior title/summary were wrong."
+        }
+      ]
+    },
+    "domain:dickbruna.jp": {
+      "confirmed": 1,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 0,
+      "score": 57,
+      "label": "dickbruna.jp",
+      "kind": "site",
+      "host": "dickbruna.jp",
+      "handle": "",
+      "firstSeen": "2026-07-05",
+      "lastReviewed": "2026-07-05",
+      "lastOutcome": "confirmed",
+      "notes": "Official Dick Bruna page explicitly states the Flower Miffy birthday campaign starts 2026-06-19 and the novelty runs until stock ends.",
+      "byBrand": {
+        "miffy": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
+        }
+      },
+      "byType": {
+        "campaign": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
+        }
+      },
+      "history": [
+        {
+          "date": "2026-07-05",
+          "outcome": "confirmed",
+          "brand": "miffy",
+          "type": "campaign",
+          "country": "JP",
+          "eventId": "mi-d9539b",
+          "evidenceCount": 0,
+          "notes": "Official Dick Bruna page explicitly states the Flower Miffy birthday campaign starts 2026-06-19 and the novelty runs until stock ends."
+        }
+      ]
+    },
+    "domain:kiddyland.co.jp": {
+      "confirmed": 1,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 0,
+      "score": 57,
+      "label": "kiddyland.co.jp",
+      "kind": "site",
+      "host": "kiddyland.co.jp",
+      "handle": "",
+      "firstSeen": "2026-07-05",
+      "lastReviewed": "2026-07-05",
+      "lastOutcome": "confirmed",
+      "notes": "Official Kiddy Land page states novelty distribution starts 2026-07-04 and ends when stock runs out.",
+      "byBrand": {
+        "miffy": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
+        }
+      },
+      "byType": {
+        "campaign": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
+        }
+      },
+      "history": [
+        {
+          "date": "2026-07-05",
+          "outcome": "confirmed",
+          "brand": "miffy",
+          "type": "campaign",
+          "country": "JP",
+          "eventId": "mi-284bf0",
+          "evidenceCount": 0,
+          "notes": "Official Kiddy Land page states novelty distribution starts 2026-07-04 and ends when stock runs out."
         }
       ]
     }
