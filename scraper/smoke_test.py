@@ -608,6 +608,17 @@ check("Pokémon Cafe TOKYO 日本橋翻新公告解析",
       (pokemon_cafe["id"], pokemon_cafe["type"], pokemon_cafe["city"],
        pokemon_cafe["startDate"], pokemon_cafe["endDate"], pokemon_cafe["needReservation"]),
       ("po-d0b8f9", "store", "Tokyo", "2026-06-17", "", True))
+pokemon_latte = official_sources._pokemon_cafe_latte_event_from_text(
+    "2026.07.03 「選べるポケモンラテ」に、メルタンとメルメタルが仲間入り！"
+    "7月17日（金）、ポケモンカフェの「選べるポケモンラテ」に、メルタンとメルメタルが仲間入り！"
+    "商品詳細 選べるポケモンラテ 販売店舗 ポケモンカフェ TOKYO ポケモンカフェ OSAKA 発売日 7月17日（金）",
+    "https://www.pokemon-cafe.jp/ja/cafe/news/260703_3439.html",
+    correct_city=scrape.correct_city,
+)
+check("Pokémon Cafe 選べるポケモンラテ新拉花解析",
+      (pokemon_latte["id"], pokemon_latte["type"], pokemon_latte["locationName"],
+       pokemon_latte["startDate"], pokemon_latte["endDate"], pokemon_latte["needReservation"]),
+      ("po-4090c2", "cafe", "Pokémon Cafe TOKYO / OSAKA", "2026-07-17", "", True))
 
 # ── _is_past ──────────────────────────────────────────────────────────────────
 print("\n[_is_past] 過期判定（含無結束日補洞）")

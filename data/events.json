@@ -434,6 +434,31 @@
   },
   {
     "brand": "pokemon",
+    "title": "Pokémon Cafe 選べるポケモンラテ Meltan/Melmetal 新拉花",
+    "type": "cafe",
+    "country": "JP",
+    "city": "",
+    "locationName": "Pokémon Cafe TOKYO / OSAKA",
+    "startDate": "2026-07-17",
+    "endDate": "",
+    "summaryZh": "Pokémon Cafe 的「選べるポケモンラテ」自2026年7月17日起新增 Meltan 與 Melmetal 兩款拉花，於 TOKYO、OSAKA 兩店販售，採事前預約制。",
+    "needReservation": true,
+    "hasLimitedGoods": false,
+    "tags": [
+      "寶可夢",
+      "Pokémon Cafe",
+      "限定餐飲",
+      "拉花",
+      "需預約"
+    ],
+    "id": "po-4090c2",
+    "sourceType": "official_site",
+    "createdAt": "2026-07-06",
+    "sourceTitle": "「選べるポケモンラテ」に、メルタンとメルメタルが仲間入り！",
+    "sourceUrl": "https://www.pokemon-cafe.jp/ja/cafe/news/260703_3439.html"
+  },
+  {
+    "brand": "pokemon",
     "title": "Pokémon K.UNO × U-TREASURE POP UP Promotion",
     "type": "popup",
     "country": "TW",

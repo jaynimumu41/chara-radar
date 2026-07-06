@@ -420,6 +420,7 @@ def fetch_chiikawa_movie_popups(correct_city=None) -> list[dict]:
 _POKE_SCHED = "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
 _POKEMON_CAFE_NEWS = "https://www.pokemon-cafe.jp/ja/cafe/news/"
 _POKEMON_CAFE_TOKYO_RENEWAL = "https://www.pokemon-cafe.jp/ja/cafe/news/260529_3377.html"
+_POKEMON_CAFE_LATTE = "https://www.pokemon-cafe.jp/ja/cafe/news/260703_3439.html"
 # 解析：2026年6月5日（金）〜7月22日（水）**兵庫県・イオンモール神戸北**専門店街3階 イオンホール
 _POKE_ROW = re.compile(
     r"(20\d\d)年(\d{1,2})月(\d{1,2})日（[^）]*）[〜～]\s*"
@@ -460,16 +461,56 @@ def _pokemon_cafe_tokyo_renewal_event_from_text(text: str, source_url: str,
     }
 
 
+def _pokemon_cafe_latte_event_from_text(text: str, source_url: str,
+                                        correct_city=None) -> dict | None:
+    """Parse official Pokemon Cafe menu additions for the selectable latte."""
+    if not all(k in (text or "") for k in ("選べるポケモンラテ", "メルタン", "メルメタル")):
+        return None
+    pub_year = date.today().year
+    y_m = re.search(r"(20\d\d)\.\d{2}\.\d{2}", text or "")
+    if y_m:
+        pub_year = int(y_m.group(1))
+    m = re.search(r"発売日\s*(\d{1,2})月(\d{1,2})日", text or "")
+    if not m:
+        m = re.search(r"(\d{1,2})月(\d{1,2})日[^、。]{0,12}選べるポケモンラテ", text or "")
+    if not m:
+        return None
+    mo, day = int(m.group(1)), int(m.group(2))
+    start = f"{pub_year:04d}-{mo:02d}-{day:02d}"
+    loc = "Pokémon Cafe TOKYO / OSAKA"
+    return {
+        "brand": "pokemon",
+        "title": "Pokémon Cafe 選べるポケモンラテ Meltan/Melmetal 新拉花",
+        "type": "cafe", "country": "JP", "city": "",
+        "locationName": loc,
+        "startDate": start, "endDate": "",
+        "summaryZh": "Pokémon Cafe 的「選べるポケモンラテ」自2026年7月17日起新增 Meltan 與 Melmetal 兩款拉花，於 TOKYO、OSAKA 兩店販售，採事前預約制。",
+        "needReservation": True, "hasLimitedGoods": False,
+        "tags": ["寶可夢", "Pokémon Cafe", "限定餐飲", "拉花", "需預約"],
+        "id": _stable_id("po", source_url),
+        "sourceType": "official_site", "createdAt": _today_iso(),
+        "sourceTitle": "「選べるポケモンラテ」に、メルタンとメルメタルが仲間入り！",
+        "sourceUrl": source_url,
+    }
+
+
 def fetch_pokemon_cafe_events(correct_city=None) -> list[dict]:
     """Parse official Pokemon Cafe news for high-confidence physical cafe updates."""
-    html_text = fetch_html(_POKEMON_CAFE_TOKYO_RENEWAL)
-    if not html_text:
-        print("    ⚠️  Pokémon Cafe 官方公告抓取失敗（直連＋代理都不行）")
-        return []
-    text = _visible_text(html_text)
-    ev = _pokemon_cafe_tokyo_renewal_event_from_text(
-        text, _POKEMON_CAFE_TOKYO_RENEWAL, correct_city=correct_city)
-    return [ev] if ev else []
+    out: list[dict] = []
+    for url, parser in (
+        (_POKEMON_CAFE_TOKYO_RENEWAL, _pokemon_cafe_tokyo_renewal_event_from_text),
+        (_POKEMON_CAFE_LATTE, _pokemon_cafe_latte_event_from_text),
+    ):
+        html_text = fetch_html(url)
+        if not html_text:
+            print(f"    ⚠️  Pokémon Cafe 官方公告抓取失敗：{url}")
+            continue
+        text = _visible_text(html_text)
+        ev = parser(text, url, correct_city=correct_city)
+        if ev:
+            out.append(ev)
+    return out
+
 
 
 def fetch_pokemon_popups(correct_city=None) -> list[dict]:
