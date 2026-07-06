@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-06T08:35:51+00:00",
+  "updatedAt": "2026-07-06T12:57:29+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 8,
@@ -1489,6 +1489,60 @@
           "eventId": "ch-999ff2",
           "evidenceCount": 0,
           "notes": "Could not verify the PARCO collaboration period or venue scope from official or authoritative sources on 2026-07-06; removed under accuracy-over-coverage."
+        }
+      ]
+    },
+    "domain:pokemon-cafe.jp": {
+      "confirmed": 1,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 0,
+      "score": 57,
+      "label": "pokemon-cafe.jp",
+      "kind": "site",
+      "host": "pokemon-cafe.jp",
+      "handle": "",
+      "firstSeen": "2026-07-06",
+      "lastReviewed": "2026-07-06",
+      "lastOutcome": "confirmed",
+      "notes": "Official Pokemon Cafe page states Meltan and Melmetal latte art join 選べるポケモンラテ from 2026-07-17 at TOKYO/OSAKA; no fixed end date is given.",
+      "byBrand": {
+        "pokemon": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
+        }
+      },
+      "byType": {
+        "cafe": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
+        }
+      },
+      "history": [
+        {
+          "date": "2026-07-06",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "cafe",
+          "country": "JP",
+          "eventId": "po-4090c2",
+          "evidenceCount": 0,
+          "notes": "Official Pokemon Cafe page states Meltan and Melmetal latte art join 選べるポケモンラテ from 2026-07-17 at TOKYO/OSAKA; no fixed end date is given."
         }
       ]
     }

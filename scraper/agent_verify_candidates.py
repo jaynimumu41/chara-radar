@@ -68,6 +68,7 @@ REASON_WEIGHTS = {
 
 REVIEWED_SKIP_REASONS = {
     "missing_endDate",
+    "structured_activity_missing_endDate",
     "campaign_type",
     "generic_title",
 }
@@ -257,7 +258,7 @@ def print_markdown(candidates: list[dict], total_events: int, limit: int) -> Non
     print(f"- Total events: {total_events}")
     print(f"- Candidates: {len(candidates)}")
     print("- Skip rule: complete structured-source records from chiikawa-info.jp, chiikawamogumogu.jp, oneheart65.net, pokemon-cafe.jp, tw.portal-pokemon.com, dickbruna.jp, and kiddyland.co.jp")
-    print("- Exception: activity-like structured official records with a startDate but no endDate stay in the queue for period verification")
+    print("- Exception: activity-like structured official records with a startDate but no endDate stay in the queue until source reputation confirms the open-ended period")
     print("- Source reputation: data/source_reputation.json adjusts risk and states how much corroboration is needed")
     print()
     print("| Risk | Reputation | Evidence | Brand | Type | Title | Location | Dates | Source | Reasons | Search query |")

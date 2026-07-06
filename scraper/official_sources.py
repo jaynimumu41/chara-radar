@@ -972,11 +972,21 @@ def _miffy_period(title: str, detail_text: str, ref_year: int, extract_dates) ->
     return s, e
 
 
+def _miffy_is_flower_birthday(title: str, name: str = "", detail: str = "") -> bool:
+    blob = "\n".join(part for part in (title, name, detail[:1200]) if part)
+    return (
+        ("Flower Miffy" in blob or "フラワーミッフィー" in blob)
+        and "バースデーキャンペーン" in blob
+    )
+
+
 def _miffy_venue_from_title(title: str, name: str = "", detail: str = "") -> str:
     m = re.search(r"^(.+?)(?:にて|に|で)「", title)
     if m:
         return m.group(1).strip("・ 　")
     blob = "\n".join(part for part in (title, name, detail) if part)
+    if _miffy_is_flower_birthday(title, name, detail):
+        return "全国のフラワーミッフィー、フラワーミッフィーオンラインショップ"
     for aliases, venue in _MIFFY_KNOWN_VENUES:
         if any(alias in blob for alias in aliases):
             return venue
@@ -991,6 +1001,8 @@ def _miffy_is_exhibition(title: str, name: str, detail: str = "") -> bool:
 def _miffy_display_name(title: str, name: str) -> str:
     if "KOBE PORT TOWER" in title and "Night Time" in title:
         return "神戶港塔 Night Time 聯名活動"
+    if _miffy_is_flower_birthday(title, name):
+        return "Flower Miffy バースデーキャンペーン"
     if "ハウステンボス" in title and "バースデー" in title:
         return "ミッフィーバースデーシーズン"
     return name
@@ -1111,22 +1123,27 @@ def fetch_miffy_events(extract_dates, correct_city, max_articles=16, fresh_days=
         city = correct_city(venue, title)
         display_name = _miffy_display_name(title, name)
         is_birthday_fair = "birthday" in title.lower() and "miffy style" in title.lower()
+        is_flower_birthday = _miffy_is_flower_birthday(title, name, detail_text)
         is_exhibition = _miffy_is_exhibition(title, name, detail_text)
         if is_birthday_fair:
             display_name = "miffy’s Birthday 2026"
             loc = "miffy style 各店＋キデイランド対象店"
             city = ""
+        elif is_flower_birthday:
+            display_name = "Flower Miffy バースデーキャンペーン"
+            loc = "全国のフラワーミッフィー、フラワーミッフィーオンラインショップ"
+            city = ""
         elif is_exhibition and f"「{display_name}」展" in title and not display_name.endswith("展"):
             display_name = f"{display_name}展"
         short_title = "神戶港塔 Night Time" in display_name
         display_title = (
-            f"Miffy {display_name}" if is_birthday_fair or short_title or _norm(display_name) == _norm(venue)
+            f"Miffy {display_name}" if is_birthday_fair or is_flower_birthday or short_title or _norm(display_name) == _norm(venue)
             else f"Miffy {display_name}　{venue}"
         )
         out.append({
             "brand": "miffy",
             "title": display_title.strip(),
-            "type": "campaign" if is_birthday_fair else (
+            "type": "campaign" if is_birthday_fair or is_flower_birthday else (
                 "campaign" if is_exhibition else (
                     "cafe" if any(k in title.lower() for k in ["カフェ", "kitchen", "おやつ", "table"]) else "popup"
                 )
@@ -1138,13 +1155,20 @@ def fetch_miffy_events(extract_dates, correct_city, max_articles=16, fresh_days=
                 "miffy’s Birthday 2026 生日活動於 miffy style 與 Kiddy Land 指定店舖登場，販售生日限定商品並提供店頭特典。"
                 if is_birthday_fair
                 else (
-                    f"Miffy（米飛兔）官方展覽「{display_name}」於{venue}舉辦，展期為{s}至{e or '未定'}。"
-                    if is_exhibition
-                    else f"Miffy（米飛兔）官方活動「{display_name}」於{venue}期間限定登場，販售限定周邊／餐點。"
+                    "Flower Miffy 全門市與線上商店自2026年6月19日起舉辦 Miffy 生日活動，單筆消費滿 8,800 日圓贈送限定斜背袋，贈品送完為止。"
+                    if is_flower_birthday
+                    else (
+                        f"Miffy（米飛兔）官方展覽「{display_name}」於{venue}舉辦，展期為{s}至{e or '未定'}。"
+                        if is_exhibition
+                        else f"Miffy（米飛兔）官方活動「{display_name}」於{venue}期間限定登場，販售限定周邊／餐點。"
+                    )
                 )
             ),
             "needReservation": False, "hasLimitedGoods": False if is_exhibition else True,
-            "tags": ["米飛兔", "展覽" if is_exhibition else "期間限定", "日本"],
+            "tags": (
+                ["米飛兔", "Flower Miffy", "生日活動", "日本"]
+                if is_flower_birthday else ["米飛兔", "展覽" if is_exhibition else "期間限定", "日本"]
+            ),
             "id": _stable_id("mi", url),
             "sourceType": "official_site", "createdAt": today,
             "sourceTitle": f"{title} - dickbruna.jp",

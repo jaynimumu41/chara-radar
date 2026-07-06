@@ -491,6 +491,12 @@ check("已確認過的非官方 event id→候選器可跳過",
           ["untrusted_date_domain:nownews.com", "generic_title"],
           {"po-confirmed"}),
       True)
+check("已確認過的官方送完為止 event id→候選器可跳過",
+      agent_verify_candidates.is_reviewed_candidate(
+          ev(id="mi-confirmed"),
+          ["missing_endDate", "structured_activity_missing_endDate", "campaign_type"],
+          {"mi-confirmed"}),
+      True)
 
 # ── source_reputation ────────────────────────────────────────────────────────
 print("\n[source_reputation] source trust memory")
@@ -711,6 +717,13 @@ out, _ = scrape.dedup_events([
 check("Flower Miffy生日活動官方替換→併且保留全店官方頁",
       (len(out), out[0]["sourceType"], out[0].get("city", "")),
       (1, "official_site", ""))
+flower_miffy_title = "Flower Miffy フラワーミッフィー バースデーキャンペーン開催"
+check("Miffy官方Flower生日活動→顯示名稱正規化",
+      official_sources._miffy_display_name(flower_miffy_title, flower_miffy_title),
+      "Flower Miffy バースデーキャンペーン")
+check("Miffy官方Flower生日活動→地點正規化",
+      official_sources._miffy_venue_from_title(flower_miffy_title, flower_miffy_title),
+      "全国のフラワーミッフィー、フラワーミッフィーオンラインショップ")
 
 out, _ = scrape.dedup_events([
     ev(brand="chiikawa", title="吉伊卡哇袋著走 台北快閃店", type="popup",
