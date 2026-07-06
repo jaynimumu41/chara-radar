@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-05T08:34:50+00:00",
+  "updatedAt": "2026-07-06T08:35:51+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 8,
@@ -1435,6 +1435,60 @@
           "eventId": "mi-284bf0",
           "evidenceCount": 0,
           "notes": "Official Kiddy Land page states novelty distribution starts 2026-07-04 and ends when stock runs out."
+        }
+      ]
+    },
+    "domain:excite.co.jp": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 0,
+      "score": 39,
+      "label": "excite.co.jp",
+      "kind": "site",
+      "host": "excite.co.jp",
+      "handle": "",
+      "firstSeen": "2026-07-06",
+      "lastReviewed": "2026-07-06",
+      "lastOutcome": "rejected",
+      "notes": "Could not verify the PARCO collaboration period or venue scope from official or authoritative sources on 2026-07-06; removed under accuracy-over-coverage.",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "byType": {
+        "popup": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "history": [
+        {
+          "date": "2026-07-06",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-999ff2",
+          "evidenceCount": 0,
+          "notes": "Could not verify the PARCO collaboration period or venue scope from official or authoritative sources on 2026-07-06; removed under accuracy-over-coverage."
         }
       ]
     }
