@@ -27,6 +27,7 @@ import audit_official_coverage
 import agent_verify_candidates
 import source_reputation
 import verify_links
+import data_lint
 
 _passed = 0
 _failed = 0
@@ -758,6 +759,33 @@ out, _ = scrape.dedup_events([
 check("Chiikawa羽田官方與Collabo Cafe轉載→保留官方",
       (len(out), out[0]["id"], out[0]["sourceType"], out[0]["locationName"]),
       (1, "ch-official-haneda", "official_site", "羽田空港第1ターミナル 2F 出発ロビー HANEDA POPUP STORE"))
+check("today_updates防呆：Miffy東京駅店媒體重複不可列新增",
+      bool(data_lint.today_update_duplicate_errors([
+          ev(id="mi-official-tokyo", brand="miffy",
+             title="miffy style東京駅店限定 駅長さんミッフィーぬいぐるみ&マスコット&チャーム",
+             type="new_product", city="Tokyo", startDate="2026-07-04",
+             locationName="miffy style 東京駅店"),
+          ev(id="mi-asahi-tokyo", brand="miffy",
+             title="東京車站限定！站長米飛兔新玩偶發售",
+             type="new_product", city="Tokyo", startDate="2026-07-04",
+             locationName="東京車站",
+             sourceTitle="今回も買えるといいな【東京駅限定】駅長さんミッフィーの新作ぬいぐるみが7/4より発売。当日は購入制限も - 朝日新聞"),
+      ], ["mi-asahi-tokyo"])),
+      True)
+check("today_updates防呆：Chiikawa羽田轉載不可列新增",
+      bool(data_lint.today_update_duplicate_errors([
+          ev(id="ch-official-haneda", brand="chiikawa",
+             title="吉伊卡哇 POP UP STORE 羽田空港第1ターミナル",
+             type="popup", startDate="2026-07-20", endDate="2026-08-17",
+             locationName="羽田空港第1ターミナル 2F 出発ロビー HANEDA POPUP STORE",
+             sourceUrl="https://chiikawa-info.jp/p26/pus_hnds/index.html"),
+          ev(id="ch-collabo-haneda", brand="chiikawa",
+             title="吉伊卡哇快閃店與主題咖啡廳",
+             type="popup", city="Tokyo", startDate="2026-07-20", endDate="2026-08-17",
+             sourceTitle="ちいかわ ポップアップストア in 東京 7月20日より開催! - コラボカフェ",
+             sourceUrl="https://collabo-cafe.com/events/collabo/chiikawa-popup-store-haneda-airport2026/"),
+      ], ["ch-collabo-haneda"])),
+      True)
 
 out, _ = scrape.dedup_events([
     ev(brand="chiikawa", title="吉伊卡哇袋著走 台北快閃店", type="popup",

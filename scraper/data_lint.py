@@ -51,6 +51,26 @@ def valid_date(value: str) -> bool:
         return False
 
 
+def today_update_duplicate_errors(events: list[dict], new_event_ids: list[str]) -> list[str]:
+    """Flag newEventIds that still duplicate another visible event."""
+    by_id = {ev.get("id", ""): ev for ev in events if isinstance(ev, dict)}
+    errors: list[str] = []
+    for new_id in new_event_ids:
+        ev = by_id.get(str(new_id))
+        if not ev:
+            continue
+        for other in events:
+            if not isinstance(other, dict) or other.get("id") == ev.get("id"):
+                continue
+            if scrape.is_same_event_for_update_diff(other, ev):
+                errors.append(
+                    "today_updates.json marks duplicate as new: "
+                    f"{ev.get('id')} duplicates existing {other.get('id')}"
+                )
+                break
+    return errors
+
+
 def main() -> int:
     errors: list[str] = []
     warnings: list[str] = []
@@ -144,6 +164,7 @@ def main() -> int:
                     for brand in ACTIVE_BRANDS:
                         if int(counts_by_brand.get(brand, 0)) != counts.get(brand, 0):
                             errors.append(f"today_updates.json count mismatch for {brand}")
+                errors.extend(today_update_duplicate_errors(events, [str(x) for x in new_event_ids]))
         except Exception as exc:
             errors.append(f"today_updates.json is not parseable: {exc}")
 
