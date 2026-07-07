@@ -726,6 +726,40 @@ check("Miffy官方Flower生日活動→地點正規化",
       "全国のフラワーミッフィー、フラワーミッフィーオンラインショップ")
 
 out, _ = scrape.dedup_events([
+    ev(id="mi-official-tokyo", brand="miffy",
+       title="miffy style東京駅店限定 駅長さんミッフィーぬいぐるみ&マスコット&チャーム",
+       type="new_product", city="Tokyo", startDate="2026-07-04",
+       locationName="miffy style 東京駅店",
+       sourceType="official_site", sourceUrl="https://www.kiddyland.co.jp/event/miffy_tokyo20260704/"),
+    ev(id="mi-asahi-tokyo", brand="miffy",
+       title="東京車站限定！站長米飛兔新玩偶發售",
+       type="new_product", city="Tokyo", startDate="2026-07-04",
+       locationName="東京車站",
+       sourceTitle="今回も買えるといいな【東京駅限定】駅長さんミッフィーの新作ぬいぐるみが7/4より発売。当日は購入制限も - 朝日新聞",
+       sourceType="official_social", sourceUrl="https://www.asahi.com/and/w/article/16698474"),
+])
+check("Miffy東京駅店限定玩偶媒體重複→保留官方",
+      (len(out), out[0]["id"], out[0]["sourceType"]),
+      (1, "mi-official-tokyo", "official_site"))
+
+out, _ = scrape.dedup_events([
+    ev(id="ch-official-haneda", brand="chiikawa",
+       title="吉伊卡哇 POP UP STORE 羽田空港第1ターミナル",
+       type="popup", startDate="2026-07-20", endDate="2026-08-17",
+       locationName="羽田空港第1ターミナル 2F 出発ロビー HANEDA POPUP STORE",
+       sourceType="official_site", sourceUrl="https://chiikawa-info.jp/p26/pus_hnds/index.html"),
+    ev(id="ch-collabo-haneda", brand="chiikawa",
+       title="吉伊卡哇快閃店與主題咖啡廳",
+       type="popup", city="Tokyo", startDate="2026-07-20", endDate="2026-08-17",
+       locationName="",
+       sourceTitle="ちいかわ ポップアップストア in 東京 7月20日より開催! - コラボカフェ",
+       sourceType="official_social", sourceUrl="https://collabo-cafe.com/events/collabo/chiikawa-popup-store-haneda-airport2026/"),
+])
+check("Chiikawa羽田官方與Collabo Cafe轉載→保留官方",
+      (len(out), out[0]["id"], out[0]["sourceType"], out[0]["locationName"]),
+      (1, "ch-official-haneda", "official_site", "羽田空港第1ターミナル 2F 出発ロビー HANEDA POPUP STORE"))
+
+out, _ = scrape.dedup_events([
     ev(brand="chiikawa", title="吉伊卡哇袋著走 台北快閃店", type="popup",
        city="Taipei", startDate="2026-05-22", endDate="2026-06-30",
        locationName="CHIIKAWA SHOP in TAIPEI 2F",

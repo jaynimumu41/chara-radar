@@ -1770,53 +1770,5 @@
     "createdAt": "2026-07-07",
     "sourceTitle": "2026年7月4日(土)～スタート!miffy style 各店ノベルティデイ - キデイランド",
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_nove202607/"
-  },
-  {
-    "brand": "miffy",
-    "title": "東京車站限定！站長米飛兔新玩偶發售",
-    "type": "new_product",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "東京車站",
-    "startDate": "2026-07-04",
-    "endDate": "",
-    "summaryZh": "東京車站將於7月4日起發售站長造型的米飛兔新款玩偶，當日可能會有購買限制。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "東京車站",
-      "限定商品",
-      "玩偶"
-    ],
-    "id": "mi-1600ad",
-    "sourceTitle": "今回も買えるといいな【東京駅限定】駅長さんミッフィーの新作ぬいぐるみが7/4より発売。当日は購入制限も - 朝日新聞",
-    "sourceType": "official_social",
-    "createdAt": "2026-07-07",
-    "sourceUrl": "https://www.asahi.com/and/w/article/16698474"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇快閃店與主題咖啡廳",
-    "type": "popup",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "",
-    "startDate": "2026-07-20",
-    "endDate": "2026-08-17",
-    "summaryZh": "吉伊卡哇於東京舉辦快閃店活動，並設有主題咖啡廳，販售周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "快閃店",
-      "主題咖啡廳",
-      "東京",
-      "限定商品"
-    ],
-    "id": "ch-a38c90",
-    "sourceTitle": "ちいかわ ポップアップストア in 東京 7月20日より開催! - コラボカフェ",
-    "sourceType": "official_social",
-    "createdAt": "2026-07-07",
-    "sourceUrl": "https://collabo-cafe.com/events/collabo/chiikawa-popup-store-haneda-airport2026/"
   }
 ]

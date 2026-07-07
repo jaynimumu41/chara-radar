@@ -976,6 +976,9 @@ SPECIAL_ACTIVITY_ALIASES = [
 SPECIAL_PRODUCT_ALIASES = [
     ("pokemon-yurutto-taipei", ["Pokémon Yurutto", "Pokemon Yurutto", "ポケモンゆるっと", "卡娜赫拉"]),
 ]
+MIFFY_PRODUCT_ALIASES = [
+    ("miffy-tokyo-stationmaster", ["駅長さんミッフィー", "東京駅限定", "東京車站限定", "站長米飛兔"]),
+]
 
 def is_generic_dedup_location(loc: str) -> bool:
     """Locations too broad to prove two product launches are the same event."""
@@ -1041,6 +1044,8 @@ def special_activity_key(ev: dict) -> str | None:
         token in blob for token in (_norm("台北"), _norm("臺北"), "taipei")
     )
     if brand == "chiikawa" and ev_type in ACTIVITY_TYPES:
+        if any(_norm(alias) in blob for alias in ["羽田空港", "haneda airport", "haneda-airport", "pus_hnds"]):
+            return "|".join([brand, "chiikawa-haneda-airport-popup", start])
         if not is_taipei:
             return None
         for concept, aliases in SPECIAL_ACTIVITY_ALIASES:
@@ -1052,6 +1057,12 @@ def special_activity_key(ev: dict) -> str | None:
         for concept, aliases in SPECIAL_PRODUCT_ALIASES:
             if any(_norm(alias) in blob for alias in aliases):
                 return "|".join([brand, concept, start])
+    if brand == "miffy" and ev_type in SELLING_TYPES:
+        is_tokyo_station = any(_norm(alias) in blob for alias in ["東京駅", "東京車站", "東京駅店"])
+        if is_tokyo_station:
+            for concept, aliases in MIFFY_PRODUCT_ALIASES:
+                if any(_norm(alias) in blob for alias in aliases):
+                    return "|".join([brand, concept, start])
     return None
 
 # 知名場館別名 → 統一代號（讓同場館不同寫法能去重）
