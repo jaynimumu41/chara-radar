@@ -1721,53 +1721,5 @@
     "createdAt": "2026-07-08",
     "sourceTitle": "2026年7月4日(土)～スタート!miffy style 各店ノベルティデイ - キデイランド",
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_nove202607/"
-  },
-  {
-    "brand": "miffy",
-    "title": "豪斯登堡 夏限定米飛兔周邊",
-    "type": "popup",
-    "country": "JP",
-    "city": "Nagasaki",
-    "locationName": "豪斯登堡",
-    "startDate": "2026-07-08",
-    "endDate": "2026-10-12",
-    "summaryZh": "豪斯登堡舉辦夏日活動，推出限定米飛兔周邊商品，並有煙火秀等活動。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "豪斯登堡",
-      "限定商品",
-      "夏日活動",
-      "米飛兔"
-    ],
-    "id": "mi-1807ae",
-    "sourceTitle": "【ハウステンボス】非日常的なヨーロピアン・ヴァカンスが味わえる！ 花火ショー＆夏限定ミッフィーグッズなどイベント満載 - マイナビウーマン",
-    "sourceType": "official_social",
-    "createdAt": "2026-07-08",
-    "sourceUrl": "https://woman.mynavi.jp/article/260708-2_1160320-3/"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "PARCO「吉伊卡哇」聯名活動",
-    "type": "campaign",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "PARCO",
-    "startDate": "2026-07-17",
-    "endDate": "2026-08-02",
-    "summaryZh": "PARCO將於7月17日起舉辦「吉伊卡哇」聯名活動，可獲得原創視覺的透明收納袋。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "聯名",
-      "限定商品",
-      "PARCO",
-      "東京"
-    ],
-    "id": "ch-3be178",
-    "sourceTitle": "パルコ「ちいかわ」コラボが7月17日より開催！ オリジナルビジュアルの「クリアポーチ」がもらえる - GAME Watch",
-    "sourceType": "official_social",
-    "createdAt": "2026-07-08",
-    "sourceUrl": "https://game.watch.impress.co.jp/docs/news/2122613.html"
   }
 ]

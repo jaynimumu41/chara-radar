@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-06T12:57:29+00:00",
+  "updatedAt": "2026-07-08T08:35:05+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 8,
@@ -1543,6 +1543,114 @@
           "eventId": "po-4090c2",
           "evidenceCount": 0,
           "notes": "Official Pokemon Cafe page states Meltan and Melmetal latte art join 選べるポケモンラテ from 2026-07-17 at TOKYO/OSAKA; no fixed end date is given."
+        }
+      ]
+    },
+    "domain:game.watch.impress.co.jp": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 41,
+      "label": "game.watch.impress.co.jp",
+      "kind": "news",
+      "host": "game.watch.impress.co.jp",
+      "handle": "",
+      "firstSeen": "2026-07-08",
+      "lastReviewed": "2026-07-08",
+      "lastOutcome": "rejected",
+      "notes": "Removed on 2026-07-08 after checking PARCO official campaign page: it is a multi-location summer campaign across 15 PARCO stores plus Okinawa PARCO CITY, not a single venue-bounded event row for events.json.",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byType": {
+        "campaign": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "history": [
+        {
+          "date": "2026-07-08",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "campaign",
+          "country": "JP",
+          "eventId": "ch-3be178",
+          "evidenceCount": 1,
+          "notes": "Removed on 2026-07-08 after checking PARCO official campaign page: it is a multi-location summer campaign across 15 PARCO stores plus Okinawa PARCO CITY, not a single venue-bounded event row for events.json."
+        }
+      ]
+    },
+    "domain:woman.mynavi.jp": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 41,
+      "label": "woman.mynavi.jp",
+      "kind": "site",
+      "host": "woman.mynavi.jp",
+      "handle": "",
+      "firstSeen": "2026-07-08",
+      "lastReviewed": "2026-07-08",
+      "lastOutcome": "rejected",
+      "notes": "Removed on 2026-07-08 after checking current Huis Ten Bosch official pages: the article is a broad seasonal roundup mixing fireworks and goods, and no single venue-bounded popup page with an explicit 2026-07-08 to 2026-10-12 event period was confirmed.",
+      "byBrand": {
+        "miffy": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byType": {
+        "popup": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "history": [
+        {
+          "date": "2026-07-08",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "mi-1807ae",
+          "evidenceCount": 1,
+          "notes": "Removed on 2026-07-08 after checking current Huis Ten Bosch official pages: the article is a broad seasonal roundup mixing fireworks and goods, and no single venue-bounded popup page with an explicit 2026-07-08 to 2026-10-12 event period was confirmed."
         }
       ]
     }
