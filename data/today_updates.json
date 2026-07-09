@@ -1,17 +1,17 @@
 {
-  "date": "2026-07-08",
-  "baselineDate": "2026-07-07",
-  "generatedAt": "2026-07-08T08:13:59.723296+00:00",
-  "baselineEventCount": 74,
-  "currentEventCount": 72,
+  "date": "2026-07-09",
+  "baselineDate": "2026-07-08",
+  "generatedAt": "2026-07-09T08:05:25.906356+00:00",
+  "baselineEventCount": 72,
+  "currentEventCount": 73,
   "newEventCount": 1,
   "countsByBrand": {
-    "miffy": 1,
-    "pokemon": 0,
+    "miffy": 0,
+    "pokemon": 1,
     "chiikawa": 0
   },
   "newEventIds": [
-    "mi-ad90b6"
+    "po-25daa5"
   ],
   "replacements": []
 }
