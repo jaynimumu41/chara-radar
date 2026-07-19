@@ -69,7 +69,20 @@ def _raw_fetch(url, timeout, want_text):
 
 
 def _proxy_fetch(url: str, timeout: int) -> tuple[bool, int, str]:
-    return _raw_fetch(READER_PROXY + url, max(timeout, 45), True)
+    last_error = None
+    for attempt in range(3):
+        try:
+            return _raw_fetch(READER_PROXY + url, max(timeout, 45), True)
+        except urllib.error.HTTPError as exc:
+            last_error = exc
+            if exc.code not in _BLOCKED_CODES or attempt == 2:
+                raise
+        except Exception as exc:
+            last_error = exc
+            if attempt == 2:
+                raise
+        time.sleep(3 * (attempt + 1))
+    raise last_error
 
 
 def check_url(url, timeout=20, return_text=False):
@@ -173,4 +186,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(1 if main() else 0)

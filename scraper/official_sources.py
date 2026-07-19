@@ -143,10 +143,14 @@ def _visible_text(html_text: str) -> str:
     return re.sub(r"\s+", " ", html_lib.unescape(" ".join(parser.parts))).strip()
 
 
-def _proxy_markdown(url: str) -> str:
+def _proxy_markdown(url: str, *, fresh: bool = False) -> str:
     """用 reader 代理取頁面 markdown（官方站常擋 bot）。失敗回 ''。"""
     try:
-        r = requests.get(READER + url, headers={"User-Agent": HEADERS_UA}, timeout=70)
+        target = url
+        if fresh:
+            separator = "&" if "?" in target else "?"
+            target += separator + "chara_radar=" + datetime.now(timezone.utc).strftime("%Y%m%d%H")
+        r = requests.get(READER + target, headers={"User-Agent": HEADERS_UA}, timeout=70)
         return r.text if r.status_code == 200 else ""
     except Exception:
         return ""
@@ -211,13 +215,8 @@ def _date_range_to_iso(sy, sm, sd, ey, em, ed) -> tuple[str, str]:
     return f"{sy:04d}-{sm:02d}-{sd:02d}", f"{ey:04d}-{em:02d}-{ed:02d}"
 
 
-def fetch_chiikawa_popups(correct_city=None) -> list[dict]:
-    """解析吉伊卡哇官方 pus.html，回傳「現行（未過期）」POP UP STORE 的成品情報清單。
-    零 Gemini。correct_city(可選)＝scrape.correct_city，用來判城市。"""
-    md = _proxy_markdown(_CHIIKAWA_PUS)
-    if not md:
-        print("    ⚠️  吉伊卡哇 pus.html 抓取失敗（直連＋代理都不行）")
-        return []
+def _chiikawa_popup_events_from_text(md: str, correct_city=None) -> list[dict]:
+    """Parse current Chiikawa POP UP STORE rows from official markdown."""
     today = _today_iso()
     out, seen = [], set()
     for m in _PUS_ROW.finditer(md):
@@ -251,6 +250,16 @@ def fetch_chiikawa_popups(correct_city=None) -> list[dict]:
             "sourceUrl": url,
         })
     return out
+
+
+def fetch_chiikawa_popups(correct_city=None) -> list[dict]:
+    """解析吉伊卡哇官方 pus.html，回傳「現行（未過期）」POP UP STORE 的成品情報清單。
+    零 Gemini。correct_city(可選)＝scrape.correct_city，用來判城市。"""
+    md = _proxy_markdown(_CHIIKAWA_PUS, fresh=True)
+    if not md:
+        print("    ⚠️  吉伊卡哇 pus.html 抓取失敗（直連＋代理都不行）")
+        return []
+    return _chiikawa_popup_events_from_text(md, correct_city=correct_city)
 
 
 def _chiikawa_otaru_castella_event(info_text: str, shop_text: str, correct_city=None) -> dict | None:

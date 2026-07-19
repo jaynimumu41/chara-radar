@@ -91,9 +91,11 @@ BRAND_LABELS = {
 # 城市不限於原本 8 個，任何有情報的地點都應正確標示
 AREA_TO_CITY = {
     "Tokyo":    ["東京", "渋谷", "澀谷", "池袋", "銀座", "新宿", "原宿", "表参道", "表參道",
-                 "スカイツリー", "晴空塔", "ソラマチ", "押上", "自由が丘", "自由之丘",
-                 "お台場", "丸の内", "浅草", "上野", "中野", "吉祥寺", "多摩", "立川",
-                 "ピューロランド", "Puroland", "彩虹樂園", "サンリオピューロランド"],
+                  "スカイツリー", "晴空塔", "ソラマチ", "押上", "自由が丘", "自由之丘",
+                  "お台場", "丸の内", "浅草", "上野", "中野", "吉祥寺", "多摩", "立川",
+                  "むさし村山", "武蔵村山", "羽田",
+                  "ピューロランド", "Puroland", "彩虹樂園", "サンリオピューロランド"],
+    "Iwate":    ["岩手", "盛岡", "カワトク", "パルクアベニュー・カワトク"],
     "Osaka":    ["大阪", "梅田", "心斎橋", "心齋橋", "なんば", "難波", "中之島", "天王寺",
                  "ルクア", "LUCUA", "グランフロント", "万博", "あべの"],
     "Kyoto":    ["京都", "KYOTO", "河原町", "嵐山", "四条"],
@@ -103,8 +105,9 @@ AREA_TO_CITY = {
     "Saitama":  ["埼玉", "羽生", "Hanyu", "大宮", "Omiya", "越谷", "Koshigaya",
                  "レイクタウン", "Laketown", "川越", "川口"],
     "Hokkaido": ["北海道", "札幌", "小樽", "函館", "新千歳", "千歳"],
-    "Okinawa":  ["沖縄", "沖繩", "那覇", "ライカム"],
-    "Kanagawa": ["神奈川", "横浜", "横濱", "橫濱", "川崎", "みなとみらい", "ワールドポーターズ"],
+    "Okinawa":  ["沖縄", "沖繩", "那覇", "ライカム", "南風原"],
+    "Kanagawa": ["神奈川", "横浜", "横濱", "橫濱", "川崎", "みなとみらい", "ワールドポーターズ",
+                  "武蔵溝ノ口", "溝ノ口"],
     "Hyogo":    ["兵庫", "神戸", "神戶", "Kobe", "KOBE", "西宮", "三宮", "伊丹", "姫路", "ピオレ"],
     "Hiroshima":["広島", "廣島", "Hiroshima"],
     "Kagoshima":["鹿児島", "鹿兒島", "Kagoshima"],
@@ -116,7 +119,10 @@ AREA_TO_CITY = {
     "Tottori":  ["鳥取", "日吉津"],
     "Nara":     ["奈良", "橿原"],
     "Fukushima":["福島", "いわき", "ハワイアンズ"],
-    "Nagano":   ["長野", "須坂"],
+    "Nagano":   ["長野", "須坂", "ながの東急"],
+    "Gunma":    ["群馬", "高崎", "太田"],
+    "Toyama":   ["富山", "高岡"],
+    "Fukui":    ["福井", "ショッピングシティベル", "ショッピングシティ・ベル"],
     "Gifu":     ["岐阜", "各務原"],
     "Miyazaki": ["宮崎"],
     "Yamanashi":["山梨", "甲府", "昭和"],
@@ -1428,6 +1434,16 @@ def _ai_dedup_locations_compatible(group: list[dict]) -> bool:
             return False
     return True
 
+
+def _ai_dedup_identity_supported(group: list[dict]) -> bool:
+    """Require deterministic evidence before AI may delete an event."""
+    for i, left in enumerate(group):
+        for right in group[i + 1:]:
+            if is_same_event_for_update_diff(left, right) or is_same_event_for_update_diff(right, left):
+                continue
+            return False
+    return True
+
 AI_DEDUP_PROMPT = """以下是已蒐集的角色周邊活動清單，每筆有編號。
 請找出指向「同一個真實活動」的重複編號群組（不同媒體報導同一檔活動）。
 
@@ -1492,6 +1508,9 @@ def ai_dedup(events: list[dict], rotator: "KeyRotator") -> tuple[list[dict], int
         if not _ai_dedup_locations_compatible([events[i] for i in ids]):
             print(f"    ⚠️  AI 提議合併但場館/店系不同，保留不合併：{[events[i].get('title') for i in ids]}")
             continue
+        if not _ai_dedup_identity_supported([events[i] for i in ids]):
+            print(f"    ⚠️  AI 提議合併但缺少可驗證的活動同一性，保留不合併：{[events[i].get('title') for i in ids]}")
+            continue
         # 日期防呆：同一活動不可能開始日相差太遠（>21天視為不同檔期，整組不合併）
         starts = []
         for i in ids:
@@ -1533,8 +1552,13 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
         raw = rotator.call(prompt)
         m = re.search(r"\{.*\}", raw, re.DOTALL)
         if not m:
-            return None
-        data = json.loads(m.group())
+            print("    ⚠️  AI 回應沒有可解析 JSON，保留隔天重試")
+            return {"_skipNoProcess": True}
+        try:
+            data = json.loads(m.group())
+        except json.JSONDecodeError as exc:
+            print(f"    ⚠️  AI JSON 格式錯誤，保留隔天重試：{exc}")
+            return {"_skipNoProcess": True}
         if not data.get("relevant"):
             return None
         data.pop("relevant", None)
@@ -1613,7 +1637,7 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
         raise  # 讓主程式接住、乾淨收工
     except Exception as e:
         print(f"    ⚠️  萃取失敗：{e}")
-        return None
+        return {"_skipNoProcess": True}
 
 # ── 主程式 ────────────────────────────────────────────────────────────────────
 

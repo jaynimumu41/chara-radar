@@ -8,6 +8,7 @@ ignored, or still needs human review.
 from __future__ import annotations
 
 import argparse
+from datetime import datetime, timezone
 import html
 import json
 import re
@@ -22,6 +23,7 @@ from verify_links import fetch_html
 
 BASE_URL = "https://chiikawa-info.jp/"
 HOME_URL = "https://chiikawa-info.jp/index.html"
+PUS_URL = "https://chiikawa-info.jp/pus.html"
 EVENTS_JSON = Path(__file__).parent.parent / "data" / "events.json"
 
 # Add pages here only after a human has checked that they are out of scope for
@@ -155,6 +157,10 @@ def _clean_text(text: str) -> str:
     return re.sub(r"\s+", " ", html.unescape(text)).strip()
 
 
+def is_ended_listing_title(title: str) -> bool:
+    return "【終了】" in (title or "")
+
+
 def extract_p26_links(text: str, base_url: str = HOME_URL) -> list[ChiikawaLink]:
     """Extract and normalize chiikawa-info.jp/p26/.../index.html links."""
     found: dict[str, str] = {}
@@ -253,10 +259,19 @@ def audit_links(
 
 
 def fetch_homepage_links() -> list[ChiikawaLink]:
-    text = fetch_html(HOME_URL) or fetch_html(BASE_URL)
-    if not text:
+    home_text = fetch_html(HOME_URL) or fetch_html(BASE_URL)
+    cache_key = datetime.now(timezone.utc).strftime("%Y%m%d%H")
+    pus_text = fetch_html(f"{PUS_URL}?chara_radar={cache_key}")
+    if not home_text and not pus_text:
         raise RuntimeError("failed to fetch Chiikawa official homepage")
-    return extract_p26_links(text, HOME_URL)
+    found: dict[str, ChiikawaLink] = {}
+    for text, base_url in ((home_text, HOME_URL), (pus_text, PUS_URL)):
+        for link in extract_p26_links(text or "", base_url):
+            if is_ended_listing_title(link.title):
+                continue
+            if link.url not in found or (link.title and not found[link.url].title):
+                found[link.url] = link
+    return [found[url] for url in sorted(found)]
 
 
 def fetch_review_details(links: list[ChiikawaLink], parsed_pages: dict[str, list[str]]) -> dict[str, str]:

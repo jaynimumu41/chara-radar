@@ -59,6 +59,13 @@ check("夢時代→Kaohsiung", scrape.correct_city("高雄夢時代"), "Kaohsiun
 check("羽生→Saitama", scrape.correct_city("イオンモール羽生"), "Saitama")
 check("柏高島屋→Chiba", scrape.correct_city("柏高島屋 本館地下2階 催会場"), "Chiba")
 check("ららぽーと磐田→Shizuoka", scrape.correct_city("ららぽーと磐田 1F 中央広場"), "Shizuoka")
+check("カワトク→Iwate", scrape.correct_city("パルクアベニュー・カワトク"), "Iwate")
+check("高崎髙島屋→Gunma", scrape.correct_city("高崎髙島屋 6階 催会場"), "Gunma")
+check("むさし村山→Tokyo", scrape.correct_city("イオンモールむさし村山"), "Tokyo")
+check("イオンモール太田→Gunma", scrape.correct_city("イオンモール太田"), "Gunma")
+check("イオンモール高岡→Toyama", scrape.correct_city("イオンモール高岡"), "Toyama")
+check("南風原→Okinawa", scrape.correct_city("イオン南風原店"), "Okinawa")
+check("ショッピングシティベル→Fukui", scrape.correct_city("ショッピングシティベル"), "Fukui")
 check("KOBE PORT TOWER→Hyogo",
       scrape.correct_city("KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront"),
       "Hyogo")
@@ -274,6 +281,10 @@ check("吉伊卡哇首頁 p26 子頁稽核分類",
 check("吉伊卡哇首頁 p26 子頁高風險訊號",
       audit_rows[2].signals.labels,
       ["date", "date_range", "collectible", "venue"])
+check("吉伊卡哇官方總表終了頁→不列現行待審",
+      audit_chiikawa_subpages.is_ended_listing_title(
+          "【終了】ちいかわPOP UP STORE イオンモール秋田"),
+      True)
 
 sample_official_links = """
 <a href="/ja/cafe/news/260529_3377.html">ポケモンカフェ TOKYO は店内がリニューアル</a>
@@ -389,6 +400,26 @@ check("Kiddy Land同日活動已有campaign→單品頁不另列",
           "https://www.kiddyland.co.jp/event/miffy_nove202607/",
           "https://www.kiddyland.co.jp/event/miffy_osaka20260711/",
       ])
+
+sample_chiikawa_popups = (
+    "[ちいかわPOP UP STORE 高崎髙島屋](https://chiikawa-info.jp/p26/pus_tkst/index.html) "
+    "2026年7月29日(水)～8月17日(月) 高崎髙島屋 6階 催会場\n"
+    "[ちいかわPOP UP STORE イオンモールむさし村山]"
+    "(https://chiikawa-info.jp/p26/pus_amsm/index.html) "
+    "2026年7月24日(金)～8月11日(火祝) イオンモールむさし村山 1F センターコート\n"
+    "[ちいかわPOP UP STORE イオンモール太田](https://chiikawa-info.jp/p26/pus_aota/index.html) "
+    "2026年7月17日(金)～8月2日(日) イオンモール太田 ウエストモール1F 無印良品前\n"
+    "[ちいかわPOP UP STORE イオンモール高岡](https://chiikawa-info.jp/p26/pus_atko/index.html) "
+    "2026年7月10日(金)～7月26日(日) イオンモール高岡 東館1F セントラルコート"
+)
+popup_events = official_sources._chiikawa_popup_events_from_text(
+    sample_chiikawa_popups, correct_city=scrape.correct_city)
+check("吉伊卡哇官方POP UP總表新增場次解析",
+      [(e["city"], e["startDate"], e["endDate"]) for e in popup_events],
+      [("Gunma", "2026-07-29", "2026-08-17"),
+       ("Tokyo", "2026-07-24", "2026-08-11"),
+       ("Gunma", "2026-07-17", "2026-08-02"),
+       ("Toyama", "2026-07-10", "2026-07-26")])
 
 sample_otaru_info = (
     "### [ちいかわベビーカステラ](https://www.chiikawamogumogu.jp/stores/castella/) "
@@ -988,6 +1019,32 @@ check("AI去重防呆：不同店系生日活動不可併",
 check("AI去重防呆：同Flower Miffy活動可併",
       scrape._ai_dedup_locations_compatible([flower_pr, flower_birthday]),
       True)
+check("AI去重防呆：缺場館的同城同日不同活動不可刪",
+      scrape._ai_dedup_identity_supported([
+          ev(brand="chiikawa", title="吉伊卡哇讀書書展", type="campaign",
+             city="Tokyo", startDate="2026-07-17"),
+          ev(brand="chiikawa", title="まじかるちいかわ POP UP STORE", type="popup",
+             city="Tokyo", startDate="2026-07-17"),
+      ]),
+      False)
+check("AI去重防呆：已通過確定規則的同活動可併",
+      scrape._ai_dedup_identity_supported([flower_pr, flower_birthday]),
+      True)
+
+class _BrokenRotator:
+    def call(self, _prompt):
+        raise RuntimeError("temporary 503")
+
+
+retry_event = scrape.extract_event(_BrokenRotator(), "miffy", {
+    "title": "ミッフィー期間限定イベント",
+    "description": "",
+    "source": "test",
+    "pubDate": "",
+    "link": "https://example.com/event",
+})
+check("暫時性AI萃取失敗→不寫入processed、隔天可重試",
+      retry_event, {"_skipNoProcess": True})
 
 # 不破壞現況：實際線上 events.json 不應被誤併（筆數不變）
 try:
