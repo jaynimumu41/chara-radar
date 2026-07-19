@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-09T08:34:32+00:00",
+  "updatedAt": "2026-07-19T14:07:42+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 9,
@@ -882,26 +882,26 @@
       ]
     },
     "domain:collabo-cafe.com": {
-      "confirmed": 1,
+      "confirmed": 2,
       "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 2,
-      "score": 39,
+      "crossChecked": 3,
+      "score": 48,
       "label": "collabo-cafe.com",
       "kind": "site",
       "host": "collabo-cafe.com",
       "handle": "",
       "firstSeen": "2026-06-30",
-      "lastReviewed": "2026-07-05",
-      "lastOutcome": "rejected",
-      "notes": "Rejected after review against Panasonic special page: broad goods sale across market, land, theaters, and popups; no single cafe/menu or accepted venue-bounded event.",
+      "lastReviewed": "2026-07-19",
+      "lastOutcome": "confirmed",
+      "notes": "Matched the official magical_s page: Perie Chiba 1F Street 1 event space, 2026-07-17 to 2026-07-28.",
       "byBrand": {
         "chiikawa": {
-          "confirmed": 1,
+          "confirmed": 2,
           "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 2,
-          "score": 39
+          "crossChecked": 3,
+          "score": 48
         }
       },
       "byType": {
@@ -913,20 +913,20 @@
           "score": 30
         },
         "popup": {
-          "confirmed": 1,
+          "confirmed": 2,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 59
+          "crossChecked": 2,
+          "score": 68
         }
       },
       "byCountry": {
         "jp": {
-          "confirmed": 1,
+          "confirmed": 2,
           "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 2,
-          "score": 39
+          "crossChecked": 3,
+          "score": 48
         }
       },
       "history": [
@@ -959,6 +959,16 @@
           "eventId": "ch-4f1855",
           "evidenceCount": 1,
           "notes": "Rejected after review against Panasonic special page: broad goods sale across market, land, theaters, and popups; no single cafe/menu or accepted venue-bounded event."
+        },
+        {
+          "date": "2026-07-19",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-176c02",
+          "evidenceCount": 1,
+          "notes": "Matched the official magical_s page: Perie Chiba 1F Street 1 event space, 2026-07-17 to 2026-07-28."
         }
       ]
     },
@@ -1234,43 +1244,43 @@
     },
     "domain:famitsu.com": {
       "confirmed": 1,
-      "rejected": 0,
+      "rejected": 1,
       "uncertain": 0,
-      "crossChecked": 1,
-      "score": 59,
+      "crossChecked": 2,
+      "score": 50,
       "label": "famitsu.com",
       "kind": "news",
       "host": "famitsu.com",
       "handle": "",
       "firstSeen": "2026-07-04",
-      "lastReviewed": "2026-07-04",
-      "lastOutcome": "confirmed",
-      "notes": "Matched Dengeki duplicate and embedded Pokemon official X post for 2026-07-11 in-store release.",
+      "lastReviewed": "2026-07-19",
+      "lastOutcome": "rejected",
+      "notes": "Removed as out-of-scope: the cited Mega Evolution plush claim was corroborated only as Pokemon Center Online product pages with 2026-07-16 10:00 online sales, not a physical store event row.",
       "byBrand": {
         "pokemon": {
           "confirmed": 1,
-          "rejected": 0,
+          "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 59
+          "crossChecked": 2,
+          "score": 50
         }
       },
       "byType": {
         "new_product": {
           "confirmed": 1,
-          "rejected": 0,
+          "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 59
+          "crossChecked": 2,
+          "score": 50
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 1,
-          "rejected": 0,
+          "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 59
+          "crossChecked": 2,
+          "score": 50
         }
       },
       "history": [
@@ -1283,6 +1293,16 @@
           "eventId": "po-1be27e",
           "evidenceCount": 1,
           "notes": "Matched Dengeki duplicate and embedded Pokemon official X post for 2026-07-11 in-store release."
+        },
+        {
+          "date": "2026-07-19",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "po-f645a4",
+          "evidenceCount": 1,
+          "notes": "Removed as out-of-scope: the cited Mega Evolution plush claim was corroborated only as Pokemon Center Online product pages with 2026-07-16 10:00 online sales, not a physical store event row."
         }
       ]
     },
@@ -1661,6 +1681,232 @@
           "eventId": "mi-1807ae",
           "evidenceCount": 1,
           "notes": "Removed on 2026-07-08 after checking current Huis Ten Bosch official pages: the article is a broad seasonal roundup mixing fireworks and goods, and no single venue-bounded popup page with an explicit 2026-07-08 to 2026-10-12 event period was confirmed."
+        }
+      ]
+    },
+    "domain:ndw.jp": {
+      "confirmed": 1,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 59,
+      "label": "ndw.jp",
+      "kind": "site",
+      "host": "ndw.jp",
+      "handle": "",
+      "firstSeen": "2026-07-19",
+      "lastReviewed": "2026-07-19",
+      "lastOutcome": "confirmed",
+      "notes": "Matched Pokemon official goods page for Pokémon Timeless Adventure; physical store release is 2026-07-04 at Pokemon Center locations.",
+      "byBrand": {
+        "pokemon": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "byType": {
+        "new_product": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "history": [
+        {
+          "date": "2026-07-19",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "po-423bc7",
+          "evidenceCount": 1,
+          "notes": "Matched Pokemon official goods page for Pokémon Timeless Adventure; physical store release is 2026-07-04 at Pokemon Center locations."
+        }
+      ]
+    },
+    "domain:minyu-net.com": {
+      "confirmed": 1,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 2,
+      "score": 50,
+      "label": "minyu-net.com",
+      "kind": "site",
+      "host": "minyu-net.com",
+      "handle": "",
+      "firstSeen": "2026-07-19",
+      "lastReviewed": "2026-07-19",
+      "lastOutcome": "rejected",
+      "notes": "Removed as a duplicate of the existing structured official chiikawa-info.jp movie popup row for Spa Resort Hawaiians (2026-07-17 to 2026-09-06).",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 1,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 50
+        }
+      },
+      "byType": {
+        "popup": {
+          "confirmed": 1,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 50
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 1,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 50
+        }
+      },
+      "history": [
+        {
+          "date": "2026-07-19",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-62c6eb",
+          "evidenceCount": 1,
+          "notes": "Matched the official Hawaiians POP UP STORE page with explicit 2026-07-17 to 2026-09-06 dates and venue."
+        },
+        {
+          "date": "2026-07-19",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-62c6eb",
+          "evidenceCount": 1,
+          "notes": "Removed as a duplicate of the existing structured official chiikawa-info.jp movie popup row for Spa Resort Hawaiians (2026-07-17 to 2026-09-06)."
+        }
+      ]
+    },
+    "domain:kobe-journal.com": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 41,
+      "label": "kobe-journal.com",
+      "kind": "site",
+      "host": "kobe-journal.com",
+      "handle": "",
+      "firstSeen": "2026-07-19",
+      "lastReviewed": "2026-07-19",
+      "lastOutcome": "rejected",
+      "notes": "Removed as out-of-scope: JR Central official page shows a giant balloon display plus X giveaway, not a popup, event-limited goods sale, or cafe.",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byType": {
+        "campaign": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "history": [
+        {
+          "date": "2026-07-19",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "campaign",
+          "country": "JP",
+          "eventId": "ch-6a3a12",
+          "evidenceCount": 1,
+          "notes": "Removed as out-of-scope: JR Central official page shows a giant balloon display plus X giveaway, not a popup, event-limited goods sale, or cafe."
+        }
+      ]
+    },
+    "domain:asahi.com": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 41,
+      "label": "asahi.com",
+      "kind": "site",
+      "host": "asahi.com",
+      "handle": "",
+      "firstSeen": "2026-07-19",
+      "lastReviewed": "2026-07-19",
+      "lastOutcome": "rejected",
+      "notes": "Removed as out-of-scope after checking the official PARCO campaign page: this is a multi-store mall campaign with novelty/photo booth, not a single venue-bounded popup row.",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byType": {
+        "popup": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "history": [
+        {
+          "date": "2026-07-19",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-09a8e3",
+          "evidenceCount": 1,
+          "notes": "Removed as out-of-scope after checking the official PARCO campaign page: this is a multi-store mall campaign with novelty/photo booth, not a single venue-bounded popup row."
         }
       ]
     }

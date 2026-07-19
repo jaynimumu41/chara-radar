@@ -583,10 +583,10 @@
     "type": "campaign",
     "country": "JP",
     "city": "Tokyo",
-    "locationName": "お台場",
-    "startDate": "2026-07-27",
-    "endDate": "2026-08-02",
-    "summaryZh": "「お台場ファンライジング」活動中的「ちいかわ おばけの森」區域，將販售以幽靈為主題的吉伊卡哇限定周邊商品，並有來場特典。",
+    "locationName": "フジテレビ本社屋 22F フォーラム",
+    "startDate": "2026-07-25",
+    "endDate": "2026-08-23",
+    "summaryZh": "「お台場ファンライジング」中的「ちいかわ おばけの森」將於富士電視台本社屋登場，設有幽靈主題區域、來場特典與限定周邊販售。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -596,45 +596,21 @@
       "吉伊卡哇"
     ],
     "id": "ch-598fd5",
-    "sourceTitle": "リアルイベント「お台場ファンライジング」のエリア「ちいかわ おばけの森」のイメージ画像や来場特典などが解禁！おばけになった可愛いちいかわたちのグッズ販売も！ - 電撃ホビーウェブ",
+    "sourceTitle": "新作映画『踊る大捜査線 N.E.W.』人気番組『新しいカギ』『ぽかぽか』の参加が決定！人気キャラクターガチャピン・ムック、チャギントン、ちいかわ、スンスンに会える夏！ - フジテレビ",
     "sourceType": "official_social",
     "createdAt": "2026-07-10",
-    "sourceUrl": "https://hobby.dengeki.com/news/3076859/"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 巨大氣球現身大阪KITTE",
-    "type": "campaign",
-    "country": "JP",
-    "city": "Osaka",
-    "locationName": "KITTE (JR大阪駅直結)",
-    "startDate": "2026-07-08",
-    "endDate": "2026-10-31",
-    "summaryZh": "吉伊卡哇巨大氣球現身JR大阪站直結的KITTE，並舉辦可獲得聯名商品的抽獎活動。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "大阪",
-      "限定商品",
-      "抽獎",
-      "氣球"
-    ],
-    "id": "ch-6a3a12",
-    "sourceTitle": "ちいかわの『巨大バルーン』が、JR大阪駅直結の「KITTE」に登場してる。コラボグッズが当たるキャンペーンも - 神戸ジャーナル",
-    "sourceType": "official_social",
-    "createdAt": "2026-07-11",
-    "sourceUrl": "https://kobe-journal.com/archives/6249935575.html"
+    "sourceUrl": "https://www.fujitv.co.jp/fujitv/news/20260553.html"
   },
   {
     "brand": "pokemon",
-    "title": "寶可夢中心「出遊」主題周邊新品登場",
+    "title": "寶可夢中心「でかける」主題周邊新品登場",
     "type": "new_product",
     "country": "JP",
     "city": "",
     "locationName": "寶可夢中心",
     "startDate": "2026-07-04",
     "endDate": "",
-    "summaryZh": "為慶祝寶可夢30週年，以「出遊」為主題的全新周邊商品將於7月4日在日本寶可夢中心登場販售。",
+    "summaryZh": "寶可夢30週年「でかける」主題的 Pokémon Timeless Adventure 周邊，將於 2026-07-04 在日本寶可夢中心開賣。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -644,10 +620,10 @@
       "周邊"
     ],
     "id": "po-423bc7",
-    "sourceTitle": "7月4日（土）ポケモン30周年ピックアップテーマ「でかける」をテーマにしたグッズがポケモンセンターに登場 - Nintendo DREAM WEB",
+    "sourceTitle": "ピックアップテーマ「でかける」のイラストを使用したグッズが、ポケモンセンターに登場！｜ポケットモンスターオフィシャルサイト",
     "sourceType": "official_social",
     "createdAt": "2026-07-12",
-    "sourceUrl": "https://www.ndw.jp/pokemon-goods-260626/"
+    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/06/260626_st01.html"
   },
   {
     "brand": "chiikawa",
@@ -655,95 +631,23 @@
     "type": "popup",
     "country": "JP",
     "city": "Chiba",
-    "locationName": "まじかるちいかわ ポップアップストア",
+    "locationName": "ペリエ千葉 1F ストリート1 イベントスペース",
     "startDate": "2026-07-17",
     "endDate": "2026-07-28",
-    "summaryZh": "まじかるちいかわ快閃店將於千葉舉辦，販售周邊商品並設有主題咖啡廳。",
+    "summaryZh": "まじかるちいかわ POP UP STORE 將於 2026-07-17 至 2026-07-28 在ペリエ千葉舉辦，販售魔法主題周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "快閃店",
       "千葉",
       "周邊商品",
-      "主題咖啡廳"
+      "魔法主題"
     ],
     "id": "ch-176c02",
-    "sourceTitle": "まじかるちいかわ ポップアップストア in 千葉 7月17日より開催! - コラボカフェ",
+    "sourceTitle": "まじかるちいかわストア ｜ スパイラルキュート",
     "sourceType": "official_social",
     "createdAt": "2026-07-14",
-    "sourceUrl": "https://collabo-cafe.com/events/collabo/magical-chiikawa-pop-up-store-perie-chiba2026/"
-  },
-  {
-    "brand": "pokemon",
-    "title": "寶可夢 新商品發售",
-    "type": "new_product",
-    "country": "JP",
-    "city": "",
-    "locationName": "",
-    "startDate": "2026-07-16",
-    "endDate": "",
-    "summaryZh": "寶可夢推出全新系列玩偶，包含「寶可夢 劍盾」中的寶可夢，預計於7月16日發售。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "寶可夢",
-      "玩偶",
-      "新品",
-      "收藏"
-    ],
-    "id": "po-f645a4",
-    "sourceTitle": "『ポケモン』メガスターミーのぬいぐるみが7月16日10時より発売。絶妙なサイズ感がかわいい。メガゼラオラ、メガルカリオZ、メガゲッコウガも登場 - ファミ通",
-    "sourceType": "official_social",
-    "createdAt": "2026-07-15",
-    "sourceUrl": "https://www.famitsu.com/article/202607/81452"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "Chiikawa x PARCO 夏日主題活動",
-    "type": "popup",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "PARCO",
-    "startDate": "2026-07-17",
-    "endDate": "2026-08-02",
-    "summaryZh": "Chiikawa與PARCO合作舉辦夏日主題活動，現場可能販售限定周邊商品，並有原創 وهوية 贈品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "Chiikawa",
-      "PARCO",
-      "期間限定",
-      "周邊商品"
-    ],
-    "id": "ch-09a8e3",
-    "sourceTitle": "「ちいかわ破産だわ」【パルコ】7/17より「ちいかわ、パルコ、夏。」が開催。オリジナルポーチのプレゼントも - 朝日新聞",
-    "sourceType": "official_social",
-    "createdAt": "2026-07-17",
-    "sourceUrl": "https://www.asahi.com/and/w/article/16722408"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇夏威夷主題活動",
-    "type": "popup",
-    "country": "JP",
-    "city": "Fukushima",
-    "locationName": "Spa Resort Hawaiians",
-    "startDate": "",
-    "endDate": "2026-09-06",
-    "summaryZh": "日本福島縣磐城市 Spa Resort Hawaiians 將舉辦吉伊卡哇主題活動，現場設有快閃店，販售周邊商品，展期至9月6日。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "快閃店",
-      "限定商品",
-      "日本",
-      "福島"
-    ],
-    "id": "ch-62c6eb",
-    "sourceTitle": "ハワイアンズで「ちいかわ」イベント ポップアップストアやパネルが配置、9月6日まで:イベント・レジャー - 福島民友新聞社",
-    "sourceType": "official_social",
-    "createdAt": "2026-07-18",
-    "sourceUrl": "https://www.minyu-net.com/news/detail/2026071807473152459"
+    "sourceUrl": "https://chiikawa-info.jp/magical_s.html"
   },
   {
     "brand": "chiikawa",
