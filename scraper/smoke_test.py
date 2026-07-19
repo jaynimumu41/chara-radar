@@ -786,6 +786,18 @@ check("today_updates防呆：Chiikawa羽田轉載不可列新增",
              sourceUrl="https://collabo-cafe.com/events/collabo/chiikawa-popup-store-haneda-airport2026/"),
       ], ["ch-collabo-haneda"])),
       True)
+check("today_updates防呆：currentEventCount與events.json不一致要報錯",
+      data_lint.today_update_count_errors(
+          [ev(id="a"), ev(id="b")],
+          {"currentEventCount": 3, "newEventCount": 0},
+          []),
+      ["today_updates.json currentEventCount mismatch: expected 2, got 3"])
+check("today_updates防呆：newEventCount與newEventIds不一致要報錯",
+      data_lint.today_update_count_errors(
+          [ev(id="a"), ev(id="b")],
+          {"currentEventCount": 2, "newEventCount": 2},
+          ["b"]),
+      ["today_updates.json newEventCount mismatch: expected 1, got 2"])
 
 out, _ = scrape.dedup_events([
     ev(brand="chiikawa", title="吉伊卡哇袋著走 台北快閃店", type="popup",
@@ -885,6 +897,16 @@ out, _ = scrape.dedup_events([
        sourceUrl="https://b.example/y"),
 ])
 check("同館不同檔期→不併（2筆）", len(out), 2)
+
+out, _ = scrape.dedup_events([
+    ev(brand="miffy", title="Miffy 美術館に行こう！展", type="campaign", city="Kagoshima",
+       startDate="2026-07-17", endDate="2026-08-30", locationName="鹿児島市立美術館",
+       sourceUrl="https://dickbruna.jp/news/202606/46804/"),
+    ev(brand="miffy", title="Miffy ミッフィーzakkaフェスタ", type="popup", city="Kagoshima",
+       startDate="2026-07-17", endDate="2026-07-29", locationName="鹿児島・山形屋",
+       sourceUrl="https://dickbruna.jp/news/202607/47282/"),
+])
+check("同品牌同城同日起日但明確不同場館→不併（2筆）", len(out), 2)
 
 # 連鎖/各店販售點不能只靠 locationName 去重：同一家寶可夢中心可能連續推出不同新品
 out, _ = scrape.dedup_events([

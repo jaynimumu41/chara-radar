@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-19T14:07:42+00:00",
+  "updatedAt": "2026-07-19T14:44:13+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 9,
@@ -1907,6 +1907,60 @@
           "eventId": "ch-09a8e3",
           "evidenceCount": 1,
           "notes": "Removed as out-of-scope after checking the official PARCO campaign page: this is a multi-store mall campaign with novelty/photo booth, not a single venue-bounded popup row."
+        }
+      ]
+    },
+    "domain:fujitv.co.jp": {
+      "confirmed": 1,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 0,
+      "score": 57,
+      "label": "fujitv.co.jp",
+      "kind": "site",
+      "host": "fujitv.co.jp",
+      "handle": "",
+      "firstSeen": "2026-07-19",
+      "lastReviewed": "2026-07-19",
+      "lastOutcome": "confirmed",
+      "notes": "Official Fuji TV event page confirms Chiikawa Obake no Mori at Fuji TV headquarters 22F Forum from 2026-07-25 through 2026-08-23, with visitor benefits and event-original goods.",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
+        }
+      },
+      "byType": {
+        "campaign": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
+        }
+      },
+      "history": [
+        {
+          "date": "2026-07-19",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "campaign",
+          "country": "JP",
+          "eventId": "ch-598fd5",
+          "evidenceCount": 0,
+          "notes": "Official Fuji TV event page confirms Chiikawa Obake no Mori at Fuji TV headquarters 22F Forum from 2026-07-25 through 2026-08-23, with visitor benefits and event-original goods."
         }
       ]
     }

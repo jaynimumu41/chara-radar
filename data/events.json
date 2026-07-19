@@ -597,7 +597,7 @@
     ],
     "id": "ch-598fd5",
     "sourceTitle": "新作映画『踊る大捜査線 N.E.W.』人気番組『新しいカギ』『ぽかぽか』の参加が決定！人気キャラクターガチャピン・ムック、チャギントン、ちいかわ、スンスンに会える夏！ - フジテレビ",
-    "sourceType": "official_social",
+    "sourceType": "official_site",
     "createdAt": "2026-07-10",
     "sourceUrl": "https://www.fujitv.co.jp/fujitv/news/20260553.html"
   },
@@ -1626,5 +1626,52 @@
     "createdAt": "2026-07-19",
     "sourceTitle": "2026年7月4日(土)～スタート!miffy style 各店ノベルティデイ - キデイランド",
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_nove202607/"
+  },
+  {
+    "brand": "miffy",
+    "title": "Miffy 美術館に行こう！展　鹿児島市立美術館",
+    "type": "campaign",
+    "country": "JP",
+    "city": "Kagoshima",
+    "locationName": "鹿児島市立美術館",
+    "startDate": "2026-07-17",
+    "endDate": "2026-08-30",
+    "summaryZh": "Miffy（米飛兔）官方展覽「美術館に行こう！展」於鹿児島市立美術館舉辦，展期為2026-07-17至2026-08-30。",
+    "needReservation": false,
+    "hasLimitedGoods": false,
+    "tags": [
+      "米飛兔",
+      "展覽",
+      "日本"
+    ],
+    "id": "mi-98d19d",
+    "sourceType": "official_site",
+    "createdAt": "2026-07-19",
+    "sourceTitle": "鹿児島市立美術館にて「美術館に行こう！」展開催 - dickbruna.jp",
+    "sourceUrl": "https://dickbruna.jp/news/202606/46804/"
+  },
+  {
+    "brand": "miffy",
+    "title": "Miffy ミッフィーzakkaフェスタ　そごう千葉店",
+    "type": "popup",
+    "country": "JP",
+    "city": "Chiba",
+    "locationName": "そごう千葉店 6階＝催事場",
+    "startDate": "2026-08-11",
+    "endDate": "2026-08-24",
+    "summaryZh": "Miffy zakka Festa 將於そごう千葉店舉辦，免費入場，集結2026年版限定商品與超過1,000款周邊。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "期間限定",
+      "限定周邊",
+      "日本"
+    ],
+    "id": "mi-b6d40f",
+    "sourceType": "official_site",
+    "createdAt": "2026-07-19",
+    "sourceTitle": "そごう千葉店で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
+    "sourceUrl": "https://dickbruna.jp/news/202607/47160/"
   }
 ]

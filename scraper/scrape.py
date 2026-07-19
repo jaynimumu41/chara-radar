@@ -1252,6 +1252,28 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
         elif lkey and lkey in loc_keys:
             hit = loc_keys[lkey]
 
+        # 同品牌、同城市、同日起跑不代表同一活動。兩筆都有明確且不同的場館時，
+        # 除非命中特殊跨來源活動鍵，否則不可合併。
+        if hit is not None:
+            kept_event = kept[hit]
+            current_loc = ev.get("locationName", "")
+            kept_loc = kept_event.get("locationName", "")
+            current_venue = canon_venue(current_loc, ev.get("title", ""))
+            kept_venue = canon_venue(kept_loc, kept_event.get("title", ""))
+            same_known_venue = bool(current_venue and current_venue == kept_venue)
+            special_match = bool(
+                (ckey and ckey == chain_campaign_key(kept_event))
+                or (skey and skey == special_activity_key(kept_event))
+            )
+            concrete_location_conflict = bool(
+                current_loc
+                and kept_loc
+                and not same_known_venue
+                and SequenceMatcher(None, _norm(current_loc), _norm(kept_loc)).ratio() < 0.5
+            )
+            if concrete_location_conflict and not special_match:
+                hit = None
+
         # 城市鐵則：兩筆城市都有值且不同 = 不同活動，即使同來源頁也不合併。
         # （彙整/排程清單頁會列多個不同城市的場次共用同一 URL，如各地出張所）
         if hit is not None and city and kept[hit].get("city") and city != kept[hit].get("city"):

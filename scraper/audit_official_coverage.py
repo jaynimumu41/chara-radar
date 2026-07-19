@@ -94,6 +94,21 @@ IGNORED_OFFICIAL_PAGES: dict[str, str] = {
     "https://tw.portal-pokemon.com/goods/post-4794/": (
         "broad online furniture product page, not a Pokemon Center TAIPEI launch"
     ),
+    "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-shibuya/news/202607/000413.html": (
+        "Pokemon Design Lab crowd-control and advance-lottery guidance, not a new event or product launch"
+    ),
+    "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-shibuya/news/202607/000399.html": (
+        "temporary Pokemon Design Lab service suspension notice"
+    ),
+    "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-shibuya/events/202607/000394.html": (
+        "media-focused product presentation with only a small public lottery allocation; excluded conservatively"
+    ),
+    "https://dickbruna.jp/news/202607/47193/": (
+        "general Liberty Fabrics collaboration goods, not a venue-bounded popup or store event"
+    ),
+    "https://dickbruna.jp/news/202606/46872/": (
+        "open-ended Flower Miffy stock-limited birthday campaign aged out with no current availability confirmation"
+    ),
     "https://dickbruna.jp/news/202606/46833/": (
         "Miffy zakka Festa season schedule overview; individual venue pages are parsed when detailed dates publish"
     ),

@@ -71,6 +71,22 @@ def today_update_duplicate_errors(events: list[dict], new_event_ids: list[str]) 
     return errors
 
 
+def today_update_count_errors(events: list[dict], updates: dict, new_event_ids: list[str]) -> list[str]:
+    """Keep summary counts synchronized with the public event data."""
+    errors: list[str] = []
+    if updates.get("currentEventCount") != len(events):
+        errors.append(
+            "today_updates.json currentEventCount mismatch: "
+            f"expected {len(events)}, got {updates.get('currentEventCount')}"
+        )
+    if updates.get("newEventCount") != len(new_event_ids):
+        errors.append(
+            "today_updates.json newEventCount mismatch: "
+            f"expected {len(new_event_ids)}, got {updates.get('newEventCount')}"
+        )
+    return errors
+
+
 def main() -> int:
     errors: list[str] = []
     warnings: list[str] = []
@@ -158,6 +174,7 @@ def main() -> int:
                 missing_update_ids = sorted(str(x) for x in new_event_ids if x not in event_ids)
                 if missing_update_ids:
                     errors.append(f"today_updates.json references missing event ids: {', '.join(missing_update_ids)}")
+                errors.extend(today_update_count_errors(events, updates, [str(x) for x in new_event_ids]))
                 counts = Counter(e.get("brand", "") for e in events if e.get("id") in set(new_event_ids))
                 counts_by_brand = updates.get("countsByBrand", {})
                 if isinstance(counts_by_brand, dict):
