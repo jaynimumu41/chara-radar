@@ -1797,13 +1797,13 @@
   {
     "brand": "chiikawa",
     "title": "吉伊卡哇限定自動販賣機",
-    "type": "popup",
+    "type": "new_product",
     "country": "JP",
     "city": "Tokyo",
     "locationName": "KITTE丸の内",
-    "startDate": "2026-07-20",
-    "endDate": "2026-07-26",
-    "summaryZh": "吉伊卡哇限定自動販賣機於KITTE丸之內登場，販售三麗鷗聯名玩偶及模型。",
+    "startDate": "2026-07-18",
+    "endDate": "",
+    "summaryZh": "吉伊卡哇限定自動販賣機於KITTE丸之內1樓及地下一樓登場，販售Kiramekko玩偶與迷你模型。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1812,9 +1812,9 @@
       "三麗鷗聯名"
     ],
     "id": "ch-38b47a",
-    "sourceTitle": "『ちいかわ』の限定自動販売機がKITTE丸の内に登場！ サンリオコラボぬいぐるみやフィギュアを販売 - 電撃オンライン",
+    "sourceTitle": "【お買い物や東京観光の合間に】ＫＩＴＴＥ丸の内に「ちいかわ」の自動販売機が登場「Kiramekko（きらめっこ）」と「GPSBOX」が7月18日（土）より販売開始",
     "sourceType": "official_social",
     "createdAt": "2026-07-20",
-    "sourceUrl": "https://dengekionline.com/article/202607/81810"
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000063.000168561.html"
   }
 ]

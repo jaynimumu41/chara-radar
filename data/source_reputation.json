@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-19T14:44:13+00:00",
+  "updatedAt": "2026-07-20T08:33:45+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 9,
@@ -1307,19 +1307,19 @@
       ]
     },
     "domain:dengekionline.com": {
-      "confirmed": 0,
+      "confirmed": 1,
       "rejected": 1,
       "uncertain": 0,
-      "crossChecked": 1,
-      "score": 41,
+      "crossChecked": 2,
+      "score": 50,
       "label": "dengekionline.com",
       "kind": "site",
       "host": "dengekionline.com",
       "handle": "",
       "firstSeen": "2026-07-04",
-      "lastReviewed": "2026-07-04",
-      "lastOutcome": "rejected",
-      "notes": "Claim matched same 2026-07-11 Henshin Metamon release already kept from Famitsu; removed as duplicate and prior title/summary were wrong.",
+      "lastReviewed": "2026-07-20",
+      "lastOutcome": "confirmed",
+      "notes": "Original article accurately reported the July 18 KITTE Marunouchi vending-machine launch; company PR TIMES release confirmed venue, products, and open-ended start. Scraper dates were corrected.",
       "byBrand": {
         "pokemon": {
           "confirmed": 0,
@@ -1327,24 +1327,31 @@
           "uncertain": 0,
           "crossChecked": 1,
           "score": 41
+        },
+        "chiikawa": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
         }
       },
       "byType": {
         "new_product": {
-          "confirmed": 0,
+          "confirmed": 1,
           "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 2,
+          "score": 50
         }
       },
       "byCountry": {
         "jp": {
-          "confirmed": 0,
+          "confirmed": 1,
           "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 2,
+          "score": 50
         }
       },
       "history": [
@@ -1357,6 +1364,16 @@
           "eventId": "po-67e262",
           "evidenceCount": 1,
           "notes": "Claim matched same 2026-07-11 Henshin Metamon release already kept from Famitsu; removed as duplicate and prior title/summary were wrong."
+        },
+        {
+          "date": "2026-07-20",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "ch-38b47a",
+          "evidenceCount": 1,
+          "notes": "Original article accurately reported the July 18 KITTE Marunouchi vending-machine launch; company PR TIMES release confirmed venue, products, and open-ended start. Scraper dates were corrected."
         }
       ]
     },
