@@ -169,30 +169,6 @@
   },
   {
     "brand": "pokemon",
-    "title": "Pokemon Center 出張所 in イオンモール神戸北",
-    "type": "popup",
-    "country": "JP",
-    "city": "Hyogo",
-    "locationName": "イオンモール神戸北 専門店街3階 イオンホール",
-    "startDate": "2026-06-05",
-    "endDate": "2026-07-22",
-    "summaryZh": "寶可夢中心出張所於兵庫県イオンモール神戸北期間限定登場，販售多樣寶可夢周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "出張所",
-      "快閃店",
-      "日本"
-    ],
-    "id": "po-2a73c0",
-    "sourceType": "official_social",
-    "createdAt": "2026-07-22",
-    "sourceTitle": "ポケモンセンター出張所inイオンモール神戸北（2026-06-05～2026-07-22）",
-    "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
-  },
-  {
-    "brand": "pokemon",
     "title": "Pokemon Center 出張所 in イオンモール今治新都市",
     "type": "popup",
     "country": "JP",
@@ -308,7 +284,7 @@
     ],
     "id": "po-d0b8f9",
     "sourceType": "official_site",
-    "createdAt": "2026-07-22",
+    "createdAt": "2026-07-23",
     "sourceTitle": "ポケモンカフェのメニューやショーが新しくなるよ！「ポケモンカフェ TOKYO」は、店内がリニューアル！",
     "sourceUrl": "https://www.pokemon-cafe.jp/ja/cafe/news/260529_3377.html"
   },
@@ -333,7 +309,7 @@
     ],
     "id": "po-4090c2",
     "sourceType": "official_site",
-    "createdAt": "2026-07-22",
+    "createdAt": "2026-07-23",
     "sourceTitle": "「選べるポケモンラテ」に、メルタンとメルメタルが仲間入り！",
     "sourceUrl": "https://www.pokemon-cafe.jp/ja/cafe/news/260703_3439.html"
   },
@@ -358,7 +334,7 @@
     ],
     "id": "po-e4c3bc",
     "sourceType": "official_site",
-    "createdAt": "2026-07-22",
+    "createdAt": "2026-07-23",
     "sourceTitle": "≪K.UNO × U-TREASURE POP UP Promotion≫開展！ - 台灣寶可夢官方網站",
     "sourceUrl": "https://tw.portal-pokemon.com/goods/post-5267/"
   },
@@ -1490,6 +1466,29 @@
     "sourceUrl": "https://chiikawa-info.jp/p26/mck_scpus/index.html#c2ca3342"
   },
   {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇 POP UP STORE 初登場",
+    "type": "popup",
+    "country": "JP",
+    "city": "Chiba",
+    "locationName": "柏高島屋",
+    "startDate": "2026-07-23",
+    "endDate": "2026-08-12",
+    "summaryZh": "吉伊卡哇 POP UP STORE 首次於柏高島屋登場，販售周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "快閃店",
+      "限定商品",
+      "柏高島屋"
+    ],
+    "id": "ch-217a1e",
+    "sourceTitle": "【柏高島屋】ちいかわPOP UP STORE初開催！！",
+    "sourceType": "official_social",
+    "createdAt": "2026-07-22",
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000001498.000069859.html"
+  },
+  {
     "brand": "miffy",
     "title": "Miffy ミッフィーzakkaフェスタ　鹿児島・山形屋",
     "type": "popup",
@@ -1508,32 +1507,9 @@
     ],
     "id": "mi-38c94a",
     "sourceType": "official_site",
-    "createdAt": "2026-07-22",
+    "createdAt": "2026-07-23",
     "sourceTitle": "鹿児島・山形屋で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202607/47282/"
-  },
-  {
-    "brand": "miffy",
-    "title": "Miffy Flower Miffy Pop-Up Marche",
-    "type": "popup",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "Flower Miffy Pop-Up Marche",
-    "startDate": "2026-07-09",
-    "endDate": "2026-07-22",
-    "summaryZh": "Miffy（米飛兔）官方活動「Flower Miffy Pop-Up Marche」於Flower Miffy Pop-Up Marche期間限定登場，販售限定周邊／餐點。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "期間限定",
-      "日本"
-    ],
-    "id": "mi-ad90b6",
-    "sourceType": "official_site",
-    "createdAt": "2026-07-22",
-    "sourceTitle": "「Flower Miffy Pop-Up Marche」が渋谷ヒカリエに期間限定オープン - dickbruna.jp",
-    "sourceUrl": "https://dickbruna.jp/news/202607/47120/"
   },
   {
     "brand": "miffy",
@@ -1554,7 +1530,7 @@
     ],
     "id": "mi-88dac4",
     "sourceType": "official_site",
-    "createdAt": "2026-07-22",
+    "createdAt": "2026-07-23",
     "sourceTitle": "＜期間延長決定＞ハウステンボス「ミッフィーバースデーマンス」 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/47004/"
   },
@@ -1577,7 +1553,7 @@
     ],
     "id": "mi-379534",
     "sourceType": "official_site",
-    "createdAt": "2026-07-22",
+    "createdAt": "2026-07-23",
     "sourceTitle": "松坂屋静岡店で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/46825/"
   },
@@ -1600,7 +1576,7 @@
     ],
     "id": "mi-98d19d",
     "sourceType": "official_site",
-    "createdAt": "2026-07-22",
+    "createdAt": "2026-07-23",
     "sourceTitle": "鹿児島市立美術館にて「美術館に行こう！」展開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/46804/"
   },
@@ -1623,7 +1599,7 @@
     ],
     "id": "mi-ea7f4f",
     "sourceType": "official_site",
-    "createdAt": "2026-07-22",
+    "createdAt": "2026-07-23",
     "sourceTitle": "「KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront」～Night Time～開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/46792/"
   },
@@ -1646,7 +1622,7 @@
     ],
     "id": "mi-8b50be",
     "sourceType": "official_site",
-    "createdAt": "2026-07-22",
+    "createdAt": "2026-07-23",
     "sourceTitle": "「誕生70周年記念 ミッフィー展」広島会場にて開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/46634/"
   },
@@ -1669,31 +1645,56 @@
     ],
     "id": "mi-284bf0",
     "sourceType": "official_site",
-    "createdAt": "2026-07-22",
+    "createdAt": "2026-07-23",
     "sourceTitle": "2026年7月4日(土)～スタート!miffy style 各店ノベルティデイ - キデイランド",
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_nove202607/"
   },
   {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE 初登場",
-    "type": "popup",
+    "brand": "miffy",
+    "title": "Miffy合作套票",
+    "type": "campaign",
     "country": "JP",
-    "city": "Chiba",
-    "locationName": "柏高島屋",
-    "startDate": "2026-07-23",
-    "endDate": "2026-08-12",
-    "summaryZh": "吉伊卡哇 POP UP STORE 首次於柏高島屋登場，販售周邊商品。",
+    "city": "Hyogo",
+    "locationName": "アトア (Atoa)",
+    "startDate": "2026-07-30",
+    "endDate": "2026-09-30",
+    "summaryZh": "Miffy合作套票「90天內可無限次入場」，限量500張。內含館內展示與周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
-      "快閃店",
+      "Miffy",
       "限定商品",
-      "柏高島屋"
+      "日本",
+      "神戶"
     ],
-    "id": "ch-217a1e",
-    "sourceTitle": "【柏高島屋】ちいかわPOP UP STORE初開催！！",
+    "id": "mi-7470c3",
+    "sourceTitle": "アトアに「90日間何度でも」通える『ミッフィーコラボチケット』が販売中。500枚限定、館内展示やグッズも - 神戸ジャーナル",
     "sourceType": "official_social",
-    "createdAt": "2026-07-22",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000001498.000069859.html"
+    "createdAt": "2026-07-23",
+    "sourceUrl": "https://kobe-journal.com/archives/9944973848.html"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "Chiikawa x 東京ばな奈 聯名環保袋組",
+    "type": "new_product",
+    "country": "JP",
+    "city": "Tokyo",
+    "locationName": "東京ばな奈ワールド",
+    "startDate": "2026-11-22",
+    "endDate": "",
+    "summaryZh": "東京ばな奈推出第二彈Chiikawa聯名商品「環保袋組」，內含環保袋與香蕉布丁蛋糕，方便攜帶。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "聯名商品",
+      "環保袋",
+      "東京",
+      "甜點"
+    ],
+    "id": "ch-7a3682",
+    "sourceTitle": "【ちいかわ×東京ばな奈】コラボグッズ第2弾『エコバッグセット』誕生！持ち歩きに便利なエコバッグとバナナプリンケーキをセットで - PR TIMES",
+    "sourceType": "official_social",
+    "createdAt": "2026-07-23",
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002069.000025606.html"
   }
 ]
