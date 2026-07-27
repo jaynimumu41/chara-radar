@@ -284,7 +284,7 @@
     ],
     "id": "po-d0b8f9",
     "sourceType": "official_site",
-    "createdAt": "2026-07-26",
+    "createdAt": "2026-07-27",
     "sourceTitle": "ポケモンカフェのメニューやショーが新しくなるよ！「ポケモンカフェ TOKYO」は、店内がリニューアル！",
     "sourceUrl": "https://www.pokemon-cafe.jp/ja/cafe/news/260529_3377.html"
   },
@@ -309,7 +309,7 @@
     ],
     "id": "po-4090c2",
     "sourceType": "official_site",
-    "createdAt": "2026-07-26",
+    "createdAt": "2026-07-27",
     "sourceTitle": "「選べるポケモンラテ」に、メルタンとメルメタルが仲間入り！",
     "sourceUrl": "https://www.pokemon-cafe.jp/ja/cafe/news/260703_3439.html"
   },
@@ -334,33 +334,9 @@
     ],
     "id": "po-e4c3bc",
     "sourceType": "official_site",
-    "createdAt": "2026-07-26",
+    "createdAt": "2026-07-27",
     "sourceTitle": "≪K.UNO × U-TREASURE POP UP Promotion≫開展！ - 台灣寶可夢官方網站",
     "sourceUrl": "https://tw.portal-pokemon.com/goods/post-5267/"
-  },
-  {
-    "brand": "miffy",
-    "title": "miffy style東京駅店限定 駅長さんミッフィーぬいぐるみ&マスコット&チャーム",
-    "type": "new_product",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "miffy style 東京駅店",
-    "startDate": "2026-07-04",
-    "endDate": "",
-    "summaryZh": "miffy style 東京駅店將於 2026-07-04 發售店鋪限定「駅長さんミッフィー」絨毛娃娃、吊飾與掛件；首日若預期人潮擁擠，店方可能發放入場整理券。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "miffy",
-      "東京站",
-      "限定商品",
-      "駅長さんミッフィー"
-    ],
-    "id": "mi-77e947",
-    "sourceTitle": "2026年7月4日(土)発売予定!miffy style東京駅店限定 駅長さんミッフィーぬいぐるみ&マスコット&チャーム | キデイランドへようこそ！",
-    "sourceType": "official_site",
-    "createdAt": "2026-06-28",
-    "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_tokyo20260704/"
   },
   {
     "brand": "pokemon",
@@ -890,54 +866,6 @@
   },
   {
     "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE ららぽーと磐田",
-    "type": "popup",
-    "country": "JP",
-    "city": "Shizuoka",
-    "locationName": "ららぽーと磐田 1F 中央広場",
-    "startDate": "2026-07-10",
-    "endDate": "2026-07-26",
-    "summaryZh": "ちいかわ POP UP STORE 於ららぽーと磐田期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-6c63f6",
-    "sourceType": "official_site",
-    "createdAt": "2026-07-22",
-    "sourceTitle": "ちいかわPOP UP STORE ららぽーと磐田(2026-07-10～2026-07-26) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_lliw/index.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE イオンモール高岡",
-    "type": "popup",
-    "country": "JP",
-    "city": "Toyama",
-    "locationName": "イオンモール高岡 東館1F セントラルコート",
-    "startDate": "2026-07-10",
-    "endDate": "2026-07-26",
-    "summaryZh": "ちいかわ POP UP STORE 於イオンモール高岡期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-b9de0f",
-    "sourceType": "official_site",
-    "createdAt": "2026-07-22",
-    "sourceTitle": "ちいかわPOP UP STORE イオンモール高岡(2026-07-10～2026-07-26) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_atko/index.html"
-  },
-  {
-    "brand": "chiikawa",
     "title": "吉伊卡哇 POP UP STORE グランデュオ立川",
     "type": "popup",
     "country": "JP",
@@ -983,30 +911,6 @@
     "createdAt": "2026-07-22",
     "sourceTitle": "ちいかわPOP UP STORE 0%OKINAWA(2026-06-05～2026-08-30) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_aonr/index.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE キャナルシティオーパ",
-    "type": "popup",
-    "country": "JP",
-    "city": "Fukuoka",
-    "locationName": "キャナルシティオーパ センターウォークB1F",
-    "startDate": "2026-05-16",
-    "endDate": "2026-07-26",
-    "summaryZh": "ちいかわ POP UP STORE 於キャナルシティオーパ期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-efe379",
-    "sourceType": "official_site",
-    "createdAt": "2026-07-22",
-    "sourceTitle": "ちいかわPOP UP STORE キャナルシティオーパ(2026-05-16～2026-07-26) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_cnco/index.html"
   },
   {
     "brand": "chiikawa",
@@ -1586,6 +1490,52 @@
   },
   {
     "brand": "miffy",
+    "title": "Miffy miffy style 各店ノベルティデイ",
+    "type": "campaign",
+    "country": "JP",
+    "city": "",
+    "locationName": "miffy style 各店＋キデイランド対象店",
+    "startDate": "2026-07-04",
+    "endDate": "",
+    "summaryZh": "miffy style 各店自 2026-07-04 起舉辦店頭購入特典活動，贈品送完為止，線上店不適用。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "miffy style",
+      "日本"
+    ],
+    "id": "mi-284bf0",
+    "sourceType": "official_site",
+    "createdAt": "2026-07-26",
+    "sourceTitle": "2026年7月4日(土)～スタート!miffy style 各店ノベルティデイ - キデイランド",
+    "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_nove202607/"
+  },
+  {
+    "brand": "miffy",
+    "title": "Miffy ミッフィーzakkaフェスタ　そごう横浜店",
+    "type": "popup",
+    "country": "JP",
+    "city": "Kanagawa",
+    "locationName": "そごう横浜店",
+    "startDate": "2026-08-01",
+    "endDate": "2026-08-17",
+    "summaryZh": "Miffy（米飛兔）官方活動「ミッフィーzakkaフェスタ」於そごう横浜店期間限定登場，販售限定周邊／餐點。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "期間限定",
+      "日本"
+    ],
+    "id": "mi-af2f79",
+    "sourceType": "official_site",
+    "createdAt": "2026-07-27",
+    "sourceTitle": "そごう横浜店で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
+    "sourceUrl": "https://dickbruna.jp/news/202607/47472/"
+  },
+  {
+    "brand": "miffy",
     "title": "Miffy ミッフィーzakkaフェスタ　鹿児島・山形屋",
     "type": "popup",
     "country": "JP",
@@ -1603,7 +1553,7 @@
     ],
     "id": "mi-38c94a",
     "sourceType": "official_site",
-    "createdAt": "2026-07-26",
+    "createdAt": "2026-07-27",
     "sourceTitle": "鹿児島・山形屋で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202607/47282/"
   },
@@ -1626,7 +1576,7 @@
     ],
     "id": "mi-88dac4",
     "sourceType": "official_site",
-    "createdAt": "2026-07-26",
+    "createdAt": "2026-07-27",
     "sourceTitle": "＜期間延長決定＞ハウステンボス「ミッフィーバースデーマンス」 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/47004/"
   },
@@ -1649,7 +1599,7 @@
     ],
     "id": "mi-379534",
     "sourceType": "official_site",
-    "createdAt": "2026-07-26",
+    "createdAt": "2026-07-27",
     "sourceTitle": "松坂屋静岡店で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/46825/"
   },
@@ -1672,7 +1622,7 @@
     ],
     "id": "mi-98d19d",
     "sourceType": "official_site",
-    "createdAt": "2026-07-26",
+    "createdAt": "2026-07-27",
     "sourceTitle": "鹿児島市立美術館にて「美術館に行こう！」展開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/46804/"
   },
@@ -1695,7 +1645,7 @@
     ],
     "id": "mi-ea7f4f",
     "sourceType": "official_site",
-    "createdAt": "2026-07-26",
+    "createdAt": "2026-07-27",
     "sourceTitle": "「KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront」～Night Time～開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/46792/"
   },
@@ -1718,9 +1668,32 @@
     ],
     "id": "mi-8b50be",
     "sourceType": "official_site",
-    "createdAt": "2026-07-26",
+    "createdAt": "2026-07-27",
     "sourceTitle": "「誕生70周年記念 ミッフィー展」広島会場にて開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/46634/"
+  },
+  {
+    "brand": "miffy",
+    "title": "Miffy miffy × Cosme Kitchen",
+    "type": "cafe",
+    "country": "JP",
+    "city": "",
+    "locationName": "miffy × Cosme Kitchen ",
+    "startDate": "2026-08-21",
+    "endDate": "",
+    "summaryZh": "Miffy（米飛兔）官方活動「miffy × Cosme Kitchen 」於miffy × Cosme Kitchen 期間限定登場，販售限定周邊／餐點。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "期間限定",
+      "日本"
+    ],
+    "id": "mi-a3137a",
+    "sourceType": "official_site",
+    "createdAt": "2026-07-27",
+    "sourceTitle": "「miffy × Cosme Kitchen 」コスメキッチンとミッフィーのコラボ第3弾登場 - dickbruna.jp",
+    "sourceUrl": "https://dickbruna.jp/news/202607/47496/"
   },
   {
     "brand": "miffy",
@@ -1741,20 +1714,20 @@
     ],
     "id": "mi-7f8804",
     "sourceType": "official_site",
-    "createdAt": "2026-07-26",
+    "createdAt": "2026-07-27",
     "sourceTitle": "2026年8月8日(土)～スタート!miffy style 各店ノベルティデイ - キデイランド",
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_nove202608/"
   },
   {
     "brand": "miffy",
-    "title": "Miffy miffy style 各店ノベルティデイ",
-    "type": "campaign",
+    "title": "Miffy miffy style東京駅店限定 駅長さんミッフィーぬいぐるみ&マスコット&チャーム",
+    "type": "new_product",
     "country": "JP",
-    "city": "",
-    "locationName": "miffy style 各店＋キデイランド対象店",
+    "city": "Tokyo",
+    "locationName": "miffy style 東京駅店",
     "startDate": "2026-07-04",
     "endDate": "",
-    "summaryZh": "miffy style 各店自 2026-07-04 起舉辦店頭購入特典活動，贈品送完為止，線上店不適用。",
+    "summaryZh": "Miffy style 店頭限定新品發售；若同日已有較大的店頭活動，單品頁不另列為正式情報。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1762,10 +1735,58 @@
       "miffy style",
       "日本"
     ],
-    "id": "mi-284bf0",
+    "id": "mi-c466d4",
     "sourceType": "official_site",
-    "createdAt": "2026-07-26",
-    "sourceTitle": "2026年7月4日(土)～スタート!miffy style 各店ノベルティデイ - キデイランド",
-    "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_nove202607/"
+    "createdAt": "2026-07-27",
+    "sourceTitle": "2026年7月4日(土)発売予定!miffy style東京駅店限定 駅長さんミッフィーぬいぐるみ&マスコット&チャーム - キデイランド",
+    "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_tokyo20260704/"
+  },
+  {
+    "brand": "miffy",
+    "title": "米飛兔zakka festa 期間限定店",
+    "type": "popup",
+    "country": "JP",
+    "city": "Chiba",
+    "locationName": "そごう千葉店",
+    "startDate": "2026-08-06",
+    "endDate": "2026-08-28",
+    "summaryZh": "米飛兔zakka festa於そごう千葉店舉辦，販售「蘋果圍裙」造型的限定商品，現場可購買到獨家周邊。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "期間限定店",
+      "周邊商品",
+      "日本"
+    ],
+    "id": "mi-332de9",
+    "sourceTitle": "「ミッフィーzakkaフェスタ」そごう千葉店で、”りんごエプロン”姿のマスコットなど - ファッションプレス",
+    "sourceType": "official_social",
+    "createdAt": "2026-07-27",
+    "sourceUrl": "https://www.fashion-press.net/news/149085"
+  },
+  {
+    "brand": "pokemon",
+    "title": "台北寶可夢中心 新商品登場",
+    "type": "new_product",
+    "country": "TW",
+    "city": "Taipei",
+    "locationName": "台北寶可夢中心",
+    "startDate": "2026-07-25",
+    "endDate": "",
+    "summaryZh": "台北寶可夢中心將於7月25日開賣超級寶石海星等4款全新毛絨玩具。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢",
+      "絨毛玩具",
+      "新品",
+      "台北"
+    ],
+    "id": "po-ef5dd6",
+    "sourceTitle": "《台北寶可夢中心》 超級寶石海星毛絨玩具7月25日開賣！還有超級甲賀忍蛙等4款登場 - Pokemon Hubs",
+    "sourceType": "official_social",
+    "createdAt": "2026-07-27",
+    "sourceUrl": "https://pokemonhubs.com/news/pokemon-center-taipei-mega-evolution-plush-july-2026/"
   }
 ]
