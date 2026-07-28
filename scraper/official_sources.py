@@ -172,6 +172,16 @@ _PUS_ROW = re.compile(
     r"(?:(20\d\d)年)?(\d{1,2})月(\d{1,2})日(?:\([^)]*\))?\s*"
     r"([^\n\[]{0,60})"     # 會場詳址（日期後那段，含縣市/樓層）
 )
+_PUS_DETAIL_URL_RE = re.compile(
+    r"(?:(?:https://chiikawa-info\.jp/)?p26/pus_[^)\s\"'<>]+/index\.html)",
+    re.I,
+)
+_PUS_DETAIL_TITLE_RE = re.compile(
+    r"ちいかわPOP\s*UP\s*STORE\s+(.+?)\s*[（(]"
+    r"(20\d{2})[年/](\d{1,2})[月/](\d{1,2})日?(?:\([^)]*\))?\s*[〜～~-]\s*"
+    r"(?:(20\d{2})[年/])?(\d{1,2})[月/](\d{1,2})日?(?:\([^)]*\))?",
+    re.I,
+)
 
 _CHIIKAWA_OTARU_CASTELLA = re.compile(
     r"ちいかわベビーカステラ[\s\S]{0,600}?"
@@ -215,6 +225,64 @@ def _date_range_to_iso(sy, sm, sd, ey, em, ed) -> tuple[str, str]:
     return f"{sy:04d}-{sm:02d}-{sd:02d}", f"{ey:04d}-{em:02d}-{ed:02d}"
 
 
+def _document_title(page_text: str) -> str:
+    for pattern in (
+        r'<meta[^>]+property=["\']og:title["\'][^>]+content=["\']([^"\']+)',
+        r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']og:title["\']',
+        r"<title[^>]*>([\s\S]*?)</title>",
+        r"(?m)^Title:\s*(.+)$",
+    ):
+        match = re.search(pattern, page_text or "", re.I)
+        if match:
+            return re.sub(r"\s+", " ", html_lib.unescape(match.group(1))).strip()
+    return ""
+
+
+def _chiikawa_popup_detail_fields(page_text: str) -> tuple[str, str, str] | None:
+    """Read venue and date range from image-only POP UP pages' document title."""
+    match = _PUS_DETAIL_TITLE_RE.search(_document_title(page_text))
+    if not match:
+        return None
+    venue, sy, sm, sd, ey, em, ed = match.groups()
+    start, end = _date_range_to_iso(sy, sm, sd, ey, em, ed)
+    return re.sub(r"\s+", " ", venue).strip(), start, end
+
+
+def _chiikawa_popup_detail_urls(page_text: str) -> list[str]:
+    return list(dict.fromkeys(
+        urljoin(_CHIIKAWA_INFO_TOP, html_lib.unescape(raw))
+        for raw in _PUS_DETAIL_URL_RE.findall(page_text or "")
+    ))
+
+
+def _chiikawa_popup_event(
+    venue: str,
+    url: str,
+    start: str,
+    end: str,
+    *,
+    location: str = "",
+    correct_city=None,
+) -> dict:
+    today = _today_iso()
+    location = location if len(location) >= len(venue) else venue
+    city = correct_city(location, venue) if correct_city else None
+    return {
+        "brand": "chiikawa",
+        "title": f"吉伊卡哇 POP UP STORE {venue}",
+        "type": "popup", "country": "JP", "city": city or "",
+        "locationName": location,
+        "startDate": start, "endDate": end,
+        "summaryZh": f"ちいかわ POP UP STORE 於{venue}期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
+        "needReservation": False, "hasLimitedGoods": True,
+        "tags": ["吉伊卡哇", "快閃店", "日本", "限定周邊"],
+        "id": _stable_id("ch", url),
+        "sourceType": "official_site", "createdAt": today,
+        "sourceTitle": f"ちいかわPOP UP STORE {venue}({start}～{end}) - ちいかわ公式",
+        "sourceUrl": url,
+    }
+
+
 def _chiikawa_popup_events_from_text(md: str, correct_city=None) -> list[dict]:
     """Parse current Chiikawa POP UP STORE rows from official markdown."""
     today = _today_iso()
@@ -232,34 +300,33 @@ def _chiikawa_popup_events_from_text(md: str, correct_city=None) -> list[dict]:
         if end < today:          # 已過期不收
             continue
         seen.add(url)
-        # locationName 用較完整的會場詳址（含縣市/樓層）；城市從詳址＋會場名一起判
-        loc = addr if len(addr) >= len(venue) else venue
-        city = correct_city(addr, venue) if correct_city else None
-        out.append({
-            "brand": "chiikawa",
-            "title": f"吉伊卡哇 POP UP STORE {venue}",
-            "type": "popup", "country": "JP", "city": city or "",
-            "locationName": loc,
-            "startDate": start, "endDate": end,
-            "summaryZh": f"ちいかわ POP UP STORE 於{venue}期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-            "needReservation": False, "hasLimitedGoods": True,
-            "tags": ["吉伊卡哇", "快閃店", "日本", "限定周邊"],
-            "id": _stable_id("ch", url),
-            "sourceType": "official_site", "createdAt": today,
-            "sourceTitle": f"ちいかわPOP UP STORE {venue}({start}～{end}) - ちいかわ公式",
-            "sourceUrl": url,
-        })
+        out.append(_chiikawa_popup_event(
+            venue, url, start, end, location=addr, correct_city=correct_city))
     return out
 
 
 def fetch_chiikawa_popups(correct_city=None) -> list[dict]:
     """解析吉伊卡哇官方 pus.html，回傳「現行（未過期）」POP UP STORE 的成品情報清單。
     零 Gemini。correct_city(可選)＝scrape.correct_city，用來判城市。"""
-    md = _proxy_markdown(_CHIIKAWA_PUS, fresh=True)
+    md = _proxy_markdown(_CHIIKAWA_PUS, fresh=True) or fetch_html(_CHIIKAWA_PUS)
     if not md:
         print("    ⚠️  吉伊卡哇 pus.html 抓取失敗（直連＋代理都不行）")
         return []
-    return _chiikawa_popup_events_from_text(md, correct_city=correct_city)
+    events = _chiikawa_popup_events_from_text(md, correct_city=correct_city)
+    seen = {event["sourceUrl"] for event in events}
+    for url in _chiikawa_popup_detail_urls(md):
+        if url in seen:
+            continue
+        fields = _chiikawa_popup_detail_fields(fetch_html(url))
+        if not fields:
+            continue
+        venue, start, end = fields
+        if end < _today_iso():
+            continue
+        events.append(_chiikawa_popup_event(
+            venue, url, start, end, correct_city=correct_city))
+        seen.add(url)
+    return events
 
 
 def _chiikawa_otaru_castella_event(info_text: str, shop_text: str, correct_city=None) -> dict | None:
@@ -852,7 +919,7 @@ def _main_article_text(page_text: str, title: str = "") -> str:
             visible = visible[idx:idx + 5000]
     for marker in (
         "関連記事", "最新の記事", "この記事をシェアする", "ネット通販",
-        "ニュースカテゴリー", "OTHER NEWS", "RECOMMEND",
+        "ニュースカテゴリー", "OTHER NEWS", "RECOMMEND", "記事一覧へ戻る",
     ):
         idx = visible.find(marker)
         if idx >= 0:
@@ -948,6 +1015,14 @@ def _drop_same_day_kiddy_product_details(events: list[dict]) -> list[dict]:
 
 _MIFFY_KNOWN_VENUES = [
     (
+        ["miffy × Cosme Kitchen", "Cosme Kitchen", "コスメキッチン"],
+        "全国のCosme Kitchen・Biople対象店舗",
+    ),
+    (
+        ["ヴィレッジヴァンガード", "Village Vanguard"],
+        "全国のヴィレッジヴァンガード 197店舗",
+    ),
+    (
         ["KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront",
          "KOBE PORT TOWER", "Dick Bruna TABLE in KOBE Waterfront"],
         "KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront",
@@ -993,11 +1068,16 @@ def _miffy_venue_from_title(title: str, name: str = "", detail: str = "") -> str
     m = re.search(r"^(.+?)(?:にて|に|で)「", title)
     if m:
         return m.group(1).strip("・ 　")
-    blob = "\n".join(part for part in (title, name, detail) if part)
     if _miffy_is_flower_birthday(title, name, detail):
         return "全国のフラワーミッフィー、フラワーミッフィーオンラインショップ"
+    title_blob = "\n".join(part for part in (title, name) if part)
     for aliases, venue in _MIFFY_KNOWN_VENUES:
-        if any(alias in blob for alias in aliases):
+        if any(alias in title_blob for alias in aliases):
+            return venue
+    # The article body is a fallback only. Titles are more reliable because
+    # campaign prizes and related articles may mention unrelated venues.
+    for aliases, venue in _MIFFY_KNOWN_VENUES:
+        if any(alias in detail for alias in aliases):
             return venue
     return ""
 
@@ -1005,6 +1085,19 @@ def _miffy_venue_from_title(title: str, name: str = "", detail: str = "") -> str
 def _miffy_is_exhibition(title: str, name: str, detail: str = "") -> bool:
     blob = "\n".join(part for part in (title, name, detail[:1200]) if part)
     return bool(re.search(r"ミッフィー展|美術館|展開催|「[^」]+」展", blob))
+
+
+def _miffy_type(title: str, name: str, detail: str = "") -> str:
+    blob = "\n".join(part for part in (title, name, detail[:1200]) if part)
+    if "Cosme Kitchen" in blob or "コスメキッチン" in blob:
+        return "new_product"
+    if _miffy_is_exhibition(title, name, detail):
+        return "campaign"
+    if any(k in blob.lower() for k in ["カフェ", "kitchen", "おやつ", "table"]):
+        return "cafe"
+    if "フェア" in blob or "キャンペーン" in blob:
+        return "campaign"
+    return "popup"
 
 
 def _miffy_display_name(title: str, name: str) -> str:
@@ -1152,11 +1245,7 @@ def fetch_miffy_events(extract_dates, correct_city, max_articles=16, fresh_days=
         out.append({
             "brand": "miffy",
             "title": display_title.strip(),
-            "type": "campaign" if is_birthday_fair or is_flower_birthday else (
-                "campaign" if is_exhibition else (
-                    "cafe" if any(k in title.lower() for k in ["カフェ", "kitchen", "おやつ", "table"]) else "popup"
-                )
-            ),
+            "type": "campaign" if is_birthday_fair or is_flower_birthday else _miffy_type(title, name, detail_text),
             "country": "JP", "city": city or "",
             "locationName": loc,
             "startDate": s, "endDate": e or "",
@@ -1169,7 +1258,17 @@ def fetch_miffy_events(extract_dates, correct_city, max_articles=16, fresh_days=
                     else (
                         f"Miffy（米飛兔）官方展覽「{display_name}」於{venue}舉辦，展期為{s}至{e or '未定'}。"
                         if is_exhibition
-                        else f"Miffy（米飛兔）官方活動「{display_name}」於{venue}期間限定登場，販售限定周邊／餐點。"
+                        else (
+                            "日本全國197間Village Vanguard舉辦Miffy手寫溫度主題活動，"
+                            "購買指定金額可獲限定明信片、紙袋及抽獎序號。"
+                            if "てがきのぬくもりフェア" in title
+                            else (
+                                "Miffy與Cosme Kitchen聯名商品第3彈於日本全國Cosme Kitchen、"
+                                "Biople等實體店發售，共18款美妝與生活雜貨。"
+                                if "Cosme Kitchen" in title or "コスメキッチン" in title
+                                else f"Miffy（米飛兔）官方活動「{display_name}」於{venue}期間限定登場，販售限定周邊／餐點。"
+                            )
+                        )
                     )
                 )
             ),

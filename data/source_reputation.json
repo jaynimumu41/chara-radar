@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-20T08:33:45+00:00",
+  "updatedAt": "2026-07-28T15:37:59+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 9,
@@ -154,44 +154,44 @@
       ]
     },
     "domain:pokemonhubs.com": {
-      "confirmed": 1,
+      "confirmed": 2,
       "rejected": 0,
       "uncertain": 0,
-      "crossChecked": 1,
-      "score": 59,
+      "crossChecked": 3,
+      "score": 70,
       "label": "pokemonhubs.com",
       "kind": "news",
       "host": "pokemonhubs.com",
       "handle": "",
       "firstSeen": "2026-06-11",
-      "lastReviewed": "2026-06-12",
+      "lastReviewed": "2026-07-28",
       "lastOutcome": "confirmed",
-      "notes": "Confirmed explicit Pokemon Center Taipei May 16 goods article with product lines and ticket dates.",
+      "notes": "The 2026-07-25 Pokemon Center TAIPEI launch of four Mega Evolution plush toys is independently corroborated by NOWnews and UDN, both citing Pokemon Taiwan official Instagram.",
       "byBrand": {
         "pokemon": {
-          "confirmed": 1,
+          "confirmed": 2,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 59
+          "crossChecked": 3,
+          "score": 70
         }
       },
       "byType": {
         "new_product": {
-          "confirmed": 1,
+          "confirmed": 2,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 59
+          "crossChecked": 3,
+          "score": 70
         }
       },
       "byCountry": {
         "tw": {
-          "confirmed": 1,
+          "confirmed": 2,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 59
+          "crossChecked": 3,
+          "score": 70
         }
       },
       "history": [
@@ -204,6 +204,16 @@
           "eventId": "po-481cb8",
           "evidenceCount": 1,
           "notes": "Confirmed explicit Pokemon Center Taipei May 16 goods article with product lines and ticket dates."
+        },
+        {
+          "date": "2026-07-28",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-ef5dd6",
+          "evidenceCount": 2,
+          "notes": "The 2026-07-25 Pokemon Center TAIPEI launch of four Mega Evolution plush toys is independently corroborated by NOWnews and UDN, both citing Pokemon Taiwan official Instagram."
         }
       ]
     },
@@ -882,26 +892,26 @@
       ]
     },
     "domain:collabo-cafe.com": {
-      "confirmed": 2,
+      "confirmed": 3,
       "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 3,
-      "score": 48,
+      "crossChecked": 4,
+      "score": 57,
       "label": "collabo-cafe.com",
       "kind": "site",
       "host": "collabo-cafe.com",
       "handle": "",
       "firstSeen": "2026-06-30",
-      "lastReviewed": "2026-07-19",
+      "lastReviewed": "2026-07-21",
       "lastOutcome": "confirmed",
-      "notes": "Matched the official magical_s page: Perie Chiba 1F Street 1 event space, 2026-07-17 to 2026-07-28.",
+      "notes": "Dates and popup confirmed by chiikawa-info.jp/ckbaby.html; replaced source with official page and removed unsupported cafe claim",
       "byBrand": {
         "chiikawa": {
-          "confirmed": 2,
+          "confirmed": 3,
           "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 3,
-          "score": 48
+          "crossChecked": 4,
+          "score": 57
         }
       },
       "byType": {
@@ -913,20 +923,20 @@
           "score": 30
         },
         "popup": {
-          "confirmed": 2,
+          "confirmed": 3,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 2,
-          "score": 68
+          "crossChecked": 3,
+          "score": 77
         }
       },
       "byCountry": {
         "jp": {
-          "confirmed": 2,
+          "confirmed": 3,
           "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 3,
-          "score": 48
+          "crossChecked": 4,
+          "score": 57
         }
       },
       "history": [
@@ -969,6 +979,16 @@
           "eventId": "ch-176c02",
           "evidenceCount": 1,
           "notes": "Matched the official magical_s page: Perie Chiba 1F Street 1 event space, 2026-07-17 to 2026-07-28."
+        },
+        {
+          "date": "2026-07-21",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-fad6d6",
+          "evidenceCount": 1,
+          "notes": "Dates and popup confirmed by chiikawa-info.jp/ckbaby.html; replaced source with official page and removed unsupported cafe claim"
         }
       ]
     },
@@ -1432,44 +1452,44 @@
       ]
     },
     "domain:kiddyland.co.jp": {
-      "confirmed": 1,
+      "confirmed": 2,
       "rejected": 0,
       "uncertain": 0,
-      "crossChecked": 0,
-      "score": 57,
+      "crossChecked": 1,
+      "score": 66,
       "label": "kiddyland.co.jp",
       "kind": "site",
       "host": "kiddyland.co.jp",
       "handle": "",
       "firstSeen": "2026-07-05",
-      "lastReviewed": "2026-07-05",
+      "lastReviewed": "2026-07-28",
       "lastOutcome": "confirmed",
-      "notes": "Official Kiddy Land page states novelty distribution starts 2026-07-04 and ends when stock runs out.",
+      "notes": "Official Kiddy Land page states the 2026-08-08 store novelty campaign runs while supplies last; no fixed end date.",
       "byBrand": {
         "miffy": {
-          "confirmed": 1,
+          "confirmed": 2,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 0,
-          "score": 57
+          "crossChecked": 1,
+          "score": 66
         }
       },
       "byType": {
         "campaign": {
-          "confirmed": 1,
+          "confirmed": 2,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 0,
-          "score": 57
+          "crossChecked": 1,
+          "score": 66
         }
       },
       "byCountry": {
         "jp": {
-          "confirmed": 1,
+          "confirmed": 2,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 0,
-          "score": 57
+          "crossChecked": 1,
+          "score": 66
         }
       },
       "history": [
@@ -1482,6 +1502,16 @@
           "eventId": "mi-284bf0",
           "evidenceCount": 0,
           "notes": "Official Kiddy Land page states novelty distribution starts 2026-07-04 and ends when stock runs out."
+        },
+        {
+          "date": "2026-07-28",
+          "outcome": "confirmed",
+          "brand": "miffy",
+          "type": "campaign",
+          "country": "JP",
+          "eventId": "mi-7f8804",
+          "evidenceCount": 1,
+          "notes": "Official Kiddy Land page states the 2026-08-08 store novelty campaign runs while supplies last; no fixed end date."
         }
       ]
     },

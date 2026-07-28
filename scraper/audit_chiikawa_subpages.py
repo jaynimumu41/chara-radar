@@ -18,6 +18,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urljoin, urlparse, urlunparse
 
+from official_sources import _chiikawa_popup_detail_fields, _document_title
 from verify_links import fetch_html
 
 
@@ -230,26 +231,35 @@ def audit_links(
     parsed_pages: dict[str, list[str]] | None = None,
     ignored_pages: dict[str, str] | None = None,
     details_by_url: dict[str, str] | None = None,
+    today: str | None = None,
 ) -> list[AuditRow]:
     parsed_pages = parsed_pages or {}
     ignored_pages = ignored_pages or {}
     details_by_url = details_by_url or {}
+    today = today or datetime.now().astimezone().date().isoformat()
     rows: list[AuditRow] = []
     for link in links:
+        detail = details_by_url.get(link.url, link.title)
+        detail_title = _document_title(detail)
+        display_title = detail_title or link.title
+        popup_fields = _chiikawa_popup_detail_fields(detail)
         if link.url in parsed_pages:
             status = "parsed"
             reason = "represented by chiikawa event sourceUrl"
         elif link.url in ignored_pages:
             status = "ignored"
             reason = ignored_pages[link.url]
+        elif popup_fields and popup_fields[2] < today:
+            status = "ignored"
+            reason = f"official event ended {popup_fields[2]}"
         else:
             status = "needs_review"
             reason = "homepage links this official p26 page, but no current event sourceUrl covers it"
-        signals = detect_signals(details_by_url.get(link.url, link.title))
+        signals = detect_signals(detail)
         rows.append(AuditRow(
             status=status,
             url=link.url,
-            title=link.title,
+            title=display_title,
             reason=reason,
             risk=_risk_for(status, signals),
             signals=signals,

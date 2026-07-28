@@ -133,7 +133,7 @@ AREA_TO_CITY = {
     "Wakayama": ["和歌山", "Wakayama"],
     "Kochi":    ["高知", "Kochi"],
     "Ehime":    ["愛媛", "今治", "松山"],
-    "Ishikawa": ["石川", "金沢", "金澤", "香林坊"],
+    "Ishikawa": ["石川", "金沢", "金澤", "香林坊", "新小松"],
     "Ibaraki":  ["茨城", "水戸", "京成百貨店"],
     "Taipei":   ["台北", "臺北", "信義", "西門", "微風", "南山", "華山", "中山",
                  "松山", "內湖", "板橋", "101"],
@@ -686,10 +686,8 @@ def _pub_year(pub: str) -> int | None:
 
 def apply_extracted_dates(data: dict, text: str, ref_year: int | None, is_html: bool,
                           scan_chars: int = 4000) -> bool:
-    """從 text 補抓活動日期，只填入 data 中目前為空的 start/end 欄位。
+    """從可信來源正文抓活動日期，並修正 AI 與來源衝突的日期。
     防呆：起始日不早於約 400 天前（避免抓到舊報導/版權年份）。回傳是否有補上。"""
-    if data.get("startDate") and data.get("endDate"):
-        return False
     s, e = extract_dates(text, ref_year=ref_year, is_html=is_html, scan_chars=scan_chars)
     if not s and not e:
         return False
@@ -698,10 +696,12 @@ def apply_extracted_dates(data: dict, text: str, ref_year: int | None, is_html: 
         if age is None or age > 400:
             return False  # 起始日太舊，整組不採用（多半抓錯）
     changed = False
-    if s and not data.get("startDate"):
-        data["startDate"] = s; changed = True
-    if e and not data.get("endDate"):
-        data["endDate"] = e; changed = True
+    if s and data.get("startDate") != s:
+        data["startDate"] = s
+        changed = True
+    if e and data.get("endDate") != e:
+        data["endDate"] = e
+        changed = True
     # 合理性檢查：結束日不可早於開始日（多半是抓錯第二個日期）→ 丟掉 endDate
     sd, ed = data.get("startDate"), data.get("endDate")
     if sd and ed and ed < sd:
@@ -982,6 +982,18 @@ SPECIAL_ACTIVITY_ALIASES = [
 SPECIAL_PRODUCT_ALIASES = [
     ("pokemon-yurutto-taipei", ["Pokémon Yurutto", "Pokemon Yurutto", "ポケモンゆるっと", "卡娜赫拉"]),
 ]
+GLOBAL_PRODUCT_ALIASES = {
+    "pokemon": [
+        ("pokemon-miare-badge-collection", ["缶バッジコレクション〜ミアレ編〜", "缶バッジコレクション ミアレ編"]),
+    ],
+    "chiikawa": [
+        ("chiikawa-tokyo-banana-eco-bag", ["東京ばな奈", "東京香蕉", "バナナプリンケーキ", "環保袋組"]),
+    ],
+}
+MIFFY_ACTIVITY_ALIASES = [
+    ("miffy-handwriting-village-vanguard", ["てがきのぬくもりフェア", "手寫溫度", "手寫的溫暖"]),
+    ("miffy-kobe-waterfront-night", ["KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront"]),
+]
 MIFFY_PRODUCT_ALIASES = [
     ("miffy-tokyo-stationmaster", ["駅長さんミッフィー", "東京駅限定", "東京車站限定", "站長米飛兔"]),
 ]
@@ -1057,6 +1069,10 @@ def special_activity_key(ev: dict) -> str | None:
         for concept, aliases in SPECIAL_ACTIVITY_ALIASES:
             if any(_norm(alias) in blob for alias in aliases):
                 return "|".join([brand, concept, start])
+    if brand in GLOBAL_PRODUCT_ALIASES and ev_type in SELLING_TYPES:
+        for concept, aliases in GLOBAL_PRODUCT_ALIASES[brand]:
+            if any(_norm(alias) in blob for alias in aliases):
+                return "|".join([brand, concept, start])
     if brand == "pokemon" and ev_type in SELLING_TYPES:
         if not is_taipei:
             return None
@@ -1069,6 +1085,10 @@ def special_activity_key(ev: dict) -> str | None:
             for concept, aliases in MIFFY_PRODUCT_ALIASES:
                 if any(_norm(alias) in blob for alias in aliases):
                     return "|".join([brand, concept, start])
+    if brand == "miffy" and ev_type in ACTIVITY_TYPES:
+        for concept, aliases in MIFFY_ACTIVITY_ALIASES:
+            if any(_norm(alias) in blob for alias in aliases):
+                return "|".join([brand, concept, start])
     return None
 
 # 知名場館別名 → 統一代號（讓同場館不同寫法能去重）
@@ -1173,9 +1193,14 @@ def is_same_event_for_update_diff(old: dict, new: dict) -> bool:
     old_loc, new_loc = old.get("locationName", ""), new.get("locationName", "")
     old_canon = canon_venue(old_loc, old_title)
     new_canon = canon_venue(new_loc, new_title)
-    if old_canon and old_canon == new_canon:
+    title_sim = SequenceMatcher(None, old_norm, new_norm).ratio()
+    if old_canon and old_canon == new_canon and title_sim >= 0.5:
         return True
-    if old_loc and new_loc and SequenceMatcher(None, _norm(old_loc), _norm(new_loc)).ratio() >= 0.6:
+    if (
+        old_loc and new_loc
+        and SequenceMatcher(None, _norm(old_loc), _norm(new_loc)).ratio() >= 0.6
+        and title_sim >= 0.5
+    ):
         return True
     return False
 
@@ -1204,9 +1229,7 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
     """合併同一活動的重複條目。回傳（清理後清單, 移除數量）"""
     kept: list[dict] = []
     title_keys: dict[str, int] = {}     # (brand, norm_title) -> kept index
-    loc_keys: dict[str, int] = {}       # (brand, norm_location) -> kept index
     url_keys: dict[str, int] = {}       # 真實來源 URL -> kept index
-    date_keys: dict[str, int] = {}      # (brand, city, startDate) -> kept index
     theme_keys: dict[str, int] = {}     # (brand, 日文主題詞) -> kept index
     chain_campaign_keys: dict[str, int] = {}  # (brand, chain, concept, startDate)
     special_activity_keys: dict[str, int] = {}  # known cross-source duplicate concepts
@@ -1247,16 +1270,12 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
             hit = url_keys[ukey]
         elif tkey in title_keys:
             hit = title_keys[tkey]
-        elif dkey and dkey in date_keys:     # 同品牌+同城市+同開始日 = 同一活動
-            hit = date_keys[dkey]
         elif ckey and ckey in chain_campaign_keys:
             hit = chain_campaign_keys[ckey]
         elif skey and skey in special_activity_keys:
             hit = special_activity_keys[skey]
         elif any(tk in theme_keys for tk in thkeys):  # 同品牌+相同日文主題詞 = 同一活動
             hit = theme_keys[next(tk for tk in thkeys if tk in theme_keys)]
-        elif lkey and lkey in loc_keys:
-            hit = loc_keys[lkey]
 
         # 同品牌、同城市、同日起跑不代表同一活動。兩筆都有明確且不同的場館時，
         # 除非命中特殊跨來源活動鍵，否則不可合併。
@@ -1313,12 +1332,8 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
         idx = len(kept)
         kept.append(ev)
         title_keys[tkey] = idx
-        if lkey:
-            loc_keys[lkey] = idx
         if ukey:
             url_keys[ukey] = idx
-        if dkey:
-            date_keys[dkey] = idx
         if ckey:
             chain_campaign_keys.setdefault(ckey, idx)
         if skey:
@@ -1380,8 +1395,8 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
             one_dateless = not ev.get("startDate") or not k.get("startDate")
             if fuzzy_allowed and (
                (same_venue and sim >= 0.4) or (same_venue and one_dateless and sim >= 0.2)
-               or (same_city and venue_close and date_aligned)
-               or (venue_close and range_aligned)
+               or (same_city and venue_close and date_aligned and sim >= 0.5)
+               or (venue_close and range_aligned and sim >= 0.5)
                or (same_city and sim >= 0.50) or sim >= 0.72):
                 # 合併到較完整者，補空欄位
                 base = k if completeness(k) >= completeness(ev) else ev

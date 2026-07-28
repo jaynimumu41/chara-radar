@@ -200,6 +200,40 @@ check("Miffy 豪斯登堡官方場館抽取",
           "ミッフィーバースデーマンス",
       ),
       "ハウステンボス")
+village_vanguard_title = "ヴィレッジヴァンガード「ミッフィーとつなぐ てがきのぬくもりフェア」開催"
+village_vanguard_page = (
+    f"<h1>{village_vanguard_title}</h1>"
+    "<p>2026年7月31日（金）から8月31日（月）まで全国197店舗で開催。</p>"
+    "<p>限定ノベルティを配布します。</p>"
+    "<p>記事一覧へ戻る</p>"
+    "<p>ハウステンボス「ミッフィーバースデーマンス」関連記事</p>"
+)
+village_vanguard_main = official_sources._main_article_text(
+    village_vanguard_page, village_vanguard_title
+)
+check("Miffy官方正文切片排除相關文章場館",
+      "ハウステンボス" in village_vanguard_main,
+      False)
+check("Miffy官方標題店系優先於抽獎與相關文章場館",
+      official_sources._miffy_venue_from_title(
+          village_vanguard_title,
+          "ミッフィーとつなぐ てがきのぬくもりフェア",
+          "抽獎景品為ハウステンボス住宿券",
+      ),
+      "全国のヴィレッジヴァンガード 197店舗")
+check("Miffy官方フェア判定為campaign",
+      official_sources._miffy_type(
+          village_vanguard_title,
+          "ミッフィーとつなぐ てがきのぬくもりフェア",
+      ),
+      "campaign")
+cosme_kitchen_title = "「miffy × Cosme Kitchen 」コスメキッチンとミッフィーのコラボ第3弾登場"
+check("Miffy Cosme Kitchen為實體店新品而非咖啡廳",
+      official_sources._miffy_type(cosme_kitchen_title, "miffy × Cosme Kitchen"),
+      "new_product")
+check("Miffy Cosme Kitchen全國店鋪地點",
+      official_sources._miffy_venue_from_title(cosme_kitchen_title, "miffy × Cosme Kitchen"),
+      "全国のCosme Kitchen・Biople対象店舗")
 check("Miffy 豪斯登堡期間延長解析",
       official_sources._miffy_period(
           "＜期間延長決定＞ハウステンボス「ミッフィーバースデーマンス」",
@@ -285,6 +319,44 @@ check("吉伊卡哇官方總表終了頁→不列現行待審",
       audit_chiikawa_subpages.is_ended_listing_title(
           "【終了】ちいかわPOP UP STORE イオンモール秋田"),
       True)
+image_only_popup_page = """
+<html><head><title>ちいかわPOP UP STORE イオンモール新小松(2026/8/5(水)～8/23(日))</title></head>
+<body><img src="schedule.jpg"></body></html>
+"""
+check("吉伊卡哇全圖片子頁從 title 解析場地與日期",
+      official_sources._chiikawa_popup_detail_fields(image_only_popup_page),
+      ("イオンモール新小松", "2026-08-05", "2026-08-23"))
+check("吉伊卡哇 POP UP 總表可解析相對與絕對子頁網址",
+      official_sources._chiikawa_popup_detail_urls(
+          '<a href="p26/pus_askm/index.html">A</a> '
+          '[B](https://chiikawa-info.jp/p26/pus_asph/index.html)'),
+      [
+          "https://chiikawa-info.jp/p26/pus_askm/index.html",
+          "https://chiikawa-info.jp/p26/pus_asph/index.html",
+      ])
+image_only_popup = official_sources._chiikawa_popup_event(
+    "イオンモール新小松",
+    "https://chiikawa-info.jp/p26/pus_askm/index.html",
+    "2026-08-05",
+    "2026-08-23",
+    correct_city=scrape.correct_city,
+)
+check("吉伊卡哇全圖片子頁正確判定石川縣",
+      (image_only_popup["city"], image_only_popup["locationName"]),
+      ("Ishikawa", "イオンモール新小松"))
+expired_popup_rows = audit_chiikawa_subpages.audit_links(
+    [audit_chiikawa_subpages.ChiikawaLink(
+        "https://chiikawa-info.jp/p26/pus_atko/index.html",
+        "ちいかわPOP UP STORE")],
+    details_by_url={
+        "https://chiikawa-info.jp/p26/pus_atko/index.html":
+            "<title>ちいかわPOP UP STORE イオンモール高岡(2026/7/10(金)～7/26(日))</title>"
+    },
+    today="2026-07-28",
+)
+check("吉伊卡哇已過期全圖片子頁自動忽略",
+      (expired_popup_rows[0].status, expired_popup_rows[0].reason),
+      ("ignored", "official event ended 2026-07-26"))
 
 sample_official_links = """
 <a href="/ja/cafe/news/260529_3377.html">ポケモンカフェ TOKYO は店内がリニューアル</a>
@@ -365,6 +437,24 @@ check("Kiddy Land 本文切片排除最新記事日期污染",
 check("Kiddy Land Birthday Fair 期間解析",
       official_sources._kiddy_period(kiddy_birthday_title, kiddy_main, scrape.extract_dates),
       ("2026-06-06", "2026-06-30"))
+
+trusted_date_record = ev(
+    brand="chiikawa",
+    type="new_product",
+    startDate="2026-11-22",
+    endDate="",
+)
+check("可信來源日期可覆寫AI誤抓的公司沿革日期",
+      scrape.apply_extracted_dates(
+          trusted_date_record,
+          "<h2>2026年8月1日(土)販売開始</h2><p>限定商品。</p>",
+          2026,
+          is_html=True,
+      ),
+      True)
+check("可信來源日期覆寫結果",
+      trusted_date_record["startDate"],
+      "2026-08-01")
 check("Kiddy Land ノベルティデイ ～スタート 不補同日結束",
       official_sources._kiddy_period(
           "2026年7月4日(土)～スタート!miffy style 各店ノベルティデイ",
@@ -410,7 +500,7 @@ sample_chiikawa_popups = (
     "[ちいかわPOP UP STORE イオンモール太田](https://chiikawa-info.jp/p26/pus_aota/index.html) "
     "2026年7月17日(金)～8月2日(日) イオンモール太田 ウエストモール1F 無印良品前\n"
     "[ちいかわPOP UP STORE イオンモール高岡](https://chiikawa-info.jp/p26/pus_atko/index.html) "
-    "2026年7月10日(金)～7月26日(日) イオンモール高岡 東館1F セントラルコート"
+    "2099年7月10日(金)～7月26日(日) イオンモール高岡 東館1F セントラルコート"
 )
 popup_events = official_sources._chiikawa_popup_events_from_text(
     sample_chiikawa_popups, correct_city=scrape.correct_city)
@@ -419,7 +509,7 @@ check("吉伊卡哇官方POP UP總表新增場次解析",
       [("Gunma", "2026-07-29", "2026-08-17"),
        ("Tokyo", "2026-07-24", "2026-08-11"),
        ("Gunma", "2026-07-17", "2026-08-02"),
-       ("Toyama", "2026-07-10", "2026-07-26")])
+       ("Toyama", "2099-07-10", "2099-07-26")])
 
 sample_otaru_info = (
     "### [ちいかわベビーカステラ](https://www.chiikawamogumogu.jp/stores/castella/) "
@@ -439,7 +529,7 @@ check("吉伊卡哇小樽ベビーカステラ店鋪情報解析",
        "https://www.chiikawamogumogu.jp/stores/castella/"))
 sample_movie_popup = (
     "[イオンモール新潟亀田インター 1F スカイコート](https://www.aeon.jp/sc/niigatakameda-inter/) "
-    "2026年7月10日(金)～7月20日(月祝) "
+    "2099年7月10日(金)～7月20日(月祝) "
     "華山1914文創園區 藝術西街 2026年7月10日(金)～8月30日(日) "
     "[イオンモールKYOTO Sakura館1階 センターコート](https://kyoto.aeonmall.com/) "
     "2026年8月21日(金)～9月6日(日)"
@@ -450,7 +540,7 @@ check("電影吉伊卡哇 POP UP 多會場解析數量",
       len(movie_events), 3)
 check("電影吉伊卡哇 POP UP 解析城市與國家",
       [(e["city"], e["country"], e["startDate"], e["endDate"]) for e in movie_events],
-      [("Niigata", "JP", "2026-07-10", "2026-07-20"),
+      [("Niigata", "JP", "2099-07-10", "2099-07-20"),
        ("Kyoto", "JP", "2026-08-21", "2026-09-06"),
        ("Taipei", "TW", "2026-07-10", "2026-08-30")])
 check("電影吉伊卡哇 POP UP 每場 sourceUrl 不共用",
@@ -715,7 +805,7 @@ out, _ = scrape.dedup_events([
     ev(brand="sanrio", title="三麗鷗遊樂園主題店快閃高雄 近40款新品", city="Kaohsiung",
        startDate="2026-05-29", endDate="2026-06-30", locationName="統一夢時代",
        sourceUrl="https://b.example/2"),
-    ev(brand="sanrio", title="三麗鷗高雄夢時代限定店 酷洛米大耳狗", city="Kaohsiung",
+    ev(brand="sanrio", title="三麗鷗遊樂園快閃 高雄夢時代限定店", city="Kaohsiung",
        startDate="2026-05-29", endDate="2026-06-30", locationName="夢時代",
        sourceUrl="https://c.example/3"),
 ])
@@ -773,6 +863,57 @@ out, _ = scrape.dedup_events([
 check("Miffy東京駅店限定玩偶媒體重複→保留官方",
       (len(out), out[0]["id"], out[0]["sourceType"]),
       (1, "mi-official-tokyo", "official_site"))
+
+out, _ = scrape.dedup_events([
+    ev(id="mi-official-handwriting", brand="miffy",
+       title="Miffy ミッフィーとつなぐ てがきのぬくもりフェア",
+       type="campaign", startDate="2026-07-31", endDate="2026-08-31",
+       locationName="全国のヴィレッジヴァンガード 197店舗",
+       sourceType="official_site", sourceUrl="https://dickbruna.jp/news/202607/47530/"),
+    ev(id="mi-prtimes-handwriting", brand="miffy",
+       title="米飛兔手寫溫度快閃店",
+       type="popup", city="Tokyo", startDate="2026-07-31", endDate="2026-08-31",
+       locationName="ヴィレッジヴァンガード",
+       sourceTitle="ヴィレッジヴァンガードで『ミッフィーとつなぐ てがきのぬくもりフェア』開催",
+       sourceType="official_social", sourceUrl="https://prtimes.jp/example"),
+])
+check("Miffy手寫溫度活動跨媒體與錯誤城市仍去重",
+      (len(out), out[0]["id"], out[0]["sourceType"]),
+      (1, "mi-official-handwriting", "official_site"))
+
+out, _ = scrape.dedup_events([
+    ev(brand="miffy", title="Miffy ミッフィーzakkaフェスタ そごう横浜店",
+       type="popup", city="Kanagawa", startDate="2026-08-01", endDate="2026-08-17",
+       locationName="そごう横浜店"),
+    ev(brand="miffy", title="Miffy DICK BRUNA STAND BY MIIA 神奈川・そごう横浜店",
+       type="popup", city="Kanagawa", startDate="2026-08-01", endDate="2026-08-17",
+       locationName="神奈川・そごう横浜店"),
+])
+check("同館同日但不同主題的Miffy活動不可合併", len(out), 2)
+check("今日更新比對不可把同館同日不同主題視為替換",
+      scrape.is_same_event_for_update_diff(out[0], out[1]),
+      False)
+
+out, _ = scrape.dedup_events([
+    ev(brand="chiikawa", title="Chiikawa x 東京ばな奈 聯名環保袋組",
+       type="new_product", city="Tokyo", startDate="2026-08-01",
+       locationName="東京ばな奈ワールド"),
+    ev(brand="chiikawa", title="吉伊卡哇 x 東京香蕉 聯名周邊",
+       type="new_product", city="Tokyo", startDate="2026-08-01",
+       locationName="東京香蕉",
+       sourceTitle="ちいかわ×東京ばな奈 エコバッグセット"),
+])
+check("Chiikawa東京香蕉環保袋跨媒體去重", len(out), 1)
+
+out, _ = scrape.dedup_events([
+    ev(brand="pokemon", title="寶可夢 缶バッジコレクション〜ミアレ編〜登場",
+       type="new_product", city="Tokyo", startDate="2026-08-01",
+       locationName="ポケモンセンター"),
+    ev(brand="pokemon", title="寶可夢中心 缶バッジコレクション ミアレ編 發售",
+       type="new_product", city="Tokyo", startDate="2026-08-01",
+       locationName="ポケモンセンター"),
+])
+check("Pokémonミアレ編徽章跨媒體去重", len(out), 1)
 
 out, _ = scrape.dedup_events([
     ev(id="ch-official-haneda", brand="chiikawa",

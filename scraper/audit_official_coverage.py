@@ -43,6 +43,9 @@ OFFICIAL_HOSTS = {
 # Pages here are official but either duplicate a richer canonical event source,
 # or are known out-of-scope after human review.
 IGNORED_OFFICIAL_PAGES: dict[str, str] = {
+    "https://www.pokemon-cafe.jp/ja/cafe/news/260723_3457.html": (
+        "Pokemon Cafe monthly seat-reservation schedule, not a new cafe menu or event"
+    ),
     "https://www.pokemon-cafe.jp/ja/cafe/news/260619_3441.html": (
         "Pokemon Cafe seat reservation schedule, not an event or goods launch"
     ),
@@ -97,6 +100,12 @@ IGNORED_OFFICIAL_PAGES: dict[str, str] = {
     "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-shibuya/news/202607/000413.html": (
         "Pokemon Design Lab crowd-control and advance-lottery guidance, not a new event or product launch"
     ),
+    "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-shibuya/news/202607/000435.html": (
+        "Pokemon Design Lab crowd-control and advance-lottery guidance for an existing T-shirt service"
+    ),
+    "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-shibuya/news/202607/000434.html": (
+        "Pokemon Design Lab crowd-control and advance-lottery guidance for an existing T-shirt service"
+    ),
     "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-shibuya/news/202607/000399.html": (
         "temporary Pokemon Design Lab service suspension notice"
     ),
@@ -105,6 +114,12 @@ IGNORED_OFFICIAL_PAGES: dict[str, str] = {
     ),
     "https://dickbruna.jp/news/202607/47193/": (
         "general Liberty Fabrics collaboration goods, not a venue-bounded popup or store event"
+    ),
+    "https://dickbruna.jp/news/202607/47476/": (
+        "Felissimo Miffy information website launch; purely online and not a physical event"
+    ),
+    "https://dickbruna.jp/news/202607/47344/": (
+        "broad studio CLIP chain and web-store goods launch, not venue-bounded limited activity"
     ),
     "https://dickbruna.jp/news/202606/46872/": (
         "open-ended Flower Miffy stock-limited birthday campaign aged out with no current availability confirmation"
@@ -124,6 +139,9 @@ IGNORED_OFFICIAL_PAGES: dict[str, str] = {
     "https://www.kiddyland.co.jp/event/miffy_20260704/": (
         "same-day miffy style single-product page covered by the 2026-07-04 novelty campaign"
     ),
+    "https://www.kiddyland.co.jp/event/miffy_20260808/": (
+        "same-day miffy style single-product page covered by the 2026-08-08 novelty campaign"
+    ),
     "https://www.kiddyland.co.jp/event/miffy_20260606/": (
         "same-day miffy style single-product page covered by Birthday Fair 2026"
     ),
@@ -141,6 +159,21 @@ IGNORED_OFFICIAL_PAGES: dict[str, str] = {
     ),
     "https://www.kiddyland.co.jp/event/miffy_harajuku202604/": (
         "past miffy style Harajuku opening/reservation notice, not a current event"
+    ),
+    "https://www.kiddyland.co.jp/miffy_style/miffy_20260606/": (
+        "past same-day miffy style single-product page covered by Birthday Fair 2026"
+    ),
+    "https://www.kiddyland.co.jp/miffy_style/miffystyle_birthday2026/": (
+        "expired Birthday Fair already represented by the canonical Dick Bruna page"
+    ),
+    "https://www.kiddyland.co.jp/miffy_style/miffy_20260502/": (
+        "past miffy style single-product page outside the current freshness window"
+    ),
+    "https://www.kiddyland.co.jp/miffy_style/miffy_20260424/": (
+        "past miffy style single-product page outside the current freshness window"
+    ),
+    "https://www.kiddyland.co.jp/miffy_style/miffy_harajuku202604/": (
+        "past miffy style Harajuku opening notice, not a current event"
     ),
 }
 
@@ -363,7 +396,7 @@ def _signal_text(candidate: OfficialCandidate, page_text: str, title: str) -> st
     for marker in (
         "関連記事", "最新の記事", "この記事をシェアする", "ネット通販",
         "ニュースカテゴリー", "ポケモンセンター公式 SNS", "その他のニュース",
-        "OTHER NEWS", "RECOMMEND",
+        "OTHER NEWS", "RECOMMEND", "記事一覧へ戻る",
     ):
         idx = visible.find(marker)
         if idx >= 0:
