@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-28T15:37:59+00:00",
+  "updatedAt": "2026-07-29T08:40:04+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 9,
@@ -892,26 +892,26 @@
       ]
     },
     "domain:collabo-cafe.com": {
-      "confirmed": 3,
+      "confirmed": 4,
       "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 4,
-      "score": 57,
+      "crossChecked": 5,
+      "score": 66,
       "label": "collabo-cafe.com",
       "kind": "site",
       "host": "collabo-cafe.com",
       "handle": "",
       "firstSeen": "2026-06-30",
-      "lastReviewed": "2026-07-21",
+      "lastReviewed": "2026-07-29",
       "lastOutcome": "confirmed",
-      "notes": "Dates and popup confirmed by chiikawa-info.jp/ckbaby.html; replaced source with official page and removed unsupported cafe claim",
+      "notes": "Kept after correction: Gray Parker Service release confirmed 2026-08-07 physical Okinawa store sales; not a cafe",
       "byBrand": {
         "chiikawa": {
-          "confirmed": 3,
+          "confirmed": 4,
           "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 4,
-          "score": 57
+          "crossChecked": 5,
+          "score": 66
         }
       },
       "byType": {
@@ -928,15 +928,22 @@
           "uncertain": 0,
           "crossChecked": 3,
           "score": 77
+        },
+        "new_product": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
         }
       },
       "byCountry": {
         "jp": {
-          "confirmed": 3,
+          "confirmed": 4,
           "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 4,
-          "score": 57
+          "crossChecked": 5,
+          "score": 66
         }
       },
       "history": [
@@ -989,6 +996,16 @@
           "eventId": "ch-fad6d6",
           "evidenceCount": 1,
           "notes": "Dates and popup confirmed by chiikawa-info.jp/ckbaby.html; replaced source with official page and removed unsupported cafe claim"
+        },
+        {
+          "date": "2026-07-29",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "ch-2e1170",
+          "evidenceCount": 1,
+          "notes": "Kept after correction: Gray Parker Service release confirmed 2026-08-07 physical Okinawa store sales; not a cafe"
         }
       ]
     },
@@ -1452,44 +1469,44 @@
       ]
     },
     "domain:kiddyland.co.jp": {
-      "confirmed": 2,
+      "confirmed": 3,
       "rejected": 0,
       "uncertain": 0,
       "crossChecked": 1,
-      "score": 66,
+      "score": 73,
       "label": "kiddyland.co.jp",
       "kind": "site",
       "host": "kiddyland.co.jp",
       "handle": "",
       "firstSeen": "2026-07-05",
-      "lastReviewed": "2026-07-28",
+      "lastReviewed": "2026-07-29",
       "lastOutcome": "confirmed",
-      "notes": "Official Kiddy Land page states the 2026-08-08 store novelty campaign runs while supplies last; no fixed end date.",
+      "notes": "Kept after correction: official page confirms store-specific purchase novelty starts 2026-08-15 and runs while supplies last; unrelated stamp-rally dates removed",
       "byBrand": {
         "miffy": {
-          "confirmed": 2,
+          "confirmed": 3,
           "rejected": 0,
           "uncertain": 0,
           "crossChecked": 1,
-          "score": 66
+          "score": 73
         }
       },
       "byType": {
         "campaign": {
-          "confirmed": 2,
+          "confirmed": 3,
           "rejected": 0,
           "uncertain": 0,
           "crossChecked": 1,
-          "score": 66
+          "score": 73
         }
       },
       "byCountry": {
         "jp": {
-          "confirmed": 2,
+          "confirmed": 3,
           "rejected": 0,
           "uncertain": 0,
           "crossChecked": 1,
-          "score": 66
+          "score": 73
         }
       },
       "history": [
@@ -1512,6 +1529,16 @@
           "eventId": "mi-7f8804",
           "evidenceCount": 1,
           "notes": "Official Kiddy Land page states the 2026-08-08 store novelty campaign runs while supplies last; no fixed end date."
+        },
+        {
+          "date": "2026-07-29",
+          "outcome": "confirmed",
+          "brand": "miffy",
+          "type": "campaign",
+          "country": "JP",
+          "eventId": "mi-8d95df",
+          "evidenceCount": 0,
+          "notes": "Kept after correction: official page confirms store-specific purchase novelty starts 2026-08-15 and runs while supplies last; unrelated stamp-rally dates removed"
         }
       ]
     },

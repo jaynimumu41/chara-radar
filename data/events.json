@@ -1601,20 +1601,43 @@
   },
   {
     "brand": "miffy",
-    "title": "Miffy スタート!miffy style 神戸店/三宮店限定 ノベルティ",
+    "title": "Miffy miffy style 各店贈品日",
     "type": "campaign",
     "country": "JP",
-    "city": "Hyogo",
-    "locationName": "miffy style 各店＋一部キデイランド店舗",
-    "startDate": "2026-07-30",
-    "endDate": "2026-09-30",
-    "summaryZh": "miffy style 各店自 2026-07-30 起舉辦店頭購入特典活動，贈品送完為止，線上店不適用。",
+    "city": "",
+    "locationName": "miffy style 各店＋キデイランド対象店",
+    "startDate": "2026-08-08",
+    "endDate": "",
+    "summaryZh": "miffy style 各店自 2026-08-08 起舉辦店頭消費贈品活動，贈品送完為止，線上店不適用。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "米飛兔",
       "miffy style",
-      "日本"
+      "店頭特典"
+    ],
+    "id": "mi-7f8804",
+    "sourceType": "official_site",
+    "createdAt": "2026-07-28",
+    "sourceTitle": "2026年8月8日(土)～スタート!miffy style 各店ノベルティデイ - キデイランド",
+    "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_nove202608/"
+  },
+  {
+    "brand": "miffy",
+    "title": "Miffy miffy style 神戶店／三宮店限定贈品",
+    "type": "campaign",
+    "country": "JP",
+    "city": "Hyogo",
+    "locationName": "miffy style 神戶店、miffy style mimi 三宮店",
+    "startDate": "2026-08-15",
+    "endDate": "",
+    "summaryZh": "miffy style 神戶店與 mimi 三宮店自 8 月 15 日起，向消費滿 3,300 日圓的顧客贈送各店限定壓克力鑰匙圈，送完為止。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "miffy style",
+      "店頭特典"
     ],
     "id": "mi-8d95df",
     "sourceType": "official_site",
@@ -1623,26 +1646,49 @@
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_limited_nove202608/"
   },
   {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 x 斯巴拉西 聯名咖啡廳",
-    "type": "cafe",
+    "brand": "miffy",
+    "title": "Miffy「米飛兔與孩子的時光」企劃展",
+    "type": "campaign",
     "country": "JP",
-    "city": "",
-    "locationName": "",
+    "city": "Gifu",
+    "locationName": "兒童陶瓷博物館（岐阜縣多治見市旭丘10-6-67）",
+    "startDate": "2026-08-01",
+    "endDate": "2026-11-23",
+    "summaryZh": "岐阜多治見兒童陶瓷博物館舉辦米飛兔主題企劃展，現場販售相關繪本與博物館限定原創餐具。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "企劃展",
+      "博物館限定商品"
+    ],
+    "id": "mi-92d441",
+    "sourceType": "official_site",
+    "createdAt": "2026-07-29",
+    "sourceTitle": "岐阜・多治見 こども陶器博物館で企画展「ミッフィーとこどものじかん」開催 - dickbruna.jp",
+    "sourceUrl": "https://dickbruna.jp/news/202607/47552/"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇 × 斯巴拉西聯名商品",
+    "type": "new_product",
+    "country": "JP",
+    "city": "Okinawa",
+    "locationName": "沖繩實體販售點（シーサーのおみやげやさん、上間菓子店直營店等）",
     "startDate": "2026-08-07",
     "endDate": "",
-    "summaryZh": "吉伊卡哇與斯巴拉西聯名咖啡廳登場，販售聯名周邊商品與限定餐飲。",
+    "summaryZh": "吉伊卡哇與沖繩斯巴拉西推出玩偶、T恤、鑰匙圈、磁鐵與貼紙等 5 款聯名商品，8 月 7 日起於沖繩實體店與官方網店販售。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "聯名",
-      "咖啡廳",
-      "限定商品"
+      "新商品",
+      "沖繩"
     ],
     "id": "ch-2e1170",
-    "sourceTitle": "ちいかわ × スッパイマン 8月7日よりコラボアイテム登場! - コラボカフェ",
+    "sourceTitle": "【ちいかわ × スッパイマン】話題を集めたコラボパッケージをモチーフにした商品が登場！マスコットやTシャツなど全5アイテムが8月7日（金）より販売開始",
     "sourceType": "official_social",
     "createdAt": "2026-07-29",
-    "sourceUrl": "https://collabo-cafe.com/events/collabo/chiikawa-suppaiman2026/"
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000064.000168561.html"
   }
 ]
