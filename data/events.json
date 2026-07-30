@@ -411,27 +411,27 @@
   },
   {
     "brand": "pokemon",
-    "title": "寶可夢：變身！百變怪系列新品",
+    "title": "寶可夢中心「變身！百變怪」玩偶與吊飾",
     "type": "new_product",
     "country": "JP",
-    "city": "Tokyo",
+    "city": "",
     "locationName": "ポケモンセンター",
     "startDate": "2026-07-11",
     "endDate": "",
-    "summaryZh": "寶可夢中心將於 2026-07-11 發售「變身！百變怪」系列新品，包含百變怪變身成夢妖魔、索羅亞、洗翠索羅亞、淚眼蜥、新葉喵與厄鬼椪的絨毛娃娃與吊飾。",
+    "summaryZh": "日本寶可夢中心將於7月11日起販售「變身！百變怪」系列的新款玩偶與吊飾，共有花岩怪、索羅亞、洗翠索羅亞、淚眼蜥、新葉喵與厄鬼椪等六種造型。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "寶可夢",
-      "變形怪",
+      "百變怪",
       "新品",
       "絨毛娃娃"
     ],
     "id": "po-1be27e",
-    "sourceTitle": "『ポケモン』メタモンがニャオハに“へんしん”。姿は完璧でも顔はメタモンのままでかわいい。メタモンの新作ぬいぐるみ＆マスコットがポケセンで7月11日発売 - ファミ通",
-    "sourceType": "official_social",
+    "sourceTitle": "メタモンがいろいろなポケモンに「へんしん」したぬいぐるみとマスコットが、ポケモンセンターに登場！｜ポケットモンスターオフィシャルサイト",
+    "sourceType": "official_site",
     "createdAt": "2026-07-04",
-    "sourceUrl": "https://www.famitsu.com/article/202607/80315"
+    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/07/260703_to01.html"
   },
   {
     "brand": "pokemon",
@@ -1624,20 +1624,20 @@
   },
   {
     "brand": "miffy",
-    "title": "Miffy スタート!miffy style 神戸店/三宮店限定 ノベルティ",
+    "title": "Miffy miffy style 神戶店／三宮店限定贈品",
     "type": "campaign",
     "country": "JP",
     "city": "Hyogo",
-    "locationName": "miffy style 各店＋一部キデイランド店舗",
-    "startDate": "2026-07-30",
-    "endDate": "2026-09-30",
-    "summaryZh": "miffy style 各店自 2026-07-30 起舉辦店頭購入特典活動，贈品送完為止，線上店不適用。",
+    "locationName": "miffy style 神戶店、miffy style mimi 三宮店",
+    "startDate": "2026-08-15",
+    "endDate": "",
+    "summaryZh": "miffy style 神戶店與 mimi 三宮店自 8 月 15 日起，向消費滿 3,300 日圓的顧客贈送各店限定壓克力鑰匙圈，送完為止。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "米飛兔",
       "miffy style",
-      "日本"
+      "店頭特典"
     ],
     "id": "mi-8d95df",
     "sourceType": "official_site",
@@ -1646,51 +1646,26 @@
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_limited_nove202608/"
   },
   {
-    "brand": "pokemon",
-    "title": "寶可夢中心「超級進化寶可夢＆超級石」壓克力鑰匙圈",
-    "type": "new_product",
+    "brand": "miffy",
+    "title": "Miffy miffy style 各店贈品日",
+    "type": "campaign",
     "country": "JP",
-    "city": "Tokyo",
-    "locationName": "ポケモンセンター",
-    "startDate": "2026-08-01",
+    "city": "",
+    "locationName": "miffy style 各店＋キデイランド対象店",
+    "startDate": "2026-08-08",
     "endDate": "",
-    "summaryZh": "日本寶可夢中心將於8月1日推出「超級進化寶可夢＆超級石」主題的壓克力鑰匙圈新品，可在寶可夢中心實體店舖購買。",
+    "summaryZh": "miffy style 各店自 2026-08-08 起舉辦店頭消費贈品活動，贈品送完為止，線上店不適用。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
-      "寶可夢",
-      "鑰匙圈",
-      "新品",
-      "日本"
+      "米飛兔",
+      "miffy style",
+      "店頭特典"
     ],
-    "id": "po-af1247",
-    "sourceTitle": "8月1日（土）より「メガシンカポケモン＆メガストーン」の新作アクリルキーホルダーがポケモンセンターに登場 - ndw.jp",
-    "sourceType": "official_social",
-    "createdAt": "2026-07-30",
-    "sourceUrl": "https://www.ndw.jp/pokemon-goods-260724-02/"
-  },
-  {
-    "brand": "pokemon",
-    "title": "寶可夢中心登場！變身玩偶登場",
-    "type": "new_product",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "ポケモンセンター",
-    "startDate": "2026-07-11",
-    "endDate": "",
-    "summaryZh": "日本寶可夢中心將於7月11日起販售變身成各種寶可夢的變身伊布系列玩偶與吊飾，可在實體店舖購買。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "玩偶",
-      "新品",
-      "日本"
-    ],
-    "id": "po-7f9f3c",
-    "sourceTitle": "メタモンがいろんなポケモンにへんしん！ 7月11日より、ぬいぐるみ＆マスコットがポケモンセンターに登場 - ndw.jp",
-    "sourceType": "official_social",
-    "createdAt": "2026-07-30",
-    "sourceUrl": "https://www.ndw.jp/pokemon-goods-260703-03/"
+    "id": "mi-7f8804",
+    "sourceType": "official_site",
+    "createdAt": "2026-07-28",
+    "sourceTitle": "2026年8月8日(土)～スタート!miffy style 各店ノベルティデイ - キデイランド",
+    "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_nove202608/"
   }
 ]

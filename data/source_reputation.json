@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-29T08:40:04+00:00",
+  "updatedAt": "2026-07-30T08:34:25+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 9,
@@ -1759,44 +1759,44 @@
       ]
     },
     "domain:ndw.jp": {
-      "confirmed": 1,
+      "confirmed": 3,
       "rejected": 0,
       "uncertain": 0,
-      "crossChecked": 1,
-      "score": 59,
+      "crossChecked": 4,
+      "score": 79,
       "label": "ndw.jp",
       "kind": "site",
       "host": "ndw.jp",
       "handle": "",
       "firstSeen": "2026-07-19",
-      "lastReviewed": "2026-07-19",
+      "lastReviewed": "2026-07-30",
       "lastOutcome": "confirmed",
-      "notes": "Matched Pokemon official goods page for Pokémon Timeless Adventure; physical store release is 2026-07-04 at Pokemon Center locations.",
+      "notes": "Exact 2026-07-11 physical Pokemon Center sale confirmed by pokemon.co.jp goods page and Pokemon Center Osaka DX store notice",
       "byBrand": {
         "pokemon": {
-          "confirmed": 1,
+          "confirmed": 3,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 59
+          "crossChecked": 4,
+          "score": 79
         }
       },
       "byType": {
         "new_product": {
-          "confirmed": 1,
+          "confirmed": 3,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 59
+          "crossChecked": 4,
+          "score": 79
         }
       },
       "byCountry": {
         "jp": {
-          "confirmed": 1,
+          "confirmed": 3,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 59
+          "crossChecked": 4,
+          "score": 79
         }
       },
       "history": [
@@ -1809,6 +1809,26 @@
           "eventId": "po-423bc7",
           "evidenceCount": 1,
           "notes": "Matched Pokemon official goods page for Pokémon Timeless Adventure; physical store release is 2026-07-04 at Pokemon Center locations."
+        },
+        {
+          "date": "2026-07-30",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "po-5e9734",
+          "evidenceCount": 1,
+          "notes": "Exact product line, 2026-08-01 physical Pokemon Center sale date, and nationwide store availability confirmed by pokemon.co.jp official goods page"
+        },
+        {
+          "date": "2026-07-30",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "po-1be27e",
+          "evidenceCount": 2,
+          "notes": "Exact 2026-07-11 physical Pokemon Center sale confirmed by pokemon.co.jp goods page and Pokemon Center Osaka DX store notice"
         }
       ]
     },
