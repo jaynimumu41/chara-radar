@@ -260,7 +260,7 @@
     ],
     "id": "po-d0b8f9",
     "sourceType": "official_site",
-    "createdAt": "2026-07-30",
+    "createdAt": "2026-07-31",
     "sourceTitle": "ポケモンカフェのメニューやショーが新しくなるよ！「ポケモンカフェ TOKYO」は、店内がリニューアル！",
     "sourceUrl": "https://www.pokemon-cafe.jp/ja/cafe/news/260529_3377.html"
   },
@@ -285,7 +285,7 @@
     ],
     "id": "po-4090c2",
     "sourceType": "official_site",
-    "createdAt": "2026-07-30",
+    "createdAt": "2026-07-31",
     "sourceTitle": "「選べるポケモンラテ」に、メルタンとメルメタルが仲間入り！",
     "sourceUrl": "https://www.pokemon-cafe.jp/ja/cafe/news/260703_3439.html"
   },
@@ -310,7 +310,7 @@
     ],
     "id": "po-e4c3bc",
     "sourceType": "official_site",
-    "createdAt": "2026-07-30",
+    "createdAt": "2026-07-31",
     "sourceTitle": "≪K.UNO × U-TREASURE POP UP Promotion≫開展！ - 台灣寶可夢官方網站",
     "sourceUrl": "https://tw.portal-pokemon.com/goods/post-5267/"
   },
@@ -1480,7 +1480,7 @@
     ],
     "id": "mi-cc9d39",
     "sourceType": "official_site",
-    "createdAt": "2026-07-30",
+    "createdAt": "2026-07-31",
     "sourceTitle": "神奈川・そごう横浜店に「DICK BRUNA STAND BY MIIA」期間限定オープン - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202607/47392/"
   },
@@ -1503,7 +1503,7 @@
     ],
     "id": "mi-af2f79",
     "sourceType": "official_site",
-    "createdAt": "2026-07-30",
+    "createdAt": "2026-07-31",
     "sourceTitle": "そごう横浜店で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202607/47472/"
   },
@@ -1526,7 +1526,7 @@
     ],
     "id": "mi-88dac4",
     "sourceType": "official_site",
-    "createdAt": "2026-07-30",
+    "createdAt": "2026-07-31",
     "sourceTitle": "＜期間延長決定＞ハウステンボス「ミッフィーバースデーマンス」 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/47004/"
   },
@@ -1549,7 +1549,7 @@
     ],
     "id": "mi-98d19d",
     "sourceType": "official_site",
-    "createdAt": "2026-07-30",
+    "createdAt": "2026-07-31",
     "sourceTitle": "鹿児島市立美術館にて「美術館に行こう！」展開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/46804/"
   },
@@ -1572,7 +1572,7 @@
     ],
     "id": "mi-ea7f4f",
     "sourceType": "official_site",
-    "createdAt": "2026-07-30",
+    "createdAt": "2026-07-31",
     "sourceTitle": "「KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront」～Night Time～開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/46792/"
   },
@@ -1595,7 +1595,7 @@
     ],
     "id": "mi-33f034",
     "sourceType": "official_site",
-    "createdAt": "2026-07-30",
+    "createdAt": "2026-07-31",
     "sourceTitle": "ヴィレッジヴァンガード「ミッフィーとつなぐ てがきのぬくもりフェア」開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202607/47530/"
   },
@@ -1618,54 +1618,31 @@
     ],
     "id": "mi-a3137a",
     "sourceType": "official_site",
-    "createdAt": "2026-07-30",
+    "createdAt": "2026-07-31",
     "sourceTitle": "「miffy × Cosme Kitchen 」コスメキッチンとミッフィーのコラボ第3弾登場 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202607/47496/"
   },
   {
     "brand": "miffy",
-    "title": "Miffy miffy style 神戶店／三宮店限定贈品",
+    "title": "Miffy スタート!miffy style 神戸店/三宮店限定 ノベルティ",
     "type": "campaign",
     "country": "JP",
     "city": "Hyogo",
-    "locationName": "miffy style 神戶店、miffy style mimi 三宮店",
-    "startDate": "2026-08-15",
-    "endDate": "",
-    "summaryZh": "miffy style 神戶店與 mimi 三宮店自 8 月 15 日起，向消費滿 3,300 日圓的顧客贈送各店限定壓克力鑰匙圈，送完為止。",
+    "locationName": "miffy style 各店＋一部キデイランド店舗",
+    "startDate": "2026-07-30",
+    "endDate": "2026-09-30",
+    "summaryZh": "miffy style 各店自 2026-07-30 起舉辦店頭購入特典活動，贈品送完為止，線上店不適用。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "米飛兔",
       "miffy style",
-      "店頭特典"
+      "日本"
     ],
     "id": "mi-8d95df",
     "sourceType": "official_site",
-    "createdAt": "2026-07-30",
+    "createdAt": "2026-07-31",
     "sourceTitle": "2026年8月15日(土)スタート!miffy style 神戸店/三宮店限定 ノベルティ - キデイランド",
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_limited_nove202608/"
-  },
-  {
-    "brand": "miffy",
-    "title": "Miffy miffy style 各店贈品日",
-    "type": "campaign",
-    "country": "JP",
-    "city": "",
-    "locationName": "miffy style 各店＋キデイランド対象店",
-    "startDate": "2026-08-08",
-    "endDate": "",
-    "summaryZh": "miffy style 各店自 2026-08-08 起舉辦店頭消費贈品活動，贈品送完為止，線上店不適用。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "miffy style",
-      "店頭特典"
-    ],
-    "id": "mi-7f8804",
-    "sourceType": "official_site",
-    "createdAt": "2026-07-28",
-    "sourceTitle": "2026年8月8日(土)～スタート!miffy style 各店ノベルティデイ - キデイランド",
-    "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_nove202608/"
   }
 ]
