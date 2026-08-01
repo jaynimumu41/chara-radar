@@ -1624,14 +1624,37 @@
   },
   {
     "brand": "miffy",
+    "title": "Miffy miffy style 各店贈品日",
+    "type": "campaign",
+    "country": "JP",
+    "city": "",
+    "locationName": "miffy style 各店＋キデイランド対象店",
+    "startDate": "2026-08-08",
+    "endDate": "",
+    "summaryZh": "miffy style 各店自 2026-08-08 起舉辦店頭消費贈品活動，贈品送完為止，線上店不適用。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "miffy style",
+      "店頭特典"
+    ],
+    "id": "mi-7f8804",
+    "sourceType": "official_site",
+    "createdAt": "2026-07-28",
+    "sourceTitle": "2026年8月8日(土)～スタート!miffy style 各店ノベルティデイ - キデイランド",
+    "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_nove202608/"
+  },
+  {
+    "brand": "miffy",
     "title": "Miffy スタート!miffy style 神戸店/三宮店限定 ノベルティ",
     "type": "campaign",
     "country": "JP",
     "city": "Hyogo",
-    "locationName": "miffy style 各店＋一部キデイランド店舗",
-    "startDate": "2026-07-30",
-    "endDate": "2026-09-30",
-    "summaryZh": "miffy style 各店自 2026-07-30 起舉辦店頭購入特典活動，贈品送完為止，線上店不適用。",
+    "locationName": "miffy style 神戸店／miffy style mimi 三宮",
+    "startDate": "2026-08-15",
+    "endDate": "",
+    "summaryZh": "miffy style 神戶店與 miffy style mimi 三宮自 2026-08-15 起推出各店限定壓克力鑰匙圈贈品，送完為止。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1646,36 +1669,12 @@
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_limited_nove202608/"
   },
   {
-    "brand": "miffy",
-    "title": "神戶港塔變身米飛兔主題",
-    "type": "popup",
-    "country": "JP",
-    "city": "Hyogo",
-    "locationName": "神戸ポートタワー",
-    "startDate": "2026-07-30",
-    "endDate": "2026-09-30",
-    "summaryZh": "神戶港塔將變身為米飛兔主題，現場有可愛周邊商品、限定餐飲及拍照打卡點，可供體驗。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "快閃店",
-      "限定商品",
-      "主題活動"
-    ],
-    "id": "mi-e2f040",
-    "sourceTitle": "神戸ポートタワーがまるごとミッフィーに♡かわいいグッズやフード、フォトスポットを体験！ - Kiss PRESS(キッスプレス)",
-    "sourceType": "official_social",
-    "createdAt": "2026-08-01",
-    "sourceUrl": "https://kisspress.jp/articles/64774/"
-  },
-  {
     "brand": "pokemon",
     "title": "寶可夢「ぱたぱたっ！ぬいぐるみ」新發售",
     "type": "new_product",
     "country": "JP",
-    "city": "Tokyo",
-    "locationName": "ポケモンセンター",
+    "city": "",
+    "locationName": "日本各地のポケモンセンター",
     "startDate": "2026-08-08",
     "endDate": "",
     "summaryZh": "寶可夢中心將於8月8日發售會動的「ぱたぱたっ！ぬいぐるみ」，寶可夢的鰭會拍動。",
@@ -1688,9 +1687,9 @@
       "日本"
     ],
     "id": "po-49ec1c",
-    "sourceTitle": "ポケモンのヒレがパタパタと動く！「ぱたぱたっ！ぬいぐるみ」がポケモンセンターで8月8日発売 - Nintendo DREAM WEB",
-    "sourceType": "official_social",
+    "sourceTitle": "ポケモンのヒレが動く「ぱたぱたっ！ぬいぐるみ」が、ポケモンセンターに登場！ - ポケットモンスターオフィシャルサイト",
+    "sourceType": "official_site",
     "createdAt": "2026-08-01",
-    "sourceUrl": "https://www.ndw.jp/pokemon-goods-260801/"
+    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/07/260731_to02.html"
   }
 ]

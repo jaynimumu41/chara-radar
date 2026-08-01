@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-30T08:34:25+00:00",
+  "updatedAt": "2026-08-01T08:36:52+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 9,
@@ -1759,44 +1759,44 @@
       ]
     },
     "domain:ndw.jp": {
-      "confirmed": 3,
+      "confirmed": 4,
       "rejected": 0,
       "uncertain": 0,
-      "crossChecked": 4,
-      "score": 79,
+      "crossChecked": 5,
+      "score": 88,
       "label": "ndw.jp",
       "kind": "site",
       "host": "ndw.jp",
       "handle": "",
       "firstSeen": "2026-07-19",
-      "lastReviewed": "2026-07-30",
+      "lastReviewed": "2026-08-01",
       "lastOutcome": "confirmed",
-      "notes": "Exact 2026-07-11 physical Pokemon Center sale confirmed by pokemon.co.jp goods page and Pokemon Center Osaka DX store notice",
+      "notes": "Matched Pokemon official goods page; physical Pokemon Center release on 2026-08-08",
       "byBrand": {
         "pokemon": {
-          "confirmed": 3,
+          "confirmed": 4,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 4,
-          "score": 79
+          "crossChecked": 5,
+          "score": 88
         }
       },
       "byType": {
         "new_product": {
-          "confirmed": 3,
+          "confirmed": 4,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 4,
-          "score": 79
+          "crossChecked": 5,
+          "score": 88
         }
       },
       "byCountry": {
         "jp": {
-          "confirmed": 3,
+          "confirmed": 4,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 4,
-          "score": 79
+          "crossChecked": 5,
+          "score": 88
         }
       },
       "history": [
@@ -1829,6 +1829,16 @@
           "eventId": "po-1be27e",
           "evidenceCount": 2,
           "notes": "Exact 2026-07-11 physical Pokemon Center sale confirmed by pokemon.co.jp goods page and Pokemon Center Osaka DX store notice"
+        },
+        {
+          "date": "2026-08-01",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "po-49ec1c",
+          "evidenceCount": 1,
+          "notes": "Matched Pokemon official goods page; physical Pokemon Center release on 2026-08-08"
         }
       ]
     },
@@ -2055,6 +2065,60 @@
           "eventId": "ch-598fd5",
           "evidenceCount": 0,
           "notes": "Official Fuji TV event page confirms Chiikawa Obake no Mori at Fuji TV headquarters 22F Forum from 2026-07-25 through 2026-08-23, with visitor benefits and event-original goods."
+        }
+      ]
+    },
+    "domain:kisspress.jp": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 41,
+      "label": "kisspress.jp",
+      "kind": "site",
+      "host": "kisspress.jp",
+      "handle": "",
+      "firstSeen": "2026-08-01",
+      "lastReviewed": "2026-08-01",
+      "lastOutcome": "rejected",
+      "notes": "Duplicate of existing official Dick Bruna Kobe Waterfront event mi-ea7f4f",
+      "byBrand": {
+        "miffy": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byType": {
+        "popup": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "history": [
+        {
+          "date": "2026-08-01",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "mi-e2f040",
+          "evidenceCount": 1,
+          "notes": "Duplicate of existing official Dick Bruna Kobe Waterfront event mi-ea7f4f"
         }
       ]
     }
