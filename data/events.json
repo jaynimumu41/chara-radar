@@ -1648,14 +1648,37 @@
   },
   {
     "brand": "miffy",
+    "title": "Miffy miffy style 各店贈品日",
+    "type": "campaign",
+    "country": "JP",
+    "city": "",
+    "locationName": "miffy style 各店＋キデイランド対象店",
+    "startDate": "2026-08-08",
+    "endDate": "",
+    "summaryZh": "miffy style 各店自 2026-08-08 起舉辦店頭消費贈品活動，贈品送完為止，線上店不適用。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "miffy style",
+      "店頭特典"
+    ],
+    "id": "mi-7f8804",
+    "sourceType": "official_site",
+    "createdAt": "2026-07-28",
+    "sourceTitle": "2026年8月8日(土)～スタート!miffy style 各店ノベルティデイ - キデイランド",
+    "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_nove202608/"
+  },
+  {
+    "brand": "miffy",
     "title": "Miffy スタート!miffy style 神戸店/三宮店限定 ノベルティ",
     "type": "campaign",
     "country": "JP",
     "city": "Hyogo",
-    "locationName": "miffy style 各店＋一部キデイランド店舗",
-    "startDate": "2026-07-30",
-    "endDate": "2026-09-30",
-    "summaryZh": "miffy style 各店自 2026-07-30 起舉辦店頭購入特典活動，贈品送完為止，線上店不適用。",
+    "locationName": "miffy style 神戸店／miffy style mimi 三宮",
+    "startDate": "2026-08-15",
+    "endDate": "",
+    "summaryZh": "miffy style 神戶店與 miffy style mimi 三宮自 2026-08-15 起推出各店限定壓克力鑰匙圈贈品，送完為止。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1665,32 +1688,8 @@
     ],
     "id": "mi-8d95df",
     "sourceType": "official_site",
-    "createdAt": "2026-08-02",
+    "createdAt": "2026-08-01",
     "sourceTitle": "2026年8月15日(土)スタート!miffy style 神戸店/三宮店限定 ノベルティ - キデイランド",
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_limited_nove202608/"
-  },
-  {
-    "brand": "miffy",
-    "title": "神戶港塔變身米飛兔主題",
-    "type": "popup",
-    "country": "JP",
-    "city": "Hyogo",
-    "locationName": "神戶港塔",
-    "startDate": "2026-07-30",
-    "endDate": "2026-09-30",
-    "summaryZh": "神戶港塔將變身為米飛兔主題，現場有可愛周邊商品、限定餐飲及拍照打卡點，提供獨特的米飛兔體驗。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "快閃店",
-      "神戶",
-      "限定商品"
-    ],
-    "id": "mi-f970b1",
-    "sourceTitle": "神戸ポートタワーがまるごとミッフィーに♡かわいいグッズやフード、フォトスポットを体験！ - ｄメニューニュース",
-    "sourceType": "official_social",
-    "createdAt": "2026-08-02",
-    "sourceUrl": "https://topics.smt.docomo.ne.jp/amp/article/kisspress/region/kisspress-64774"
   }
 ]

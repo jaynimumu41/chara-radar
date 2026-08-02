@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-01T08:36:52+00:00",
+  "updatedAt": "2026-08-02T08:34:21+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 9,
@@ -2119,6 +2119,60 @@
           "eventId": "mi-e2f040",
           "evidenceCount": 1,
           "notes": "Duplicate of existing official Dick Bruna Kobe Waterfront event mi-ea7f4f"
+        }
+      ]
+    },
+    "domain:topics.smt.docomo.ne.jp": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 41,
+      "label": "topics.smt.docomo.ne.jp",
+      "kind": "site",
+      "host": "topics.smt.docomo.ne.jp",
+      "handle": "",
+      "firstSeen": "2026-08-02",
+      "lastReviewed": "2026-08-02",
+      "lastOutcome": "rejected",
+      "notes": "Duplicate syndication of the already structured official KOBE PORT TOWER event mi-ea7f4f",
+      "byBrand": {
+        "miffy": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byType": {
+        "popup": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "history": [
+        {
+          "date": "2026-08-02",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "mi-f970b1",
+          "evidenceCount": 1,
+          "notes": "Duplicate syndication of the already structured official KOBE PORT TOWER event mi-ea7f4f"
         }
       ]
     }
