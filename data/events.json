@@ -260,7 +260,7 @@
     ],
     "id": "po-d0b8f9",
     "sourceType": "official_site",
-    "createdAt": "2026-08-03",
+    "createdAt": "2026-08-04",
     "sourceTitle": "ポケモンカフェのメニューやショーが新しくなるよ！「ポケモンカフェ TOKYO」は、店内がリニューアル！",
     "sourceUrl": "https://www.pokemon-cafe.jp/ja/cafe/news/260529_3377.html"
   },
@@ -285,7 +285,7 @@
     ],
     "id": "po-4090c2",
     "sourceType": "official_site",
-    "createdAt": "2026-08-03",
+    "createdAt": "2026-08-04",
     "sourceTitle": "「選べるポケモンラテ」に、メルタンとメルメタルが仲間入り！",
     "sourceUrl": "https://www.pokemon-cafe.jp/ja/cafe/news/260703_3439.html"
   },
@@ -310,7 +310,7 @@
     ],
     "id": "po-e4c3bc",
     "sourceType": "official_site",
-    "createdAt": "2026-08-03",
+    "createdAt": "2026-08-04",
     "sourceTitle": "≪K.UNO × U-TREASURE POP UP Promotion≫開展！ - 台灣寶可夢官方網站",
     "sourceUrl": "https://tw.portal-pokemon.com/goods/post-5267/"
   },
@@ -744,54 +744,6 @@
     "createdAt": "2026-07-22",
     "sourceTitle": "映画ちいかわ 人魚の島のひみつ POP UP STORE イオンレイクタウンkaze 3階 イオンホール(2026-07-24～2026-08-17) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/mck_scpus/index.html#77a0af28"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "電影吉伊卡哇 POP UP STORE イオンモール須坂",
-    "type": "popup",
-    "country": "JP",
-    "city": "Nagano",
-    "locationName": "イオンモール須坂 3F イオンホール",
-    "startDate": "2026-07-24",
-    "endDate": "2026-08-03",
-    "summaryZh": "「映画ちいかわ 人魚の島のひみつ」POP UP STORE 於イオンモール須坂 3F イオンホール期間限定登場，販售電影相關限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "電影",
-      "快閃店",
-      "限定周邊"
-    ],
-    "id": "ch-f89e70",
-    "sourceType": "official_site",
-    "createdAt": "2026-07-22",
-    "sourceTitle": "映画ちいかわ 人魚の島のひみつ POP UP STORE イオンモール須坂 3F イオンホール(2026-07-24～2026-08-03) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/mck_scpus/index.html#b82b02c4"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "電影吉伊卡哇 POP UP STORE イオンモール福岡",
-    "type": "popup",
-    "country": "JP",
-    "city": "Fukuoka",
-    "locationName": "イオンモール福岡 1F 無印良品前",
-    "startDate": "2026-07-24",
-    "endDate": "2026-08-03",
-    "summaryZh": "「映画ちいかわ 人魚の島のひみつ」POP UP STORE 於イオンモール福岡 1F 無印良品前期間限定登場，販售電影相關限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "電影",
-      "快閃店",
-      "限定周邊"
-    ],
-    "id": "ch-023b5f",
-    "sourceType": "official_site",
-    "createdAt": "2026-07-22",
-    "sourceTitle": "映画ちいかわ 人魚の島のひみつ POP UP STORE イオンモール福岡 1F 無印良品前(2026-07-24～2026-08-03) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/mck_scpus/index.html#192c1954"
   },
   {
     "brand": "chiikawa",
@@ -1456,7 +1408,7 @@
     ],
     "id": "mi-cc9d39",
     "sourceType": "official_site",
-    "createdAt": "2026-08-03",
+    "createdAt": "2026-08-04",
     "sourceTitle": "神奈川・そごう横浜店に「DICK BRUNA STAND BY MIIA」期間限定オープン - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202607/47392/"
   },
@@ -1479,7 +1431,7 @@
     ],
     "id": "mi-af2f79",
     "sourceType": "official_site",
-    "createdAt": "2026-08-03",
+    "createdAt": "2026-08-04",
     "sourceTitle": "そごう横浜店で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202607/47472/"
   },
@@ -1502,8 +1454,8 @@
     ],
     "id": "mi-88dac4",
     "sourceType": "official_site",
-    "createdAt": "2026-08-03",
-    "sourceTitle": "＜期間延長決定＞ハウステンボス「ミッフィーバースデーマンス」 - dickbruna.jp",
+    "createdAt": "2026-08-04",
+    "sourceTitle": "ハウステンボス「ミッフィーバースデーシーズン」 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/47004/"
   },
   {
@@ -1525,7 +1477,7 @@
     ],
     "id": "mi-98d19d",
     "sourceType": "official_site",
-    "createdAt": "2026-08-03",
+    "createdAt": "2026-08-04",
     "sourceTitle": "鹿児島市立美術館にて「美術館に行こう！」展開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/46804/"
   },
@@ -1548,7 +1500,7 @@
     ],
     "id": "mi-ea7f4f",
     "sourceType": "official_site",
-    "createdAt": "2026-08-03",
+    "createdAt": "2026-08-04",
     "sourceTitle": "「KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront」～Night Time～開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/46792/"
   },
@@ -1571,7 +1523,7 @@
     ],
     "id": "mi-33f034",
     "sourceType": "official_site",
-    "createdAt": "2026-08-03",
+    "createdAt": "2026-08-04",
     "sourceTitle": "ヴィレッジヴァンガード「ミッフィーとつなぐ てがきのぬくもりフェア」開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202607/47530/"
   },
@@ -1594,7 +1546,7 @@
     ],
     "id": "mi-a3137a",
     "sourceType": "official_site",
-    "createdAt": "2026-08-03",
+    "createdAt": "2026-08-04",
     "sourceTitle": "「miffy × Cosme Kitchen 」コスメキッチンとミッフィーのコラボ第3弾登場 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202607/47496/"
   },
@@ -1617,8 +1569,80 @@
     ],
     "id": "mi-8d95df",
     "sourceType": "official_site",
-    "createdAt": "2026-08-03",
+    "createdAt": "2026-08-04",
     "sourceTitle": "2026年8月15日(土)スタート!miffy style 神戸店/三宮店限定 ノベルティ - キデイランド",
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_limited_nove202608/"
+  },
+  {
+    "brand": "miffy",
+    "title": "米飛兔 ZAKKA 嘉年華",
+    "type": "popup",
+    "country": "JP",
+    "city": "Kanagawa",
+    "locationName": "そごう横浜店",
+    "startDate": "2026-08-01",
+    "endDate": "",
+    "summaryZh": "米飛兔 ZAKKA 嘉年華將於そごう横浜店登場，販售多樣周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "快閃店",
+      "限定商品",
+      "橫濱"
+    ],
+    "id": "mi-57b48b",
+    "sourceTitle": "【そごう横浜店】ミッフィーzakkaフェスタ ２０２６ - PR TIMES",
+    "sourceType": "official_social",
+    "createdAt": "2026-08-04",
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002454.000031382.html"
+  },
+  {
+    "brand": "miffy",
+    "title": "神戶海側米飛兔主題活動",
+    "type": "campaign",
+    "country": "JP",
+    "city": "Hyogo",
+    "locationName": "神戶海側",
+    "startDate": "2026-07-30",
+    "endDate": "",
+    "summaryZh": "神戶海側16個設施將舉辦米飛兔主題活動，包含麵包、甜點及夜市等，7月30日起登場。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "主題活動",
+      "限定商品",
+      "甜點",
+      "夜市"
+    ],
+    "id": "mi-7f1bbf",
+    "sourceTitle": "【7月30日から】神戸・海側が“ミッフィー”だらけ！全16施設でパン、スイーツ、ナイトマーケットも - Lmaga.jp",
+    "sourceType": "official_social",
+    "createdAt": "2026-08-04",
+    "sourceUrl": "https://www.lmaga.jp/news/2026/08/1081728/"
+  },
+  {
+    "brand": "pokemon",
+    "title": "寶可夢歷代遊戲彩盒周邊商品",
+    "type": "new_product",
+    "country": "TW",
+    "city": "Taipei",
+    "locationName": "台北寶可夢中心",
+    "startDate": "2026-08-08",
+    "endDate": "",
+    "summaryZh": "寶可夢歷代遊戲彩盒周邊商品於8月8日起在台北寶可夢中心開賣。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢",
+      "周邊商品",
+      "新品發售",
+      "台北"
+    ],
+    "id": "po-22bd8f",
+    "sourceTitle": "寶可夢歷代遊戲彩盒周邊商品來台，8/8台北寶可夢中心開賣 - 4Gamers",
+    "sourceType": "official_social",
+    "createdAt": "2026-08-04",
+    "sourceUrl": "https://www.4gamers.com.tw/news/detail/81076/pokemon-game-packaging-merchandise-launch-in-taiwan-at-august-8th-2026"
   }
 ]
