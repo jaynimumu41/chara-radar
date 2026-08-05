@@ -34,6 +34,18 @@ if ($pyCode -ne 0) {
   exit $pyCode
 }
 
+# Block publication when deterministic regression or data checks fail.
+foreach ($check in @("smoke_test.py", "data_lint.py")) {
+  & $py $check 2>&1 | Out-File -FilePath $log -Append -Encoding utf8
+  $checkCode = $LASTEXITCODE
+  if ($null -eq $checkCode) { $checkCode = 0 }
+  if ($checkCode -ne 0) {
+    ("DEPLOY: " + $check + " failed, skip commit and push.") | Out-File -FilePath $log -Append -Encoding utf8
+    "========== END $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') ==========" | Out-File -FilePath $log -Append -Encoding utf8
+    exit $checkCode
+  }
+}
+
 # ---- Auto-deploy to GitHub Pages (viewable on phone) ----------------------
 # Every run writes last_updated.json (heartbeat: even if data is unchanged, the
 # frontend can still show "last updated time"). Commit + push together with any

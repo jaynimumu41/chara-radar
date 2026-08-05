@@ -14,9 +14,11 @@
 """
 
 import argparse
+import html
 import json
 import os
 import re
+import subprocess
 import sys
 import time
 import uuid
@@ -93,7 +95,7 @@ AREA_TO_CITY = {
     "Tokyo":    ["東京", "渋谷", "澀谷", "池袋", "銀座", "新宿", "原宿", "表参道", "表參道",
                   "スカイツリー", "晴空塔", "ソラマチ", "押上", "自由が丘", "自由之丘",
                   "お台場", "丸の内", "浅草", "上野", "中野", "吉祥寺", "多摩", "立川",
-                  "むさし村山", "武蔵村山", "羽田",
+                  "むさし村山", "武蔵村山", "羽田", "北千住",
                   "ピューロランド", "Puroland", "彩虹樂園", "サンリオピューロランド"],
     "Iwate":    ["岩手", "盛岡", "カワトク", "パルクアベニュー・カワトク"],
     "Osaka":    ["大阪", "梅田", "心斎橋", "心齋橋", "なんば", "難波", "中之島", "天王寺",
@@ -105,7 +107,7 @@ AREA_TO_CITY = {
     "Saitama":  ["埼玉", "羽生", "Hanyu", "大宮", "Omiya", "越谷", "Koshigaya",
                  "レイクタウン", "Laketown", "川越", "川口"],
     "Hokkaido": ["北海道", "札幌", "小樽", "函館", "新千歳", "千歳"],
-    "Okinawa":  ["沖縄", "沖繩", "那覇", "ライカム", "南風原"],
+    "Okinawa":  ["沖縄", "沖繩", "那覇", "NAHA", "ライカム", "南風原"],
     "Kanagawa": ["神奈川", "横浜", "横濱", "橫濱", "川崎", "みなとみらい", "ワールドポーターズ",
                   "武蔵溝ノ口", "溝ノ口"],
     "Hyogo":    ["兵庫", "神戸", "神戶", "Kobe", "KOBE", "西宮", "三宮", "伊丹", "姫路", "ピオレ"],
@@ -710,6 +712,63 @@ def apply_extracted_dates(data: dict, text: str, ref_year: int | None, is_html: 
         print(f"    📅 補抓日期：{data.get('startDate') or '—'} ~ {data.get('endDate') or '—'}")
     return changed
 
+
+_STORE_OPEN_CUE_RE = re.compile(
+    r"(?:グランド)?オープン|開業(?!前|に先駆け)|開店|営業開始",
+    re.I,
+)
+
+
+def clear_unsubstantiated_store_dates(data: dict, page_text: str) -> bool:
+    """Clear a store date unless the page ties that exact day to the named store.
+
+    Multi-topic press releases often contain dates for preview art, greetings, or
+    campaigns before the actual shop section. A date is safe only when a nearby
+    context also contains both an opening cue and a distinctive quoted shop name.
+    """
+    start = data.get("startDate", "")
+    if data.get("type") != "store" or not start or not page_text:
+        return False
+    try:
+        year, month, day = (int(part) for part in start.split("-"))
+    except (TypeError, ValueError):
+        return False
+
+    visible = re.sub(r"<script[\s\S]*?</script>|<style[\s\S]*?</style>", " ", page_text, flags=re.I)
+    visible = re.sub(r"<[^>]+>", " ", visible)
+    visible = re.sub(r"\s+", " ", html.unescape(visible.replace("　", " ")))
+    date_forms = (
+        f"{year}年{month}月{day}日",
+        f"{month}月{day}日",
+        f"{year}/{month}/{day}",
+        f"{month}/{day}",
+    )
+    quoted = re.findall(
+        r"[「『]([^」』]{3,40})[」』]",
+        " ".join(str(data.get(field, "")) for field in ("title", "summaryZh", "sourceTitle")),
+    )
+    identity_terms = [
+        term for term in quoted
+        if re.search(r"ストア|ショップ|store|shop|カフェ|cafe|パーク", term, re.I)
+    ]
+    for date_form in date_forms:
+        start_at = 0
+        while True:
+            pos = visible.find(date_form, start_at)
+            if pos < 0:
+                break
+            cue_context = visible[max(0, pos - 48):pos + len(date_form) + 48]
+            identity_context = visible[max(0, pos - 140):pos + len(date_form) + 140]
+            if (_STORE_OPEN_CUE_RE.search(cue_context)
+                    and any(term in identity_context for term in identity_terms)):
+                return False
+            start_at = pos + len(date_form)
+
+    data["startDate"] = ""
+    data["endDate"] = ""
+    print(f"    📅 店鋪日期缺少主體鄰近證據，清除誤抓日期：{start}")
+    return True
+
 _KANA = re.compile(r"[぀-ヿ]")  # 平假名 + 片假名
 
 def theme_tokens(*texts) -> list[str]:
@@ -806,6 +865,36 @@ def load_last_updated_date() -> str:
     except Exception:
         return ""
 
+
+def parse_published_baseline(events_raw: str, updated_raw: str) -> tuple[list[dict], str]:
+    events = json.loads((events_raw or "").lstrip("\ufeff"))
+    if not isinstance(events, list):
+        raise ValueError("published events snapshot is not a list")
+    return events, parse_last_updated_date(updated_raw)
+
+
+def load_published_baseline(fallback_events: list[dict]) -> tuple[list[dict], str]:
+    """Load yesterday's public snapshot from Git HEAD, not a dirty worktree.
+
+    Agent verification may leave legitimate local changes before the scheduled
+    scrape starts. Those changes are new relative to the public site and must
+    not silently become the baseline for today_updates.json.
+    """
+    repo = DATA_DIR.parent
+    try:
+        events_raw = subprocess.check_output(
+            ["git", "show", "HEAD:data/events.json"], cwd=repo,
+            text=True, encoding="utf-8",
+        )
+        updated_raw = subprocess.check_output(
+            ["git", "show", "HEAD:data/last_updated.json"], cwd=repo,
+            text=True, encoding="utf-8",
+        )
+        return parse_published_baseline(events_raw, updated_raw)
+    except Exception as exc:
+        print(f"    ⚠️  無法讀取 Git 公開 baseline，改用目前資料：{exc}")
+        return json.loads(json.dumps(fallback_events, ensure_ascii=False)), load_last_updated_date()
+
 def build_update_diff(previous: list[dict], current: list[dict], *,
                       date: str = TODAY, baseline_date: str = "") -> dict:
     """Build the public 'today updates' file from the previous visible data state."""
@@ -899,8 +988,13 @@ def load_rejected() -> dict:
 _REJECTED = {"url_contains": [], "title_contains": []}  # run() 啟動時載入
 
 def is_rejected_url(url: str) -> bool:
-    u = (url or "").lower()
-    return any(s in u for s in _REJECTED["url_contains"])
+    def normalized(value: str) -> str:
+        value = (value or "").lower().split("#", 1)[0].split("?", 1)[0]
+        value = value.replace("https://", "").replace("http://", "").replace("www.", "")
+        return value.replace("/amp/article/", "/article/").replace("/amp/", "/")
+
+    u = normalized(url)
+    return any(normalized(fragment) in u for fragment in _REJECTED["url_contains"])
 
 def is_rejected_title(title: str) -> bool:
     t = title or ""
@@ -992,7 +1086,6 @@ GLOBAL_PRODUCT_ALIASES = {
 }
 MIFFY_ACTIVITY_ALIASES = [
     ("miffy-handwriting-village-vanguard", ["てがきのぬくもりフェア", "手寫溫度", "手寫的溫暖"]),
-    ("miffy-kobe-waterfront-night", ["KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront"]),
 ]
 MIFFY_PRODUCT_ALIASES = [
     ("miffy-tokyo-stationmaster", ["駅長さんミッフィー", "東京駅限定", "東京車站限定", "站長米飛兔"]),
@@ -1021,6 +1114,55 @@ def _event_blob(ev: dict) -> str:
     if isinstance(tags, list):
         parts.extend(str(tag) for tag in tags)
     return _norm(" ".join(parts))
+
+
+STRONG_EVENT_IDENTITY_RULES = (
+    {
+        "brand": "miffy",
+        "types": {"popup", "cafe", "campaign"},
+        "concept": "miffy-kobe-waterfront-night",
+        "patterns": (
+            (("KOBE PORT TOWER", "神戸ポートタワー", "神戶港塔",
+              "神戸ウォーターフロント", "神戶海側", "神戸・海側"),),
+        ),
+        "scope": "date",
+    },
+    {
+        "brand": "chiikawa",
+        "types": {"store"},
+        "concept": "chiikawa-park-store-lucua",
+        "patterns": (
+            (("ちいかわパークストア", "ちいかわパーク公式ショップ",
+              "ちいかわパーク」公式ショップ", "Chiikawa Park Store"),),
+            (("LUCUA SOUTH", "ルクア サウス", "ルクア大阪新館"),
+             ("全国初店", "全国初店舗", "全国初出店", "全國初店")),
+        ),
+        "scope": "city",
+    },
+)
+
+
+def strong_event_identity_key(ev: dict) -> str | None:
+    """Stable identity for named events/stores whose media wording varies widely."""
+    blob = _event_blob(ev)
+    for rule in STRONG_EVENT_IDENTITY_RULES:
+        if ev.get("brand") != rule["brand"] or ev.get("type") not in rule["types"]:
+            continue
+        matched = any(
+            all(any(_norm(alias) in blob for alias in alias_group) for alias_group in pattern)
+            for pattern in rule["patterns"]
+        )
+        if not matched:
+            continue
+        parts = [rule["brand"], rule["concept"]]
+        if rule["scope"] == "date":
+            if not ev.get("startDate"):
+                return None
+            parts.append(ev["startDate"])
+        elif rule["scope"] == "city":
+            parts.append(ev.get("city", ""))
+        return "|".join(parts)
+    return None
 
 def chain_campaign_key(ev: dict) -> str | None:
     """Stable key for chain-wide activity pages that may mention one store first."""
@@ -1052,6 +1194,9 @@ def chain_campaign_key(ev: dict) -> str | None:
 
 def special_activity_key(ev: dict) -> str | None:
     """Known activities where media titles vary too much for fuzzy title dedup."""
+    strong_key = strong_event_identity_key(ev)
+    if strong_key:
+        return strong_key
     start = ev.get("startDate", "")
     if not start:
         return None
@@ -1363,6 +1508,8 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
             # 會場鐵則：兩筆都有 locationName、且明顯是不同會場(非同一已知場館、字串也不相近)
             # = 同城市的不同場次(如兵庫的ピオレ姫路 vs イオンモール伊丹，標題幾乎相同)，不合併。
             ln_e, ln_k = ev.get("locationName", ""), k.get("locationName", "")
+            if bool(is_chainwide_location(ln_e)) != bool(is_chainwide_location(ln_k)):
+                continue
             if ln_e and ln_k and not same_venue and tsim(ln_e, ln_k) < 0.5:
                 continue
             if (
@@ -1627,6 +1774,7 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
                 else:
                     apply_labeled_extracted_dates(data, html, _pub_year(item["pubDate"]),
                                                   is_html=True, scan_chars=90000)
+                clear_unsubstantiated_store_dates(data, html)
         if is_venue_less_generic_new_product(
             data,
             source_title=item.get("title", ""),
@@ -1679,8 +1827,7 @@ def run(brands: list[str]):
     print(f"🤖  AI 後端：{name}　·　{len(keys)} 把 key{'（自動輪替）' if len(keys) > 1 else ''}")
 
     events = load_events()
-    previous_events = json.loads(json.dumps(events, ensure_ascii=False))
-    baseline_date = load_last_updated_date()
+    previous_events, baseline_date = load_published_baseline(events)
 
     # ── 結構化官方來源（零 Gemini）：直接解析官方排程頁產生成品情報，每次跑都用官方最新版
     #    覆蓋同來源 URL 的舊資料；過期的由後面的 clean_events 自動移除。 ──────────────

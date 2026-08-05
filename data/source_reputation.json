@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-02T08:34:21+00:00",
+  "updatedAt": "2026-08-05T08:50:36+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 9,
@@ -440,8 +440,8 @@
       ]
     },
     "domain:harpersbazaar.com": {
-      "confirmed": 1,
-      "rejected": 1,
+      "confirmed": 0,
+      "rejected": 2,
       "uncertain": 0,
       "crossChecked": 0,
       "score": 46,
@@ -1010,26 +1010,33 @@
       ]
     },
     "domain:prtimes.jp": {
-      "confirmed": 0,
+      "confirmed": 2,
       "rejected": 1,
       "uncertain": 0,
-      "crossChecked": 0,
-      "score": 39,
+      "crossChecked": 3,
+      "score": 59,
       "label": "prtimes.jp",
       "kind": "news",
       "host": "prtimes.jp",
       "handle": "",
       "firstSeen": "2026-07-01",
-      "lastReviewed": "2026-07-01",
-      "lastOutcome": "rejected",
-      "notes": "Broad product launch with no physical venue; out of scope for events.json",
+      "lastReviewed": "2026-08-05",
+      "lastOutcome": "confirmed",
+      "notes": "JR West SC official press release confirms Chiikawa Park Store at LUCUA SOUTH 11F, opening in November 2026; exact opening day remains TBD",
       "byBrand": {
         "chiikawa": {
+          "confirmed": 1,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 48
+        },
+        "miffy": {
           "confirmed": 0,
           "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 0,
-          "score": 39
+          "crossChecked": 2,
+          "score": 43
         }
       },
       "byType": {
@@ -1039,15 +1046,29 @@
           "uncertain": 0,
           "crossChecked": 0,
           "score": 39
+        },
+        "popup": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 43
+        },
+        "store": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
         }
       },
       "byCountry": {
         "jp": {
-          "confirmed": 0,
-          "rejected": 1,
+          "confirmed": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 0,
-          "score": 39
+          "crossChecked": 3,
+          "score": 41
         }
       },
       "history": [
@@ -1060,6 +1081,26 @@
           "eventId": "ch-1e7fd2",
           "evidenceCount": 0,
           "notes": "Broad product launch with no physical venue; out of scope for events.json"
+        },
+        {
+          "date": "2026-08-04",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "mi-57b48b",
+          "evidenceCount": 2,
+          "notes": "Duplicate of existing structured Dick Bruna record mi-af2f79 for the same Sogo Yokohama event and period"
+        },
+        {
+          "date": "2026-08-05",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "store",
+          "country": "JP",
+          "eventId": "ch-6d9bb5",
+          "evidenceCount": 1,
+          "notes": "JR West SC official press release confirms Chiikawa Park Store at LUCUA SOUTH 11F, opening in November 2026; exact opening day remains TBD"
         }
       ]
     },
@@ -2173,6 +2214,114 @@
           "eventId": "mi-f970b1",
           "evidenceCount": 1,
           "notes": "Duplicate syndication of the already structured official KOBE PORT TOWER event mi-ea7f4f"
+        }
+      ]
+    },
+    "domain:lmaga.jp": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 41,
+      "label": "lmaga.jp",
+      "kind": "site",
+      "host": "lmaga.jp",
+      "handle": "",
+      "firstSeen": "2026-08-04",
+      "lastReviewed": "2026-08-04",
+      "lastOutcome": "rejected",
+      "notes": "Broad 16-facility roundup duplicated existing structured official Kobe Waterfront coverage",
+      "byBrand": {
+        "miffy": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byType": {
+        "campaign": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "history": [
+        {
+          "date": "2026-08-04",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "campaign",
+          "country": "JP",
+          "eventId": "mi-7f1bbf",
+          "evidenceCount": 1,
+          "notes": "Broad 16-facility roundup duplicated existing structured official Kobe Waterfront coverage"
+        }
+      ]
+    },
+    "domain:4gamers.com.tw": {
+      "confirmed": 1,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 0,
+      "score": 57,
+      "label": "4gamers.com.tw",
+      "kind": "news",
+      "host": "4gamers.com.tw",
+      "handle": "",
+      "firstSeen": "2026-08-04",
+      "lastReviewed": "2026-08-04",
+      "lastOutcome": "confirmed",
+      "notes": "Article explicitly names Pokemon Center TAIPEI, 2026-08-08 in-store sale date, products, prices, and purchase rules",
+      "byBrand": {
+        "pokemon": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
+        }
+      },
+      "byType": {
+        "new_product": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
+        }
+      },
+      "byCountry": {
+        "tw": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
+        }
+      },
+      "history": [
+        {
+          "date": "2026-08-04",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-22bd8f",
+          "evidenceCount": 0,
+          "notes": "Article explicitly names Pokemon Center TAIPEI, 2026-08-08 in-store sale date, products, prices, and purchase rules"
         }
       ]
     }

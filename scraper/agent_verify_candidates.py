@@ -67,6 +67,7 @@ REASON_WEIGHTS = {
 }
 
 REVIEWED_SKIP_REASONS = {
+    "missing_dates",
     "missing_endDate",
     "structured_activity_missing_endDate",
     "campaign_type",

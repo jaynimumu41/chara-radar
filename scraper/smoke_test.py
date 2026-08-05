@@ -64,6 +64,8 @@ check("高崎髙島屋→Gunma", scrape.correct_city("高崎髙島屋 6階 催�
 check("むさし村山→Tokyo", scrape.correct_city("イオンモールむさし村山"), "Tokyo")
 check("イオンモール太田→Gunma", scrape.correct_city("イオンモール太田"), "Gunma")
 check("イオンモール高岡→Toyama", scrape.correct_city("イオンモール高岡"), "Toyama")
+check("北千住マルイ→Tokyo", scrape.correct_city("北千住マルイ"), "Tokyo")
+check("0%NAHA→Okinawa", scrape.correct_city("0%NAHA"), "Okinawa")
 check("南風原→Okinawa", scrape.correct_city("イオン南風原店"), "Okinawa")
 check("ショッピングシティベル→Fukui", scrape.correct_city("ショッピングシティベル"), "Fukui")
 check("KOBE PORT TOWER→Hyogo",
@@ -85,6 +87,17 @@ print("\n[stale_by_year] 舊文年份過濾")
 check("2016年→stale", scrape.stale_by_year("活動於2016年4月19日舉行"), True)
 check("今年→不stale", scrape.stale_by_year("活動於2026年6月1日舉行"), False)
 check("無年份→不stale", scrape.stale_by_year("活動日期未定"), False)
+
+saved_rejected = scrape._REJECTED
+scrape._REJECTED = {
+    "url_contains": ["topics.smt.docomo.ne.jp/amp/article/kisspress/region/kisspress-64774"],
+    "title_contains": [],
+}
+check("黑名單URL正規化可攔截同文非AMP版本",
+      scrape.is_rejected_url(
+          "https://topics.smt.docomo.ne.jp/article/kisspress/region/kisspress-64774?x=1"),
+      True)
+scrape._REJECTED = saved_rejected
 
 # ── is_roundup_title ──────────────────────────────────────────────────────────
 print("\n[is_roundup_title] 彙整/懶人包過濾（不可誤殺單一活動攻略文）")
@@ -264,6 +277,13 @@ check("NOWnews 真實 URL→穩定來源",
 check("last_updated 含 BOM 仍可讀日期",
       scrape.parse_last_updated_date('\ufeff{ "updatedAt": "2026-06-22T16:04:27+08:00" }'),
       "2026-06-22")
+published_events, published_date = scrape.parse_published_baseline(
+    '[{"id":"public-a"},{"id":"public-b"}]',
+    '\ufeff{ "updatedAt": "2026-08-04T16:04:58+08:00" }',
+)
+check("今日更新baseline使用Git公開快照而非執行中工作區",
+      ([event["id"] for event in published_events], published_date),
+      (["public-a", "public-b"], "2026-08-04"))
 flower_event = ev(
     brand="miffy",
     title="フラワーミッフィー限定活動",
@@ -455,6 +475,32 @@ check("可信來源日期可覆寫AI誤抓的公司沿革日期",
 check("可信來源日期覆寫結果",
       trusted_date_record["startDate"],
       "2026-08-01")
+store_wrong_date = ev(
+    brand="chiikawa", type="store", city="Osaka",
+    title="全國初『ちいかわパークストア』",
+    sourceTitle="全国初『ちいかわパークストア』 LUCUA SOUTH 第2期",
+    startDate="2026-08-06", endDate="",
+)
+check("常設店不可誤用同頁預熱活動日期",
+      scrape.clear_unsubstantiated_store_dates(
+          store_wrong_date,
+          "2026年11月開業 PICK UP SHOP ちいかわパークストア。"
+          "開業前プロモーションのウォールアート開催期間：2026年8月6日～2027年夏頃。",
+      ),
+      True)
+check("常設店誤抓日期清除結果", store_wrong_date["startDate"], "")
+store_supported_date = ev(
+    brand="chiikawa", type="store", city="Osaka",
+    title="『ちいかわパークストア』",
+    sourceTitle="『ちいかわパークストア』開業",
+    startDate="2026-11-01", endDate="",
+)
+check("常設店日期有店名與開幕鄰近證據則保留",
+      scrape.clear_unsubstantiated_store_dates(
+          store_supported_date,
+          "『ちいかわパークストア』は2026年11月1日にグランドオープンします。",
+      ),
+      False)
 check("Kiddy Land ノベルティデイ ～スタート 不補同日結束",
       official_sources._kiddy_period(
           "2026年7月4日(土)～スタート!miffy style 各店ノベルティデイ",
@@ -470,6 +516,29 @@ check("Kiddy Land 重複標題造成同日區間→仍視為送完為止",
           scrape.extract_dates,
       ),
       ("2026-07-04", ""))
+check("Kiddy Land標題日期優先，不受相關文章區間污染",
+      official_sources._kiddy_period(
+          "2026年8月15日(土)スタート!miffy style 神戸店/三宮店限定 ノベルティ",
+          "関連記事 KOBE PORT TOWER 2026年7月30日～9月30日",
+          scrape.extract_dates,
+      ),
+      ("2026-08-15", ""))
+check("Kiddy Land神戶兩店location",
+      official_sources._kiddy_location("miffy style 神戸店/三宮店限定 ノベルティ"),
+      ("miffy style 神戸店・三宮店", "Hyogo"))
+check("Kiddy Land標題移除スタート前綴",
+      official_sources._kiddy_display_title(
+          "2026年8月15日(土)スタート!miffy style 神戸店/三宮店限定 ノベルティ"),
+      "miffy style 神戸店/三宮店限定 ノベルティ")
+chainwide_kiddy, _ = scrape.dedup_events([
+    ev(id="mi-chainwide", brand="miffy", type="campaign",
+       title="Miffy miffy style 各店ノベルティデイ",
+       startDate="2026-08-08", locationName="miffy style 各店＋キデイランド対象店"),
+    ev(id="mi-kobe-shops", brand="miffy", type="campaign", city="Hyogo",
+       title="Miffy miffy style 神戸店/三宮店限定 ノベルティ",
+       startDate="2026-08-15", locationName="miffy style 神戸店・三宮店"),
+])
+check("Kiddy Land全店活動不可與指定分店活動模糊合併", len(chainwide_kiddy), 2)
 check("Kiddy Land 東京駅店 location",
       official_sources._kiddy_location("2026年7月4日(土)発売予定!miffy style東京駅店限定 駅長さんミッフィー"),
       ("miffy style 東京駅店", "Tokyo"))
@@ -493,12 +562,12 @@ check("Kiddy Land同日活動已有campaign→單品頁不另列",
 
 sample_chiikawa_popups = (
     "[ちいかわPOP UP STORE 高崎髙島屋](https://chiikawa-info.jp/p26/pus_tkst/index.html) "
-    "2026年7月29日(水)～8月17日(月) 高崎髙島屋 6階 催会場\n"
+    "2099年7月29日(水)～8月17日(月) 高崎髙島屋 6階 催会場\n"
     "[ちいかわPOP UP STORE イオンモールむさし村山]"
     "(https://chiikawa-info.jp/p26/pus_amsm/index.html) "
-    "2026年7月24日(金)～8月11日(火祝) イオンモールむさし村山 1F センターコート\n"
+    "2099年7月24日(金)～8月11日(火祝) イオンモールむさし村山 1F センターコート\n"
     "[ちいかわPOP UP STORE イオンモール太田](https://chiikawa-info.jp/p26/pus_aota/index.html) "
-    "2026年7月17日(金)～8月2日(日) イオンモール太田 ウエストモール1F 無印良品前\n"
+    "2099年7月17日(金)～8月2日(日) イオンモール太田 ウエストモール1F 無印良品前\n"
     "[ちいかわPOP UP STORE イオンモール高岡](https://chiikawa-info.jp/p26/pus_atko/index.html) "
     "2099年7月10日(金)～7月26日(日) イオンモール高岡 東館1F セントラルコート"
 )
@@ -506,9 +575,9 @@ popup_events = official_sources._chiikawa_popup_events_from_text(
     sample_chiikawa_popups, correct_city=scrape.correct_city)
 check("吉伊卡哇官方POP UP總表新增場次解析",
       [(e["city"], e["startDate"], e["endDate"]) for e in popup_events],
-      [("Gunma", "2026-07-29", "2026-08-17"),
-       ("Tokyo", "2026-07-24", "2026-08-11"),
-       ("Gunma", "2026-07-17", "2026-08-02"),
+      [("Gunma", "2099-07-29", "2099-08-17"),
+       ("Tokyo", "2099-07-24", "2099-08-11"),
+       ("Gunma", "2099-07-17", "2099-08-02"),
        ("Toyama", "2099-07-10", "2099-07-26")])
 
 sample_otaru_info = (
@@ -618,6 +687,12 @@ check("已確認過的官方送完為止 event id→候選器可跳過",
           ev(id="mi-confirmed"),
           ["missing_endDate", "structured_activity_missing_endDate", "campaign_type"],
           {"mi-confirmed"}),
+      True)
+check("已確認過且開幕日未定的常設店→候選器可跳過",
+      agent_verify_candidates.is_reviewed_candidate(
+          ev(id="reviewed-store", type="store"),
+          ["missing_dates", "missing_endDate"],
+          {"reviewed-store"}),
       True)
 
 # ── source_reputation ────────────────────────────────────────────────────────
@@ -826,6 +901,28 @@ out, _ = scrape.dedup_events([
 check("同場館同完整區間 city 缺漏→併（1筆）", len(out), 1)
 
 out, _ = scrape.dedup_events([
+    ev(id="mi-official-kobe", brand="miffy",
+       title="Miffy 神戶港塔 Night Time 聯名活動", type="cafe", city="Hyogo",
+       startDate="2026-07-30", endDate="2026-09-30",
+       locationName="KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront",
+       sourceType="official_site", sourceUrl="https://dickbruna.jp/news/202606/46792/"),
+    ev(id="mi-media-kobe", brand="miffy",
+       title="神戶港塔變身米飛兔主題", type="popup", city="Hyogo",
+       startDate="2026-07-30", endDate="2026-09-30", locationName="神戶港塔",
+       sourceTitle="神戸ポートタワーがまるごとミッフィーに グッズやフードを体験",
+       sourceUrl="https://topics.smt.docomo.ne.jp/article/kisspress/region/kisspress-64774"),
+])
+check("Miffy神戶Waterfront官方頁與媒體體驗文去重",
+      (len(out), out[0]["id"], out[0]["sourceType"]),
+      (1, "mi-official-kobe", "official_site"))
+check("Miffy神戶不同年度檔期不可誤併",
+      scrape.strong_event_identity_key(ev(
+          brand="miffy", title="神戶港塔米飛兔活動", type="popup", city="Hyogo",
+          startDate="2027-07-30", locationName="神戶港塔"))
+      == scrape.strong_event_identity_key(out[0]),
+      False)
+
+out, _ = scrape.dedup_events([
     ev(brand="miffy", title="Miffy生日與Flower Miffy淺草店7週年慶活動", type="campaign", city="Tokyo",
        startDate="2026-06-19", locationName="Flower Miffy 浅草店",
        summaryZh="為慶祝Miffy生日與淺草店7週年，將於6月19日起舉辦限定活動。",
@@ -904,6 +1001,30 @@ out, _ = scrape.dedup_events([
        sourceTitle="ちいかわ×東京ばな奈 エコバッグセット"),
 ])
 check("Chiikawa東京香蕉環保袋跨媒體去重", len(out), 1)
+
+out, _ = scrape.dedup_events([
+    ev(id="ch-lucua-pr", brand="chiikawa", title="全國初『ちいかわパークストア』",
+       type="store", city="Osaka", locationName="LUCUA SOUTH 11F",
+       sourceTitle="全国初『ちいかわパークストア』 LUCUA SOUTH 第2期、21ブランドを先行公開",
+       sourceUrl="https://prtimes.jp/main/html/rd/p/000000231.000014414.html"),
+    ev(id="ch-lucua-crank", brand="chiikawa", title="大阪ちいかわパーク官方商店開幕",
+       type="store", city="Osaka", locationName="ちいかわパーク",
+       sourceTitle="全国初「ちいかわパーク」公式ショップが大阪に誕生へ",
+       sourceUrl="https://www.crank-in.net/trend/trip/189151"),
+    ev(id="ch-lucua-yahoo", brand="chiikawa", title="LUCUA SOUTH chiikawa全國初店",
+       type="store", city="Osaka", locationName="LUCUA OSAKA 新館 LUCUA SOUTH",
+       sourceTitle="LUCUA SOUTH キャラゾーン ちいかわ全国初店舗",
+       sourceUrl="https://news.yahoo.co.jp/example"),
+])
+check("Chiikawa Park Store三媒體公告合併為官方PR一筆",
+      (len(out), out[0]["id"], out[0]["sourceUrl"]),
+      (1, "ch-lucua-pr", "https://prtimes.jp/main/html/rd/p/000000231.000014414.html"))
+check("Chiikawa Park Store不同城市不可誤併",
+      scrape.strong_event_identity_key(ev(
+          brand="chiikawa", title="ちいかわパークストア", type="store",
+          city="Tokyo", locationName="東京"))
+      == scrape.strong_event_identity_key(out[0]),
+      False)
 
 out, _ = scrape.dedup_events([
     ev(brand="pokemon", title="寶可夢 缶バッジコレクション〜ミアレ編〜登場",

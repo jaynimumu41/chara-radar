@@ -941,7 +941,7 @@ def _first_heading(md: str) -> str:
 def _kiddy_display_title(title: str) -> str:
     title = title.replace(_KIDDY_SITE_SUFFIX, "").strip()
     title = re.sub(r"^20\d{2}年\d{1,2}月\d{1,2}日\([^)]*\)", "", title).strip()
-    title = re.sub(r"^(?:より開催|発売予定|～スタート|〜スタート|!|！)+", "", title).strip()
+    title = re.sub(r"^(?:より開催|発売予定|[～〜]?スタート|!|！)+", "", title).strip()
     title = re.sub(r"^miffy style[^!！]*受注開始予定[!！]", "", title).strip()
     return title or "miffy style 店頭活動"
 
@@ -949,6 +949,10 @@ def _kiddy_display_title(title: str) -> str:
 def _kiddy_period(title: str, detail: str, extract_dates) -> tuple[str, str]:
     ref_year_m = re.search(r"(20\d{2})年", title)
     ref_year = int(ref_year_m.group(1)) if ref_year_m else date.today().year
+    # The heading is the event's strongest date evidence. Article sidebars and
+    # related links can contain unrelated ranges, so only consult the body when
+    # the heading itself has no parseable date.
+    title_s, title_e = extract_dates(title, ref_year=ref_year, is_html=False, scan_chars=1000)
     m = _KIDDY_RANGE.search(detail)
     if m:
         sy = int(m.group(1) or ref_year)
@@ -957,9 +961,23 @@ def _kiddy_period(title: str, detail: str, extract_dates) -> tuple[str, str]:
         em, ed = int(m.group(5)), int(m.group(6))
         if em < sm and not m.group(4):
             ey += 1
+        range_s = f"{sy:04d}-{sm:02d}-{sd:02d}"
+        range_e = f"{ey:04d}-{em:02d}-{ed:02d}"
+        if title_s:
+            if range_s == title_s:
+                if range_e == range_s and re.search(r"(?:[〜～~]\s*)?スタート|よりスタート", title):
+                    range_e = ""
+                return range_s, range_e
+            if title_e == title_s and re.search(r"(?:[〜～~]\s*)?スタート|よりスタート", title):
+                title_e = ""
+            return title_s, title_e
         if sy == ey and sm == em and sd == ed and re.search(r"(?:[〜～~]\s*)?スタート|よりスタート", title):
-            return f"{sy:04d}-{sm:02d}-{sd:02d}", ""
-        return f"{sy:04d}-{sm:02d}-{sd:02d}", f"{ey:04d}-{em:02d}-{ed:02d}"
+            return range_s, ""
+        return range_s, range_e
+    if title_s:
+        if title_e == title_s and re.search(r"(?:[〜～~]\s*)?スタート|よりスタート", title):
+            title_e = ""
+        return title_s, title_e
     s, e = extract_dates(title + "\n" + detail, ref_year=ref_year, is_html=False, scan_chars=7000)
     if s and e == s and re.search(r"(?:[〜～~]\s*)?スタート|よりスタート", title):
         return s, ""
@@ -977,6 +995,8 @@ def _kiddy_location(title: str) -> tuple[str, str]:
         return "miffy style 大阪梅田店", "Osaka"
     if "心斎橋" in title or "心齋橋" in title:
         return "miffy style 心齋橋PARCO店", "Osaka"
+    if "神戸店" in title or "三宮店" in title:
+        return "miffy style 神戸店・三宮店", "Hyogo"
     return "miffy style 各店＋一部キデイランド店舗", ""
 
 

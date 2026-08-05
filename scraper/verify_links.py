@@ -1,15 +1,13 @@
 """驗證 events.json 每一筆的 sourceUrl 是否真的連得過去（不花 Gemini 配額）。
 用瀏覽器 UA、跟隨轉址。回報每一筆的 HTTP 狀態，列出壞掉的（非 2xx/3xx）。
 可被 scrape.py 匯入：check_url(url) -> (ok: bool, code: int)。"""
-import sys, json, urllib.request, urllib.error, urllib.parse, ssl, time
+import sys, json, urllib.error, urllib.parse, time
 from pathlib import Path
+
+import requests
 
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/126.0 Safari/537.36")
-_CTX = ssl.create_default_context()
-_CTX.check_hostname = False
-_CTX.verify_mode = ssl.CERT_NONE
-
 # 官方網站常擋資料中心 IP 的 bot（多回 403/429/503）。被擋時改用 reader 代理硬取，
 # 不要直接放棄。r.jina.ai 會把目標頁轉成純文字 markdown（含標題/內文/日期），
 # 對 page_mentions 關鍵字比對與 extract_dates 日期掃描都夠用。
@@ -60,12 +58,19 @@ def _raw_fetch(url, timeout, want_text):
     }
     if parsed.hostname == "chiikawa-info.jp":
         headers["Referer"] = "https://chiikawa-info.jp/index.html"
-    req = urllib.request.Request(url, headers=headers)
-    with urllib.request.urlopen(req, timeout=timeout, context=_CTX) as r:
+    with requests.get(
+        url, headers=headers, timeout=timeout,
+        allow_redirects=True, stream=True,
+    ) as response:
         text = ""
-        if want_text:
-            text = r.read(200000).decode("utf-8", "replace")
-        return (200 <= r.status < 400, r.status, text)
+        if want_text and 200 <= response.status_code < 400:
+            raw = bytearray()
+            for chunk in response.iter_content(chunk_size=32768):
+                raw.extend(chunk)
+                if len(raw) >= 200000:
+                    break
+            text = bytes(raw[:200000]).decode("utf-8", "replace")
+        return (200 <= response.status_code < 400, response.status_code, text)
 
 
 def _proxy_fetch(url: str, timeout: int) -> tuple[bool, int, str]:
@@ -151,10 +156,13 @@ def fetch_html(url, timeout=20):
         blocked = True
     if blocked:
         try:
-            req = urllib.request.Request(READER_PROXY + url, headers={
-                "User-Agent": UA, "X-Return-Format": "html"})
-            with urllib.request.urlopen(req, timeout=max(timeout, 45), context=_CTX) as r:
-                return r.read(500000).decode("utf-8", "replace")
+            response = requests.get(
+                READER_PROXY + url,
+                headers={"User-Agent": UA, "X-Return-Format": "html"},
+                timeout=max(timeout, 45),
+            )
+            if 200 <= response.status_code < 400:
+                return response.content[:500000].decode("utf-8", "replace")
         except Exception:
             pass
     return ""

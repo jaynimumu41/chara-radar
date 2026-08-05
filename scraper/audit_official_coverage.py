@@ -88,6 +88,9 @@ IGNORED_OFFICIAL_PAGES: dict[str, str] = {
     "https://tw.portal-pokemon.com/goods/post-5937/": (
         "apparel/medical uniform licensed product; not a target physical-store event"
     ),
+    "https://tw.portal-pokemon.com/goods/post-6031/": (
+        "general-release Pokemon GOITA tabletop game; excluded by the game/product scope rule"
+    ),
     "https://tw.portal-pokemon.com/goods/post-5343/": (
         "game music jukebox product, excluded by game/music rule"
     ),
@@ -101,6 +104,9 @@ IGNORED_OFFICIAL_PAGES: dict[str, str] = {
         "Pokemon Design Lab crowd-control and advance-lottery guidance, not a new event or product launch"
     ),
     "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-shibuya/news/202607/000435.html": (
+        "Pokemon Design Lab crowd-control and advance-lottery guidance for an existing T-shirt service"
+    ),
+    "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-shibuya/news/202607/000441.html": (
         "Pokemon Design Lab crowd-control and advance-lottery guidance for an existing T-shirt service"
     ),
     "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-shibuya/news/202607/000434.html": (
@@ -120,6 +126,9 @@ IGNORED_OFFICIAL_PAGES: dict[str, str] = {
     ),
     "https://dickbruna.jp/news/202607/47344/": (
         "broad studio CLIP chain and web-store goods launch, not venue-bounded limited activity"
+    ),
+    "https://dickbruna.jp/news/202608/47580/": (
+        "August event roundup; all listed activities are represented by their individual canonical pages"
     ),
     "https://dickbruna.jp/news/202606/46872/": (
         "open-ended Flower Miffy stock-limited birthday campaign aged out with no current availability confirmation"
