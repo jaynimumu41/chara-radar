@@ -236,7 +236,7 @@
     ],
     "id": "po-d0b8f9",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "ポケモンカフェのメニューやショーが新しくなるよ！「ポケモンカフェ TOKYO」は、店内がリニューアル！",
     "sourceUrl": "https://www.pokemon-cafe.jp/ja/cafe/news/260529_3377.html"
   },
@@ -261,7 +261,7 @@
     ],
     "id": "po-4090c2",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "「選べるポケモンラテ」に、メルタンとメルメタルが仲間入り！",
     "sourceUrl": "https://www.pokemon-cafe.jp/ja/cafe/news/260703_3439.html"
   },
@@ -286,7 +286,7 @@
     ],
     "id": "po-e4c3bc",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "≪K.UNO × U-TREASURE POP UP Promotion≫開展！ - 台灣寶可夢官方網站",
     "sourceUrl": "https://tw.portal-pokemon.com/goods/post-5267/"
   },
@@ -1245,27 +1245,27 @@
   },
   {
     "brand": "miffy",
-    "title": "米飛限定下午茶與馬卡龍",
+    "title": "Miffy 限定下午茶與馬卡龍",
     "type": "cafe",
     "country": "JP",
     "city": "Hyogo",
-    "locationName": "",
+    "locationName": "ラ・スイート神戸ハーバーランド / ル・パン",
     "startDate": "",
     "endDate": "2026-09-30",
-    "summaryZh": "神戶將迎來米飛兔主題活動，推出限定下午茶套餐與馬卡龍，活動至9月30日止。",
+    "summaryZh": "神戶Miffy限定下午茶套餐與馬卡龍組合，於La Suite Kobe Harborland及Le Pan總本店販售，活動至9月30日止。",
     "needReservation": false,
-    "hasLimitedGoods": false,
+    "hasLimitedGoods": true,
     "tags": [
-      "米飛兔",
-      "主題咖啡廳",
+      "限定餐飲",
       "下午茶",
-      "甜點"
+      "馬卡龍",
+      "Miffy"
     ],
-    "id": "mi-d2d687",
-    "sourceTitle": "神戸が“ミッフィー”に染まる！限定アフタヌーンティーやマカロンが登場♪【9月30日まで】 - アニメ！アニメ！",
+    "id": "mi-a93c3f",
+    "sourceTitle": "神戸・ミッフィーの限定アフヌンやマカロンセットがラ・スイートやル・パン総本店で販売！9・30まで - jocr.jp",
     "sourceType": "official_social",
-    "createdAt": "2026-08-08",
-    "sourceUrl": "https://animeanime.jp/article/2026/08/08/101838.html"
+    "createdAt": "2026-08-11",
+    "sourceUrl": "https://jocr.jp/raditopi/2026/08/10/701737/"
   },
   {
     "brand": "chiikawa",
@@ -1291,6 +1291,150 @@
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000001498.000069859.html"
   },
   {
+    "brand": "pokemon",
+    "title": "寶可夢中心新品 Sean Wotherspoon聯名玩偶",
+    "type": "new_product",
+    "country": "TW",
+    "city": "Taipei",
+    "locationName": "台灣寶可夢中心",
+    "startDate": "2026-08-15",
+    "endDate": "",
+    "summaryZh": "台灣寶可夢中心將於8月15日開賣Sean Wotherspoon聯名款的3款寶可夢玩偶，為實體門市新品發售。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "新品",
+      "聯名",
+      "玩偶",
+      "寶可夢中心"
+    ],
+    "id": "po-1a34a4",
+    "sourceTitle": "台灣寶可夢中心新品來了！Sean Wotherspoon聯名3款玩偶8/15開賣 - NOWnews今日新聞",
+    "sourceType": "official_social",
+    "createdAt": "2026-08-10",
+    "sourceUrl": "https://www.nownews.com/news/6864654"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇 x 藏壽司 聯名活動",
+    "type": "campaign",
+    "country": "JP",
+    "city": "",
+    "locationName": "全国のくら寿司",
+    "startDate": "2026-08-21",
+    "endDate": "2026-09-30",
+    "summaryZh": "吉伊卡哇與藏壽司的第四次聯名活動，推出原創湯呑及特別聯名餐點，8月21日起於日本全國藏壽司店鋪登場。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "聯名",
+      "限定商品",
+      "主題餐飲",
+      "日本"
+    ],
+    "id": "ch-a880a3",
+    "sourceTitle": "4回目のコラボはちいかわデザインのオリジナル「湯呑み」が初登場！ 「ちいかわ」×くら寿司コラボキャンペーン ちいかわたちの特別なコラボメニューも登場！ ～8月21日（金）から全国のくら寿司で開催～｜プレスリリース｜くら寿司 ホームページ - kurasushi.co.jp",
+    "sourceType": "official_social",
+    "createdAt": "2026-08-10",
+    "sourceUrl": "https://www.kurasushi.co.jp/author/008384.html"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "くら寿司「吉伊卡哇」合作活動",
+    "type": "cafe",
+    "country": "JP",
+    "city": "Osaka",
+    "locationName": "くら寿司",
+    "startDate": "2026-08-21",
+    "endDate": "2026-09-30",
+    "summaryZh": "くら寿司與吉伊卡哇合作活動，推出限定餐點與湯杯，8月21日起跑。",
+    "needReservation": false,
+    "hasLimitedGoods": false,
+    "tags": [
+      "壽司",
+      "主題咖啡廳",
+      "限定餐飲",
+      "吉伊卡哇"
+    ],
+    "id": "ch-c709d0",
+    "sourceTitle": "くら寿司「ちいかわ」コラボキャンペーン8月21日から！ 湯呑み初登場＆コラボメニューも（cinemacafe.net） - Yahoo!ニュース",
+    "sourceType": "official_social",
+    "createdAt": "2026-08-11",
+    "sourceUrl": "https://news.yahoo.co.jp/articles/33b91e4a38451d9a51b1f4053c887bc9687503e2"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇 沖繩那霸機場伴手禮店",
+    "type": "store",
+    "country": "JP",
+    "city": "Okinawa",
+    "locationName": "那霸機場",
+    "startDate": "",
+    "endDate": "",
+    "summaryZh": "吉伊卡哇於沖繩那霸機場開設「シーサーのおみやげやさん」伴手禮店，並與當地品牌合作推出聯名商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "伴手禮",
+      "機場",
+      "沖繩",
+      "聯名"
+    ],
+    "id": "ch-20b2a6",
+    "sourceTitle": "ちいかわ「シーサーのおみやげやさん」、那覇空港にオープン！ ご当地ブランドとのコラボも - AIRLINE web",
+    "sourceType": "official_social",
+    "createdAt": "2026-08-10",
+    "sourceUrl": "https://airline.ikaros.jp/news/59069/"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "ちいかわ 公式グッズ第3弾発売＆ポップアップストア",
+    "type": "popup",
+    "country": "JP",
+    "city": "",
+    "locationName": "",
+    "startDate": "2026-08-21",
+    "endDate": "2026-09-23",
+    "summaryZh": "『ちいぽけ』官方周邊第三彈將發售，以「恐龍」和「愛麗絲」為主題的ちいかわ商品，並將在日本全國五處舉辦快閃店活動。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "周邊商品",
+      "快閃店",
+      "恐龍",
+      "愛麗絲"
+    ],
+    "id": "ch-7e2a69",
+    "sourceTitle": "『ちいぽけ』公式グッズ第3弾が発売決定！”恐竜”＆”アリス”モチーフのちいかわたちなど盛り沢山ーポップアップストアを全国5箇所で開催（インサイド） - Yahoo!ニュース",
+    "sourceType": "official_social",
+    "createdAt": "2026-08-10",
+    "sourceUrl": "https://news.yahoo.co.jp/articles/795d2f58ec20e20a69e4780480a8568967775cc0"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "Chiikawa x 藏壽司 聯名活動",
+    "type": "campaign",
+    "country": "JP",
+    "city": "",
+    "locationName": "くら寿司 (藏壽司)",
+    "startDate": "2026-08-21",
+    "endDate": "2026-09-30",
+    "summaryZh": "Chiikawa與藏壽司的第四彈聯名活動於8月21日開始，可獲得初登場的湯呑及限定模型。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "聯名",
+      "限定商品",
+      "模型",
+      "湯呑"
+    ],
+    "id": "ch-51294a",
+    "sourceTitle": "【ちいかわ×くら寿司】コラボ第4弾が8/21より開催。初登場となるちいかわデザインのオリジナル“湯呑み”や限定フィギュアがもらえる - 電撃オンライン",
+    "sourceType": "official_social",
+    "createdAt": "2026-08-10",
+    "sourceUrl": "https://dengekionline.com/article/202608/84036"
+  },
+  {
     "brand": "chiikawa",
     "title": "吉伊卡哇 POP UP STORE 米子天満屋",
     "type": "popup",
@@ -1310,7 +1454,7 @@
     ],
     "id": "ch-2686be",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "ちいかわPOP UP STORE 米子天満屋(2026-09-18～2026-10-12) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_ygtm/index.html"
   },
@@ -1334,7 +1478,7 @@
     ],
     "id": "ch-a1ec92",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール高知(2026-08-21～2026-09-07) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_akuc/index.html"
   },
@@ -1358,7 +1502,7 @@
     ],
     "id": "ch-382889",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "ちいかわPOP UP STORE 新光三越台中中港店(2026-08-22～2026-09-20) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_smtc/index.html"
   },
@@ -1382,7 +1526,7 @@
     ],
     "id": "ch-6026cb",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "ちいかわPOP UP STORE 北千住マルイ(2026-08-14～2026-09-06) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_ksjo/index.html"
   },
@@ -1406,7 +1550,7 @@
     ],
     "id": "ch-fc3ebf",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール岡山(2026-08-14～2026-08-30) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_aoky/index.html"
   },
@@ -1430,7 +1574,7 @@
     ],
     "id": "ch-5a8c80",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "ちいかわPOP UP STORE 0%NAHA(2026-08-13～2026-09-27) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_naha/index.html"
   },
@@ -1454,7 +1598,7 @@
     ],
     "id": "ch-934f13",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール新小松(2026-08-05～2026-08-23) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_askm/index.html"
   },
@@ -1478,7 +1622,7 @@
     ],
     "id": "ch-ce1faf",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール札幌発寒(2026-08-01～2026-08-16) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_asph/index.html"
   },
@@ -1502,7 +1646,7 @@
     ],
     "id": "ch-7ae222",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "ちいかわPOP UP STORE パルクアベニュー・カワトク(2026-07-31～2026-08-17) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_pakt/index.html"
   },
@@ -1526,7 +1670,7 @@
     ],
     "id": "ch-c9579d",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "ちいかわPOP UP STORE 高崎髙島屋(2026-07-29～2026-08-17) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_tkst/index.html"
   },
@@ -1550,7 +1694,7 @@
     ],
     "id": "ch-a1ec1b",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "ちいかわPOP UP STORE イオン南風原店(2026-07-24～2026-08-16) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_aheb/index.html"
   },
@@ -1574,7 +1718,7 @@
     ],
     "id": "ch-eeae5e",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "ちいかわPOP UP STORE イオンモールむさし村山(2026-07-24～2026-08-11) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_amsm/index.html"
   },
@@ -1598,7 +1742,7 @@
     ],
     "id": "ch-dc48e2",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "ちいかわPOP UP STORE 柏高島屋(2026-07-23～2026-08-12) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_kstk/index.html"
   },
@@ -1622,7 +1766,7 @@
     ],
     "id": "ch-b675f5",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "ちいかわPOP UP STORE 羽田空港第1ターミナル(2026-07-20～2026-08-17) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_hnds/index.html"
   },
@@ -1646,7 +1790,7 @@
     ],
     "id": "ch-2a2e88",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "ちいかわPOP UP STORE ショッピングシティベル(2026-07-17～2026-08-23) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_sbel/index.html"
   },
@@ -1670,7 +1814,7 @@
     ],
     "id": "ch-6dee6b",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "ちいかわPOP UP STORE JR武蔵溝ノ口駅(2026-07-17～2026-08-17) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_jrmm/index.html"
   },
@@ -1694,7 +1838,7 @@
     ],
     "id": "ch-92d69c",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "ちいかわPOP UP STORE 0%OKINAWA(2026-06-05～2026-08-30) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_aonr/index.html"
   },
@@ -1717,7 +1861,7 @@
     ],
     "id": "mi-9160e8",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "近鉄百貨店草津店で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202608/47784/"
   },
@@ -1740,7 +1884,7 @@
     ],
     "id": "mi-6e44af",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "ハウステンボス「ミッフィー・ハロウィン」 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202608/47757/"
   },
@@ -1763,7 +1907,7 @@
     ],
     "id": "mi-cc9d39",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "神奈川・そごう横浜店に「DICK BRUNA STAND BY MIIA」期間限定オープン - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202607/47392/"
   },
@@ -1786,7 +1930,7 @@
     ],
     "id": "mi-af2f79",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "そごう横浜店で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202607/47472/"
   },
@@ -1809,7 +1953,7 @@
     ],
     "id": "mi-88dac4",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "ハウステンボス「ミッフィーバースデーシーズン」 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202606/47004/"
   },
@@ -1832,7 +1976,7 @@
     ],
     "id": "mi-33f034",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "ヴィレッジヴァンガード「ミッフィーとつなぐ てがきのぬくもりフェア」開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202607/47530/"
   },
@@ -1855,7 +1999,7 @@
     ],
     "id": "mi-a3137a",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "「miffy × Cosme Kitchen 」コスメキッチンとミッフィーのコラボ第3弾登場 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202607/47496/"
   },
@@ -1878,7 +2022,7 @@
     ],
     "id": "mi-8d95df",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "2026年8月15日(土)スタート!miffy style 神戸店/三宮店限定 ノベルティ - キデイランド",
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_limited_nove202608/"
   },
@@ -1901,8 +2045,126 @@
     ],
     "id": "mi-7f8804",
     "sourceType": "official_site",
-    "createdAt": "2026-08-09",
+    "createdAt": "2026-08-11",
     "sourceTitle": "2026年8月8日(土)～スタート!miffy style 各店ノベルティデイ - キデイランド",
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_nove202608/"
+  },
+  {
+    "brand": "miffy",
+    "title": "米飛兔 x 珍珠耳飾的少女 展覽限定周邊",
+    "type": "campaign",
+    "country": "JP",
+    "city": "",
+    "locationName": "",
+    "startDate": "2026-08-21",
+    "endDate": "2026-09-27",
+    "summaryZh": "展覽推出以《真珠耳飾的少女》為主題的米飛兔等周邊商品，包含 Mikimoto 等品牌聯名。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "展覽",
+      "限定商品",
+      "聯名"
+    ],
+    "id": "mi-43f516",
+    "sourceTitle": "【フェルメール展】「超豪華！展覧会オリジナルグッズ」を発表。ミキモト、フリーレン、ミッフィーなど《真珠の耳飾りの少女》モチーフのアイテムを豊富に展開 - 朝日新聞",
+    "sourceType": "official_social",
+    "createdAt": "2026-08-11",
+    "sourceUrl": "https://www.asahi.com/and/w/article/16794953"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇 x 壽司郎 期間限定合作",
+    "type": "campaign",
+    "country": "JP",
+    "city": "",
+    "locationName": "壽司郎全日本分店",
+    "startDate": "2026-08-21",
+    "endDate": "2026-09-30",
+    "summaryZh": "吉伊卡哇與壽司郎合作活動，將推出限定餐點與周邊商品，活動於日本全國壽司郎店鋪展開。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "壽司郎",
+      "聯名",
+      "限定餐飲",
+      "周邊商品"
+    ],
+    "id": "ch-f12827",
+    "sourceTitle": "「ちいかわ」×くら寿司コラボキャンペーンが8月21日より期間限定開催（GAME Watch） - Yahoo!ニュース",
+    "sourceType": "official_social",
+    "createdAt": "2026-08-11",
+    "sourceUrl": "https://news.yahoo.co.jp/articles/32aaf97f5dc783b919cc57cf7693ea6011d20e60"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "くら寿司×ちいかわコラボ",
+    "type": "cafe",
+    "country": "JP",
+    "city": "Osaka",
+    "locationName": "くら寿司",
+    "startDate": "2026-08-21",
+    "endDate": "",
+    "summaryZh": "くら寿司與吉伊卡哇的聯名活動於8月21日起在日本全國的くら寿司店展開，推出限定餐點與周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "聯名",
+      "限定餐飲",
+      "周邊商品"
+    ],
+    "id": "ch-507505",
+    "sourceTitle": "「今年も来た！」「たれ耳うさぎかわいい」とファン注目！くら寿司×「ちいかわ」コラボが8月21日〜開幕（ABEMA TIMES） - Yahoo!ニュース",
+    "sourceType": "official_social",
+    "createdAt": "2026-08-11",
+    "sourceUrl": "https://news.yahoo.co.jp/articles/551b556f8200a977b2d9dec1c8f1859045bf31f2?source"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "まじかるちいかわ POP UP STORE in 川越",
+    "type": "popup",
+    "country": "JP",
+    "city": "Saitama",
+    "locationName": "川越",
+    "startDate": "2026-08-20",
+    "endDate": "2026-08-31",
+    "summaryZh": "まじかるちいかわ快閃店於川越舉辦，販售限定周邊商品並設有主題咖啡廳。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "快閃店",
+      "限定商品",
+      "川越",
+      "主題咖啡廳"
+    ],
+    "id": "ch-878f63",
+    "sourceTitle": "まじかるちいかわ ポップアップストア in 川越 8月20日より開催! - コラボカフェ",
+    "sourceType": "official_social",
+    "createdAt": "2026-08-11",
+    "sourceUrl": "https://collabo-cafe.com/events/collabo/magical-chiikawa-pop-up-store-kawagoe2026/"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇 x 壽司郎 限定周邊",
+    "type": "campaign",
+    "country": "JP",
+    "city": "",
+    "locationName": "くら寿司 (壽司郎)",
+    "startDate": "2026-08-21",
+    "endDate": "2026-09-30",
+    "summaryZh": "吉伊卡哇與壽司郎合作活動，有機會獲得限定公仔、磁鐵、湯吞等周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "壽司郎",
+      "限定周邊",
+      "公仔",
+      "磁鐵"
+    ],
+    "id": "ch-3233bd",
+    "sourceTitle": "ちいかわ×くら寿司、ちいかわ/ハチワレ/うさぎなどの「フィギュア」「マグネット」「湯呑み」がもらえる - グルメ Watch",
+    "sourceType": "official_social",
+    "createdAt": "2026-08-11",
+    "sourceUrl": "https://gourmet.watch.impress.co.jp/docs/news/2131867.html"
   }
 ]
