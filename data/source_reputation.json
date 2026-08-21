@@ -1,36 +1,43 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-05T08:50:36+00:00",
+  "updatedAt": "2026-08-21T13:49:22+00:00",
   "sources": {
     "domain:nownews.com": {
-      "confirmed": 9,
-      "rejected": 1,
+      "confirmed": 10,
+      "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 9,
+      "crossChecked": 11,
       "score": 95,
       "label": "nownews.com",
       "kind": "news",
       "host": "nownews.com",
       "handle": "",
       "firstSeen": "2026-06-11",
-      "lastReviewed": "2026-07-09",
+      "lastReviewed": "2026-08-21",
       "lastOutcome": "confirmed",
-      "notes": "Kept under Taiwan Pokemon Center goods policy after 2026-07-09 review: the article text explicitly states Taiwan Pokemon Center scope, the 博士助手皮卡丘 product, and the delayed in-store sale date of 2026-07-18; no conflicting official source was found, but no independent corroboration was available.",
+      "notes": "Article explicitly confirms Taiwan Pokemon Center physical sale date and concrete Sean Wotherspoon plush line",
       "byBrand": {
         "pokemon": {
-          "confirmed": 9,
+          "confirmed": 10,
           "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 9,
+          "crossChecked": 10,
           "score": 95
+        },
+        "chiikawa": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
         }
       },
       "byType": {
         "new_product": {
-          "confirmed": 9,
+          "confirmed": 10,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 7,
+          "crossChecked": 8,
           "score": 95
         },
         "campaign": {
@@ -39,14 +46,21 @@
           "uncertain": 0,
           "crossChecked": 2,
           "score": 43
+        },
+        "popup": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
         }
       },
       "byCountry": {
         "tw": {
-          "confirmed": 9,
-          "rejected": 1,
+          "confirmed": 10,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 9,
+          "crossChecked": 11,
           "score": 95
         }
       },
@@ -150,6 +164,26 @@
           "eventId": "po-25daa5",
           "evidenceCount": 0,
           "notes": "Kept under Taiwan Pokemon Center goods policy after 2026-07-09 review: the article text explicitly states Taiwan Pokemon Center scope, the 博士助手皮卡丘 product, and the delayed in-store sale date of 2026-07-18; no conflicting official source was found, but no independent corroboration was available."
+        },
+        {
+          "date": "2026-08-21",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "TW",
+          "eventId": "ch-ad53ae",
+          "evidenceCount": 1,
+          "notes": "Duplicate of structured official Taichung POP UP STORE record"
+        },
+        {
+          "date": "2026-08-21",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-1a34a4",
+          "evidenceCount": 1,
+          "notes": "Article explicitly confirms Taiwan Pokemon Center physical sale date and concrete Sean Wotherspoon plush line"
         }
       ]
     },
@@ -319,25 +353,25 @@
     },
     "domain:news.yahoo.co.jp": {
       "confirmed": 1,
-      "rejected": 4,
+      "rejected": 8,
       "uncertain": 0,
-      "crossChecked": 2,
-      "score": 17,
+      "crossChecked": 6,
+      "score": 5,
       "label": "news.yahoo.co.jp",
       "kind": "news",
       "host": "news.yahoo.co.jp",
       "handle": "",
       "firstSeen": "2026-06-15",
-      "lastReviewed": "2026-07-05",
+      "lastReviewed": "2026-08-21",
       "lastOutcome": "rejected",
-      "notes": "Removed under accuracy-over-coverage: Yahoo/Pia goods roundup gave only a 2026-07-24 launch signal and no authoritative page with an explicit event period was confirmed.",
+      "notes": "Duplicate secondary coverage of official Kura Sushi collaboration",
       "byBrand": {
         "chiikawa": {
           "confirmed": 1,
-          "rejected": 3,
+          "rejected": 7,
           "uncertain": 0,
-          "crossChecked": 2,
-          "score": 28
+          "crossChecked": 6,
+          "score": 5
         },
         "miffy": {
           "confirmed": 0,
@@ -364,26 +398,33 @@
         },
         "cafe": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 3,
           "uncertain": 0,
-          "crossChecked": 0,
-          "score": 39
+          "crossChecked": 2,
+          "score": 21
         },
         "popup": {
           "confirmed": 0,
+          "rejected": 2,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 30
+        },
+        "campaign": {
+          "confirmed": 0,
           "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 0,
-          "score": 39
+          "crossChecked": 1,
+          "score": 41
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 1,
-          "rejected": 4,
+          "rejected": 8,
           "uncertain": 0,
-          "crossChecked": 2,
-          "score": 17
+          "crossChecked": 6,
+          "score": 5
         }
       },
       "history": [
@@ -436,6 +477,46 @@
           "eventId": "ch-133d70",
           "evidenceCount": 0,
           "notes": "Removed under accuracy-over-coverage: Yahoo/Pia goods roundup gave only a 2026-07-24 launch signal and no authoritative page with an explicit event period was confirmed."
+        },
+        {
+          "date": "2026-08-21",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "campaign",
+          "country": "JP",
+          "eventId": "ch-f12827",
+          "evidenceCount": 1,
+          "notes": "Duplicate secondary coverage of official Kura Sushi collaboration"
+        },
+        {
+          "date": "2026-08-21",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "cafe",
+          "country": "JP",
+          "eventId": "ch-c709d0",
+          "evidenceCount": 1,
+          "notes": "Duplicate secondary coverage of official Kura Sushi collaboration"
+        },
+        {
+          "date": "2026-08-21",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-7e2a69",
+          "evidenceCount": 1,
+          "notes": "Broad multi-venue aggregate without venue-specific structured rows"
+        },
+        {
+          "date": "2026-08-21",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "cafe",
+          "country": "JP",
+          "eventId": "ch-507505",
+          "evidenceCount": 1,
+          "notes": "Duplicate secondary coverage of official Kura Sushi collaboration"
         }
       ]
     },
@@ -892,42 +973,49 @@
       ]
     },
     "domain:collabo-cafe.com": {
-      "confirmed": 4,
-      "rejected": 2,
+      "confirmed": 6,
+      "rejected": 6,
       "uncertain": 0,
-      "crossChecked": 5,
-      "score": 66,
+      "crossChecked": 13,
+      "score": 36,
       "label": "collabo-cafe.com",
       "kind": "site",
       "host": "collabo-cafe.com",
       "handle": "",
       "firstSeen": "2026-06-30",
-      "lastReviewed": "2026-07-29",
+      "lastReviewed": "2026-08-21",
       "lastOutcome": "confirmed",
-      "notes": "Kept after correction: Gray Parker Service release confirmed 2026-08-07 physical Okinawa store sales; not a cafe",
+      "notes": "Chiikawa official page confirmed Maruhiro Kawagoe venue and exact period",
       "byBrand": {
         "chiikawa": {
-          "confirmed": 4,
-          "rejected": 2,
+          "confirmed": 6,
+          "rejected": 5,
           "uncertain": 0,
-          "crossChecked": 5,
-          "score": 66
+          "crossChecked": 12,
+          "score": 47
+        },
+        "miffy": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
         }
       },
       "byType": {
         "cafe": {
           "confirmed": 0,
-          "rejected": 2,
+          "rejected": 5,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 30
+          "crossChecked": 4,
+          "score": 5
         },
         "popup": {
-          "confirmed": 3,
-          "rejected": 0,
+          "confirmed": 5,
+          "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 3,
-          "score": 77
+          "crossChecked": 8,
+          "score": 84
         },
         "new_product": {
           "confirmed": 1,
@@ -939,11 +1027,11 @@
       },
       "byCountry": {
         "jp": {
-          "confirmed": 4,
-          "rejected": 2,
+          "confirmed": 6,
+          "rejected": 6,
           "uncertain": 0,
-          "crossChecked": 5,
-          "score": 66
+          "crossChecked": 13,
+          "score": 36
         }
       },
       "history": [
@@ -1006,23 +1094,83 @@
           "eventId": "ch-2e1170",
           "evidenceCount": 1,
           "notes": "Kept after correction: Gray Parker Service release confirmed 2026-08-07 physical Okinawa store sales; not a cafe"
+        },
+        {
+          "date": "2026-08-21",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "cafe",
+          "country": "JP",
+          "eventId": "mi-9b679b",
+          "evidenceCount": 1,
+          "notes": "Misclassified mass-retail product launch and not an accepted cafe event"
+        },
+        {
+          "date": "2026-08-21",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "cafe",
+          "country": "JP",
+          "eventId": "ch-8e2e46",
+          "evidenceCount": 1,
+          "notes": "Misclassified venue-less general product item"
+        },
+        {
+          "date": "2026-08-21",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-28a446",
+          "evidenceCount": 2,
+          "notes": "Chiikawa official page confirmed Entetsu venue and exact period"
+        },
+        {
+          "date": "2026-08-21",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "cafe",
+          "country": "JP",
+          "eventId": "ch-df22f4",
+          "evidenceCount": 1,
+          "notes": "Duplicate secondary coverage of official Kura Sushi collaboration"
+        },
+        {
+          "date": "2026-08-21",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-008cda",
+          "evidenceCount": 1,
+          "notes": "Duplicate of structured official Chubu Centrair POP UP STORE record"
+        },
+        {
+          "date": "2026-08-21",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-878f63",
+          "evidenceCount": 2,
+          "notes": "Chiikawa official page confirmed Maruhiro Kawagoe venue and exact period"
         }
       ]
     },
     "domain:prtimes.jp": {
       "confirmed": 2,
-      "rejected": 1,
+      "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 3,
-      "score": 59,
+      "crossChecked": 5,
+      "score": 52,
       "label": "prtimes.jp",
       "kind": "news",
       "host": "prtimes.jp",
       "handle": "",
       "firstSeen": "2026-07-01",
-      "lastReviewed": "2026-08-05",
-      "lastOutcome": "confirmed",
-      "notes": "JR West SC official press release confirms Chiikawa Park Store at LUCUA SOUTH 11F, opening in November 2026; exact opening day remains TBD",
+      "lastReviewed": "2026-08-21",
+      "lastOutcome": "rejected",
+      "notes": "Broad Kobe Waterfront roundup duplicated existing venue-specific records",
       "byBrand": {
         "chiikawa": {
           "confirmed": 1,
@@ -1033,10 +1181,10 @@
         },
         "miffy": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 2,
-          "score": 43
+          "crossChecked": 4,
+          "score": 36
         }
       },
       "byType": {
@@ -1060,15 +1208,22 @@
           "uncertain": 0,
           "crossChecked": 1,
           "score": 59
+        },
+        "campaign": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 43
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 1,
-          "rejected": 2,
+          "rejected": 3,
           "uncertain": 0,
-          "crossChecked": 3,
-          "score": 41
+          "crossChecked": 5,
+          "score": 34
         }
       },
       "history": [
@@ -1101,6 +1256,16 @@
           "eventId": "ch-6d9bb5",
           "evidenceCount": 1,
           "notes": "JR West SC official press release confirms Chiikawa Park Store at LUCUA SOUTH 11F, opening in November 2026; exact opening day remains TBD"
+        },
+        {
+          "date": "2026-08-21",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "campaign",
+          "country": "JP",
+          "eventId": "mi-631b46",
+          "evidenceCount": 2,
+          "notes": "Broad Kobe Waterfront roundup duplicated existing venue-specific records"
         }
       ]
     },
@@ -1386,18 +1551,18 @@
     },
     "domain:dengekionline.com": {
       "confirmed": 1,
-      "rejected": 1,
+      "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 2,
-      "score": 50,
+      "crossChecked": 3,
+      "score": 41,
       "label": "dengekionline.com",
       "kind": "site",
       "host": "dengekionline.com",
       "handle": "",
       "firstSeen": "2026-07-04",
-      "lastReviewed": "2026-07-20",
-      "lastOutcome": "confirmed",
-      "notes": "Original article accurately reported the July 18 KITTE Marunouchi vending-machine launch; company PR TIMES release confirmed venue, products, and open-ended start. Scraper dates were corrected.",
+      "lastReviewed": "2026-08-21",
+      "lastOutcome": "rejected",
+      "notes": "Duplicate secondary coverage of official Kura Sushi collaboration",
       "byBrand": {
         "pokemon": {
           "confirmed": 0,
@@ -1408,10 +1573,10 @@
         },
         "chiikawa": {
           "confirmed": 1,
-          "rejected": 0,
+          "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 59
+          "crossChecked": 2,
+          "score": 50
         }
       },
       "byType": {
@@ -1421,15 +1586,22 @@
           "uncertain": 0,
           "crossChecked": 2,
           "score": 50
+        },
+        "campaign": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 1,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 2,
-          "score": 50
+          "crossChecked": 3,
+          "score": 41
         }
       },
       "history": [
@@ -1452,6 +1624,16 @@
           "eventId": "ch-38b47a",
           "evidenceCount": 1,
           "notes": "Original article accurately reported the July 18 KITTE Marunouchi vending-machine launch; company PR TIMES release confirmed venue, products, and open-ended start. Scraper dates were corrected."
+        },
+        {
+          "date": "2026-08-21",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "campaign",
+          "country": "JP",
+          "eventId": "ch-51294a",
+          "evidenceCount": 1,
+          "notes": "Duplicate secondary coverage of official Kura Sushi collaboration"
         }
       ]
     },
@@ -1801,43 +1983,43 @@
     },
     "domain:ndw.jp": {
       "confirmed": 4,
-      "rejected": 0,
+      "rejected": 1,
       "uncertain": 0,
-      "crossChecked": 5,
-      "score": 88,
+      "crossChecked": 6,
+      "score": 77,
       "label": "ndw.jp",
       "kind": "site",
       "host": "ndw.jp",
       "handle": "",
       "firstSeen": "2026-07-19",
-      "lastReviewed": "2026-08-01",
-      "lastOutcome": "confirmed",
-      "notes": "Matched Pokemon official goods page; physical Pokemon Center release on 2026-08-08",
+      "lastReviewed": "2026-08-21",
+      "lastOutcome": "rejected",
+      "notes": "Duplicate of existing Pokemon official product record po-49ec1c",
       "byBrand": {
         "pokemon": {
           "confirmed": 4,
-          "rejected": 0,
+          "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 5,
-          "score": 88
+          "crossChecked": 6,
+          "score": 77
         }
       },
       "byType": {
         "new_product": {
           "confirmed": 4,
-          "rejected": 0,
+          "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 5,
-          "score": 88
+          "crossChecked": 6,
+          "score": 77
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 4,
-          "rejected": 0,
+          "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 5,
-          "score": 88
+          "crossChecked": 6,
+          "score": 77
         }
       },
       "history": [
@@ -1880,6 +2062,16 @@
           "eventId": "po-49ec1c",
           "evidenceCount": 1,
           "notes": "Matched Pokemon official goods page; physical Pokemon Center release on 2026-08-08"
+        },
+        {
+          "date": "2026-08-21",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "po-44685b",
+          "evidenceCount": 1,
+          "notes": "Duplicate of existing Pokemon official product record po-49ec1c"
         }
       ]
     },
@@ -2003,25 +2195,32 @@
     },
     "domain:asahi.com": {
       "confirmed": 0,
-      "rejected": 1,
+      "rejected": 3,
       "uncertain": 0,
-      "crossChecked": 1,
-      "score": 41,
+      "crossChecked": 4,
+      "score": 25,
       "label": "asahi.com",
       "kind": "site",
       "host": "asahi.com",
       "handle": "",
       "firstSeen": "2026-07-19",
-      "lastReviewed": "2026-07-19",
+      "lastReviewed": "2026-08-21",
       "lastOutcome": "rejected",
-      "notes": "Removed as out-of-scope after checking the official PARCO campaign page: this is a multi-store mall campaign with novelty/photo booth, not a single venue-bounded popup row.",
+      "notes": "Duplicate secondary coverage of official Kura Sushi collaboration",
       "byBrand": {
         "chiikawa": {
           "confirmed": 0,
+          "rejected": 2,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 32
+        },
+        "miffy": {
+          "confirmed": 0,
           "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 2,
+          "score": 43
         }
       },
       "byType": {
@@ -2031,15 +2230,22 @@
           "uncertain": 0,
           "crossChecked": 1,
           "score": 41
+        },
+        "campaign": {
+          "confirmed": 0,
+          "rejected": 2,
+          "uncertain": 0,
+          "crossChecked": 3,
+          "score": 34
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 3,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 4,
+          "score": 25
         }
       },
       "history": [
@@ -2052,6 +2258,26 @@
           "eventId": "ch-09a8e3",
           "evidenceCount": 1,
           "notes": "Removed as out-of-scope after checking the official PARCO campaign page: this is a multi-store mall campaign with novelty/photo booth, not a single venue-bounded popup row."
+        },
+        {
+          "date": "2026-08-21",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "campaign",
+          "country": "JP",
+          "eventId": "mi-43f516",
+          "evidenceCount": 2,
+          "notes": "Duplicate of Dick Bruna official Vermeer exhibition limited-goods record"
+        },
+        {
+          "date": "2026-08-21",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "campaign",
+          "country": "JP",
+          "eventId": "ch-1cdea8",
+          "evidenceCount": 1,
+          "notes": "Duplicate secondary coverage of official Kura Sushi collaboration"
         }
       ]
     },
@@ -2165,20 +2391,27 @@
     },
     "domain:topics.smt.docomo.ne.jp": {
       "confirmed": 0,
-      "rejected": 1,
+      "rejected": 3,
       "uncertain": 0,
-      "crossChecked": 1,
-      "score": 41,
+      "crossChecked": 4,
+      "score": 25,
       "label": "topics.smt.docomo.ne.jp",
       "kind": "site",
       "host": "topics.smt.docomo.ne.jp",
       "handle": "",
       "firstSeen": "2026-08-02",
-      "lastReviewed": "2026-08-02",
+      "lastReviewed": "2026-08-21",
       "lastOutcome": "rejected",
-      "notes": "Duplicate syndication of the already structured official KOBE PORT TOWER event mi-ea7f4f",
+      "notes": "Duplicate of structured official Huis Ten Bosch Miffy record",
       "byBrand": {
         "miffy": {
+          "confirmed": 0,
+          "rejected": 2,
+          "uncertain": 0,
+          "crossChecked": 3,
+          "score": 34
+        },
+        "chiikawa": {
           "confirmed": 0,
           "rejected": 1,
           "uncertain": 0,
@@ -2193,15 +2426,22 @@
           "uncertain": 0,
           "crossChecked": 1,
           "score": 41
+        },
+        "campaign": {
+          "confirmed": 0,
+          "rejected": 2,
+          "uncertain": 0,
+          "crossChecked": 3,
+          "score": 34
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 3,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 4,
+          "score": 25
         }
       },
       "history": [
@@ -2214,48 +2454,68 @@
           "eventId": "mi-f970b1",
           "evidenceCount": 1,
           "notes": "Duplicate syndication of the already structured official KOBE PORT TOWER event mi-ea7f4f"
+        },
+        {
+          "date": "2026-08-21",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "campaign",
+          "country": "JP",
+          "eventId": "ch-8178aa",
+          "evidenceCount": 1,
+          "notes": "Duplicate syndication of official Kura Sushi collaboration"
+        },
+        {
+          "date": "2026-08-21",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "campaign",
+          "country": "JP",
+          "eventId": "mi-2ec127",
+          "evidenceCount": 2,
+          "notes": "Duplicate of structured official Huis Ten Bosch Miffy record"
         }
       ]
     },
     "domain:lmaga.jp": {
       "confirmed": 0,
-      "rejected": 1,
+      "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 1,
-      "score": 41,
+      "crossChecked": 3,
+      "score": 34,
       "label": "lmaga.jp",
       "kind": "site",
       "host": "lmaga.jp",
       "handle": "",
       "firstSeen": "2026-08-04",
-      "lastReviewed": "2026-08-04",
+      "lastReviewed": "2026-08-21",
       "lastOutcome": "rejected",
-      "notes": "Broad 16-facility roundup duplicated existing structured official Kobe Waterfront coverage",
+      "notes": "Duplicate of official Vermeer exhibition limited-goods record",
       "byBrand": {
         "miffy": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 3,
+          "score": 34
         }
       },
       "byType": {
         "campaign": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 3,
+          "score": 34
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 3,
+          "score": 34
         }
       },
       "history": [
@@ -2268,6 +2528,16 @@
           "eventId": "mi-7f1bbf",
           "evidenceCount": 1,
           "notes": "Broad 16-facility roundup duplicated existing structured official Kobe Waterfront coverage"
+        },
+        {
+          "date": "2026-08-21",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "campaign",
+          "country": "JP",
+          "eventId": "mi-476343",
+          "evidenceCount": 2,
+          "notes": "Duplicate of official Vermeer exhibition limited-goods record"
         }
       ]
     },
@@ -2322,6 +2592,546 @@
           "eventId": "po-22bd8f",
           "evidenceCount": 0,
           "notes": "Article explicitly names Pokemon Center TAIPEI, 2026-08-08 in-store sale date, products, prices, and purchase rules"
+        }
+      ]
+    },
+    "domain:universe.oneone.com.tw": {
+      "confirmed": 1,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 2,
+      "score": 61,
+      "label": "universe.oneone.com.tw",
+      "kind": "site",
+      "host": "universe.oneone.com.tw",
+      "handle": "",
+      "firstSeen": "2026-08-21",
+      "lastReviewed": "2026-08-21",
+      "lastOutcome": "confirmed",
+      "notes": "Official Pokemon Asia page confirmed Taipei venue and 2026-10-10 to 2026-10-11 period",
+      "byBrand": {
+        "pokemon": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 61
+        }
+      },
+      "byType": {
+        "campaign": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 61
+        }
+      },
+      "byCountry": {
+        "tw": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 61
+        }
+      },
+      "history": [
+        {
+          "date": "2026-08-21",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "campaign",
+          "country": "TW",
+          "eventId": "po-de81e3",
+          "evidenceCount": 2,
+          "notes": "Official Pokemon Asia page confirmed Taipei venue and 2026-10-10 to 2026-10-11 period"
+        }
+      ]
+    },
+    "domain:predge.jp": {
+      "confirmed": 1,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 2,
+      "score": 61,
+      "label": "predge.jp",
+      "kind": "site",
+      "host": "predge.jp",
+      "handle": "",
+      "firstSeen": "2026-08-21",
+      "lastReviewed": "2026-08-21",
+      "lastOutcome": "confirmed",
+      "notes": "Chiikawa official and Naha Airport confirmed permanent shop opening on 2026-08-12",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 61
+        }
+      },
+      "byType": {
+        "store": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 61
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 61
+        }
+      },
+      "history": [
+        {
+          "date": "2026-08-21",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "store",
+          "country": "JP",
+          "eventId": "ch-f682d3",
+          "evidenceCount": 2,
+          "notes": "Chiikawa official and Naha Airport confirmed permanent shop opening on 2026-08-12"
+        }
+      ]
+    },
+    "domain:airline.ikaros.jp": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 2,
+      "score": 43,
+      "label": "airline.ikaros.jp",
+      "kind": "site",
+      "host": "airline.ikaros.jp",
+      "handle": "",
+      "firstSeen": "2026-08-21",
+      "lastReviewed": "2026-08-21",
+      "lastOutcome": "rejected",
+      "notes": "Duplicate of corrected official Naha Airport permanent shop record",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 43
+        }
+      },
+      "byType": {
+        "store": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 43
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 43
+        }
+      },
+      "history": [
+        {
+          "date": "2026-08-21",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "store",
+          "country": "JP",
+          "eventId": "ch-20b2a6",
+          "evidenceCount": 2,
+          "notes": "Duplicate of corrected official Naha Airport permanent shop record"
+        }
+      ]
+    },
+    "domain:kurasushi.co.jp": {
+      "confirmed": 1,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 2,
+      "score": 61,
+      "label": "kurasushi.co.jp",
+      "kind": "site",
+      "host": "kurasushi.co.jp",
+      "handle": "",
+      "firstSeen": "2026-08-21",
+      "lastReviewed": "2026-08-21",
+      "lastOutcome": "confirmed",
+      "notes": "Official Kura Sushi page explicitly confirms menu and goods period 2026-08-21 to 2026-09-30",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 61
+        }
+      },
+      "byType": {
+        "cafe": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 61
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 61
+        }
+      },
+      "history": [
+        {
+          "date": "2026-08-21",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "cafe",
+          "country": "JP",
+          "eventId": "ch-a880a3",
+          "evidenceCount": 2,
+          "notes": "Official Kura Sushi page explicitly confirms menu and goods period 2026-08-21 to 2026-09-30"
+        }
+      ]
+    },
+    "domain:walkerland.com.tw": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 41,
+      "label": "walkerland.com.tw",
+      "kind": "site",
+      "host": "walkerland.com.tw",
+      "handle": "",
+      "firstSeen": "2026-08-21",
+      "lastReviewed": "2026-08-21",
+      "lastOutcome": "rejected",
+      "notes": "Broad exhibition roundup duplicated existing official CHIIKAWA DAYS coverage and used wrong dates",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byType": {
+        "campaign": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byCountry": {
+        "tw": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "history": [
+        {
+          "date": "2026-08-21",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "campaign",
+          "country": "TW",
+          "eventId": "ch-e9c452",
+          "evidenceCount": 1,
+          "notes": "Broad exhibition roundup duplicated existing official CHIIKAWA DAYS coverage and used wrong dates"
+        }
+      ]
+    },
+    "domain:travel.watch.impress.co.jp": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 2,
+      "score": 43,
+      "label": "travel.watch.impress.co.jp",
+      "kind": "site",
+      "host": "travel.watch.impress.co.jp",
+      "handle": "",
+      "firstSeen": "2026-08-21",
+      "lastReviewed": "2026-08-21",
+      "lastOutcome": "rejected",
+      "notes": "Duplicate of official Vermeer exhibition limited-goods record",
+      "byBrand": {
+        "miffy": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 43
+        }
+      },
+      "byType": {
+        "campaign": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 43
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 43
+        }
+      },
+      "history": [
+        {
+          "date": "2026-08-21",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "campaign",
+          "country": "JP",
+          "eventId": "mi-e5d66d",
+          "evidenceCount": 2,
+          "notes": "Duplicate of official Vermeer exhibition limited-goods record"
+        }
+      ]
+    },
+    "domain:gourmet.watch.impress.co.jp": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 41,
+      "label": "gourmet.watch.impress.co.jp",
+      "kind": "site",
+      "host": "gourmet.watch.impress.co.jp",
+      "handle": "",
+      "firstSeen": "2026-08-21",
+      "lastReviewed": "2026-08-21",
+      "lastOutcome": "rejected",
+      "notes": "Duplicate secondary coverage of official Kura Sushi collaboration",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byType": {
+        "cafe": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "history": [
+        {
+          "date": "2026-08-21",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "cafe",
+          "country": "JP",
+          "eventId": "ch-2e1d02",
+          "evidenceCount": 1,
+          "notes": "Duplicate secondary coverage of official Kura Sushi collaboration"
+        }
+      ]
+    },
+    "domain:jocr.jp": {
+      "confirmed": 1,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 2,
+      "score": 61,
+      "label": "jocr.jp",
+      "kind": "site",
+      "host": "jocr.jp",
+      "handle": "",
+      "firstSeen": "2026-08-21",
+      "lastReviewed": "2026-08-21",
+      "lastOutcome": "confirmed",
+      "notes": "Official Le Pan page confirmed venues and period 2026-07-30 to 2026-09-30",
+      "byBrand": {
+        "miffy": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 61
+        }
+      },
+      "byType": {
+        "cafe": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 61
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 61
+        }
+      },
+      "history": [
+        {
+          "date": "2026-08-21",
+          "outcome": "confirmed",
+          "brand": "miffy",
+          "type": "cafe",
+          "country": "JP",
+          "eventId": "mi-a93c3f",
+          "evidenceCount": 2,
+          "notes": "Official Le Pan page confirmed venues and period 2026-07-30 to 2026-09-30"
+        }
+      ]
+    },
+    "domain:report.iko-yo.net": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 41,
+      "label": "report.iko-yo.net",
+      "kind": "site",
+      "host": "report.iko-yo.net",
+      "handle": "",
+      "firstSeen": "2026-08-21",
+      "lastReviewed": "2026-08-21",
+      "lastOutcome": "rejected",
+      "notes": "Broad roundup merged separate Sogo Yokohama and Chiba events and used an invalid combined period",
+      "byBrand": {
+        "miffy": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byType": {
+        "popup": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "history": [
+        {
+          "date": "2026-08-21",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "mi-d4fa82",
+          "evidenceCount": 1,
+          "notes": "Broad roundup merged separate Sogo Yokohama and Chiba events and used an invalid combined period"
+        }
+      ]
+    },
+    "domain:kobe-np.co.jp": {
+      "confirmed": 1,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 2,
+      "score": 61,
+      "label": "kobe-np.co.jp",
+      "kind": "site",
+      "host": "kobe-np.co.jp",
+      "handle": "",
+      "firstSeen": "2026-08-21",
+      "lastReviewed": "2026-08-21",
+      "lastOutcome": "confirmed",
+      "notes": "Hotel official page confirmed VIEW CAFE afternoon tea period and reservation requirement",
+      "byBrand": {
+        "miffy": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 61
+        }
+      },
+      "byType": {
+        "cafe": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 61
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 61
+        }
+      },
+      "history": [
+        {
+          "date": "2026-08-21",
+          "outcome": "confirmed",
+          "brand": "miffy",
+          "type": "cafe",
+          "country": "JP",
+          "eventId": "mi-8ddf2f",
+          "evidenceCount": 2,
+          "notes": "Hotel official page confirmed VIEW CAFE afternoon tea period and reservation requirement"
         }
       ]
     }
