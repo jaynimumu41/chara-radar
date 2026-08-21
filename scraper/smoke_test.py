@@ -1405,6 +1405,30 @@ except ValueError:
     one_to_many_blocked = True
 check("更新差異計算直接阻擋一對多基準配對", one_to_many_blocked, True)
 
+hierarchy_events = [
+    ev(id="mi-ea7f4f", brand="miffy", title="Miffy 神戶 Waterfront 母活動",
+       type="campaign", city="Hyogo", startDate="2026-07-30", endDate="2026-09-30"),
+    ev(id="mi-aa3188", brand="miffy", title="Miffy 神戶主題客房",
+       type="reservation", city="Hyogo", startDate="2026-07-30", endDate="2026-09-30"),
+    ev(id="mi-356f47", brand="miffy", title="Miffy 神戶聯名遊輪",
+       type="cafe", city="Hyogo", startDate="2026-07-30", endDate="2026-09-30"),
+]
+scrape.apply_event_hierarchy(hierarchy_events)
+check("母子活動規則附加 parentEventId",
+      [event.get("parentEventId", "") for event in hierarchy_events],
+      ["", "mi-ea7f4f", "mi-ea7f4f"])
+check("有效母子活動通過 lint",
+      data_lint.event_hierarchy_errors(hierarchy_events), [])
+check("缺少母活動時 lint 阻擋",
+      len(data_lint.event_hierarchy_errors([
+          ev(id="child", brand="miffy", parentEventId="missing-parent")
+      ])), 1)
+check("跨品牌母子活動 lint 阻擋",
+      len(data_lint.event_hierarchy_errors([
+          ev(id="parent", brand="pokemon"),
+          ev(id="child", brand="miffy", parentEventId="parent"),
+      ])), 1)
+
 class _BrokenRotator:
     def call(self, _prompt):
         raise RuntimeError("temporary 503")

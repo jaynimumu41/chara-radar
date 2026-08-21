@@ -331,6 +331,7 @@
       "米飛"
     ],
     "id": "mi-aa3188",
+    "parentEventId": "mi-ea7f4f",
     "sourceTitle": "ホテルオークラ神戸”ミッフィー尽くし”の神戸港ビュー客室「ミッフィールーム」限定グッズも - ファッションプレス",
     "sourceType": "official_social",
     "createdAt": "2026-06-30",
@@ -1069,6 +1070,7 @@
       "神戶"
     ],
     "id": "mi-8ddf2f",
+    "parentEventId": "mi-ea7f4f",
     "sourceTitle": "【神戸メリケンパークオリエンタルホテル】【数量限定】この夏、神戸でミッフィーと過ごす特別な癒やし旅。プレミアムなコラボ宿泊プラン＆アフタヌーンティーが本日6/29より発売！ - kobe-np.co.jp",
     "sourceType": "official_site",
     "createdAt": "2026-08-06",
@@ -1093,6 +1095,7 @@
       "Miffy"
     ],
     "id": "mi-a93c3f",
+    "parentEventId": "mi-ea7f4f",
     "sourceTitle": "神戸・ミッフィーの限定アフヌンやマカロンセットがラ・スイートやル・パン総本店で販売！9・30まで - jocr.jp",
     "sourceType": "official_site",
     "createdAt": "2026-08-11",
@@ -1685,6 +1688,7 @@
       "限定餐飲"
     ],
     "id": "mi-356f47",
+    "parentEventId": "mi-ea7f4f",
     "sourceTitle": "ミッフィーに出会える、昼と夜の神戸港。神戸リゾートクルーズ「boh boh KOBE」で夏限定コラボレーションを開催",
     "sourceType": "official_social",
     "createdAt": "2026-08-21",

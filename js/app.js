@@ -28,10 +28,12 @@ const CITY_LABELS = {
   Tokyo: '東京', Osaka: '大阪', Kyoto: '京都', Fukuoka: '福岡', Nagoya: '名古屋',
   Nagasaki: '長崎', Saitama: '埼玉', Hokkaido: '北海道', Okinawa: '沖繩',
   Kanagawa: '神奈川', Hyogo: '兵庫', Hiroshima: '廣島', Mie: '三重',
-  Miyagi: '宮城', Chiba: '千葉', Aomori: '青森', Aichi: '愛知', Hyougo: '兵庫',
+  Miyagi: '宮城', Chiba: '千葉', Aomori: '青森', Akita: '秋田', Aichi: '愛知', Hyougo: '兵庫',
   Shizuoka: '靜岡', Ibaraki: '茨城', Tochigi: '栃木', Gunma: '群馬',
   Nara: '奈良', Shiga: '滋賀', Okayama: '岡山', Kumamoto: '熊本',
   Ishikawa: '石川', Niigata: '新潟', Nagano: '長野', Gifu: '岐阜', Kochi: '高知', Ehime: '愛媛', Yamaguchi: '山口', Wakayama: '和歌山',
+  Fukushima: '福島', Kagoshima: '鹿兒島', Iwate: '岩手', Toyama: '富山', Fukui: '福井',
+  Miyazaki: '宮崎', Yamanashi: '山梨',
   Taipei: '台北', Taichung: '台中', Kaohsiung: '高雄', Tainan: '台南',
   Taoyuan: '桃園', Hsinchu: '新竹', Keelung: '基隆'
 };
@@ -186,6 +188,114 @@ function renderCard(ev) {
     </div>`;
 }
 
+function buildEventUnits(sorted, filtered) {
+  const allById = new Map(allEvents.map(ev => [ev.id, ev]));
+  const visibleIds = new Set(filtered.map(ev => ev.id));
+  const visibleChildren = new Map();
+  const allChildren = new Map();
+
+  allEvents.forEach(ev => {
+    if (!ev.parentEventId) return;
+    if (!allChildren.has(ev.parentEventId)) allChildren.set(ev.parentEventId, []);
+    allChildren.get(ev.parentEventId).push(ev);
+  });
+  filtered.forEach(ev => {
+    if (!ev.parentEventId) return;
+    if (!visibleChildren.has(ev.parentEventId)) visibleChildren.set(ev.parentEventId, []);
+    visibleChildren.get(ev.parentEventId).push(ev);
+  });
+
+  const units = [];
+  const renderedGroups = new Set();
+  sorted.forEach(ev => {
+    const parentId = ev.parentEventId || (allChildren.has(ev.id) ? ev.id : '');
+    if (!parentId) {
+      units.push({ kind: 'event', event: ev });
+      return;
+    }
+    if (renderedGroups.has(parentId)) return;
+
+    const parent = allById.get(parentId);
+    const children = (visibleChildren.get(parentId) || []).sort(compareEvents);
+    if (!parent || children.length === 0) {
+      if (visibleIds.has(ev.id)) units.push({ kind: 'event', event: ev });
+      return;
+    }
+    renderedGroups.add(parentId);
+    units.push({ kind: 'group', parent, children });
+  });
+  return units;
+}
+
+function renderGroupChild(ev) {
+  const location = [CITY_LABELS[ev.city] || ev.city, ev.locationName].filter(Boolean).join(' · ');
+  const badges = [
+    `<span class="badge badge-type">${TYPE_LABELS[ev.type] || ev.type}</span>`,
+    ev.needReservation ? '<span class="badge badge-reservation">需預約</span>' : '',
+    ev.hasLimitedGoods ? '<span class="badge badge-limited">限定商品</span>' : ''
+  ].join('');
+  return `
+    <div class="group-child" data-id="${ev.id}">
+      <div class="group-child-main">
+        <div class="group-child-badges">${badges}</div>
+        <div class="group-child-title">${ev.title}</div>
+        <div class="group-child-summary">${ev.summaryZh || ''}</div>
+        <div class="group-child-meta">
+          ${location ? `<span>📍 ${location}</span>` : ''}
+          <span>📅 ${dateRange(ev)}</span>
+        </div>
+      </div>
+      <a class="group-child-link" href="${ev.sourceUrl}" target="_blank" rel="noopener">來源 ↗</a>
+    </div>`;
+}
+
+function renderEventGroup(parent, children) {
+  const days = daysUntilEnd(parent.endDate);
+  const urgentBadge = (days !== null && days <= 7 && days >= 0)
+    ? `<span class="badge badge-urgent">剩 ${days} 天</span>` : '';
+  const hasReservation = parent.needReservation || children.some(ev => ev.needReservation);
+  const hasLimitedGoods = parent.hasLimitedGoods || children.some(ev => ev.hasLimitedGoods);
+  const location = [CITY_LABELS[parent.city] || parent.city, parent.locationName].filter(Boolean).join(' · ');
+  const tags = (parent.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
+
+  return `
+    <details class="event-card event-group-card" data-brand="${parent.brand}" data-id="${parent.id}">
+      <summary class="group-summary">
+        <div class="card-header">
+          <div class="card-badges">
+            <span class="badge badge-brand-${parent.brand}">${BRAND_LABELS[parent.brand]}</span>
+            <span class="badge badge-type">系列活動</span>
+            ${urgentBadge}
+            ${hasReservation ? '<span class="badge badge-reservation">含需預約</span>' : ''}
+            ${hasLimitedGoods ? '<span class="badge badge-limited">有限定商品</span>' : ''}
+            <span class="badge badge-${parent.country.toLowerCase()}">${parent.country === 'JP' ? '🇯🇵 日本' : '🇹🇼 台灣'}</span>
+          </div>
+        </div>
+        <div class="card-title">${parent.title}</div>
+        <div class="card-summary">${parent.summaryZh || ''}</div>
+        <div class="card-meta">
+          ${location ? `<div class="card-meta-row">📍 ${location}</div>` : ''}
+          <div class="card-meta-row">📅 ${dateRange(parent)}</div>
+        </div>
+        <div class="group-toggle">
+          <span>${children.length} 個相關場域與方案</span>
+          <span class="group-chevron" aria-hidden="true"></span>
+        </div>
+      </summary>
+      <div class="group-children">${children.map(renderGroupChild).join('')}</div>
+      <div class="card-footer group-footer">
+        <div class="card-tags">${tags}</div>
+        <a class="card-link" href="${parent.sourceUrl}" target="_blank" rel="noopener">母活動來源 ↗</a>
+      </div>
+    </details>`;
+}
+
+function renderEventUnit(unit) {
+  return unit.kind === 'group'
+    ? renderEventGroup(unit.parent, unit.children)
+    : renderCard(unit.event);
+}
+
 // ── Home render ───────────────────────────────────────────────────────────────
 
 function renderHome() {
@@ -212,11 +322,15 @@ function renderEvents() {
     filtered.filter(e => e.needReservation).length,
     filtered.filter(e => e.hasLimitedGoods).length);
 
-  document.getElementById('events-count').textContent =
-    activeTodayOnly ? `今日新增 ${filtered.length} 筆` : `共 ${filtered.length} 筆`;
-
   // 排序：有結束日的快結束在前；只有開始日的排在後段並依開始日排序。
   const sorted = [...filtered].sort(activeTodayOnly ? compareTodayEvents : compareEvents);
+  const units = buildEventUnits(sorted, filtered);
+
+  document.getElementById('events-count').textContent = activeTodayOnly
+    ? `今日新增 ${filtered.length} 筆`
+    : (units.length === filtered.length
+      ? `共 ${filtered.length} 筆`
+      : `共 ${filtered.length} 筆 · 整理為 ${units.length} 組`);
 
   const grid = document.getElementById('events-grid');
   if (sorted.length === 0) {
@@ -224,7 +338,7 @@ function renderEvents() {
     grid.innerHTML = `<div class="no-results"><p>🔍</p><p>${emptyText}</p></div>`;
     return;
   }
-  grid.innerHTML = sorted.map(renderCard).join('');
+  grid.innerHTML = units.map(renderEventUnit).join('');
 }
 
 function setStats(total, urgent, reservation, limited) {

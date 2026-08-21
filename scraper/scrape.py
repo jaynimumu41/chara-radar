@@ -828,6 +828,28 @@ DISPLAY_REPLACEMENTS = {
     },
 }
 
+EVENT_HIERARCHIES = {
+    "mi-ea7f4f": {
+        "mi-aa3188",
+        "mi-8ddf2f",
+        "mi-a93c3f",
+        "mi-356f47",
+    },
+}
+
+
+def apply_event_hierarchy(events: list[dict]) -> list[dict]:
+    """Attach configured child events to a canonical umbrella event."""
+    by_id = {ev.get("id"): ev for ev in events if ev.get("id")}
+    for parent_id, child_ids in EVENT_HIERARCHIES.items():
+        if parent_id not in by_id:
+            continue
+        for child_id in child_ids:
+            child = by_id.get(child_id)
+            if child:
+                child["parentEventId"] = parent_id
+    return events
+
 def normalize_display_terms(ev: dict) -> dict:
     """Normalize brand/place display terms before writing public data."""
     replacements = DISPLAY_REPLACEMENTS.get(ev.get("brand", ""), {})
@@ -851,6 +873,7 @@ def normalize_display_terms(ev: dict) -> dict:
     return ev
 
 def save_events(events: list[dict]):
+    apply_event_hierarchy(events)
     for ev in events:
         normalize_display_terms(ev)
     EVENTS_JSON.write_text(json.dumps(events, ensure_ascii=False, indent=2), encoding="utf-8")

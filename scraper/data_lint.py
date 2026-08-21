@@ -103,6 +103,43 @@ def stable_identity_duplicate_errors(events: list[dict]) -> list[str]:
     ]
 
 
+def event_hierarchy_errors(events: list[dict]) -> list[str]:
+    """Validate one-level parent/child grouping without weakening event identity."""
+    by_id = {
+        str(ev.get("id", "")): ev
+        for ev in events
+        if isinstance(ev, dict) and ev.get("id")
+    }
+    errors: list[str] = []
+    for child_id, child in by_id.items():
+        parent_id = child.get("parentEventId")
+        if parent_id is None:
+            continue
+        if not isinstance(parent_id, str) or not parent_id:
+            errors.append(f"{child_id}: parentEventId must be a non-empty string")
+            continue
+        if parent_id == child_id:
+            errors.append(f"{child_id}: event cannot be its own parent")
+            continue
+        parent = by_id.get(parent_id)
+        if not parent:
+            errors.append(f"{child_id}: parentEventId references missing event {parent_id}")
+            continue
+        if parent.get("parentEventId"):
+            errors.append(f"{child_id}: nested event hierarchy is not supported")
+        if parent.get("brand") != child.get("brand"):
+            errors.append(f"{child_id}: parent {parent_id} has a different brand")
+        if parent.get("country") != child.get("country"):
+            errors.append(f"{child_id}: parent {parent_id} has a different country")
+        parent_start, parent_end = parent.get("startDate", ""), parent.get("endDate", "")
+        child_start, child_end = child.get("startDate", ""), child.get("endDate", "")
+        if parent_end and child_start and child_start > parent_end:
+            errors.append(f"{child_id}: starts after parent {parent_id} ends")
+        if child_end and parent_start and child_end < parent_start:
+            errors.append(f"{child_id}: ends before parent {parent_id} starts")
+    return errors
+
+
 def replacement_mapping_errors(updates: dict) -> list[str]:
     """Replacement rows must form a one-to-one mapping between old and current IDs."""
     replacements = updates.get("replacements", [])
@@ -197,6 +234,7 @@ def main() -> int:
             warnings.append(f"possible duplicate cluster {key}: {', '.join(ids_for_key)}")
 
     errors.extend(stable_identity_duplicate_errors(events))
+    errors.extend(event_hierarchy_errors(events))
 
     if STORES_JSON.exists():
         stores = load_json(STORES_JSON)
