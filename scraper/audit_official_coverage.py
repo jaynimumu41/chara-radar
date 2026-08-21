@@ -43,6 +43,12 @@ OFFICIAL_HOSTS = {
 # Pages here are official but either duplicate a richer canonical event source,
 # or are known out-of-scope after human review.
 IGNORED_OFFICIAL_PAGES: dict[str, str] = {
+    "https://www.pokemon-cafe.jp/ja/cafe/news/260821_3462.html": (
+        "Pokemon Cafe October seat-reservation schedule, not a new cafe menu or event"
+    ),
+    "https://www.pokemon-cafe.jp/ja/cafe/news/260703_3439.html": (
+        "open-ended selectable latte art update aged out of the cafe activity freshness window"
+    ),
     "https://www.pokemon-cafe.jp/ja/cafe/news/260723_3457.html": (
         "Pokemon Cafe monthly seat-reservation schedule, not a new cafe menu or event"
     ),
@@ -103,6 +109,21 @@ IGNORED_OFFICIAL_PAGES: dict[str, str] = {
     "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-shibuya/news/202607/000413.html": (
         "Pokemon Design Lab crowd-control and advance-lottery guidance, not a new event or product launch"
     ),
+    "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-shibuya/news/202608/000455.html": (
+        "crowd-control lottery guidance for the existing apparel-focused Pokemon Design Lab service"
+    ),
+    "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-yokohama-satellite/news/202608/000448.html": (
+        "past one-day satellite-store operating notice, not a new event or product launch"
+    ),
+    "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-shibuya/events/202608/000467.html": (
+        "monthly schedule dominated by Pokemon Card activities, which are outside collection scope"
+    ),
+    "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kanazawa/events/202608/000469.html": (
+        "monthly Pokemon Card activity calendar, outside collection scope"
+    ),
+    "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-osakadx/events/202608/000475.html": (
+        "monthly character/photo and Pokemon Card activity calendar without target limited goods or dining"
+    ),
     "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-shibuya/news/202607/000435.html": (
         "Pokemon Design Lab crowd-control and advance-lottery guidance for an existing T-shirt service"
     ),
@@ -129,6 +150,12 @@ IGNORED_OFFICIAL_PAGES: dict[str, str] = {
     ),
     "https://dickbruna.jp/news/202608/47580/": (
         "August event roundup; all listed activities are represented by their individual canonical pages"
+    ),
+    "https://dickbruna.jp/news/202608/47832/": (
+        "same Vermeer exhibition goods represented by canonical official page 202605/46308"
+    ),
+    "https://dickbruna.jp/news/202608/47767/": (
+        "same Kobe/Sannomiya miffy style novelty represented by the Kiddy Land canonical event page"
     ),
     "https://dickbruna.jp/news/202606/46872/": (
         "open-ended Flower Miffy stock-limited birthday campaign aged out with no current availability confirmation"

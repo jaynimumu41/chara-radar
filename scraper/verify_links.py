@@ -13,6 +13,7 @@ UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
 # 對 page_mentions 關鍵字比對與 extract_dates 日期掃描都夠用。
 READER_PROXY = "https://r.jina.ai/"
 _BLOCKED_CODES = {401, 403, 429, 451, 503}
+_PROTECTED_OFFICIAL_BLOCKS = {("www.kiddyland.co.jp", 403)}
 _CHECK_CACHE = {}
 _LAST_REQUEST_AT = {}
 _HOST_MIN_INTERVAL = {
@@ -45,6 +46,12 @@ def _prefer_reader_proxy(url: str) -> bool:
     if host == "chiikawa-info.jp" and "/p26/" in parsed.path:
         return True
     return host == "pokemonhubs.com"
+
+
+def _is_protected_official_block(url: str, code: int) -> bool:
+    """Recognize a narrow, observed whole-site bot block without hiding 404s."""
+    host = urllib.parse.urlparse(url).hostname or ""
+    return (host, code) in _PROTECTED_OFFICIAL_BLOCKS
 
 
 def _raw_fetch(url, timeout, want_text):
@@ -136,6 +143,9 @@ def check_url(url, timeout=20, return_text=False):
                 return pack(True, 200, ptext if return_text else "")
         except Exception:
             pass
+    if _is_protected_official_block(net_url, code):
+        _CHECK_CACHE[cache_key] = (True, code, "")
+        return pack(True, code)
     _CHECK_CACHE[cache_key] = (False, code, "")
     return pack(False, code)
 

@@ -95,7 +95,7 @@ AREA_TO_CITY = {
     "Tokyo":    ["東京", "渋谷", "澀谷", "池袋", "銀座", "新宿", "原宿", "表参道", "表參道",
                   "スカイツリー", "晴空塔", "ソラマチ", "押上", "自由が丘", "自由之丘",
                   "お台場", "丸の内", "浅草", "上野", "中野", "吉祥寺", "多摩", "立川",
-                  "むさし村山", "武蔵村山", "羽田", "北千住",
+                  "むさし村山", "武蔵村山", "羽田", "北千住", "蒲田", "グランデュオ蒲田",
                   "ピューロランド", "Puroland", "彩虹樂園", "サンリオピューロランド"],
     "Iwate":    ["岩手", "盛岡", "カワトク", "パルクアベニュー・カワトク"],
     "Osaka":    ["大阪", "梅田", "心斎橋", "心齋橋", "なんば", "難波", "中之島", "天王寺",
@@ -112,15 +112,15 @@ AREA_TO_CITY = {
                   "武蔵溝ノ口", "溝ノ口"],
     "Hyogo":    ["兵庫", "神戸", "神戶", "Kobe", "KOBE", "西宮", "三宮", "伊丹", "姫路", "ピオレ"],
     "Hiroshima":["広島", "廣島", "Hiroshima"],
-    "Kagoshima":["鹿児島", "鹿兒島", "Kagoshima"],
+    "Kagoshima":["鹿児島", "鹿兒島", "Kagoshima", "KAGOSHIMA BAY"],
     "Mie":      ["三重", "四日市", "津南"],
     "Miyagi":   ["仙台", "宮城", "名取", "新利府", "利府"],
     "Chiba":    ["千葉", "舞浜", "幕張", "柏高島屋"],
-    "Niigata":  ["新潟", "亀田"],
+    "Niigata":  ["新潟", "亀田", "新発田"],
     "Okayama":  ["岡山", "倉敷"],
     "Tottori":  ["鳥取", "日吉津"],
     "Nara":     ["奈良", "橿原"],
-    "Fukushima":["福島", "いわき", "ハワイアンズ"],
+    "Fukushima":["福島", "いわき", "ハワイアンズ", "郡山"],
     "Nagano":   ["長野", "須坂", "ながの東急"],
     "Gunma":    ["群馬", "高崎", "太田"],
     "Toyama":   ["富山", "高岡"],
@@ -129,6 +129,7 @@ AREA_TO_CITY = {
     "Miyazaki": ["宮崎"],
     "Yamanashi":["山梨", "甲府", "昭和"],
     "Aomori":   ["青森", "Aomori", "弘前"],
+    "Akita":    ["秋田"],
     "Aichi":    ["愛知", "豊田", "名古屋", "常滑", "大高"],
     "Shizuoka": ["静岡", "靜岡", "富士宮", "浜松", "遠鉄", "セノバ", "磐田"],
     "Yamaguchi":["山口", "小野田", "おのだ"],
@@ -890,7 +891,28 @@ def load_published_baseline(fallback_events: list[dict]) -> tuple[list[dict], st
             ["git", "show", "HEAD:data/last_updated.json"], cwd=repo,
             text=True, encoding="utf-8",
         )
-        return parse_published_baseline(events_raw, updated_raw)
+        head_events, head_date = parse_published_baseline(events_raw, updated_raw)
+        if head_date == TODAY and UPDATE_DIFF_JSON.exists():
+            updates = json.loads(UPDATE_DIFF_JSON.read_text(encoding="utf-8-sig"))
+            baseline_date = updates.get("baselineDate", "") if updates.get("date") == TODAY else ""
+            if baseline_date and baseline_date != TODAY:
+                commits = subprocess.check_output(
+                    ["git", "log", "--format=%H", "--", "data/last_updated.json"],
+                    cwd=repo, text=True, encoding="utf-8",
+                ).splitlines()
+                for commit in commits:
+                    historic_updated = subprocess.check_output(
+                        ["git", "show", f"{commit}:data/last_updated.json"],
+                        cwd=repo, text=True, encoding="utf-8",
+                    )
+                    if parse_last_updated_date(historic_updated) != baseline_date:
+                        continue
+                    historic_events = subprocess.check_output(
+                        ["git", "show", f"{commit}:data/events.json"],
+                        cwd=repo, text=True, encoding="utf-8",
+                    )
+                    return parse_published_baseline(historic_events, historic_updated)
+        return head_events, head_date
     except Exception as exc:
         print(f"    ⚠️  無法讀取 Git 公開 baseline，改用目前資料：{exc}")
         return json.loads(json.dumps(fallback_events, ensure_ascii=False)), load_last_updated_date()
@@ -898,11 +920,47 @@ def load_published_baseline(fallback_events: list[dict]) -> tuple[list[dict], st
 def build_update_diff(previous: list[dict], current: list[dict], *,
                       date: str = TODAY, baseline_date: str = "") -> dict:
     """Build the public 'today updates' file from the previous visible data state."""
+    identity_owners: dict[str, str] = {}
+    for ev in current:
+        identity = special_activity_key(ev)
+        if not identity:
+            continue
+        owner = identity_owners.get(identity)
+        if identity in identity_owners:
+            raise ValueError(
+                "current events contain duplicate stable identity: "
+                f"{owner} and {ev.get('id', '')} ({identity})"
+            )
+        identity_owners[identity] = ev.get("id", "")
+
     new_events: list[dict] = []
     replacements: list[dict] = []
+    claimed_previous: dict[int, str] = {}
     for ev in current:
-        match = next((old for old in previous if is_same_event_for_update_diff(old, ev)), None)
-        if match:
+        matches = [
+            (index, old)
+            for index, old in enumerate(previous)
+            if is_same_event_for_update_diff(old, ev)
+        ]
+        matches.sort(key=lambda match: (
+            match[1].get("id") != ev.get("id"),
+            not bool(
+                _real_source_url(match[1])
+                and _real_source_url(match[1]) == _real_source_url(ev)
+            ),
+            match[0],
+        ))
+        available = [match for match in matches if match[0] not in claimed_previous]
+        if matches and not available:
+            previous_index, previous_event = matches[0]
+            raise ValueError(
+                "multiple current events match the same baseline event: "
+                f"{claimed_previous[previous_index]} and {ev.get('id', '')} "
+                f"both match {previous_event.get('id', '')}"
+            )
+        if available:
+            previous_index, match = available[0]
+            claimed_previous[previous_index] = ev.get("id", "")
             if match.get("id") != ev.get("id"):
                 replacements.append({"from": match.get("id", ""), "to": ev.get("id", "")})
             continue
@@ -1106,7 +1164,7 @@ def is_chainwide_location(loc: str) -> bool:
 
 def _event_blob(ev: dict) -> str:
     parts = []
-    for field in ("title", "locationName", "summaryZh", "sourceTitle"):
+    for field in ("title", "locationName", "summaryZh", "sourceTitle", "sourceUrl"):
         value = ev.get(field)
         if isinstance(value, str):
             parts.append(value)
@@ -1124,6 +1182,55 @@ STRONG_EVENT_IDENTITY_RULES = (
         "patterns": (
             (("KOBE PORT TOWER", "神戸ポートタワー", "神戶港塔",
               "神戸ウォーターフロント", "神戶海側", "神戸・海側"),),
+        ),
+        "scope": "date",
+    },
+    {
+        "brand": "miffy",
+        "types": {"popup", "cafe", "campaign"},
+        "concept": "miffy-vermeer-pearl-earring-exhibition",
+        "patterns": (
+            (("フェルメール", "Vermeer", "費爾梅爾"),
+             ("真珠の耳飾りの少女", "戴珍珠耳環的少女", "珍珠耳環少女")),
+            (("真珠の耳飾りの少女", "戴珍珠耳環的少女", "珍珠耳環少女"),),
+            (("フェルメール", "Vermeer", "費爾梅爾"),),
+        ),
+        "scope": "date",
+    },
+    {
+        "brand": "miffy",
+        "types": {"popup", "cafe", "campaign"},
+        "concept": "miffy-huis-ten-bosch-birthday-season",
+        "patterns": (
+            (("ハウステンボス", "Huis Ten Bosch", "豪斯登堡", "huistenbosch"),
+             ("バースデーシーズン", "Birthday Season", "生日季")),
+        ),
+        "scope": "date",
+    },
+    {
+        "brand": "chiikawa",
+        "types": {"popup", "cafe", "campaign"},
+        "concept": "chiikawa-kura-sushi-campaign",
+        "patterns": (
+            (("くら寿司", "藏壽司", "Kura Sushi", "kurasushi"),),
+        ),
+        "scope": "date",
+    },
+    {
+        "brand": "chiikawa",
+        "types": {"popup", "cafe", "campaign"},
+        "concept": "chiikawa-centrair-popup",
+        "patterns": (
+            (("中部国際空港", "セントレア", "Centrair", "pus_cbca", "centrair-2026"),),
+        ),
+        "scope": "date",
+    },
+    {
+        "brand": "pokemon",
+        "types": {"new_product"},
+        "concept": "pokemon-patapata-plush",
+        "patterns": (
+            (("ぱたぱたっ！ぬいぐるみ", "ぱたぱたっ!ぬいぐるみ", "拍動玩偶"),),
         ),
         "scope": "date",
     },
@@ -1411,6 +1518,7 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
         ]
 
         hit = None
+        special_match = False
         if ukey and ukey in url_keys:        # 相同真實來源 = 同一活動
             hit = url_keys[ukey]
         elif tkey in title_keys:
@@ -1446,7 +1554,13 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
 
         # 城市鐵則：兩筆城市都有值且不同 = 不同活動，即使同來源頁也不合併。
         # （彙整/排程清單頁會列多個不同城市的場次共用同一 URL，如各地出張所）
-        if hit is not None and city and kept[hit].get("city") and city != kept[hit].get("city"):
+        if (
+            hit is not None
+            and city
+            and kept[hit].get("city")
+            and city != kept[hit].get("city")
+            and not special_match
+        ):
             hit = None
 
         # 日期鐵則：兩筆都有開始日且差距 >14 天 = 不同檔期，不合併（同場館的春檔/秋檔
@@ -1804,27 +1918,18 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
 
 # ── 主程式 ────────────────────────────────────────────────────────────────────
 
-def run(brands: list[str]):
+def run(brands: list[str], official_only: bool = False):
     env = load_env()
-    backend = detect_ai_backend(env)
-    if not backend:
-        print("❌  找不到 API Key。")
-        print()
-        print("請在 scraper/.env 填入以下其中一個：")
-        print()
-        print("  ── 免費方案（推薦）──────────────────────────────")
-        print("  GEMINI_API_KEY=AIzaSy...")
-        print("  申請：https://aistudio.google.com  → Get API key")
-        print()
-        print("  ── Anthropic Claude（新帳號有 $5 免費額度）───────")
-        print("  ANTHROPIC_API_KEY=sk-ant-...")
-        print("  申請：https://console.anthropic.com")
-        sys.exit(1)
-
-    kind, keys = backend
-    rotator = KeyRotator(kind, keys)
-    name = "Claude (Anthropic)" if kind == "anthropic" else "Gemini (Google)"
-    print(f"🤖  AI 後端：{name}　·　{len(keys)} 把 key{'（自動輪替）' if len(keys) > 1 else ''}")
+    backend = None if official_only else detect_ai_backend(env)
+    rotator = None
+    if backend:
+        kind, keys = backend
+        rotator = KeyRotator(kind, keys)
+        name = "Claude (Anthropic)" if kind == "anthropic" else "Gemini (Google)"
+        print(f"🤖  AI 後端：{name}　·　{len(keys)} 把 key{'（自動輪替）' if len(keys) > 1 else ''}")
+    else:
+        reason = "指定 --official-only" if official_only else "找不到 API Key"
+        print(f"ℹ️  {reason}；仍會更新結構化官方來源，媒體新聞留待有 Key 時處理。")
 
     events = load_events()
     previous_events, baseline_date = load_published_baseline(events)
@@ -1841,7 +1946,11 @@ def run(brands: list[str]):
             )
             if structured:
                 surls = {e["sourceUrl"] for e in structured}
-                events = [e for e in events if e.get("sourceUrl") not in surls] + structured
+                events = replace_in_place(
+                    events,
+                    structured,
+                    lambda e: e.get("sourceUrl") in surls,
+                )
                 print(f"🏛️  吉伊卡哇官方排程/店鋪（結構化，免 AI）→ {len(structured)} 筆現行")
                 save_events(events)
         except Exception as e:
@@ -1895,11 +2004,26 @@ def run(brands: list[str]):
             mf = fetch_miffy_events(extract_dates, correct_city)
             if mf:
                 surls = {e["sourceUrl"] for e in mf}
-                events = [e for e in events if e.get("sourceUrl") not in surls] + mf
+                events = replace_in_place(
+                    events,
+                    mf,
+                    lambda e: e.get("sourceUrl") in surls,
+                )
                 print(f"🏛️  Miffy 官方活動（dickbruna，結構化，免 AI）→ {len(mf)} 筆現行")
                 save_events(events)
         except Exception as e:
             print(f"    ⚠️  Miffy 結構化來源失敗（略過）：{e}")
+
+    if not rotator:
+        events, past_removed, dup_removed = clean_events(events)
+        save_events(events)
+        update_diff = save_update_diff(previous_events, events, baseline_date)
+        print("\n✨  官方來源更新完成（媒體 AI 萃取已略過）")
+        print(f"    今日新增檢視：相對前次版本新增 {update_diff['newEventCount']} 筆")
+        if past_removed or dup_removed:
+            print(f"    清理：移除過期 {past_removed} 筆、去重 {dup_removed} 筆")
+        print(f"    總計 {len(events)} 筆，寫入：{EVENTS_JSON}")
+        return
 
     seen_ttls = {e.get("title", "") for e in events} | {e.get("sourceTitle", "") for e in events}
     seen_urls = {e.get("sourceUrl", "") for e in events}
@@ -2021,11 +2145,13 @@ def run(brands: list[str]):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--brand", choices=list(BRAND_LABELS.keys()))
+    parser.add_argument("--official-only", action="store_true",
+                        help="Update structured official sources without using AI keys.")
     args = parser.parse_args()
     brands = [args.brand] if args.brand else DEFAULT_BRANDS
     print(f"角色情報雷達 scraper · {TODAY}")
     print(f"品牌：{', '.join(brands)}")
-    run(brands)
+    run(brands, official_only=args.official_only)
 
 if __name__ == "__main__":
     main()

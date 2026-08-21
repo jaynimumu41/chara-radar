@@ -65,6 +65,11 @@ check("むさし村山→Tokyo", scrape.correct_city("イオンモールむさ�
 check("イオンモール太田→Gunma", scrape.correct_city("イオンモール太田"), "Gunma")
 check("イオンモール高岡→Toyama", scrape.correct_city("イオンモール高岡"), "Toyama")
 check("北千住マルイ→Tokyo", scrape.correct_city("北千住マルイ"), "Tokyo")
+check("グランデュオ蒲田→Tokyo", scrape.correct_city("グランデュオ蒲田"), "Tokyo")
+check("アティ郡山→Fukushima", scrape.correct_city("アティ郡山"), "Fukushima")
+check("KAGOSHIMA BAY→Kagoshima", scrape.correct_city("イオンモール KAGOSHIMA BAY"), "Kagoshima")
+check("イオンモール新発田→Niigata", scrape.correct_city("イオンモール新発田"), "Niigata")
+check("イオンモール秋田→Akita", scrape.correct_city("イオンモール秋田"), "Akita")
 check("0%NAHA→Okinawa", scrape.correct_city("0%NAHA"), "Okinawa")
 check("南風原→Okinawa", scrape.correct_city("イオン南風原店"), "Okinawa")
 check("ショッピングシティベル→Fukui", scrape.correct_city("ショッピングシティベル"), "Fukui")
@@ -301,6 +306,17 @@ check("連結驗證網路 URL 去掉 fragment",
 check("Chiikawa p26 連結驗證優先走 reader proxy",
       verify_links._prefer_reader_proxy("https://chiikawa-info.jp/p26/mck_scpus/index.html"),
       True)
+check("Kiddy Land 官方整站 403 視為防爬端點可達",
+      verify_links._is_protected_official_block(
+          "https://www.kiddyland.co.jp/event/miffy_nove202608/", 403),
+      True)
+check("Kiddy Land 404 不可被防爬例外放行",
+      verify_links._is_protected_official_block(
+          "https://www.kiddyland.co.jp/event/missing/", 404),
+      False)
+check("非 Kiddy Land 的 403 不可被放行",
+      verify_links._is_protected_official_block("https://example.com/event", 403),
+      False)
 sample_chiikawa_home = """
 <a href="/p26/foo/index.html">Foo <span>Store</span></a>
 <a href="https://chiikawa-info.jp/p26/bar/">Bar</a>
@@ -1292,6 +1308,102 @@ check("AI去重防呆：缺場館的同城同日不同活動不可刪",
 check("AI去重防呆：已通過確定規則的同活動可併",
       scrape._ai_dedup_identity_supported([flower_pr, flower_birthday]),
       True)
+
+# ── 2026-08-21 cross-source duplicate regression ─────────────────────────────
+print("\n[duplicate release gate] 跨來源活動身分與發布阻擋")
+out, _ = scrape.dedup_events([
+    ev(id="ch-kura-media", brand="chiikawa", title="吉伊卡哇 x 壽司郎限定合作",
+       type="cafe", city="Osaka", startDate="2026-08-21", endDate="2026-09-30",
+       locationName="くら寿司", sourceUrl="https://example.com/kura-media"),
+    ev(id="ch-kura-official", brand="chiikawa", title="ちいかわ × くら寿司 コラボキャンペーン",
+       type="campaign", city="Tokyo", startDate="2026-08-21", endDate="2026-09-30",
+       locationName="くら寿司 全国店舗", sourceType="official_site",
+       sourceUrl="https://www.kurasushi.co.jp/author/008384.html"),
+])
+check("藏壽司被媒體誤寫城市/類型仍只留官方一筆",
+      (len(out), out[0]["id"]), (1, "ch-kura-official"))
+
+out, _ = scrape.dedup_events([
+    ev(id="mi-vermeer-existing", brand="miffy",
+       title="Miffy x《真珠の耳飾りの少女》展原創商品", type="campaign",
+       city="Osaka", startDate="2026-08-21", endDate="2026-09-27",
+       locationName="大阪中之島美術館 5階展示室", sourceType="official_site",
+       sourceUrl="https://dickbruna.jp/news/202605/46308/"),
+    ev(id="mi-vermeer-new", brand="miffy",
+       title="ミッフィーとフェルメール《真珠の耳飾りの少女》展 コラボグッズ",
+       type="campaign", startDate="2026-08-21", endDate="2026-09-27",
+       locationName="特設ショップ", sourceType="official_site",
+       sourceUrl="https://dickbruna.jp/news/202608/47832/"),
+    ev(id="mi-vermeer-media", brand="miffy", title="費爾梅爾展米飛限定周邊",
+       type="campaign", city="Tokyo", startDate="2026-08-21", endDate="2026-09-27",
+       locationName="東京都美術館", sourceUrl="https://example.com/vermeer-media"),
+])
+check("費爾梅爾展不同官方頁與錯誤城市媒體文合併為既有資料",
+      (len(out), out[0]["id"]), (1, "mi-vermeer-existing"))
+
+out, _ = scrape.dedup_events([
+    ev(id="ch-centrair-media", brand="chiikawa", title="吉伊卡哇愛知快閃店",
+       type="popup", city="Aichi", startDate="2026-09-08", endDate="2026-10-05",
+       sourceUrl="https://collabo-cafe.com/events/chiikawa-pop-up-store-centrair-2026/"),
+    ev(id="ch-centrair-official", brand="chiikawa", title="ちいかわ POP UP STORE 中部国際空港",
+       type="popup", startDate="2026-09-08", endDate="2026-10-05",
+       locationName="中部国際空港 第1ターミナル", sourceType="official_site",
+       sourceUrl="https://chiikawa-info.jp/p26/pus_cbca/index.html"),
+])
+check("中部機場快閃媒體文與官方頁合併",
+      (len(out), out[0]["id"]), (1, "ch-centrair-official"))
+
+check("豪斯登堡生日季跨來源身分一致",
+      scrape.strong_event_identity_key(ev(
+          brand="miffy", title="豪斯登堡 Miffy 生日季", type="campaign",
+          startDate="2026-05-29", sourceTitle="ミッフィーバースデーシーズン ハウステンボス")),
+      "miffy|miffy-huis-ten-bosch-birthday-season|2026-05-29")
+check("ぱたぱた玩偶跨來源身分一致",
+      scrape.strong_event_identity_key(ev(
+          brand="pokemon", title="ぱたぱたっ！ぬいぐるみ 寶可夢中心發售",
+          type="new_product", startDate="2026-08-08")),
+      "pokemon|pokemon-patapata-plush|2026-08-08")
+
+out, _ = scrape.dedup_events([
+    ev(id="mi-kobe-parent", brand="miffy", title="Miffy 神戶港塔 Night Time 聯名活動",
+       type="campaign", city="Hyogo", startDate="2026-07-30", endDate="2026-09-30",
+       locationName="KOBE PORT TOWER × Dick Bruna TABLE in KOBE Waterfront"),
+    ev(id="mi-kobe-cruise", brand="miffy", title="米飛夏日限定聯名遊輪",
+       type="cafe", city="Hyogo", startDate="2026-07-30", endDate="2026-09-30",
+       locationName="神戸リゾートクルーズ boh boh KOBE"),
+])
+check("神戶母活動與獨立遊輪體驗不誤併", len(out), 2)
+
+stable_errors = data_lint.stable_identity_duplicate_errors([
+    ev(id="ch-kura-a", brand="chiikawa", title="ちいかわ くら寿司", type="campaign",
+       startDate="2026-08-21"),
+    ev(id="ch-kura-b", brand="chiikawa", title="藏壽司吉伊卡哇合作", type="cafe",
+       startDate="2026-08-21"),
+])
+check("lint 將穩定身分重複視為錯誤", len(stable_errors), 1)
+replacement_errors = data_lint.replacement_mapping_errors({"replacements": [
+    {"from": "old-one", "to": "new-a"},
+    {"from": "old-one", "to": "new-b"},
+]})
+check("lint 阻擋一筆舊資料被重複替換",
+      replacement_errors,
+      ["today_updates.json replacement source reused: old-one (2)"])
+
+try:
+    scrape.build_update_diff(
+        [ev(id="old-one", brand="miffy", title="Miffy 限定活動",
+            sourceUrl="https://example.com/same-event")],
+        [
+            ev(id="new-a", brand="miffy", title="Miffy 限定活動 A",
+               sourceUrl="https://example.com/same-event"),
+            ev(id="new-b", brand="miffy", title="Miffy 限定活動 B",
+               sourceUrl="https://example.com/same-event"),
+        ],
+    )
+    one_to_many_blocked = False
+except ValueError:
+    one_to_many_blocked = True
+check("更新差異計算直接阻擋一對多基準配對", one_to_many_blocked, True)
 
 class _BrokenRotator:
     def call(self, _prompt):

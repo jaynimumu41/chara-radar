@@ -87,6 +87,51 @@ def today_update_count_errors(events: list[dict], updates: dict, new_event_ids: 
     return errors
 
 
+def stable_identity_duplicate_errors(events: list[dict]) -> list[str]:
+    """Reject duplicate rows for activities with a deterministic real-world identity."""
+    groups: defaultdict[str, list[str]] = defaultdict(list)
+    for ev in events:
+        if not isinstance(ev, dict):
+            continue
+        identity = scrape.special_activity_key(ev)
+        if identity:
+            groups[identity].append(str(ev.get("id", "")))
+    return [
+        f"duplicate stable event identity {identity}: {', '.join(event_ids)}"
+        for identity, event_ids in groups.items()
+        if len(event_ids) > 1
+    ]
+
+
+def replacement_mapping_errors(updates: dict) -> list[str]:
+    """Replacement rows must form a one-to-one mapping between old and current IDs."""
+    replacements = updates.get("replacements", [])
+    if not isinstance(replacements, list):
+        return ["today_updates.json replacements must be an array"]
+
+    errors: list[str] = []
+    from_ids: Counter[str] = Counter()
+    to_ids: Counter[str] = Counter()
+    for index, replacement in enumerate(replacements, 1):
+        if not isinstance(replacement, dict):
+            errors.append(f"today_updates.json replacement #{index} must be an object")
+            continue
+        from_id = str(replacement.get("from", ""))
+        to_id = str(replacement.get("to", ""))
+        if not from_id or not to_id:
+            errors.append(f"today_updates.json replacement #{index} has a blank id")
+            continue
+        from_ids[from_id] += 1
+        to_ids[to_id] += 1
+    for event_id, count in from_ids.items():
+        if count > 1:
+            errors.append(f"today_updates.json replacement source reused: {event_id} ({count})")
+    for event_id, count in to_ids.items():
+        if count > 1:
+            errors.append(f"today_updates.json replacement target reused: {event_id} ({count})")
+    return errors
+
+
 def main() -> int:
     errors: list[str] = []
     warnings: list[str] = []
@@ -151,6 +196,8 @@ def main() -> int:
         if len(ids_for_key) > 1:
             warnings.append(f"possible duplicate cluster {key}: {', '.join(ids_for_key)}")
 
+    errors.extend(stable_identity_duplicate_errors(events))
+
     if STORES_JSON.exists():
         stores = load_json(STORES_JSON)
         if isinstance(stores, dict):
@@ -175,6 +222,7 @@ def main() -> int:
                 if missing_update_ids:
                     errors.append(f"today_updates.json references missing event ids: {', '.join(missing_update_ids)}")
                 errors.extend(today_update_count_errors(events, updates, [str(x) for x in new_event_ids]))
+                errors.extend(replacement_mapping_errors(updates))
                 counts = Counter(e.get("brand", "") for e in events if e.get("id") in set(new_event_ids))
                 counts_by_brand = updates.get("countsByBrand", {})
                 if isinstance(counts_by_brand, dict):
