@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-21T13:49:22+00:00",
+  "updatedAt": "2026-08-22T08:33:48+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 10,
@@ -2391,18 +2391,18 @@
     },
     "domain:topics.smt.docomo.ne.jp": {
       "confirmed": 0,
-      "rejected": 3,
+      "rejected": 4,
       "uncertain": 0,
-      "crossChecked": 4,
-      "score": 25,
+      "crossChecked": 5,
+      "score": 16,
       "label": "topics.smt.docomo.ne.jp",
       "kind": "site",
       "host": "topics.smt.docomo.ne.jp",
       "handle": "",
       "firstSeen": "2026-08-02",
-      "lastReviewed": "2026-08-21",
+      "lastReviewed": "2026-08-22",
       "lastOutcome": "rejected",
-      "notes": "Duplicate of structured official Huis Ten Bosch Miffy record",
+      "notes": "Duplicate of official nationwide Kura Sushi collaboration ch-a880a3; article spotlights one decorated branch but does not define a separate event.",
       "byBrand": {
         "miffy": {
           "confirmed": 0,
@@ -2413,10 +2413,10 @@
         },
         "chiikawa": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 2,
+          "score": 32
         }
       },
       "byType": {
@@ -2433,15 +2433,22 @@
           "uncertain": 0,
           "crossChecked": 3,
           "score": 34
+        },
+        "store": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 0,
-          "rejected": 3,
+          "rejected": 4,
           "uncertain": 0,
-          "crossChecked": 4,
-          "score": 25
+          "crossChecked": 5,
+          "score": 16
         }
       },
       "history": [
@@ -2474,6 +2481,16 @@
           "eventId": "mi-2ec127",
           "evidenceCount": 2,
           "notes": "Duplicate of structured official Huis Ten Bosch Miffy record"
+        },
+        {
+          "date": "2026-08-22",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "store",
+          "country": "JP",
+          "eventId": "ch-083e0b",
+          "evidenceCount": 1,
+          "notes": "Duplicate of official nationwide Kura Sushi collaboration ch-a880a3; article spotlights one decorated branch but does not define a separate event."
         }
       ]
     },

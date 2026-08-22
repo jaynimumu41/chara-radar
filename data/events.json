@@ -1130,7 +1130,7 @@
     "title": "吉伊卡哇 × 藏壽司期間限定合作",
     "type": "cafe",
     "country": "JP",
-    "city": "Osaka",
+    "city": "",
     "locationName": "日本全國くら寿司門市",
     "startDate": "2026-08-21",
     "endDate": "2026-09-30",
@@ -1813,29 +1813,5 @@
     "createdAt": "2026-08-22",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール秋田(2026-08-28～2026-09-13) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_aaki/index.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇壽司聯名店",
-    "type": "store",
-    "country": "JP",
-    "city": "Osaka",
-    "locationName": "グローバル旗艦店なんばパークスサウス",
-    "startDate": "",
-    "endDate": "",
-    "summaryZh": "吉伊卡哇與壽司店「グローバル旗艦店なんばパークスサウス」合作，提供主題餐飲與體驗。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "吉伊卡哇",
-      "壽司",
-      "大阪",
-      "聯名"
-    ],
-    "id": "ch-083e0b",
-    "sourceTitle": "ちいかわと一緒にお寿司タイム♪関西でのコラボ店舗「グローバル旗艦店なんばパークスサウス」 - ｄメニューニュース",
-    "sourceType": "official_social",
-    "createdAt": "2026-08-22",
-    "sourceUrl": "https://topics.smt.docomo.ne.jp/article/cocotte/trend/cocotte-619973?utm_source"
   }
 ]
