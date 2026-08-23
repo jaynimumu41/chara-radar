@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-22T08:33:48+00:00",
+  "updatedAt": "2026-08-23T08:35:49+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 10,
@@ -974,25 +974,25 @@
     },
     "domain:collabo-cafe.com": {
       "confirmed": 6,
-      "rejected": 6,
+      "rejected": 7,
       "uncertain": 0,
-      "crossChecked": 13,
-      "score": 36,
+      "crossChecked": 16,
+      "score": 25,
       "label": "collabo-cafe.com",
       "kind": "site",
       "host": "collabo-cafe.com",
       "handle": "",
       "firstSeen": "2026-06-30",
-      "lastReviewed": "2026-08-21",
-      "lastOutcome": "confirmed",
-      "notes": "Chiikawa official page confirmed Maruhiro Kawagoe venue and exact period",
+      "lastReviewed": "2026-08-23",
+      "lastOutcome": "rejected",
+      "notes": "Manufacturer and official shop pages show a July notebook product sold through nationwide stationery/online channels; no cafe or 2026-09-08 to 2026-10-05 event exists, so the candidate was out of scope and date-polluted.",
       "byBrand": {
         "chiikawa": {
           "confirmed": 6,
-          "rejected": 5,
+          "rejected": 6,
           "uncertain": 0,
-          "crossChecked": 12,
-          "score": 47
+          "crossChecked": 15,
+          "score": 36
         },
         "miffy": {
           "confirmed": 0,
@@ -1005,9 +1005,9 @@
       "byType": {
         "cafe": {
           "confirmed": 0,
-          "rejected": 5,
+          "rejected": 6,
           "uncertain": 0,
-          "crossChecked": 4,
+          "crossChecked": 7,
           "score": 5
         },
         "popup": {
@@ -1028,10 +1028,10 @@
       "byCountry": {
         "jp": {
           "confirmed": 6,
-          "rejected": 6,
+          "rejected": 7,
           "uncertain": 0,
-          "crossChecked": 13,
-          "score": 36
+          "crossChecked": 16,
+          "score": 25
         }
       },
       "history": [
@@ -1154,6 +1154,16 @@
           "eventId": "ch-878f63",
           "evidenceCount": 2,
           "notes": "Chiikawa official page confirmed Maruhiro Kawagoe venue and exact period"
+        },
+        {
+          "date": "2026-08-23",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "cafe",
+          "country": "JP",
+          "eventId": "ch-971d31",
+          "evidenceCount": 3,
+          "notes": "Manufacturer and official shop pages show a July notebook product sold through nationwide stationery/online channels; no cafe or 2026-09-08 to 2026-10-05 event exists, so the candidate was out of scope and date-polluted."
         }
       ]
     },
