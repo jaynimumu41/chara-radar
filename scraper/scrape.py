@@ -148,11 +148,16 @@ AREA_TO_CITY = {
 
 def correct_city(*texts) -> str | None:
     """從地點/標題文字判斷正確城市；找不到回 None（不亂猜）。"""
-    blob = " ".join(t for t in texts if t)
-    for city, kws in AREA_TO_CITY.items():
-        for kw in kws:
-            if kw in blob:
-                return city
+    # Callers pass concrete location first and broad titles afterwards. Scan
+    # each field separately so a brand name such as 東京ばな奈 cannot override
+    # an explicit venue such as 秋田駅ビル.
+    for text in texts:
+        if not text:
+            continue
+        for city, kws in AREA_TO_CITY.items():
+            for kw in kws:
+                if kw in text:
+                    return city
     return None
 
 # 預設抓取的品牌與順序。Sanrio 先暫停：新聞/Gemini 來源品質不穩，
@@ -224,6 +229,11 @@ APPAREL_PRODUCT_KEYWORDS = (
     "ワンピース", "ブラウス", "ジャケット", "コート", "カーディガン",
 )
 
+ONLINE_ONLY_SIGNALS = (
+    "公式web shop", "web shop", "webショップ", "オンラインショップ",
+    "オンラインストア", "通販", "網路商店", "線上商店", "線上預購",
+)
+
 PHYSICAL_STORE_SIGNALS = (
     "pokemon center", "pokémon center", "ポケモンセンター", "寶可夢中心", "宝可梦中心",
     "pokemon center taipei", "台灣寶可夢中心", "台北寶可夢中心",
@@ -260,6 +270,23 @@ def is_apparel_new_product(ev: dict, source_title: str = "", page_text: str = ""
         parts.extend(str(tag) for tag in tags)
     blob = " ".join(part for part in parts if part).lower()
     return any(kw.lower() in blob for kw in APPAREL_PRODUCT_KEYWORDS)
+
+def is_online_only_merchandise(ev: dict, source_title: str = "", page_text: str = "") -> bool:
+    """Reject merchandise reservations that have no concrete physical venue."""
+    if ev.get("type") not in {"new_product", "reservation"}:
+        return False
+    location = (ev.get("locationName") or "").strip()
+    if location and has_physical_store_signal(location):
+        return False
+    summary_blob = " ".join([
+        ev.get("title", ""), ev.get("summaryZh", ""), source_title,
+    ])
+    if has_physical_store_signal(summary_blob):
+        return False
+    source_blob = f"{summary_blob} {page_text[:12000]}".lower()
+    online_only = any(signal.lower() in source_blob for signal in ONLINE_ONLY_SIGNALS)
+    merchandise = ev.get("type") == "reservation" or is_generic_merch_title(summary_blob)
+    return online_only and merchandise
 
 def has_physical_store_signal(*texts) -> bool:
     blob = " ".join(t for t in texts if t).lower()
@@ -592,7 +619,7 @@ def _mk_iso(y: int, mo: int, d: int) -> str | None:
 
 # 起始日後常見的「開跑」提示語（用來提高單一日期的可信度，避免抓到隨機日期）
 _WEEKDAY = r"[日月火水木金土一二三四五六]"
-_DAY_SUFFIX = rf"\s*日?\s*[（(]?{_WEEKDAY}*[)）]?\s*"
+_DAY_SUFFIX = r"\s*日?\s*(?:[（(][^)）]{0,12}[)）])?\s*"
 _START_CUE = (rf"{_DAY_SUFFIX}"
               r"(?:から|スタート|開始|より|開幕|開催|販売|発売|登場|オープン|"
               r"起|開跑|開展|開賣|起跑|～|〜|~|－|—|–|-|至|到)")
@@ -1912,6 +1939,13 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
                     apply_labeled_extracted_dates(data, html, _pub_year(item["pubDate"]),
                                                   is_html=True, scan_chars=90000)
                 clear_unsubstantiated_store_dates(data, html)
+        if is_online_only_merchandise(
+            data,
+            source_title=item.get("title", ""),
+            page_text=source_html,
+        ):
+            print("    ⛔ 純網路商品預購且無實體店/會場，不收")
+            return None
         if is_venue_less_generic_new_product(
             data,
             source_title=item.get("title", ""),

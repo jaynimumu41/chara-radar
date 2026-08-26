@@ -78,6 +78,9 @@ check("KOBE PORT TOWER→Hyogo",
       "Hyogo")
 check("鹿児島市立美術館→Kagoshima", scrape.correct_city("鹿児島市立美術館"), "Kagoshima")
 check("無關鍵字→None", scrape.correct_city("某不知名地點"), None)
+check("具體秋田場館優先於標題中的東京品牌名",
+      scrape.correct_city("秋田駅ビル トピコ", "Chiikawa x 東京ばな奈 快閃店"),
+      "Akita")
 
 # ── canon_venue ───────────────────────────────────────────────────────────────
 print("\n[canon_venue] 場館統一代號")
@@ -175,6 +178,19 @@ check("非服裝實體店新品→不擋",
              summaryZh="店頭販售娃娃與周邊新品。"),
           source_title="台灣寶可夢中心 6/13 開賣",
           page_text="Pokémon Center TAIPEI 店頭 販售 娃娃 周邊"),
+      False)
+check("純網路福袋預購且無實體地點→擋",
+      scrape.is_online_only_merchandise(
+          ev(brand="chiikawa", type="reservation", title="吉伊卡哇羊年主題福袋預購",
+             locationName="", summaryZh="官方網路商店開放福袋預購。"),
+          source_title="ちいかわ ハッピーバッグ2027 予約開始",
+          page_text="ちいかわ公式WEB SHOP ちいかわマーケットにて予約受付"),
+      True)
+check("實體店新品即使另有線上販售→不擋",
+      scrape.is_online_only_merchandise(
+          ev(brand="pokemon", type="new_product", title="寶可夢中心新品",
+             locationName="Pokémon Center TAIPEI", summaryZh="台北實體店開賣。"),
+          page_text="オンラインショップでも販売"),
       False)
 
 # ── is_trusted_date_source ────────────────────────────────────────────────────
@@ -430,6 +446,10 @@ official_candidates = [
         "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-skytreetown/events/202606/000370.html",
         "「ポケモンセンタースカイツリータウンわくわく大冒険 2026 in 東京ソラマチ®」が開催！"),
     audit_official_coverage.OfficialCandidate(
+        "pokemon", "pokemon-store-events",
+        "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tokyodx/events/202608/000472.html",
+        "9月のイベントカレンダー公開！"),
+    audit_official_coverage.OfficialCandidate(
         "miffy", "miffy-dickbruna-news",
         "https://dickbruna.jp/news/202606/46926/",
         "ミッフィー LINE公式アカウントがオープン"),
@@ -458,7 +478,13 @@ check("官方覆蓋稽核 parsed / needs_review / ignored",
           ("ignored", "-", ()),
           ("ignored", "-", ()),
           ("ignored", "-", ()),
+          ("ignored", "-", ()),
       ])
+holiday_range_signals = audit_official_coverage.detect_signals(
+    "2026年8月11日（火・祝）から8月24日（月）まで、そごう千葉店で限定グッズを販売")
+check("官方稽核可解析含祝日標記的日文日期區間",
+      (holiday_range_signals.start_date, holiday_range_signals.end_date),
+      ("2026-08-11", "2026-08-24"))
 kiddy_birthday_title = "2026年6月6日(土)より開催miffy’s Birthday Fair2026"
 kiddy_birthday_page = (
     f"<h1>{kiddy_birthday_title}</h1>"
@@ -620,7 +646,7 @@ sample_movie_popup = (
     "2026年8月21日(金)～9月6日(日)"
 )
 movie_events = official_sources._chiikawa_movie_popup_events_from_text(
-    sample_movie_popup, correct_city=scrape.correct_city)
+    sample_movie_popup, correct_city=scrape.correct_city, today="2026-07-01")
 check("電影吉伊卡哇 POP UP 多會場解析數量",
       len(movie_events), 3)
 check("電影吉伊卡哇 POP UP 解析城市與國家",
@@ -640,7 +666,7 @@ sample_movie_goods = (
     "お台場ファンライジング ちいかわお台場商店 1階フジテレビ モール店"
 )
 movie_goods = official_sources._chiikawa_movie_goods_events_from_text(
-    sample_movie_goods, correct_city=scrape.correct_city)
+    sample_movie_goods, correct_city=scrape.correct_city, today="2026-07-01")
 check("電影吉伊卡哇グッズ取扱店 高信心區塊解析數量",
       len(movie_goods), 2)
 check("電影吉伊卡哇グッズ取扱店 解析類型城市日期",
@@ -649,6 +675,11 @@ check("電影吉伊卡哇グッズ取扱店 解析類型城市日期",
        ("new_product", "Tokyo", "2026-07-25", "2026-08-23")])
 check("電影吉伊卡哇グッズ取扱店 sourceUrl 不共用",
       len({e["sourceUrl"] for e in movie_goods}), 2)
+movie_goods_after_fuji = official_sources._chiikawa_movie_goods_events_from_text(
+    sample_movie_goods, correct_city=scrape.correct_city, today="2026-08-24")
+check("電影吉伊卡哇グッズ取扱店 過期場次依指定日期排除",
+      [(e["startDate"], e["endDate"]) for e in movie_goods_after_fuji],
+      [("2026-07-10", "2026-08-31")])
 
 # ── agent_verify_candidates ─────────────────────────────────────────────────
 print("\n[agent_verify_candidates] 每日驗證候選")

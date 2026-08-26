@@ -373,8 +373,13 @@ def fetch_chiikawa_mogumogu(correct_city=None) -> list[dict]:
     return [event] if event else []
 
 
-def _chiikawa_movie_popup_events_from_text(md: str, correct_city=None) -> list[dict]:
-    today = _today_iso()
+def _chiikawa_movie_popup_events_from_text(
+    md: str,
+    correct_city=None,
+    *,
+    today: str | None = None,
+) -> list[dict]:
+    today = today or _today_iso()
     out, seen = [], set()
 
     def add_event(venue: str, start: str, end: str, venue_url: str = ""):
@@ -418,13 +423,18 @@ def _chiikawa_movie_popup_events_from_text(md: str, correct_city=None) -> list[d
     return out
 
 
-def _chiikawa_movie_goods_events_from_text(md: str, correct_city=None) -> list[dict]:
+def _chiikawa_movie_goods_events_from_text(
+    md: str,
+    correct_city=None,
+    *,
+    today: str | None = None,
+) -> list[dict]:
     """Parse high-confidence physical-store movie goods blocks from ck_movie.
 
     This intentionally skips broad web-shop/permanent-store handling rows and the
     mck_scpus venue schedule, which is parsed by fetch_chiikawa_movie_popups().
     """
-    today = _today_iso()
+    today = today or _today_iso()
     out: list[dict] = []
 
     def add_event(kind: str, title: str, typ: str, location: str, start: str, end: str):
