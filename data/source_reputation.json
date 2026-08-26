@@ -1,27 +1,27 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-23T08:35:49+00:00",
+  "updatedAt": "2026-08-26T05:38:29+00:00",
   "sources": {
     "domain:nownews.com": {
-      "confirmed": 10,
+      "confirmed": 11,
       "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 11,
+      "crossChecked": 12,
       "score": 95,
       "label": "nownews.com",
       "kind": "news",
       "host": "nownews.com",
       "handle": "",
       "firstSeen": "2026-06-11",
-      "lastReviewed": "2026-08-21",
+      "lastReviewed": "2026-08-26",
       "lastOutcome": "confirmed",
-      "notes": "Article explicitly confirms Taiwan Pokemon Center physical sale date and concrete Sean Wotherspoon plush line",
+      "notes": "Confirmed 2026-08-29 Pokemon Center TAIPEI physical launch; article cites Pokemon Taiwan official Instagram and the official August schedule independently confirms entry control on the launch date.",
       "byBrand": {
         "pokemon": {
-          "confirmed": 10,
+          "confirmed": 11,
           "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 10,
+          "crossChecked": 11,
           "score": 95
         },
         "chiikawa": {
@@ -34,10 +34,10 @@
       },
       "byType": {
         "new_product": {
-          "confirmed": 10,
+          "confirmed": 11,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 8,
+          "crossChecked": 9,
           "score": 95
         },
         "campaign": {
@@ -57,10 +57,10 @@
       },
       "byCountry": {
         "tw": {
-          "confirmed": 10,
+          "confirmed": 11,
           "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 11,
+          "crossChecked": 12,
           "score": 95
         }
       },
@@ -184,6 +184,16 @@
           "eventId": "po-1a34a4",
           "evidenceCount": 1,
           "notes": "Article explicitly confirms Taiwan Pokemon Center physical sale date and concrete Sean Wotherspoon plush line"
+        },
+        {
+          "date": "2026-08-26",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-e5aeff",
+          "evidenceCount": 1,
+          "notes": "Confirmed 2026-08-29 Pokemon Center TAIPEI physical launch; article cites Pokemon Taiwan official Instagram and the official August schedule independently confirms entry control on the launch date."
         }
       ]
     },
