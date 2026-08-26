@@ -1652,17 +1652,15 @@
     "type": "popup",
     "country": "JP",
     "city": "Hyogo",
-    "locationName": "神戸阪急 本館9階 催場",
+    "locationName": "神戸阪急",
     "startDate": "2026-09-09",
     "endDate": "2026-09-23",
-    "summaryZh": "Miffy zakka Festa 於神戶阪急期間限定登場，集結超過1,000款周邊與2026年版活動限定商品；限定玩偶須事前抽選預約。",
-    "needReservation": true,
+    "summaryZh": "Miffy（米飛兔）官方活動「ミッフィーzakkaフェスタ」於神戸阪急期間限定登場，販售限定周邊／餐點。",
+    "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "米飛兔",
-      "zakka Festa",
-      "限定周邊",
-      "抽選預約",
+      "期間限定",
       "日本"
     ],
     "id": "mi-46b0f2",
@@ -1744,5 +1742,53 @@
     "sourceType": "official_social",
     "createdAt": "2026-08-26",
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002088.000025606.html"
+  },
+  {
+    "brand": "miffy",
+    "title": "Dick Bruna TABLE POP-UP SHOP",
+    "type": "popup",
+    "country": "JP",
+    "city": "Hyogo",
+    "locationName": "神戸阪急",
+    "startDate": "2026-08-28",
+    "endDate": "2026-09-30",
+    "summaryZh": "「Dick Bruna TABLE POP-UP SHOP」在日本各地舉辦，神戶阪急店將出現以「Night Time」為主題、閉眼的米飛兔造型。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "快閃店",
+      "限定商品",
+      "神戶"
+    ],
+    "id": "mi-9abd8e",
+    "sourceTitle": "ミッフィーの限定イベントグッズが追加で登場！「Dick Bruna TABLE POP-UP SHOP」が各地で開催。神戸阪急には「ナイトタイム」をイメージした目を閉じているミッフィーのお顔も出現",
+    "sourceType": "official_social",
+    "createdAt": "2026-08-26",
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000004353.000012759.html"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "Chiikawa x 東京ばな奈 快閃店",
+    "type": "popup",
+    "country": "JP",
+    "city": "Tokyo",
+    "locationName": "",
+    "startDate": "2026-09-02",
+    "endDate": "2026-09-15",
+    "summaryZh": "Chiikawa與東京ばな奈合作的快閃店將在秋田舉辦，推出限定的環保袋套組與新圖案的香蕉布丁蛋糕。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "快閃店",
+      "限定商品",
+      "東京ばな奈",
+      "秋田"
+    ],
+    "id": "ch-3b1251",
+    "sourceTitle": "「ちいかわ」×「東京ばな奈」にエコバッグセットが初登場！ポップアップが秋田で開催、 新絵柄のバナナプリンケーキも（インサイド） - Yahoo!ニュース",
+    "sourceType": "official_social",
+    "createdAt": "2026-08-26",
+    "sourceUrl": "https://news.yahoo.co.jp/articles/505de56876a1010da8050ade8fb3f5e070af8daa"
   }
 ]
