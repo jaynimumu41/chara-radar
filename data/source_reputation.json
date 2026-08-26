@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-26T05:38:29+00:00",
+  "updatedAt": "2026-08-26T08:34:03+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 11,
@@ -363,24 +363,24 @@
     },
     "domain:news.yahoo.co.jp": {
       "confirmed": 1,
-      "rejected": 8,
+      "rejected": 9,
       "uncertain": 0,
-      "crossChecked": 6,
+      "crossChecked": 7,
       "score": 5,
       "label": "news.yahoo.co.jp",
       "kind": "news",
       "host": "news.yahoo.co.jp",
       "handle": "",
       "firstSeen": "2026-06-15",
-      "lastReviewed": "2026-08-21",
+      "lastReviewed": "2026-08-26",
       "lastOutcome": "rejected",
-      "notes": "Duplicate secondary coverage of official Kura Sushi collaboration",
+      "notes": "Duplicate of the same Akita Topico popup retained from the company PR TIMES release; candidate also had wrong Tokyo city and missing venue",
       "byBrand": {
         "chiikawa": {
           "confirmed": 1,
-          "rejected": 7,
+          "rejected": 8,
           "uncertain": 0,
-          "crossChecked": 6,
+          "crossChecked": 7,
           "score": 5
         },
         "miffy": {
@@ -415,10 +415,10 @@
         },
         "popup": {
           "confirmed": 0,
-          "rejected": 2,
+          "rejected": 3,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 30
+          "crossChecked": 2,
+          "score": 21
         },
         "campaign": {
           "confirmed": 0,
@@ -431,9 +431,9 @@
       "byCountry": {
         "jp": {
           "confirmed": 1,
-          "rejected": 8,
+          "rejected": 9,
           "uncertain": 0,
-          "crossChecked": 6,
+          "crossChecked": 7,
           "score": 5
         }
       },
@@ -527,6 +527,16 @@
           "eventId": "ch-507505",
           "evidenceCount": 1,
           "notes": "Duplicate secondary coverage of official Kura Sushi collaboration"
+        },
+        {
+          "date": "2026-08-26",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-3b1251",
+          "evidenceCount": 1,
+          "notes": "Duplicate of the same Akita Topico popup retained from the company PR TIMES release; candidate also had wrong Tokyo city and missing venue"
         }
       ]
     },
@@ -1178,19 +1188,19 @@
       ]
     },
     "domain:prtimes.jp": {
-      "confirmed": 2,
+      "confirmed": 3,
       "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 5,
-      "score": 52,
+      "crossChecked": 6,
+      "score": 59,
       "label": "prtimes.jp",
       "kind": "news",
       "host": "prtimes.jp",
       "handle": "",
       "firstSeen": "2026-07-01",
-      "lastReviewed": "2026-08-21",
-      "lastOutcome": "rejected",
-      "notes": "Broad Kobe Waterfront roundup duplicated existing venue-specific records",
+      "lastReviewed": "2026-08-26",
+      "lastOutcome": "confirmed",
+      "notes": "Company release explicitly gives the Kobe Hankyu popup period 2026-09-09 to 2026-09-23; Dick Bruna official independently confirms the co-located zakka festa venue and period",
       "byBrand": {
         "chiikawa": {
           "confirmed": 1,
@@ -1200,11 +1210,11 @@
           "score": 48
         },
         "miffy": {
-          "confirmed": 0,
+          "confirmed": 1,
           "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 4,
-          "score": 36
+          "crossChecked": 5,
+          "score": 45
         }
       },
       "byType": {
@@ -1216,11 +1226,11 @@
           "score": 39
         },
         "popup": {
-          "confirmed": 0,
+          "confirmed": 1,
           "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 2,
-          "score": 43
+          "crossChecked": 3,
+          "score": 52
         },
         "store": {
           "confirmed": 1,
@@ -1239,11 +1249,11 @@
       },
       "byCountry": {
         "jp": {
-          "confirmed": 1,
+          "confirmed": 2,
           "rejected": 3,
           "uncertain": 0,
-          "crossChecked": 5,
-          "score": 34
+          "crossChecked": 6,
+          "score": 41
         }
       },
       "history": [
@@ -1286,6 +1296,16 @@
           "eventId": "mi-631b46",
           "evidenceCount": 2,
           "notes": "Broad Kobe Waterfront roundup duplicated existing venue-specific records"
+        },
+        {
+          "date": "2026-08-26",
+          "outcome": "confirmed",
+          "brand": "miffy",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "mi-9abd8e",
+          "evidenceCount": 1,
+          "notes": "Company release explicitly gives the Kobe Hankyu popup period 2026-09-09 to 2026-09-23; Dick Bruna official independently confirms the co-located zakka festa venue and period"
         }
       ]
     },
