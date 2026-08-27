@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-26T08:34:03+00:00",
+  "updatedAt": "2026-08-27T08:35:12+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 11,
@@ -199,25 +199,25 @@
     },
     "domain:pokemonhubs.com": {
       "confirmed": 2,
-      "rejected": 0,
+      "rejected": 1,
       "uncertain": 0,
-      "crossChecked": 3,
-      "score": 70,
+      "crossChecked": 5,
+      "score": 63,
       "label": "pokemonhubs.com",
       "kind": "news",
       "host": "pokemonhubs.com",
       "handle": "",
       "firstSeen": "2026-06-11",
-      "lastReviewed": "2026-07-28",
-      "lastOutcome": "confirmed",
-      "notes": "The 2026-07-25 Pokemon Center TAIPEI launch of four Mega Evolution plush toys is independently corroborated by NOWnews and UDN, both citing Pokemon Taiwan official Instagram.",
+      "lastReviewed": "2026-08-27",
+      "lastOutcome": "rejected",
+      "notes": "Original article, official Pokemon information X, and independent coverage confirm this is only a ZeroBase Shibuya exterior display for PTCG Pocket promotion; no shop, sale, cafe, or limited goods",
       "byBrand": {
         "pokemon": {
           "confirmed": 2,
-          "rejected": 0,
+          "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 3,
-          "score": 70
+          "crossChecked": 5,
+          "score": 63
         }
       },
       "byType": {
@@ -227,6 +227,13 @@
           "uncertain": 0,
           "crossChecked": 3,
           "score": 70
+        },
+        "popup": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 43
         }
       },
       "byCountry": {
@@ -236,6 +243,13 @@
           "uncertain": 0,
           "crossChecked": 3,
           "score": 70
+        },
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 43
         }
       },
       "history": [
@@ -258,6 +272,16 @@
           "eventId": "po-ef5dd6",
           "evidenceCount": 2,
           "notes": "The 2026-07-25 Pokemon Center TAIPEI launch of four Mega Evolution plush toys is independently corroborated by NOWnews and UDN, both citing Pokemon Taiwan official Instagram."
+        },
+        {
+          "date": "2026-08-27",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "po-21ce64",
+          "evidenceCount": 2,
+          "notes": "Original article, official Pokemon information X, and independent coverage confirm this is only a ZeroBase Shibuya exterior display for PTCG Pocket promotion; no shop, sale, cafe, or limited goods"
         }
       ]
     },

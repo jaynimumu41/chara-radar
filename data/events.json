@@ -1790,29 +1790,5 @@
     "createdAt": "2026-08-27",
     "sourceTitle": "ちいかわPOP UP STORE 岡島(2026-09-09～2026-09-14) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_okjm/index.html"
-  },
-  {
-    "brand": "pokemon",
-    "title": "Pokémon TCG Pocket 火箭隊大樓",
-    "type": "popup",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "澀谷",
-    "startDate": "2026-08-25",
-    "endDate": "2026-08-31",
-    "summaryZh": "Pokémon TCG Pocket「火箭隊大樓」期間限定展示於澀谷登場，展現火箭隊的野心。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "TCG",
-      "快閃店",
-      "澀谷"
-    ],
-    "id": "po-21ce64",
-    "sourceTitle": "Pokémon TCG Pocket「火箭隊大樓」現身澀谷！火箭隊的野心期間限定展示 - Pokemon Hubs",
-    "sourceType": "official_social",
-    "createdAt": "2026-08-27",
-    "sourceUrl": "https://pokemonhubs.com/ptcg-pocket/team-rocket-building-shibuya/"
   }
 ]
