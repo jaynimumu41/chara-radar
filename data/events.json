@@ -1816,30 +1816,6 @@
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002166.000022901.html"
   },
   {
-    "brand": "miffy",
-    "title": "神戶限定米飛兔主題餐飲",
-    "type": "cafe",
-    "country": "JP",
-    "city": "Hyogo",
-    "locationName": "ポートタワーなど4施設",
-    "startDate": "2026-07-30",
-    "endDate": "2026-09-30",
-    "summaryZh": "神戶限定的米飛兔主題餐飲將在港口塔等4個設施登場，提供特色餐點。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "米飛兔",
-      "神戶",
-      "限定餐飲",
-      "主題咖啡廳"
-    ],
-    "id": "mi-5c495a",
-    "sourceTitle": "神戸限定のミッフィーコラボメニューが登場！ポートタワーなど4施設で提供 - Kiss PRESS(キッスプレス)",
-    "sourceType": "official_social",
-    "createdAt": "2026-08-28",
-    "sourceUrl": "https://kisspress.jp/articles/64577/"
-  },
-  {
     "brand": "pokemon",
     "title": "Pokémon Sleep 模型登場",
     "type": "new_product",
@@ -1865,14 +1841,14 @@
   },
   {
     "brand": "pokemon",
-    "title": "寶可夢 睡覺玩偶系列",
+    "title": "Pokémon Sleep おやすみ玩偶系列",
     "type": "new_product",
     "country": "JP",
-    "city": "Tokyo",
+    "city": "",
     "locationName": "ポケモンセンター",
-    "startDate": "2026-09-03",
+    "startDate": "2026-09-05",
     "endDate": "",
-    "summaryZh": "寶可夢中心推出全新「睡覺玩偶」系列，包含關都地區的四種寶可夢：妙蛙種子、小火龍、傑尼龜和夢幻。於9月3日起在全日本寶可夢中心販售。",
+    "summaryZh": "日本全國寶可夢中心自9月5日起販售 Pokémon Sleep 睡姿玩偶，包含妙蛙種子、小火龍、傑尼龜與夢幻；官方線上商店則於9月3日先行開賣。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1882,9 +1858,9 @@
       "寶可夢中心"
     ],
     "id": "po-6858a8",
-    "sourceTitle": "フシギダネ・ヒトカゲ・ゼニガメ・ミュウがねむるぬいぐるみが登場！ 9月3日よりポケモンセンターにて発売 - Nintendo DREAM WEB",
-    "sourceType": "official_social",
+    "sourceTitle": "『Pokémon Sleep（ポケモンスリープ）』の新しいぬいぐるみが、ポケモンセンターに登場！｜ポケットモンスターオフィシャルサイト",
+    "sourceType": "official_site",
     "createdAt": "2026-08-28",
-    "sourceUrl": "https://www.ndw.jp/pokemon-goods-260828-02/"
+    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/08/260828_to01.html"
   }
 ]

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-27T08:35:12+00:00",
+  "updatedAt": "2026-08-28T08:34:57+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 11,
@@ -2046,44 +2046,44 @@
       ]
     },
     "domain:ndw.jp": {
-      "confirmed": 4,
+      "confirmed": 5,
       "rejected": 1,
       "uncertain": 0,
-      "crossChecked": 6,
-      "score": 77,
+      "crossChecked": 8,
+      "score": 84,
       "label": "ndw.jp",
       "kind": "site",
       "host": "ndw.jp",
       "handle": "",
       "firstSeen": "2026-07-19",
-      "lastReviewed": "2026-08-21",
-      "lastOutcome": "rejected",
-      "notes": "Duplicate of existing Pokemon official product record po-49ec1c",
+      "lastReviewed": "2026-08-28",
+      "lastOutcome": "confirmed",
+      "notes": "Official Pokemon and Mynavi confirmed the plush line; corrected physical-store date to 2026-09-05 and replaced source with official page",
       "byBrand": {
         "pokemon": {
-          "confirmed": 4,
+          "confirmed": 5,
           "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 6,
-          "score": 77
+          "crossChecked": 8,
+          "score": 84
         }
       },
       "byType": {
         "new_product": {
-          "confirmed": 4,
+          "confirmed": 5,
           "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 6,
-          "score": 77
+          "crossChecked": 8,
+          "score": 84
         }
       },
       "byCountry": {
         "jp": {
-          "confirmed": 4,
+          "confirmed": 5,
           "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 6,
-          "score": 77
+          "crossChecked": 8,
+          "score": 84
         }
       },
       "history": [
@@ -2136,6 +2136,16 @@
           "eventId": "po-44685b",
           "evidenceCount": 1,
           "notes": "Duplicate of existing Pokemon official product record po-49ec1c"
+        },
+        {
+          "date": "2026-08-28",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "po-6858a8",
+          "evidenceCount": 2,
+          "notes": "Official Pokemon and Mynavi confirmed the plush line; corrected physical-store date to 2026-09-05 and replaced source with official page"
         }
       ]
     },
@@ -2401,25 +2411,25 @@
     },
     "domain:kisspress.jp": {
       "confirmed": 0,
-      "rejected": 1,
+      "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 1,
-      "score": 41,
+      "crossChecked": 4,
+      "score": 36,
       "label": "kisspress.jp",
       "kind": "site",
       "host": "kisspress.jp",
       "handle": "",
       "firstSeen": "2026-08-01",
-      "lastReviewed": "2026-08-01",
+      "lastReviewed": "2026-08-28",
       "lastOutcome": "rejected",
-      "notes": "Duplicate of existing official Dick Bruna Kobe Waterfront event mi-ea7f4f",
+      "notes": "Duplicate of official Dick Bruna record mi-ea7f4f; exact 2026-07-30 to 2026-09-30 period corroborated by Dick Bruna official, Kobe Port Tower, and Feel KOBE",
       "byBrand": {
         "miffy": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 4,
+          "score": 36
         }
       },
       "byType": {
@@ -2429,15 +2439,22 @@
           "uncertain": 0,
           "crossChecked": 1,
           "score": 41
+        },
+        "cafe": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 3,
+          "score": 45
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 4,
+          "score": 36
         }
       },
       "history": [
@@ -2450,6 +2467,16 @@
           "eventId": "mi-e2f040",
           "evidenceCount": 1,
           "notes": "Duplicate of existing official Dick Bruna Kobe Waterfront event mi-ea7f4f"
+        },
+        {
+          "date": "2026-08-28",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "cafe",
+          "country": "JP",
+          "eventId": "mi-5c495a",
+          "evidenceCount": 3,
+          "notes": "Duplicate of official Dick Bruna record mi-ea7f4f; exact 2026-07-30 to 2026-09-30 period corroborated by Dick Bruna official, Kobe Port Tower, and Feel KOBE"
         }
       ]
     },

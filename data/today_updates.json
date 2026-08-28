@@ -3,16 +3,15 @@
   "baselineDate": "2026-08-27",
   "generatedAt": "2026-08-28T08:04:48.445057+00:00",
   "baselineEventCount": 75,
-  "currentEventCount": 79,
-  "newEventCount": 4,
+  "currentEventCount": 78,
+  "newEventCount": 3,
   "countsByBrand": {
-    "miffy": 2,
+    "miffy": 1,
     "pokemon": 2,
     "chiikawa": 0
   },
   "newEventIds": [
     "mi-d6db9e",
-    "mi-5c495a",
     "po-b0a992",
     "po-6858a8"
   ],
