@@ -1913,38 +1913,38 @@
   },
   {
     "brand": "miffy",
-    "title": "miffy 新周邊快閃店",
+    "title": "Miffy Dick Bruna TABLE 阿倍野 Harukas 快閃店",
     "type": "popup",
     "country": "JP",
     "city": "Osaka",
-    "locationName": "あべのハルカス",
+    "locationName": "あべのハルカス近鉄本店 ウイング館2階イベントスペース",
     "startDate": "2026-09-02",
     "endDate": "2026-09-15",
-    "summaryZh": "miffy 新周邊商品於神戶阪急及大阪阿倍野Harukas舉辦快閃店，販售豆皿、餅乾、鏡子等新商品。",
+    "summaryZh": "Dick Bruna TABLE 首度在阿倍野 Harukas 近鐵本店開設快閃店，販售活動限定商品、先行商品、Miffy／Black Bear 隨身鏡與限定外帶餐點。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
-      "miffy",
+      "Miffy",
+      "Dick Bruna TABLE",
       "快閃店",
-      "周邊商品",
-      "大阪"
+      "限定商品"
     ],
     "id": "mi-c23623",
-    "sourceTitle": "豆皿やクッキー、コンパクトミラーなどミッフィー新グッズ登場、神戸阪急とあべのハルカスでポップアップ開催（cinemacafe.net） - Yahoo!ニュース",
-    "sourceType": "official_social",
+    "sourceTitle": "ミッフィーの限定イベントグッズが追加で登場！「Dick Bruna TABLE POP-UP SHOP」が各地で開催。神戸阪急には「ナイトタイム」をイメージした目を閉じているミッフィーのお顔も出現 - 株式会社フェリシモ",
+    "sourceType": "press_release",
     "createdAt": "2026-08-29",
-    "sourceUrl": "https://news.yahoo.co.jp/articles/356f94ddd5cf14bc258518ce4beacfa15370fb25"
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000004353.000012759.html"
   },
   {
     "brand": "pokemon",
-    "title": "《寶可夢睡覺》× Pokémon Center 合作企劃",
+    "title": "Pokémon Sleep × Pokémon Center 一起入睡活動",
     "type": "campaign",
     "country": "JP",
     "city": "",
-    "locationName": "ポケモンセンター",
+    "locationName": "全国のポケモンセンター・ポケモンストア",
     "startDate": "2026-09-05",
-    "endDate": "",
-    "summaryZh": "《寶可夢睡覺》與 Pokémon Center 合作企劃，可獲得貼紙和夢幻的相框。",
+    "endDate": "2026-09-20",
+    "summaryZh": "活動期間在日本全國 Pokémon Center／Pokémon Store 購物可獲贈附 Pokémon Sleep 道具序號的貼紙；9月7日起另有店內尋找夢幻並兌換限定相框的企劃。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1954,45 +1954,21 @@
       "合作企劃"
     ],
     "id": "po-d330c0",
-    "sourceTitle": "9月5日より『ポケモンスリープ』×ポケモンセンターのコラボ企画が開催！ ステッカーやミュウのフォトフレームがもらえる「いっしょにねむるキャンペーン」 - Nintendo DREAM WEB",
-    "sourceType": "official_social",
+    "sourceTitle": "『Pokémon Sleep』×ポケモンセンターいっしょにねむるキャンペーン開催！ - 『Pokémon Sleep』公式サイト",
+    "sourceType": "official_site",
     "createdAt": "2026-08-29",
-    "sourceUrl": "https://www.ndw.jp/pokemon-news-260828/"
+    "sourceUrl": "https://www.pokemonsleep.net/news/pokemoncenter_campaign_2026/"
   },
   {
     "brand": "pokemon",
-    "title": "《寶可夢Sleep》睡覺的寶可夢公仔登場",
+    "title": "Pokémon Timeless Adventure「ねむる」主題周邊",
     "type": "new_product",
     "country": "JP",
     "city": "",
-    "locationName": "トープ洞窟",
-    "startDate": "2026-09-03",
+    "locationName": "全国のポケモンセンター・ポケモンストア",
+    "startDate": "2026-09-05",
     "endDate": "",
-    "summaryZh": "《寶可夢Sleep》推出睡覺的寶可夢公仔，共6款，包含小火馬、利歐路等，9月3日起於トープ洞窟發售。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢Sleep",
-      "公仔",
-      "新品發售",
-      "日本"
-    ],
-    "id": "po-fbd059",
-    "sourceTitle": "9月3日より『ポケモンスリープ』のトープ洞窟でねむるポケモンたちのフィギュアが発売！ ロコン・リオルなど全6種が登場 - Nintendo DREAM WEB",
-    "sourceType": "official_social",
-    "createdAt": "2026-08-29",
-    "sourceUrl": "https://www.ndw.jp/pokemon-goods-260828-01/"
-  },
-  {
-    "brand": "pokemon",
-    "title": "寶可夢中心「ねむる」主題周邊登場",
-    "type": "new_product",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "ポケモンセンター",
-    "startDate": "2026-09-03",
-    "endDate": "",
-    "summaryZh": "寶可夢中心將於9月3日推出以「ねむる」（睡覺）為主題的30週年特別周邊商品，可在寶可夢中心實體店舖購買。",
+    "summaryZh": "Pokémon 30週年「ねむる」主題商品於日本各地 Pokémon Center 實體店推出，包含資料夾、壓克力商品、午睡毯枕組與餅乾；線上商店提前於9月3日開賣。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -2002,32 +1978,9 @@
       "日本"
     ],
     "id": "po-4307fc",
-    "sourceTitle": "9月3日（木）ポケモン30周年ピックアップテーマ「ねむる」をテーマにしたグッズがポケモンセンターに登場 - Nintendo DREAM WEB",
-    "sourceType": "official_social",
+    "sourceTitle": "ピックアップテーマ「ねむる」のイラストを使用したグッズが、ポケモンセンターに登場！ - ポケットモンスターオフィシャルサイト",
+    "sourceType": "official_site",
     "createdAt": "2026-08-29",
-    "sourceUrl": "https://www.ndw.jp/pokemon-goods-260828-03/"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇快閃店與聯名咖啡廳",
-    "type": "popup",
-    "country": "JP",
-    "city": "Kagoshima",
-    "locationName": "鹿児島",
-    "startDate": "2026-09-04",
-    "endDate": "2026-09-23",
-    "summaryZh": "吉伊卡哇快閃店於9月4日起在鹿兒島舉辦，現場設有聯名咖啡廳，販售限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "快閃店",
-      "限定商品",
-      "聯名咖啡廳"
-    ],
-    "id": "ch-094516",
-    "sourceTitle": "ちいかわ ポップアップストア in 鹿児島 9月4日より開催! - コラボカフェ",
-    "sourceType": "official_social",
-    "createdAt": "2026-08-29",
-    "sourceUrl": "https://collabo-cafe.com/events/collabo/chiikawa-popup-store-aeonmall-kagoshima-bay-2026/"
+    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/08/260828_go01.html"
   }
 ]

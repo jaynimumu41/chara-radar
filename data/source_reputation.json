@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-28T08:34:57+00:00",
+  "updatedAt": "2026-08-29T08:33:30+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 11,
@@ -386,19 +386,19 @@
       ]
     },
     "domain:news.yahoo.co.jp": {
-      "confirmed": 1,
+      "confirmed": 2,
       "rejected": 9,
       "uncertain": 0,
-      "crossChecked": 7,
+      "crossChecked": 8,
       "score": 5,
       "label": "news.yahoo.co.jp",
       "kind": "news",
       "host": "news.yahoo.co.jp",
       "handle": "",
       "firstSeen": "2026-06-15",
-      "lastReviewed": "2026-08-26",
-      "lastOutcome": "rejected",
-      "notes": "Duplicate of the same Akita Topico popup retained from the company PR TIMES release; candidate also had wrong Tokyo city and missing venue",
+      "lastReviewed": "2026-08-29",
+      "lastOutcome": "confirmed",
+      "notes": "Claim matched Felissimo company release on PR TIMES with exact Abeno Harukas dates, venue, limited goods, and takeout menu",
       "byBrand": {
         "chiikawa": {
           "confirmed": 1,
@@ -408,11 +408,11 @@
           "score": 5
         },
         "miffy": {
-          "confirmed": 0,
+          "confirmed": 1,
           "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 0,
-          "score": 39
+          "crossChecked": 1,
+          "score": 48
         }
       },
       "byType": {
@@ -438,11 +438,11 @@
           "score": 21
         },
         "popup": {
-          "confirmed": 0,
+          "confirmed": 1,
           "rejected": 3,
           "uncertain": 0,
-          "crossChecked": 2,
-          "score": 21
+          "crossChecked": 3,
+          "score": 30
         },
         "campaign": {
           "confirmed": 0,
@@ -454,10 +454,10 @@
       },
       "byCountry": {
         "jp": {
-          "confirmed": 1,
+          "confirmed": 2,
           "rejected": 9,
           "uncertain": 0,
-          "crossChecked": 7,
+          "crossChecked": 8,
           "score": 5
         }
       },
@@ -561,6 +561,16 @@
           "eventId": "ch-3b1251",
           "evidenceCount": 1,
           "notes": "Duplicate of the same Akita Topico popup retained from the company PR TIMES release; candidate also had wrong Tokyo city and missing venue"
+        },
+        {
+          "date": "2026-08-29",
+          "outcome": "confirmed",
+          "brand": "miffy",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "mi-c23623",
+          "evidenceCount": 1,
+          "notes": "Claim matched Felissimo company release on PR TIMES with exact Abeno Harukas dates, venue, limited goods, and takeout menu"
         }
       ]
     },
@@ -1018,25 +1028,25 @@
     },
     "domain:collabo-cafe.com": {
       "confirmed": 6,
-      "rejected": 7,
+      "rejected": 8,
       "uncertain": 0,
-      "crossChecked": 16,
-      "score": 25,
+      "crossChecked": 17,
+      "score": 14,
       "label": "collabo-cafe.com",
       "kind": "site",
       "host": "collabo-cafe.com",
       "handle": "",
       "firstSeen": "2026-06-30",
-      "lastReviewed": "2026-08-23",
+      "lastReviewed": "2026-08-29",
       "lastOutcome": "rejected",
-      "notes": "Manufacturer and official shop pages show a July notebook product sold through nationwide stationery/online channels; no cafe or 2026-09-08 to 2026-10-05 event exists, so the candidate was out of scope and date-polluted.",
+      "notes": "Duplicate of official structured record ch-965712 for identical Kagoshima venue and dates; candidate also added unsupported collaboration-cafe claim",
       "byBrand": {
         "chiikawa": {
           "confirmed": 6,
-          "rejected": 6,
+          "rejected": 7,
           "uncertain": 0,
-          "crossChecked": 15,
-          "score": 36
+          "crossChecked": 16,
+          "score": 25
         },
         "miffy": {
           "confirmed": 0,
@@ -1056,10 +1066,10 @@
         },
         "popup": {
           "confirmed": 5,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 8,
-          "score": 84
+          "crossChecked": 9,
+          "score": 73
         },
         "new_product": {
           "confirmed": 1,
@@ -1072,10 +1082,10 @@
       "byCountry": {
         "jp": {
           "confirmed": 6,
-          "rejected": 7,
+          "rejected": 8,
           "uncertain": 0,
-          "crossChecked": 16,
-          "score": 25
+          "crossChecked": 17,
+          "score": 14
         }
       },
       "history": [
@@ -1208,6 +1218,16 @@
           "eventId": "ch-971d31",
           "evidenceCount": 3,
           "notes": "Manufacturer and official shop pages show a July notebook product sold through nationwide stationery/online channels; no cafe or 2026-09-08 to 2026-10-05 event exists, so the candidate was out of scope and date-polluted."
+        },
+        {
+          "date": "2026-08-29",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-094516",
+          "evidenceCount": 1,
+          "notes": "Duplicate of official structured record ch-965712 for identical Kagoshima venue and dates; candidate also added unsupported collaboration-cafe claim"
         }
       ]
     },
@@ -2046,44 +2066,51 @@
       ]
     },
     "domain:ndw.jp": {
-      "confirmed": 5,
-      "rejected": 1,
+      "confirmed": 7,
+      "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 8,
-      "score": 84,
+      "crossChecked": 11,
+      "score": 87,
       "label": "ndw.jp",
       "kind": "site",
       "host": "ndw.jp",
       "handle": "",
       "firstSeen": "2026-07-19",
-      "lastReviewed": "2026-08-28",
+      "lastReviewed": "2026-08-29",
       "lastOutcome": "confirmed",
-      "notes": "Official Pokemon and Mynavi confirmed the plush line; corrected physical-store date to 2026-09-05 and replaced source with official page",
+      "notes": "Pokemon official goods page confirmed physical Pokemon Center sales begin 2026-09-05; corrected online-only 2026-09-03 date",
       "byBrand": {
         "pokemon": {
-          "confirmed": 5,
-          "rejected": 1,
+          "confirmed": 7,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 8,
-          "score": 84
+          "crossChecked": 11,
+          "score": 87
         }
       },
       "byType": {
         "new_product": {
-          "confirmed": 5,
-          "rejected": 1,
+          "confirmed": 6,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 8,
-          "score": 84
+          "crossChecked": 10,
+          "score": 80
+        },
+        "campaign": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
         }
       },
       "byCountry": {
         "jp": {
-          "confirmed": 5,
-          "rejected": 1,
+          "confirmed": 7,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 8,
-          "score": 84
+          "crossChecked": 11,
+          "score": 87
         }
       },
       "history": [
@@ -2146,6 +2173,36 @@
           "eventId": "po-6858a8",
           "evidenceCount": 2,
           "notes": "Official Pokemon and Mynavi confirmed the plush line; corrected physical-store date to 2026-09-05 and replaced source with official page"
+        },
+        {
+          "date": "2026-08-29",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "campaign",
+          "country": "JP",
+          "eventId": "po-d330c0",
+          "evidenceCount": 1,
+          "notes": "Pokemon Sleep official campaign page confirmed nationwide physical-store campaign from 2026-09-05 through 2026-09-20"
+        },
+        {
+          "date": "2026-08-29",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "po-fbd059",
+          "evidenceCount": 1,
+          "notes": "Claim was accurate but duplicated existing official Pokemon record po-b0a992; secondary row also used online-only 2026-09-03 date and virtual game area as venue"
+        },
+        {
+          "date": "2026-08-29",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "po-4307fc",
+          "evidenceCount": 1,
+          "notes": "Pokemon official goods page confirmed physical Pokemon Center sales begin 2026-09-05; corrected online-only 2026-09-03 date"
         }
       ]
     },
