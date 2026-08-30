@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-29T08:33:30+00:00",
+  "updatedAt": "2026-08-30T08:34:50+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 11,
@@ -387,32 +387,32 @@
     },
     "domain:news.yahoo.co.jp": {
       "confirmed": 2,
-      "rejected": 9,
+      "rejected": 11,
       "uncertain": 0,
-      "crossChecked": 8,
+      "crossChecked": 10,
       "score": 5,
       "label": "news.yahoo.co.jp",
       "kind": "news",
       "host": "news.yahoo.co.jp",
       "handle": "",
       "firstSeen": "2026-06-15",
-      "lastReviewed": "2026-08-29",
-      "lastOutcome": "confirmed",
-      "notes": "Claim matched Felissimo company release on PR TIMES with exact Abeno Harukas dates, venue, limited goods, and takeout menu",
+      "lastReviewed": "2026-08-30",
+      "lastOutcome": "rejected",
+      "notes": "Duplicate of existing official PR TIMES Akita Station Topico record ch-034d6e",
       "byBrand": {
         "chiikawa": {
           "confirmed": 1,
-          "rejected": 8,
+          "rejected": 9,
           "uncertain": 0,
-          "crossChecked": 7,
+          "crossChecked": 8,
           "score": 5
         },
         "miffy": {
           "confirmed": 1,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 48
+          "crossChecked": 2,
+          "score": 39
         }
       },
       "byType": {
@@ -439,10 +439,10 @@
         },
         "popup": {
           "confirmed": 1,
-          "rejected": 3,
+          "rejected": 5,
           "uncertain": 0,
-          "crossChecked": 3,
-          "score": 30
+          "crossChecked": 5,
+          "score": 12
         },
         "campaign": {
           "confirmed": 0,
@@ -455,9 +455,9 @@
       "byCountry": {
         "jp": {
           "confirmed": 2,
-          "rejected": 9,
+          "rejected": 11,
           "uncertain": 0,
-          "crossChecked": 8,
+          "crossChecked": 10,
           "score": 5
         }
       },
@@ -571,6 +571,26 @@
           "eventId": "mi-c23623",
           "evidenceCount": 1,
           "notes": "Claim matched Felissimo company release on PR TIMES with exact Abeno Harukas dates, venue, limited goods, and takeout menu"
+        },
+        {
+          "date": "2026-08-30",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "mi-d8aaf2",
+          "evidenceCount": 1,
+          "notes": "Duplicate of existing PR TIMES Dick Bruna TABLE Abeno Harukas record mi-c23623"
+        },
+        {
+          "date": "2026-08-30",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-cf9b8b",
+          "evidenceCount": 1,
+          "notes": "Duplicate of existing official PR TIMES Akita Station Topico record ch-034d6e"
         }
       ]
     },
@@ -1028,25 +1048,25 @@
     },
     "domain:collabo-cafe.com": {
       "confirmed": 6,
-      "rejected": 8,
+      "rejected": 9,
       "uncertain": 0,
-      "crossChecked": 17,
-      "score": 14,
+      "crossChecked": 19,
+      "score": 5,
       "label": "collabo-cafe.com",
       "kind": "site",
       "host": "collabo-cafe.com",
       "handle": "",
       "firstSeen": "2026-06-30",
-      "lastReviewed": "2026-08-29",
+      "lastReviewed": "2026-08-30",
       "lastOutcome": "rejected",
-      "notes": "Duplicate of official structured record ch-965712 for identical Kagoshima venue and dates; candidate also added unsupported collaboration-cafe claim",
+      "notes": "Duplicate of official Chiikawa record ch-45dddd; unsupported theme-cafe claim absent from official and venue pages",
       "byBrand": {
         "chiikawa": {
           "confirmed": 6,
-          "rejected": 7,
+          "rejected": 8,
           "uncertain": 0,
-          "crossChecked": 16,
-          "score": 25
+          "crossChecked": 18,
+          "score": 14
         },
         "miffy": {
           "confirmed": 0,
@@ -1066,10 +1086,10 @@
         },
         "popup": {
           "confirmed": 5,
-          "rejected": 2,
+          "rejected": 3,
           "uncertain": 0,
-          "crossChecked": 9,
-          "score": 73
+          "crossChecked": 11,
+          "score": 62
         },
         "new_product": {
           "confirmed": 1,
@@ -1082,10 +1102,10 @@
       "byCountry": {
         "jp": {
           "confirmed": 6,
-          "rejected": 8,
+          "rejected": 9,
           "uncertain": 0,
-          "crossChecked": 17,
-          "score": 14
+          "crossChecked": 19,
+          "score": 5
         }
       },
       "history": [
@@ -1228,6 +1248,16 @@
           "eventId": "ch-094516",
           "evidenceCount": 1,
           "notes": "Duplicate of official structured record ch-965712 for identical Kagoshima venue and dates; candidate also added unsupported collaboration-cafe claim"
+        },
+        {
+          "date": "2026-08-30",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-f127f5",
+          "evidenceCount": 2,
+          "notes": "Duplicate of official Chiikawa record ch-45dddd; unsupported theme-cafe claim absent from official and venue pages"
         }
       ]
     },
