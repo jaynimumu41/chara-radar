@@ -1577,23 +1577,22 @@
   },
   {
     "brand": "miffy",
-    "title": "Flower Miffy Sunshine City Alpa店10週年活動",
-    "type": "campaign",
+    "title": "Flower Miffy Sunshine City Alpa店10週年限定贈品與新品",
+    "type": "new_product",
     "country": "JP",
     "city": "Tokyo",
     "locationName": "Flower Miffy Sunshine City Alpa店",
     "startDate": "2026-09-04",
-    "endDate": "2026-09-23",
-    "summaryZh": "Flower Miffy Sunshine City Alpa店舉辦10週年活動，推出限定商品與贈品，並於9月19日、23日舉辦抽選攝影會及需預約的花藝工作坊。",
-    "needReservation": true,
+    "endDate": "",
+    "summaryZh": "Flower Miffy Sunshine City Alpa店自9月4日起推出10週年限定商品；店內消費滿7,700日圓可獲限定迷你盤，贈品送完為止。",
+    "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "米飛兔",
       "Flower Miffy",
       "10週年",
       "限定商品",
-      "攝影會",
-      "工作坊"
+      "限定贈品"
     ],
     "id": "mi-31f7c9",
     "sourceTitle": "サンシャインシティアルパ店10th Anniversary - Flower Miffy",
@@ -1672,30 +1671,6 @@
     "createdAt": "2026-08-31",
     "sourceTitle": "ちいかわPOP UP STORE 岡島(2026-09-09～2026-09-14) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_okjm/index.html"
-  },
-  {
-    "brand": "miffy",
-    "title": "Flower Miffy 10週年限定新品",
-    "type": "new_product",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "Sunshine City Alpa",
-    "startDate": "2026-09-04",
-    "endDate": "2026-09-15",
-    "summaryZh": "為慶祝Sunshine City Alpa店10週年，Flower Miffy將於9月4日起推出限定贈品與新商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "花店",
-      "限定商品",
-      "週年慶"
-    ],
-    "id": "mi-d6db9e",
-    "sourceTitle": "人気絵本ミッフィーのお花屋さん「フラワーミッフィー」にて、サンシャインシティアルパ店10周年を記念して2026年9月4日(金)より限定ノベルティプレートのプレゼントや新商品を発売",
-    "sourceType": "official_social",
-    "createdAt": "2026-08-28",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002166.000022901.html"
   },
   {
     "brand": "pokemon",
@@ -1864,29 +1839,5 @@
     "sourceType": "official_site",
     "createdAt": "2026-08-29",
     "sourceUrl": "https://www.pokemon.co.jp/goods/2026/08/260828_go01.html"
-  },
-  {
-    "brand": "miffy",
-    "title": "miffy 新周邊快閃店",
-    "type": "popup",
-    "country": "JP",
-    "city": "Osaka",
-    "locationName": "あべのハルカス",
-    "startDate": "2026-09-02",
-    "endDate": "2026-09-15",
-    "summaryZh": "miffy 將於神戶阪急與大阪阿倍野HARUKAS舉辦快閃店，販售豆皿、餅乾、鏡子等新周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "miffy",
-      "快閃店",
-      "大阪",
-      "周邊商品"
-    ],
-    "id": "mi-4ce883",
-    "sourceTitle": "豆皿やクッキー、コンパクトミラーなどミッフィー新グッズ登場、神戸阪急とあべのハルカスでポップアップ開催 - cinemacafe.net",
-    "sourceType": "official_social",
-    "createdAt": "2026-08-31",
-    "sourceUrl": "https://www.cinemacafe.net/article/2026/08/29/112160.html"
   }
 ]

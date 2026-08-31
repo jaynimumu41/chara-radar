@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-30T08:34:50+00:00",
+  "updatedAt": "2026-08-31T08:36:24+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 11,
@@ -3327,6 +3327,60 @@
           "eventId": "mi-8ddf2f",
           "evidenceCount": 2,
           "notes": "Hotel official page confirmed VIEW CAFE afternoon tea period and reservation requirement"
+        }
+      ]
+    },
+    "domain:cinemacafe.net": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 41,
+      "label": "cinemacafe.net",
+      "kind": "site",
+      "host": "cinemacafe.net",
+      "handle": "",
+      "firstSeen": "2026-08-31",
+      "lastReviewed": "2026-08-31",
+      "lastOutcome": "rejected",
+      "notes": "Accurate dates, but duplicate of existing mi-c23623 confirmed by Felissimo company release on PR TIMES",
+      "byBrand": {
+        "miffy": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byType": {
+        "popup": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "history": [
+        {
+          "date": "2026-08-31",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "mi-4ce883",
+          "evidenceCount": 1,
+          "notes": "Accurate dates, but duplicate of existing mi-c23623 confirmed by Felissimo company release on PR TIMES"
         }
       ]
     }
