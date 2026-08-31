@@ -212,7 +212,7 @@
     ],
     "id": "po-d0b8f9",
     "sourceType": "official_site",
-    "createdAt": "2026-08-30",
+    "createdAt": "2026-08-31",
     "sourceTitle": "ポケモンカフェのメニューやショーが新しくなるよ！「ポケモンカフェ TOKYO」は、店内がリニューアル！",
     "sourceUrl": "https://www.pokemon-cafe.jp/ja/cafe/news/260529_3377.html"
   },
@@ -237,7 +237,7 @@
     ],
     "id": "po-e4c3bc",
     "sourceType": "official_site",
-    "createdAt": "2026-08-30",
+    "createdAt": "2026-08-31",
     "sourceTitle": "≪K.UNO × U-TREASURE POP UP Promotion≫開展！ - 台灣寶可夢官方網站",
     "sourceUrl": "https://tw.portal-pokemon.com/goods/post-5267/"
   },
@@ -603,30 +603,6 @@
   },
   {
     "brand": "chiikawa",
-    "title": "電影吉伊卡哇 POP UP STORE 華山1914文創園區",
-    "type": "popup",
-    "country": "TW",
-    "city": "Taipei",
-    "locationName": "華山1914文創園區 藝術西街",
-    "startDate": "2026-07-10",
-    "endDate": "2026-08-30",
-    "summaryZh": "「映画ちいかわ 人魚の島のひみつ」POP UP STORE 於華山1914文創園區 藝術西街期間限定登場，販售電影相關限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "電影",
-      "快閃店",
-      "限定周邊"
-    ],
-    "id": "ch-89ac9e",
-    "sourceType": "official_site",
-    "createdAt": "2026-07-22",
-    "sourceTitle": "映画ちいかわ 人魚の島のひみつ POP UP STORE 華山1914文創園區 藝術西街(2026-07-10～2026-08-30) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/mck_scpus/index.html#c2ca3342"
-  },
-  {
-    "brand": "chiikawa",
     "title": "Chiikawa x 東京ばな奈 聯名環保袋組",
     "type": "new_product",
     "country": "JP",
@@ -910,29 +886,6 @@
   },
   {
     "brand": "miffy",
-    "title": "Miffy 美術館に行こう！展　鹿児島市立美術館",
-    "type": "campaign",
-    "country": "JP",
-    "city": "Kagoshima",
-    "locationName": "鹿児島市立美術館",
-    "startDate": "2026-07-17",
-    "endDate": "2026-08-30",
-    "summaryZh": "Miffy（米飛兔）官方展覽「美術館に行こう！展」於鹿児島市立美術館舉辦，展期為2026-07-17至2026-08-30。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "米飛兔",
-      "展覽",
-      "日本"
-    ],
-    "id": "mi-98d19d",
-    "sourceType": "official_site",
-    "createdAt": "2026-08-06",
-    "sourceTitle": "鹿児島市立美術館にて「美術館に行こう！」展開催 - dickbruna.jp",
-    "sourceUrl": "https://dickbruna.jp/news/202606/46804/"
-  },
-  {
-    "brand": "miffy",
     "title": "Miffy GOOD NIGHT MIFFY 限定下午茶",
     "type": "cafe",
     "country": "JP",
@@ -1190,7 +1143,7 @@
     ],
     "id": "ch-2686be",
     "sourceType": "official_site",
-    "createdAt": "2026-08-30",
+    "createdAt": "2026-08-31",
     "sourceTitle": "ちいかわPOP UP STORE 米子天満屋(2026-09-18～2026-10-12) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_ygtm/index.html"
   },
@@ -1214,7 +1167,7 @@
     ],
     "id": "ch-fde90b",
     "sourceType": "official_site",
-    "createdAt": "2026-08-30",
+    "createdAt": "2026-08-31",
     "sourceTitle": "ちいかわPOP UP STORE 中部国際空港 第1ターミナル(2026-09-08～2026-10-05) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_cbca/index.html"
   },
@@ -1238,7 +1191,7 @@
     ],
     "id": "ch-aefd4a",
     "sourceType": "official_site",
-    "createdAt": "2026-08-30",
+    "createdAt": "2026-08-31",
     "sourceTitle": "ちいかわPOP UP STORE あべのハルカス近鉄本店(2026-09-03～2026-09-14) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_abnh/index.html"
   },
@@ -1262,7 +1215,7 @@
     ],
     "id": "ch-a1ec92",
     "sourceType": "official_site",
-    "createdAt": "2026-08-30",
+    "createdAt": "2026-08-31",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール高知(2026-08-21～2026-09-07) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_akuc/index.html"
   },
@@ -1286,7 +1239,7 @@
     ],
     "id": "ch-382889",
     "sourceType": "official_site",
-    "createdAt": "2026-08-30",
+    "createdAt": "2026-08-31",
     "sourceTitle": "ちいかわPOP UP STORE 新光三越台中中港店(2026-08-22～2026-09-20) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_smtc/index.html"
   },
@@ -1310,33 +1263,9 @@
     ],
     "id": "ch-6026cb",
     "sourceType": "official_site",
-    "createdAt": "2026-08-30",
+    "createdAt": "2026-08-31",
     "sourceTitle": "ちいかわPOP UP STORE 北千住マルイ(2026-08-14～2026-09-06) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_ksjo/index.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE イオンモール岡山",
-    "type": "popup",
-    "country": "JP",
-    "city": "Okayama",
-    "locationName": "イオンモール岡山",
-    "startDate": "2026-08-14",
-    "endDate": "2026-08-30",
-    "summaryZh": "ちいかわ POP UP STORE 於イオンモール岡山期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-fc3ebf",
-    "sourceType": "official_site",
-    "createdAt": "2026-08-30",
-    "sourceTitle": "ちいかわPOP UP STORE イオンモール岡山(2026-08-14～2026-08-30) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_aoky/index.html"
   },
   {
     "brand": "chiikawa",
@@ -1358,33 +1287,9 @@
     ],
     "id": "ch-5a8c80",
     "sourceType": "official_site",
-    "createdAt": "2026-08-30",
+    "createdAt": "2026-08-31",
     "sourceTitle": "ちいかわPOP UP STORE 0%NAHA(2026-08-13～2026-09-27) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_naha/index.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE 0%OKINAWA",
-    "type": "popup",
-    "country": "JP",
-    "city": "",
-    "locationName": "0%OKINAWA",
-    "startDate": "2026-06-05",
-    "endDate": "2026-08-30",
-    "summaryZh": "ちいかわ POP UP STORE 於0%OKINAWA期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-92d69c",
-    "sourceType": "official_site",
-    "createdAt": "2026-08-30",
-    "sourceTitle": "ちいかわPOP UP STORE 0%OKINAWA(2026-06-05～2026-08-30) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_aonr/index.html"
   },
   {
     "brand": "miffy",
@@ -1431,29 +1336,6 @@
     "createdAt": "2026-08-30",
     "sourceTitle": "ハウステンボス「ミッフィー・ハロウィン」 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202608/47757/"
-  },
-  {
-    "brand": "miffy",
-    "title": "Miffy ミッフィーバースデーシーズン　ハウステンボス",
-    "type": "cafe",
-    "country": "JP",
-    "city": "Nagasaki",
-    "locationName": "ハウステンボス",
-    "startDate": "2026-05-29",
-    "endDate": "2026-08-30",
-    "summaryZh": "Miffy（米飛兔）官方活動「ミッフィーバースデーシーズン」於ハウステンボス期間限定登場，販售限定周邊／餐點。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "期間限定",
-      "日本"
-    ],
-    "id": "mi-88dac4",
-    "sourceType": "official_site",
-    "createdAt": "2026-08-30",
-    "sourceTitle": "ハウステンボス「ミッフィーバースデーシーズン」 - dickbruna.jp",
-    "sourceUrl": "https://dickbruna.jp/news/202606/47004/"
   },
   {
     "brand": "miffy",
@@ -1546,7 +1428,7 @@
     ],
     "id": "ch-45dddd",
     "sourceType": "official_site",
-    "createdAt": "2026-08-30",
+    "createdAt": "2026-08-31",
     "sourceTitle": "ちいかわPOP UP STORE グランデュオ蒲田(2026-09-08～2026-09-30) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_gdkm/index.html"
   },
@@ -1570,7 +1452,7 @@
     ],
     "id": "ch-37ba51",
     "sourceType": "official_site",
-    "createdAt": "2026-08-30",
+    "createdAt": "2026-08-31",
     "sourceTitle": "ちいかわPOP UP STORE アティ郡山(2026-09-04～2026-09-27) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_atik/index.html"
   },
@@ -1594,7 +1476,7 @@
     ],
     "id": "ch-965712",
     "sourceType": "official_site",
-    "createdAt": "2026-08-30",
+    "createdAt": "2026-08-31",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール KAGOSHIMA BAY(2026-09-04～2026-09-23) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_akgs/index.html"
   },
@@ -1618,7 +1500,7 @@
     ],
     "id": "ch-3c9341",
     "sourceType": "official_site",
-    "createdAt": "2026-08-30",
+    "createdAt": "2026-08-31",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール新発田(2026-08-28～2026-09-14) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_asbt/index.html"
   },
@@ -1642,7 +1524,7 @@
     ],
     "id": "ch-5b6005",
     "sourceType": "official_site",
-    "createdAt": "2026-08-30",
+    "createdAt": "2026-08-31",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール秋田(2026-08-28～2026-09-13) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_aaki/index.html"
   },
@@ -1787,7 +1669,7 @@
     ],
     "id": "ch-703193",
     "sourceType": "official_site",
-    "createdAt": "2026-08-30",
+    "createdAt": "2026-08-31",
     "sourceTitle": "ちいかわPOP UP STORE 岡島(2026-09-09～2026-09-14) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_okjm/index.html"
   },
@@ -1883,7 +1765,7 @@
     ],
     "id": "ch-68607c",
     "sourceType": "official_site",
-    "createdAt": "2026-08-30",
+    "createdAt": "2026-08-31",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール直方(2026-09-11～2026-09-28) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_angt/index.html"
   },
@@ -1907,7 +1789,7 @@
     ],
     "id": "ch-bc9a48",
     "sourceType": "official_site",
-    "createdAt": "2026-08-30",
+    "createdAt": "2026-08-31",
     "sourceTitle": "ちいかわPOP UP STORE フューチャーシティ・ファボーレ(2026-09-11～2026-09-27) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_favo/index.html"
   },
@@ -1982,5 +1864,29 @@
     "sourceType": "official_site",
     "createdAt": "2026-08-29",
     "sourceUrl": "https://www.pokemon.co.jp/goods/2026/08/260828_go01.html"
+  },
+  {
+    "brand": "miffy",
+    "title": "miffy 新周邊快閃店",
+    "type": "popup",
+    "country": "JP",
+    "city": "Osaka",
+    "locationName": "あべのハルカス",
+    "startDate": "2026-09-02",
+    "endDate": "2026-09-15",
+    "summaryZh": "miffy 將於神戶阪急與大阪阿倍野HARUKAS舉辦快閃店，販售豆皿、餅乾、鏡子等新周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "miffy",
+      "快閃店",
+      "大阪",
+      "周邊商品"
+    ],
+    "id": "mi-4ce883",
+    "sourceTitle": "豆皿やクッキー、コンパクトミラーなどミッフィー新グッズ登場、神戸阪急とあべのハルカスでポップアップ開催 - cinemacafe.net",
+    "sourceType": "official_social",
+    "createdAt": "2026-08-31",
+    "sourceUrl": "https://www.cinemacafe.net/article/2026/08/29/112160.html"
   }
 ]
