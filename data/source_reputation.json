@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-08-31T08:36:24+00:00",
+  "updatedAt": "2026-09-01T08:36:29+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 11,
@@ -387,18 +387,18 @@
     },
     "domain:news.yahoo.co.jp": {
       "confirmed": 2,
-      "rejected": 11,
+      "rejected": 13,
       "uncertain": 0,
-      "crossChecked": 10,
+      "crossChecked": 15,
       "score": 5,
       "label": "news.yahoo.co.jp",
       "kind": "news",
       "host": "news.yahoo.co.jp",
       "handle": "",
       "firstSeen": "2026-06-15",
-      "lastReviewed": "2026-08-30",
+      "lastReviewed": "2026-09-01",
       "lastOutcome": "rejected",
-      "notes": "Duplicate of existing official PR TIMES Akita Station Topico record ch-034d6e",
+      "notes": "Duplicate of official/venue-backed Kobe Waterfront cafe child record mi-a93c3f",
       "byBrand": {
         "chiikawa": {
           "confirmed": 1,
@@ -409,10 +409,10 @@
         },
         "miffy": {
           "confirmed": 1,
-          "rejected": 2,
+          "rejected": 4,
           "uncertain": 0,
-          "crossChecked": 2,
-          "score": 39
+          "crossChecked": 7,
+          "score": 23
         }
       },
       "byType": {
@@ -432,10 +432,10 @@
         },
         "cafe": {
           "confirmed": 0,
-          "rejected": 3,
+          "rejected": 5,
           "uncertain": 0,
-          "crossChecked": 2,
-          "score": 21
+          "crossChecked": 7,
+          "score": 5
         },
         "popup": {
           "confirmed": 1,
@@ -455,9 +455,9 @@
       "byCountry": {
         "jp": {
           "confirmed": 2,
-          "rejected": 11,
+          "rejected": 13,
           "uncertain": 0,
-          "crossChecked": 10,
+          "crossChecked": 15,
           "score": 5
         }
       },
@@ -591,6 +591,26 @@
           "eventId": "ch-cf9b8b",
           "evidenceCount": 1,
           "notes": "Duplicate of existing official PR TIMES Akita Station Topico record ch-034d6e"
+        },
+        {
+          "date": "2026-09-01",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "cafe",
+          "country": "JP",
+          "eventId": "mi-ba5cc8",
+          "evidenceCount": 2,
+          "notes": "Duplicate/mixed summary of official Kobe Waterfront parent event and existing venue records"
+        },
+        {
+          "date": "2026-09-01",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "cafe",
+          "country": "JP",
+          "eventId": "mi-6f9d90",
+          "evidenceCount": 3,
+          "notes": "Duplicate of official/venue-backed Kobe Waterfront cafe child record mi-a93c3f"
         }
       ]
     },
@@ -1047,26 +1067,26 @@
       ]
     },
     "domain:collabo-cafe.com": {
-      "confirmed": 6,
-      "rejected": 9,
+      "confirmed": 7,
+      "rejected": 10,
       "uncertain": 0,
-      "crossChecked": 19,
+      "crossChecked": 22,
       "score": 5,
       "label": "collabo-cafe.com",
       "kind": "site",
       "host": "collabo-cafe.com",
       "handle": "",
       "firstSeen": "2026-06-30",
-      "lastReviewed": "2026-08-30",
+      "lastReviewed": "2026-09-01",
       "lastOutcome": "rejected",
-      "notes": "Duplicate of official Chiikawa record ch-45dddd; unsupported theme-cafe claim absent from official and venue pages",
+      "notes": "Duplicate of official Future City Favore record ch-bc9a48; cafe claim unsupported",
       "byBrand": {
         "chiikawa": {
-          "confirmed": 6,
-          "rejected": 8,
+          "confirmed": 7,
+          "rejected": 9,
           "uncertain": 0,
-          "crossChecked": 18,
-          "score": 14
+          "crossChecked": 21,
+          "score": 10
         },
         "miffy": {
           "confirmed": 0,
@@ -1085,11 +1105,11 @@
           "score": 5
         },
         "popup": {
-          "confirmed": 5,
-          "rejected": 3,
+          "confirmed": 6,
+          "rejected": 4,
           "uncertain": 0,
-          "crossChecked": 11,
-          "score": 62
+          "crossChecked": 14,
+          "score": 58
         },
         "new_product": {
           "confirmed": 1,
@@ -1101,10 +1121,10 @@
       },
       "byCountry": {
         "jp": {
-          "confirmed": 6,
-          "rejected": 9,
+          "confirmed": 7,
+          "rejected": 10,
           "uncertain": 0,
-          "crossChecked": 19,
+          "crossChecked": 22,
           "score": 5
         }
       },
@@ -1258,6 +1278,26 @@
           "eventId": "ch-f127f5",
           "evidenceCount": 2,
           "notes": "Duplicate of official Chiikawa record ch-45dddd; unsupported theme-cafe claim absent from official and venue pages"
+        },
+        {
+          "date": "2026-09-01",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-e7461b",
+          "evidenceCount": 1,
+          "notes": "Dates and goods matched Chiikawa official magical store page; removed unsupported cafe tag and upgraded source"
+        },
+        {
+          "date": "2026-09-01",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-4538e3",
+          "evidenceCount": 2,
+          "notes": "Duplicate of official Future City Favore record ch-bc9a48; cafe claim unsupported"
         }
       ]
     },
@@ -1989,43 +2029,43 @@
     },
     "domain:game.watch.impress.co.jp": {
       "confirmed": 0,
-      "rejected": 1,
+      "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 1,
-      "score": 41,
+      "crossChecked": 3,
+      "score": 34,
       "label": "game.watch.impress.co.jp",
       "kind": "news",
       "host": "game.watch.impress.co.jp",
       "handle": "",
       "firstSeen": "2026-07-08",
-      "lastReviewed": "2026-07-08",
+      "lastReviewed": "2026-09-01",
       "lastOutcome": "rejected",
-      "notes": "Removed on 2026-07-08 after checking PARCO official campaign page: it is a multi-location summer campaign across 15 PARCO stores plus Okinawa PARCO CITY, not a single venue-bounded event row for events.json.",
+      "notes": "Accurate second-wave gift detail but duplicate of official nationwide Kura Sushi collaboration ch-a880a3",
       "byBrand": {
         "chiikawa": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 3,
+          "score": 34
         }
       },
       "byType": {
         "campaign": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 3,
+          "score": 34
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 3,
+          "score": 34
         }
       },
       "history": [
@@ -2038,6 +2078,16 @@
           "eventId": "ch-3be178",
           "evidenceCount": 1,
           "notes": "Removed on 2026-07-08 after checking PARCO official campaign page: it is a multi-location summer campaign across 15 PARCO stores plus Okinawa PARCO CITY, not a single venue-bounded event row for events.json."
+        },
+        {
+          "date": "2026-09-01",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "campaign",
+          "country": "JP",
+          "eventId": "ch-3e9aa8",
+          "evidenceCount": 2,
+          "notes": "Accurate second-wave gift detail but duplicate of official nationwide Kura Sushi collaboration ch-a880a3"
         }
       ]
     },
@@ -2302,18 +2352,18 @@
     },
     "domain:kobe-journal.com": {
       "confirmed": 0,
-      "rejected": 1,
+      "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 1,
-      "score": 41,
+      "crossChecked": 4,
+      "score": 36,
       "label": "kobe-journal.com",
       "kind": "site",
       "host": "kobe-journal.com",
       "handle": "",
       "firstSeen": "2026-07-19",
-      "lastReviewed": "2026-07-19",
+      "lastReviewed": "2026-09-01",
       "lastOutcome": "rejected",
-      "notes": "Removed as out-of-scope: JR Central official page shows a giant balloon display plus X giveaway, not a popup, event-limited goods sale, or cafe.",
+      "notes": "Roundup mixed Kobe Hankyu and Kobe Airport periods already covered by official parent and popup records",
       "byBrand": {
         "chiikawa": {
           "confirmed": 0,
@@ -2321,6 +2371,13 @@
           "uncertain": 0,
           "crossChecked": 1,
           "score": 41
+        },
+        "miffy": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 3,
+          "score": 45
         }
       },
       "byType": {
@@ -2330,15 +2387,22 @@
           "uncertain": 0,
           "crossChecked": 1,
           "score": 41
+        },
+        "popup": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 3,
+          "score": 45
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 4,
+          "score": 36
         }
       },
       "history": [
@@ -2351,6 +2415,16 @@
           "eventId": "ch-6a3a12",
           "evidenceCount": 1,
           "notes": "Removed as out-of-scope: JR Central official page shows a giant balloon display plus X giveaway, not a popup, event-limited goods sale, or cafe."
+        },
+        {
+          "date": "2026-09-01",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "mi-572d60",
+          "evidenceCount": 3,
+          "notes": "Roundup mixed Kobe Hankyu and Kobe Airport periods already covered by official parent and popup records"
         }
       ]
     },

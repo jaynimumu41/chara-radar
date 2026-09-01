@@ -1697,145 +1697,26 @@
     "sourceUrl": "https://dickbruna.jp/news/202608/48107/"
   },
   {
-    "brand": "miffy",
-    "title": "Miffy限定活動&商品販售",
-    "type": "cafe",
-    "country": "JP",
-    "city": "Hyogo",
-    "locationName": "ディック・ブルーナ テーブル",
-    "startDate": "2026-09-09",
-    "endDate": "2026-09-30",
-    "summaryZh": "神戶「Dick Bruna Table」舉辦Miffy限定活動與周邊商品販售，活動至九月底止。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "限定商品",
-      "主題咖啡廳",
-      "神戶"
-    ],
-    "id": "mi-ba5cc8",
-    "sourceTitle": "ミッフィーに会いに神戸へ！ 【ディック・ブルーナ テーブル】ミッフィーの限定イベント&グッズ販売を9月末まで開催 - Yahoo!ニュース",
-    "sourceType": "official_social",
-    "createdAt": "2026-09-01",
-    "sourceUrl": "https://news.yahoo.co.jp/articles/f97d6ce1f39c9a3acdb813045623e01510c5ddf2"
-  },
-  {
-    "brand": "miffy",
-    "title": "Miffy x Dick Bruna TABLE 限定商品",
-    "type": "popup",
-    "country": "JP",
-    "city": "Hyogo",
-    "locationName": "神戸阪急, 神戸空港",
-    "startDate": "2026-07-30",
-    "endDate": "2026-09-30",
-    "summaryZh": "Miffy與Dick Bruna TABLE於神戶港推出聯名限定商品，將在神戶阪急及神戶機場等地販售。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "限定商品",
-      "神戶",
-      "Dick Bruna TABLE"
-    ],
-    "id": "mi-572d60",
-    "sourceTitle": "神戸港の「ミッフィーコラボ」で『Dick Bruna TABLE』限定グッズが販売されるみたい。神戸阪急や神戸空港など - 神戸ジャーナル",
-    "sourceType": "official_social",
-    "createdAt": "2026-09-01",
-    "sourceUrl": "https://kobe-journal.com/archives/6493248652.html"
-  },
-  {
-    "brand": "miffy",
-    "title": "米飛限定下午茶與馬卡龍",
-    "type": "cafe",
-    "country": "JP",
-    "city": "Hyogo",
-    "locationName": "ラ・スイート神戸ハーバーランド / ル・パン総本店",
-    "startDate": "",
-    "endDate": "2026-09-30",
-    "summaryZh": "神戶的La Suite Kobe Harborland和Le Pain總本店推出米飛主題限定下午茶套餐及馬卡龍禮盒，販售至9月30日。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛",
-      "下午茶",
-      "甜點",
-      "限定"
-    ],
-    "id": "mi-6f9d90",
-    "sourceTitle": "神戸・ミッフィーの限定アフヌンやマカロンセットがラ・スイートやル・パン総本店で販売！9・30まで（ラジトピ ラジオ関西トピックス） - Yahoo!ニュース",
-    "sourceType": "official_social",
-    "createdAt": "2026-09-01",
-    "sourceUrl": "https://news.yahoo.co.jp/articles/8edb149a7b1b2cf3ff891efba6b178d2c22a27fa"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "壽司聯名第二彈周邊「湯杯」登場",
-    "type": "campaign",
-    "country": "JP",
-    "city": "",
-    "locationName": "くら寿司",
-    "startDate": "2026-09-04",
-    "endDate": "2026-10-01",
-    "summaryZh": "くら寿司與吉伊卡哇合作第二彈，推出限定周邊「湯杯」，9月4日起登場。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "壽司",
-      "聯名",
-      "限定商品",
-      "湯杯"
-    ],
-    "id": "ch-3e9aa8",
-    "sourceTitle": "くら寿司×「ちいかわ」コラボ第2弾グッズ「湯呑み」の実物お披露目！ ファン必見の限定アイテムは9月4日より登場 - GAME Watch",
-    "sourceType": "official_social",
-    "createdAt": "2026-09-01",
-    "sourceUrl": "https://game.watch.impress.co.jp/docs/kikaku/2137280.html"
-  },
-  {
     "brand": "chiikawa",
     "title": "まじかるちいかわ POP UP STORE in 高知",
     "type": "popup",
     "country": "JP",
     "city": "Kochi",
-    "locationName": "まじかるちいかわ ポップアップストア",
+    "locationName": "高知 蔦屋書店 1F中央広場",
     "startDate": "2026-09-11",
     "endDate": "2026-10-05",
-    "summaryZh": "まじかるちいかわ快閃店於高知舉辦，販售周邊商品並設有主題咖啡廳。",
+    "summaryZh": "まじかるちいかわ期間限定店於高知蔦屋書店登場，販售角色周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "快閃店",
       "限定商品",
-      "主題咖啡廳"
+      "高知"
     ],
     "id": "ch-e7461b",
-    "sourceTitle": "まじかるちいかわ ポップアップストア in 高知 9月11日より開催! - コラボカフェ",
-    "sourceType": "official_social",
+    "sourceTitle": "まじかるちいかわPOP UP STORE 高知 蔦屋書店 - ちいかわ公式",
+    "sourceType": "official_site",
     "createdAt": "2026-09-01",
-    "sourceUrl": "https://collabo-cafe.com/events/collabo/magical-chiikawa-popup-store-kochi-tsutaya-2026/"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇快閃店與主題咖啡廳",
-    "type": "popup",
-    "country": "JP",
-    "city": "Toyama",
-    "locationName": "富山県",
-    "startDate": "2026-09-11",
-    "endDate": "2026-09-27",
-    "summaryZh": "吉伊卡哇快閃店將於9月11日起在日本富山縣舉辦，並設有主題咖啡廳。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "快閃店",
-      "主題咖啡廳",
-      "限定商品"
-    ],
-    "id": "ch-4538e3",
-    "sourceTitle": "ちいかわ ポップアップストア in 富山県 9月11日より開催! - コラボカフェ",
-    "sourceType": "official_social",
-    "createdAt": "2026-09-01",
-    "sourceUrl": "https://collabo-cafe.com/events/collabo/chiikawa-popup-store-favore-toyama-2026/"
+    "sourceUrl": "https://chiikawa-info.jp/magical_s.html"
   }
 ]
