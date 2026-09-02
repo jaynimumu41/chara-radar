@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-01T08:36:29+00:00",
+  "updatedAt": "2026-09-02T08:41:09+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 11,
@@ -1067,26 +1067,26 @@
       ]
     },
     "domain:collabo-cafe.com": {
-      "confirmed": 7,
+      "confirmed": 9,
       "rejected": 10,
       "uncertain": 0,
-      "crossChecked": 22,
-      "score": 5,
+      "crossChecked": 24,
+      "score": 13,
       "label": "collabo-cafe.com",
       "kind": "site",
       "host": "collabo-cafe.com",
       "handle": "",
       "firstSeen": "2026-06-30",
-      "lastReviewed": "2026-09-01",
-      "lastOutcome": "rejected",
-      "notes": "Duplicate of official Future City Favore record ch-bc9a48; cafe claim unsupported",
+      "lastReviewed": "2026-09-02",
+      "lastOutcome": "confirmed",
+      "notes": "Chiikawa official Oita page confirmed dates and venue; removed unsupported cafe claim",
       "byBrand": {
         "chiikawa": {
-          "confirmed": 7,
+          "confirmed": 9,
           "rejected": 9,
           "uncertain": 0,
-          "crossChecked": 21,
-          "score": 10
+          "crossChecked": 23,
+          "score": 24
         },
         "miffy": {
           "confirmed": 0,
@@ -1105,27 +1105,27 @@
           "score": 5
         },
         "popup": {
-          "confirmed": 6,
+          "confirmed": 7,
           "rejected": 4,
           "uncertain": 0,
-          "crossChecked": 14,
-          "score": 58
+          "crossChecked": 15,
+          "score": 65
         },
         "new_product": {
-          "confirmed": 1,
+          "confirmed": 2,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 59
+          "crossChecked": 2,
+          "score": 68
         }
       },
       "byCountry": {
         "jp": {
-          "confirmed": 7,
+          "confirmed": 9,
           "rejected": 10,
           "uncertain": 0,
-          "crossChecked": 22,
-          "score": 5
+          "crossChecked": 24,
+          "score": 13
         }
       },
       "history": [
@@ -1298,23 +1298,43 @@
           "eventId": "ch-4538e3",
           "evidenceCount": 2,
           "notes": "Duplicate of official Future City Favore record ch-bc9a48; cafe claim unsupported"
+        },
+        {
+          "date": "2026-09-02",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "ch-8102e4",
+          "evidenceCount": 1,
+          "notes": "United Arrows company release confirmed 2026-09-15 physical-store launch; corrected false cafe classification and polluted date range"
+        },
+        {
+          "date": "2026-09-02",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-7dfd81",
+          "evidenceCount": 1,
+          "notes": "Chiikawa official Oita page confirmed dates and venue; removed unsupported cafe claim"
         }
       ]
     },
     "domain:prtimes.jp": {
       "confirmed": 3,
-      "rejected": 2,
+      "rejected": 3,
       "uncertain": 0,
       "crossChecked": 6,
-      "score": 59,
+      "score": 48,
       "label": "prtimes.jp",
       "kind": "news",
       "host": "prtimes.jp",
       "handle": "",
       "firstSeen": "2026-07-01",
-      "lastReviewed": "2026-08-26",
-      "lastOutcome": "confirmed",
-      "notes": "Company release explicitly gives the Kobe Hankyu popup period 2026-09-09 to 2026-09-23; Dick Bruna official independently confirms the co-located zakka festa venue and period",
+      "lastReviewed": "2026-09-02",
+      "lastOutcome": "rejected",
+      "notes": "Company release explicitly ended 2026-08-24; expired by verification date",
       "byBrand": {
         "chiikawa": {
           "confirmed": 1,
@@ -1325,10 +1345,10 @@
         },
         "miffy": {
           "confirmed": 1,
-          "rejected": 2,
+          "rejected": 3,
           "uncertain": 0,
           "crossChecked": 5,
-          "score": 45
+          "score": 34
         }
       },
       "byType": {
@@ -1341,10 +1361,10 @@
         },
         "popup": {
           "confirmed": 1,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
           "crossChecked": 3,
-          "score": 52
+          "score": 41
         },
         "store": {
           "confirmed": 1,
@@ -1364,10 +1384,10 @@
       "byCountry": {
         "jp": {
           "confirmed": 2,
-          "rejected": 3,
+          "rejected": 4,
           "uncertain": 0,
           "crossChecked": 6,
-          "score": 41
+          "score": 30
         }
       },
       "history": [
@@ -1420,6 +1440,16 @@
           "eventId": "mi-9abd8e",
           "evidenceCount": 1,
           "notes": "Company release explicitly gives the Kobe Hankyu popup period 2026-09-09 to 2026-09-23; Dick Bruna official independently confirms the co-located zakka festa venue and period"
+        },
+        {
+          "date": "2026-09-02",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "mi-1702d8",
+          "evidenceCount": 0,
+          "notes": "Company release explicitly ended 2026-08-24; expired by verification date"
         }
       ]
     },
@@ -3455,6 +3485,114 @@
           "eventId": "mi-4ce883",
           "evidenceCount": 1,
           "notes": "Accurate dates, but duplicate of existing mi-c23623 confirmed by Felissimo company release on PR TIMES"
+        }
+      ]
+    },
+    "domain:article.auone.jp": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 0,
+      "score": 39,
+      "label": "article.auone.jp",
+      "kind": "site",
+      "host": "article.auone.jp",
+      "handle": "",
+      "firstSeen": "2026-09-02",
+      "lastReviewed": "2026-09-02",
+      "lastOutcome": "rejected",
+      "notes": "Undated 50-item product roundup, not a new store opening, event, or sale period",
+      "byBrand": {
+        "miffy": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "byType": {
+        "store": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 39
+        }
+      },
+      "history": [
+        {
+          "date": "2026-09-02",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "store",
+          "country": "JP",
+          "eventId": "mi-20e094",
+          "evidenceCount": 0,
+          "notes": "Undated 50-item product roundup, not a new store opening, event, or sale period"
+        }
+      ]
+    },
+    "domain:news.infoseek.co.jp": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 41,
+      "label": "news.infoseek.co.jp",
+      "kind": "news",
+      "host": "news.infoseek.co.jp",
+      "handle": "",
+      "firstSeen": "2026-09-02",
+      "lastReviewed": "2026-09-02",
+      "lastOutcome": "rejected",
+      "notes": "Duplicate of existing official Pokemon Sleep campaign po-d330c0",
+      "byBrand": {
+        "pokemon": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byType": {
+        "campaign": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "history": [
+        {
+          "date": "2026-09-02",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "campaign",
+          "country": "JP",
+          "eventId": "po-2cfc57",
+          "evidenceCount": 1,
+          "notes": "Duplicate of existing official Pokemon Sleep campaign po-d330c0"
         }
       ]
     }

@@ -1602,99 +1602,27 @@
     "sourceUrl": "https://chiikawa-info.jp/magical_s.html"
   },
   {
-    "brand": "miffy",
-    "title": "米飛兔 zakka fest 2026",
-    "type": "popup",
-    "country": "JP",
-    "city": "Chiba",
-    "locationName": "そごう千葉店",
-    "startDate": "2026-08-11",
-    "endDate": "",
-    "summaryZh": "米飛兔 zakka fest 2026 將於そごう千葉店首次舉辦，販售限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "快閃店",
-      "限定商品",
-      "千葉"
-    ],
-    "id": "mi-1702d8",
-    "sourceTitle": "【そごう千葉店】千葉県内で初開催 2026年ニューバージョン『ミッフィーzakkaフェスタ』 - prtimes.jp",
-    "sourceType": "official_social",
-    "createdAt": "2026-09-02",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002453.000031382.html"
-  },
-  {
-    "brand": "miffy",
-    "title": "長崎豪斯登堡米飛兔周邊",
-    "type": "store",
-    "country": "JP",
-    "city": "Nagasaki",
-    "locationName": "豪斯登堡",
-    "startDate": "",
-    "endDate": "",
-    "summaryZh": "長崎豪斯登堡將推出豐富的米飛兔周邊商品，包含許多當地限定的稀有商品，適合粉絲前往挖寶。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "長崎",
-      "豪斯登堡",
-      "限定商品"
-    ],
-    "id": "mi-20e094",
-    "sourceTitle": "【2026最新】長崎・ハウステンボスのミッフィーグッズ50選！ 現地でしか買えないレアアイテムが豊富 - article.auone.jp",
-    "sourceType": "official_social",
-    "createdAt": "2026-09-02",
-    "sourceUrl": "https://article.auone.jp/article/8535a4a9-07ac-40e9-8975-5e8bb6fc0aea"
-  },
-  {
-    "brand": "pokemon",
-    "title": "寶可夢中心×寶可夢Sleep活動",
-    "type": "campaign",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "ポケモンセンター",
-    "startDate": "2026-09-05",
-    "endDate": "",
-    "summaryZh": "日本寶可夢中心舉辦「寶可夢Sleep」合作活動，消費滿額可獲得「おこう付きステッカー」（薰香貼紙）。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢中心",
-      "寶可夢Sleep",
-      "日本限定",
-      "贈品"
-    ],
-    "id": "po-2cfc57",
-    "sourceTitle": "『ポケモンスリープ』×ポケモンセンター、おこう付きステッカーがもらえるキャンペーン- 9月5日から - news.infoseek.co.jp",
-    "sourceType": "official_social",
-    "createdAt": "2026-09-02",
-    "sourceUrl": "https://news.infoseek.co.jp/article/mynavi_3221982/"
-  },
-  {
     "brand": "chiikawa",
-    "title": "吉伊卡哇 CITEN 聯名咖啡廳",
-    "type": "cafe",
+    "title": "吉伊卡哇 × CITEN 特別商品系列",
+    "type": "new_product",
     "country": "JP",
     "city": "",
-    "locationName": "",
-    "startDate": "2026-09-01",
-    "endDate": "2026-09-26",
-    "summaryZh": "吉伊卡哇與 CITEN 推出聯名咖啡廳，販售限定周邊商品與主題餐飲。",
+    "locationName": "CITEN全店舗・ちいかわらんど・Talking",
+    "startDate": "2026-09-15",
+    "endDate": "",
+    "summaryZh": "吉伊卡哇 × CITEN 特別系列自9月15日起於日本 CITEN 全店、ちいかわらんど及 Talking 順次販售，包含居家服、托特包、電腦包與小物包等6款商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "聯名",
-      "咖啡廳",
-      "限定商品"
+      "新品",
+      "實體門市"
     ],
     "id": "ch-8102e4",
-    "sourceTitle": "ちいかわ CITEN スペシャルコレクション 9月15日より登場! - コラボカフェ",
-    "sourceType": "official_social",
+    "sourceTitle": "「ちいかわ」「CITEN（シテン）」スペシャルコレクション発売。ルームウェアやバッグ、ポーチなど全6型を展開",
+    "sourceType": "official_site",
     "createdAt": "2026-09-02",
-    "sourceUrl": "https://collabo-cafe.com/events/collabo/chiikawa-citen-special-collection2026/"
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000511.000003197.html"
   },
   {
     "brand": "chiikawa",
@@ -1702,21 +1630,21 @@
     "type": "popup",
     "country": "JP",
     "city": "Oita",
-    "locationName": "ちいかわらんど",
+    "locationName": "アミュプラザおおいた 2階 特設会場",
     "startDate": "2026-09-11",
     "endDate": "2026-10-12",
-    "summaryZh": "吉伊卡哇快閃店於大分舉辦，販售周邊商品並設有主題咖啡廳。",
+    "summaryZh": "ちいかわらんど快閃店於大分站直結的アミュプラザおおいた2樓特設會場期間限定登場，販售吉伊卡哇周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "快閃店",
       "限定商品",
-      "主題咖啡廳"
+      "大分"
     ],
     "id": "ch-7dfd81",
-    "sourceTitle": "ちいかわらんど ポップアップストア in 大分 9月11日より開催! - コラボカフェ",
-    "sourceType": "official_social",
+    "sourceTitle": "ちいかわらんど POP UP SHOP アミュプラザおおいた(2026/9/11(金)～10/12(月祝))",
+    "sourceType": "official_site",
     "createdAt": "2026-09-02",
-    "sourceUrl": "https://collabo-cafe.com/events/collabo/chiikawaland-popup-shop-amu-plaza-oita-2026/"
+    "sourceUrl": "https://chiikawa-info.jp/chiikawaland/oita/"
   }
 ]
