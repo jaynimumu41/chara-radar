@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-02T08:41:09+00:00",
+  "updatedAt": "2026-09-03T08:34:06+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 11,
@@ -680,20 +680,27 @@
     },
     "domain:dtimes.jp": {
       "confirmed": 0,
-      "rejected": 1,
+      "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 1,
-      "score": 41,
+      "crossChecked": 2,
+      "score": 32,
       "label": "dtimes.jp",
       "kind": "news",
       "host": "dtimes.jp",
       "handle": "",
       "firstSeen": "2026-06-19",
-      "lastReviewed": "2026-06-19",
+      "lastReviewed": "2026-09-03",
       "lastOutcome": "rejected",
-      "notes": "Removed on 2026-06-19: could not corroborate 2026 run; current Huis Ten Bosch official Miffy event page shows ended 2024 page instead.",
+      "notes": "Accurate secondary coverage but duplicate of official Pokemon Sleep campaign po-d330c0",
       "byBrand": {
         "miffy": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        },
+        "pokemon": {
           "confirmed": 0,
           "rejected": 1,
           "uncertain": 0,
@@ -704,19 +711,19 @@
       "byType": {
         "campaign": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 2,
+          "score": 32
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 2,
+          "score": 32
         }
       },
       "history": [
@@ -729,6 +736,16 @@
           "eventId": "mi-b0ae64",
           "evidenceCount": 1,
           "notes": "Removed on 2026-06-19: could not corroborate 2026 run; current Huis Ten Bosch official Miffy event page shows ended 2024 page instead."
+        },
+        {
+          "date": "2026-09-03",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "campaign",
+          "country": "JP",
+          "eventId": "po-4efb9a",
+          "evidenceCount": 1,
+          "notes": "Accurate secondary coverage but duplicate of official Pokemon Sleep campaign po-d330c0"
         }
       ]
     },
@@ -1068,25 +1085,25 @@
     },
     "domain:collabo-cafe.com": {
       "confirmed": 9,
-      "rejected": 10,
+      "rejected": 11,
       "uncertain": 0,
-      "crossChecked": 24,
-      "score": 13,
+      "crossChecked": 26,
+      "score": 5,
       "label": "collabo-cafe.com",
       "kind": "site",
       "host": "collabo-cafe.com",
       "handle": "",
       "firstSeen": "2026-06-30",
-      "lastReviewed": "2026-09-02",
-      "lastOutcome": "confirmed",
-      "notes": "Chiikawa official Oita page confirmed dates and venue; removed unsupported cafe claim",
+      "lastReviewed": "2026-09-03",
+      "lastOutcome": "rejected",
+      "notes": "Mixed two-venue roundup duplicated official Yagihashi and FKD Utsunomiya records and added unsupported cafe claim",
       "byBrand": {
         "chiikawa": {
           "confirmed": 9,
-          "rejected": 9,
+          "rejected": 10,
           "uncertain": 0,
-          "crossChecked": 23,
-          "score": 24
+          "crossChecked": 25,
+          "score": 13
         },
         "miffy": {
           "confirmed": 0,
@@ -1106,10 +1123,10 @@
         },
         "popup": {
           "confirmed": 7,
-          "rejected": 4,
+          "rejected": 5,
           "uncertain": 0,
-          "crossChecked": 15,
-          "score": 65
+          "crossChecked": 17,
+          "score": 54
         },
         "new_product": {
           "confirmed": 2,
@@ -1122,10 +1139,10 @@
       "byCountry": {
         "jp": {
           "confirmed": 9,
-          "rejected": 10,
+          "rejected": 11,
           "uncertain": 0,
-          "crossChecked": 24,
-          "score": 13
+          "crossChecked": 26,
+          "score": 5
         }
       },
       "history": [
@@ -1318,6 +1335,16 @@
           "eventId": "ch-7dfd81",
           "evidenceCount": 1,
           "notes": "Chiikawa official Oita page confirmed dates and venue; removed unsupported cafe claim"
+        },
+        {
+          "date": "2026-09-03",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-208ec5",
+          "evidenceCount": 2,
+          "notes": "Mixed two-venue roundup duplicated official Yagihashi and FKD Utsunomiya records and added unsupported cafe claim"
         }
       ]
     },
@@ -2177,50 +2204,50 @@
     },
     "domain:ndw.jp": {
       "confirmed": 7,
-      "rejected": 2,
+      "rejected": 4,
       "uncertain": 0,
-      "crossChecked": 11,
-      "score": 87,
+      "crossChecked": 13,
+      "score": 65,
       "label": "ndw.jp",
       "kind": "site",
       "host": "ndw.jp",
       "handle": "",
       "firstSeen": "2026-07-19",
-      "lastReviewed": "2026-08-29",
-      "lastOutcome": "confirmed",
-      "notes": "Pokemon official goods page confirmed physical Pokemon Center sales begin 2026-09-05; corrected online-only 2026-09-03 date",
+      "lastReviewed": "2026-09-03",
+      "lastOutcome": "rejected",
+      "notes": "Duplicate of official plush record po-6858a8 and used online-only Sep 3 date for physical stores",
       "byBrand": {
         "pokemon": {
           "confirmed": 7,
-          "rejected": 2,
+          "rejected": 4,
           "uncertain": 0,
-          "crossChecked": 11,
-          "score": 87
+          "crossChecked": 13,
+          "score": 65
         }
       },
       "byType": {
         "new_product": {
           "confirmed": 6,
-          "rejected": 2,
+          "rejected": 3,
           "uncertain": 0,
-          "crossChecked": 10,
-          "score": 80
+          "crossChecked": 11,
+          "score": 69
         },
         "campaign": {
           "confirmed": 1,
-          "rejected": 0,
+          "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 59
+          "crossChecked": 2,
+          "score": 50
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 7,
-          "rejected": 2,
+          "rejected": 4,
           "uncertain": 0,
-          "crossChecked": 11,
-          "score": 87
+          "crossChecked": 13,
+          "score": 65
         }
       },
       "history": [
@@ -2313,6 +2340,26 @@
           "eventId": "po-4307fc",
           "evidenceCount": 1,
           "notes": "Pokemon official goods page confirmed physical Pokemon Center sales begin 2026-09-05; corrected online-only 2026-09-03 date"
+        },
+        {
+          "date": "2026-09-03",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "campaign",
+          "country": "JP",
+          "eventId": "po-fd8001",
+          "evidenceCount": 1,
+          "notes": "Accurate secondary coverage but duplicate of official Pokemon Sleep campaign po-d330c0"
+        },
+        {
+          "date": "2026-09-03",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "po-9083d8",
+          "evidenceCount": 1,
+          "notes": "Duplicate of official plush record po-6858a8 and used online-only Sep 3 date for physical stores"
         }
       ]
     },
