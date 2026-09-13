@@ -16,6 +16,7 @@
 回傳 exit code 0=全過，非 0=有失敗（方便 CI / 排程串接）。
 """
 import sys
+from datetime import datetime, timezone
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -50,6 +51,11 @@ def ev(**kw):
             "summaryZh": "", "sourceUrl": "", "sourceType": "official_social"}
     base.update(kw)
     return base
+
+
+check("台北午夜後不沿用UTC前一日",
+      scrape.taipei_today(datetime(2026, 9, 13, 16, 1, tzinfo=timezone.utc)),
+      "2026-09-14")
 
 
 # ── correct_city ──────────────────────────────────────────────────────────────
@@ -113,6 +119,8 @@ check("全台活動懶人包→彙整",
       scrape.is_roundup_title("「布丁狗30週年」全台活動時間＋地點懶人包！"), True)
 check("活動總整理→彙整",
       scrape.is_roundup_title("布丁狗 30 週年慶祝活動總整理！曬黑三麗鷗主題日"), True)
+check("日文まとめ報導→彙整",
+      scrape.is_roundup_title("開催中ポップアップストアの注目アイテムまとめ"), True)
 check("特展攻略票價整理→不誤殺",
       scrape.is_roundup_title("2026吉伊卡哇台北特展攻略！CHIIKAWA DAYS時間、地點、票價整理"), False)
 check("快閃一次看→不誤殺",
@@ -192,6 +200,13 @@ check("實體店新品即使另有線上販售→不擋",
              locationName="Pokémon Center TAIPEI", summaryZh="台北實體店開賣。"),
           page_text="オンラインショップでも販売"),
       False)
+check("來源僅證實Pokemon Center Online時不採信AI泛稱實體地點",
+      scrape.is_online_only_merchandise(
+          ev(brand="pokemon", type="new_product", title="寶可夢插畫公仔系列發售",
+             locationName="寶可夢中心", summaryZh="新品將於8月27日發售。"),
+          source_title="ポケカイラストフィギュアコレクション 8/27発売",
+          page_text="公式ECサイト ポケモンセンターオンラインでは仮想待合室を設置"),
+      True)
 
 # ── is_trusted_date_source ────────────────────────────────────────────────────
 print("\n[is_trusted_date_source] 可信日期網域（hostname 精準比對）")
@@ -485,6 +500,14 @@ holiday_range_signals = audit_official_coverage.detect_signals(
 check("官方稽核可解析含祝日標記的日文日期區間",
       (holiday_range_signals.start_date, holiday_range_signals.end_date),
       ("2026-08-11", "2026-08-24"))
+check("官方稽核忽略Pokemon Design Lab暫停受理公告",
+      bool(audit_official_coverage.detect_signals(
+          "9月12日（土）・13日（日）ポケモンデザインラボ 一時受付停止のお知らせ"
+      ).auto_ignore_reason), True)
+check("官方稽核忽略單日營業公告",
+      bool(audit_official_coverage.detect_signals(
+          "9月8日（火）の営業について ポケモンセンタートウキョーベイ"
+      ).auto_ignore_reason), True)
 kiddy_birthday_title = "2026年6月6日(土)より開催miffy’s Birthday Fair2026"
 kiddy_birthday_page = (
     f"<h1>{kiddy_birthday_title}</h1>"
@@ -638,6 +661,43 @@ check("吉伊卡哇小樽ベビーカステラ店鋪情報解析",
        otaru["needReservation"], otaru["hasLimitedGoods"], otaru["sourceUrl"]),
       ("store", "Hokkaido", "2026-07-18", "", True, True,
        "https://www.chiikawamogumogu.jp/stores/castella/"))
+sample_otaru_info_html = (
+    '<main><p>ちいかわベビーカステラ 2026年7月18日(土)～ '
+    'ちいかわもぐもぐ本舗 小樽店にオープン！</p></main>'
+)
+sample_otaru_shop_html = (
+    '<main><p>ちいかわベビーカステラ</p><p>オリジナルグッズ</p>'
+    '<p>住所：北海道小樽市堺町6-1</p></main>'
+)
+otaru_html = official_sources._chiikawa_otaru_castella_event(
+    official_sources._visible_text(sample_otaru_info_html),
+    official_sources._visible_text(sample_otaru_shop_html),
+    correct_city=scrape.correct_city,
+)
+check("吉伊卡哇小樽原站HTML可見文字解析",
+      (otaru_html["city"], otaru_html["startDate"]),
+      ("Hokkaido", "2026-07-18"))
+
+sample_pokemon_popup_html = (
+    '<table><tr><td>2099年6月5日（金）〜7月22日（水）</td>'
+    '<td><b>兵庫県・イオンモール神戸北<br></b>専門店街3階 イオンホール</td></tr>'
+    '<tr><td>2026年6月12日（金）〜8月31日（月）</td>'
+    '<td><strong>愛媛県・イオンモール今治新都市<br></strong>2階 イオンホール</td>'
+    '</tr></table>'
+)
+pokemon_popup_html_events, pokemon_popup_html_rows = (
+    official_sources._pokemon_popup_events_from_text(
+        sample_pokemon_popup_html,
+        correct_city=scrape.correct_city,
+        today="2099-06-01",
+    )
+)
+check("寶可夢出張所原站HTML表格列可解析", pokemon_popup_html_rows, 2)
+check("寶可夢出張所HTML只保留現行場次",
+      [(e["city"], e["locationName"], e["startDate"], e["endDate"])
+       for e in pokemon_popup_html_events],
+      [("Hyogo", "イオンモール神戸北 専門店街3階 イオンホール",
+        "2099-06-05", "2099-07-22")])
 sample_movie_popup = (
     "[イオンモール新潟亀田インター 1F スカイコート](https://www.aeon.jp/sc/niigatakameda-inter/) "
     "2099年7月10日(金)～7月20日(月祝) "
@@ -656,6 +716,19 @@ check("電影吉伊卡哇 POP UP 解析城市與國家",
        ("Taipei", "TW", "2026-07-10", "2026-08-30")])
 check("電影吉伊卡哇 POP UP 每場 sourceUrl 不共用",
       len({e["sourceUrl"] for e in movie_events}), 3)
+sample_movie_popup_html = (
+    '<table><tr><td><a href="https://www.hawaiians.co.jp/">'
+    'スパリゾート ハワイアンズ ビッグアロハ2階 特設会場</a><br>'
+    '<span>2026年7月17日(金)～9月27日(日)</span></td>'
+    '<td><a href="https://www.aeon.jp/">イオンモール広島府中 1F</a><br>'
+    '<span>2026年8月21日(金)～9月6日(日)</span></td></tr></table>'
+)
+movie_html_events = official_sources._chiikawa_movie_popup_events_from_text(
+    sample_movie_popup_html, correct_city=scrape.correct_city, today="2026-09-13")
+check("電影吉伊卡哇官方HTML表格只保留現行場次",
+      [(e["locationName"], e["startDate"], e["endDate"]) for e in movie_html_events],
+      [("スパリゾート ハワイアンズ ビッグアロハ2階 特設会場",
+        "2026-07-17", "2026-09-27")])
 sample_movie_goods = (
     "映画ちいかわ POPUP in TOHOシネマズ "
     "＜2026年7月10日(金)～8月31日(月)＞ "
@@ -683,6 +756,14 @@ check("電影吉伊卡哇グッズ取扱店 過期場次依指定日期排除",
 
 # ── agent_verify_candidates ─────────────────────────────────────────────────
 print("\n[agent_verify_candidates] 每日驗證候選")
+check("官方候選網域允許真正子網域",
+      agent_verify_candidates.has_domain(
+          "https://shop.pokemon.co.jp/event", ("pokemon.co.jp",)),
+      True)
+check("官方候選網域拒絕名稱偽裝",
+      agent_verify_candidates.has_domain(
+          "https://pokemon.co.jp.example.com/event", ("pokemon.co.jp",)),
+      False)
 check("結構化官方活動缺 endDate→仍進候選",
       "structured_activity_missing_endDate" in agent_verify_candidates.verification_reasons(
           ev(type="campaign", sourceType="official_site",
@@ -1180,6 +1261,26 @@ check("更新差異：同來源不同城市仍是不同情報",
              locationName="イオンモール今治新都市", sourceUrl="https://oneheart65.net/pokemoncenterbranch_schedule_2/"),
       ),
       False)
+check("更新差異：同標題但不同城市仍是新場次",
+      scrape.is_same_event_for_update_diff(
+          ev(brand="chiikawa", title="吉伊卡哇 POP UP STORE", type="popup", city="Tokyo",
+             startDate="2026-09-01", endDate="2026-09-15",
+             locationName="イオンモールむさし村山", sourceUrl="https://example.com/tokyo"),
+          ev(brand="chiikawa", title="吉伊卡哇 POP UP STORE", type="popup", city="Aichi",
+             startDate="2026-09-01", endDate="2026-09-15",
+             locationName="イオンモール岡崎", sourceUrl="https://example.com/aichi"),
+      ),
+      False)
+check("更新差異：同來源同城市但不同分店仍是新場次",
+      scrape.is_same_event_for_update_diff(
+          ev(brand="chiikawa", title="吉伊卡哇 POP UP STORE", type="popup", city="Aichi",
+             startDate="2026-09-01", endDate="2026-09-15",
+             locationName="イオンモール岡崎", sourceUrl="https://example.com/schedule"),
+          ev(brand="chiikawa", title="吉伊卡哇 POP UP STORE", type="popup", city="Aichi",
+             startDate="2026-09-01", endDate="2026-09-15",
+             locationName="イオンモール大高", sourceUrl="https://example.com/schedule"),
+      ),
+      False)
 kobe_diff = scrape.build_update_diff(
     [ev(id="old-kobe", brand="miffy", title="Miffy 神戶港塔聯名主題咖啡廳", type="cafe", city="Hyogo",
         startDate="2026-07-30", endDate="2026-09-30",
@@ -1503,6 +1604,179 @@ out = scrape.replace_in_place(
 check("同id原地更新、舊資料移除、新資料append",
       [(e["id"], e.get("endDate", "")) for e in out],
       [("keep", ""), ("po-1", "2026-07-31"), ("other", ""), ("po-2", "")])
+old_created = [ev(id="same", createdAt="2026-08-01", title="舊標題")]
+fresh_created = [ev(id="same", createdAt="2026-09-13", title="新標題")]
+check("同id結構化更新保留首次發現日",
+      scrape.replace_in_place(old_created, fresh_created, lambda _e: False)[0]["createdAt"],
+      "2026-08-01")
+
+# ── 2026-09-13 structured-source and dedup regressions ───────────────────────
+print("\n[2026-09-13 official source and branch dedup regressions]")
+check("岡崎→Aichi", scrape.correct_city("イオンモール岡崎"), "Aichi")
+check("新居浜→Ehime", scrape.correct_city("イオンモール新居浜"), "Ehime")
+check("直方→Fukuoka", scrape.correct_city("イオンモール直方"), "Fukuoka")
+check("米子→Tottori", scrape.correct_city("米子天満屋"), "Tottori")
+check("宇都宮→Tochigi", scrape.correct_city("FKD宇都宮店"), "Tochigi")
+check("不同AEON分店是明確不同場館",
+      scrape.location_compatibility("イオンモール岡崎 1F", "イオンモール和歌山 1F"), False)
+check("同分店加樓層仍是同場館",
+      scrape.location_compatibility("泉北髙島屋", "泉北髙島屋 4階 催事場"), True)
+
+branch_events, _ = scrape.dedup_events([
+    ev(id="okazaki", brand="chiikawa", title="吉伊卡哇 POP UP STORE イオンモール岡崎",
+       startDate="2026-09-18", endDate="2026-10-05", locationName="イオンモール岡崎 1F"),
+    ev(id="wakayama", brand="chiikawa", title="吉伊卡哇 POP UP STORE イオンモール和歌山",
+       startDate="2026-09-18", endDate="2026-10-05", locationName="イオンモール和歌山 1F"),
+    ev(id="niihama", brand="chiikawa", title="吉伊卡哇 POP UP STORE イオンモール新居浜",
+       startDate="2026-09-26", endDate="2026-10-12", locationName="イオンモール新居浜"),
+])
+check("巡迴快閃的不同分店不可被模糊相似度合併", [e["id"] for e in branch_events],
+      ["okazaki", "wakayama", "niihama"])
+
+semboku_popup, _ = scrape.dedup_events([
+    ev(id="semboku-official", brand="chiikawa", title="吉伊卡哇 POP UP STORE 泉北髙島屋",
+       city="Osaka", startDate="2026-09-24", endDate="2026-10-06",
+       locationName="泉北髙島屋", sourceType="official_site"),
+    ev(id="semboku-media", brand="chiikawa", title="ちいかわ ポップアップストア in 大阪 泉北髙島屋",
+       city="Osaka", startDate="2026-09-24", endDate="2026-10-06",
+       locationName="泉北髙島屋 4階 催事場", sourceType="media"),
+])
+check("同場次官方頁與媒體轉載合併並保留官方",
+      (len(semboku_popup), semboku_popup[0]["id"]), (1, "semboku-official"))
+
+haneda_baby_cross_language, _ = scrape.dedup_events([
+    ev(id="haneda-baby-official", brand="chiikawa", title="Chiikawa Baby POP UP SHOP 羽田空港第1ターミナル",
+       city="Tokyo", startDate="2026-08-18", endDate="2026-09-28",
+       locationName="羽田空港第1ターミナル 2F 出発ロビー HANEDA POPUP STORE",
+       sourceType="official_site"),
+    ev(id="haneda-baby-media", brand="chiikawa", title="羽田機場 Chiikawa 限定快閃店",
+       city="Tokyo", startDate="2026-08-18", endDate="2026-09-28",
+       locationName="羽田機場"),
+])
+check("羽田空港與羽田機場跨語言場館別名仍合併",
+      (len(haneda_baby_cross_language), haneda_baby_cross_language[0]["id"]),
+      (1, "haneda-baby-official"))
+
+yurakucho, _ = scrape.dedup_events([
+    ev(id="media-a", brand="miffy", title="miffy style POP UP SHOP in 有楽町",
+       city="Tokyo", startDate="2026-10-02", endDate="2026-10-19", locationName="有楽町マルイ"),
+    ev(id="media-b", brand="miffy", title="miffy style POP UP SHOP in 有楽町",
+       city="Tokyo", startDate="2026-10-02", endDate="2026-10-19", locationName="キデイランド"),
+    ev(id="official", brand="miffy", title="Miffy miffy style POP UP SHOP in 有楽町",
+       city="Tokyo", startDate="2026-10-02", endDate="2026-10-19", locationName="有楽町マルイ",
+       sourceType="official_site"),
+])
+check("有樂町同活動不同媒體場館寫法仍合併並保留官方", (len(yurakucho), yurakucho[0]["id"]),
+      (1, "official"))
+
+phase_kura, _ = scrape.dedup_events([
+    ev(id="kura-main", brand="chiikawa", title="ちいかわ × くら寿司 コラボキャンペーン",
+       type="campaign", startDate="2026-08-21", endDate="2026-09-30", sourceType="official_site"),
+    ev(id="kura-phase", brand="chiikawa", title="くら寿司×ちいかわ 第2弾 湯呑み",
+       type="campaign", startDate="2026-09-04"),
+])
+check("連鎖活動分階段贈品併回母活動", (len(phase_kura), phase_kura[0]["id"]),
+      (1, "kura-main"))
+
+miffy_style_page = """
+# miffy style POP UP SHOPが有楽町・梅田・札幌に期間限定オープン
+## information
+### miffy style POP UP SHOP
+有楽町マルイ
+2026年10月2日（金）～10月19日（月）
+キデイランド大阪梅田店
+2026年10月31日（土）～11月17日（火）
+札幌アピア
+2026年11月6日（金）～11月24日（火）
+"""
+miffy_style_rows = official_sources._miffy_multi_venue_events(
+    "miffy style POP UP SHOPが有楽町・梅田・札幌に期間限定オープン",
+    "https://dickbruna.jp/news/202609/48222/", miffy_style_page, 2026,
+    scrape.extract_dates, scrape.correct_city,
+)
+check("Miffy同篇三場次拆成三筆",
+      [(e["locationName"], e["startDate"], e["endDate"], e["city"]) for e in miffy_style_rows],
+      [("有楽町マルイ", "2026-10-02", "2026-10-19", "Tokyo"),
+       ("キデイランド大阪梅田店", "2026-10-31", "2026-11-17", "Osaka"),
+       ("札幌アピア", "2026-11-06", "2026-11-24", "Hokkaido")])
+
+campaign_page = """
+[Chiikawa BabyPOP UP SHOP 羽田空港第1ターミナル](https://chiikawa-info.jp/p26/ck_baby/haneda/index.html)
+2026年8月18日(火)～9月28日(月)
+羽田空港第1ターミナル 2F 出発ロビー HANEDA POPUP STORE
+"""
+baby_rows = official_sources._chiikawa_campaign_events_from_text(
+    campaign_page, "baby", correct_city=scrape.correct_city, today="2026-09-13")
+check("Chiikawa Baby官方場次結構化",
+      [(e["title"], e["city"], e["startDate"], e["endDate"]) for e in baby_rows],
+      [("Chiikawa Baby POP UP SHOP 羽田空港第1ターミナル", "Tokyo", "2026-08-18", "2026-09-28")])
+campaign_html = """
+<article class="special"><header><h3><a href="p26/ck_baby/haneda/index.html">
+Chiikawa Baby<br>POP UP SHOP 羽田空港第1ターミナル</a></h3></header>
+<p class="setumei">2026年8月18日(火)～9月28日(月)<br>
+羽田空港第1ターミナル 2F 出発ロビー HANEDA POPUP STORE</p></article>
+"""
+baby_html_rows = official_sources._chiikawa_campaign_events_from_text(
+    campaign_html, "baby", correct_city=scrape.correct_city, today="2026-09-13")
+check("Chiikawa Baby官方HTML版型也可解析",
+      [(e["sourceUrl"], e["startDate"], e["endDate"]) for e in baby_html_rows],
+      [("https://chiikawa-info.jp/p26/ck_baby/haneda/index.html", "2026-08-18", "2026-09-28")])
+
+mixed_miffy_dates = """
+# 神戸阪急、あべのハルカス近鉄本店で Dick Bruna TABLE POP-UP SHOP 開催
+Dick Bruna TABLE POP-UP SHOP in 神戸阪急 2026年9月9日～9月23日
+Dick Bruna TABLE POP-UP SHOP in あべのハルカス近鉄本店
+期間 2026年9月2日～9月15日 場所 あべのハルカス近鉄本店
+神戸空港でのグッズ販売 2026年8月28日～9月30日
+"""
+check("Miffy多場次日期採距離場館最近的區間",
+      official_sources._miffy_range_near_marker(
+          mixed_miffy_dates, "あべのハルカス近鉄本店", 2026, scrape.extract_dates),
+      ("2026-09-02", "2026-09-15"))
+mixed_miffy_rows = official_sources._miffy_multi_venue_events(
+    "神戸阪急、あべのハルカス近鉄本店で Dick Bruna TABLE POP-UP SHOP 開催",
+    "https://dickbruna.jp/news/202609/48149/", mixed_miffy_dates, 2026,
+    scrape.extract_dates, scrape.correct_city,
+)
+mixed_miffy_deduped, _ = scrape.dedup_events(mixed_miffy_rows)
+check("Miffy同篇神戶與阿倍野場次不可被來源標題誤併",
+      [(e["city"], e["startDate"], e["endDate"]) for e in mixed_miffy_deduped],
+      [("Hyogo", "2026-09-09", "2026-09-23"),
+       ("Osaka", "2026-09-02", "2026-09-15")])
+
+park_sample = """
+ちいかわパークがハロウィーンに染まる 秋の限定企画
+開催期間 2026年9月25日(金)～10月31日(土)
+"""
+park_event = official_sources._chiikawa_park_halloween_event_from_text(
+    park_sample, correct_city=scrape.correct_city)
+check("Chiikawa Park Halloween官方頁結構化",
+      (park_event["city"], park_event["startDate"], park_event["endDate"], park_event["sourceType"]),
+      ("Tokyo", "2026-09-25", "2026-10-31", "official_site"))
+
+pokemon_payload = {"results": [{
+    "model": "goods", "type": "body", "pokecen": 1,
+    "title": "ハロウィンをテーマにしたグッズ「Pokémon Magic Hour Illusion!」が、ポケモンセンターに登場！",
+    "start_date": "2026.09.04",
+    "full_uniq": "https://www.pokemon.co.jp/goods/2026/09/260904_to01.html",
+}]}
+pokemon_rows = official_sources._pokemon_jp_goods_events_from_payload(
+    pokemon_payload,
+    fetch_page=lambda _url: "発売日 | 9月12日（土） 販売店舗 | ポケモンセンター",
+    today="2026-09-13",
+)
+check("日本Pokémon官方feed採實體店發售日",
+      [(e["startDate"], e["locationName"], e["sourceType"]) for e in pokemon_rows],
+      [("2026-09-12", "日本全國 Pokémon Center", "official_site")])
+
+open_ended = ev(
+    brand="miffy", type="campaign", sourceType="official_site",
+    sourceUrl="https://dickbruna.jp/news/202609/48228/",
+    startDate="2026-10-10", endDate="",
+    summaryZh="購買滿額贈限定購物袋，數量有限、送完為止。",
+)
+check("官方明示送完為止不再反覆進缺結束日候選",
+      agent_verify_candidates.verification_reasons(open_ended), [])
 
 # ── 結語 ──────────────────────────────────────────────────────────────────────
 print(f"\n{'=' * 40}\n結果：{_passed} 通過、{_failed} 失敗")

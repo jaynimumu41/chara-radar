@@ -25,7 +25,7 @@ import uuid
 from difflib import SequenceMatcher
 from email.utils import parsedate_to_datetime
 import xml.etree.ElementTree as ET
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -33,10 +33,13 @@ import requests
 
 from verify_links import check_url, page_mentions  # 存檔前驗證來源連結：連得過去 + 內容與品牌相關
 from official_sources import (fetch_official, fetch_chiikawa_popups,
+                              fetch_chiikawa_campaign_popups,
+                              fetch_chiikawa_park_events,
                               fetch_chiikawa_mogumogu,
                               fetch_chiikawa_movie_goods,
                               fetch_chiikawa_movie_popups,
                               fetch_pokemon_popups, fetch_pokemon_cafe_events,
+                              fetch_pokemon_jp_goods,
                               fetch_pokemon_tw_goods,
                               fetch_miffy_events)  # 官方來源：PR TIMES + 結構化排程頁
 
@@ -49,7 +52,17 @@ DATA_DIR = Path(__file__).parent.parent / "data"
 EVENTS_JSON = DATA_DIR / "events.json"
 UPDATE_DIFF_JSON = DATA_DIR / "today_updates.json"
 LAST_UPDATED_JSON = DATA_DIR / "last_updated.json"
-TODAY = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+TAIPEI_TZ = timezone(timedelta(hours=8))
+
+
+def taipei_today(now: datetime | None = None) -> str:
+    current = now or datetime.now(timezone.utc)
+    if current.tzinfo is None:
+        current = current.replace(tzinfo=timezone.utc)
+    return current.astimezone(TAIPEI_TZ).date().isoformat()
+
+
+TODAY = taipei_today()
 MAX_PER_BRAND = 13  # 每品牌單次最多用 AI 判斷幾筆（控制速度與額度）
 
 # ── RSS 搜尋條件 ───────────────────────────────────────────────────────────────
@@ -95,17 +108,18 @@ AREA_TO_CITY = {
     "Tokyo":    ["東京", "渋谷", "澀谷", "池袋", "銀座", "新宿", "原宿", "表参道", "表參道",
                   "スカイツリー", "晴空塔", "ソラマチ", "押上", "自由が丘", "自由之丘",
                   "お台場", "丸の内", "浅草", "上野", "中野", "吉祥寺", "多摩", "立川",
+                  "有楽町", "有樂町",
                   "むさし村山", "武蔵村山", "羽田", "北千住", "蒲田", "グランデュオ蒲田",
                   "ピューロランド", "Puroland", "彩虹樂園", "サンリオピューロランド"],
     "Iwate":    ["岩手", "盛岡", "カワトク", "パルクアベニュー・カワトク"],
     "Osaka":    ["大阪", "梅田", "心斎橋", "心齋橋", "なんば", "難波", "中之島", "天王寺",
-                 "ルクア", "LUCUA", "グランフロント", "万博", "あべの"],
+                 "ルクア", "LUCUA", "グランフロント", "万博", "あべの", "泉北"],
     "Kyoto":    ["京都", "KYOTO", "河原町", "嵐山", "四条"],
-    "Fukuoka":  ["福岡", "博多", "天神", "キャナルシティ", "キャナル"],
+    "Fukuoka":  ["福岡", "博多", "天神", "キャナルシティ", "キャナル", "直方"],
     "Nagoya":   ["名古屋", "栄", "ラシック", "名駅", "大須"],
     "Nagasaki": ["長崎", "ハウステンボス", "豪斯登堡", "Huis Ten Bosch", "佐世保"],
     "Saitama":  ["埼玉", "羽生", "Hanyu", "大宮", "Omiya", "越谷", "Koshigaya",
-                 "レイクタウン", "Laketown", "川越", "川口"],
+                 "レイクタウン", "Laketown", "川越", "川口", "八木橋", "熊谷"],
     "Hokkaido": ["北海道", "札幌", "小樽", "函館", "新千歳", "千歳"],
     "Okinawa":  ["沖縄", "沖繩", "那覇", "NAHA", "ライカム", "南風原"],
     "Kanagawa": ["神奈川", "横浜", "横濱", "橫濱", "川崎", "みなとみらい", "ワールドポーターズ",
@@ -118,24 +132,25 @@ AREA_TO_CITY = {
     "Chiba":    ["千葉", "舞浜", "幕張", "柏高島屋"],
     "Niigata":  ["新潟", "亀田", "新発田"],
     "Okayama":  ["岡山", "倉敷"],
-    "Tottori":  ["鳥取", "日吉津"],
+    "Tottori":  ["鳥取", "日吉津", "米子"],
     "Nara":     ["奈良", "橿原"],
     "Fukushima":["福島", "いわき", "ハワイアンズ", "郡山"],
     "Nagano":   ["長野", "須坂", "ながの東急"],
     "Gunma":    ["群馬", "高崎", "太田"],
-    "Toyama":   ["富山", "高岡"],
+    "Toyama":   ["富山", "高岡", "ファボーレ"],
     "Fukui":    ["福井", "ショッピングシティベル", "ショッピングシティ・ベル"],
     "Gifu":     ["岐阜", "各務原"],
     "Miyazaki": ["宮崎"],
-    "Yamanashi":["山梨", "甲府", "昭和"],
+    "Yamanashi":["山梨", "甲府", "昭和", "岡島"],
     "Aomori":   ["青森", "Aomori", "弘前"],
     "Akita":    ["秋田"],
-    "Aichi":    ["愛知", "豊田", "名古屋", "常滑", "大高"],
+    "Aichi":    ["愛知", "豊田", "名古屋", "常滑", "大高", "岡崎", "中部国際空港", "セントレア"],
     "Shizuoka": ["静岡", "靜岡", "富士宮", "浜松", "遠鉄", "セノバ", "磐田"],
     "Yamaguchi":["山口", "小野田", "おのだ"],
     "Wakayama": ["和歌山", "Wakayama"],
     "Kochi":    ["高知", "Kochi"],
-    "Ehime":    ["愛媛", "今治", "松山"],
+    "Ehime":    ["愛媛", "今治", "松山", "新居浜"],
+    "Tochigi":  ["栃木", "宇都宮", "FKD"],
     "Ishikawa": ["石川", "金沢", "金澤", "香林坊", "新小松"],
     "Ibaraki":  ["茨城", "水戸", "京成百貨店"],
     "Taipei":   ["台北", "臺北", "信義", "西門", "微風", "南山", "華山", "中山",
@@ -212,7 +227,7 @@ def is_sports_noise(*texts) -> bool:
 # 「列出有哪些活動」，而非單一可信來源——真正值得收的活動會由其官方頁或單一新聞各自帶入，
 # 故彙整文一律略過（符合「準確>覆蓋」：只有彙整文提到、無其他來源佐證者，本就該捨）。
 # 關鍵詞刻意收斂，避免誤殺正當的單一活動攻略文（如「特展攻略…票價整理」不含下列詞）。
-ROUNDUP_KEYWORDS = ["懶人包", "總整理", "行事曆", "整理包"]
+ROUNDUP_KEYWORDS = ["懶人包", "總整理", "行事曆", "整理包", "まとめ", "総まとめ"]
 
 def is_roundup_title(title: str) -> bool:
     return any(kw in (title or "") for kw in ROUNDUP_KEYWORDS)
@@ -231,7 +246,14 @@ APPAREL_PRODUCT_KEYWORDS = (
 
 ONLINE_ONLY_SIGNALS = (
     "公式web shop", "web shop", "webショップ", "オンラインショップ",
-    "オンラインストア", "通販", "網路商店", "線上商店", "線上預購",
+    "オンラインストア", "ポケモンセンターオンライン", "pokemon center online",
+    "公式ecサイト", "仮想待合室", "virtual waiting room",
+    "通販", "網路商店", "線上商店", "線上預購",
+)
+
+ONLINE_STORE_PHRASES = (
+    "ポケモンセンターオンライン", "pokemon center online",
+    "寶可夢中心線上商店", "宝可梦中心线上商店",
 )
 
 PHYSICAL_STORE_SIGNALS = (
@@ -272,20 +294,28 @@ def is_apparel_new_product(ev: dict, source_title: str = "", page_text: str = ""
     return any(kw.lower() in blob for kw in APPAREL_PRODUCT_KEYWORDS)
 
 def is_online_only_merchandise(ev: dict, source_title: str = "", page_text: str = "") -> bool:
-    """Reject merchandise reservations that have no concrete physical venue."""
+    """Reject merchandise pages whose source only supports online availability."""
     if ev.get("type") not in {"new_product", "reservation"}:
         return False
-    location = (ev.get("locationName") or "").strip()
-    if location and has_physical_store_signal(location):
-        return False
-    summary_blob = " ".join([
+    source_blob = " ".join([
         ev.get("title", ""), ev.get("summaryZh", ""), source_title,
+        page_text[:12000],
     ])
-    if has_physical_store_signal(summary_blob):
+    online_only = any(signal.lower() in source_blob.lower() for signal in ONLINE_ONLY_SIGNALS)
+    if not online_only:
         return False
-    source_blob = f"{summary_blob} {page_text[:12000]}".lower()
-    online_only = any(signal.lower() in source_blob for signal in ONLINE_ONLY_SIGNALS)
-    merchandise = ev.get("type") == "reservation" or is_generic_merch_title(summary_blob)
+
+    # "Pokemon Center" is part of the online shop's proper name. Remove those
+    # phrases before looking for independent evidence of a physical store.
+    physical_evidence = source_blob
+    for phrase in ONLINE_STORE_PHRASES:
+        physical_evidence = re.sub(re.escape(phrase), "", physical_evidence, flags=re.I)
+    if has_physical_store_signal(physical_evidence):
+        return False
+
+    merchandise = ev.get("type") == "reservation" or is_generic_merch_title(
+        ev.get("title", ""), source_title,
+    )
     return online_only and merchandise
 
 def has_physical_store_signal(*texts) -> bool:
@@ -640,7 +670,7 @@ def extract_dates(text: str, ref_year: int | None = None, is_html: bool = True,
     if is_html:
         text = re.sub(r"<[^>]+>", " ", text)
     text = re.sub(r"\s+", " ", text.replace("　", " "))[:scan_chars]
-    ry = ref_year or datetime.now(timezone.utc).year
+    ry = ref_year or datetime.now(TAIPEI_TZ).year
 
     ymd = r"(?:(20\d{2})\s*[年/.]\s*)?(\d{1,2})\s*[月/.]\s*(\d{1,2})"
     sep = rf"(?:{_DAY_SUFFIX}(?:から|より)\s*|{_DAY_SUFFIX}[～〜~\-−–—－至到]{{1,2}}\s*)"
@@ -1048,7 +1078,10 @@ def replace_in_place(events: list[dict], fresh: list[dict], should_replace) -> l
     for ev in events:
         eid = ev.get("id")
         if eid in by_id:
-            out.append(by_id[eid])
+            replacement = dict(by_id[eid])
+            if ev.get("createdAt"):
+                replacement["createdAt"] = ev["createdAt"]
+            out.append(replacement)
             used.add(eid)
         elif should_replace(ev):
             continue
@@ -1258,13 +1291,54 @@ STRONG_EVENT_IDENTITY_RULES = (
         "scope": "date",
     },
     {
+        "brand": "miffy",
+        "types": {"popup", "campaign"},
+        "concept": "miffy-style-yurakucho-popup",
+        "patterns": (
+            (("miffy style",), ("有楽町", "有樂町"), ("POP UP", "POPUP", "ポップアップ")),
+        ),
+        "scope": "date",
+    },
+    {
+        "brand": "miffy",
+        "types": {"popup", "campaign", "new_product"},
+        "concept": "flower-miffy-sunshine-alpa-10th",
+        "patterns": (
+            (("Flower Miffy", "フラワーミッフィー"),
+             ("サンシャインシティアルパ", "Sunshine City Alpa"),
+             ("10周年", "10週年", "10th")),
+        ),
+        "scope": "date",
+    },
+    {
+        "brand": "miffy",
+        "types": {"popup", "campaign", "cafe"},
+        "concept": "miffy-zakka-festa-kobe-hankyu",
+        "patterns": (
+            (("zakkaフェスタ", "zakka festa"), ("神戸阪急", "神戶阪急")),
+        ),
+        "match_fields": ("title", "sourceTitle"),
+        "scope": "month",
+    },
+    {
+        "brand": "miffy",
+        "types": {"popup", "campaign", "cafe"},
+        "concept": "dick-bruna-table-kobe-hankyu-popup",
+        "patterns": (
+            (("Dick Bruna TABLE", "ディック・ブルーナ テーブル"),
+             ("神戸阪急", "神戶阪急")),
+        ),
+        "match_fields": ("title", "locationName"),
+        "scope": "month",
+    },
+    {
         "brand": "chiikawa",
         "types": {"popup", "cafe", "campaign"},
         "concept": "chiikawa-kura-sushi-campaign",
         "patterns": (
             (("くら寿司", "藏壽司", "Kura Sushi", "kurasushi"),),
         ),
-        "scope": "date",
+        "scope": "quarter",
     },
     {
         "brand": "chiikawa",
@@ -1276,6 +1350,43 @@ STRONG_EVENT_IDENTITY_RULES = (
         "scope": "date",
     },
     {
+        "brand": "chiikawa",
+        "types": {"popup", "campaign"},
+        "concept": "chiikawa-baby-haneda-popup",
+        "patterns": (
+            (("Chiikawa Baby", "ちいかわベビー"), ("羽田空港", "羽田機場", "Haneda")),
+        ),
+        "scope": "end",
+    },
+    {
+        "brand": "chiikawa",
+        "types": {"popup", "campaign"},
+        "concept": "chiikawa-park-halloween-2026",
+        "patterns": (
+            (("ちいかわパーク", "Chiikawa Park", "吉伊卡哇主題"),
+             ("ハロウィ", "Halloween", "萬聖節", "秋季限定")),
+        ),
+        "scope": "year",
+    },
+    {
+        "brand": "chiikawa",
+        "types": {"popup", "campaign", "store"},
+        "concept": "chiikawa-koriyama-popup",
+        "patterns": (
+            (("アティ郡山", "郡山"), ("POP UP", "ポップアップ", "快閃")),
+        ),
+        "scope": "end",
+    },
+    {
+        "brand": "chiikawa",
+        "types": {"popup", "campaign"},
+        "concept": "chiikawa-aeon-okazaki-popup",
+        "patterns": (
+            (("イオンモール岡崎", "aeonmall-okazaki", "pus_aoka", "岡崎"),),
+        ),
+        "scope": "date",
+    },
+    {
         "brand": "pokemon",
         "types": {"new_product"},
         "concept": "pokemon-patapata-plush",
@@ -1283,6 +1394,15 @@ STRONG_EVENT_IDENTITY_RULES = (
             (("ぱたぱたっ！ぬいぐるみ", "ぱたぱたっ!ぬいぐるみ", "拍動玩偶"),),
         ),
         "scope": "date",
+    },
+    {
+        "brand": "pokemon",
+        "types": {"new_product", "campaign"},
+        "concept": "pokemon-magic-hour-illusion",
+        "patterns": (
+            (("Magic Hour Illusion",),),
+        ),
+        "scope": "year",
     },
     {
         "brand": "chiikawa",
@@ -1301,10 +1421,14 @@ STRONG_EVENT_IDENTITY_RULES = (
 
 def strong_event_identity_key(ev: dict) -> str | None:
     """Stable identity for named events/stores whose media wording varies widely."""
-    blob = _event_blob(ev)
     for rule in STRONG_EVENT_IDENTITY_RULES:
         if ev.get("brand") != rule["brand"] or ev.get("type") not in rule["types"]:
             continue
+        fields = rule.get("match_fields")
+        blob = (
+            _norm(" ".join(str(ev.get(field, "")) for field in fields))
+            if fields else _event_blob(ev)
+        )
         matched = any(
             all(any(_norm(alias) in blob for alias in alias_group) for alias_group in pattern)
             for pattern in rule["patterns"]
@@ -1312,11 +1436,30 @@ def strong_event_identity_key(ev: dict) -> str | None:
         if not matched:
             continue
         parts = [rule["brand"], rule["concept"]]
-        if rule["scope"] == "date":
+        scope = rule["scope"]
+        if scope == "date":
             if not ev.get("startDate"):
                 return None
             parts.append(ev["startDate"])
-        elif rule["scope"] == "city":
+        elif scope == "month":
+            if not ev.get("startDate"):
+                return None
+            parts.append(ev["startDate"][:7])
+        elif scope == "quarter":
+            if not ev.get("startDate"):
+                return None
+            year, month = ev["startDate"].split("-")[:2]
+            parts.append(f"{year}-Q{(int(month) - 1) // 3 + 1}")
+        elif scope == "year":
+            date_value = ev.get("startDate") or ev.get("endDate")
+            if not date_value:
+                return None
+            parts.append(date_value[:4])
+        elif scope == "end":
+            if not ev.get("endDate"):
+                return None
+            parts.append(ev["endDate"])
+        elif scope == "city":
             parts.append(ev.get("city", ""))
         return "|".join(parts)
     return None
@@ -1349,28 +1492,68 @@ def chain_campaign_key(ev: dict) -> str | None:
         return None
     return "|".join([ev.get("brand", ""), chain, concept, start])
 
+
+def chiikawa_popup_venue_key(ev: dict) -> str | None:
+    """Identity for a venue-specific Chiikawa popup without conflating branches."""
+    if ev.get("brand") != "chiikawa" or ev.get("type") not in ACTIVITY_TYPES:
+        return None
+    start = ev.get("startDate", "")
+    location = ev.get("locationName", "")
+    if not start or not location or is_generic_dedup_location(location):
+        return None
+    blob = _event_blob(ev)
+    if not any(_norm(signal) in blob for signal in (
+        "POP UP", "POPUP", "ポップアップ", "快閃",
+    )):
+        return None
+    family = "standard"
+    for name, aliases in (
+        ("baby", ("Chiikawa Baby", "ちいかわベビー")),
+        ("pocket", ("ちいかわぽけっと", "Chiikawa Pocket")),
+        ("movie", ("映画ちいかわ", "電影吉伊卡哇")),
+        ("magical", ("まじかるちいかわ",)),
+    ):
+        if any(_norm(alias) in blob for alias in aliases):
+            family = name
+            break
+    venue = _norm(location)
+    venue = re.sub(r"(?:本館|東館|西館|南館|北館)?\d+(?:階|f).*$", "", venue, flags=re.I)
+    if len(venue) < 3:
+        return None
+    return "|".join(["chiikawa", f"venue-popup-{family}", venue, start])
+
 def special_activity_key(ev: dict) -> str | None:
     """Known activities where media titles vary too much for fuzzy title dedup."""
-    strong_key = strong_event_identity_key(ev)
-    if strong_key:
-        return strong_key
     start = ev.get("startDate", "")
-    if not start:
-        return None
     blob = _event_blob(ev) + _norm(ev.get("sourceUrl", ""))
     brand = ev.get("brand")
     ev_type = ev.get("type", "")
+    if (
+        start
+        and brand == "chiikawa"
+        and ev_type in ACTIVITY_TYPES
+        and any(_norm(alias) in blob for alias in (
+            "羽田空港", "羽田機場", "haneda airport", "haneda-airport", "pus_hnds",
+        ))
+    ):
+        return "|".join([brand, "chiikawa-haneda-airport-popup", start])
+    strong_key = strong_event_identity_key(ev)
+    if strong_key:
+        return strong_key
+    if not start:
+        return None
     is_taipei = ev.get("city") == "Taipei" or any(
         token in blob for token in (_norm("台北"), _norm("臺北"), "taipei")
     )
     if brand == "chiikawa" and ev_type in ACTIVITY_TYPES:
-        if any(_norm(alias) in blob for alias in ["羽田空港", "haneda airport", "haneda-airport", "pus_hnds"]):
-            return "|".join([brand, "chiikawa-haneda-airport-popup", start])
-        if not is_taipei:
-            return None
-        for concept, aliases in SPECIAL_ACTIVITY_ALIASES:
-            if any(_norm(alias) in blob for alias in aliases):
-                return "|".join([brand, concept, start])
+        if is_taipei:
+            for concept, aliases in SPECIAL_ACTIVITY_ALIASES:
+                if any(_norm(alias) in blob for alias in aliases):
+                    return "|".join([brand, concept, start])
+        venue_key = chiikawa_popup_venue_key(ev)
+        if venue_key:
+            return venue_key
+        return None
     if brand in GLOBAL_PRODUCT_ALIASES and ev_type in SELLING_TYPES:
         for concept, aliases in GLOBAL_PRODUCT_ALIASES[brand]:
             if any(_norm(alias) in blob for alias in aliases):
@@ -1414,11 +1597,39 @@ def canon_venue(loc: str, title: str = "") -> str | None:
             return canon
     return None
 
+
+def location_compatibility(left_loc: str, right_loc: str,
+                           left_title: str = "", right_title: str = "") -> bool | None:
+    """Return True for the same venue, False for distinct venues, None if unknown.
+
+    Chain branches such as AEON MALL share most of their text, so a fuzzy string
+    score is not evidence that they are the same place. Exact/contained names and
+    curated venue aliases are the only automatic positive matches.
+    """
+    if not left_loc or not right_loc:
+        return None
+    if bool(is_chainwide_location(left_loc)) != bool(is_chainwide_location(right_loc)):
+        return False
+    left_venue = canon_venue(left_loc, left_title)
+    right_venue = canon_venue(right_loc, right_title)
+    if left_venue or right_venue:
+        return bool(left_venue and left_venue == right_venue)
+    left_norm, right_norm = _norm(left_loc), _norm(right_loc)
+    if not left_norm or not right_norm:
+        return None
+    if left_norm == right_norm:
+        return True
+    shorter, longer = sorted((left_norm, right_norm), key=len)
+    if len(shorter) >= 4 and shorter in longer:
+        return True
+    return False
+
 def _days_ago_iso(iso_date: str) -> float | None:
     """YYYY-MM-DD 距今幾天；無法解析回 None"""
     try:
-        dt = datetime.strptime(iso_date, "%Y-%m-%d").replace(tzinfo=timezone.utc)
-        return (datetime.now(timezone.utc) - dt).total_seconds() / 86400
+        today = datetime.strptime(TODAY, "%Y-%m-%d").date()
+        target = datetime.strptime(iso_date, "%Y-%m-%d").date()
+        return float((today - target).days)
     except Exception:
         return None
 
@@ -1443,10 +1654,18 @@ def is_same_event_for_update_diff(old: dict, new: dict) -> bool:
     """Whether `new` is the same real-world item as an older public entry."""
     if old.get("id") and old.get("id") == new.get("id"):
         return True
+    if old.get("brand") != new.get("brand"):
+        return False
+
     old_url, new_url = _real_source_url(old), _real_source_url(new)
     if old_url and old_url == new_url:
         old_city, new_city = old.get("city", ""), new.get("city", "")
         if old_city and new_city and old_city != new_city:
+            return False
+        old_loc, new_loc = old.get("locationName", ""), new.get("locationName", "")
+        location_match = location_compatibility(
+            old_loc, new_loc, old.get("title", ""), new.get("title", ""))
+        if location_match is False:
             return False
         old_start, new_start = old.get("startDate", ""), new.get("startDate", "")
         if old_start and new_start:
@@ -1454,27 +1673,34 @@ def is_same_event_for_update_diff(old: dict, new: dict) -> bool:
             if gap is not None and gap > 14:
                 return False
         return True
-    if old.get("brand") != new.get("brand"):
-        return False
 
-    old_title = old.get("title", "")
-    new_title = new.get("title", "")
-    old_norm, new_norm = _norm(old_title), _norm(new_title)
-    if old_norm and old_norm == new_norm:
-        return True
-
-    old_type, new_type = old.get("type", ""), new.get("type", "")
     old_special = special_activity_key(old)
     new_special = special_activity_key(new)
     if old_special and old_special == new_special:
         return True
+    old_chain = chain_campaign_key(old)
+    new_chain = chain_campaign_key(new)
+    if old_chain and old_chain == new_chain:
+        return True
+
+    old_title = old.get("title", "")
+    new_title = new.get("title", "")
+    old_norm, new_norm = _norm(old_title), _norm(new_title)
+    old_city, new_city = old.get("city", ""), new.get("city", "")
+    if old_city and new_city and old_city != new_city:
+        return False
+
+    old_loc, new_loc = old.get("locationName", ""), new.get("locationName", "")
+    location_match = location_compatibility(old_loc, new_loc, old_title, new_title)
+    if location_match is False:
+        return False
+    if old_norm and old_norm == new_norm:
+        return True
+
+    old_type, new_type = old.get("type", ""), new.get("type", "")
     if old_type in SELLING_TYPES or new_type in SELLING_TYPES:
         return False
     if old_type not in ACTIVITY_TYPES or new_type not in ACTIVITY_TYPES:
-        return False
-
-    old_city, new_city = old.get("city", ""), new.get("city", "")
-    if old_city and new_city and old_city != new_city:
         return False
 
     old_start, new_start = old.get("startDate", ""), new.get("startDate", "")
@@ -1488,11 +1714,6 @@ def is_same_event_for_update_diff(old: dict, new: dict) -> bool:
     if old_end and new_end and old_end != new_end:
         return False
 
-    old_chain = chain_campaign_key(old)
-    new_chain = chain_campaign_key(new)
-    if old_chain and old_chain == new_chain:
-        return True
-    old_loc, new_loc = old.get("locationName", ""), new.get("locationName", "")
     old_canon = canon_venue(old_loc, old_title)
     new_canon = canon_venue(new_loc, new_title)
     title_sim = SequenceMatcher(None, old_norm, new_norm).ratio()
@@ -1586,19 +1807,13 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
             kept_event = kept[hit]
             current_loc = ev.get("locationName", "")
             kept_loc = kept_event.get("locationName", "")
-            current_venue = canon_venue(current_loc, ev.get("title", ""))
-            kept_venue = canon_venue(kept_loc, kept_event.get("title", ""))
-            same_known_venue = bool(current_venue and current_venue == kept_venue)
+            location_match = location_compatibility(
+                current_loc, kept_loc, ev.get("title", ""), kept_event.get("title", ""))
             special_match = bool(
                 (ckey and ckey == chain_campaign_key(kept_event))
                 or (skey and skey == special_activity_key(kept_event))
             )
-            concrete_location_conflict = bool(
-                current_loc
-                and kept_loc
-                and not same_known_venue
-                and SequenceMatcher(None, _norm(current_loc), _norm(kept_loc)).ratio() < 0.5
-            )
+            concrete_location_conflict = location_match is False
             if concrete_location_conflict and not special_match:
                 hit = None
 
@@ -1617,8 +1832,8 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
         # 巡迴標題常完全相同，僅靠日期區分）。同一真實來源 URL 視為同篇報導，為例外不套用。
         hit_by_url = ukey is not None and url_keys.get(ukey) == hit
         if hit is not None and not hit_by_url and sd and kept[hit].get("startDate"):
-            ga, gb = _days_ago_iso(sd), _days_ago_iso(kept[hit]["startDate"])
-            if ga is not None and gb is not None and abs(ga - gb) > 14:
+            gap = _date_gap_days(sd, kept[hit]["startDate"])
+            if gap is not None and gap > 14:
                 hit = None
 
         if hit is not None:
@@ -1666,15 +1881,13 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
             if k.get("city") and ev.get("city") and k.get("city") != ev.get("city"):
                 continue
             sim = tsim(k.get("title", ""), ev.get("title", ""))
-            same_venue = (canon_venue(ev.get("locationName", ""), ev.get("title", "")) is not None
-                          and canon_venue(ev.get("locationName", ""), ev.get("title", ""))
-                              == canon_venue(k.get("locationName", ""), k.get("title", "")))
-            # 會場鐵則：兩筆都有 locationName、且明顯是不同會場(非同一已知場館、字串也不相近)
-            # = 同城市的不同場次(如兵庫的ピオレ姫路 vs イオンモール伊丹，標題幾乎相同)，不合併。
             ln_e, ln_k = ev.get("locationName", ""), k.get("locationName", "")
-            if bool(is_chainwide_location(ln_e)) != bool(is_chainwide_location(ln_k)):
-                continue
-            if ln_e and ln_k and not same_venue and tsim(ln_e, ln_k) < 0.5:
+            location_match = location_compatibility(
+                ln_e, ln_k, ev.get("title", ""), k.get("title", ""))
+            same_venue = location_match is True
+            # Distinct concrete branches are a hard boundary even when their
+            # names and event titles are nearly identical.
+            if location_match is False:
                 continue
             if (
                 (ev.get("type") in SELLING_TYPES or k.get("type") in SELLING_TYPES)
@@ -1687,9 +1900,8 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
             sa, sb = ev.get("startDate"), k.get("startDate")
             date_conflict = date_aligned = False
             if sa and sb:
-                ga, gb = _days_ago_iso(sa), _days_ago_iso(sb)
-                if ga is not None and gb is not None:
-                    gap = abs(ga - gb)
+                gap = _date_gap_days(sa, sb)
+                if gap is not None:
                     date_conflict, date_aligned = gap > 14, gap <= 3
             if date_conflict:
                 continue
@@ -1697,18 +1909,16 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
                 ev.get("type", "") in ACTIVITY_TYPES
                 and k.get("type", "") in ACTIVITY_TYPES
             )
-            # 場館字串相似（即使不在 VENUE_CANON 清單）：用於「同城+同活動但媒體標題寫法差很多」
-            venue_close = bool(ln_e and ln_k and tsim(ln_e, ln_k) >= 0.6)
             ea, eb = ev.get("endDate"), k.get("endDate")
             range_aligned = date_aligned and (not ea or not eb or ea == eb)
             # 同品牌+同一已知場館，且其中一筆完全沒日期 → 幾乎一定是同活動的較不完整版本
             # （兩個不同檔期通常各自都有日期，故「一邊全無日期」可避免誤併不同檔期）
             one_dateless = not ev.get("startDate") or not k.get("startDate")
             if fuzzy_allowed and (
-               (same_venue and sim >= 0.4) or (same_venue and one_dateless and sim >= 0.2)
-               or (same_city and venue_close and date_aligned and sim >= 0.5)
-               or (venue_close and range_aligned and sim >= 0.5)
-               or (same_city and sim >= 0.50) or sim >= 0.72):
+               (same_venue and sim >= 0.5) or (same_venue and one_dateless and sim >= 0.5)
+               or (same_city and location_match is not False and date_aligned and sim >= 0.5)
+               or (location_match is None and range_aligned
+                   and _norm(ev.get("title", "")) == _norm(k.get("title", "")))):
                 # 合併到較完整者，補空欄位
                 base = k if completeness(k) >= completeness(ev) else ev
                 other = ev if base is k else k
@@ -1725,12 +1935,22 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
 
     return result, removed
 
-def clean_events(events: list[dict]) -> tuple[list[dict], int, int]:
-    """移除過期活動 + 去重。回傳（清理後, 移除過期數, 去重數）"""
-    fresh = [e for e in events if not _is_past(e)]
-    past_removed = len(events) - len(fresh)
+def clean_events(events: list[dict]) -> tuple[list[dict], int, int, int]:
+    """Remove blocked sources, expired records, and duplicates."""
+    accepted = [
+        e for e in events
+        if not is_rejected_url(e.get("sourceUrl", ""))
+        and not is_rejected_title(e.get("sourceTitle", ""))
+        and not (
+            e.get("sourceType") != "official_site"
+            and is_roundup_title(e.get("sourceTitle", ""))
+        )
+    ]
+    rejected_removed = len(events) - len(accepted)
+    fresh = [e for e in accepted if not _is_past(e)]
+    past_removed = len(accepted) - len(fresh)
     deduped, dup_removed = dedup_events(fresh)
-    return deduped, past_removed, dup_removed
+    return deduped, past_removed, dup_removed, rejected_removed
 
 def _completeness(e: dict) -> int:
     score = sum(bool(e.get(f)) for f in ("startDate", "endDate", "city", "locationName"))
@@ -1976,6 +2196,8 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
 # ── 主程式 ────────────────────────────────────────────────────────────────────
 
 def run(brands: list[str], official_only: bool = False):
+    global _REJECTED
+    _REJECTED = load_rejected()
     env = load_env()
     backend = None if official_only else detect_ai_backend(env)
     rotator = None
@@ -1997,6 +2219,8 @@ def run(brands: list[str], official_only: bool = False):
         try:
             structured = (
                 fetch_chiikawa_popups(correct_city=correct_city)
+                + fetch_chiikawa_campaign_popups(correct_city=correct_city)
+                + fetch_chiikawa_park_events(correct_city=correct_city)
                 + fetch_chiikawa_mogumogu(correct_city=correct_city)
                 + fetch_chiikawa_movie_goods(correct_city=correct_city)
                 + fetch_chiikawa_movie_popups(correct_city=correct_city)
@@ -2042,6 +2266,19 @@ def run(brands: list[str], official_only: bool = False):
         except Exception as e:
             print(f"    ⚠️  寶可夢結構化來源失敗（略過）：{e}")
         try:
+            poke_jp = fetch_pokemon_jp_goods()
+            if poke_jp:
+                urls = {e["sourceUrl"] for e in poke_jp}
+                events = replace_in_place(
+                    events,
+                    poke_jp,
+                    lambda e: e.get("sourceUrl") in urls,
+                )
+                print(f"🏛️  日本 Pokémon Center 官方商品（結構化，免 AI）→ {len(poke_jp)} 筆現行")
+                save_events(events)
+        except Exception as e:
+            print(f"    ⚠️  日本 Pokémon 官方商品來源失敗（略過）：{e}")
+        try:
             poke_tw = fetch_pokemon_tw_goods(correct_city=correct_city)
             if poke_tw:
                 events = replace_in_place(
@@ -2072,21 +2309,19 @@ def run(brands: list[str], official_only: bool = False):
             print(f"    ⚠️  Miffy 結構化來源失敗（略過）：{e}")
 
     if not rotator:
-        events, past_removed, dup_removed = clean_events(events)
+        events, past_removed, dup_removed, rejected_removed = clean_events(events)
         save_events(events)
         update_diff = save_update_diff(previous_events, events, baseline_date)
         print("\n✨  官方來源更新完成（媒體 AI 萃取已略過）")
         print(f"    今日新增檢視：相對前次版本新增 {update_diff['newEventCount']} 筆")
-        if past_removed or dup_removed:
-            print(f"    清理：移除過期 {past_removed} 筆、去重 {dup_removed} 筆")
+        if past_removed or dup_removed or rejected_removed:
+            print(f"    清理：移除過期 {past_removed} 筆、去重 {dup_removed} 筆、封鎖來源 {rejected_removed} 筆")
         print(f"    總計 {len(events)} 筆，寫入：{EVENTS_JSON}")
         return
 
     seen_ttls = {e.get("title", "") for e in events} | {e.get("sourceTitle", "") for e in events}
     seen_urls = {e.get("sourceUrl", "") for e in events}
     processed_cache = load_processed()  # 跑過的（採用或略過）原始標題，避免重複送 AI
-    global _REJECTED
-    _REJECTED = load_rejected()         # 壞資料黑名單（url/title 片段），防舊壞資料復活
     new_count = 0
     rate_limited = False
 
@@ -2183,7 +2418,7 @@ def run(brands: list[str], official_only: bool = False):
 
     save_processed(processed_cache)
     # 收尾：移除過期 + 啟發式去重
-    events, past_removed, dup_removed = clean_events(events)
+    events, past_removed, dup_removed, rejected_removed = clean_events(events)
     # 再用一次 AI 群組去重，補抓改寫標題的同一活動（配額用盡則自動略過）
     ai_removed = 0
     if not rate_limited:
@@ -2194,9 +2429,9 @@ def run(brands: list[str], official_only: bool = False):
     status = "中途因配額停止" if rate_limited else "完成"
     print(f"\n✨  {status}！本次新增 {new_count} 筆")
     print(f"    今日新增檢視：相對前次版本新增 {update_diff['newEventCount']} 筆")
-    if past_removed or dup_removed or ai_removed:
-        print(f"    清理：移除過期 {past_removed} 筆、去重 {dup_removed + ai_removed} 筆"
-              f"（其中 AI 去重 {ai_removed} 筆）")
+    if past_removed or dup_removed or ai_removed or rejected_removed:
+        print(f"    清理：移除過期 {past_removed} 筆、封鎖來源 {rejected_removed} 筆、"
+              f"去重 {dup_removed + ai_removed} 筆（其中 AI 去重 {ai_removed} 筆）")
     print(f"    總計 {len(events)} 筆，寫入：{EVENTS_JSON}")
 
 def main():

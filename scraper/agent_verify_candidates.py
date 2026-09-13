@@ -30,9 +30,17 @@ STRUCTURED_OFFICIAL_DOMAINS = (
     "chiikawamogumogu.jp",
     "oneheart65.net",
     "pokemon-cafe.jp",
+    "pokemon.co.jp",
     "tw.portal-pokemon.com",
     "dickbruna.jp",
     "kiddyland.co.jp",
+    "chiikawapark-tokyo.jp",
+    "chiikawabakery.jp",
+)
+
+OPEN_ENDED_STOCK_MARKERS = (
+    "送完為止", "送完即止", "數量有限", "数量限定", "数に限り",
+    "なくなり次第", "無くなり次第", "在庫がなくなり次第",
 )
 
 GENERIC_TITLE_KEYWORDS = (
@@ -88,7 +96,7 @@ def domain_of(url: str) -> str:
 
 def has_domain(url: str, domains: tuple[str, ...]) -> bool:
     host = domain_of(url)
-    return any(d in host for d in domains)
+    return any(host == domain or host.endswith("." + domain) for domain in domains)
 
 
 def is_structured_official(ev: dict) -> bool:
@@ -100,12 +108,21 @@ def is_structured_official(ev: dict) -> bool:
     return ev.get("brand") == "pokemon" and has_domain(url, ("oneheart65.net",))
 
 
+def has_explicit_open_ended_condition(ev: dict) -> bool:
+    blob = " ".join(
+        str(ev.get(field, ""))
+        for field in ("title", "summaryZh", "sourceTitle")
+    )
+    return any(marker in blob for marker in OPEN_ENDED_STOCK_MARKERS)
+
+
 def structured_activity_missing_end_date(ev: dict) -> bool:
     return (
         is_structured_official(ev)
         and ev.get("type") in scrape.ACTIVITY_TYPES
         and bool(ev.get("startDate"))
         and not ev.get("endDate")
+        and not has_explicit_open_ended_condition(ev)
     )
 
 
@@ -258,7 +275,7 @@ def print_markdown(candidates: list[dict], total_events: int, limit: int) -> Non
     print()
     print(f"- Total events: {total_events}")
     print(f"- Candidates: {len(candidates)}")
-    print("- Skip rule: complete structured-source records from chiikawa-info.jp, chiikawamogumogu.jp, oneheart65.net, pokemon-cafe.jp, tw.portal-pokemon.com, dickbruna.jp, and kiddyland.co.jp")
+    print("- Skip rule: complete structured official records, including explicitly stock-limited open-ended campaigns")
     print("- Exception: activity-like structured official records with a startDate but no endDate stay in the queue until source reputation confirms the open-ended period")
     print("- Source reputation: data/source_reputation.json adjusts risk and states how much corroboration is needed")
     print()

@@ -154,6 +154,9 @@ IGNORED_OFFICIAL_PAGES: dict[str, str] = {
     "https://dickbruna.jp/news/202608/47832/": (
         "same Vermeer exhibition goods represented by canonical official page 202605/46308"
     ),
+    "https://dickbruna.jp/news/202608/48107/": (
+        "same Flower Miffy Sunshine City Alpa 10th anniversary represented by the canonical Flower Miffy page"
+    ),
     "https://dickbruna.jp/news/202608/47767/": (
         "same Kobe/Sannomiya miffy style novelty represented by the Kiddy Land canonical event page"
     ),
@@ -244,11 +247,14 @@ ALWAYS_IGNORE_RE = re.compile(
     r"#キミにあえた|ご来店予定|来店予定|ご来店のお客様へ|"
     r"整理券|入場制限|入場整理券|付録|宝島社|BOOK|メッセージを送ろう|"
     r"シャンブル|LINE|Tシャツ|Ｔシャツ|T-shirt|tee|ユニクロ|UNIQLO|"
-    r"Game Music|Jukebox|遊戲音樂機|音樂機|刷手衣|刷手服|醫療服",
+    r"Game Music|Jukebox|遊戲音樂機|音樂機|刷手衣|刷手服|醫療服|"
+    r"オープニングセレモニー|開会式",
     re.I,
 )
 CONDITIONAL_IGNORE_RE = re.compile(
     r"メンテナンス|休業|営業時間|お詫び|延期|入店方法|配送遅れ|"
+    r"受付休止|受付停止|一時休止|一時受付停止|サービス休止|受付を休止|"
+    r"\d{1,2}月\d{1,2}日[^\n]{0,12}営業について|"
     r"Pok[eé]mon GO|ポケモンGO|アプリ",
     re.I,
 )

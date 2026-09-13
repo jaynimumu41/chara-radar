@@ -31,6 +31,9 @@ EVENTS_JSON = Path(__file__).parent.parent / "data" / "events.json"
 # this project, e.g. pure online content, non-JP/TW, no physical sale/event, or
 # an expired historical notice intentionally left on the homepage.
 IGNORED_P26_PAGES: dict[str, str] = {
+    "https://chiikawa-info.jp/p26/ck_movie/index.html": (
+        "aggregate movie-goods page: expired bounded sections are filtered, the active venue schedule is represented by mck_scpus, and remaining permanent/broad retail listings are out of scope"
+    ),
     "https://chiikawa-info.jp/p26/ck_tokyo/index.html": (
         "2026-02-06 handling-start page with no current event end date; "
         "outside the new_product freshness window"

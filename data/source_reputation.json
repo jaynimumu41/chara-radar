@@ -1,27 +1,27 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-03T08:34:06+00:00",
+  "updatedAt": "2026-09-13T15:48:56+00:00",
   "sources": {
     "domain:nownews.com": {
-      "confirmed": 11,
+      "confirmed": 12,
       "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 12,
+      "crossChecked": 13,
       "score": 95,
       "label": "nownews.com",
       "kind": "news",
       "host": "nownews.com",
       "handle": "",
       "firstSeen": "2026-06-11",
-      "lastReviewed": "2026-08-26",
+      "lastReviewed": "2026-09-13",
       "lastOutcome": "confirmed",
-      "notes": "Confirmed 2026-08-29 Pokemon Center TAIPEI physical launch; article cites Pokemon Taiwan official Instagram and the official August schedule independently confirms entry control on the launch date.",
+      "notes": "Confirmed 2026-09-12 Pokemon Center TAIPEI physical launch of Pokemon Timeless Adventure Sinnoh and 2019-2025 game-package merchandise; UDN independently corroborates the date, store, and two product groups.",
       "byBrand": {
         "pokemon": {
-          "confirmed": 11,
+          "confirmed": 12,
           "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 11,
+          "crossChecked": 12,
           "score": 95
         },
         "chiikawa": {
@@ -34,10 +34,10 @@
       },
       "byType": {
         "new_product": {
-          "confirmed": 11,
+          "confirmed": 12,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 9,
+          "crossChecked": 10,
           "score": 95
         },
         "campaign": {
@@ -57,10 +57,10 @@
       },
       "byCountry": {
         "tw": {
-          "confirmed": 11,
+          "confirmed": 12,
           "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 12,
+          "crossChecked": 13,
           "score": 95
         }
       },
@@ -194,6 +194,16 @@
           "eventId": "po-e5aeff",
           "evidenceCount": 1,
           "notes": "Confirmed 2026-08-29 Pokemon Center TAIPEI physical launch; article cites Pokemon Taiwan official Instagram and the official August schedule independently confirms entry control on the launch date."
+        },
+        {
+          "date": "2026-09-13",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-4aeb10",
+          "evidenceCount": 1,
+          "notes": "Confirmed 2026-09-12 Pokemon Center TAIPEI physical launch of Pokemon Timeless Adventure Sinnoh and 2019-2025 game-package merchandise; UDN independently corroborates the date, store, and two product groups."
         }
       ]
     },
@@ -1698,43 +1708,43 @@
     },
     "domain:famitsu.com": {
       "confirmed": 1,
-      "rejected": 1,
+      "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 2,
-      "score": 50,
+      "crossChecked": 3,
+      "score": 41,
       "label": "famitsu.com",
       "kind": "news",
       "host": "famitsu.com",
       "handle": "",
       "firstSeen": "2026-07-04",
-      "lastReviewed": "2026-07-19",
+      "lastReviewed": "2026-09-13",
       "lastOutcome": "rejected",
-      "notes": "Removed as out-of-scope: the cited Mega Evolution plush claim was corroborated only as Pokemon Center Online product pages with 2026-07-16 10:00 online sales, not a physical store event row.",
+      "notes": "Removed: the article supports a Pokemon Center Online release and virtual waiting room only; it does not establish physical-store availability, so the record is out of scope.",
       "byBrand": {
         "pokemon": {
           "confirmed": 1,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 2,
-          "score": 50
+          "crossChecked": 3,
+          "score": 41
         }
       },
       "byType": {
         "new_product": {
           "confirmed": 1,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 2,
-          "score": 50
+          "crossChecked": 3,
+          "score": 41
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 1,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 2,
-          "score": 50
+          "crossChecked": 3,
+          "score": 41
         }
       },
       "history": [
@@ -1757,6 +1767,16 @@
           "eventId": "po-f645a4",
           "evidenceCount": 1,
           "notes": "Removed as out-of-scope: the cited Mega Evolution plush claim was corroborated only as Pokemon Center Online product pages with 2026-07-16 10:00 online sales, not a physical store event row."
+        },
+        {
+          "date": "2026-09-13",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "po-bd35c2",
+          "evidenceCount": 1,
+          "notes": "Removed: the article supports a Pokemon Center Online release and virtual waiting room only; it does not establish physical-store availability, so the record is out of scope."
         }
       ]
     },
@@ -2888,44 +2908,44 @@
       ]
     },
     "domain:4gamers.com.tw": {
-      "confirmed": 1,
+      "confirmed": 2,
       "rejected": 0,
       "uncertain": 0,
       "crossChecked": 0,
-      "score": 57,
+      "score": 64,
       "label": "4gamers.com.tw",
       "kind": "news",
       "host": "4gamers.com.tw",
       "handle": "",
       "firstSeen": "2026-08-04",
-      "lastReviewed": "2026-08-04",
+      "lastReviewed": "2026-09-13",
       "lastOutcome": "confirmed",
-      "notes": "Article explicitly names Pokemon Center TAIPEI, 2026-08-08 in-store sale date, products, prices, and purchase rules",
+      "notes": "Article explicitly identifies Pokemon Center TAIPEI, the 2026-08-22 in-store sale date, product lineup, prices, and in-store purchase procedure; retained under the verified Taiwan store-goods policy.",
       "byBrand": {
         "pokemon": {
-          "confirmed": 1,
+          "confirmed": 2,
           "rejected": 0,
           "uncertain": 0,
           "crossChecked": 0,
-          "score": 57
+          "score": 64
         }
       },
       "byType": {
         "new_product": {
-          "confirmed": 1,
+          "confirmed": 2,
           "rejected": 0,
           "uncertain": 0,
           "crossChecked": 0,
-          "score": 57
+          "score": 64
         }
       },
       "byCountry": {
         "tw": {
-          "confirmed": 1,
+          "confirmed": 2,
           "rejected": 0,
           "uncertain": 0,
           "crossChecked": 0,
-          "score": 57
+          "score": 64
         }
       },
       "history": [
@@ -2938,6 +2958,16 @@
           "eventId": "po-22bd8f",
           "evidenceCount": 0,
           "notes": "Article explicitly names Pokemon Center TAIPEI, 2026-08-08 in-store sale date, products, prices, and purchase rules"
+        },
+        {
+          "date": "2026-09-13",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-9cefdb",
+          "evidenceCount": 0,
+          "notes": "Article explicitly identifies Pokemon Center TAIPEI, the 2026-08-22 in-store sale date, product lineup, prices, and in-store purchase procedure; retained under the verified Taiwan store-goods policy."
         }
       ]
     },
@@ -3375,20 +3405,27 @@
     },
     "domain:report.iko-yo.net": {
       "confirmed": 0,
-      "rejected": 1,
+      "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 1,
-      "score": 41,
+      "crossChecked": 2,
+      "score": 32,
       "label": "report.iko-yo.net",
       "kind": "site",
       "host": "report.iko-yo.net",
       "handle": "",
       "firstSeen": "2026-08-21",
-      "lastReviewed": "2026-08-21",
+      "lastReviewed": "2026-09-13",
       "lastOutcome": "rejected",
-      "notes": "Broad roundup merged separate Sogo Yokohama and Chiba events and used an invalid combined period",
+      "notes": "Removed as a secondary duplicate of the structured Chiikawa Baby Haneda official record for 2026-08-18 through 2026-09-28.",
       "byBrand": {
         "miffy": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        },
+        "chiikawa": {
           "confirmed": 0,
           "rejected": 1,
           "uncertain": 0,
@@ -3399,19 +3436,19 @@
       "byType": {
         "popup": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 2,
+          "score": 32
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 2,
+          "score": 32
         }
       },
       "history": [
@@ -3424,6 +3461,16 @@
           "eventId": "mi-d4fa82",
           "evidenceCount": 1,
           "notes": "Broad roundup merged separate Sogo Yokohama and Chiba events and used an invalid combined period"
+        },
+        {
+          "date": "2026-09-13",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-a4c133",
+          "evidenceCount": 1,
+          "notes": "Removed as a secondary duplicate of the structured Chiikawa Baby Haneda official record for 2026-08-18 through 2026-09-28."
         }
       ]
     },
