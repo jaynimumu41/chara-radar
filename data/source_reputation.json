@@ -1,27 +1,27 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-13T15:48:56+00:00",
+  "updatedAt": "2026-09-14T08:35:45+00:00",
   "sources": {
     "domain:nownews.com": {
-      "confirmed": 12,
+      "confirmed": 13,
       "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 13,
+      "crossChecked": 14,
       "score": 95,
       "label": "nownews.com",
       "kind": "news",
       "host": "nownews.com",
       "handle": "",
       "firstSeen": "2026-06-11",
-      "lastReviewed": "2026-09-13",
+      "lastReviewed": "2026-09-14",
       "lastOutcome": "confirmed",
-      "notes": "Confirmed 2026-09-12 Pokemon Center TAIPEI physical launch of Pokemon Timeless Adventure Sinnoh and 2019-2025 game-package merchandise; UDN independently corroborates the date, store, and two product groups.",
+      "notes": "Article explicitly names Pokemon Center TAIPEI, physical 2026-09-19 sale, concrete Pokopia products, and cites pokemon_taiwan official announcement",
       "byBrand": {
         "pokemon": {
-          "confirmed": 12,
+          "confirmed": 13,
           "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 12,
+          "crossChecked": 13,
           "score": 95
         },
         "chiikawa": {
@@ -34,10 +34,10 @@
       },
       "byType": {
         "new_product": {
-          "confirmed": 12,
+          "confirmed": 13,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 10,
+          "crossChecked": 11,
           "score": 95
         },
         "campaign": {
@@ -57,10 +57,10 @@
       },
       "byCountry": {
         "tw": {
-          "confirmed": 12,
+          "confirmed": 13,
           "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 13,
+          "crossChecked": 14,
           "score": 95
         }
       },
@@ -204,6 +204,16 @@
           "eventId": "po-4aeb10",
           "evidenceCount": 1,
           "notes": "Confirmed 2026-09-12 Pokemon Center TAIPEI physical launch of Pokemon Timeless Adventure Sinnoh and 2019-2025 game-package merchandise; UDN independently corroborates the date, store, and two product groups."
+        },
+        {
+          "date": "2026-09-14",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-521834",
+          "evidenceCount": 1,
+          "notes": "Article explicitly names Pokemon Center TAIPEI, physical 2026-09-19 sale, concrete Pokopia products, and cites pokemon_taiwan official announcement"
         }
       ]
     },
@@ -397,18 +407,18 @@
     },
     "domain:news.yahoo.co.jp": {
       "confirmed": 2,
-      "rejected": 13,
+      "rejected": 14,
       "uncertain": 0,
-      "crossChecked": 15,
+      "crossChecked": 16,
       "score": 5,
       "label": "news.yahoo.co.jp",
       "kind": "news",
       "host": "news.yahoo.co.jp",
       "handle": "",
       "firstSeen": "2026-06-15",
-      "lastReviewed": "2026-09-01",
+      "lastReviewed": "2026-09-14",
       "lastOutcome": "rejected",
-      "notes": "Duplicate of official/venue-backed Kobe Waterfront cafe child record mi-a93c3f",
+      "notes": "Duplicate of Dick Bruna official mi-9b0b1c for Yurakucho Marui 2026-10-02 to 2026-10-19",
       "byBrand": {
         "chiikawa": {
           "confirmed": 1,
@@ -419,10 +429,10 @@
         },
         "miffy": {
           "confirmed": 1,
-          "rejected": 4,
+          "rejected": 5,
           "uncertain": 0,
-          "crossChecked": 7,
-          "score": 23
+          "crossChecked": 8,
+          "score": 12
         }
       },
       "byType": {
@@ -449,10 +459,10 @@
         },
         "popup": {
           "confirmed": 1,
-          "rejected": 5,
+          "rejected": 6,
           "uncertain": 0,
-          "crossChecked": 5,
-          "score": 12
+          "crossChecked": 6,
+          "score": 5
         },
         "campaign": {
           "confirmed": 0,
@@ -465,9 +475,9 @@
       "byCountry": {
         "jp": {
           "confirmed": 2,
-          "rejected": 13,
+          "rejected": 14,
           "uncertain": 0,
-          "crossChecked": 15,
+          "crossChecked": 16,
           "score": 5
         }
       },
@@ -621,6 +631,16 @@
           "eventId": "mi-6f9d90",
           "evidenceCount": 3,
           "notes": "Duplicate of official/venue-backed Kobe Waterfront cafe child record mi-a93c3f"
+        },
+        {
+          "date": "2026-09-14",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "mi-bf93da",
+          "evidenceCount": 1,
+          "notes": "Duplicate of Dick Bruna official mi-9b0b1c for Yurakucho Marui 2026-10-02 to 2026-10-19"
         }
       ]
     },
@@ -1095,25 +1115,25 @@
     },
     "domain:collabo-cafe.com": {
       "confirmed": 9,
-      "rejected": 11,
+      "rejected": 12,
       "uncertain": 0,
-      "crossChecked": 26,
+      "crossChecked": 27,
       "score": 5,
       "label": "collabo-cafe.com",
       "kind": "site",
       "host": "collabo-cafe.com",
       "handle": "",
       "firstSeen": "2026-06-30",
-      "lastReviewed": "2026-09-03",
+      "lastReviewed": "2026-09-14",
       "lastOutcome": "rejected",
-      "notes": "Mixed two-venue roundup duplicated official Yagihashi and FKD Utsunomiya records and added unsupported cafe claim",
+      "notes": "Duplicate of Chiikawa official ch-310b94 for Aeon Mall Niihama 2026-09-26 to 2026-10-12",
       "byBrand": {
         "chiikawa": {
           "confirmed": 9,
-          "rejected": 10,
+          "rejected": 11,
           "uncertain": 0,
-          "crossChecked": 25,
-          "score": 13
+          "crossChecked": 26,
+          "score": 5
         },
         "miffy": {
           "confirmed": 0,
@@ -1133,10 +1153,10 @@
         },
         "popup": {
           "confirmed": 7,
-          "rejected": 5,
+          "rejected": 6,
           "uncertain": 0,
-          "crossChecked": 17,
-          "score": 54
+          "crossChecked": 18,
+          "score": 43
         },
         "new_product": {
           "confirmed": 2,
@@ -1149,9 +1169,9 @@
       "byCountry": {
         "jp": {
           "confirmed": 9,
-          "rejected": 11,
+          "rejected": 12,
           "uncertain": 0,
-          "crossChecked": 26,
+          "crossChecked": 27,
           "score": 5
         }
       },
@@ -1355,6 +1375,16 @@
           "eventId": "ch-208ec5",
           "evidenceCount": 2,
           "notes": "Mixed two-venue roundup duplicated official Yagihashi and FKD Utsunomiya records and added unsupported cafe claim"
+        },
+        {
+          "date": "2026-09-14",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-fd1638",
+          "evidenceCount": 1,
+          "notes": "Duplicate of Chiikawa official ch-310b94 for Aeon Mall Niihama 2026-09-26 to 2026-10-12"
         }
       ]
     },
@@ -2527,18 +2557,18 @@
     },
     "domain:asahi.com": {
       "confirmed": 0,
-      "rejected": 3,
+      "rejected": 4,
       "uncertain": 0,
-      "crossChecked": 4,
-      "score": 25,
+      "crossChecked": 5,
+      "score": 16,
       "label": "asahi.com",
       "kind": "site",
       "host": "asahi.com",
       "handle": "",
       "firstSeen": "2026-07-19",
-      "lastReviewed": "2026-08-21",
+      "lastReviewed": "2026-09-14",
       "lastOutcome": "rejected",
-      "notes": "Duplicate secondary coverage of official Kura Sushi collaboration",
+      "notes": "Duplicate of Dick Bruna official mi-9b0b1c for Yurakucho Marui 2026-10-02 to 2026-10-19",
       "byBrand": {
         "chiikawa": {
           "confirmed": 0,
@@ -2549,19 +2579,19 @@
         },
         "miffy": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 2,
-          "score": 43
+          "crossChecked": 3,
+          "score": 34
         }
       },
       "byType": {
         "popup": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 2,
+          "score": 32
         },
         "campaign": {
           "confirmed": 0,
@@ -2574,10 +2604,10 @@
       "byCountry": {
         "jp": {
           "confirmed": 0,
-          "rejected": 3,
+          "rejected": 4,
           "uncertain": 0,
-          "crossChecked": 4,
-          "score": 25
+          "crossChecked": 5,
+          "score": 16
         }
       },
       "history": [
@@ -2610,6 +2640,16 @@
           "eventId": "ch-1cdea8",
           "evidenceCount": 1,
           "notes": "Duplicate secondary coverage of official Kura Sushi collaboration"
+        },
+        {
+          "date": "2026-09-14",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "mi-65c69a",
+          "evidenceCount": 1,
+          "notes": "Duplicate of Dick Bruna official mi-9b0b1c for Yurakucho Marui 2026-10-02 to 2026-10-19"
         }
       ]
     },
