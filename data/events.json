@@ -1772,29 +1772,5 @@
     "sourceType": "official_social",
     "createdAt": "2026-09-14",
     "sourceUrl": "https://www.nownews.com/amp/news/6874887"
-  },
-  {
-    "brand": "miffy",
-    "title": "米飛兔快閃店",
-    "type": "popup",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "有楽町マルイ",
-    "startDate": "2026-10-02",
-    "endDate": "2026-10-19",
-    "summaryZh": "米飛兔主題快閃店將於10月2日起在日本有樂町丸井百貨期間限定登場，販售周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "快閃店",
-      "日本",
-      "東京"
-    ],
-    "id": "mi-74917d",
-    "sourceTitle": "ミッフィー専門店ポップアップ、有楽町マルイに期間限定オープン 10月2日から - cinemacafe.net",
-    "sourceType": "official_social",
-    "createdAt": "2026-09-15",
-    "sourceUrl": "https://www.cinemacafe.net/article/2026/09/13/112552.html"
   }
 ]

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-14T08:35:45+00:00",
+  "updatedAt": "2026-09-15T08:33:23+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 13,
@@ -3570,43 +3570,43 @@
     },
     "domain:cinemacafe.net": {
       "confirmed": 0,
-      "rejected": 1,
+      "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 1,
-      "score": 41,
+      "crossChecked": 2,
+      "score": 32,
       "label": "cinemacafe.net",
       "kind": "site",
       "host": "cinemacafe.net",
       "handle": "",
       "firstSeen": "2026-08-31",
-      "lastReviewed": "2026-08-31",
+      "lastReviewed": "2026-09-15",
       "lastOutcome": "rejected",
-      "notes": "Accurate dates, but duplicate of existing mi-c23623 confirmed by Felissimo company release on PR TIMES",
+      "notes": "Claim confirmed, but duplicate of Dick Bruna official record mi-9b0b1c for the same Yurakucho Marui venue and 2026-10-02 to 2026-10-19 period",
       "byBrand": {
         "miffy": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 2,
+          "score": 32
         }
       },
       "byType": {
         "popup": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 2,
+          "score": 32
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 2,
+          "score": 32
         }
       },
       "history": [
@@ -3619,6 +3619,16 @@
           "eventId": "mi-4ce883",
           "evidenceCount": 1,
           "notes": "Accurate dates, but duplicate of existing mi-c23623 confirmed by Felissimo company release on PR TIMES"
+        },
+        {
+          "date": "2026-09-15",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "mi-74917d",
+          "evidenceCount": 1,
+          "notes": "Claim confirmed, but duplicate of Dick Bruna official record mi-9b0b1c for the same Yurakucho Marui venue and 2026-10-02 to 2026-10-19 period"
         }
       ]
     },
