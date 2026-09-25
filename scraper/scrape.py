@@ -39,9 +39,11 @@ from official_sources import (fetch_official, fetch_chiikawa_popups,
                               fetch_chiikawa_movie_goods,
                               fetch_chiikawa_movie_popups,
                               fetch_pokemon_popups, fetch_pokemon_cafe_events,
+                              fetch_pokemon_store_events,
                               fetch_pokemon_jp_goods,
                               fetch_pokemon_tw_goods,
-                              fetch_miffy_events)  # 官方來源：PR TIMES + 結構化排程頁
+                              fetch_miffy_events,
+                              _kiddy_is_out_of_scope_product)  # 官方來源：PR TIMES + 結構化排程頁
 
 # Windows 終端機 UTF-8 輸出 + 關閉緩衝（即時看到進度）
 if hasattr(sys.stdout, "reconfigure"):
@@ -109,7 +111,7 @@ AREA_TO_CITY = {
                   "スカイツリー", "晴空塔", "ソラマチ", "押上", "自由が丘", "自由之丘",
                   "お台場", "丸の内", "浅草", "上野", "中野", "吉祥寺", "多摩", "立川",
                   "有楽町", "有樂町",
-                  "むさし村山", "武蔵村山", "羽田", "北千住", "蒲田", "グランデュオ蒲田",
+                  "むさし村山", "武蔵村山", "町田", "羽田", "北千住", "蒲田", "グランデュオ蒲田",
                   "ピューロランド", "Puroland", "彩虹樂園", "サンリオピューロランド"],
     "Iwate":    ["岩手", "盛岡", "カワトク", "パルクアベニュー・カワトク"],
     "Osaka":    ["大阪", "梅田", "心斎橋", "心齋橋", "なんば", "難波", "中之島", "天王寺",
@@ -129,7 +131,7 @@ AREA_TO_CITY = {
     "Kagoshima":["鹿児島", "鹿兒島", "Kagoshima", "KAGOSHIMA BAY"],
     "Mie":      ["三重", "四日市", "津南"],
     "Miyagi":   ["仙台", "宮城", "名取", "新利府", "利府"],
-    "Chiba":    ["千葉", "舞浜", "幕張", "柏高島屋"],
+    "Chiba":    ["千葉", "舞浜", "幕張", "柏高島屋", "船橋", "TOKYO-BAY", "津田沼"],
     "Niigata":  ["新潟", "亀田", "新発田"],
     "Okayama":  ["岡山", "倉敷"],
     "Tottori":  ["鳥取", "日吉津", "米子"],
@@ -147,12 +149,13 @@ AREA_TO_CITY = {
     "Aichi":    ["愛知", "豊田", "名古屋", "常滑", "大高", "岡崎", "中部国際空港", "セントレア"],
     "Shizuoka": ["静岡", "靜岡", "富士宮", "浜松", "遠鉄", "セノバ", "磐田"],
     "Yamaguchi":["山口", "小野田", "おのだ"],
+    "Saga":     ["佐賀", "佐贺", "佐賀大和"],
     "Wakayama": ["和歌山", "Wakayama"],
     "Kochi":    ["高知", "Kochi"],
     "Ehime":    ["愛媛", "今治", "松山", "新居浜"],
     "Tochigi":  ["栃木", "宇都宮", "FKD"],
     "Ishikawa": ["石川", "金沢", "金澤", "香林坊", "新小松"],
-    "Ibaraki":  ["茨城", "水戸", "京成百貨店"],
+    "Ibaraki":  ["茨城", "水戸", "内原", "京成百貨店"],
     "Taipei":   ["台北", "臺北", "信義", "西門", "微風", "南山", "華山", "中山",
                  "松山", "內湖", "板橋", "101"],
     "Taichung": ["台中", "臺中", "草悟", "勤美"],
@@ -197,12 +200,17 @@ NOISE_KEYWORDS = [
     "映画", "予告", "声優", "主題歌", "アプリ", "ぽけっと", "ゲーム",
     "劇場版", "預告", "聲優", "手遊", "動畫", "電影",
     "Pokémon GO", "Pokemon GO", "ポケモンGO", "寶可夢GO",
+    # 卡牌／遊戲衍生商品（即使改成實體週邊，仍不在本專案範圍）
+    "ポケポケ", "pokemon tcg pocket", "trading card game pocket",
+    "ポケカ", "カードゲーム", "トレーディングカード", "集換式卡牌",
     # 隨機販售 / 開箱 / 夾娃娃機景品（非「去逛買」目標）
     "ガチャ", "カプセル", "扭蛋", "轉蛋", "盲盒", "開箱", "レビュー", "ガチレビュー",
     "付録", "レポ", "夾娃娃機", "ナムコ", "景品", "プライズ", "クレーンゲーム",
     "アミューズメント", "UFOキャッチャー",
     # 廣泛通路抽賞（書店/便利商店/玩具店等上架，不是特定現場活動）
     "一番くじ", "一番賞",
+    # 廣泛通路限定品，不是角色專門店或活動會場
+    "郵便局",
     # 冷卻片 / 文具雜貨小物（順手買，非專程）
     "冷却シート", "スマ冷え", "チャーム", "シール",
     # 海外（非日台）
@@ -210,7 +218,8 @@ NOISE_KEYWORDS = [
 ]
 
 def is_noise(title: str) -> bool:
-    return any(kw in title for kw in NOISE_KEYWORDS)
+    lower = (title or "").lower()
+    return any(kw.lower() in lower for kw in NOISE_KEYWORDS)
 
 # 體育 / 路跑 / 棒球：體驗活動非購物情報。這類關鍵字可安全地對「標題＋摘要＋內文」
 # 全面比對（不像食品/飲料字會誤殺「咖啡廳有飲料攤」之類的正當活動）。
@@ -239,9 +248,20 @@ GENERIC_MERCH_TITLE_KEYWORDS = (
 
 APPAREL_PRODUCT_KEYWORDS = (
     "服裝", "服装", "服飾", "衣服", "衣料", "衣類", "衣著",
-    "アパレル", "ファッション", "ウェア", "wear",
+    "アパレル", "ウェア", "wear",
     "tシャツ", "t-shirt", "tee", "シャツ", "パーカー", "スウェット",
     "ワンピース", "ブラウス", "ジャケット", "コート", "カーディガン",
+    "童裝", "童装", "子供服", "キッズ服", "キッズウェア", "ベビー服",
+    "ルームウェア", "パジャマ", "ソックス", "靴下", "襪子",
+    "アプレ レ クール", "après les cours", "apres les cours", "スクラブ",
+)
+
+OUT_OF_SCOPE_PRODUCT_KEYWORDS = (
+    # 美妝／保養品與可穿戴飾品的一般新品不收。
+    "コスメ", "化粧", "スキンケア", "美妝", "化妝", "保養品",
+    "コスメパレット", "化粧パレット", "化妝盤", "mitea organic",
+    "ジュエリー", "ネックレス", "ピアス", "イヤリング",
+    "首飾", "耳環", "珠寶", "q-pot.",
 )
 
 ONLINE_ONLY_SIGNALS = (
@@ -267,6 +287,26 @@ PHYSICAL_STORE_SIGNALS = (
     "カフェ", "cafe", "レストラン", "restaurant", "ベーカリー", "出張所",
 )
 
+FIRST_PARTY_PRODUCT_DOMAINS = (
+    "pokemon.co.jp", "pokemon.com.tw", "tw.portal-pokemon.com",
+    "chiikawa-info.jp", "chiikawa-market.com", "chiikawamogumogu.jp",
+    "dickbruna.jp", "miffykitchenbakery.jp", "kiddyland.co.jp",
+)
+
+DESTINATION_STORE_SIGNALS = (
+    "pokemon center", "pokémon center", "ポケモンセンター",
+    "寶可夢中心", "宝可梦中心", "miffy style", "キデイランド", "kiddy land",
+    "flower miffy", "フラワーミッフィー", "ちいかわらんど",
+    "ちいかわもぐもぐ本舗", "もぐもぐ本舗",
+    "pop up", "popup", "ポップアップ", "快閃", "期間限定店",
+)
+
+GENERIC_RETAIL_LOCATION_HINTS = (
+    "全国", "全國", "各店", "各店舗", "対象店", "對象門市", "一部店舗",
+    "取扱店", "販売店", "玩具店", "量販店", "雑貨店", "バラエティショップ",
+    "郵便局", "オンライン", "online", "通販",
+)
+
 MEDIA_LOCATION_HINTS = (
     "テレビ", "放送", "新聞", "ニュース", "通信", "メディア", "press", "times",
     "tv", "news", "magazine", "web", "編集部",
@@ -277,9 +317,7 @@ def is_generic_merch_title(*texts) -> bool:
     return any(kw.lower() in blob.lower() for kw in GENERIC_MERCH_TITLE_KEYWORDS)
 
 def is_apparel_new_product(ev: dict, source_title: str = "", page_text: str = "") -> bool:
-    """Reject clothing/apparel product-only launches while keeping real events."""
-    if ev.get("type") != "new_product":
-        return False
+    """Reject apparel launches even when AI mislabeled them as campaigns."""
     parts = [
         ev.get("title", ""),
         ev.get("summaryZh", ""),
@@ -291,7 +329,50 @@ def is_apparel_new_product(ev: dict, source_title: str = "", page_text: str = ""
     if isinstance(tags, list):
         parts.extend(str(tag) for tag in tags)
     blob = " ".join(part for part in parts if part).lower()
-    return any(kw.lower() in blob for kw in APPAREL_PRODUCT_KEYWORDS)
+    if not any(kw.lower() in blob for kw in APPAREL_PRODUCT_KEYWORDS):
+        return False
+    event_blob = " ".join([
+        ev.get("title", ""), ev.get("summaryZh", ""), source_title,
+    ]).lower()
+    explicit_popup = any(signal in event_blob for signal in (
+        "pop up", "popup", "ポップアップ", "快閃", "期間限定店",
+    ))
+    complete_event = bool(
+        ev.get("locationName") and ev.get("startDate") and ev.get("endDate")
+    )
+    return not (ev.get("type") in {"popup", "campaign"} and explicit_popup and complete_event)
+
+def is_out_of_scope_product(ev: dict, source_title: str = "", page_text: str = "") -> bool:
+    """Reject cosmetic/accessory launches even when AI mislabeled the type."""
+    parts = [
+        ev.get("title", ""), ev.get("summaryZh", ""), ev.get("locationName", ""),
+        source_title, page_text[:12000],
+    ]
+    tags = ev.get("tags")
+    if isinstance(tags, list):
+        parts.extend(str(tag) for tag in tags)
+    blob = " ".join(part for part in parts if part).lower()
+    if not any(kw.lower() in blob for kw in OUT_OF_SCOPE_PRODUCT_KEYWORDS):
+        return False
+    event_blob = " ".join([
+        ev.get("title", ""), ev.get("summaryZh", ""), source_title,
+    ]).lower()
+    explicit_popup = any(signal in event_blob for signal in (
+        "pop up", "popup", "ポップアップ", "快閃", "期間限定店",
+    ))
+    complete_event = bool(
+        ev.get("locationName") and ev.get("startDate") and ev.get("endDate")
+    )
+    return not (ev.get("type") in {"popup", "campaign"} and explicit_popup and complete_event)
+
+def is_experience_only_event(ev: dict, source_title: str = "") -> bool:
+    """Reject AI rows whose extracted subject is an out-of-scope experience."""
+    subject = " ".join([
+        ev.get("title", ""), ev.get("summaryZh", ""), source_title,
+    ]).lower()
+    return any(signal in subject for signal in (
+        "パレード", "parade", "遊行", "燈光秀", "ライトアップ",
+    ))
 
 def is_online_only_merchandise(ev: dict, source_title: str = "", page_text: str = "") -> bool:
     """Reject merchandise pages whose source only supports online availability."""
@@ -322,6 +403,22 @@ def has_physical_store_signal(*texts) -> bool:
     blob = " ".join(t for t in texts if t).lower()
     return any(kw.lower() in blob for kw in PHYSICAL_STORE_SIGNALS)
 
+def is_first_party_product_source(url: str) -> bool:
+    try:
+        host = (urlparse(url).hostname or "").lower()
+    except Exception:
+        return False
+    return any(host == domain or host.endswith("." + domain)
+               for domain in FIRST_PARTY_PRODUCT_DOMAINS)
+
+def has_destination_store_signal(*texts) -> bool:
+    blob = " ".join(t for t in texts if t).lower()
+    return any(signal.lower() in blob for signal in DESTINATION_STORE_SIGNALS)
+
+def is_generic_retail_location(location: str) -> bool:
+    lower = (location or "").lower()
+    return any(signal.lower() in lower for signal in GENERIC_RETAIL_LOCATION_HINTS)
+
 def looks_like_media_location(location: str, source: str = "", source_title: str = "") -> bool:
     loc = re.sub(r"\s+", "", location or "").lower()
     if not loc:
@@ -342,19 +439,27 @@ def is_venue_less_generic_new_product(ev: dict, source_title: str = "",
     """
     if ev.get("type") != "new_product":
         return False
-    if is_trusted_date_source(source_url):
+    if is_first_party_product_source(source_url):
         return False
 
     loc = (ev.get("locationName") or "").strip()
-    physical = has_physical_store_signal(
+    destination = has_destination_store_signal(
         loc, ev.get("title", ""), ev.get("summaryZh", ""),
         source_title, page_text[:12000],
     )
-    if physical:
+    if destination:
         return False
 
     generic = is_generic_merch_title(ev.get("title", ""), source_title)
-    bad_location = (not loc) or looks_like_media_location(loc, source, source_title)
+    company_location = any(signal.lower() in loc.lower() for signal in (
+        "株式会社", "有限会社", "公司", "co., ltd", "corporation",
+    ))
+    bad_location = (
+        (not loc)
+        or is_generic_retail_location(loc)
+        or company_location
+        or looks_like_media_location(loc, source, source_title)
+    )
     return generic and bad_location
 
 # 官方／權威來源（新聞稿、品牌官方）——額度有限，這些先處理（資料一定正確、日期齊全）
@@ -470,6 +575,9 @@ EXTRACT_PROMPT = """你是角色周邊情報萃取助手，專門幫旅人篩選
 【一律 relevant: false（即使有提到本品牌也不要）】
 - 體育/賽事類：棒球主題日、球場應援、始球式、開球、路跑、馬拉松、RUN 活動、運動賽事聯名出場
 - 純體驗/無商品：見面會、握手會、拍照打卡點、燈光秀、遊行(parade)本身、抽獎派對（除非主軸是限定商品販售）
+- 一般服裝、童裝、襪子、美妝保養品、珠寶飾品的新品（除非情報主體是有明確會場與檔期的快閃店）
+- 卡牌、遊戲、Pokémon GO、Pokémon TCG Pocket／ポケポケ相關情報與衍生商品
+- 郵局、量販店等廣泛通路的一般聯名商品
 - 多活動「總整理/懶人包」式報導（內容雜揉很多無關活動，無單一明確的購物地點與檔期）
 - 超商/藥妝/百元店/量販店的聯名小商品（7-11、全家、唐吉訶德、DAISO、Seria、Canddo、驚安殿堂等）
 - 食品飲料聯名上架（醬油、優格、軟糖、糖果、寶礦力、力保美達等量販通路商品）
@@ -1292,12 +1400,25 @@ STRONG_EVENT_IDENTITY_RULES = (
     },
     {
         "brand": "miffy",
-        "types": {"popup", "campaign"},
+        "types": {"popup", "campaign", "new_product"},
         "concept": "miffy-style-yurakucho-popup",
         "patterns": (
             (("miffy style",), ("有楽町", "有樂町"), ("POP UP", "POPUP", "ポップアップ")),
+            (("Miffy", "ミッフィー", "米飛兔"), ("有楽町", "有樂町"),
+             ("POP UP", "POPUP", "ポップアップ", "快閃")),
         ),
-        "scope": "date",
+        "match_fields": ("title", "locationName"),
+        "scope": "year",
+    },
+    {
+        "brand": "miffy",
+        "types": {"popup", "campaign", "cafe", "new_product"},
+        "concept": "miffy-huis-ten-bosch-halloween",
+        "patterns": (
+            (("ハウステンボス", "Huis Ten Bosch", "豪斯登堡", "huistenbosch"),
+             ("ハロウィ", "Halloween", "萬聖節")),
+        ),
+        "scope": "year",
     },
     {
         "brand": "miffy",
@@ -1342,7 +1463,7 @@ STRONG_EVENT_IDENTITY_RULES = (
     },
     {
         "brand": "chiikawa",
-        "types": {"popup", "cafe", "campaign"},
+        "types": {"popup", "cafe", "campaign", "store", "new_product"},
         "concept": "chiikawa-centrair-popup",
         "patterns": (
             (("中部国際空港", "セントレア", "Centrair", "pus_cbca", "centrair-2026"),),
@@ -1360,7 +1481,7 @@ STRONG_EVENT_IDENTITY_RULES = (
     },
     {
         "brand": "chiikawa",
-        "types": {"popup", "campaign"},
+        "types": {"popup", "campaign", "cafe", "new_product"},
         "concept": "chiikawa-park-halloween-2026",
         "patterns": (
             (("ちいかわパーク", "Chiikawa Park", "吉伊卡哇主題"),
@@ -1831,7 +1952,13 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
         # 日期鐵則：兩筆都有開始日且差距 >14 天 = 不同檔期，不合併（同場館的春檔/秋檔
         # 巡迴標題常完全相同，僅靠日期區分）。同一真實來源 URL 視為同篇報導，為例外不套用。
         hit_by_url = ukey is not None and url_keys.get(ukey) == hit
-        if hit is not None and not hit_by_url and sd and kept[hit].get("startDate"):
+        if (
+            hit is not None
+            and not hit_by_url
+            and not special_match
+            and sd
+            and kept[hit].get("startDate")
+        ):
             gap = _date_gap_days(sd, kept[hit]["startDate"])
             if gap is not None and gap > 14:
                 hit = None
@@ -1937,10 +2064,20 @@ def dedup_events(events: list[dict]) -> tuple[list[dict], int]:
 
 def clean_events(events: list[dict]) -> tuple[list[dict], int, int, int]:
     """Remove blocked sources, expired records, and duplicates."""
+    def structured_scope_rejected(event: dict) -> bool:
+        url = event.get("sourceUrl", "")
+        source_title = event.get("sourceTitle", "")
+        if "kiddyland.co.jp/event/miffy" in url:
+            return _kiddy_is_out_of_scope_product(source_title)
+        if "pokemon.co.jp/goods/" in url and event.get("type") in SELLING_TYPES:
+            return is_noise(source_title)
+        return False
+
     accepted = [
         e for e in events
         if not is_rejected_url(e.get("sourceUrl", ""))
         and not is_rejected_title(e.get("sourceTitle", ""))
+        and not structured_scope_rejected(e)
         and not (
             e.get("sourceType") != "official_site"
             and is_roundup_title(e.get("sourceTitle", ""))
@@ -2182,6 +2319,16 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
         ):
             print("    ⛔ 服裝/衣服類新品，不收")
             return None
+        if is_out_of_scope_product(
+            data,
+            source_title=item.get("title", ""),
+            page_text=source_html,
+        ):
+            print("    ⛔ 美妝/珠寶飾品類一般新品，不收")
+            return None
+        if is_experience_only_event(data, source_title=item.get("title", "")):
+            print("    ⛔ 遊行/燈光秀等純體驗情報，不收")
+            return None
         if is_unstable_source_url(real or ""):
             print("    ⛔ 找不到穩定來源 URL，不入庫（保留隔天重試）")
             return {"_skipNoProcess": True}
@@ -2252,6 +2399,19 @@ def run(brands: list[str], official_only: bool = False):
                 save_events(events)
         except Exception as e:
             print(f"    ⚠️  Pokémon Cafe 官方公告來源失敗（略過）：{e}")
+        try:
+            store_events = fetch_pokemon_store_events(correct_city=correct_city)
+            if store_events:
+                urls = {e["sourceUrl"] for e in store_events}
+                events = replace_in_place(
+                    events,
+                    store_events,
+                    lambda e: e.get("sourceUrl") in urls,
+                )
+                print(f"🏛️  Pokémon Center 官方店頭活動（結構化，免 AI）→ {len(store_events)} 筆現行")
+                save_events(events)
+        except Exception as e:
+            print(f"    ⚠️  Pokémon Center 官方店頭活動來源失敗（略過）：{e}")
         try:
             poke = fetch_pokemon_popups(correct_city=correct_city)
             if poke:

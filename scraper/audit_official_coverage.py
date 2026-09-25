@@ -248,7 +248,10 @@ ALWAYS_IGNORE_RE = re.compile(
     r"整理券|入場制限|入場整理券|付録|宝島社|BOOK|メッセージを送ろう|"
     r"シャンブル|LINE|Tシャツ|Ｔシャツ|T-shirt|tee|ユニクロ|UNIQLO|"
     r"Game Music|Jukebox|遊戲音樂機|音樂機|刷手衣|刷手服|醫療服|"
-    r"オープニングセレモニー|開会式",
+    r"オープニングセレモニー|開会式|撮影会|"
+    r"予約[^\n]{0,12}(?:受け付け|受付)|"
+    r"スキンケア|コスメ|ファミリーマート|"
+    r"紀伊國屋書店[^\n]{0,40}(?:コラボグッズ|グッズフェア)",
     re.I,
 )
 CONDITIONAL_IGNORE_RE = re.compile(
@@ -490,6 +493,119 @@ def load_parsed_event_pages(events_path: Path = EVENTS_JSON) -> dict[str, list[s
     return parsed
 
 
+def load_current_events(events_path: Path = EVENTS_JSON) -> list[dict]:
+    if not events_path.exists():
+        return []
+    return json.loads(events_path.read_text(encoding="utf-8"))
+
+
+def _covered_event_ids(candidate: OfficialCandidate, title: str, detail: str,
+                       signals: PageSignals, current_events: list[dict],
+                       today: str) -> tuple[str, ...]:
+    """Match alternate official pages to the structured real-world event."""
+    if not current_events or candidate.brand != "miffy":
+        return ()
+
+    pseudo_events: list[dict] = []
+    lower_title = title.lower()
+    is_miffy_popup = (
+        "miffy style" in lower_title
+        and any(token in lower_title for token in ("pop up", "popup", "ポップアップ"))
+    )
+    if is_miffy_popup and all(token in title for token in ("有楽町", "梅田", "札幌")):
+        ref_year = int(signals.start_date[:4]) if signals.start_date else date.fromisoformat(today).year
+        parsed = official_sources._miffy_multi_venue_events(
+            title,
+            candidate.url,
+            detail,
+            ref_year,
+            scrape.extract_dates,
+            scrape.correct_city,
+            today=today,
+        )
+        pseudo_events.extend(parsed or [])
+    elif is_miffy_popup and "有楽町" in title and signals.start_date:
+        pseudo_events.append({
+            "brand": "miffy",
+            "title": "Miffy miffy style POP UP SHOP in 有楽町",
+            "type": "popup",
+            "country": "JP",
+            "city": "Tokyo",
+            "locationName": "有楽町マルイ",
+            "startDate": signals.start_date,
+            "endDate": signals.end_date,
+            "sourceUrl": candidate.url,
+        })
+
+    if candidate.source == "miffy-kiddyland-search" and signals.start_date:
+        if official_sources._kiddy_type(title) == "new_product":
+            same_day_campaigns = [
+                event for event in current_events
+                if event.get("brand") == "miffy"
+                and event.get("type") == "campaign"
+                and event.get("startDate") == signals.start_date
+                and "miffy style" in (
+                    event.get("title", "") + event.get("locationName", "")
+                ).lower()
+            ]
+            if same_day_campaigns:
+                return tuple(event.get("id", "") for event in same_day_campaigns if event.get("id"))
+
+    if not pseudo_events:
+        return ()
+    matched_ids: list[str] = []
+    for pseudo in pseudo_events:
+        matches = [
+            event.get("id", "") for event in current_events
+            if event.get("brand") == pseudo.get("brand")
+            and scrape.is_same_event_for_update_diff(event, pseudo)
+            and event.get("id")
+        ]
+        if not matches:
+            return ()
+        matched_ids.extend(matches)
+    return tuple(dict.fromkeys(matched_ids))
+
+
+def _scope_ignore_reason(candidate: OfficialCandidate, title: str, detail: str,
+                         signals: PageSignals, today: str) -> str:
+    if candidate.source == "pokemon-cafe-news":
+        visible = clean_text(detail)
+        if re.search(r"予約[^。\n]{0,30}(?:受け付け|受付)", visible):
+            return "Pokemon Cafe monthly seat-reservation schedule, not a new menu or event"
+
+    if candidate.source == "miffy-kiddyland-search":
+        if official_sources._kiddy_is_out_of_scope_product(title):
+            return "Kiddy Land single-product page is outside the configured merchandise scope"
+        if signals.start_date:
+            event_type = official_sources._kiddy_type(title)
+            max_age = 30 if event_type in scrape.ACTIVITY_TYPES else 60
+            try:
+                age = (date.fromisoformat(today) - date.fromisoformat(signals.start_date)).days
+            except ValueError:
+                age = 0
+            if age > max_age:
+                return "Kiddy Land page is outside the same freshness window used by production cleanup"
+
+    if candidate.source.startswith("miffy-dickbruna"):
+        main_text = official_sources._main_article_text(detail, title)
+        if (
+            re.search(r"絵本|書籍|\d+冊(?:同時)?刊行", main_text)
+            and not re.search(r"POP\s*UP|ポップアップ|フェア|イベント|限定店", title, re.I)
+        ):
+            return "editorial/book release without a target physical event"
+
+    if candidate.url == official_sources._POKEMON_CAFE_TOKYO_RENEWAL:
+        visible = official_sources._visible_text(detail)
+        event = official_sources._pokemon_cafe_tokyo_renewal_event_from_text(
+            visible, candidate.url, correct_city=scrape.correct_city)
+        if event and event.get("startDate"):
+            age = (date.fromisoformat(today) - date.fromisoformat(event["startDate"])).days
+            if age > 90:
+                return "structured cafe update is outside the production store freshness window"
+    return ""
+
+
 def fetch_pokemon_cafe_candidates(max_items: int = 14) -> list[OfficialCandidate]:
     page = _page_text(POKEMON_CAFE_NEWS)
     out: list[OfficialCandidate] = []
@@ -642,10 +758,15 @@ def audit_candidates(
     parsed_pages: dict[str, list[str]] | None = None,
     ignored_pages: dict[str, str] | None = None,
     details_by_url: dict[str, str] | None = None,
+    current_events: list[dict] | None = None,
+    *,
+    today: str | None = None,
 ) -> list[AuditRow]:
     parsed_pages = parsed_pages or {}
     ignored_pages = ignored_pages or {}
     details_by_url = details_by_url or {}
+    current_events = current_events or []
+    today = today or date.today().isoformat()
     rows: list[AuditRow] = []
     for candidate in candidates:
         url = normalize_url(candidate.url)
@@ -655,6 +776,10 @@ def audit_candidates(
             _signal_text(candidate, detail, title),
             ignore_text="\n".join(part for part in (title, candidate.title) if part),
         )
+        covered_ids = _covered_event_ids(
+            candidate, title, detail, signals, current_events, today)
+        scope_ignore_reason = _scope_ignore_reason(
+            candidate, title, detail, signals, today)
         if url in parsed_pages:
             status = "parsed"
             reason = "represented by current event sourceUrl"
@@ -664,6 +789,12 @@ def audit_candidates(
         elif signals.auto_ignore_reason:
             status = "ignored"
             reason = signals.auto_ignore_reason
+        elif scope_ignore_reason:
+            status = "ignored"
+            reason = scope_ignore_reason
+        elif covered_ids:
+            status = "ignored"
+            reason = "alternate official page is represented by the same structured real-world event"
         elif _is_expired(signals):
             status = "ignored"
             reason = "official page appears expired"
@@ -679,7 +810,7 @@ def audit_candidates(
             url=url,
             reason=reason,
             signals=signals,
-            event_ids=tuple(parsed_pages.get(url, ())),
+            event_ids=tuple(parsed_pages.get(url, ())) or covered_ids,
             published=candidate.published,
         ))
     return rows
@@ -826,9 +957,13 @@ def main() -> int:
         )
         return 3
     parsed_pages = load_parsed_event_pages()
+    current_events = load_current_events()
     ignored_pages = {normalize_url(k): v for k, v in IGNORED_OFFICIAL_PAGES.items()}
     details = {} if args.no_fetch_details else fetch_review_details(candidates, parsed_pages)
-    rows = audit_candidates(candidates, parsed_pages, ignored_pages, details)
+    rows = audit_candidates(
+        candidates, parsed_pages, ignored_pages, details,
+        current_events=current_events,
+    )
 
     if args.format == "json":
         print(_format_json(rows))

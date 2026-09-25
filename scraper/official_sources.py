@@ -319,6 +319,18 @@ def _chiikawa_popup_detail_urls(page_text: str) -> list[str]:
     ))
 
 
+_CHIIKAWA_POPUP_OVERRIDES = {
+    "/p26/pus_smtk/": {
+        "venue": "新光三越台北信義新天地",
+        "location": "新光三越台北信義新天地 A9 9F 宴會展演館",
+        "city": "Taipei",
+        "country": "TW",
+    },
+}
+
+_TAIWAN_CITIES = {"Taipei", "Taichung", "Tainan", "Kaohsiung", "Taoyuan"}
+
+
 def _chiikawa_popup_event(
     venue: str,
     url: str,
@@ -329,17 +341,30 @@ def _chiikawa_popup_event(
     correct_city=None,
 ) -> dict:
     today = _today_iso()
+    override = next(
+        (values for marker, values in _CHIIKAWA_POPUP_OVERRIDES.items() if marker in url),
+        None,
+    )
+    if override:
+        venue = override["venue"]
+        location = override["location"]
     location = location if len(location) >= len(venue) else venue
-    city = correct_city(location, venue) if correct_city else None
+    city = override["city"] if override else (
+        correct_city(location, venue) if correct_city else None
+    )
+    country = override["country"] if override else (
+        "TW" if city in _TAIWAN_CITIES else "JP"
+    )
+    country_tag = "台灣" if country == "TW" else "日本"
     return {
         "brand": "chiikawa",
         "title": f"吉伊卡哇 POP UP STORE {venue}",
-        "type": "popup", "country": "JP", "city": city or "",
+        "type": "popup", "country": country, "city": city or "",
         "locationName": location,
         "startDate": start, "endDate": end,
         "summaryZh": f"ちいかわ POP UP STORE 於{venue}期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
         "needReservation": False, "hasLimitedGoods": True,
-        "tags": ["吉伊卡哇", "快閃店", "日本", "限定周邊"],
+        "tags": ["吉伊卡哇", "快閃店", country_tag, "限定周邊"],
         "id": _stable_id("ch", url),
         "sourceType": "official_site", "createdAt": today,
         "sourceTitle": f"ちいかわPOP UP STORE {venue}({start}～{end}) - ちいかわ公式",
@@ -347,9 +372,14 @@ def _chiikawa_popup_event(
     }
 
 
-def _chiikawa_popup_events_from_text(md: str, correct_city=None) -> list[dict]:
+def _chiikawa_popup_events_from_text(
+    md: str,
+    correct_city=None,
+    *,
+    today: str | None = None,
+) -> list[dict]:
     """Parse current Chiikawa POP UP STORE rows from official markdown."""
-    today = _today_iso()
+    today = today or _today_iso()
     out, seen = [], set()
     for m in _PUS_ROW.finditer(md):
         venue, url, sy, sm, sd, ey, em, ed, addr = m.groups()
@@ -378,7 +408,18 @@ def fetch_chiikawa_popups(correct_city=None) -> list[dict]:
         return []
     events = _chiikawa_popup_events_from_text(md, correct_city=correct_city)
     seen = {event["sourceUrl"] for event in events}
-    for url in _chiikawa_popup_detail_urls(md):
+    # New image-only p26 pages can appear on the homepage before pus.html is
+    # updated. Discover both surfaces so the official detail page is enough to
+    # publish a complete, dated venue record.
+    homepage = (
+        _proxy_markdown(_CHIIKAWA_INFO_TOP, fresh=True)
+        or fetch_html(_CHIIKAWA_INFO_TOP)
+        or ""
+    )
+    detail_urls = list(dict.fromkeys(
+        _chiikawa_popup_detail_urls(md) + _chiikawa_popup_detail_urls(homepage)
+    ))
+    for url in detail_urls:
         if url in seen:
             continue
         fields = _chiikawa_popup_detail_fields(fetch_html(url))
@@ -468,14 +509,19 @@ def fetch_chiikawa_campaign_popups(correct_city=None) -> list[dict]:
     return out
 
 
-def _chiikawa_park_halloween_event_from_text(text: str, correct_city=None) -> dict | None:
+def _chiikawa_park_halloween_event_from_text(
+    text: str,
+    correct_city=None,
+    *,
+    today: str | None = None,
+) -> dict | None:
     if "ちいかわパーク" not in text or "ハロウィ" not in text:
         return None
     match = re.search(_JP_DATE_RANGE, text)
     if not match:
         return None
     start, end = _date_range_to_iso(*match.groups())
-    if end < _today_iso():
+    if end < (today or _today_iso()):
         return None
     location = "ちいかわパーク（東京・池袋）"
     city = correct_city(location, "池袋") if correct_city else "Tokyo"
@@ -702,6 +748,10 @@ _POKE_SCHED = "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
 _POKEMON_CAFE_NEWS = "https://www.pokemon-cafe.jp/ja/cafe/news/"
 _POKEMON_CAFE_TOKYO_RENEWAL = "https://www.pokemon-cafe.jp/ja/cafe/news/260529_3377.html"
 _POKEMON_CAFE_LATTE = "https://www.pokemon-cafe.jp/ja/cafe/news/260703_3439.html"
+_POKEMON_CENTER_HEIGHT_SURVEY = (
+    "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tokyobay/"
+    "events/202609/000524.html"
+)
 # 解析：2026年6月5日（金）〜7月22日（水）**兵庫県・イオンモール神戸北**専門店街3階 イオンホール
 _POKE_ROW = re.compile(
     r"(20\d\d)年(\d{1,2})月(\d{1,2})日（[^）]*）[〜～]\s*"
@@ -874,6 +924,77 @@ def fetch_pokemon_cafe_events(correct_city=None) -> list[dict]:
     return out
 
 
+def _pokemon_center_height_survey_event_from_text(
+    text: str,
+    source_url: str,
+    correct_city=None,
+    *,
+    today: str | None = None,
+) -> dict | None:
+    """Parse the TOKYO-BAY height-survey rally and its limited stickers."""
+    if not all(token in (text or "") for token in (
+        "ポケモンたかさ調査隊", "ららぽーとTOKYO-BAY", "オリジナルステッカー",
+    )):
+        return None
+    period = re.search(
+        r"(?:(20\d{2})\s*年\s*)?(\d{1,2})\s*月\s*(\d{1,2})\s*日"
+        r"(?:[（(][^）)]*[）)])?\s*[〜～~-]\s*"
+        r"(?:(20\d{2})\s*年\s*)?(\d{1,2})\s*月\s*(\d{1,2})\s*日",
+        text,
+    )
+    if not period:
+        return None
+    fallback_year = re.search(r"/events/(20\d{2})\d{2}/", source_url or "")
+    sy = int(period.group(1) or (fallback_year.group(1) if fallback_year else _today_date().year))
+    sm, sd = int(period.group(2)), int(period.group(3))
+    ey = int(period.group(4) or sy)
+    em, ed = int(period.group(5)), int(period.group(6))
+    if not period.group(4) and em < sm:
+        ey += 1
+    start = f"{sy:04d}-{sm:02d}-{sd:02d}"
+    end = f"{ey:04d}-{em:02d}-{ed:02d}"
+    location = "三井ショッピングパーク ららぽーとTOKYO-BAY"
+    city = correct_city(location, text[:1000]) if correct_city else "Chiba"
+    return {
+        "brand": "pokemon",
+        "title": "Pokémon Center TOKYO-BAY 寶可夢身高調查隊集章活動",
+        "type": "campaign",
+        "country": "JP",
+        "city": city or "Chiba",
+        "locationName": location,
+        "startDate": start,
+        "endDate": end,
+        "summaryZh": (
+            "於啦啦寶都 TOKYO-BAY 館內尋找寶可夢並完成問答；完成指定路線可獲兩款"
+            "活動限定貼紙，每日名額有限。"
+        ),
+        "needReservation": False,
+        "hasLimitedGoods": True,
+        "tags": ["寶可夢", "實體活動", "集章", "限定贈品", "千葉"],
+        "id": _stable_id("po", source_url),
+        "sourceType": "official_site",
+        "createdAt": today or _today_iso(),
+        "sourceTitle": "ポケモンセンタートウキョーベイ「さがして、はかって！ポケモンたかさ調査隊！」が開催！",
+        "sourceUrl": source_url,
+    }
+
+
+def fetch_pokemon_store_events(correct_city=None) -> list[dict]:
+    """Fetch manually reviewed, high-confidence Pokemon Center store events."""
+    out: list[dict] = []
+    for url, parser in (
+        (_POKEMON_CENTER_HEIGHT_SURVEY, _pokemon_center_height_survey_event_from_text),
+    ):
+        html_text = fetch_html(url)
+        if not html_text:
+            print(f"    ⚠️  Pokémon Center 官方活動抓取失敗：{url}")
+            continue
+        event = parser(_visible_text(html_text), url, correct_city=correct_city)
+        if event:
+            out.append(event)
+    return out
+
+
 
 def fetch_pokemon_popups(correct_city=None) -> list[dict]:
     """解析寶可夢出張所排程，回傳「現行（未過期）」出張所的成品情報清單。零 Gemini。
@@ -892,7 +1013,10 @@ def fetch_pokemon_popups(correct_city=None) -> list[dict]:
 _POKE_JP_GOODS_API = "https://www.pokemon.co.jp/api/goods/index/"
 _POKE_JP_GOODS_NOISE = (
     "ポケモンカード", "カードゲーム", "Pokémon GO", "ゲームソフト",
+    "ポケポケ", "Pokémon TCG Pocket", "Pokemon TCG Pocket",
+    "Pokémon Trading Card Game Pocket", "Trading Card Game Pocket",
     "アプリ", "アクセサリー", "ジュエリー", "アパレル", "ファッション",
+    "ソックス", "靴下",
 )
 
 
@@ -1008,6 +1132,9 @@ _POKE_TW_GOODS_NOISE = (
     "音樂機",
     "寶可夢集換式卡牌",
     "Trading Card Game",
+    "Pokémon TCG Pocket",
+    "Pokemon TCG Pocket",
+    "ポケポケ",
     "卡牌",
     "刷手衣",
     "刷手服",
@@ -1101,7 +1228,13 @@ def _tw_store_sale_date(text: str, published: str) -> str:
     return ""
 
 
-def _tw_partner_popup_event(entry: dict, text: str, correct_city=None) -> dict | None:
+def _tw_partner_popup_event(
+    entry: dict,
+    text: str,
+    correct_city=None,
+    *,
+    today: str | None = None,
+) -> dict | None:
     title = entry.get("title", "")
     if "POP UP Promotion" not in (title + text) or "活動店鋪" not in text:
         return None
@@ -1113,7 +1246,7 @@ def _tw_partner_popup_event(entry: dict, text: str, correct_city=None) -> dict |
     sy, sm, sd, ey, em, ed = map(int, m.groups())
     start = f"{sy:04d}-{sm:02d}-{sd:02d}"
     end = f"{ey:04d}-{em:02d}-{ed:02d}"
-    if end < _today_iso():
+    if end < (today or _today_iso()):
         return None
     stores = [s.strip() for s in _POKE_TW_POPUP_STORE.findall(text) if s.strip()]
     location = "／".join(stores[:4]) or "K.UNO 台灣指定店鋪"
@@ -1225,6 +1358,10 @@ _KIDDY_MIFFY_LINK = re.compile(
     r"(?:\]\(|href=[\"'])(https://www\.kiddyland\.co\.jp/event/miffy[^)\"']+/)"
 )
 _KIDDY_SKIP = ["お詫び", "延期", "入店方法", "緊急案内"]
+_KIDDY_OUT_OF_SCOPE_PRODUCT = [
+    "ハンカチ", "トレーナー", "アパレル", "ファッション",
+    "Tシャツ", "パーカー", "ソックス", "靴下", "ジュエリー", "チャーム",
+]
 _KIDDY_SITE_SUFFIX = " | キデイランドへようこそ！"
 _KIDDY_RANGE = re.compile(
     r"(?:(20\d{2})年)?(\d{1,2})月(\d{1,2})日[^。\n]{0,30}?"
@@ -1381,6 +1518,13 @@ def _kiddy_type(title: str) -> str:
     return "new_product"
 
 
+def _kiddy_is_out_of_scope_product(title: str) -> bool:
+    return _kiddy_type(title) == "new_product" and any(
+        keyword.lower() in (title or "").lower()
+        for keyword in _KIDDY_OUT_OF_SCOPE_PRODUCT
+    )
+
+
 def _drop_same_day_kiddy_product_details(events: list[dict]) -> list[dict]:
     """Keep broad miffy style campaign pages over same-day single-product pages."""
     campaign_dates = {
@@ -1404,6 +1548,10 @@ def _drop_same_day_kiddy_product_details(events: list[dict]) -> list[dict]:
 
 
 _MIFFY_KNOWN_VENUES = [
+    (
+        ["有楽町マルイ", "有楽町"],
+        "有楽町マルイ",
+    ),
     (
         ["miffy × Cosme Kitchen", "Cosme Kitchen", "コスメキッチン"],
         "全国のCosme Kitchen・Biople対象店舗",
@@ -1497,6 +1645,12 @@ def _miffy_display_name(title: str, name: str) -> str:
         return "Flower Miffy バースデーキャンペーン"
     if "ハウステンボス" in title and "バースデー" in title:
         return "ミッフィーバースデーシーズン"
+    if (
+        "miffy style" in title.lower()
+        and "有楽町" in title
+        and any(signal in title.lower() for signal in ("pop up", "popup", "ポップアップ"))
+    ):
+        return "miffy style POP UP SHOP in 有楽町"
     return name
 
 
@@ -1543,8 +1697,16 @@ def _miffy_range_near_marker(page_text: str, marker: str, ref_year: int,
     return "", ""
 
 
-def _miffy_multi_venue_events(title: str, url: str, page_text: str, ref_year: int,
-                               extract_dates, correct_city) -> list[dict] | None:
+def _miffy_multi_venue_events(
+    title: str,
+    url: str,
+    page_text: str,
+    ref_year: int,
+    extract_dates,
+    correct_city,
+    *,
+    today: str | None = None,
+) -> list[dict] | None:
     specs: list[tuple[str, str]] | None = None
     if "miffy style POP UP SHOP" in title and all(
         venue in title for venue in ("有楽町", "梅田", "札幌")
@@ -1562,7 +1724,7 @@ def _miffy_multi_venue_events(title: str, url: str, page_text: str, ref_year: in
     if specs is None:
         return None
 
-    today = _today_iso()
+    today = today or _today_iso()
     out: list[dict] = []
     for display_name, venue in specs:
         start, end = _miffy_range_near_marker(
@@ -1631,7 +1793,9 @@ def fetch_kiddyland_miffy_events(extract_dates, correct_city, max_articles=3, fr
     today = _today_iso()
     out, seen = [], set()
     urls = list(dict.fromkeys(_KIDDY_MIFFY_LINK.findall(md)))
-    for url in urls[:max_articles]:
+    for url in urls[:max_articles * 4]:
+        if len(out) >= max_articles:
+            break
         if url in seen:
             continue
         detail = _page_text(url)
@@ -1642,6 +1806,8 @@ def fetch_kiddyland_miffy_events(extract_dates, correct_city, max_articles=3, fr
             continue
         detail_text = _main_article_text(detail, title)
         if any(k in title for k in _KIDDY_SKIP):
+            continue
+        if _kiddy_is_out_of_scope_product(title):
             continue
         pub_m = re.search(r"On\s+(\d{1,2})月\s*(\d{1,2}),\s*(20\d{2})", detail_text)
         if pub_m:

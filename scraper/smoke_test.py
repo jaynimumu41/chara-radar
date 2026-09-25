@@ -64,10 +64,17 @@ check("豪斯登堡→Nagasaki", scrape.correct_city("豪斯登堡"), "Nagasaki"
 check("夢時代→Kaohsiung", scrape.correct_city("高雄夢時代"), "Kaohsiung")
 check("羽生→Saitama", scrape.correct_city("イオンモール羽生"), "Saitama")
 check("柏高島屋→Chiba", scrape.correct_city("柏高島屋 本館地下2階 催会場"), "Chiba")
+check("ららぽーとTOKYO-BAY→Chiba",
+      scrape.correct_city("三井ショッピングパーク ららぽーとTOKYO-BAY"), "Chiba")
 check("ららぽーと磐田→Shizuoka", scrape.correct_city("ららぽーと磐田 1F 中央広場"), "Shizuoka")
 check("カワトク→Iwate", scrape.correct_city("パルクアベニュー・カワトク"), "Iwate")
 check("高崎髙島屋→Gunma", scrape.correct_city("高崎髙島屋 6階 催会場"), "Gunma")
 check("むさし村山→Tokyo", scrape.correct_city("イオンモールむさし村山"), "Tokyo")
+check("町田モディ→Tokyo", scrape.correct_city("町田モディ"), "Tokyo")
+check("イオンモール水戸内原→Ibaraki",
+      scrape.correct_city("イオンモール水戸内原"), "Ibaraki")
+check("イオンモール津田沼→Chiba",
+      scrape.correct_city("イオンモール津田沼"), "Chiba")
 check("イオンモール太田→Gunma", scrape.correct_city("イオンモール太田"), "Gunma")
 check("イオンモール高岡→Toyama", scrape.correct_city("イオンモール高岡"), "Toyama")
 check("北千住マルイ→Tokyo", scrape.correct_city("北千住マルイ"), "Tokyo")
@@ -139,6 +146,10 @@ check("正當快閃→不誤殺",
       scrape.is_noise("吉伊卡哇 POP UP STORE キャナルシティオーパ"), False)
 check("Pokémon GO→雜訊",
       scrape.is_noise("Pokémon GO Fest 2026：全球 心中山登場"), True)
+check("Pokémon TCG Pocket衍生週邊→雜訊",
+      scrape.is_noise("Pokémon Trading Card Game Pocket主題週邊登場"), True)
+check("郵局廣泛通路商品→雜訊",
+      scrape.is_noise("郵便局限定ミッフィーグッズ発売"), True)
 
 # ── is_venue_less_generic_new_product ────────────────────────────────────────
 print("\n[is_venue_less_generic_new_product] 泛商品無實體地點過濾")
@@ -171,6 +182,24 @@ check("可信官方商品來源→不套非官方泛商品擋法",
           source_url="https://www.pokemon.co.jp/goods/2026/05/260522_to01.html",
           page_text=""),
       False)
+check("PR TIMES可信日期不等於泛通路商品可收",
+      scrape.is_venue_less_generic_new_product(
+          ev(brand="miffy", type="new_product", title="Miffy 拼圖屋與茶具組新上市",
+             locationName="日本全國玩具店", summaryZh="一般玩具通路發售新品。"),
+          source_title="「ミッフィー パズルハウス」新発売",
+          source="PR TIMES",
+          source_url="https://prtimes.jp/main/html/rd/p/000000001.html",
+          page_text="全国の玩具店、量販店で販売"),
+      True)
+check("PR TIMES的具體快閃會場仍可收",
+      scrape.is_venue_less_generic_new_product(
+          ev(brand="miffy", type="new_product", title="Miffy POP UP 限定新品",
+             locationName="有楽町マルイ", summaryZh="期間限定店販售。"),
+          source_title="有楽町マルイでミッフィーPOP UP開催",
+          source="PR TIMES",
+          source_url="https://prtimes.jp/main/html/rd/p/000000002.html",
+          page_text="有楽町マルイ ポップアップ"),
+      False)
 check("服裝類新品→擋",
       scrape.is_apparel_new_product(
           ev(brand="miffy", type="new_product", title="Miffy 新商品發售",
@@ -179,6 +208,26 @@ check("服裝類新品→擋",
           source_title="ミッフィー限定アイテムを含む新商品19点を発売開始",
           page_text="ミッフィー Tシャツ ワンピース ファッション アパレル"),
       True)
+check("童裝被AI誤分為campaign仍擋",
+      scrape.is_apparel_new_product(
+          ev(brand="chiikawa", type="campaign", title="Chiikawa x アプレ レ クール 聯名童裝",
+             locationName="全國門市", startDate="2026-09-19", endDate="",
+             summaryZh="吉伊卡哇童裝系列新上市。"),
+          source_title="apres les cours「アニメちいかわ」新登場",
+          page_text="子供服 キッズウェア"),
+      True)
+check("襪子類新品→擋",
+      scrape.is_apparel_new_product(
+          ev(brand="pokemon", type="new_product", title="寶可夢襪子新品登場",
+             locationName="日本全國 Pokémon Center"),
+          source_title="ポケモンデザインのソックスに新作登場"),
+      True)
+check("有明確會場檔期的服飾快閃保留",
+      scrape.is_apparel_new_product(
+          ev(brand="miffy", type="popup", title="Miffy 服飾 POP UP STORE",
+             locationName="有楽町マルイ", startDate="2026-10-02", endDate="2026-10-19"),
+          source_title="ミッフィー服飾ポップアップ"),
+      False)
 check("非服裝實體店新品→不擋",
       scrape.is_apparel_new_product(
           ev(brand="pokemon", type="new_product", title="寶可夢中心夯品再到貨",
@@ -187,6 +236,38 @@ check("非服裝實體店新品→不擋",
           source_title="台灣寶可夢中心 6/13 開賣",
           page_text="Pokémon Center TAIPEI 店頭 販售 娃娃 周邊"),
       False)
+check("出版媒體名「ファッションプレス」不可誤判成服飾",
+      scrape.is_apparel_new_product(
+          ev(brand="miffy", type="reservation", title="米飛主題客房與限定商品",
+             locationName="ホテルオークラ神戸",
+             summaryZh="神戶主題客房。"),
+          source_title="ホテルオークラ神戸限定ルーム - ファッションプレス"),
+      False)
+check("化妝盤一般新品→擋",
+      scrape.is_out_of_scope_product(
+          ev(brand="chiikawa", type="new_product", title="吉伊卡哇 鑰匙圈化妝盤",
+             locationName="全國雜貨店"),
+          source_title="ちいかわ キーリングコスメパレット新登場"),
+      True)
+check("美妝新品被AI誤分為campaign仍擋",
+      scrape.is_out_of_scope_product(
+          ev(brand="miffy", type="campaign", title="Miffy 保養品聯名企劃",
+             locationName="全國門市", startDate="2026-10-01", endDate="",
+             summaryZh="Miffy 護膚與彩妝新品發售。"),
+          source_title="ミッフィー スキンケア・コスメ新商品キャンペーン"),
+      True)
+check("有明確會場檔期的美妝快閃保留",
+      scrape.is_out_of_scope_product(
+          ev(brand="miffy", type="popup", title="Miffy 美妝 POP UP STORE",
+             locationName="有楽町マルイ", startDate="2026-10-02", endDate="2026-10-19"),
+          source_title="ミッフィーコスメ ポップアップ"),
+      False)
+check("萬聖節遊行純體驗→擋",
+      scrape.is_experience_only_event(
+          ev(brand="miffy", type="campaign", title="Miffy萬聖節主題遊行",
+             summaryZh="豪斯登堡期間限定遊行。"),
+          source_title="ハウステンボスのハロウィン開幕"),
+      True)
 check("純網路福袋預購且無實體地點→擋",
       scrape.is_online_only_merchandise(
           ev(brand="chiikawa", type="reservation", title="吉伊卡哇羊年主題福袋預購",
@@ -249,6 +330,18 @@ check("Miffy 豪斯登堡官方場館抽取",
           "ミッフィーバースデーマンス",
       ),
       "ハウステンボス")
+check("Miffy有樂町單場官方新頁場館抽取",
+      official_sources._miffy_venue_from_title(
+          "「miffy style ミッフィースタイル」ポップアップショップが有楽町に期間限定オープン",
+          "miffy style ミッフィースタイル",
+      ),
+      "有楽町マルイ")
+check("Miffy有樂町單場官方新頁顯示名正規化",
+      official_sources._miffy_display_name(
+          "「miffy style ミッフィースタイル」ポップアップショップが有楽町に期間限定オープン",
+          "miffy style ミッフィースタイル",
+      ),
+      "miffy style POP UP SHOP in 有楽町")
 village_vanguard_title = "ヴィレッジヴァンガード「ミッフィーとつなぐ てがきのぬくもりフェア」開催"
 village_vanguard_page = (
     f"<h1>{village_vanguard_title}</h1>"
@@ -411,6 +504,17 @@ image_only_popup = official_sources._chiikawa_popup_event(
 check("吉伊卡哇全圖片子頁正確判定石川縣",
       (image_only_popup["city"], image_only_popup["locationName"]),
       ("Ishikawa", "イオンモール新小松"))
+image_only_taipei_popup = official_sources._chiikawa_popup_event(
+    "新光三越",
+    "https://chiikawa-info.jp/p26/pus_smtk/index.html",
+    "2026-10-07",
+    "2026-11-15",
+    correct_city=scrape.correct_city,
+)
+check("吉伊卡哇全圖片台北子頁依URL補完場館與國別",
+      (image_only_taipei_popup["country"], image_only_taipei_popup["city"],
+       image_only_taipei_popup["locationName"]),
+      ("TW", "Taipei", "新光三越台北信義新天地 A9 9F 宴會展演館"))
 expired_popup_rows = audit_chiikawa_subpages.audit_links(
     [audit_chiikawa_subpages.ChiikawaLink(
         "https://chiikawa-info.jp/p26/pus_atko/index.html",
@@ -482,6 +586,7 @@ official_audit_rows = audit_official_coverage.audit_candidates(
         "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kagawa/events/202606/000001.html":
             "6月28日（日）、ヒトカゲとピカチュウに会えるグリーティング",
     },
+    today="2026-06-10",
 )
 check("官方覆蓋稽核 parsed / needs_review / ignored",
       [(r.status, r.risk, r.event_ids) for r in official_audit_rows],
@@ -508,6 +613,70 @@ check("官方稽核忽略單日營業公告",
       bool(audit_official_coverage.detect_signals(
           "9月8日（火）の営業について ポケモンセンタートウキョーベイ"
       ).auto_ignore_reason), True)
+
+coverage_candidates = [
+    audit_official_coverage.OfficialCandidate(
+        "miffy", "miffy-dickbruna-event",
+        "https://dickbruna.jp/news/202609/48428/",
+        "「miffy style ミッフィースタイル」ポップアップショップが有楽町に期間限定オープン"),
+    audit_official_coverage.OfficialCandidate(
+        "miffy", "miffy-kiddyland-search",
+        "https://www.kiddyland.co.jp/event/miffy_20260905/",
+        "2026年9月5日(土)発売予定!miffy style限定 ハロウィンアイテム"),
+    audit_official_coverage.OfficialCandidate(
+        "miffy", "miffy-kiddyland-search",
+        "https://www.kiddyland.co.jp/event/miffy_limited_nove202608/",
+        "2026年8月15日(土)スタート!miffy style 神戸店/三宮店限定 ノベルティ"),
+    audit_official_coverage.OfficialCandidate(
+        "miffy", "miffy-kiddyland-search",
+        "https://www.kiddyland.co.jp/event/miffy_20261010_feiler/",
+        "2026年10月10日(土)発売予定!miffy style限定 フェイラーハンカチ"),
+    audit_official_coverage.OfficialCandidate(
+        "miffy", "miffy-dickbruna-news",
+        "https://dickbruna.jp/news/202609/48509/",
+        "ボリスといっしょに、山へ空へ海へ"),
+    audit_official_coverage.OfficialCandidate(
+        "pokemon", "pokemon-cafe-news",
+        "https://www.pokemon-cafe.jp/ja/cafe/news/260918_3468.html",
+        ""),
+]
+coverage_rows = audit_official_coverage.audit_candidates(
+    coverage_candidates,
+    details_by_url={
+        "https://dickbruna.jp/news/202609/48428/":
+            "有楽町マルイ 開催期間 2026年10月2日（金）～10月19日（月） 限定ショップ",
+        "https://www.kiddyland.co.jp/event/miffy_20260905/":
+            "2026年9月5日(土)発売予定 miffy style限定 ハロウィンアイテム",
+        "https://www.kiddyland.co.jp/event/miffy_limited_nove202608/":
+            "2026年8月15日(土)スタート miffy style 神戸店/三宮店限定 ノベルティ",
+        "https://www.kiddyland.co.jp/event/miffy_20261010_feiler/":
+            "2026年10月10日(土)発売予定 miffy style限定 フェイラーハンカチ",
+        "https://dickbruna.jp/news/202609/48509/":
+            "ボリスといっしょに、山へ空へ海へ 福音館書店より絵本3冊同時刊行",
+        "https://www.pokemon-cafe.jp/ja/cafe/news/260918_3468.html":
+            "2026年11月1日（日）以降の予約受け付けについて",
+    },
+    current_events=[
+        ev(id="mi-yurakucho", brand="miffy", type="popup", city="Tokyo",
+           title="Miffy miffy style POP UP SHOP in 有楽町",
+           locationName="有楽町マルイ", startDate="2026-10-02", endDate="2026-10-19"),
+        ev(id="mi-novelty", brand="miffy", type="campaign",
+           title="Miffy miffy style 各店ノベルティデイ",
+           locationName="miffy style 各店＋キデイランド対象店",
+           startDate="2026-09-05", endDate=""),
+    ],
+    today="2026-09-25",
+)
+check("官方稽核自動處理替代頁、同日單品、過期與範圍外頁",
+      [(row.status, row.event_ids) for row in coverage_rows],
+      [
+          ("ignored", ("mi-yurakucho",)),
+          ("ignored", ("mi-novelty",)),
+          ("ignored", ()),
+          ("ignored", ()),
+          ("ignored", ()),
+          ("ignored", ()),
+      ])
 kiddy_birthday_title = "2026年6月6日(土)より開催miffy’s Birthday Fair2026"
 kiddy_birthday_page = (
     f"<h1>{kiddy_birthday_title}</h1>"
@@ -624,6 +793,22 @@ check("Kiddy Land同日活動已有campaign→單品頁不另列",
           "https://www.kiddyland.co.jp/event/miffy_nove202607/",
           "https://www.kiddyland.co.jp/event/miffy_osaka20260711/",
       ])
+check("Kiddy Land手帕單品頁→不收",
+      official_sources._kiddy_is_out_of_scope_product(
+          "2026年10月10日(土)発売予定!miffy style限定 フェイラーハンカチ"),
+      True)
+check("Kiddy Land混有運動衫的單品頁→不收",
+      official_sources._kiddy_is_out_of_scope_product(
+          "miffy style限定 ふわふわコートミッフィーぬいぐるみ&トレーナー"),
+      True)
+check("Kiddy Land一般吊飾單品頁→不收",
+      official_sources._kiddy_is_out_of_scope_product(
+          "miffy style限定 ブルーナボンボンぷっくりチャーム"),
+      True)
+check("Kiddy Land具明確會場的快閃仍可收",
+      official_sources._kiddy_is_out_of_scope_product(
+          "Miffy アパレル POP UP SHOP in 有楽町"),
+      False)
 
 sample_chiikawa_popups = (
     "[ちいかわPOP UP STORE 高崎髙島屋](https://chiikawa-info.jp/p26/pus_tkst/index.html) "
@@ -637,13 +822,24 @@ sample_chiikawa_popups = (
     "2099年7月10日(金)～7月26日(日) イオンモール高岡 東館1F セントラルコート"
 )
 popup_events = official_sources._chiikawa_popup_events_from_text(
-    sample_chiikawa_popups, correct_city=scrape.correct_city)
+    sample_chiikawa_popups, correct_city=scrape.correct_city, today="2026-07-01")
 check("吉伊卡哇官方POP UP總表新增場次解析",
       [(e["city"], e["startDate"], e["endDate"]) for e in popup_events],
       [("Gunma", "2099-07-29", "2099-08-17"),
        ("Tokyo", "2099-07-24", "2099-08-11"),
        ("Gunma", "2099-07-17", "2099-08-02"),
        ("Toyama", "2099-07-10", "2099-07-26")])
+
+extended_popup = official_sources._chiikawa_popup_events_from_text(
+    "[ちいかわPOP UP STORE 0%NAHA]"
+    "(https://chiikawa-info.jp/p26/pus_naha/index.html) "
+    "2026年8月13日(木)～2027年2月14日(日) プチミーII 2階 0%NAHA",
+    correct_city=scrape.correct_city,
+    today="2026-09-25",
+)
+check("吉伊卡哇官方跨年延長場次保留完整結束年份",
+      [(e["city"], e["startDate"], e["endDate"]) for e in extended_popup],
+      [("Okinawa", "2026-08-13", "2027-02-14")])
 
 sample_otaru_info = (
     "### [ちいかわベビーカステラ](https://www.chiikawamogumogu.jp/stores/castella/) "
@@ -908,6 +1104,7 @@ tw_popup = official_sources._tw_partner_popup_event(
     "≪K.UNO × U-TREASURE POP UP Promotion≫ ＜活動期間＞2026年2月1日(日)～2026年12月31日(四) "
     "＜活動店鋪＞ ・K.UNO台北忠孝旗艦店 ・K.UNO新光三越南西店 ・K.UNO新光三越台南新天地西門店",
     correct_city=scrape.correct_city,
+    today="2026-02-01",
 )
 check("台灣寶可夢官方 K.UNO POP UP 解析",
       (tw_popup["id"], tw_popup["type"], tw_popup["country"], tw_popup["startDate"],
@@ -950,6 +1147,19 @@ check("Pokémon Cafe 選べるポケモンラテ新拉花解析",
       (pokemon_latte["id"], pokemon_latte["type"], pokemon_latte["locationName"],
        pokemon_latte["startDate"], pokemon_latte["endDate"], pokemon_latte["needReservation"]),
       ("po-4090c2", "cafe", "Pokémon Cafe TOKYO / OSAKA", "2026-07-17", "", True))
+pokemon_height_survey = official_sources._pokemon_center_height_survey_event_from_text(
+    "公開日：2026-09-14 ポケモンセンタートウキョーベイ "
+    "9 月 18 日（金）～ 9 月 27 日（日）、ららぽーとTOKYO-BAY館内で"
+    "『ポケモンたかさ調査隊』を開催。全問正解でオリジナルステッカーをプレゼント。",
+    official_sources._POKEMON_CENTER_HEIGHT_SURVEY,
+    correct_city=scrape.correct_city,
+    today="2026-09-25",
+)
+check("Pokémon Center TOKYO-BAY身高調查隊官方活動解析",
+      (pokemon_height_survey["type"], pokemon_height_survey["city"],
+       pokemon_height_survey["startDate"], pokemon_height_survey["endDate"],
+       pokemon_height_survey["hasLimitedGoods"]),
+      ("campaign", "Chiba", "2026-09-18", "2026-09-27", True))
 
 # ── _is_past ──────────────────────────────────────────────────────────────────
 print("\n[_is_past] 過期判定（含無結束日補洞）")
@@ -1617,6 +1827,7 @@ check("新居浜→Ehime", scrape.correct_city("イオンモール新居浜"), "
 check("直方→Fukuoka", scrape.correct_city("イオンモール直方"), "Fukuoka")
 check("米子→Tottori", scrape.correct_city("米子天満屋"), "Tottori")
 check("宇都宮→Tochigi", scrape.correct_city("FKD宇都宮店"), "Tochigi")
+check("佐賀大和→Saga", scrape.correct_city("イオンモール佐賀大和"), "Saga")
 check("不同AEON分店是明確不同場館",
       scrape.location_compatibility("イオンモール岡崎 1F", "イオンモール和歌山 1F"), False)
 check("同分店加樓層仍是同場館",
@@ -1669,6 +1880,44 @@ yurakucho, _ = scrape.dedup_events([
 check("有樂町同活動不同媒體場館寫法仍合併並保留官方", (len(yurakucho), yurakucho[0]["id"]),
       (1, "official"))
 
+yurakucho_wrong_media_date, _ = scrape.dedup_events([
+    ev(id="official", brand="miffy", title="Miffy miffy style POP UP SHOP in 有楽町",
+       city="Tokyo", startDate="2026-10-02", endDate="2026-10-19",
+       locationName="有楽町マルイ", sourceType="official_site"),
+    ev(id="media-wrong-date", brand="miffy", title="米飛兔有樂町快閃店",
+       city="Tokyo", startDate="2026-10-31", endDate="2026-11-17",
+       locationName="有楽町マルイ", sourceType="media",
+       sourceTitle="ミッフィーのポップアップを有楽町で開催"),
+])
+check("有樂町媒體誤抓大阪日期仍併回官方活動",
+      (len(yurakucho_wrong_media_date), yurakucho_wrong_media_date[0]["id"]),
+      (1, "official"))
+
+huis_ten_bosch_halloween, _ = scrape.dedup_events([
+    ev(id="official-halloween", brand="miffy", title="Miffy ミッフィー・ハロウィン ハウステンボス",
+       type="popup", city="Nagasaki", startDate="2026-09-18", endDate="2026-11-03",
+       locationName="ハウステンボス", sourceType="official_site"),
+    ev(id="media-cafe", brand="miffy", title="米飛萬聖節主題咖啡廳",
+       type="cafe", city="Nagasaki", startDate="2026-09-18", endDate="2026-11-03",
+       locationName="豪斯登堡 Holiday Picnic Cafe",
+       sourceTitle="ハウステンボス ミッフィー・ハロウィン限定メニュー"),
+])
+check("豪斯登堡Miffy萬聖節子項併回官方母活動",
+      (len(huis_ten_bosch_halloween), huis_ten_bosch_halloween[0]["id"]),
+      (1, "official-halloween"))
+
+park_halloween_media, _ = scrape.dedup_events([
+    ev(id="park-official", brand="chiikawa", title="吉伊卡哇 Park Halloween 秋季限定活動",
+       type="campaign", city="Tokyo", startDate="2026-09-25", endDate="2026-10-31",
+       locationName="ちいかわパーク（東京・池袋）", sourceType="official_site"),
+    ev(id="park-media", brand="chiikawa", title="Chiikawa Park 初萬聖節限定週邊",
+       type="new_product", city="Tokyo", startDate="2026-09-25", endDate="2026-10-31",
+       locationName="Chiikawa Park 池袋"),
+])
+check("Chiikawa Park萬聖節週邊媒體文併回官方活動",
+      (len(park_halloween_media), park_halloween_media[0]["id"]),
+      (1, "park-official"))
+
 phase_kura, _ = scrape.dedup_events([
     ev(id="kura-main", brand="chiikawa", title="ちいかわ × くら寿司 コラボキャンペーン",
        type="campaign", startDate="2026-08-21", endDate="2026-09-30", sourceType="official_site"),
@@ -1693,6 +1942,7 @@ miffy_style_rows = official_sources._miffy_multi_venue_events(
     "miffy style POP UP SHOPが有楽町・梅田・札幌に期間限定オープン",
     "https://dickbruna.jp/news/202609/48222/", miffy_style_page, 2026,
     scrape.extract_dates, scrape.correct_city,
+    today="2026-09-01",
 )
 check("Miffy同篇三場次拆成三筆",
       [(e["locationName"], e["startDate"], e["endDate"], e["city"]) for e in miffy_style_rows],
@@ -1737,6 +1987,7 @@ mixed_miffy_rows = official_sources._miffy_multi_venue_events(
     "神戸阪急、あべのハルカス近鉄本店で Dick Bruna TABLE POP-UP SHOP 開催",
     "https://dickbruna.jp/news/202609/48149/", mixed_miffy_dates, 2026,
     scrape.extract_dates, scrape.correct_city,
+    today="2026-09-01",
 )
 mixed_miffy_deduped, _ = scrape.dedup_events(mixed_miffy_rows)
 check("Miffy同篇神戶與阿倍野場次不可被來源標題誤併",
@@ -1749,7 +2000,7 @@ park_sample = """
 開催期間 2026年9月25日(金)～10月31日(土)
 """
 park_event = official_sources._chiikawa_park_halloween_event_from_text(
-    park_sample, correct_city=scrape.correct_city)
+    park_sample, correct_city=scrape.correct_city, today="2026-09-01")
 check("Chiikawa Park Halloween官方頁結構化",
       (park_event["city"], park_event["startDate"], park_event["endDate"], park_event["sourceType"]),
       ("Tokyo", "2026-09-25", "2026-10-31", "official_site"))
@@ -1768,6 +2019,35 @@ pokemon_rows = official_sources._pokemon_jp_goods_events_from_payload(
 check("日本Pokémon官方feed採實體店發售日",
       [(e["startDate"], e["locationName"], e["sourceType"]) for e in pokemon_rows],
       [("2026-09-12", "日本全國 Pokémon Center", "official_site")])
+
+pokemon_scope_payload = {"results": [
+    {
+        "model": "goods", "type": "body", "pokecen": 1,
+        "title": "『Pokémon Trading Card Game Pocket』をモチーフにしたグッズが登場！",
+        "start_date": "2026.09.18",
+        "full_uniq": "https://www.pokemon.co.jp/goods/2026/09/pocket.html",
+    },
+    {
+        "model": "goods", "type": "body", "pokecen": 1,
+        "title": "ポケモンデザインのソックスに新作登場！",
+        "start_date": "2026.09.18",
+        "full_uniq": "https://www.pokemon.co.jp/goods/2026/09/socks.html",
+    },
+    {
+        "model": "goods", "type": "body", "pokecen": 1,
+        "title": "ピックアップテーマ「つながる」グッズが登場！",
+        "start_date": "2026.09.18",
+        "full_uniq": "https://www.pokemon.co.jp/goods/2026/09/valid.html",
+    },
+]}
+pokemon_scope_rows = official_sources._pokemon_jp_goods_events_from_payload(
+    pokemon_scope_payload,
+    fetch_page=lambda _url: "発売日 | 9月26日（土） 販売店舗 | ポケモンセンター",
+    today="2026-09-25",
+)
+check("日本Pokémon官方feed也排除ポケポケ與襪子",
+      [e["sourceUrl"] for e in pokemon_scope_rows],
+      ["https://www.pokemon.co.jp/goods/2026/09/valid.html"])
 
 open_ended = ev(
     brand="miffy", type="campaign", sourceType="official_site",
