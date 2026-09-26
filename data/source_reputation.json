@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-15T08:33:23+00:00",
+  "updatedAt": "2026-09-26T08:35:01+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 13,
@@ -710,25 +710,25 @@
     },
     "domain:dtimes.jp": {
       "confirmed": 0,
-      "rejected": 2,
+      "rejected": 3,
       "uncertain": 0,
-      "crossChecked": 2,
-      "score": 32,
+      "crossChecked": 5,
+      "score": 27,
       "label": "dtimes.jp",
       "kind": "news",
       "host": "dtimes.jp",
       "handle": "",
       "firstSeen": "2026-06-19",
-      "lastReviewed": "2026-09-03",
+      "lastReviewed": "2026-09-26",
       "lastOutcome": "rejected",
-      "notes": "Accurate secondary coverage but duplicate of official Pokemon Sleep campaign po-d330c0",
+      "notes": "Accurate menu report but duplicate of existing official Huis Ten Bosch Miffy Halloween record mi-6e44af covering the identical 2026-09-18 to 2026-11-03 event, limited food, and goods",
       "byBrand": {
         "miffy": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 4,
+          "score": 36
         },
         "pokemon": {
           "confirmed": 0,
@@ -745,15 +745,22 @@
           "uncertain": 0,
           "crossChecked": 2,
           "score": 32
+        },
+        "cafe": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 3,
+          "score": 45
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 0,
-          "rejected": 2,
+          "rejected": 3,
           "uncertain": 0,
-          "crossChecked": 2,
-          "score": 32
+          "crossChecked": 5,
+          "score": 27
         }
       },
       "history": [
@@ -776,6 +783,16 @@
           "eventId": "po-4efb9a",
           "evidenceCount": 1,
           "notes": "Accurate secondary coverage but duplicate of official Pokemon Sleep campaign po-d330c0"
+        },
+        {
+          "date": "2026-09-26",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "cafe",
+          "country": "JP",
+          "eventId": "mi-86cede",
+          "evidenceCount": 3,
+          "notes": "Accurate menu report but duplicate of existing official Huis Ten Bosch Miffy Halloween record mi-6e44af covering the identical 2026-09-18 to 2026-11-03 event, limited food, and goods"
         }
       ]
     },
