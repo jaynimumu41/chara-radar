@@ -1701,5 +1701,54 @@
     "createdAt": "2026-09-25",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール津田沼(2026-10-09～2026-10-26) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_tuda/index.html"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "まじかるちいかわ POP UP STORE グランデュオ立川",
+    "type": "popup",
+    "country": "JP",
+    "city": "Tokyo",
+    "locationName": "グランデュオ立川 2F イベントスペース2",
+    "startDate": "2026-09-30",
+    "endDate": "2026-11-08",
+    "summaryZh": "まじかるちいかわ期間限定店於 Granduo 立川 2F 登場，販售角色周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "吉伊卡哇",
+      "まじかるちいかわ",
+      "快閃店",
+      "限定周邊"
+    ],
+    "id": "ch-1f97e2",
+    "sourceType": "official_site",
+    "createdAt": "2026-09-27",
+    "sourceTitle": "まじかるちいかわPOP UP STORE グランデュオ立川(2026/9/30～11/8) - ちいかわ公式",
+    "sourceUrl": "https://chiikawa-info.jp/p26/mg_tckw/index.html"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "まじかるちいかわ キデイランド POP UP SHOP 札幌",
+    "type": "popup",
+    "country": "JP",
+    "city": "Hokkaido",
+    "locationName": "札幌アピア ファッションウォーク B1F キデイランド POP UP SHOP",
+    "startDate": "2026-10-02",
+    "endDate": "2026-11-03",
+    "summaryZh": "まじかるちいかわ於札幌 Apia 的 Kiddy Land POP UP SHOP 期間限定登場，販售角色周邊商品。",
+    "needReservation": true,
+    "hasLimitedGoods": true,
+    "tags": [
+      "吉伊卡哇",
+      "まじかるちいかわ",
+      "快閃店",
+      "限定周邊",
+      "札幌"
+    ],
+    "id": "ch-f4e275",
+    "sourceType": "official_site",
+    "createdAt": "2026-09-27",
+    "sourceTitle": "まじかるちいかわ キデイランド POP UP SHOP 札幌(2026/10/2～11/3) - ちいかわ公式",
+    "sourceUrl": "https://chiikawa-info.jp/magical_store/kd_spr/index.html"
   }
 ]
