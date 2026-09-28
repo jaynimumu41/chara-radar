@@ -1,29 +1,5 @@
 [
   {
-    "brand": "miffy",
-    "title": "Miffy x《真珠の耳飾りの少女》展原創商品",
-    "type": "campaign",
-    "country": "JP",
-    "city": "Osaka",
-    "locationName": "大阪中之島美術館 5階展示室",
-    "startDate": "2026-08-21",
-    "endDate": "2026-09-27",
-    "summaryZh": "Miffy 擔任大阪中之島美術館「フェルメール《真珠の耳飾りの少女》展」大使，展覽現場將販售原創「真珠の耳飾りのミッフィー」玩偶與吊飾等限定商品。",
-    "needReservation": true,
-    "hasLimitedGoods": true,
-    "tags": [
-      "Miffy",
-      "真珠の耳飾りの少女",
-      "大阪中之島美術館",
-      "展覽限定商品"
-    ],
-    "id": "mi-53a257",
-    "sourceUrl": "https://dickbruna.jp/news/202605/46308/",
-    "sourceType": "official_site",
-    "createdAt": "2026-06-02",
-    "sourceTitle": "ミッフィーがフェルメール《真珠の耳飾りの少女》展のアンバサダーに - dickbruna.jp"
-  },
-  {
     "brand": "chiikawa",
     "title": "Chiikawa x 東京晴空塔 聯名活動",
     "type": "campaign",
@@ -46,30 +22,6 @@
     "sourceType": "official_social",
     "createdAt": "2026-06-02",
     "sourceTitle": "「ちいかわ☆星ふるスカイツリー®とひみつの島」開催決定！【公式】東京スカイツリー TOKYO SKYTREE - tokyo-skytree.jp"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 CHIIKAWA DAYS 台北特展",
-    "type": "popup",
-    "country": "TW",
-    "city": "Taipei",
-    "locationName": "華山1914文化創意產業園區 東2館",
-    "startDate": "2026-07-04",
-    "endDate": "2026-09-27",
-    "summaryZh": "吉伊卡哇大型特展「CHIIKAWA DAYS」登台，於華山1914東2館登場，推出作者Nagano親繪的「台灣夜市」限定系列（滷肉飯、珍奶、地瓜球、雞排造型）等台灣獨家商品。",
-    "needReservation": true,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "特展",
-      "台北",
-      "台灣限定"
-    ],
-    "id": "ch-da7c01",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-03",
-    "sourceTitle": "2026吉伊卡哇台北特展攻略！CHIIKAWA DAYS時間、地點、票價整理 - 食尚玩家",
-    "sourceUrl": "https://supertaste.tvbs.com.tw/accessories/359723"
   },
   {
     "brand": "pokemon",
@@ -673,30 +625,6 @@
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_gdkm/index.html"
   },
   {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE アティ郡山",
-    "type": "popup",
-    "country": "JP",
-    "city": "Fukushima",
-    "locationName": "アティ郡山",
-    "startDate": "2026-09-04",
-    "endDate": "2026-09-27",
-    "summaryZh": "ちいかわ POP UP STORE 於アティ郡山期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-37ba51",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-13",
-    "sourceTitle": "ちいかわPOP UP STORE アティ郡山(2026-09-04～2026-09-27) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_atik/index.html"
-  },
-  {
     "brand": "pokemon",
     "title": "寶可夢中心新品Flapping Fins系列",
     "type": "new_product",
@@ -791,30 +719,6 @@
     "createdAt": "2026-09-13",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール和歌山(2026-09-18～2026-10-05) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_awak/index.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE フューチャーシティ・ファボーレ",
-    "type": "popup",
-    "country": "JP",
-    "city": "Toyama",
-    "locationName": "フューチャーシティ・ファボーレ",
-    "startDate": "2026-09-11",
-    "endDate": "2026-09-27",
-    "summaryZh": "ちいかわ POP UP STORE 於フューチャーシティ・ファボーレ期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-bc9a48",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-13",
-    "sourceTitle": "ちいかわPOP UP STORE フューチャーシティ・ファボーレ(2026-09-11～2026-09-27) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_favo/index.html"
   },
   {
     "brand": "pokemon",
@@ -956,29 +860,6 @@
     "createdAt": "2026-09-13",
     "sourceTitle": "ちいかわPOP UP STORE 八木橋百貨店(2026-09-16～2026-09-28) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_yghs/index.html"
-  },
-  {
-    "brand": "miffy",
-    "title": "Miffy ミッフィーzakkaフェスタ　京王百貨店 新宿店",
-    "type": "popup",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "京王百貨店 新宿店",
-    "startDate": "2026-09-17",
-    "endDate": "2026-09-27",
-    "summaryZh": "Miffy（米飛兔）官方活動「ミッフィーzakkaフェスタ」於京王百貨店 新宿店期間限定登場，販售限定周邊／餐點。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "期間限定",
-      "日本"
-    ],
-    "id": "mi-9beee3",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-13",
-    "sourceTitle": "京王百貨店 新宿店で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
-    "sourceUrl": "https://dickbruna.jp/news/202609/48205/"
   },
   {
     "brand": "chiikawa",
@@ -1390,30 +1271,6 @@
     "sourceUrl": "https://chiikawa-info.jp/p26/chiikawa_pocket_mini_spp/index.html"
   },
   {
-    "brand": "chiikawa",
-    "title": "電影吉伊卡哇 POP UP STORE スパリゾート",
-    "type": "popup",
-    "country": "JP",
-    "city": "Fukushima",
-    "locationName": "スパリゾート ハワイアンズ ビッグアロハ2階 特設会場",
-    "startDate": "2026-07-17",
-    "endDate": "2026-09-27",
-    "summaryZh": "「映画ちいかわ 人魚の島のひみつ」POP UP STORE 於スパリゾート ハワイアンズ ビッグアロハ2階 特設会場期間限定登場，販售電影相關限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "電影",
-      "快閃店",
-      "限定周邊"
-    ],
-    "id": "ch-d9cc77",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-14",
-    "sourceTitle": "映画ちいかわ 人魚の島のひみつ POP UP STORE スパリゾート ハワイアンズ ビッグアロハ2階 特設会場(2026-07-17～2026-09-27) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/mck_scpus/index.html#c0a1ba75"
-  },
-  {
     "brand": "pokemon",
     "title": "台灣寶可夢中心新品",
     "type": "new_product",
@@ -1606,31 +1463,6 @@
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_nove202609/"
   },
   {
-    "brand": "pokemon",
-    "title": "Pokémon Center TOKYO-BAY 寶可夢身高調查隊集章活動",
-    "type": "campaign",
-    "country": "JP",
-    "city": "Chiba",
-    "locationName": "三井ショッピングパーク ららぽーとTOKYO-BAY",
-    "startDate": "2026-09-18",
-    "endDate": "2026-09-27",
-    "summaryZh": "於啦啦寶都 TOKYO-BAY 館內尋找寶可夢並完成問答；完成指定路線可獲兩款活動限定貼紙，每日名額有限。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "實體活動",
-      "集章",
-      "限定贈品",
-      "千葉"
-    ],
-    "id": "po-f92a69",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-25",
-    "sourceTitle": "ポケモンセンタートウキョーベイ「さがして、はかって！ポケモンたかさ調査隊！」が開催！",
-    "sourceUrl": "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-tokyobay/events/202609/000524.html"
-  },
-  {
     "brand": "chiikawa",
     "title": "吉伊卡哇 POP UP STORE 町田モディ",
     "type": "popup",
@@ -1750,5 +1582,76 @@
     "createdAt": "2026-09-27",
     "sourceTitle": "まじかるちいかわ キデイランド POP UP SHOP 札幌(2026/10/2～11/3) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/magical_store/kd_spr/index.html"
+  },
+  {
+    "brand": "pokemon",
+    "title": "寶可夢中心南瓜皮卡丘新貨",
+    "type": "new_product",
+    "country": "TW",
+    "city": "",
+    "locationName": "寶可夢中心",
+    "startDate": "2026-09-25",
+    "endDate": "2026-09-28",
+    "summaryZh": "寶可夢中心南瓜皮卡丘中秋連假再到貨，10月可領新光三越限定明信片。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢中心",
+      "限定商品",
+      "明信片"
+    ],
+    "id": "po-900338",
+    "sourceTitle": "寶可夢中心南瓜皮卡丘中秋連假再到貨！10月領新光三越限定明信片 - NOWnews今日新聞",
+    "sourceType": "official_social",
+    "createdAt": "2026-09-28",
+    "sourceUrl": "https://www.nownews.com/news/6878252"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "Chiikawa x 東京ばな奈 快閃店",
+    "type": "popup",
+    "country": "JP",
+    "city": "Tokyo",
+    "locationName": "東京ソラマチ(R)",
+    "startDate": "2026-10-01",
+    "endDate": "2026-10-14",
+    "summaryZh": "「Chiikawa」與「東京ばな奈」聯名快閃店於東京晴空塔期間限定登場，販售初登場的環保袋及人氣香蕉布丁蛋糕。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "快閃店",
+      "東京",
+      "聯名",
+      "限定商品"
+    ],
+    "id": "ch-a8a929",
+    "sourceTitle": "【東京ソラマチ(R)】「ちいかわ」×「東京ばな奈」のポップアップショップが期間限定OPEN！初登場『エコバッグ』に人気のバナナプリンケーキも",
+    "sourceType": "official_social",
+    "createdAt": "2026-09-28",
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002148.000025606.html"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇快閃店 in 茨城",
+    "type": "popup",
+    "country": "JP",
+    "city": "Ibaraki",
+    "locationName": "茨城",
+    "startDate": "2026-10-09",
+    "endDate": "2026-10-26",
+    "summaryZh": "吉伊卡哇快閃店於茨城舉辦，現場販售周邊商品並設有主題咖啡廳。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "快閃店",
+      "茨城",
+      "周邊商品",
+      "主題咖啡廳"
+    ],
+    "id": "ch-82295a",
+    "sourceTitle": "ちいかわ ポップアップストア in 茨城 10月9日より開催! - コラボカフェ",
+    "sourceType": "official_social",
+    "createdAt": "2026-09-28",
+    "sourceUrl": "https://collabo-cafe.com/events/collabo/chiikawa-popup-store-aeonmall-mito-uchihara-2026/"
   }
 ]
