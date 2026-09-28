@@ -1585,20 +1585,21 @@
   },
   {
     "brand": "pokemon",
-    "title": "寶可夢中心南瓜皮卡丘新貨",
+    "title": "Pokémon Center TAIPEI 9/25 南瓜皮卡丘與新品發售",
     "type": "new_product",
     "country": "TW",
-    "city": "",
-    "locationName": "寶可夢中心",
+    "city": "Taipei",
+    "locationName": "Pokémon Center TAIPEI",
     "startDate": "2026-09-25",
-    "endDate": "2026-09-28",
-    "summaryZh": "寶可夢中心南瓜皮卡丘中秋連假再到貨，10月可領新光三越限定明信片。",
+    "endDate": "",
+    "summaryZh": "Pokémon Center TAIPEI 於9月25日實體發售南瓜皮卡丘玩偶、超夢SUPER CARD造型悠遊卡與精靈球扣環吉祥物等新品；9月25日至28日僅為入店整理券管理日期，並非販售截止日。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "寶可夢中心",
       "限定商品",
-      "明信片"
+      "玩偶",
+      "悠遊卡"
     ],
     "id": "po-900338",
     "sourceTitle": "寶可夢中心南瓜皮卡丘中秋連假再到貨！10月領新光三越限定明信片 - NOWnews今日新聞",
@@ -1631,27 +1632,27 @@
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002148.000025606.html"
   },
   {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇快閃店 in 茨城",
-    "type": "popup",
-    "country": "JP",
-    "city": "Ibaraki",
-    "locationName": "茨城",
-    "startDate": "2026-10-09",
-    "endDate": "2026-10-26",
-    "summaryZh": "吉伊卡哇快閃店於茨城舉辦，現場販售周邊商品並設有主題咖啡廳。",
+    "brand": "pokemon",
+    "title": "Pokémon Center TAIPEI #記憶的旅途",
+    "type": "campaign",
+    "country": "TW",
+    "city": "Taipei",
+    "locationName": "Pokémon Center TAIPEI／新光三越台北信義新天地",
+    "startDate": "2026-10-02",
+    "endDate": "2026-11-01",
+    "summaryZh": "Pokémon Center TAIPEI 舉辦30週年「#記憶的旅途」活動，單筆消費滿NT$300可兌換原創圓形扇，並可在信義新天地指定地點完成任務領取冒險紀念證。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
-      "快閃店",
-      "茨城",
-      "周邊商品",
-      "主題咖啡廳"
+      "Pokémon Center TAIPEI",
+      "30週年",
+      "消費贈品",
+      "冒險紀念證"
     ],
-    "id": "ch-82295a",
-    "sourceTitle": "ちいかわ ポップアップストア in 茨城 10月9日より開催! - コラボカフェ",
-    "sourceType": "official_social",
+    "id": "po-de907f",
+    "sourceTitle": "【Pokémon Center TAIPEI】Pokémon Center TAIPEI #記憶的旅途 活動登場！",
+    "sourceType": "official_site",
     "createdAt": "2026-09-28",
-    "sourceUrl": "https://collabo-cafe.com/events/collabo/chiikawa-popup-store-aeonmall-mito-uchihara-2026/"
+    "sourceUrl": "https://tw.portal-pokemon.com/topics/post-6716/"
   }
 ]

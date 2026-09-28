@@ -1,27 +1,27 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-26T08:35:01+00:00",
+  "updatedAt": "2026-09-28T08:34:34+00:00",
   "sources": {
     "domain:nownews.com": {
-      "confirmed": 13,
+      "confirmed": 14,
       "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 14,
+      "crossChecked": 16,
       "score": 95,
       "label": "nownews.com",
       "kind": "news",
       "host": "nownews.com",
       "handle": "",
       "firstSeen": "2026-06-11",
-      "lastReviewed": "2026-09-14",
+      "lastReviewed": "2026-09-28",
       "lastOutcome": "confirmed",
-      "notes": "Article explicitly names Pokemon Center TAIPEI, physical 2026-09-19 sale, concrete Pokopia products, and cites pokemon_taiwan official announcement",
+      "notes": "Physical 2026-09-25 Pokemon Center TAIPEI launch corroborated by Pokemon Hubs and UDN; corrected 9/25-9/28 as entry-ticket dates, not sale period",
       "byBrand": {
         "pokemon": {
-          "confirmed": 13,
+          "confirmed": 14,
           "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 13,
+          "crossChecked": 15,
           "score": 95
         },
         "chiikawa": {
@@ -34,10 +34,10 @@
       },
       "byType": {
         "new_product": {
-          "confirmed": 13,
+          "confirmed": 14,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 11,
+          "crossChecked": 13,
           "score": 95
         },
         "campaign": {
@@ -57,10 +57,10 @@
       },
       "byCountry": {
         "tw": {
-          "confirmed": 13,
+          "confirmed": 14,
           "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 14,
+          "crossChecked": 16,
           "score": 95
         }
       },
@@ -214,6 +214,16 @@
           "eventId": "po-521834",
           "evidenceCount": 1,
           "notes": "Article explicitly names Pokemon Center TAIPEI, physical 2026-09-19 sale, concrete Pokopia products, and cites pokemon_taiwan official announcement"
+        },
+        {
+          "date": "2026-09-28",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-900338",
+          "evidenceCount": 2,
+          "notes": "Physical 2026-09-25 Pokemon Center TAIPEI launch corroborated by Pokemon Hubs and UDN; corrected 9/25-9/28 as entry-ticket dates, not sale period"
         }
       ]
     },
@@ -1132,24 +1142,24 @@
     },
     "domain:collabo-cafe.com": {
       "confirmed": 9,
-      "rejected": 12,
+      "rejected": 13,
       "uncertain": 0,
-      "crossChecked": 27,
+      "crossChecked": 28,
       "score": 5,
       "label": "collabo-cafe.com",
       "kind": "site",
       "host": "collabo-cafe.com",
       "handle": "",
       "firstSeen": "2026-06-30",
-      "lastReviewed": "2026-09-14",
+      "lastReviewed": "2026-09-28",
       "lastOutcome": "rejected",
-      "notes": "Duplicate of Chiikawa official ch-310b94 for Aeon Mall Niihama 2026-09-26 to 2026-10-12",
+      "notes": "Accurate popup dates but duplicate of official record ch-d1b68c; unsupported cafe claim",
       "byBrand": {
         "chiikawa": {
           "confirmed": 9,
-          "rejected": 11,
+          "rejected": 12,
           "uncertain": 0,
-          "crossChecked": 26,
+          "crossChecked": 27,
           "score": 5
         },
         "miffy": {
@@ -1170,10 +1180,10 @@
         },
         "popup": {
           "confirmed": 7,
-          "rejected": 6,
+          "rejected": 7,
           "uncertain": 0,
-          "crossChecked": 18,
-          "score": 43
+          "crossChecked": 19,
+          "score": 32
         },
         "new_product": {
           "confirmed": 2,
@@ -1186,9 +1196,9 @@
       "byCountry": {
         "jp": {
           "confirmed": 9,
-          "rejected": 12,
+          "rejected": 13,
           "uncertain": 0,
-          "crossChecked": 27,
+          "crossChecked": 28,
           "score": 5
         }
       },
@@ -1402,6 +1412,16 @@
           "eventId": "ch-fd1638",
           "evidenceCount": 1,
           "notes": "Duplicate of Chiikawa official ch-310b94 for Aeon Mall Niihama 2026-09-26 to 2026-10-12"
+        },
+        {
+          "date": "2026-09-28",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-82295a",
+          "evidenceCount": 1,
+          "notes": "Accurate popup dates but duplicate of official record ch-d1b68c; unsupported cafe claim"
         }
       ]
     },
