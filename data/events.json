@@ -814,78 +814,6 @@
     "sourceUrl": "https://chiikawa-info.jp/chiikawaland/oita/"
   },
   {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE FKD宇都宮店",
-    "type": "popup",
-    "country": "JP",
-    "city": "Tochigi",
-    "locationName": "FKD宇都宮店",
-    "startDate": "2026-09-16",
-    "endDate": "2026-09-28",
-    "summaryZh": "ちいかわ POP UP STORE 於FKD宇都宮店期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-cfe524",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-13",
-    "sourceTitle": "ちいかわPOP UP STORE FKD宇都宮店(2026-09-16～2026-09-28) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_utnm/index.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE 八木橋百貨店",
-    "type": "popup",
-    "country": "JP",
-    "city": "Saitama",
-    "locationName": "八木橋百貨店",
-    "startDate": "2026-09-16",
-    "endDate": "2026-09-28",
-    "summaryZh": "ちいかわ POP UP STORE 於八木橋百貨店期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-127e07",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-13",
-    "sourceTitle": "ちいかわPOP UP STORE 八木橋百貨店(2026-09-16～2026-09-28) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_yghs/index.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE JR池袋駅",
-    "type": "popup",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "JR池袋駅",
-    "startDate": "2026-09-18",
-    "endDate": "2026-09-28",
-    "summaryZh": "ちいかわ POP UP STORE 於JR池袋駅期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-2b9099",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-13",
-    "sourceTitle": "ちいかわPOP UP STORE JR池袋駅(2026-09-18～2026-09-28) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_jrik/index.html"
-  },
-  {
     "brand": "pokemon",
     "title": "寶可夢歷代遊戲彩盒周邊第二彈",
     "type": "new_product",
@@ -1153,30 +1081,6 @@
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_anhm/index.html"
   },
   {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE イオンモール直方",
-    "type": "popup",
-    "country": "JP",
-    "city": "Fukuoka",
-    "locationName": "イオンモール直方",
-    "startDate": "2026-09-11",
-    "endDate": "2026-09-28",
-    "summaryZh": "ちいかわ POP UP STORE 於イオンモール直方期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-68607c",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-13",
-    "sourceTitle": "ちいかわPOP UP STORE イオンモール直方(2026-09-11～2026-09-28) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_angt/index.html"
-  },
-  {
     "brand": "miffy",
     "title": "Miffy miffy style POP UP SHOP in 大阪梅田",
     "type": "popup",
@@ -1223,29 +1127,6 @@
     "createdAt": "2026-09-13",
     "sourceTitle": "miffy style POP UP SHOPが有楽町・梅田・札幌に期間限定オープン - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202609/48222/"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "Chiikawa Baby POP UP SHOP 羽田空港第1ターミナル",
-    "type": "popup",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "羽田空港第1ターミナル 2F 出発ロビー HANEDA POPUP STORE",
-    "startDate": "2026-08-18",
-    "endDate": "2026-09-28",
-    "summaryZh": "Chiikawa Baby POP UP SHOP 羽田空港第1ターミナル於羽田空港第1ターミナル 2F 出発ロビー HANEDA POPUP STORE期間限定登場，販售活動紀念與限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "Chiikawa Baby",
-      "快閃店"
-    ],
-    "id": "ch-9d5bad",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-13",
-    "sourceTitle": "Chiikawa Baby POP UP SHOP 羽田空港第1ターミナル (2026-08-18～2026-09-28) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/ck_baby/haneda/index.html"
   },
   {
     "brand": "chiikawa",
@@ -1654,5 +1535,76 @@
     "sourceType": "official_site",
     "createdAt": "2026-09-28",
     "sourceUrl": "https://tw.portal-pokemon.com/topics/post-6716/"
+  },
+  {
+    "brand": "miffy",
+    "title": "Miffy ミッフィーzakkaフェスタ　近鉄百貨店 奈良店",
+    "type": "popup",
+    "country": "JP",
+    "city": "Nara",
+    "locationName": "近鉄百貨店 奈良店",
+    "startDate": "2026-10-07",
+    "endDate": "2026-10-13",
+    "summaryZh": "Miffy（米飛兔）官方活動「ミッフィーzakkaフェスタ」於近鉄百貨店 奈良店期間限定登場，販售限定周邊／餐點。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "期間限定",
+      "日本"
+    ],
+    "id": "mi-9540fc",
+    "sourceType": "official_site",
+    "createdAt": "2026-09-29",
+    "sourceTitle": "近鉄百貨店 奈良店で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
+    "sourceUrl": "https://dickbruna.jp/news/202609/48687/"
+  },
+  {
+    "brand": "pokemon",
+    "title": "寶可夢中心10/3新品！Ditto系列上架",
+    "type": "new_product",
+    "country": "TW",
+    "city": "",
+    "locationName": "寶可夢中心",
+    "startDate": "2026-10-03",
+    "endDate": "",
+    "summaryZh": "寶可夢中心於10月3日推出Disguise! Ditto系列新品，包含6款玩偶。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "新品",
+      "玩偶",
+      "Ditto",
+      "寶可夢中心"
+    ],
+    "id": "po-05d98b",
+    "sourceTitle": "寶可夢中心10/3新品！Disguise! Ditto系列上架　6款玩偶搶先看 - nownews.com",
+    "sourceType": "official_social",
+    "createdAt": "2026-09-29",
+    "sourceUrl": "https://www.nownews.com/news/6879023"
+  },
+  {
+    "brand": "pokemon",
+    "title": "寶可夢30週年慶典 PokéXciting!",
+    "type": "campaign",
+    "country": "TW",
+    "city": "",
+    "locationName": "",
+    "startDate": "2026-10-10",
+    "endDate": "2026-11-11",
+    "summaryZh": "寶可夢30週年慶典「PokéXciting! 」將於國慶連假期間舉辦，免費入場。",
+    "needReservation": false,
+    "hasLimitedGoods": false,
+    "tags": [
+      "寶可夢",
+      "30週年",
+      "慶典",
+      "免費入場"
+    ],
+    "id": "po-fea2a2",
+    "sourceTitle": "寶可夢30週年慶典「PokéXciting! 」完整攻略！國慶連假免費入場 - nownews.com",
+    "sourceType": "official_social",
+    "createdAt": "2026-09-29",
+    "sourceUrl": "https://www.nownews.com/news/6876543"
   }
 ]
