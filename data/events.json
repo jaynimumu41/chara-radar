@@ -1561,50 +1561,26 @@
   },
   {
     "brand": "pokemon",
-    "title": "寶可夢中心10/3新品！Ditto系列上架",
+    "title": "Pokémon Center TAIPEI「Disguise! Ditto」系列新品",
     "type": "new_product",
     "country": "TW",
-    "city": "",
-    "locationName": "寶可夢中心",
+    "city": "Taipei",
+    "locationName": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3F）",
     "startDate": "2026-10-03",
     "endDate": "",
-    "summaryZh": "寶可夢中心於10月3日推出Disguise! Ditto系列新品，包含6款玩偶。",
+    "summaryZh": "Pokémon Center TAIPEI 於10月3日推出「Disguise! Ditto」系列，販售花岩怪、索羅亞、洗翠索羅亞、淚眼蜥、新葉喵與厄鬼椪等6款毛絨玩具及吉祥物。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "新品",
       "玩偶",
       "Ditto",
-      "寶可夢中心"
+      "Pokémon Center TAIPEI"
     ],
     "id": "po-05d98b",
     "sourceTitle": "寶可夢中心10/3新品！Disguise! Ditto系列上架　6款玩偶搶先看 - nownews.com",
     "sourceType": "official_social",
     "createdAt": "2026-09-29",
     "sourceUrl": "https://www.nownews.com/news/6879023"
-  },
-  {
-    "brand": "pokemon",
-    "title": "寶可夢30週年慶典 PokéXciting!",
-    "type": "campaign",
-    "country": "TW",
-    "city": "",
-    "locationName": "",
-    "startDate": "2026-10-10",
-    "endDate": "2026-11-11",
-    "summaryZh": "寶可夢30週年慶典「PokéXciting! 」將於國慶連假期間舉辦，免費入場。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "寶可夢",
-      "30週年",
-      "慶典",
-      "免費入場"
-    ],
-    "id": "po-fea2a2",
-    "sourceTitle": "寶可夢30週年慶典「PokéXciting! 」完整攻略！國慶連假免費入場 - nownews.com",
-    "sourceType": "official_social",
-    "createdAt": "2026-09-29",
-    "sourceUrl": "https://www.nownews.com/news/6876543"
   }
 ]

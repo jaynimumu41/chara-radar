@@ -1,27 +1,27 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-28T08:34:34+00:00",
+  "updatedAt": "2026-09-29T08:34:36+00:00",
   "sources": {
     "domain:nownews.com": {
-      "confirmed": 14,
-      "rejected": 2,
+      "confirmed": 15,
+      "rejected": 3,
       "uncertain": 0,
-      "crossChecked": 16,
+      "crossChecked": 18,
       "score": 95,
       "label": "nownews.com",
       "kind": "news",
       "host": "nownews.com",
       "handle": "",
       "firstSeen": "2026-06-11",
-      "lastReviewed": "2026-09-28",
-      "lastOutcome": "confirmed",
-      "notes": "Physical 2026-09-25 Pokemon Center TAIPEI launch corroborated by Pokemon Hubs and UDN; corrected 9/25-9/28 as entry-ticket dates, not sale period",
+      "lastReviewed": "2026-09-29",
+      "lastOutcome": "rejected",
+      "notes": "Duplicate of official po-de81e3; 2026-11-11 belongs to Pokemon GO stamp activity, while the physical PokéXciting event is 2026-10-10 to 2026-10-11",
       "byBrand": {
         "pokemon": {
-          "confirmed": 14,
-          "rejected": 1,
+          "confirmed": 15,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 15,
+          "crossChecked": 17,
           "score": 95
         },
         "chiikawa": {
@@ -34,18 +34,18 @@
       },
       "byType": {
         "new_product": {
-          "confirmed": 14,
+          "confirmed": 15,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 13,
+          "crossChecked": 14,
           "score": 95
         },
         "campaign": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 2,
-          "score": 43
+          "crossChecked": 3,
+          "score": 34
         },
         "popup": {
           "confirmed": 0,
@@ -57,10 +57,10 @@
       },
       "byCountry": {
         "tw": {
-          "confirmed": 14,
-          "rejected": 2,
+          "confirmed": 15,
+          "rejected": 3,
           "uncertain": 0,
-          "crossChecked": 16,
+          "crossChecked": 18,
           "score": 95
         }
       },
@@ -224,6 +224,26 @@
           "eventId": "po-900338",
           "evidenceCount": 2,
           "notes": "Physical 2026-09-25 Pokemon Center TAIPEI launch corroborated by Pokemon Hubs and UDN; corrected 9/25-9/28 as entry-ticket dates, not sale period"
+        },
+        {
+          "date": "2026-09-29",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-05d98b",
+          "evidenceCount": 1,
+          "notes": "Original article explicitly names Pokemon Center TAIPEI, 2026-10-03 in-store sale, six concrete product designs, and cites official @pokemon_taiwan"
+        },
+        {
+          "date": "2026-09-29",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "campaign",
+          "country": "TW",
+          "eventId": "po-fea2a2",
+          "evidenceCount": 1,
+          "notes": "Duplicate of official po-de81e3; 2026-11-11 belongs to Pokemon GO stamp activity, while the physical PokéXciting event is 2026-10-10 to 2026-10-11"
         }
       ]
     },
