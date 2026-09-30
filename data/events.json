@@ -1582,5 +1582,53 @@
     "sourceType": "official_social",
     "createdAt": "2026-09-29",
     "sourceUrl": "https://www.nownews.com/news/6879023"
+  },
+  {
+    "brand": "miffy",
+    "title": "米飛兔 zakka festa 奈良",
+    "type": "popup",
+    "country": "JP",
+    "city": "Nara",
+    "locationName": "近鉄百貨店奈良店",
+    "startDate": "2026-10-07",
+    "endDate": "",
+    "summaryZh": "米飛兔 zakka festa 在奈良近鉄百貨店初登場，集結800件以上周邊商品，有會場限定品與蘋果樹拍照點。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "快閃店",
+      "限定商品",
+      "奈良"
+    ],
+    "id": "mi-156de0",
+    "sourceTitle": "「ミッフィー zakkaフェスタ(2026年版ニューバージョン)」奈良初開催！800点以上のグッズが集結！10月7日から近鉄百貨店奈良店で開催。会場限定品や「りんごの木フォトスポット」も",
+    "sourceType": "official_social",
+    "createdAt": "2026-09-30",
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000151.000155220.html"
+  },
+  {
+    "brand": "pokemon",
+    "title": "寶可夢中心推出新周邊",
+    "type": "new_product",
+    "country": "JP",
+    "city": "",
+    "locationName": "ポケモンセンター",
+    "startDate": "2026-09-05",
+    "endDate": "",
+    "summaryZh": "寶可夢中心將於9月5日起販售以睡覺的摩古壽羅為主題的新商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢",
+      "摩古壽羅",
+      "周邊商品",
+      "日本"
+    ],
+    "id": "po-19d234",
+    "sourceTitle": "【ポケモン】すやすやねむるモクローたちをデザインした新作グッズがポケモンセンターで9月5日より販売 (GAME Watch) - Yahoo!ニュース",
+    "sourceType": "official_social",
+    "createdAt": "2026-09-30",
+    "sourceUrl": "https://news.yahoo.co.jp/articles/da6e952794553f9aaab152a4326966870a4b3c1d/images/000"
   }
 ]
