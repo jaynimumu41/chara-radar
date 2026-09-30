@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-29T08:34:36+00:00",
+  "updatedAt": "2026-09-30T08:37:14+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 15,
@@ -437,18 +437,18 @@
     },
     "domain:news.yahoo.co.jp": {
       "confirmed": 2,
-      "rejected": 14,
+      "rejected": 15,
       "uncertain": 0,
-      "crossChecked": 16,
+      "crossChecked": 17,
       "score": 5,
       "label": "news.yahoo.co.jp",
       "kind": "news",
       "host": "news.yahoo.co.jp",
       "handle": "",
       "firstSeen": "2026-06-15",
-      "lastReviewed": "2026-09-14",
+      "lastReviewed": "2026-09-30",
       "lastOutcome": "rejected",
-      "notes": "Duplicate of Dick Bruna official mi-9b0b1c for Yurakucho Marui 2026-10-02 to 2026-10-19",
+      "notes": "Accurate syndication, but duplicate of Pokemon official po-4307fc for Pokemon Timeless Adventure nemuru goods on 2026-09-05",
       "byBrand": {
         "chiikawa": {
           "confirmed": 1,
@@ -463,6 +463,13 @@
           "uncertain": 0,
           "crossChecked": 8,
           "score": 12
+        },
+        "pokemon": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
         }
       },
       "byType": {
@@ -475,10 +482,10 @@
         },
         "new_product": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 0,
-          "score": 39
+          "crossChecked": 1,
+          "score": 30
         },
         "cafe": {
           "confirmed": 0,
@@ -505,9 +512,9 @@
       "byCountry": {
         "jp": {
           "confirmed": 2,
-          "rejected": 14,
+          "rejected": 15,
           "uncertain": 0,
-          "crossChecked": 16,
+          "crossChecked": 17,
           "score": 5
         }
       },
@@ -671,6 +678,16 @@
           "eventId": "mi-bf93da",
           "evidenceCount": 1,
           "notes": "Duplicate of Dick Bruna official mi-9b0b1c for Yurakucho Marui 2026-10-02 to 2026-10-19"
+        },
+        {
+          "date": "2026-09-30",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "po-19d234",
+          "evidenceCount": 1,
+          "notes": "Accurate syndication, but duplicate of Pokemon official po-4307fc for Pokemon Timeless Adventure nemuru goods on 2026-09-05"
         }
       ]
     },
@@ -1447,18 +1464,18 @@
     },
     "domain:prtimes.jp": {
       "confirmed": 3,
-      "rejected": 3,
+      "rejected": 4,
       "uncertain": 0,
-      "crossChecked": 6,
-      "score": 48,
+      "crossChecked": 7,
+      "score": 37,
       "label": "prtimes.jp",
       "kind": "news",
       "host": "prtimes.jp",
       "handle": "",
       "firstSeen": "2026-07-01",
-      "lastReviewed": "2026-09-02",
+      "lastReviewed": "2026-09-30",
       "lastOutcome": "rejected",
-      "notes": "Company release explicitly ended 2026-08-24; expired by verification date",
+      "notes": "Accurate company release, but duplicate of Dick Bruna official mi-9540fc for Kintetsu Nara 2026-10-07 to 2026-10-13",
       "byBrand": {
         "chiikawa": {
           "confirmed": 1,
@@ -1469,10 +1486,10 @@
         },
         "miffy": {
           "confirmed": 1,
-          "rejected": 3,
+          "rejected": 4,
           "uncertain": 0,
-          "crossChecked": 5,
-          "score": 34
+          "crossChecked": 6,
+          "score": 23
         }
       },
       "byType": {
@@ -1485,10 +1502,10 @@
         },
         "popup": {
           "confirmed": 1,
-          "rejected": 2,
+          "rejected": 3,
           "uncertain": 0,
-          "crossChecked": 3,
-          "score": 41
+          "crossChecked": 4,
+          "score": 32
         },
         "store": {
           "confirmed": 1,
@@ -1508,10 +1525,10 @@
       "byCountry": {
         "jp": {
           "confirmed": 2,
-          "rejected": 4,
+          "rejected": 5,
           "uncertain": 0,
-          "crossChecked": 6,
-          "score": 30
+          "crossChecked": 7,
+          "score": 19
         }
       },
       "history": [
@@ -1574,6 +1591,16 @@
           "eventId": "mi-1702d8",
           "evidenceCount": 0,
           "notes": "Company release explicitly ended 2026-08-24; expired by verification date"
+        },
+        {
+          "date": "2026-09-30",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "mi-156de0",
+          "evidenceCount": 1,
+          "notes": "Accurate company release, but duplicate of Dick Bruna official mi-9540fc for Kintetsu Nara 2026-10-07 to 2026-10-13"
         }
       ]
     },
