@@ -49,31 +49,6 @@
     "sourceUrl": "https://tw.portal-pokemon.com/goods/post-5267/"
   },
   {
-    "brand": "miffy",
-    "title": "米飛主題客房與限定商品",
-    "type": "reservation",
-    "country": "JP",
-    "city": "Hyogo",
-    "locationName": "ホテルオークラ神戸",
-    "startDate": "2026-07-30",
-    "endDate": "2026-09-30",
-    "summaryZh": "神戶大倉飯店的「米飛房」住宿方案將於 2026-07-30 至 2026-09-30 提供，2026-06-30 起開放預約，並附住宿者限定周邊。",
-    "needReservation": true,
-    "hasLimitedGoods": true,
-    "tags": [
-      "主題客房",
-      "限定商品",
-      "神戶",
-      "米飛"
-    ],
-    "id": "mi-aa3188",
-    "parentEventId": "mi-ea7f4f",
-    "sourceTitle": "ホテルオークラ神戸”ミッフィー尽くし”の神戸港ビュー客室「ミッフィールーム」限定グッズも - ファッションプレス",
-    "sourceType": "official_social",
-    "createdAt": "2026-06-30",
-    "sourceUrl": "https://www.fashion-press.net/news/148061"
-  },
-  {
     "brand": "chiikawa",
     "title": "吉伊卡哇 小樽店 ちいかわベビーカステラ",
     "type": "store",
@@ -97,78 +72,6 @@
     "createdAt": "2026-07-22",
     "sourceTitle": "7月に北海道・小樽にオープン！テイクアウトショップ「ちいかわベビーカステラ」フードメニュー、グッズのご紹介 - ちいかわもぐもぐ本舗",
     "sourceUrl": "https://www.chiikawamogumogu.jp/stores/castella/"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "Chiikawa x 東京ばな奈 聯名環保袋組",
-    "type": "new_product",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "東京ばな奈s（JR東京駅）ほか対象店舗",
-    "startDate": "2026-08-01",
-    "endDate": "",
-    "summaryZh": "東京ばな奈推出第二彈Chiikawa聯名商品「環保袋組」，內含環保袋與香蕉布丁蛋糕，方便攜帶。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "聯名商品",
-      "環保袋",
-      "東京",
-      "甜點"
-    ],
-    "id": "ch-7a3682",
-    "sourceTitle": "【ちいかわ×東京ばな奈】コラボグッズ第2弾『エコバッグセット』誕生！持ち歩きに便利なエコバッグとバナナプリンケーキをセットで - PR TIMES",
-    "sourceType": "official_social",
-    "createdAt": "2026-07-23",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002069.000025606.html"
-  },
-  {
-    "brand": "pokemon",
-    "title": "寶可夢 缶バッジコレクション〜ミアレ編〜登場",
-    "type": "new_product",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "ポケモンセンター全店",
-    "startDate": "2026-08-01",
-    "endDate": "",
-    "summaryZh": "寶可夢中心將於8月1日推出「缶バッジコレクション〜ミアレ編〜」徽章收藏系列，可在寶可夢中心實體店舖購買。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "徽章",
-      "新品",
-      "日本"
-    ],
-    "id": "po-d8365c",
-    "sourceTitle": "「缶バッジコレクション〜ミアレ編〜」が、ポケモンセンターに登場！ - ポケットモンスターオフィシャルサイト",
-    "sourceType": "official_site",
-    "createdAt": "2026-07-25",
-    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/07/260724_go01.html"
-  },
-  {
-    "brand": "pokemon",
-    "title": "寶可夢中心「超級進化寶可夢＆超級石」壓克力鑰匙圈新登場",
-    "type": "new_product",
-    "country": "JP",
-    "city": "",
-    "locationName": "ポケモンセンター全店",
-    "startDate": "2026-08-01",
-    "endDate": "",
-    "summaryZh": "日本寶可夢中心將於8月1日推出「超級進化寶可夢＆超級石」主題的壓克力鑰匙圈新品，可在寶可夢中心實體店舖購買。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "鑰匙圈",
-      "新品",
-      "日本"
-    ],
-    "id": "po-5e9734",
-    "sourceTitle": "メガシンカポケモン＆メガストーンのキーホルダーが、ポケモンセンターに登場！ - ポケットモンスターオフィシャルサイト",
-    "sourceType": "official_site",
-    "createdAt": "2026-07-25",
-    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/07/260724_go02.html"
   },
   {
     "brand": "miffy",
@@ -265,29 +168,6 @@
     "sourceUrl": "https://www.4gamers.com.tw/news/detail/81076/pokemon-game-packaging-merchandise-launch-in-taiwan-at-august-8th-2026"
   },
   {
-    "brand": "miffy",
-    "title": "Miffy 神戶港塔 Night Time 聯名活動",
-    "type": "cafe",
-    "country": "JP",
-    "city": "Hyogo",
-    "locationName": "KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront",
-    "startDate": "2026-07-30",
-    "endDate": "2026-09-30",
-    "summaryZh": "Miffy（米飛兔）官方活動「神戶港塔 Night Time 聯名活動」於KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront期間限定登場，販售限定周邊／餐點。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "期間限定",
-      "日本"
-    ],
-    "id": "mi-ea7f4f",
-    "sourceType": "official_site",
-    "createdAt": "2026-08-05",
-    "sourceTitle": "「KOBE PORT TOWER×Dick Bruna TABLE in KOBE Waterfront」～Night Time～開催 - dickbruna.jp",
-    "sourceUrl": "https://dickbruna.jp/news/202606/46792/"
-  },
-  {
     "brand": "chiikawa",
     "title": "Chiikawa ちいかわパークストア LUCUA SOUTH",
     "type": "store",
@@ -312,56 +192,6 @@
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000231.000014414.html"
   },
   {
-    "brand": "miffy",
-    "title": "Miffy GOOD NIGHT MIFFY 限定下午茶",
-    "type": "cafe",
-    "country": "JP",
-    "city": "Hyogo",
-    "locationName": "神戸メリケンパークオリエンタルホテル 14F VIEW CAFE",
-    "startDate": "2026-07-30",
-    "endDate": "2026-09-30",
-    "summaryZh": "神戶美利堅公園東方飯店推出米飛主題住宿與下午茶，數量限定，享受特別的療癒旅程。",
-    "needReservation": true,
-    "hasLimitedGoods": false,
-    "tags": [
-      "主題住宿",
-      "下午茶",
-      "限定",
-      "神戶"
-    ],
-    "id": "mi-8ddf2f",
-    "parentEventId": "mi-ea7f4f",
-    "sourceTitle": "【神戸メリケンパークオリエンタルホテル】【数量限定】この夏、神戸でミッフィーと過ごす特別な癒やし旅。プレミアムなコラボ宿泊プラン＆アフタヌーンティーが本日6/29より発売！ - kobe-np.co.jp",
-    "sourceType": "official_site",
-    "createdAt": "2026-08-06",
-    "sourceUrl": "https://www.kobe-orientalhotel.co.jp/restaurant/viewcafe/menu/"
-  },
-  {
-    "brand": "miffy",
-    "title": "Miffy 限定馬卡龍與夏日下午茶",
-    "type": "cafe",
-    "country": "JP",
-    "city": "Hyogo",
-    "locationName": "ル・パン総本店／レストランカフェテラス アミ神戸",
-    "startDate": "2026-07-30",
-    "endDate": "2026-09-30",
-    "summaryZh": "神戶Miffy限定下午茶套餐與馬卡龍組合，於La Suite Kobe Harborland及Le Pan總本店販售，活動至9月30日止。",
-    "needReservation": true,
-    "hasLimitedGoods": true,
-    "tags": [
-      "限定餐飲",
-      "下午茶",
-      "馬卡龍",
-      "Miffy"
-    ],
-    "id": "mi-a93c3f",
-    "parentEventId": "mi-ea7f4f",
-    "sourceTitle": "神戸・ミッフィーの限定アフヌンやマカロンセットがラ・スイートやル・パン総本店で販売！9・30まで - jocr.jp",
-    "sourceType": "official_site",
-    "createdAt": "2026-08-11",
-    "sourceUrl": "https://www.l-s.jp/lepan/event-fair/miffy2026/"
-  },
-  {
     "brand": "pokemon",
     "title": "寶可夢中心新品 Sean Wotherspoon聯名玩偶",
     "type": "new_product",
@@ -384,30 +214,6 @@
     "sourceType": "official_social",
     "createdAt": "2026-08-10",
     "sourceUrl": "https://www.nownews.com/news/6864654"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 × 藏壽司期間限定合作",
-    "type": "cafe",
-    "country": "JP",
-    "city": "Aichi",
-    "locationName": "日本全國くら寿司門市",
-    "startDate": "2026-08-21",
-    "endDate": "2026-09-30",
-    "summaryZh": "吉伊卡哇與藏壽司的第四次聯名活動，推出原創湯呑及特別聯名餐點，8月21日起於日本全國藏壽司店鋪登場。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "聯名",
-      "限定商品",
-      "主題餐飲",
-      "日本"
-    ],
-    "id": "ch-a880a3",
-    "sourceTitle": "4回目のコラボはちいかわデザインのオリジナル「湯呑み」が初登場！ 「ちいかわ」×くら寿司コラボキャンペーン ちいかわたちの特別なコラボメニューも登場！ ～8月21日（金）から全国のくら寿司で開催～｜プレスリリース｜くら寿司 ホームページ - kurasushi.co.jp",
-    "sourceType": "official_site",
-    "createdAt": "2026-08-10",
-    "sourceUrl": "https://www.kurasushi.co.jp/author/008384.html"
   },
   {
     "brand": "pokemon",
@@ -574,55 +380,6 @@
     "createdAt": "2026-08-27",
     "sourceTitle": "「miffy × Cosme Kitchen 」コスメキッチンとミッフィーのコラボ第3弾登場 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202607/47496/"
-  },
-  {
-    "brand": "miffy",
-    "title": "米飛夏日限定聯名遊輪",
-    "type": "cafe",
-    "country": "JP",
-    "city": "Hyogo",
-    "locationName": "神戸リゾートクルーズ「boh boh KOBE」",
-    "startDate": "2026-07-30",
-    "endDate": "2026-09-30",
-    "summaryZh": "神戶港推出米飛夏日限定聯名遊輪「boh boh KOBE」，白天與夜晚皆有不同風貌，提供限定主題餐飲與體驗。",
-    "needReservation": false,
-    "hasLimitedGoods": false,
-    "tags": [
-      "米飛",
-      "神戶",
-      "遊輪",
-      "限定餐飲"
-    ],
-    "id": "mi-356f47",
-    "parentEventId": "mi-ea7f4f",
-    "sourceTitle": "ミッフィーに出会える、昼と夜の神戸港。神戸リゾートクルーズ「boh boh KOBE」で夏限定コラボレーションを開催",
-    "sourceType": "official_social",
-    "createdAt": "2026-08-21",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000143.000127012.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE グランデュオ蒲田",
-    "type": "popup",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "グランデュオ蒲田",
-    "startDate": "2026-09-08",
-    "endDate": "2026-09-30",
-    "summaryZh": "ちいかわ POP UP STORE 於グランデュオ蒲田期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-45dddd",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-13",
-    "sourceTitle": "ちいかわPOP UP STORE グランデュオ蒲田(2026-09-08～2026-09-30) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_gdkm/index.html"
   },
   {
     "brand": "pokemon",
@@ -958,30 +715,6 @@
     "createdAt": "2026-09-13",
     "sourceTitle": "10/10より「ブルーナフェア」開催 ショッピングバッグプレゼント - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202609/48228/"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "「吉伊卡哇」×「東京ばな奈」快閃店",
-    "type": "popup",
-    "country": "JP",
-    "city": "Iwate",
-    "locationName": "盛岡駅",
-    "startDate": "2026-09-18",
-    "endDate": "2026-09-30",
-    "summaryZh": "「吉伊卡哇」與「東京ばな奈」於盛岡駅舉辦快閃店，推出岩手縣初登場的環保袋套組及新款香蕉布丁蛋糕。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "快閃店",
-      "限定商品",
-      "東京ばな奈",
-      "岩手"
-    ],
-    "id": "ch-87cc55",
-    "sourceTitle": "【盛岡駅】「ちいかわ」×「東京ばな奈」のポップアップストアがOPEN。岩手県初登場のエコバッグセットに新バナナプリンケーキも - PR TIMES",
-    "sourceType": "official_social",
-    "createdAt": "2026-09-10",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002110.000025606.html"
   },
   {
     "brand": "chiikawa",
