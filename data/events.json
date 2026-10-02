@@ -1315,5 +1315,30 @@
     "sourceType": "official_social",
     "createdAt": "2026-09-29",
     "sourceUrl": "https://www.nownews.com/news/6879023"
+  },
+  {
+    "brand": "pokemon",
+    "title": "Pokémon Center 電気を求めてやってきたデデンネとバチュルの日常を描いたグッズがポケモンセンターに登場",
+    "type": "new_product",
+    "country": "JP",
+    "city": "",
+    "locationName": "日本全國 Pokémon Center",
+    "startDate": "2026-10-10",
+    "endDate": "",
+    "summaryZh": "日本 Pokémon 官方公告「電気を求めてやってきたデデンネとバチュルの日常を描いたグッズがポケモンセンターに登場！」於2026-10-10起在日本各地 Pokémon Center 實體店販售。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢",
+      "Pokémon Center",
+      "新品",
+      "日本",
+      "官方"
+    ],
+    "id": "po-e64bed",
+    "sourceType": "official_site",
+    "createdAt": "2026-10-02",
+    "sourceTitle": "電気を求めてやってきたデデンネとバチュルの日常を描いたグッズがポケモンセンターに登場！ - ポケットモンスターオフィシャルサイト",
+    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/10/261002_to01.html"
   }
 ]
