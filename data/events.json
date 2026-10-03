@@ -1340,5 +1340,53 @@
     "createdAt": "2026-10-02",
     "sourceTitle": "電気を求めてやってきたデデンネとバチュルの日常を描いたグッズがポケモンセンターに登場！ - ポケットモンスターオフィシャルサイト",
     "sourceUrl": "https://www.pokemon.co.jp/goods/2026/10/261002_to01.html"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇 POP UP STORE イオンモール常滑",
+    "type": "popup",
+    "country": "JP",
+    "city": "Aichi",
+    "locationName": "イオンモール常滑",
+    "startDate": "2026-10-16",
+    "endDate": "2026-11-03",
+    "summaryZh": "ちいかわ POP UP STORE 於イオンモール常滑期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "吉伊卡哇",
+      "快閃店",
+      "日本",
+      "限定周邊"
+    ],
+    "id": "ch-3821ff",
+    "sourceType": "official_site",
+    "createdAt": "2026-10-03",
+    "sourceTitle": "ちいかわPOP UP STORE イオンモール常滑(2026-10-16～2026-11-03) - ちいかわ公式",
+    "sourceUrl": "https://chiikawa-info.jp/p26/pus_tknm/index.html"
+  },
+  {
+    "brand": "pokemon",
+    "title": "寶可夢デデンネとバチュル周邊新品發售",
+    "type": "new_product",
+    "country": "JP",
+    "city": "",
+    "locationName": "",
+    "startDate": "2026-10-08",
+    "endDate": "",
+    "summaryZh": "寶可夢推出以デデンネ與バチュル為主題的新周邊商品，包含くっつきぬいぐるみ、托特包等，於10月8日發售。",
+    "needReservation": false,
+    "hasLimitedGoods": false,
+    "tags": [
+      "寶可夢",
+      "新品",
+      "デデンネ",
+      "バチュル"
+    ],
+    "id": "po-ef2294",
+    "sourceTitle": "ポケモン，デデンネとバチュルの日常にフォーカスしたグッズを10月8日に発売。くっつきぬいぐるみやトートバッグなどを展開 - 4Gamer.net",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-03",
+    "sourceUrl": "https://www.4gamer.net/games/991/G999106/20261002022/"
   }
 ]
