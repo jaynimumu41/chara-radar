@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-30T08:37:14+00:00",
+  "updatedAt": "2026-10-03T08:36:49+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 15,
@@ -3821,6 +3821,60 @@
           "eventId": "po-2cfc57",
           "evidenceCount": 1,
           "notes": "Duplicate of existing official Pokemon Sleep campaign po-d330c0"
+        }
+      ]
+    },
+    "domain:4gamer.net": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 41,
+      "label": "4gamer.net",
+      "kind": "site",
+      "host": "4gamer.net",
+      "handle": "",
+      "firstSeen": "2026-10-03",
+      "lastReviewed": "2026-10-03",
+      "lastOutcome": "rejected",
+      "notes": "Duplicate of official po-e64bed; 2026-10-08 is Pokemon Center Online only, while physical Pokemon Center sales start 2026-10-10",
+      "byBrand": {
+        "pokemon": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byType": {
+        "new_product": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "history": [
+        {
+          "date": "2026-10-03",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "po-ef2294",
+          "evidenceCount": 1,
+          "notes": "Duplicate of official po-e64bed; 2026-10-08 is Pokemon Center Online only, while physical Pokemon Center sales start 2026-10-10"
         }
       ]
     }
