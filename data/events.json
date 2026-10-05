@@ -862,29 +862,6 @@
     "sourceUrl": "https://dickbruna.jp/news/202609/48222/"
   },
   {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 Pocket mini POP UP STORE 札幌",
-    "type": "popup",
-    "country": "JP",
-    "city": "Hokkaido",
-    "locationName": "札幌PARCO 7F PARCO FACTORY",
-    "startDate": "2026-09-18",
-    "endDate": "2026-10-04",
-    "summaryZh": "ちいかわぽけっと mini POP UP STORE in 札幌於札幌PARCO 7F PARCO FACTORY期間限定登場，販售活動紀念與限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "Chiikawa Pocket",
-      "快閃店"
-    ],
-    "id": "ch-7a2b34",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-13",
-    "sourceTitle": "ちいかわぽけっと mini POP UP STORE in 札幌 (2026-09-18～2026-10-04) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/chiikawa_pocket_mini_spp/index.html"
-  },
-  {
     "brand": "pokemon",
     "title": "台灣寶可夢中心新品",
     "type": "new_product",
@@ -1364,5 +1341,28 @@
     "createdAt": "2026-10-03",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール常滑(2026-10-16～2026-11-03) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_tknm/index.html"
+  },
+  {
+    "brand": "miffy",
+    "title": "Miffy ミッフィーzakkaフェスタ　仙台・藤崎百貨店",
+    "type": "popup",
+    "country": "JP",
+    "city": "Miyagi",
+    "locationName": "仙台・藤崎百貨店",
+    "startDate": "2026-11-25",
+    "endDate": "2026-12-08",
+    "summaryZh": "Miffy（米飛兔）官方活動「ミッフィーzakkaフェスタ」於仙台・藤崎百貨店期間限定登場，販售限定周邊／餐點。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "期間限定",
+      "日本"
+    ],
+    "id": "mi-2196ff",
+    "sourceType": "official_site",
+    "createdAt": "2026-10-05",
+    "sourceTitle": "仙台・藤崎百貨店で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
+    "sourceUrl": "https://dickbruna.jp/news/202610/48945/"
   }
 ]
