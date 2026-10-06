@@ -289,30 +289,6 @@
   },
   {
     "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE 中部国際空港 第1ターミナル",
-    "type": "popup",
-    "country": "JP",
-    "city": "Aichi",
-    "locationName": "中部国際空港 第1ターミナル",
-    "startDate": "2026-09-08",
-    "endDate": "2026-10-05",
-    "summaryZh": "ちいかわ POP UP STORE 於中部国際空港 第1ターミナル期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-fde90b",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-13",
-    "sourceTitle": "ちいかわPOP UP STORE 中部国際空港 第1ターミナル(2026-09-08～2026-10-05) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_cbca/index.html"
-  },
-  {
-    "brand": "chiikawa",
     "title": "吉伊卡哇 POP UP STORE 0%NAHA",
     "type": "popup",
     "country": "JP",
@@ -454,30 +430,6 @@
     "sourceUrl": "https://www.pokemon.co.jp/goods/2026/08/260828_to01.html"
   },
   {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE イオンモール和歌山",
-    "type": "popup",
-    "country": "JP",
-    "city": "Wakayama",
-    "locationName": "イオンモール和歌山",
-    "startDate": "2026-09-18",
-    "endDate": "2026-10-05",
-    "summaryZh": "ちいかわ POP UP STORE 於イオンモール和歌山期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-8c7ad6",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-13",
-    "sourceTitle": "ちいかわPOP UP STORE イオンモール和歌山(2026-09-18～2026-10-05) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_awak/index.html"
-  },
-  {
     "brand": "pokemon",
     "title": "Pokémon Timeless Adventure「ねむる」主題周邊",
     "type": "new_product",
@@ -523,29 +475,6 @@
     "createdAt": "2026-09-13",
     "sourceTitle": "「誕生70周年記念 ミッフィー展」福井会場にて開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202609/48144/"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "まじかるちいかわ POP UP STORE in 高知",
-    "type": "popup",
-    "country": "JP",
-    "city": "Kochi",
-    "locationName": "高知 蔦屋書店 1F中央広場",
-    "startDate": "2026-09-11",
-    "endDate": "2026-10-05",
-    "summaryZh": "まじかるちいかわ期間限定店於高知蔦屋書店登場，販售角色周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "快閃店",
-      "限定商品",
-      "高知"
-    ],
-    "id": "ch-e7461b",
-    "sourceTitle": "まじかるちいかわPOP UP STORE 高知 蔦屋書店 - ちいかわ公式",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-01",
-    "sourceUrl": "https://chiikawa-info.jp/magical_s.html"
   },
   {
     "brand": "chiikawa",
@@ -764,30 +693,6 @@
     "createdAt": "2026-09-13",
     "sourceTitle": "ちいかわPOP UP STORE 泉北髙島屋(2026-09-24～2026-10-06) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_snbk/index.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE イオンモール岡崎",
-    "type": "popup",
-    "country": "JP",
-    "city": "Aichi",
-    "locationName": "イオンモール岡崎",
-    "startDate": "2026-09-18",
-    "endDate": "2026-10-05",
-    "summaryZh": "ちいかわ POP UP STORE 於イオンモール岡崎期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-c50b07",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-13",
-    "sourceTitle": "ちいかわPOP UP STORE イオンモール岡崎(2026-09-18～2026-10-05) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_aoka/index.html"
   },
   {
     "brand": "chiikawa",
@@ -1029,29 +934,6 @@
     "createdAt": "2026-09-25",
     "sourceTitle": "ピックアップテーマ「つながる」のイラストを使用したグッズが、ポケモンセンターに登場！ - ポケットモンスターオフィシャルサイト",
     "sourceUrl": "https://www.pokemon.co.jp/goods/2026/09/260925_to01.html"
-  },
-  {
-    "brand": "miffy",
-    "title": "Miffy miffy style 各店ノベルティデイ",
-    "type": "campaign",
-    "country": "JP",
-    "city": "",
-    "locationName": "miffy style 各店＋キデイランド対象店",
-    "startDate": "2026-09-05",
-    "endDate": "",
-    "summaryZh": "miffy style 各店自 2026-09-05 起舉辦店頭購入特典活動，贈品送完為止，線上店不適用。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "miffy style",
-      "日本"
-    ],
-    "id": "mi-9374dd",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-25",
-    "sourceTitle": "2026年9月5日(土)～スタート!miffy style 各店ノベルティデイ - キデイランド",
-    "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_nove202609/"
   },
   {
     "brand": "chiikawa",
@@ -1364,5 +1246,53 @@
     "createdAt": "2026-10-05",
     "sourceTitle": "仙台・藤崎百貨店で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202610/48945/"
+  },
+  {
+    "brand": "pokemon",
+    "title": "寶可夢中心新商品登場",
+    "type": "new_product",
+    "country": "JP",
+    "city": "Tokyo",
+    "locationName": "ポケモンセンター",
+    "startDate": "2026-10-10",
+    "endDate": "",
+    "summaryZh": "日本寶可夢中心將於10月10日起推出以電氣屬性寶可夢「咚咚鼠」與「燭光靈」為主題的新周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢中心",
+      "新商品",
+      "咚咚鼠",
+      "燭光靈"
+    ],
+    "id": "po-13b0bd",
+    "sourceTitle": "電気にまつわるグッズがずらり！ 10月10日よりデデンネ＆バチュルがテーマのアイテムがポケモンセンターに登場 - Nintendo DREAM WEB",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-06",
+    "sourceUrl": "https://www.ndw.jp/pokemon-goods-261002-02/"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇快閃店",
+    "type": "popup",
+    "country": "JP",
+    "city": "Aichi",
+    "locationName": "AEON MALL Tokoname",
+    "startDate": "2026-10-16",
+    "endDate": "2026-11-03",
+    "summaryZh": "吉伊卡哇快閃店於10月16日起在永旺夢樂城常滑舉辦，現場販售周邊商品，並設有主題咖啡廳。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "快閃店",
+      "限定商品",
+      "主題咖啡廳",
+      "日本"
+    ],
+    "id": "ch-3f4f90",
+    "sourceTitle": "ちいかわ POP UP STORE in イオンモール常滑 10月16日より開催! - コラボカフェ",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-06",
+    "sourceUrl": "https://collabo-cafe.com/events/collabo/chiikawa-popup-store-aeonmall-tokoname-2026/"
   }
 ]
