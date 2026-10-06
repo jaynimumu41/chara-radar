@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-03T08:36:49+00:00",
+  "updatedAt": "2026-10-06T08:35:45+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 15,
@@ -1179,24 +1179,24 @@
     },
     "domain:collabo-cafe.com": {
       "confirmed": 9,
-      "rejected": 13,
+      "rejected": 14,
       "uncertain": 0,
-      "crossChecked": 28,
+      "crossChecked": 29,
       "score": 5,
       "label": "collabo-cafe.com",
       "kind": "site",
       "host": "collabo-cafe.com",
       "handle": "",
       "firstSeen": "2026-06-30",
-      "lastReviewed": "2026-09-28",
+      "lastReviewed": "2026-10-06",
       "lastOutcome": "rejected",
-      "notes": "Accurate popup dates but duplicate of official record ch-d1b68c; unsupported cafe claim",
+      "notes": "Duplicate of Chiikawa official record ch-3821ff for 2026-10-16 through 2026-11-03; secondary row also added an unsupported cafe claim",
       "byBrand": {
         "chiikawa": {
           "confirmed": 9,
-          "rejected": 12,
+          "rejected": 13,
           "uncertain": 0,
-          "crossChecked": 27,
+          "crossChecked": 28,
           "score": 5
         },
         "miffy": {
@@ -1217,10 +1217,10 @@
         },
         "popup": {
           "confirmed": 7,
-          "rejected": 7,
+          "rejected": 8,
           "uncertain": 0,
-          "crossChecked": 19,
-          "score": 32
+          "crossChecked": 20,
+          "score": 21
         },
         "new_product": {
           "confirmed": 2,
@@ -1233,9 +1233,9 @@
       "byCountry": {
         "jp": {
           "confirmed": 9,
-          "rejected": 13,
+          "rejected": 14,
           "uncertain": 0,
-          "crossChecked": 28,
+          "crossChecked": 29,
           "score": 5
         }
       },
@@ -1459,6 +1459,16 @@
           "eventId": "ch-82295a",
           "evidenceCount": 1,
           "notes": "Accurate popup dates but duplicate of official record ch-d1b68c; unsupported cafe claim"
+        },
+        {
+          "date": "2026-10-06",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-3f4f90",
+          "evidenceCount": 1,
+          "notes": "Duplicate of Chiikawa official record ch-3821ff for 2026-10-16 through 2026-11-03; secondary row also added an unsupported cafe claim"
         }
       ]
     },
@@ -2338,34 +2348,34 @@
     },
     "domain:ndw.jp": {
       "confirmed": 7,
-      "rejected": 4,
+      "rejected": 5,
       "uncertain": 0,
-      "crossChecked": 13,
-      "score": 65,
+      "crossChecked": 14,
+      "score": 54,
       "label": "ndw.jp",
       "kind": "site",
       "host": "ndw.jp",
       "handle": "",
       "firstSeen": "2026-07-19",
-      "lastReviewed": "2026-09-03",
+      "lastReviewed": "2026-10-06",
       "lastOutcome": "rejected",
-      "notes": "Duplicate of official plush record po-6858a8 and used online-only Sep 3 date for physical stores",
+      "notes": "Accurate article but duplicate of existing Pokémon official record po-e64bed for the same 2026-10-10 physical-store launch",
       "byBrand": {
         "pokemon": {
           "confirmed": 7,
-          "rejected": 4,
+          "rejected": 5,
           "uncertain": 0,
-          "crossChecked": 13,
-          "score": 65
+          "crossChecked": 14,
+          "score": 54
         }
       },
       "byType": {
         "new_product": {
           "confirmed": 6,
-          "rejected": 3,
+          "rejected": 4,
           "uncertain": 0,
-          "crossChecked": 11,
-          "score": 69
+          "crossChecked": 12,
+          "score": 58
         },
         "campaign": {
           "confirmed": 1,
@@ -2378,10 +2388,10 @@
       "byCountry": {
         "jp": {
           "confirmed": 7,
-          "rejected": 4,
+          "rejected": 5,
           "uncertain": 0,
-          "crossChecked": 13,
-          "score": 65
+          "crossChecked": 14,
+          "score": 54
         }
       },
       "history": [
@@ -2494,6 +2504,16 @@
           "eventId": "po-9083d8",
           "evidenceCount": 1,
           "notes": "Duplicate of official plush record po-6858a8 and used online-only Sep 3 date for physical stores"
+        },
+        {
+          "date": "2026-10-06",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "po-13b0bd",
+          "evidenceCount": 1,
+          "notes": "Accurate article but duplicate of existing Pokémon official record po-e64bed for the same 2026-10-10 physical-store launch"
         }
       ]
     },

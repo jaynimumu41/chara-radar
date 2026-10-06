@@ -1246,53 +1246,5 @@
     "createdAt": "2026-10-05",
     "sourceTitle": "仙台・藤崎百貨店で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202610/48945/"
-  },
-  {
-    "brand": "pokemon",
-    "title": "寶可夢中心新商品登場",
-    "type": "new_product",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "ポケモンセンター",
-    "startDate": "2026-10-10",
-    "endDate": "",
-    "summaryZh": "日本寶可夢中心將於10月10日起推出以電氣屬性寶可夢「咚咚鼠」與「燭光靈」為主題的新周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢中心",
-      "新商品",
-      "咚咚鼠",
-      "燭光靈"
-    ],
-    "id": "po-13b0bd",
-    "sourceTitle": "電気にまつわるグッズがずらり！ 10月10日よりデデンネ＆バチュルがテーマのアイテムがポケモンセンターに登場 - Nintendo DREAM WEB",
-    "sourceType": "official_social",
-    "createdAt": "2026-10-06",
-    "sourceUrl": "https://www.ndw.jp/pokemon-goods-261002-02/"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇快閃店",
-    "type": "popup",
-    "country": "JP",
-    "city": "Aichi",
-    "locationName": "AEON MALL Tokoname",
-    "startDate": "2026-10-16",
-    "endDate": "2026-11-03",
-    "summaryZh": "吉伊卡哇快閃店於10月16日起在永旺夢樂城常滑舉辦，現場販售周邊商品，並設有主題咖啡廳。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "快閃店",
-      "限定商品",
-      "主題咖啡廳",
-      "日本"
-    ],
-    "id": "ch-3f4f90",
-    "sourceTitle": "ちいかわ POP UP STORE in イオンモール常滑 10月16日より開催! - コラボカフェ",
-    "sourceType": "official_social",
-    "createdAt": "2026-10-06",
-    "sourceUrl": "https://collabo-cafe.com/events/collabo/chiikawa-popup-store-aeonmall-tokoname-2026/"
   }
 ]
