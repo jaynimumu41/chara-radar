@@ -97,29 +97,6 @@
     "sourceUrl": "https://dickbruna.jp/news/202607/47552/"
   },
   {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 × 斯巴拉西聯名商品",
-    "type": "new_product",
-    "country": "JP",
-    "city": "Okinawa",
-    "locationName": "沖繩實體販售點（シーサーのおみやげやさん、上間菓子店直營店等）",
-    "startDate": "2026-08-07",
-    "endDate": "",
-    "summaryZh": "吉伊卡哇與沖繩斯巴拉西推出玩偶、T恤、鑰匙圈、磁鐵與貼紙等 5 款聯名商品，8 月 7 日起於沖繩實體店與官方網店販售。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "聯名",
-      "新商品",
-      "沖繩"
-    ],
-    "id": "ch-2e1170",
-    "sourceTitle": "【ちいかわ × スッパイマン】話題を集めたコラボパッケージをモチーフにした商品が登場！マスコットやTシャツなど全5アイテムが8月7日（金）より販売開始",
-    "sourceType": "official_social",
-    "createdAt": "2026-07-29",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000064.000168561.html"
-  },
-  {
     "brand": "pokemon",
     "title": "寶可夢「ぱたぱたっ！ぬいぐるみ」新發售",
     "type": "new_product",
@@ -669,30 +646,6 @@
     "createdAt": "2026-09-13",
     "sourceTitle": "ちいかわパークがハロウィーンに染まる 秋の限定企画 - ちいかわパーク",
     "sourceUrl": "https://chiikawapark-tokyo.jp/news/9lofnm5f5wy/"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE 泉北髙島屋",
-    "type": "popup",
-    "country": "JP",
-    "city": "Osaka",
-    "locationName": "泉北髙島屋",
-    "startDate": "2026-09-24",
-    "endDate": "2026-10-06",
-    "summaryZh": "ちいかわ POP UP STORE 於泉北髙島屋期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-67f3d4",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-13",
-    "sourceTitle": "ちいかわPOP UP STORE 泉北髙島屋(2026-09-24～2026-10-06) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_snbk/index.html"
   },
   {
     "brand": "chiikawa",
@@ -1246,5 +1199,28 @@
     "createdAt": "2026-10-05",
     "sourceTitle": "仙台・藤崎百貨店で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202610/48945/"
+  },
+  {
+    "brand": "pokemon",
+    "title": "台灣寶可夢中心新品上市",
+    "type": "new_product",
+    "country": "TW",
+    "city": "Taipei",
+    "locationName": "台灣寶可夢中心",
+    "startDate": "2026-10-10",
+    "endDate": "",
+    "summaryZh": "台灣寶可夢中心將於10月10日上市「粉紅皮卡丘」等29款新品，連開三天販售。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "新品上市",
+      "寶可夢中心",
+      "皮卡丘"
+    ],
+    "id": "po-5c8817",
+    "sourceTitle": "台灣寶可夢中心連3天開賣29款新品！「粉紅皮卡丘」10/10上市 販售管道價格曝 - udn科技玩家",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-07",
+    "sourceUrl": "https://tech.udn.com/tech/amp/story/123154/9800084"
   }
 ]
