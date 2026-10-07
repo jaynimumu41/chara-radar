@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-06T08:35:45+00:00",
+  "updatedAt": "2026-10-07T08:39:08+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 15,
@@ -3895,6 +3895,60 @@
           "eventId": "po-ef2294",
           "evidenceCount": 1,
           "notes": "Duplicate of official po-e64bed; 2026-10-08 is Pokemon Center Online only, while physical Pokemon Center sales start 2026-10-10"
+        }
+      ]
+    },
+    "domain:tech.udn.com": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 2,
+      "score": 43,
+      "label": "tech.udn.com",
+      "kind": "news",
+      "host": "tech.udn.com",
+      "handle": "",
+      "firstSeen": "2026-10-07",
+      "lastReviewed": "2026-10-07",
+      "lastOutcome": "rejected",
+      "notes": "Article details were accurate, but the generated row duplicated official Pokemon Magic Hour Illusion record po-08f99d and overlapped official PokéXciting record po-de81e3.",
+      "byBrand": {
+        "pokemon": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 43
+        }
+      },
+      "byType": {
+        "new_product": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 43
+        }
+      },
+      "byCountry": {
+        "tw": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 43
+        }
+      },
+      "history": [
+        {
+          "date": "2026-10-07",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-5c8817",
+          "evidenceCount": 2,
+          "notes": "Article details were accurate, but the generated row duplicated official Pokemon Magic Hour Illusion record po-08f99d and overlapped official PokéXciting record po-de81e3."
         }
       ]
     }
