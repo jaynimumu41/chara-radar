@@ -97,54 +97,6 @@
     "sourceUrl": "https://dickbruna.jp/news/202607/47552/"
   },
   {
-    "brand": "pokemon",
-    "title": "寶可夢「ぱたぱたっ！ぬいぐるみ」新發售",
-    "type": "new_product",
-    "country": "JP",
-    "city": "",
-    "locationName": "日本各地のポケモンセンター",
-    "startDate": "2026-08-08",
-    "endDate": "",
-    "summaryZh": "寶可夢中心將於8月8日發售會動的「ぱたぱたっ！ぬいぐるみ」，寶可夢的鰭會拍動。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "娃娃",
-      "新品",
-      "日本"
-    ],
-    "id": "po-49ec1c",
-    "sourceTitle": "ポケモンのヒレが動く「ぱたぱたっ！ぬいぐるみ」が、ポケモンセンターに登場！ - ポケットモンスターオフィシャルサイト",
-    "sourceType": "official_site",
-    "createdAt": "2026-08-01",
-    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/07/260731_to02.html"
-  },
-  {
-    "brand": "pokemon",
-    "title": "寶可夢歷代遊戲彩盒周邊商品",
-    "type": "new_product",
-    "country": "TW",
-    "city": "Taipei",
-    "locationName": "台北寶可夢中心",
-    "startDate": "2026-08-08",
-    "endDate": "",
-    "summaryZh": "寶可夢歷代遊戲彩盒周邊商品於8月8日起在台北寶可夢中心開賣。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "周邊商品",
-      "新品發售",
-      "台北"
-    ],
-    "id": "po-22bd8f",
-    "sourceTitle": "寶可夢歷代遊戲彩盒周邊商品來台，8/8台北寶可夢中心開賣 - 4Gamers",
-    "sourceType": "official_social",
-    "createdAt": "2026-08-04",
-    "sourceUrl": "https://www.4gamers.com.tw/news/detail/81076/pokemon-game-packaging-merchandise-launch-in-taiwan-at-august-8th-2026"
-  },
-  {
     "brand": "chiikawa",
     "title": "Chiikawa ちいかわパークストア LUCUA SOUTH",
     "type": "store",
@@ -1199,5 +1151,77 @@
     "createdAt": "2026-10-05",
     "sourceTitle": "仙台・藤崎百貨店で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202610/48945/"
+  },
+  {
+    "brand": "pokemon",
+    "title": "寶可夢中心粉紅皮卡丘購買攻略",
+    "type": "store",
+    "country": "TW",
+    "city": "",
+    "locationName": "寶可夢中心",
+    "startDate": "",
+    "endDate": "",
+    "summaryZh": "雙十連假期間，寶可夢中心將發放整理券，提供粉紅皮卡丘購買攻略。",
+    "needReservation": true,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢中心",
+      "皮卡丘",
+      "限定商品",
+      "雙十連假"
+    ],
+    "id": "po-dc55b2",
+    "sourceTitle": "寶可夢中心整理券哪裡領？雙十連假發放時間、粉紅皮卡丘購買攻略 - NOWnews今日新聞",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-08",
+    "sourceUrl": "https://www.nownews.com/amp/news/6881675"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇聖誕市集",
+    "type": "popup",
+    "country": "JP",
+    "city": "Tokyo",
+    "locationName": "池袋Sunshine City",
+    "startDate": "2026-11-24",
+    "endDate": "2026-12-25",
+    "summaryZh": "吉伊卡哇聖誕市集將於2026年11月24日起在池袋Sunshine City舉辦，現場將有聖誕主題周邊商品販售，與吉伊卡哇一起歡慶聖誕節。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "聖誕節",
+      "限定商品",
+      "快閃店",
+      "聖誕市集"
+    ],
+    "id": "ch-93a675",
+    "sourceTitle": "ちいかわたちとクリスマスを楽しむ「ちいかわクリスマスマーケット」を2026年11月24日（火）より開催決定！",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-08",
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000004081.000064643.html"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇聖誕市集",
+    "type": "popup",
+    "country": "JP",
+    "city": "Tokyo",
+    "locationName": "東京晴空街道",
+    "startDate": "2026-11-24",
+    "endDate": "2026-12-25",
+    "summaryZh": "吉伊卡哇聖誕市集將在東京晴空街道登場，現場有約6公尺高的聖誕樹，並以光、影像、聲音點綴，預計販售限定周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "聖誕市集",
+      "限定商品",
+      "東京",
+      "晴空街道"
+    ],
+    "id": "ch-3fe5e3",
+    "sourceTitle": "光・映像・音で彩る高さ約6mのシンボルツリー！ちいかわクリスマスマーケット - Dtimes",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-08",
+    "sourceUrl": "https://dtimes.jp/post-1410675/"
   }
 ]
