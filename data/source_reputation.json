@@ -1,27 +1,27 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-07T08:39:08+00:00",
+  "updatedAt": "2026-10-08T08:36:34+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 15,
-      "rejected": 3,
+      "rejected": 4,
       "uncertain": 0,
-      "crossChecked": 18,
+      "crossChecked": 20,
       "score": 95,
       "label": "nownews.com",
       "kind": "news",
       "host": "nownews.com",
       "handle": "",
       "firstSeen": "2026-06-11",
-      "lastReviewed": "2026-09-29",
+      "lastReviewed": "2026-10-08",
       "lastOutcome": "rejected",
-      "notes": "Duplicate of official po-de81e3; 2026-11-11 belongs to Pokemon GO stamp activity, while the physical PokéXciting event is 2026-10-10 to 2026-10-11",
+      "notes": "Access-ticket and purchase-guide roundup duplicated existing official Pokexciting event/product coverage",
       "byBrand": {
         "pokemon": {
           "confirmed": 15,
-          "rejected": 2,
+          "rejected": 3,
           "uncertain": 0,
-          "crossChecked": 17,
+          "crossChecked": 19,
           "score": 95
         },
         "chiikawa": {
@@ -53,14 +53,21 @@
           "uncertain": 0,
           "crossChecked": 1,
           "score": 41
+        },
+        "store": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 43
         }
       },
       "byCountry": {
         "tw": {
           "confirmed": 15,
-          "rejected": 3,
+          "rejected": 4,
           "uncertain": 0,
-          "crossChecked": 18,
+          "crossChecked": 20,
           "score": 95
         }
       },
@@ -244,6 +251,16 @@
           "eventId": "po-fea2a2",
           "evidenceCount": 1,
           "notes": "Duplicate of official po-de81e3; 2026-11-11 belongs to Pokemon GO stamp activity, while the physical PokéXciting event is 2026-10-10 to 2026-10-11"
+        },
+        {
+          "date": "2026-10-08",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "store",
+          "country": "TW",
+          "eventId": "po-dc55b2",
+          "evidenceCount": 2,
+          "notes": "Access-ticket and purchase-guide roundup duplicated existing official Pokexciting event/product coverage"
         }
       ]
     },
@@ -757,18 +774,18 @@
     },
     "domain:dtimes.jp": {
       "confirmed": 0,
-      "rejected": 3,
+      "rejected": 4,
       "uncertain": 0,
-      "crossChecked": 5,
-      "score": 27,
+      "crossChecked": 7,
+      "score": 16,
       "label": "dtimes.jp",
       "kind": "news",
       "host": "dtimes.jp",
       "handle": "",
       "firstSeen": "2026-06-19",
-      "lastReviewed": "2026-09-26",
+      "lastReviewed": "2026-10-08",
       "lastOutcome": "rejected",
-      "notes": "Accurate menu report but duplicate of existing official Huis Ten Bosch Miffy Halloween record mi-6e44af covering the identical 2026-09-18 to 2026-11-03 event, limited food, and goods",
+      "notes": "Duplicate of the official Christmas Market event and generated with a false Tokyo Solamachi venue; official venue is Toyosuna Park in Chiba",
       "byBrand": {
         "miffy": {
           "confirmed": 0,
@@ -783,6 +800,13 @@
           "uncertain": 0,
           "crossChecked": 1,
           "score": 41
+        },
+        "chiikawa": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 43
         }
       },
       "byType": {
@@ -799,15 +823,22 @@
           "uncertain": 0,
           "crossChecked": 3,
           "score": 45
+        },
+        "popup": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 43
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 0,
-          "rejected": 3,
+          "rejected": 4,
           "uncertain": 0,
-          "crossChecked": 5,
-          "score": 27
+          "crossChecked": 7,
+          "score": 16
         }
       },
       "history": [
@@ -840,6 +871,16 @@
           "eventId": "mi-86cede",
           "evidenceCount": 3,
           "notes": "Accurate menu report but duplicate of existing official Huis Ten Bosch Miffy Halloween record mi-6e44af covering the identical 2026-09-18 to 2026-11-03 event, limited food, and goods"
+        },
+        {
+          "date": "2026-10-08",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-3fe5e3",
+          "evidenceCount": 2,
+          "notes": "Duplicate of the official Christmas Market event and generated with a false Tokyo Solamachi venue; official venue is Toyosuna Park in Chiba"
         }
       ]
     },
@@ -3949,6 +3990,60 @@
           "eventId": "po-5c8817",
           "evidenceCount": 2,
           "notes": "Article details were accurate, but the generated row duplicated official Pokemon Magic Hour Illusion record po-08f99d and overlapped official PokéXciting record po-de81e3."
+        }
+      ]
+    },
+    "domain:contents-abema.com": {
+      "confirmed": 1,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 2,
+      "score": 61,
+      "label": "contents-abema.com",
+      "kind": "site",
+      "host": "contents-abema.com",
+      "handle": "",
+      "firstSeen": "2026-10-08",
+      "lastReviewed": "2026-10-08",
+      "lastOutcome": "confirmed",
+      "notes": "Official event site matches the Chiikawa official index and organizer PR TIMES release for dates, Toyosuna Park venue, ticketing, food, and goods",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 61
+        }
+      },
+      "byType": {
+        "popup": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 61
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 61
+        }
+      },
+      "history": [
+        {
+          "date": "2026-10-08",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-93a675",
+          "evidenceCount": 2,
+          "notes": "Official event site matches the Chiikawa official index and organizer PR TIMES release for dates, Toyosuna Park venue, ticketing, food, and goods"
         }
       ]
     }
