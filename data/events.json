@@ -1201,5 +1201,54 @@
     "sourceType": "official_site",
     "createdAt": "2026-10-08",
     "sourceUrl": "https://contents-abema.com/chiikawa-christmas-market/"
+  },
+  {
+    "brand": "pokemon",
+    "title": "Pokémon Center みんなで食べられる、アレルギー物質29品目不使用のやさしいクッキーが、ポケモンセンターに登場",
+    "type": "new_product",
+    "country": "JP",
+    "city": "",
+    "locationName": "日本全國 Pokémon Center",
+    "startDate": "2026-10-17",
+    "endDate": "",
+    "summaryZh": "日本 Pokémon 官方公告「みんなで食べられる、アレルギー物質29品目不使用のやさしいクッキーが、ポケモンセンターに登場！」於2026-10-17起在日本各地 Pokémon Center 實體店販售。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢",
+      "Pokémon Center",
+      "新品",
+      "日本",
+      "官方"
+    ],
+    "id": "po-fb3257",
+    "sourceType": "official_site",
+    "createdAt": "2026-10-09",
+    "sourceTitle": "みんなで食べられる、アレルギー物質29品目不使用のやさしいクッキーが、ポケモンセンターに登場！ - ポケットモンスターオフィシャルサイト",
+    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/10/261009_fo01.html"
+  },
+  {
+    "brand": "miffy",
+    "title": "米飛聖誕花禮登場",
+    "type": "store",
+    "country": "JP",
+    "city": "",
+    "locationName": "Flower Miffy",
+    "startDate": "",
+    "endDate": "",
+    "summaryZh": "每年人氣的聖誕花禮，以「米飛媽媽」及盪鞦韆的米飛為主題，即日起於「Flower Miffy」販售。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "聖誕",
+      "花禮",
+      "限定商品",
+      "聖誕裝飾"
+    ],
+    "id": "mi-b11c65",
+    "sourceTitle": "「ミッフィーマム」やブランコに乗ったミッフィーをあしらったお部屋をクリスマスムードに仕立てる毎年人気のリースとツリーが登場！2026年11月上旬よりミッフィーのお花屋さん「フラワーミッフィー」にて",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-09",
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002237.000022901.html"
   }
 ]
