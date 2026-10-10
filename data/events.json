@@ -792,30 +792,6 @@
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_asag/index.html"
   },
   {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE JR仙台駅",
-    "type": "popup",
-    "country": "JP",
-    "city": "Miyagi",
-    "locationName": "JR仙台駅",
-    "startDate": "2026-10-01",
-    "endDate": "2026-10-09",
-    "summaryZh": "ちいかわ POP UP STORE 於JR仙台駅期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-9149f5",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-25",
-    "sourceTitle": "ちいかわPOP UP STORE JR仙台駅(2026-10-01～2026-10-09) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_jrss/index.html"
-  },
-  {
     "brand": "pokemon",
     "title": "Pokémon Center ピックアップテーマ「つながる」のイラストを使用したグッズが、ポケモンセンターに登場",
     "type": "new_product",
@@ -1250,5 +1226,53 @@
     "sourceType": "official_social",
     "createdAt": "2026-10-09",
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002237.000022901.html"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇 POP UP STORE 海老名マルイ",
+    "type": "popup",
+    "country": "JP",
+    "city": "",
+    "locationName": "海老名マルイ",
+    "startDate": "2026-10-23",
+    "endDate": "2026-11-29",
+    "summaryZh": "ちいかわ POP UP STORE 於海老名マルイ期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "吉伊卡哇",
+      "快閃店",
+      "日本",
+      "限定周邊"
+    ],
+    "id": "ch-096148",
+    "sourceType": "official_site",
+    "createdAt": "2026-10-10",
+    "sourceTitle": "ちいかわPOP UP STORE 海老名マルイ(2026-10-23～2026-11-29) - ちいかわ公式",
+    "sourceUrl": "https://chiikawa-info.jp/p26/pus_ebmr/index.html"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇 POP UP STORE イオンパークプレイス大分店",
+    "type": "popup",
+    "country": "JP",
+    "city": "",
+    "locationName": "イオンパークプレイス大分店",
+    "startDate": "2026-10-23",
+    "endDate": "2026-11-08",
+    "summaryZh": "ちいかわ POP UP STORE 於イオンパークプレイス大分店期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "吉伊卡哇",
+      "快閃店",
+      "日本",
+      "限定周邊"
+    ],
+    "id": "ch-650a2b",
+    "sourceType": "official_site",
+    "createdAt": "2026-10-10",
+    "sourceTitle": "ちいかわPOP UP STORE イオンパークプレイス大分店(2026-10-23～2026-11-08) - ちいかわ公式",
+    "sourceUrl": "https://chiikawa-info.jp/p26/pus_aoit/index.html"
   }
 ]
