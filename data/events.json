@@ -1274,5 +1274,29 @@
     "createdAt": "2026-10-10",
     "sourceTitle": "ちいかわPOP UP STORE イオンパークプレイス大分店(2026-10-23～2026-11-08) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_aoit/index.html"
+  },
+  {
+    "brand": "miffy",
+    "title": "米飛「雜貨祭」奈良初登場",
+    "type": "popup",
+    "country": "JP",
+    "city": "Nara",
+    "locationName": "奈良",
+    "startDate": "2026-10-07",
+    "endDate": "",
+    "summaryZh": "米飛「雜貨祭」首次在奈良舉辦，現場集結超過800件周邊商品，包含會場限定品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "雜貨",
+      "限定商品",
+      "奈良"
+    ],
+    "id": "mi-e018d4",
+    "sourceTitle": "【10月7日から】ミッフィー「雑貨フェス」が奈良で初…会場だけの限定品など、800点以上のグッズ集結！＜入場無料＞ - Yahoo!ニュース",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-11",
+    "sourceUrl": "https://news.yahoo.co.jp/articles/fc26ee30172211e83dd4ef589f376acfb94150f2/images/000"
   }
 ]
