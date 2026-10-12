@@ -145,30 +145,6 @@
     "sourceUrl": "https://www.nownews.com/news/6864654"
   },
   {
-    "brand": "pokemon",
-    "title": "寶可夢30週年 PokéXciting! in 台北",
-    "type": "popup",
-    "country": "TW",
-    "city": "Taipei",
-    "locationName": "台北信義香堤大道廣場及鄰近地區",
-    "startDate": "2026-10-10",
-    "endDate": "2026-10-11",
-    "summaryZh": "寶可夢30週年活動 PokéXciting! 在台北登場，有機會買到限定粉紅色皮卡丘絨毛周邊，現場還有遊行與夜間舞台。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "30週年",
-      "限定商品",
-      "台北"
-    ],
-    "id": "po-de81e3",
-    "sourceTitle": "《寶可夢30週年》PokéXciting! in 台北10/10登場！限定「粉紅色皮卡丘」絨毛周邊公開，寶可夢遊行、夜間舞台一次看 - oneone宇宙",
-    "sourceType": "official_site",
-    "createdAt": "2026-08-13",
-    "sourceUrl": "https://tw.portal-pokemon.com/30th/topics/20260701_01/"
-  },
-  {
     "brand": "chiikawa",
     "title": "吉伊卡哇 シーサーのおみやげやさん 那霸機場常設店",
     "type": "store",
@@ -1298,5 +1274,29 @@
     "sourceType": "official_social",
     "createdAt": "2026-10-11",
     "sourceUrl": "https://news.yahoo.co.jp/articles/fc26ee30172211e83dd4ef589f376acfb94150f2/images/000"
+  },
+  {
+    "brand": "pokemon",
+    "title": "寶可夢中心10月中新品",
+    "type": "new_product",
+    "country": "JP",
+    "city": "",
+    "locationName": "寶可夢中心",
+    "startDate": "2026-10-01",
+    "endDate": "",
+    "summaryZh": "寶可夢中心推出10月中新品，包含戰敗系列玩偶及皮卡丘刺繡帽子等周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": false,
+    "tags": [
+      "寶可夢中心",
+      "新品",
+      "玩偶",
+      "帽子"
+    ],
+    "id": "po-e3f4cc",
+    "sourceTitle": "寶可夢中心10月中新品！戰敗系列玩偶登場　皮卡丘刺繡帽子超萌 - NOWnews今日新聞",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-12",
+    "sourceUrl": "https://www.nownews.com/news/6882679"
   }
 ]
