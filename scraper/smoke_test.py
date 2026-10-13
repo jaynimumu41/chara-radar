@@ -464,6 +464,7 @@ audit_rows = audit_chiikawa_subpages.audit_links(
             "映画ちいかわ POP UP STORE 会場 イオンモール "
             "2026年7月10日(金)～7月20日(月祝) 限定グッズ",
     },
+    today="2026-07-01",
 )
 check("吉伊卡哇首頁 p26 子頁稽核分類",
       [(r.url.rsplit("/p26/", 1)[1], r.status, r.risk, r.event_ids) for r in audit_rows],
@@ -786,13 +787,22 @@ same_day_kiddy = official_sources._drop_same_day_kiddy_product_details([
     ev(brand="miffy", type="new_product", title="Miffy miffy style大阪梅田店限定商品",
        startDate="2026-07-11", locationName="miffy style 大阪梅田店",
        sourceUrl="https://www.kiddyland.co.jp/event/miffy_osaka20260711/"),
-])
+], today="2026-07-04")
 check("Kiddy Land同日活動已有campaign→單品頁不另列",
       [e["sourceUrl"] for e in same_day_kiddy],
       [
           "https://www.kiddyland.co.jp/event/miffy_nove202607/",
           "https://www.kiddyland.co.jp/event/miffy_osaka20260711/",
       ])
+aged_kiddy_campaign = official_sources._drop_same_day_kiddy_product_details([
+    ev(brand="miffy", type="campaign", title="Miffy miffy style 各店ノベルティデイ",
+       startDate="2026-09-05", locationName="miffy style 各店＋キデイランド対象店"),
+    ev(brand="miffy", type="new_product", title="Miffy miffy style限定 ハロウィンアイテム",
+       startDate="2026-09-05", locationName="miffy style 各店"),
+], today="2026-10-13")
+check("Kiddy campaign過期後不再壓掉仍在60日內的店頭新品",
+      [e["type"] for e in aged_kiddy_campaign],
+      ["campaign", "new_product"])
 check("Kiddy Land手帕單品頁→不收",
       official_sources._kiddy_is_out_of_scope_product(
           "2026年10月10日(土)発売予定!miffy style限定 フェイラーハンカチ"),
@@ -925,6 +935,18 @@ check("電影吉伊卡哇官方HTML表格只保留現行場次",
       [(e["locationName"], e["startDate"], e["endDate"]) for e in movie_html_events],
       [("スパリゾート ハワイアンズ ビッグアロハ2階 特設会場",
         "2026-07-17", "2026-09-27")])
+expired_movie_audit = audit_chiikawa_subpages.audit_links(
+    [audit_chiikawa_subpages.ChiikawaLink(
+        "https://chiikawa-info.jp/p26/mck_scpus/index.html",
+        "映画ちいかわ 人魚の島のひみつ POP UP STORE")],
+    details_by_url={
+        "https://chiikawa-info.jp/p26/mck_scpus/index.html": sample_movie_popup_html,
+    },
+    today="2026-10-13",
+)
+check("電影吉伊卡哇多會場頁僅在全部明確過期後忽略",
+      (expired_movie_audit[0].status, expired_movie_audit[0].reason),
+      ("ignored", "all structured official venue schedules ended by 2026-09-27"))
 sample_movie_goods = (
     "映画ちいかわ POPUP in TOHOシネマズ "
     "＜2026年7月10日(金)～8月31日(月)＞ "
@@ -2057,6 +2079,215 @@ open_ended = ev(
 )
 check("官方明示送完為止不再反覆進缺結束日候選",
       agent_verify_candidates.verification_reasons(open_ended), [])
+
+# ── 2026-10-13 regressions: venue-bound dates and cross-source identity ───────
+kiddy_three_city_schedule = """
+# 「miffy style POP UP SHOP」がキデイランド大阪梅田店に期間限定オープン！
+2026年10月2日（金）～10月19日（月）
+有楽町マルイ
+2026年10月31日（土）～11月17日（火）
+キデイランド大阪梅田店
+2026年11月6日（金）～11月24日（火）
+札幌アピア
+"""
+check("Kiddy Land大阪頁不誤抓有樂町第一組日期",
+      official_sources._kiddy_period(
+          "「miffy style POP UP SHOP」がキデイランド大阪梅田店に期間限定オープン！",
+          kiddy_three_city_schedule, scrape.extract_dates),
+      ("2026-10-31", "2026-11-17"))
+kiddy_osaka_range_before_marker = """
+「miffy style POP UP SHOP」がキデイランド大阪梅田店に期間限定オープン！
+2026年10月2日（金）から10月19日（月）まで、有楽町マルイで開催。
+2026年10月31日（土）から11月17日（火）までの
+miffy style POP UP SHOP in 大阪梅田の開催期間中に限定商品を販売。
+"""
+check("Kiddy Land場館名稱在區間後方時仍抓大阪檔期",
+      official_sources._kiddy_period(
+          "「miffy style POP UP SHOP」がキデイランド大阪梅田店に期間限定オープン！",
+          kiddy_osaka_range_before_marker, scrape.extract_dates),
+      ("2026-10-31", "2026-11-17"))
+
+kiddy_incomplete_roundup = """
+2026年10月2日(金)～随時開催!
+今年は有楽町マルイ、キデイランド大阪梅田店、札幌アピアの3か所で開催します。
+"""
+check("Kiddy Land多城市總覽缺各站日期時整頁保守略過",
+      official_sources._miffy_multi_venue_events(
+          "2026年10月2日(金)～随時開催! miffy style POP UP SHOP 有楽町・大阪梅田店・札幌アピア",
+          "https://www.kiddyland.co.jp/event/miffy_popup2026/",
+          kiddy_incomplete_roundup, 2026, scrape.extract_dates, scrape.correct_city,
+          today="2026-10-13"),
+      [])
+
+sapporo_with_roundup_source = ev(
+    brand="miffy", title="Miffy miffy style POP UP SHOP in 札幌", type="popup",
+    startDate="2026-11-06", locationName="札幌アピア",
+    sourceTitle="miffy style POP UP SHOP 有楽町・大阪梅田店・札幌アピア")
+check("多城市來源總標題不可把札幌場誤判成大阪場",
+      scrape.strong_event_identity_key(sapporo_with_roundup_source),
+      "miffy|miffy-style-sapporo-popup|2026")
+
+osaka_rows, _ = scrape.dedup_events([
+    ev(id="mi-osaka-official", brand="miffy",
+       title="Miffy miffy style POP UP SHOP in 大阪梅田", type="popup", city="Osaka",
+       startDate="2026-10-31", endDate="2026-11-17",
+       locationName="キデイランド大阪梅田店", sourceType="official_site",
+       sourceUrl="https://dickbruna.jp/news/202609/48222/"),
+    ev(id="mi-osaka-kiddy", brand="miffy",
+       title="Miffy miffy style POP UP SHOP 大阪梅田店", type="popup", city="Osaka",
+       startDate="2026-10-02", endDate="2026-10-19",
+       locationName="miffy style 大阪梅田店", sourceType="official_site",
+       sourceUrl="https://www.kiddyland.co.jp/event/miffy_popup_umeda2026_info/"),
+])
+check("Miffy大阪POP UP跨頁且錯日期仍合併並保留官方正確檔期",
+      [(e["id"], e["startDate"], e["endDate"]) for e in osaka_rows],
+      [("mi-osaka-official", "2026-10-31", "2026-11-17")])
+
+check("Miffy札幌POP UP不同標題仍有相同穩定身份",
+      scrape.strong_event_identity_key(ev(
+          brand="miffy", title="Miffy miffy style POP UP SHOP in 札幌", type="popup",
+          startDate="2026-11-06", locationName="札幌アピア")),
+      scrape.strong_event_identity_key(ev(
+          brand="miffy", title="米飛兔札幌快閃店", type="campaign",
+          startDate="2026-11-07", locationName="札幌アピア POP UP")))
+
+nara_rows, _ = scrape.dedup_events([
+    ev(id="mi-nara-official", brand="miffy",
+       title="Miffy ミッフィーzakkaフェスタ 近鉄百貨店 奈良店", type="popup",
+       city="Nara", startDate="2026-10-07", endDate="2026-10-13",
+       locationName="近鉄百貨店 奈良店", sourceType="official_site",
+       sourceUrl="https://dickbruna.jp/news/202609/48687/"),
+    ev(id="mi-nara-media", brand="miffy", title="米飛「雜貨祭」奈良初登場",
+       type="popup", city="Nara", startDate="2026-10-07", locationName="奈良",
+       sourceTitle="ミッフィー雑貨フェスが奈良で初開催", sourceUrl="https://news.example/nara"),
+])
+check("Miffy奈良zakka festa媒體重複保留官方",
+      [(e["id"], e["endDate"]) for e in nara_rows],
+      [("mi-nara-official", "2026-10-13")])
+
+htb_rows, _ = scrape.dedup_events([
+    scrape.normalize_source_event(ev(
+        id="mi-htb-pr", brand="miffy", title="豪斯登堡 x 米飛兔主題餐廳",
+        type="cafe", city="Nagasaki", startDate="2026-11-06", endDate="2026-12-25",
+        locationName="豪斯登堡", sourceUrl="https://prtimes.jp/main/html/rd/p/000000725.000023462.html")),
+    scrape.normalize_source_event(ev(
+        id="mi-htb-media", brand="miffy", title="Miffy聖誕/冬季假期",
+        type="campaign", city="Nagasaki", startDate="2026-11-06", endDate="2026-12-25",
+        locationName="豪斯登堡", sourceUrl="https://dtimes.jp/post-1413219/")),
+])
+check("豪斯登堡聖誕餐廳與冬季活動合併為完整母活動",
+      [(e["id"], e["type"], e["startDate"], e["endDate"]) for e in htb_rows],
+      [("mi-htb-pr", "campaign", "2026-11-06", "2027-02-25")])
+
+fainted_page = """
+台灣寶可夢中心（Pokémon Center TAIPEI）將於10月17日（六）上架
+《Pokémon GO》10週年服飾，以及吉祥物 Fainted 系列。
+"""
+fainted = scrape.normalize_source_event(
+    ev(id="po-fainted", brand="pokemon", title="寶可夢中心10月中新品",
+       type="new_product", country="JP", startDate="2026-10-01",
+       locationName="寶可夢中心", sourceTitle="戰敗系列玩偶與皮卡丘刺繡帽子"),
+    source_url="https://www.nownews.com/news/6882679",
+    page_text=fainted_page, ref_year=2026,
+)
+check("台灣Pokémon混合商品文反校正國家地點日期並只留Fainted",
+      (fainted["country"], fainted["city"], fainted["startDate"],
+       fainted["title"], "Pokémon GO" in fainted["summaryZh"]),
+      ("TW", "Taipei", "2026-10-17",
+       "Pokémon Center TAIPEI「Fainted」系列吉祥物", False))
+check("已用來源鎖定Fainted時不被同篇服飾內容誤刪",
+      scrape.is_apparel_new_product(
+          fainted, source_title="戰敗系列玩偶與皮卡丘刺繡帽子", page_text=fainted_page),
+      False)
+check("日本Pokémon來源不被台灣規則改寫",
+      scrape.normalize_source_event(ev(
+          brand="pokemon", title="日本Pokémon Center新品", type="new_product",
+          country="JP", city="Tokyo", startDate="2026-10-17",
+          locationName="日本全國 Pokémon Center",
+          sourceUrl="https://www.pokemon.co.jp/goods/example"))["country"],
+      "JP")
+
+flower = scrape.normalize_source_event(ev(
+    id="mi-flower-xmas", brand="miffy", title="米飛聖誕花禮登場", type="store",
+    sourceTitle="2026年11月上旬よりフラワーミッフィーにて",
+    sourceUrl="https://prtimes.jp/main/html/rd/p/000002237.000022901.html"))
+saved_today = scrape.TODAY
+scrape.TODAY = "2026-10-13"
+check("Flower Miffy上旬預定新品不虛構日期也不提前過期",
+      (flower["type"], flower["startDate"], "即日起" in flower["summaryZh"],
+       scrape._is_past(flower)),
+      ("new_product", "", False, False))
+scrape.TODAY = saved_today
+
+official_review_regressions = [
+    audit_official_coverage.OfficialCandidate(
+        "pokemon", "pokemon-store-news",
+        "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-shibuya/news/202610/000611.html",
+        "10月17日（土）、18日（日）の「ポケモンデザインラボ」案内方法について"),
+    audit_official_coverage.OfficialCandidate(
+        "miffy", "miffy-kiddyland-search",
+        "https://www.kiddyland.co.jp/event/miffy_popup2026_rule/",
+        "「miffy style POP UP SHOP」10月4日(日)の入場に関して"),
+    audit_official_coverage.OfficialCandidate(
+        "miffy", "miffy-kiddyland-search",
+        "https://www.kiddyland.co.jp/event/miffy_popup_umeda2026_info/",
+        "「miffy style POP UP SHOP」がキデイランド大阪梅田店に期間限定オープン！"),
+    audit_official_coverage.OfficialCandidate(
+        "miffy", "miffy-kiddyland-search",
+        "https://www.kiddyland.co.jp/event/miffy_popup2026/",
+        "2026年10月2日(金)～随時開催! miffy style POP UP SHOP 有楽町・大阪梅田店・札幌アピア"),
+]
+official_review_rows = audit_official_coverage.audit_candidates(
+    official_review_regressions,
+    details_by_url={
+        "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-shibuya/news/202610/000611.html":
+            "10月17日（土）、18日（日）のポケモンデザインラボ案内方法について",
+        "https://www.kiddyland.co.jp/event/miffy_popup2026_rule/":
+            "miffy style POP UP SHOP 10月4日(日)の入場に関して",
+        "https://www.kiddyland.co.jp/event/miffy_popup_umeda2026_info/":
+            kiddy_osaka_range_before_marker,
+        "https://www.kiddyland.co.jp/event/miffy_popup2026/":
+            kiddy_incomplete_roundup,
+    },
+    current_events=[
+        ev(id="mi-yurakucho-official", brand="miffy",
+           title="Miffy miffy style POP UP SHOP in 有楽町", type="popup", city="Tokyo",
+           startDate="2026-10-02", endDate="2026-10-19", locationName="有楽町マルイ"),
+        ev(id="mi-osaka-official", brand="miffy",
+           title="Miffy miffy style POP UP SHOP in 大阪梅田", type="popup", city="Osaka",
+           startDate="2026-10-31", endDate="2026-11-17",
+           locationName="キデイランド大阪梅田店",
+           sourceUrl="https://dickbruna.jp/news/202609/48222/"),
+        ev(id="mi-sapporo-official", brand="miffy",
+           title="Miffy miffy style POP UP SHOP in 札幌", type="popup", city="Hokkaido",
+           startDate="2026-11-06", endDate="2026-11-24", locationName="札幌アピア"),
+    ],
+    today="2026-10-13",
+)
+check("官方稽核忽略入場公告並辨識大阪替代官方頁",
+      [(row.status, row.event_ids) for row in official_review_rows],
+      [("ignored", ()), ("ignored", ()), ("ignored", ("mi-osaka-official",)),
+       ("ignored", ("mi-yurakucho-official", "mi-osaka-official", "mi-sapporo-official"))])
+
+roundup_after_yurakucho = audit_official_coverage.audit_candidates(
+    [official_review_regressions[-1]],
+    details_by_url={
+        "https://www.kiddyland.co.jp/event/miffy_popup2026/": kiddy_incomplete_roundup,
+    },
+    current_events=[
+        ev(id="mi-osaka-official", brand="miffy",
+           title="Miffy miffy style POP UP SHOP in 大阪梅田", type="popup", city="Osaka",
+           startDate="2026-10-31", endDate="2026-11-17",
+           locationName="キデイランド大阪梅田店"),
+        ev(id="mi-sapporo-official", brand="miffy",
+           title="Miffy miffy style POP UP SHOP in 札幌", type="popup", city="Hokkaido",
+           startDate="2026-11-06", endDate="2026-11-24", locationName="札幌アピア"),
+    ],
+    today="2026-10-20",
+)
+check("三城市總覽不要求已結束場次但仍要求未來場次",
+      (roundup_after_yurakucho[0].status, roundup_after_yurakucho[0].event_ids),
+      ("ignored", ("mi-osaka-official", "mi-sapporo-official")))
 
 # ── 結語 ──────────────────────────────────────────────────────────────────────
 print(f"\n{'=' * 40}\n結果：{_passed} 通過、{_failed} 失敗")

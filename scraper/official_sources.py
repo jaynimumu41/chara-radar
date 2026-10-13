@@ -1460,6 +1460,22 @@ def _kiddy_period(title: str, detail: str, extract_dates) -> tuple[str, str]:
     # related links can contain unrelated ranges, so only consult the body when
     # the heading itself has no parseable date.
     title_s, title_e = extract_dates(title, ref_year=ref_year, is_html=False, scan_chars=1000)
+    if not title_s:
+        # Venue-specific POP UP pages can repeat a three-city schedule. The
+        # first range may belong to another city, so bind dates to the venue in
+        # the article title instead of taking the first range blindly.
+        venue_markers = [
+            marker for marker in (
+                "有楽町", "大阪梅田", "札幌アピア", "札幌",
+                "東京駅", "原宿", "心斎橋", "神戸", "三宮",
+            )
+            if marker in title
+        ]
+        for marker in venue_markers:
+            marker_s, marker_e = _miffy_range_near_marker(
+                detail, marker, ref_year, extract_dates, prefer_before=True)
+            if marker_s:
+                return marker_s, marker_e
     m = _KIDDY_RANGE.search(detail)
     if m:
         sy = int(m.group(1) or ref_year)
@@ -1500,6 +1516,10 @@ def _kiddy_location(title: str) -> tuple[str, str]:
         return "miffy style 原宿店", "Tokyo"
     if "大阪梅田店" in title:
         return "miffy style 大阪梅田店", "Osaka"
+    if "有楽町" in title:
+        return "有楽町マルイ", "Tokyo"
+    if "札幌" in title:
+        return "札幌アピア", "Hokkaido"
     if "心斎橋" in title or "心齋橋" in title:
         return "miffy style 心齋橋PARCO店", "Osaka"
     if "神戸店" in title or "三宮店" in title:
@@ -1525,13 +1545,19 @@ def _kiddy_is_out_of_scope_product(title: str) -> bool:
     )
 
 
-def _drop_same_day_kiddy_product_details(events: list[dict]) -> list[dict]:
-    """Keep broad miffy style campaign pages over same-day single-product pages."""
+def _drop_same_day_kiddy_product_details(events: list[dict], *, today: str | None = None) -> list[dict]:
+    """Keep a live broad campaign over same-day single-product pages.
+
+    Campaigns age out after 30 days while store products stay current for 60.
+    An expired campaign must not keep suppressing a still-current product page.
+    """
+    today_date = datetime.strptime(today or _today_iso(), "%Y-%m-%d").date()
     campaign_dates = {
         e.get("startDate", "") for e in events
         if e.get("type") == "campaign"
         and e.get("startDate")
         and "miffy style" in (e.get("title", "") + e.get("locationName", ""))
+        and (today_date - datetime.strptime(e["startDate"], "%Y-%m-%d").date()).days <= 30
     }
     if not campaign_dates:
         return events
@@ -1655,7 +1681,7 @@ def _miffy_display_name(title: str, name: str) -> str:
 
 
 def _miffy_range_near_marker(page_text: str, marker: str, ref_year: int,
-                             extract_dates) -> tuple[str, str]:
+                             extract_dates, *, prefer_before: bool = False) -> tuple[str, str]:
     heading = re.compile(
         rf"(?m)^#{{2,4}}\s*{re.escape(marker)}\s*$([\s\S]*?)(?=^#{{2,4}}\s|\Z)",
         re.I,
@@ -1667,21 +1693,24 @@ def _miffy_range_near_marker(page_text: str, marker: str, ref_year: int,
             return start, end
     plain = _plain_text(page_text)
     marker_matches = list(re.finditer(re.escape(marker), plain, re.I))
-    range_matches = list(re.finditer(
-        r"20\d{2}年\d{1,2}月\d{1,2}日[^〜～]{0,35}[〜～]\s*"
-        r"(?:(?:20\d{2})年)?\d{1,2}月\d{1,2}日",
-        plain,
-    ))
-    nearest: tuple[int, re.Match] | None = None
+    range_matches = list(_KIDDY_RANGE.finditer(plain))
+    nearest: tuple[tuple[int, int], re.Match] | None = None
     for marker_match in marker_matches:
         for range_match in range_matches:
-            if range_match.start() < marker_match.end():
-                continue
-            distance = range_match.start() - marker_match.end()
+            if range_match.end() < marker_match.start():
+                distance = marker_match.start() - range_match.end()
+                range_is_before = True
+            elif range_match.start() > marker_match.end():
+                distance = range_match.start() - marker_match.end()
+                range_is_before = False
+            else:
+                distance = 0
+                range_is_before = True
             if distance > 500:
                 continue
-            if nearest is None or distance < nearest[0]:
-                nearest = (distance, range_match)
+            score = (0 if (range_is_before or not prefer_before) else 1, distance)
+            if nearest is None or score < nearest[0]:
+                nearest = (score, range_match)
     if nearest:
         start, end = extract_dates(nearest[1].group(0), ref_year=ref_year,
                                    is_html=False, scan_chars=len(nearest[1].group(0)))
@@ -1725,11 +1754,21 @@ def _miffy_multi_venue_events(
         return None
 
     today = today or _today_iso()
-    out: list[dict] = []
+    parsed_specs: list[tuple[str, str, str, str]] = []
     for display_name, venue in specs:
         start, end = _miffy_range_near_marker(
             page_text, venue, ref_year, extract_dates)
-        if not start or (end and end < today):
+        # A roundup page may only say that locations open "from time to time"
+        # and expose one generic date near the venue list. Partial extraction
+        # would assign that date to the wrong branch, so fail closed unless the
+        # page provides a venue-bound range for every listed stop.
+        if not start:
+            return []
+        parsed_specs.append((display_name, venue, start, end))
+
+    out: list[dict] = []
+    for display_name, venue, start, end in parsed_specs:
+        if end and end < today:
             continue
         city = correct_city(venue, display_name) if correct_city else ""
         out.append({
@@ -1784,7 +1823,7 @@ def _miffy_special_single_event(title: str, url: str, detail_text: str,
     }
 
 
-def fetch_kiddyland_miffy_events(extract_dates, correct_city, max_articles=3, fresh_days=45) -> list[dict]:
+def fetch_kiddyland_miffy_events(extract_dates, correct_city, max_articles=8, fresh_days=45) -> list[dict]:
     """解析 Kiddy Land / miffy style 站內搜尋的近期 Miffy 店頭活動與新品。零 Gemini。"""
     md = _page_text(_KIDDY_MIFFY_SEARCH)
     if not md:
@@ -1808,6 +1847,14 @@ def fetch_kiddyland_miffy_events(extract_dates, correct_city, max_articles=3, fr
         if any(k in title for k in _KIDDY_SKIP):
             continue
         if _kiddy_is_out_of_scope_product(title):
+            continue
+        ref_year_m = re.search(r"(20\d{2})年", title)
+        ref_year = int(ref_year_m.group(1)) if ref_year_m else _today_date().year
+        multi_venue = _miffy_multi_venue_events(
+            title, url, detail_text, ref_year, extract_dates, correct_city, today=today)
+        if multi_venue is not None:
+            out.extend(multi_venue)
+            seen.add(url)
             continue
         pub_m = re.search(r"On\s+(\d{1,2})月\s*(\d{1,2}),\s*(20\d{2})", detail_text)
         if pub_m:
@@ -1853,7 +1900,7 @@ def fetch_kiddyland_miffy_events(extract_dates, correct_city, max_articles=3, fr
             "sourceUrl": url,
         })
         seen.add(url)
-    return _drop_same_day_kiddy_product_details(out)
+    return _drop_same_day_kiddy_product_details(out, today=today)
 
 
 def fetch_miffy_events(extract_dates, correct_city, max_articles=16, fresh_days=80) -> list[dict]:

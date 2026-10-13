@@ -245,7 +245,8 @@ ALWAYS_IGNORE_RE = re.compile(
     r"ゲーム教室|グリーティング|なりきりサマー|ポケモンフレンダ|フレンダ|"
     r"店頭大会|ミュウツーバトル|わくわく大冒険|ビンゴラリー|"
     r"#キミにあえた|ご来店予定|来店予定|ご来店のお客様へ|"
-    r"整理券|入場制限|入場整理券|付録|宝島社|BOOK|メッセージを送ろう|"
+    r"整理券|入場制限|入場整理券|入場(?:方法|に関して)|案内方法について|"
+    r"付録|宝島社|BOOK|メッセージを送ろう|"
     r"シャンブル|LINE|Tシャツ|Ｔシャツ|T-shirt|tee|ユニクロ|UNIQLO|"
     r"Game Music|Jukebox|遊戲音樂機|音樂機|刷手衣|刷手服|醫療服|"
     r"オープニングセレモニー|開会式|撮影会|"
@@ -523,7 +524,65 @@ def _covered_event_ids(candidate: OfficialCandidate, title: str, detail: str,
             scrape.correct_city,
             today=today,
         )
-        pseudo_events.extend(parsed or [])
+        if parsed:
+            pseudo_events.extend(parsed)
+        elif candidate.source == "miffy-kiddyland-search" and signals.start_date:
+            # Kiddy Land's roundup only says the three stores open gradually;
+            # it does not expose each branch's period as text. Treat it as an
+            # alternate page only when all three real-world events are already
+            # present for the same year. Missing even one branch remains a
+            # review item.
+            identity_rows = [
+                ("Miffy miffy style POP UP SHOP in 有楽町", "有楽町マルイ", "Tokyo",
+                 "2026-10-02", "2026-10-19"),
+                ("Miffy miffy style POP UP SHOP in 大阪梅田", "キデイランド大阪梅田店", "Osaka",
+                 "2026-10-31", "2026-11-17"),
+                ("Miffy miffy style POP UP SHOP in 札幌", "札幌アピア", "Hokkaido",
+                 "2026-11-06", "2026-11-24"),
+            ]
+            covered: list[str] = []
+            for event_title, venue, city, start, end in identity_rows:
+                if end < today:
+                    continue
+                pseudo = {
+                    "brand": "miffy",
+                    "title": event_title,
+                    "type": "popup",
+                    "city": city,
+                    "locationName": venue,
+                    "startDate": start,
+                    "endDate": end,
+                }
+                identity = scrape.special_activity_key(pseudo)
+                matches = [
+                    event.get("id", "") for event in current_events
+                    if identity
+                    and scrape.special_activity_key(event) == identity
+                    and event.get("id")
+                ]
+                if not matches:
+                    return ()
+                covered.extend(matches)
+            if covered:
+                return tuple(dict.fromkeys(covered))
+    elif is_miffy_popup and candidate.source == "miffy-kiddyland-search":
+        detail_text = official_sources._main_article_text(detail, title)
+        start, end = official_sources._kiddy_period(
+            title, detail_text, scrape.extract_dates)
+        if start:
+            location, fallback_city = official_sources._kiddy_location(title)
+            city = scrape.correct_city(title, location) or fallback_city
+            pseudo_events.append({
+                "brand": "miffy",
+                "title": "Miffy " + official_sources._kiddy_display_title(title),
+                "type": "popup",
+                "country": "JP",
+                "city": city or "",
+                "locationName": location,
+                "startDate": start,
+                "endDate": end,
+                "sourceUrl": candidate.url,
+            })
     elif is_miffy_popup and "有楽町" in title and signals.start_date:
         pseudo_events.append({
             "brand": "miffy",

@@ -318,6 +318,8 @@ def is_generic_merch_title(*texts) -> bool:
 
 def is_apparel_new_product(ev: dict, source_title: str = "", page_text: str = "") -> bool:
     """Reject apparel launches even when AI mislabeled them as campaigns."""
+    if ev.get("_sourceScopedProduct"):
+        return False
     parts = [
         ev.get("title", ""),
         ev.get("summaryZh", ""),
@@ -1412,6 +1414,34 @@ STRONG_EVENT_IDENTITY_RULES = (
     },
     {
         "brand": "miffy",
+        "types": {"popup", "campaign", "new_product"},
+        "concept": "miffy-style-osaka-umeda-popup",
+        "patterns": (
+            (("miffy style",), ("大阪梅田", "梅田店"),
+             ("POP UP", "POPUP", "ポップアップ")),
+            (("Miffy", "ミッフィー", "米飛兔"), ("大阪梅田", "梅田店"),
+             ("POP UP", "POPUP", "ポップアップ", "快閃")),
+        ),
+        # Multi-city roundup source titles mention Osaka and Sapporo together;
+        # only the row's own title/location may determine its branch identity.
+        "match_fields": ("title", "locationName"),
+        "scope": "year",
+    },
+    {
+        "brand": "miffy",
+        "types": {"popup", "campaign", "new_product"},
+        "concept": "miffy-style-sapporo-popup",
+        "patterns": (
+            (("miffy style",), ("札幌", "札幌アピア"),
+             ("POP UP", "POPUP", "ポップアップ")),
+            (("Miffy", "ミッフィー", "米飛兔"), ("札幌", "札幌アピア"),
+             ("POP UP", "POPUP", "ポップアップ", "快閃")),
+        ),
+        "match_fields": ("title", "locationName"),
+        "scope": "year",
+    },
+    {
+        "brand": "miffy",
         "types": {"popup", "campaign", "cafe", "new_product"},
         "concept": "miffy-huis-ten-bosch-halloween",
         "patterns": (
@@ -1440,6 +1470,28 @@ STRONG_EVENT_IDENTITY_RULES = (
         ),
         "match_fields": ("title", "sourceTitle"),
         "scope": "month",
+    },
+    {
+        "brand": "miffy",
+        "types": {"popup", "campaign", "cafe"},
+        "concept": "miffy-zakka-festa-nara",
+        "patterns": (
+            (("zakkaフェスタ", "zakka festa", "雑貨フェス", "雜貨祭"),
+             ("奈良", "近鉄百貨店 奈良店")),
+        ),
+        "match_fields": ("title", "locationName", "sourceTitle"),
+        "scope": "year",
+    },
+    {
+        "brand": "miffy",
+        "types": {"popup", "campaign", "cafe", "new_product"},
+        "concept": "miffy-huis-ten-bosch-winter",
+        "patterns": (
+            (("ハウステンボス", "Huis Ten Bosch", "豪斯登堡", "huistenbosch"),
+             ("ウィンターホリデー", "Winter Holiday", "冬季假期",
+              "ミッフィー・クリスマス", "Miffy聖誕", "ディック・ブルーナ テーブル")),
+        ),
+        "scope": "year",
     },
     {
         "brand": "miffy",
@@ -1762,10 +1814,155 @@ def _date_gap_days(a: str, b: str) -> int | None:
     except Exception:
         return None
 
+
+def _approximate_start_age_days(ev: dict) -> float | None:
+    """Internal lifecycle date for official sources that only say early/mid/late month."""
+    blob = " ".join(str(ev.get(field, "")) for field in (
+        "title", "summaryZh", "sourceTitle",
+    ))
+    match = re.search(r"(20\d{2})年\s*(\d{1,2})月\s*(上旬|中旬|下旬)", blob)
+    if not match:
+        return None
+    day = {"上旬": 1, "中旬": 11, "下旬": 21}[match.group(3)]
+    try:
+        target = datetime(int(match.group(1)), int(match.group(2)), day).date()
+        today = datetime.strptime(TODAY, "%Y-%m-%d").date()
+        return float((today - target).days)
+    except ValueError:
+        return None
+
 # 無結束日時，依類型用「起始日距今天數」推估是否已過期（補洞：無 endDate 的活動
 # 原本永遠清不掉，導致過期活動殘留）。活動型檔期通常數天~數週；商品發售熱度約兩月。
 ACTIVITY_TYPES = {"popup", "cafe", "campaign"}      # 有明確檔期的活動
 SELLING_TYPES  = {"new_product", "lottery", "reservation"}  # 商品發售/抽選/預約
+
+_NOWNEWS_FAINTED_URL = "https://www.nownews.com/news/6882679"
+_FLOWER_MIFFY_CHRISTMAS_URL = "https://prtimes.jp/main/html/rd/p/000002237.000022901.html"
+_MIFFY_HTB_WINTER_URLS = {
+    "https://prtimes.jp/main/html/rd/p/000000725.000023462.html",
+    "https://dtimes.jp/post-1413219/",
+}
+
+
+def _source_visible_text(text: str) -> str:
+    visible = re.sub(r"<script[\s\S]*?</script>|<style[\s\S]*?</style>", " ", text or "", flags=re.I)
+    visible = re.sub(r"<[^>]+>", " ", visible)
+    return re.sub(r"\s+", " ", html.unescape(visible.replace("　", " "))).strip()
+
+
+def _taiwan_store_sale_date(text: str, ref_year: int | None) -> str:
+    if not text or not ref_year:
+        return ""
+    patterns = (
+        r"(\d{1,2})月(\d{1,2})日(?:（[^）]*）|\([^)]*\))?"
+        r"[^。！？\n]{0,180}?(?:上架|發售|販售|登場)",
+        r"(?:上架|發售|販售)日?[^。！？\n]{0,80}?"
+        r"(\d{1,2})月(\d{1,2})日",
+    )
+    for pattern in patterns:
+        match = re.search(pattern, text, re.I)
+        if not match:
+            continue
+        month, day = int(match.group(1)), int(match.group(2))
+        try:
+            return datetime(ref_year, month, day).date().isoformat()
+        except ValueError:
+            continue
+    return ""
+
+
+def normalize_source_event(event: dict, *, source_url: str = "", page_text: str = "",
+                           ref_year: int | None = None) -> dict:
+    """Apply deterministic corrections backed by the original source.
+
+    AI extraction may select a useful subtopic, but country, venue, dates, and
+    scope are re-anchored to source text before save. URL-specific branches
+    also migrate already-saved records during cleanup.
+    """
+    data = dict(event)
+    url = source_url or data.get("sourceUrl", "")
+    visible = _source_visible_text(page_text)
+    evidence = " ".join([
+        data.get("title", ""), data.get("summaryZh", ""),
+        data.get("sourceTitle", ""), visible,
+    ])
+
+    known_fainted_article = url.rstrip("/") == _NOWNEWS_FAINTED_URL
+    taiwan_store_evidence = known_fainted_article or any(signal in evidence for signal in (
+        "Pokémon Center TAIPEI", "Pokemon Center TAIPEI",
+        "台灣寶可夢中心", "台北寶可夢中心",
+    ))
+    if data.get("brand") == "pokemon" and taiwan_store_evidence:
+        data.update({
+            "country": "TW",
+            "city": "Taipei",
+            "locationName": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3F）",
+        })
+        year = ref_year
+        if not year:
+            year_match = re.match(r"(20\d{2})", data.get("createdAt", ""))
+            year = int(year_match.group(1)) if year_match else None
+        sale_date = _taiwan_store_sale_date(visible, year)
+        if known_fainted_article and not sale_date:
+            sale_date = "2026-10-17"
+        if sale_date:
+            data["startDate"] = sale_date
+            data["endDate"] = ""
+
+        fainted_evidence = known_fainted_article or any(signal in evidence for signal in (
+            "Fainted", "戰敗系列", "失去戰鬥能力",
+        ))
+        if fainted_evidence:
+            data.update({
+                "title": "Pokémon Center TAIPEI「Fainted」系列吉祥物",
+                "type": "new_product",
+                "summaryZh": (
+                    "Pokémon Center TAIPEI 推出 Fainted 系列吉祥物，重現皮卡丘、耿鬼、"
+                    "卡比獸等寶可夢失去戰鬥能力的造型；實體店自 2026 年 10 月 17 日販售。"
+                ),
+                "needReservation": False,
+                "hasLimitedGoods": False,
+                "tags": ["寶可夢", "Pokémon Center TAIPEI", "Fainted", "吉祥物", "店頭新品"],
+            })
+            if page_text:
+                data["_sourceScopedProduct"] = True
+
+    if url in _MIFFY_HTB_WINTER_URLS:
+        data.update({
+            "title": "Miffy 豪斯登堡聖誕與冬季假期",
+            "type": "campaign",
+            "country": "JP",
+            "city": "Nagasaki",
+            "locationName": "ハウステンボス",
+            "startDate": "2026-11-06",
+            "endDate": "2027-02-25",
+            "summaryZh": (
+                "豪斯登堡自 2026 年 11 月 6 日至 2027 年 2 月 25 日推出 Miffy 聖誕與"
+                "冬季假期內容；聖誕期間包含 Dick Bruna Table 聯名餐飲、限定商品與特別秀。"
+            ),
+            "needReservation": False,
+            "hasLimitedGoods": True,
+            "tags": ["米飛兔", "豪斯登堡", "聖誕", "冬季假期", "限定餐飲", "限定商品"],
+        })
+
+    if url == _FLOWER_MIFFY_CHRISTMAS_URL:
+        data.update({
+            "title": "Flower Miffy 2026 聖誕花禮",
+            "type": "new_product",
+            "country": "JP",
+            "city": "",
+            "locationName": "日本全國 Flower Miffy 實體店",
+            "startDate": "",
+            "endDate": "",
+            "summaryZh": (
+                "Flower Miffy 預計自 2026 年 11 月上旬起陸續推出聖誕花圈與聖誕樹擺飾；"
+                "部分款式於日本全國實體店及 Flower Miffy Pop-Up Marche 販售。"
+            ),
+            "needReservation": False,
+            "hasLimitedGoods": True,
+            "tags": ["米飛兔", "Flower Miffy", "聖誕花禮", "季節新品", "實體店"],
+        })
+    return data
 
 def _real_source_url(ev: dict) -> str:
     url = ev.get("sourceUrl", "")
@@ -1865,6 +2062,8 @@ def _is_past(ev: dict) -> bool:
     if t in ACTIVITY_TYPES:
         return True if age is None else age > 30
     if t in SELLING_TYPES:
+        if age is None:
+            age = _approximate_start_age_days(ev)
         return True if age is None else age > 60
     # store / 其他：常設性質，保守
     return age is not None and age > 90
@@ -2073,8 +2272,9 @@ def clean_events(events: list[dict]) -> tuple[list[dict], int, int, int]:
             return is_noise(source_title)
         return False
 
+    normalized = [normalize_source_event(e) for e in events]
     accepted = [
-        e for e in events
+        e for e in normalized
         if not is_rejected_url(e.get("sourceUrl", ""))
         and not is_rejected_title(e.get("sourceTitle", ""))
         and not structured_scope_rejected(e)
@@ -2083,7 +2283,7 @@ def clean_events(events: list[dict]) -> tuple[list[dict], int, int, int]:
             and is_roundup_title(e.get("sourceTitle", ""))
         )
     ]
-    rejected_removed = len(events) - len(accepted)
+    rejected_removed = len(normalized) - len(accepted)
     fresh = [e for e in accepted if not _is_past(e)]
     past_removed = len(accepted) - len(fresh)
     deduped, dup_removed = dedup_events(fresh)
@@ -2296,6 +2496,12 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
                     apply_labeled_extracted_dates(data, html, _pub_year(item["pubDate"]),
                                                   is_html=True, scan_chars=90000)
                 clear_unsubstantiated_store_dates(data, html)
+        data = normalize_source_event(
+            data,
+            source_url=real or "",
+            page_text=source_html,
+            ref_year=_pub_year(item["pubDate"]),
+        )
         if is_online_only_merchandise(
             data,
             source_title=item.get("title", ""),
@@ -2332,6 +2538,7 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
         if is_unstable_source_url(real or ""):
             print("    ⛔ 找不到穩定來源 URL，不入庫（保留隔天重試）")
             return {"_skipNoProcess": True}
+        data.pop("_sourceScopedProduct", None)
         data["sourceUrl"]   = real
         return data
     except RateLimitError:

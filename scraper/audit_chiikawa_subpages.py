@@ -18,7 +18,12 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urljoin, urlparse, urlunparse
 
-from official_sources import _chiikawa_popup_detail_fields, _document_title
+from official_sources import (
+    _CHIIKAWA_MOVIE_POPUP,
+    _chiikawa_movie_popup_events_from_text,
+    _chiikawa_popup_detail_fields,
+    _document_title,
+)
 from verify_links import fetch_html
 
 
@@ -32,7 +37,7 @@ EVENTS_JSON = Path(__file__).parent.parent / "data" / "events.json"
 # an expired historical notice intentionally left on the homepage.
 IGNORED_P26_PAGES: dict[str, str] = {
     "https://chiikawa-info.jp/p26/ck_movie/index.html": (
-        "aggregate movie-goods page: expired bounded sections are filtered, the active venue schedule is represented by mck_scpus, and remaining permanent/broad retail listings are out of scope"
+        "aggregate movie-goods page: bounded goods and popup schedules use structured parsers; remaining permanent/broad retail listings are out of scope"
     ),
     "https://chiikawa-info.jp/p26/ck_tokyo/index.html": (
         "2026-02-06 handling-start page with no current event end date; "
@@ -229,6 +234,21 @@ def _risk_for(status: str, signals: PageSignals) -> str:
     return "low"
 
 
+def _structured_schedule_expiry_reason(url: str, detail: str, today: str) -> str:
+    """Ignore a schedule page only when every parsed venue has explicitly ended."""
+    if normalize_p26_url(url) != normalize_p26_url(_CHIIKAWA_MOVIE_POPUP):
+        return ""
+    all_events = _chiikawa_movie_popup_events_from_text(
+        detail, today="1900-01-01")
+    if not all_events or any(
+        not event.get("endDate") or event["endDate"] >= today
+        for event in all_events
+    ):
+        return ""
+    latest_end = max(event["endDate"] for event in all_events)
+    return f"all structured official venue schedules ended by {latest_end}"
+
+
 def audit_links(
     links: list[ChiikawaLink],
     parsed_pages: dict[str, list[str]] | None = None,
@@ -246,12 +266,17 @@ def audit_links(
         detail_title = _document_title(detail)
         display_title = detail_title or link.title
         popup_fields = _chiikawa_popup_detail_fields(detail)
+        schedule_expiry_reason = _structured_schedule_expiry_reason(
+            link.url, detail, today)
         if link.url in parsed_pages:
             status = "parsed"
             reason = "represented by chiikawa event sourceUrl"
         elif link.url in ignored_pages:
             status = "ignored"
             reason = ignored_pages[link.url]
+        elif schedule_expiry_reason:
+            status = "ignored"
+            reason = schedule_expiry_reason
         elif popup_fields and popup_fields[2] < today:
             status = "ignored"
             reason = f"official event ended {popup_fields[2]}"

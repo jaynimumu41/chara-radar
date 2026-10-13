@@ -1,27 +1,27 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-08T08:36:34+00:00",
+  "updatedAt": "2026-10-13T14:21:47+00:00",
   "sources": {
     "domain:nownews.com": {
-      "confirmed": 15,
+      "confirmed": 16,
       "rejected": 4,
       "uncertain": 0,
-      "crossChecked": 20,
+      "crossChecked": 21,
       "score": 95,
       "label": "nownews.com",
       "kind": "news",
       "host": "nownews.com",
       "handle": "",
       "firstSeen": "2026-06-11",
-      "lastReviewed": "2026-10-08",
-      "lastOutcome": "rejected",
-      "notes": "Access-ticket and purchase-guide roundup duplicated existing official Pokexciting event/product coverage",
+      "lastReviewed": "2026-10-13",
+      "lastOutcome": "confirmed",
+      "notes": "Corrected to the in-scope Fainted mascot line at Pokemon Center TAIPEI on 2026-10-17; excluded Pokemon GO apparel and transit cards. Pokemon Hubs independently corroborates store, date, and nine mascots.",
       "byBrand": {
         "pokemon": {
-          "confirmed": 15,
+          "confirmed": 16,
           "rejected": 3,
           "uncertain": 0,
-          "crossChecked": 19,
+          "crossChecked": 20,
           "score": 95
         },
         "chiikawa": {
@@ -34,10 +34,10 @@
       },
       "byType": {
         "new_product": {
-          "confirmed": 15,
+          "confirmed": 16,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 14,
+          "crossChecked": 15,
           "score": 95
         },
         "campaign": {
@@ -64,10 +64,10 @@
       },
       "byCountry": {
         "tw": {
-          "confirmed": 15,
+          "confirmed": 16,
           "rejected": 4,
           "uncertain": 0,
-          "crossChecked": 20,
+          "crossChecked": 21,
           "score": 95
         }
       },
@@ -261,6 +261,16 @@
           "eventId": "po-dc55b2",
           "evidenceCount": 2,
           "notes": "Access-ticket and purchase-guide roundup duplicated existing official Pokexciting event/product coverage"
+        },
+        {
+          "date": "2026-10-13",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-e3f4cc",
+          "evidenceCount": 1,
+          "notes": "Corrected to the in-scope Fainted mascot line at Pokemon Center TAIPEI on 2026-10-17; excluded Pokemon GO apparel and transit cards. Pokemon Hubs independently corroborates store, date, and nine mascots."
         }
       ]
     },
@@ -1514,19 +1524,19 @@
       ]
     },
     "domain:prtimes.jp": {
-      "confirmed": 3,
+      "confirmed": 4,
       "rejected": 4,
       "uncertain": 0,
-      "crossChecked": 7,
-      "score": 37,
+      "crossChecked": 8,
+      "score": 44,
       "label": "prtimes.jp",
       "kind": "news",
       "host": "prtimes.jp",
       "handle": "",
       "firstSeen": "2026-07-01",
-      "lastReviewed": "2026-09-30",
-      "lastOutcome": "rejected",
-      "notes": "Accurate company release, but duplicate of Dick Bruna official mi-9540fc for Kintetsu Nara 2026-10-07 to 2026-10-13",
+      "lastReviewed": "2026-10-13",
+      "lastOutcome": "confirmed",
+      "notes": "First-party Benelic press release confirms nationwide Flower Miffy physical-store Christmas wreath/tree products planned for early November 2026; official Flower Miffy page independently confirms the launch window.",
       "byBrand": {
         "chiikawa": {
           "confirmed": 1,
@@ -1536,20 +1546,20 @@
           "score": 48
         },
         "miffy": {
-          "confirmed": 1,
+          "confirmed": 2,
           "rejected": 4,
           "uncertain": 0,
-          "crossChecked": 6,
-          "score": 23
+          "crossChecked": 7,
+          "score": 30
         }
       },
       "byType": {
         "new_product": {
-          "confirmed": 0,
+          "confirmed": 1,
           "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 0,
-          "score": 39
+          "crossChecked": 1,
+          "score": 48
         },
         "popup": {
           "confirmed": 1,
@@ -1575,11 +1585,11 @@
       },
       "byCountry": {
         "jp": {
-          "confirmed": 2,
+          "confirmed": 3,
           "rejected": 5,
           "uncertain": 0,
-          "crossChecked": 7,
-          "score": 19
+          "crossChecked": 8,
+          "score": 26
         }
       },
       "history": [
@@ -1652,6 +1662,16 @@
           "eventId": "mi-156de0",
           "evidenceCount": 1,
           "notes": "Accurate company release, but duplicate of Dick Bruna official mi-9540fc for Kintetsu Nara 2026-10-07 to 2026-10-13"
+        },
+        {
+          "date": "2026-10-13",
+          "outcome": "confirmed",
+          "brand": "miffy",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "mi-b11c65",
+          "evidenceCount": 1,
+          "notes": "First-party Benelic press release confirms nationwide Flower Miffy physical-store Christmas wreath/tree products planned for early November 2026; official Flower Miffy page independently confirms the launch window."
         }
       ]
     },
