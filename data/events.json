@@ -915,29 +915,6 @@
     "sourceUrl": "https://tw.portal-pokemon.com/topics/post-6716/"
   },
   {
-    "brand": "miffy",
-    "title": "Miffy ミッフィーzakkaフェスタ　近鉄百貨店 奈良店",
-    "type": "popup",
-    "country": "JP",
-    "city": "Nara",
-    "locationName": "近鉄百貨店 奈良店",
-    "startDate": "2026-10-07",
-    "endDate": "2026-10-13",
-    "summaryZh": "Miffy（米飛兔）官方活動「ミッフィーzakkaフェスタ」於近鉄百貨店 奈良店期間限定登場，販售限定周邊／餐點。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "期間限定",
-      "日本"
-    ],
-    "id": "mi-9540fc",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-29",
-    "sourceTitle": "近鉄百貨店 奈良店で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
-    "sourceUrl": "https://dickbruna.jp/news/202609/48687/"
-  },
-  {
     "brand": "pokemon",
     "title": "Pokémon Center TAIPEI「Disguise! Ditto」系列新品",
     "type": "new_product",
@@ -1138,7 +1115,7 @@
     "title": "吉伊卡哇 POP UP STORE 海老名マルイ",
     "type": "popup",
     "country": "JP",
-    "city": "",
+    "city": "Saitama",
     "locationName": "海老名マルイ 5F イベントスペース",
     "startDate": "2026-10-23",
     "endDate": "2026-11-29",
@@ -1231,29 +1208,26 @@
   },
   {
     "brand": "miffy",
-    "title": "Miffy 豪斯登堡聖誕與冬季假期",
-    "type": "campaign",
+    "title": "Miffy ミッフィー・クリスマス　ハウステンボス",
+    "type": "cafe",
     "country": "JP",
     "city": "Nagasaki",
     "locationName": "ハウステンボス",
     "startDate": "2026-11-06",
     "endDate": "2027-02-25",
-    "summaryZh": "豪斯登堡自 2026 年 11 月 6 日至 2027 年 2 月 25 日推出 Miffy 聖誕與冬季假期內容；聖誕期間包含 Dick Bruna Table 聯名餐飲、限定商品與特別秀。",
+    "summaryZh": "Miffy（米飛兔）官方活動「ミッフィー・クリスマス」於ハウステンボス期間限定登場，販售限定周邊／餐點。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "米飛兔",
-      "豪斯登堡",
-      "聖誕",
-      "冬季假期",
-      "限定餐飲",
-      "限定商品"
+      "期間限定",
+      "日本"
     ],
-    "id": "mi-c6bf42",
-    "sourceTitle": "クリスマスからウィンターホリデーシーズンまでハウステンボスはミッフィーのかわいさにあふれている！大好評の「ハウステンボス × ディック・ブルーナ テーブル」がパワーアップしてクリスマスに登場",
-    "sourceType": "official_social",
-    "createdAt": "2026-10-13",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000725.000023462.html"
+    "id": "mi-cff8d1",
+    "sourceType": "official_site",
+    "createdAt": "2026-10-14",
+    "sourceTitle": "ハウステンボス「ミッフィー・クリスマス」&「ハウステンボス × ディック・ブルーナ テーブル」 - dickbruna.jp",
+    "sourceUrl": "https://dickbruna.jp/news/202610/49038/"
   },
   {
     "brand": "miffy",
@@ -1277,5 +1251,100 @@
     "createdAt": "2026-10-13",
     "sourceTitle": "2026年9月5日(土)発売予定!miffy style限定 ハロウィンアイテム - キデイランド",
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_20260905/"
+  },
+  {
+    "brand": "pokemon",
+    "title": "Pokemon Center 出張所 in イオンモール甲府昭和",
+    "type": "popup",
+    "country": "JP",
+    "city": "Yamanashi",
+    "locationName": "イオンモール甲府昭和 3階 イオンホール",
+    "startDate": "2026-09-18",
+    "endDate": "2026-11-03",
+    "summaryZh": "寶可夢中心出張所於山梨県イオンモール甲府昭和期間限定登場，販售多樣寶可夢周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢",
+      "出張所",
+      "快閃店",
+      "日本"
+    ],
+    "id": "po-17540a",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-14",
+    "sourceTitle": "ポケモンセンター出張所inイオンモール甲府昭和（2026-09-18～2026-11-03）",
+    "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
+  },
+  {
+    "brand": "pokemon",
+    "title": "PokéXciting! in 台北",
+    "type": "campaign",
+    "country": "TW",
+    "city": "Taipei",
+    "locationName": "信義區",
+    "startDate": "2026-10-10",
+    "endDate": "",
+    "summaryZh": "寶可夢30週年大型慶典「PokéXciting! in 台北」將於10月10日在台北信義區熱鬧登場，預計有豐富活動與周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢",
+      "慶典",
+      "台北",
+      "限定商品"
+    ],
+    "id": "po-3641de",
+    "sourceTitle": "寶可夢30週年大型慶典「PokéXciting! in 台北」10月10日 信義區熱鬧登場！ - 警政時報",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-14",
+    "sourceUrl": "https://www.tcpttw.com/life/2026/10/13/319676/"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇聖誕市集",
+    "type": "popup",
+    "country": "JP",
+    "city": "Tokyo",
+    "locationName": "ちいかわクリスマスマーケット",
+    "startDate": "2026-11-24",
+    "endDate": "2026-12-25",
+    "summaryZh": "吉伊卡哇聖誕市集將於2026年11月24日起舉辦，現場將有35種原創餐飲及限定原創周邊商品登場。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "聖誕市集",
+      "限定商品",
+      "原創餐飲"
+    ],
+    "id": "ch-dd9530",
+    "sourceTitle": "「ちいかわクリスマスマーケット」が2026年11月24日より開催決定！ 全35種のオリジナルフード＆限定オリジナルグッズなどが登場 - eeo",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-14",
+    "sourceUrl": "https://eeo.today/media/2026/10/14/401593/"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇快閃店與咖啡廳 in 大分",
+    "type": "popup",
+    "country": "JP",
+    "city": "Oita",
+    "locationName": "大分",
+    "startDate": "2026-10-23",
+    "endDate": "2026-11-08",
+    "summaryZh": "吉伊卡哇快閃店於10月23日起在大分舉辦，現場設有主題咖啡廳，販售周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "快閃店",
+      "咖啡廳",
+      "限定商品",
+      "大分"
+    ],
+    "id": "ch-f55cd4",
+    "sourceTitle": "ちいかわ ポップアップストア in 大分 10月23日より開催! - コラボカフェ",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-14",
+    "sourceUrl": "https://collabo-cafe.com/events/collabo/chiikawa-popup-store-aeon-park-place-oita-2026/"
   }
 ]
