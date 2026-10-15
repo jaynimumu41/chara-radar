@@ -121,30 +121,6 @@
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000231.000014414.html"
   },
   {
-    "brand": "pokemon",
-    "title": "寶可夢中心新品 Sean Wotherspoon聯名玩偶",
-    "type": "new_product",
-    "country": "TW",
-    "city": "Taipei",
-    "locationName": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3F）",
-    "startDate": "2026-08-15",
-    "endDate": "",
-    "summaryZh": "台灣寶可夢中心將於8月15日開賣Sean Wotherspoon聯名款的3款寶可夢玩偶，為實體門市新品發售。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "新品",
-      "聯名",
-      "玩偶",
-      "寶可夢中心"
-    ],
-    "id": "po-1a34a4",
-    "sourceTitle": "台灣寶可夢中心新品來了！Sean Wotherspoon聯名3款玩偶8/15開賣 - NOWnews今日新聞",
-    "sourceType": "official_social",
-    "createdAt": "2026-08-10",
-    "sourceUrl": "https://www.nownews.com/news/6864654"
-  },
-  {
     "brand": "chiikawa",
     "title": "吉伊卡哇 シーサーのおみやげやさん 那霸機場常設店",
     "type": "store",
@@ -453,30 +429,6 @@
     "sourceType": "official_social",
     "createdAt": "2026-09-08",
     "sourceUrl": "https://www.nownews.com/amp/news/6873238"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "Chiikawa x 東京ばな奈 POP UP STORE",
-    "type": "popup",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "池袋",
-    "startDate": "2026-09-17",
-    "endDate": "2026-10-14",
-    "summaryZh": "池袋區域首次登場的Chiikawa x 東京ばな奈快閃店，販售限定環保袋套組與新款餅乾三明治。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "快閃店",
-      "限定商品",
-      "東京ばな奈",
-      "池袋"
-    ],
-    "id": "ch-0d8b61",
-    "sourceTitle": "【池袋】「ちいかわ」×「東京ばな奈」のポップアップストアがOPEN。エリア初登場のエコバッグセットに新作クッキーサンドも - PR TIMES",
-    "sourceType": "official_social",
-    "createdAt": "2026-09-09",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002111.000025606.html"
   },
   {
     "brand": "miffy",
@@ -867,30 +819,6 @@
     "sourceUrl": "https://www.nownews.com/news/6878252"
   },
   {
-    "brand": "chiikawa",
-    "title": "Chiikawa x 東京ばな奈 快閃店",
-    "type": "popup",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "東京ソラマチ(R)",
-    "startDate": "2026-10-01",
-    "endDate": "2026-10-14",
-    "summaryZh": "「Chiikawa」與「東京ばな奈」聯名快閃店於東京晴空塔期間限定登場，販售初登場的環保袋及人氣香蕉布丁蛋糕。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "快閃店",
-      "東京",
-      "聯名",
-      "限定商品"
-    ],
-    "id": "ch-a8a929",
-    "sourceTitle": "【東京ソラマチ(R)】「ちいかわ」×「東京ばな奈」のポップアップショップが期間限定OPEN！初登場『エコバッグ』に人気のバナナプリンケーキも",
-    "sourceType": "official_social",
-    "createdAt": "2026-09-28",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002148.000025606.html"
-  },
-  {
     "brand": "pokemon",
     "title": "Pokémon Center TAIPEI #記憶的旅途",
     "type": "campaign",
@@ -1115,7 +1043,7 @@
     "title": "吉伊卡哇 POP UP STORE 海老名マルイ",
     "type": "popup",
     "country": "JP",
-    "city": "Saitama",
+    "city": "",
     "locationName": "海老名マルイ 5F イベントスペース",
     "startDate": "2026-10-23",
     "endDate": "2026-11-29",
@@ -1346,5 +1274,52 @@
     "sourceType": "official_social",
     "createdAt": "2026-10-14",
     "sourceUrl": "https://collabo-cafe.com/events/collabo/chiikawa-popup-store-aeon-park-place-oita-2026/"
+  },
+  {
+    "brand": "miffy",
+    "title": "Miffy miffy style ミッフィースタイル",
+    "type": "popup",
+    "country": "JP",
+    "city": "Osaka",
+    "locationName": "miffy style ミッフィースタイル",
+    "startDate": "2026-10-31",
+    "endDate": "2026-11-17",
+    "summaryZh": "Miffy（米飛兔）官方活動「miffy style ミッフィースタイル」於miffy style ミッフィースタイル期間限定登場，販售限定周邊／餐點。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "期間限定",
+      "日本"
+    ],
+    "id": "mi-ae99c8",
+    "sourceType": "official_site",
+    "createdAt": "2026-10-15",
+    "sourceTitle": "「miffy style ミッフィースタイル」ポップアップショップがキデイランド大阪梅田店に期間限定オープン - dickbruna.jp",
+    "sourceUrl": "https://dickbruna.jp/news/202610/49063/"
+  },
+  {
+    "brand": "pokemon",
+    "title": "爆炸頭皮卡丘補貨",
+    "type": "new_product",
+    "country": "TW",
+    "city": "Taipei",
+    "locationName": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3F）",
+    "startDate": "2026-10-20",
+    "endDate": "",
+    "summaryZh": "寶可夢「爆炸頭皮卡丘」於10月20日在官方店舖補貨，每人限領一張整理券，官方將加強查驗。",
+    "needReservation": true,
+    "hasLimitedGoods": true,
+    "tags": [
+      "皮卡丘",
+      "補貨",
+      "限定",
+      "台灣"
+    ],
+    "id": "po-e53e1b",
+    "sourceTitle": "寶可夢「爆炸頭皮卡丘」10/20補貨！整理券限領1張　官方加強查驗 - NOWnews今日新聞",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-15",
+    "sourceUrl": "https://www.nownews.com/news/6883605"
   }
 ]
