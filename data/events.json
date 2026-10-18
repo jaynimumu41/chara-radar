@@ -1490,5 +1490,53 @@
     "sourceType": "official_social",
     "createdAt": "2026-10-17",
     "sourceUrl": "https://collabo-cafe.com/events/collabo/muchauma-chiikawa-sushi-popup-store-yokohama2026/"
+  },
+  {
+    "brand": "pokemon",
+    "title": "寶可夢『ポケモンレジェンズ Z-A』新周邊",
+    "type": "new_product",
+    "country": "JP",
+    "city": "Tokyo",
+    "locationName": "ポケモンセンター",
+    "startDate": "2026-10-29",
+    "endDate": "",
+    "summaryZh": "寶可夢中心將於10月29日發售《寶可夢傳說 阿爾宙斯》主題周邊，包含「卡洛兒娃娃」與「米亞雷市」風格的藝術磁鐵等。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢",
+      "周邊",
+      "新商品",
+      "日本"
+    ],
+    "id": "po-8505de",
+    "sourceTitle": "『ポケモンレジェンズ Z-A』“カナリィぬい（全5種）”がグッズで登場。ポケモン絵画のアートマグネットなどミアレシティの世界観をイメージしたグッズシリーズ。ポケセンで10月29日発売 - ファミ通.com",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-18",
+    "sourceUrl": "https://www.famitsu.com/article/202610/91192"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇聖誕市集",
+    "type": "popup",
+    "country": "JP",
+    "city": "Chiba",
+    "locationName": "幕張豊砂",
+    "startDate": "2026-11-24",
+    "endDate": "2026-12-25",
+    "summaryZh": "吉伊卡哇聖誕市集將於11月24日在幕張豊砂登場，販售限定商品與35種限定餐飲，入場費2,500日圓。",
+    "needReservation": true,
+    "hasLimitedGoods": true,
+    "tags": [
+      "聖誕市集",
+      "限定商品",
+      "限定餐飲",
+      "幕張豊砂"
+    ],
+    "id": "ch-690f5f",
+    "sourceTitle": "「ちいかわクリスマスマーケット」幕張豊砂で11/24から！先行抽選は10/15～25まで、どう申し込む？ 限定フード全35種、入場は大人2,500円 - 旅とおでかけ 鉄道チャンネル",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-18",
+    "sourceUrl": "https://tetsudo-ch.com/13041326.html"
   }
 ]
