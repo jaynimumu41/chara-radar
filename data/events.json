@@ -167,29 +167,6 @@
     "sourceUrl": "https://dickbruna.jp/news/202608/47757/"
   },
   {
-    "brand": "miffy",
-    "title": "Miffy miffy × Cosme Kitchen 　全国のCosme Kitchen・Biople対象店舗",
-    "type": "new_product",
-    "country": "JP",
-    "city": "",
-    "locationName": "全国のCosme Kitchen・Biople対象店舗",
-    "startDate": "2026-08-21",
-    "endDate": "",
-    "summaryZh": "Miffy與Cosme Kitchen聯名商品第3彈於日本全國Cosme Kitchen、Biople等實體店發售，共18款美妝與生活雜貨。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "期間限定",
-      "日本"
-    ],
-    "id": "mi-a3137a",
-    "sourceType": "official_site",
-    "createdAt": "2026-08-27",
-    "sourceTitle": "「miffy × Cosme Kitchen 」コスメキッチンとミッフィーのコラボ第3弾登場 - dickbruna.jp",
-    "sourceUrl": "https://dickbruna.jp/news/202607/47496/"
-  },
-  {
     "brand": "pokemon",
     "title": "寶可夢中心新品Flapping Fins系列",
     "type": "new_product",
@@ -331,30 +308,6 @@
     "sourceType": "official_social",
     "createdAt": "2026-09-06",
     "sourceUrl": "https://www.4gamers.com.tw/news/detail/81415/pokemon-game-packaging-merchandise-2nd-wave-in-taiwan-at-august-22nd-2026"
-  },
-  {
-    "brand": "miffy",
-    "title": "Miffy miffy style POP UP SHOP in 有楽町",
-    "type": "popup",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "有楽町マルイ",
-    "startDate": "2026-10-02",
-    "endDate": "2026-10-19",
-    "summaryZh": "Miffy 官方快閃店「miffy style POP UP SHOP in 有楽町」於有楽町マルイ期間限定登場，販售限定與先行商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "快閃店",
-      "限定周邊",
-      "日本"
-    ],
-    "id": "mi-9b0b1c",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-13",
-    "sourceTitle": "miffy style POP UP SHOPが有楽町・梅田・札幌に期間限定オープン - dickbruna.jp",
-    "sourceUrl": "https://dickbruna.jp/news/202609/48222/"
   },
   {
     "brand": "pokemon",
@@ -574,54 +527,6 @@
     "createdAt": "2026-09-25",
     "sourceTitle": "ちいかわPOP UP STORE 新光三越台北信義新天地(2026-10-07～2026-11-15) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_smtk/index.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE 青森ELM",
-    "type": "popup",
-    "country": "JP",
-    "city": "Aomori",
-    "locationName": "青森ELM 2階 ELMホール",
-    "startDate": "2026-10-02",
-    "endDate": "2026-10-19",
-    "summaryZh": "ちいかわ POP UP STORE 於青森ELM期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-c21f84",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-25",
-    "sourceTitle": "ちいかわPOP UP STORE 青森ELM(2026-10-02～2026-10-19) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_aomr/index.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE イオンモール佐賀大和",
-    "type": "popup",
-    "country": "JP",
-    "city": "Saga",
-    "locationName": "イオンモール佐賀大和 2F フードコート",
-    "startDate": "2026-10-02",
-    "endDate": "2026-10-19",
-    "summaryZh": "ちいかわ POP UP STORE 於イオンモール佐賀大和期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-ba1102",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-25",
-    "sourceTitle": "ちいかわPOP UP STORE イオンモール佐賀大和(2026-10-02～2026-10-19) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_asag/index.html"
   },
   {
     "brand": "pokemon",
@@ -1562,5 +1467,101 @@
     "sourceType": "official_social",
     "createdAt": "2026-10-19",
     "sourceUrl": "https://www.nownews.com/news/6884725"
+  },
+  {
+    "brand": "miffy",
+    "title": "米飛兔咖哩食器系列",
+    "type": "new_product",
+    "country": "JP",
+    "city": "",
+    "locationName": "",
+    "startDate": "2026-10-21",
+    "endDate": "",
+    "summaryZh": "日本スケーター公司推出4款米飛兔主題不鏽鋼咖哩食器與餐具，於10月21日起在日本一般販售。",
+    "needReservation": false,
+    "hasLimitedGoods": false,
+    "tags": [
+      "米飛兔",
+      "食器",
+      "餐具",
+      "日本"
+    ],
+    "id": "mi-6d27dc",
+    "sourceTitle": "【ミッフィー】カレー時間を楽しめるステンレス製の食器・カトラリーの４アイテムがスケーターから10月21日（水）より一般販売開始！",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-21",
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000279.000084027.html"
+  },
+  {
+    "brand": "miffy",
+    "title": "米飛兔 中華風食器",
+    "type": "new_product",
+    "country": "JP",
+    "city": "",
+    "locationName": "",
+    "startDate": "2026-10-21",
+    "endDate": "",
+    "summaryZh": "米飛兔與熊貓聯名推出復古可愛的中華風食器，共4款，於10/21起由スケーター公司一般販售。",
+    "needReservation": false,
+    "hasLimitedGoods": false,
+    "tags": [
+      "米飛兔",
+      "食器",
+      "聯名",
+      "日本"
+    ],
+    "id": "mi-813f88",
+    "sourceTitle": "【ミッフィー】おうちで町中華気分！「ミッフィー」と「パンダ」が仲良く並ぶレトロ可愛い中華風食器（全4種）がスケーターから10/21(水)より一般販売開始！今日のごはんは中華で決まり♪",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-21",
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000286.000084027.html"
+  },
+  {
+    "brand": "pokemon",
+    "title": "台北寶可夢中心10月新品",
+    "type": "new_product",
+    "country": "TW",
+    "city": "Taipei",
+    "locationName": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3F）",
+    "startDate": "2026-10-24",
+    "endDate": "",
+    "summaryZh": "台北寶可夢中心將於10月24日推出寶可夢30週年及萬聖節主題新品，可在現場購買。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢",
+      "新品",
+      "30週年",
+      "萬聖節"
+    ],
+    "id": "po-cfc1f4",
+    "sourceTitle": "台北寶可夢中心 10月24日新品！寶可夢30週年、萬聖節商品登場 - Pokemon Hubs",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-21",
+    "sourceUrl": "https://pokemonhubs.com/news/pokemon-center-taipei-2026-10-24-new-products/"
+  },
+  {
+    "brand": "pokemon",
+    "title": "台北寶可夢中心新增隱形印章",
+    "type": "store",
+    "country": "TW",
+    "city": "Taipei",
+    "locationName": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3F）",
+    "startDate": "2026-10-20",
+    "endDate": "",
+    "summaryZh": "台北寶可夢中心新增「隱形印章」入場規定，粉紅爆炸頭皮卡丘補貨再掀排隊潮。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢中心",
+      "台北",
+      "限定商品",
+      "皮卡丘"
+    ],
+    "id": "po-27c92d",
+    "sourceTitle": "粉紅爆炸頭皮卡丘補貨再掀排隊潮！台北寶可夢中心新增「隱形印章」入場規定 - Pokemon Hubs",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-21",
+    "sourceUrl": "https://pokemonhubs.com/news/pink-afro-pikachu-october-20-queue-rules/"
   }
 ]
