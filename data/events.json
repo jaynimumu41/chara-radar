@@ -287,30 +287,6 @@
   },
   {
     "brand": "pokemon",
-    "title": "寶可夢歷代遊戲彩盒周邊第二彈",
-    "type": "new_product",
-    "country": "TW",
-    "city": "Taipei",
-    "locationName": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3F）",
-    "startDate": "2026-08-22",
-    "endDate": "",
-    "summaryZh": "寶可夢歷代遊戲彩盒周邊第二彈於8月22日在台北寶可夢中心開賣。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "周邊商品",
-      "新品",
-      "台北"
-    ],
-    "id": "po-9cefdb",
-    "sourceTitle": "寶可夢歷代遊戲彩盒周邊第二彈8/22台北寶可夢中心開賣 - 4Gamers",
-    "sourceType": "official_social",
-    "createdAt": "2026-09-06",
-    "sourceUrl": "https://www.4gamers.com.tw/news/detail/81415/pokemon-game-packaging-merchandise-2nd-wave-in-taiwan-at-august-22nd-2026"
-  },
-  {
-    "brand": "pokemon",
     "title": "Pokémon Center ハロウィンをテーマにしたグッズ「Pokémon Magic Hour Illusion!」が、ポケモンセンターに登場",
     "type": "new_product",
     "country": "JP",
@@ -1563,5 +1539,29 @@
     "sourceType": "official_social",
     "createdAt": "2026-10-21",
     "sourceUrl": "https://pokemonhubs.com/news/pink-afro-pikachu-october-20-queue-rules/"
+  },
+  {
+    "brand": "pokemon",
+    "title": "PokéXciting! in 台北",
+    "type": "popup",
+    "country": "TW",
+    "city": "Taipei",
+    "locationName": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3F）",
+    "startDate": "2026-10-08",
+    "endDate": "",
+    "summaryZh": "「PokéXciting! in 台北」國慶週末將在信義區登場，活動詳情與限定商品資訊待公布。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "快閃店",
+      "限定商品",
+      "寶可夢",
+      "台北"
+    ],
+    "id": "po-2ad7d4",
+    "sourceTitle": "「PokéXciting! in 台北」國慶週末登場，信義區寶可夢活動重點一次看 - 4Gamers",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-22",
+    "sourceUrl": "https://www.4gamers.com.tw/news/detail/82511/be-prepared-for-pokexciting-in-taipei-2026"
   }
 ]
