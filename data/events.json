@@ -1563,5 +1563,123 @@
     "sourceType": "official_social",
     "createdAt": "2026-10-22",
     "sourceUrl": "https://www.4gamers.com.tw/news/detail/82511/be-prepared-for-pokexciting-in-taipei-2026"
+  },
+  {
+    "brand": "miffy",
+    "title": "Miffy miffy style ミッフィースタイル",
+    "type": "popup",
+    "country": "JP",
+    "city": "Hokkaido",
+    "locationName": "miffy style ミッフィースタイル",
+    "startDate": "2026-11-06",
+    "endDate": "2026-11-24",
+    "summaryZh": "Miffy（米飛兔）官方活動「miffy style ミッフィースタイル」於miffy style ミッフィースタイル期間限定登場，販售限定周邊／餐點。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "期間限定",
+      "日本"
+    ],
+    "id": "mi-68de61",
+    "sourceType": "official_site",
+    "createdAt": "2026-10-23",
+    "sourceTitle": "「miffy style ミッフィースタイル」ポップアップショップが札幌アピアに期間限定オープン - dickbruna.jp",
+    "sourceUrl": "https://dickbruna.jp/news/202610/49227/"
+  },
+  {
+    "brand": "miffy",
+    "title": "Miffy miffy style 各店ノベルティデイ",
+    "type": "campaign",
+    "country": "JP",
+    "city": "",
+    "locationName": "miffy style 各店＋キデイランド対象店",
+    "startDate": "2026-11-07",
+    "endDate": "",
+    "summaryZh": "miffy style 各店自 2026-11-07 起舉辦店頭購入特典活動，贈品送完為止，線上店不適用。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "miffy style",
+      "日本"
+    ],
+    "id": "mi-59382d",
+    "sourceType": "official_site",
+    "createdAt": "2026-10-23",
+    "sourceTitle": "2026年11月7日(土)～スタート!miffy style 各店ノベルティデイ - キデイランド",
+    "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_nove202611/"
+  },
+  {
+    "brand": "miffy",
+    "title": "Flower Miffy Pop-Up Marche",
+    "type": "popup",
+    "country": "JP",
+    "city": "Kanagawa",
+    "locationName": "横浜赤レンガ倉庫",
+    "startDate": "2026-11-06",
+    "endDate": "2026-12-08",
+    "summaryZh": "每年都受歡迎的米飛兔聖誕花圈與冬季禮物推薦商品齊聚一堂。於橫濱紅磚倉庫期間限定舉辦。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "快閃店",
+      "聖誕",
+      "禮物"
+    ],
+    "id": "mi-b04e35",
+    "sourceTitle": "毎年人気のミッフィーのクリスマスリースや冬の贈り物におすすめのアイテムが集結 「Flower Miffy Pop-Up Marche」2026年11月6日(金)より横浜赤レンガ倉庫で期間限定開催",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-23",
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002255.000022901.html"
+  },
+  {
+    "brand": "miffy",
+    "title": "米飛兔主題咖啡廳「ミッフィーほかほかダイニング」期間限定登場",
+    "type": "cafe",
+    "country": "JP",
+    "city": "Tokyo",
+    "locationName": "ミッフィーほかほかダイニング",
+    "startDate": "2026-10-31",
+    "endDate": "2027-01-24",
+    "summaryZh": "米飛兔主題咖啡廳「ミッフィーほかほかダイニング」將於東京與大阪期間限定開幕，提供特別的餐飲體驗。",
+    "needReservation": false,
+    "hasLimitedGoods": false,
+    "tags": [
+      "米飛兔",
+      "主題咖啡廳",
+      "東京",
+      "大阪"
+    ],
+    "id": "mi-378506",
+    "sourceTitle": "ミッフィーのスペシャルなテーマカフェが東京・大阪で開催決定「ミッフィーほかほかダイニング」期間限定オープン - PR TIMES",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-23",
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000334.000086964.html"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "ちいかわ×ANA 聯名商品",
+    "type": "new_product",
+    "country": "JP",
+    "city": "Tokyo",
+    "locationName": "ANA FESTA",
+    "startDate": "2026-10-23",
+    "endDate": "",
+    "summaryZh": "「ちいかわ×ANA」聯名商品第1彈於10月23日起先行販售，購買數量限制期間延長。詳細地點為ANA FESTA。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "聯名",
+      "限定商品",
+      "ANA",
+      "機場"
+    ],
+    "id": "ch-22b7e6",
+    "sourceTitle": "「ちいかわ×ANA」コラボレーショングッズ第1弾の購入個数制限期間が延長に！ 10月23日より先行販売中 (アニメ！アニメ！) - Yahoo!ニュース",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-23",
+    "sourceUrl": "https://news.yahoo.co.jp/articles/812a35626adce3e9a98cfc02a868ff563469c884/images/000"
   }
 ]
