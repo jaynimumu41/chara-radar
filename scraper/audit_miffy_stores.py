@@ -1,0 +1,214 @@
+"""Audit Miffy permanent-store coverage against the official shop list.
+
+The public store names are localized for this project, so each Miffy row keeps
+an ``officialName`` identity. This script compares those identities with the
+current physical locations published by dickbruna.jp and reports additions or
+closures that need review. It never edits data by itself.
+"""
+from __future__ import annotations
+
+import argparse
+from collections import Counter
+from dataclasses import dataclass
+from html.parser import HTMLParser
+import json
+from pathlib import Path
+import re
+import sys
+import unicodedata
+
+from verify_links import fetch_html
+
+
+ROOT = Path(__file__).resolve().parents[1]
+STORES_JSON = ROOT / "data" / "stores.json"
+OFFICIAL_SHOPS_URL = "https://dickbruna.jp/shop/"
+
+
+@dataclass(frozen=True)
+class OfficialStore:
+    name: str
+    category: str
+    address: str
+
+
+@dataclass(frozen=True)
+class AuditResult:
+    official_count: int
+    local_count: int
+    missing: tuple[str, ...]
+    stale: tuple[str, ...]
+    duplicates: tuple[str, ...]
+
+    @property
+    def ok(self) -> bool:
+        return not (self.missing or self.stale or self.duplicates)
+
+
+def _clean(text: str) -> str:
+    return re.sub(r"\s+", " ", text or "").strip()
+
+
+def normalize_name(text: str) -> str:
+    normalized = unicodedata.normalize("NFKC", text or "").casefold()
+    return re.sub(r"\s+", "", normalized)
+
+
+class _OfficialShopParser(HTMLParser):
+    """Parse the server-rendered official shop cards without extra packages."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.stores: list[OfficialStore] = []
+        self._card_depth = 0
+        self._category: list[str] = []
+        self._name: list[str] = []
+        self._address: list[str] = []
+        self._capture = ""
+        self._capture_tag = ""
+
+    @staticmethod
+    def _classes(attrs) -> set[str]:
+        for key, value in attrs:
+            if key == "class" and value:
+                return set(value.split())
+        return set()
+
+    def handle_starttag(self, tag, attrs) -> None:
+        classes = self._classes(attrs)
+        if tag == "div" and "c-card-shop-item" in classes and not self._card_depth:
+            self._card_depth = 1
+            self._category = []
+            self._name = []
+            self._address = []
+            return
+        if not self._card_depth:
+            return
+        if tag == "div":
+            self._card_depth += 1
+        if tag == "span" and "c-article-taxonomy" in classes:
+            self._capture, self._capture_tag = "category", tag
+        elif tag == "h3" and "c-card-shop-item__title" in classes:
+            self._capture, self._capture_tag = "name", tag
+        elif tag == "div" and "c-card-shop-item__address" in classes:
+            self._capture, self._capture_tag = "address", tag
+
+    def handle_data(self, data: str) -> None:
+        if not self._card_depth or not self._capture:
+            return
+        getattr(self, f"_{self._capture}").append(data)
+
+    def handle_endtag(self, tag: str) -> None:
+        if not self._card_depth:
+            return
+        if tag == self._capture_tag:
+            self._capture = ""
+            self._capture_tag = ""
+        if tag != "div":
+            return
+        self._card_depth -= 1
+        if self._card_depth:
+            return
+        name = _clean(" ".join(self._name))
+        address = _clean(" ".join(self._address))
+        if name and address:
+            self.stores.append(OfficialStore(
+                name=name,
+                category=_clean(" ".join(self._category)),
+                address=address,
+            ))
+
+
+def extract_official_stores(page_html: str) -> list[OfficialStore]:
+    parser = _OfficialShopParser()
+    parser.feed(page_html or "")
+    return parser.stores
+
+
+def load_local_official_names(path: Path = STORES_JSON) -> list[str]:
+    data = json.loads(path.read_text(encoding="utf-8-sig"))
+    names: list[str] = []
+    for group in data.get("miffy", {}).get("groups", []):
+        for store in group.get("stores", []):
+            official_name = _clean(store.get("officialName", ""))
+            if official_name:
+                names.append(official_name)
+    return names
+
+
+def audit_stores(official: list[OfficialStore], local_names: list[str]) -> AuditResult:
+    official_by_key = {normalize_name(store.name): store.name for store in official}
+    local_by_key = {normalize_name(name): name for name in local_names if normalize_name(name)}
+    local_counts = Counter(normalize_name(name) for name in local_names if normalize_name(name))
+
+    missing = tuple(
+        store.name for store in official if normalize_name(store.name) not in local_by_key
+    )
+    stale = tuple(
+        name for name in local_names if normalize_name(name) not in official_by_key
+    )
+    duplicates = tuple(
+        local_by_key[key] for key, count in local_counts.items() if count > 1
+    )
+    return AuditResult(
+        official_count=len(official),
+        local_count=len(local_names),
+        missing=missing,
+        stale=stale,
+        duplicates=duplicates,
+    )
+
+
+def print_result(result: AuditResult, output_format: str) -> None:
+    status = "ok" if result.ok else "needs_review"
+    summary = (
+        f"status={status} official={result.official_count} local={result.local_count} "
+        f"missing={len(result.missing)} stale={len(result.stale)} "
+        f"duplicates={len(result.duplicates)}"
+    )
+    print(summary)
+    if output_format == "summary" or result.ok:
+        return
+
+    rows = (
+        [("missing", name) for name in result.missing]
+        + [("stale", name) for name in result.stale]
+        + [("duplicate", name) for name in result.duplicates]
+    )
+    if output_format == "markdown":
+        print("\n| Status | Official name |")
+        print("| -- | -- |")
+        for row_status, name in rows:
+            print(f"| {row_status} | {name} |")
+        return
+    for row_status, name in rows:
+        print(f"{row_status.upper():9} {name}")
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Compare data/stores.json Miffy locations with the official shop list."
+    )
+    parser.add_argument("--url", default=OFFICIAL_SHOPS_URL)
+    parser.add_argument("--stores", type=Path, default=STORES_JSON)
+    parser.add_argument("--format", choices=("summary", "text", "markdown"), default="text")
+    parser.add_argument("--fail-on-review", action="store_true")
+    parser.add_argument("--timeout", type=int, default=30)
+    args = parser.parse_args()
+
+    page_html = fetch_html(args.url, timeout=args.timeout)
+    if not page_html:
+        print(f"ERROR could not fetch official Miffy shop list: {args.url}", file=sys.stderr)
+        return 2
+    official = extract_official_stores(page_html)
+    if not official:
+        print("ERROR official Miffy shop parser returned no physical stores", file=sys.stderr)
+        return 2
+
+    result = audit_stores(official, load_local_official_names(args.stores))
+    print_result(result, args.format)
+    return 1 if args.fail_on_review and not result.ok else 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

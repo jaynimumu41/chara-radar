@@ -24,6 +24,7 @@ if hasattr(sys.stdout, "reconfigure"):
 import scrape
 import official_sources
 import audit_chiikawa_subpages
+import audit_miffy_stores
 import audit_official_coverage
 import agent_verify_candidates
 import source_reputation
@@ -441,6 +442,61 @@ check("Kiddy Land 404 不可被防爬例外放行",
 check("非 Kiddy Land 的 403 不可被放行",
       verify_links._is_protected_official_block("https://example.com/event", 403),
       False)
+sample_miffy_shops = """
+<div class="c-card-shop-item">
+  <span class="c-article-taxonomy">miffy style</span>
+  <h3 class="c-card-shop-item__title">miffy style 東京駅店</h3>
+  <div class="c-card-shop-item__address">東京都千代田区丸の内1-9-1</div>
+</div>
+<div class="c-card-shop-item">
+  <span class="c-article-taxonomy">みっふぃーきっちん/みっふぃーおやつ堂</span>
+  <h3 class="c-card-shop-item__title">みっふぃーおやつ堂　伊勢店</h3>
+  <div class="c-card-shop-item__address">三重県伊勢市宇治今在家町11</div>
+</div>
+<div class="c-card-shop-item">
+  <h3 class="c-card-shop-item__title">miffy style online</h3>
+  <div class="c-card-shop-item__address"></div>
+</div>
+"""
+sample_official_stores = audit_miffy_stores.extract_official_stores(sample_miffy_shops)
+check("Miffy 官方店舖總表只解析有地址的實體據點",
+      [(store.name, store.category) for store in sample_official_stores],
+      [
+          ("miffy style 東京駅店", "miffy style"),
+          ("みっふぃーおやつ堂 伊勢店", "みっふぃーきっちん/みっふぃーおやつ堂"),
+      ])
+miffy_store_audit = audit_miffy_stores.audit_stores(
+    sample_official_stores,
+    ["miffy style 東京駅店", "みっふぃーおやつ堂 伊勢店"],
+)
+check("Miffy 常設店官方識別完整時稽核通過",
+      (miffy_store_audit.ok, miffy_store_audit.official_count, miffy_store_audit.local_count),
+      (True, 2, 2))
+miffy_store_gap = audit_miffy_stores.audit_stores(
+    sample_official_stores,
+    ["miffy style 東京駅店", "miffy style 已閉店"],
+)
+check("Miffy 常設店稽核同時找出漏店與已下架店",
+      (miffy_store_gap.missing, miffy_store_gap.stale),
+      (("みっふぃーおやつ堂 伊勢店",), ("miffy style 已閉店",)))
+store_lint_fixture = {
+    "pokemon": {"groups": []},
+    "chiikawa": {"groups": []},
+    "miffy": {
+        "sourceUrl": "https://dickbruna.jp/shop/",
+        "sourceCheckedAt": "2026-10-23",
+        "groups": [{
+            "label": "test",
+            "stores": [
+                {"name": "店 A", "officialName": "公式店", "area": "東京", "country": "JP"},
+                {"name": "店 B", "officialName": "公式店", "area": "大阪", "country": "JP"},
+            ],
+        }],
+    },
+}
+check("stores lint 阻擋重複 Miffy 官方識別",
+      data_lint.store_data_errors(store_lint_fixture),
+      ["stores.json duplicate miffy officialName: 公式店, 公式店"])
 sample_chiikawa_home = """
 <a href="/p26/foo/index.html">Foo <span>Store</span></a>
 <a href="https://chiikawa-info.jp/p26/bar/">Bar</a>

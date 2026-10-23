@@ -39,50 +39,73 @@
     ]
   },
   "miffy": {
+    "sourceUrl": "https://dickbruna.jp/shop/",
+    "sourceCheckedAt": "2026-10-23",
     "groups": [
       {
         "label": "miffy style",
         "stores": [
-          { "name": "miffy style 原宿店", "area": "東京・原宿", "country": "JP" },
-          { "name": "miffy style 新宿店", "area": "東京・新宿", "country": "JP" },
-          { "name": "miffy style 東京車站店", "area": "東京・東京車站", "country": "JP" },
-          { "name": "miffy style 吉祥寺店", "area": "東京・吉祥寺", "country": "JP" },
-          { "name": "miffy style 晴空塔城店", "area": "東京・晴空塔", "country": "JP" },
-          { "name": "miffy style 橫濱店", "area": "神奈川・橫濱", "country": "JP" },
-          { "name": "miffy style 越谷 LakeTown 店", "area": "埼玉・越谷", "country": "JP" },
-          { "name": "miffy style mimi 上小田井", "area": "愛知・名古屋", "country": "JP" },
-          { "name": "miffy style 名古屋 Gate Tower 店", "area": "愛知・名古屋", "country": "JP" },
-          { "name": "miffy style 名古屋 PARCO 店", "area": "愛知・名古屋", "country": "JP" },
-          { "name": "miffy style 大阪梅田店", "area": "大阪・梅田", "country": "JP" },
-          { "name": "miffy style 心齋橋 PARCO 店", "area": "大阪・心齋橋", "country": "JP" },
-          { "name": "miffy style mimi LaLaport EXPOCITY", "area": "大阪・吹田", "country": "JP" },
-          { "name": "miffy style 京都四条河原町店", "area": "京都", "country": "JP" },
-          { "name": "miffy style 神戶店", "area": "兵庫・神戶", "country": "JP" },
-          { "name": "miffy style mimi 三宮", "area": "兵庫・三宮", "country": "JP" },
-          { "name": "miffy style Piole 姬路店", "area": "兵庫・姬路", "country": "JP" },
-          { "name": "miffy style mimi 高松", "area": "香川・高松", "country": "JP" },
-          { "name": "miffy style mimi 福岡 PARCO", "area": "福岡", "country": "JP" },
-          { "name": "miffy style AMU PLAZA 熊本店", "area": "熊本", "country": "JP" }
+          { "name": "miffy style 原宿店", "officialName": "miffy style 原宿店", "area": "東京・原宿", "country": "JP" },
+          { "name": "miffy style 新宿店", "officialName": "miffy style 新宿店", "area": "東京・新宿", "country": "JP" },
+          { "name": "miffy style 東京車站店", "officialName": "miffy style 東京駅店", "area": "東京・東京車站", "country": "JP" },
+          { "name": "miffy style 吉祥寺店", "officialName": "miffy style 吉祥寺店", "area": "東京・吉祥寺", "country": "JP" },
+          { "name": "miffy style 晴空塔城店", "officialName": "miffy style 東京スカイツリータウン・ソラマチ店", "area": "東京・晴空塔", "country": "JP" },
+          { "name": "miffy style 橫濱店", "officialName": "miffy style 横浜店", "area": "神奈川・橫濱", "country": "JP" },
+          { "name": "miffy style 越谷 LakeTown 店", "officialName": "miffy style 越谷レイクタウン店", "area": "埼玉・越谷", "country": "JP" },
+          { "name": "miffy style 名古屋 Gate Tower 店", "officialName": "miffy style 名古屋ゲートタワー店", "area": "愛知・名古屋", "country": "JP" },
+          { "name": "miffy style 名古屋 PARCO 店", "officialName": "miffy style 名古屋パルコ店", "area": "愛知・名古屋", "country": "JP" },
+          { "name": "miffy style 大阪梅田店", "officialName": "miffy style 大阪梅田店", "area": "大阪・梅田", "country": "JP" },
+          { "name": "miffy style 心齋橋 PARCO 店", "officialName": "miffy style 心斎橋パルコ店", "area": "大阪・心齋橋", "country": "JP" },
+          { "name": "miffy style mimi LaLaport EXPOCITY", "officialName": "miffy style mimi ららぽーとEXPOCITY", "area": "大阪・吹田", "country": "JP" },
+          { "name": "miffy style 京都四条河原町店", "officialName": "miffy style 京都四条河原町店", "area": "京都", "country": "JP" },
+          { "name": "miffy style 神戶店", "officialName": "miffy style 神戸店", "area": "兵庫・神戶", "country": "JP" },
+          { "name": "miffy style mimi 三宮", "officialName": "miffy style mimi 三宮", "area": "兵庫・三宮", "country": "JP" },
+          { "name": "miffy style Piole 姬路店", "officialName": "miffy style ピオレ姫路店", "area": "兵庫・姬路", "country": "JP" },
+          { "name": "miffy style mimi 高松", "officialName": "miffy style mimi 高松", "area": "香川・高松", "country": "JP" },
+          { "name": "miffy style mimi 福岡 PARCO", "officialName": "miffy style mimi 福岡パルコ", "area": "福岡", "country": "JP" },
+          { "name": "miffy style AMU PLAZA 熊本店", "officialName": "miffy style アミュプラザくまもと店", "area": "熊本", "country": "JP" }
         ]
       },
       {
         "label": "miffy kitchen & bakery",
         "stores": [
-          { "name": "みっふぃー桜きっちん＆べーかりー 嵐山店", "area": "京都・嵐山", "country": "JP" },
-          { "name": "みっふぃー森のきっちん＆べーかりー 輕井澤店", "area": "長野・輕井澤", "country": "JP" },
-          { "name": "みっふぃー森のきっちん＆べーかりー 湯布院店", "area": "大分・湯布院", "country": "JP" },
-          { "name": "みっふぃー海のきっちん＆べーかりー 小樽店", "area": "北海道・小樽", "country": "JP" },
-          { "name": "みっふぃー蔵のきっちん＆べーかりー 川越店", "area": "埼玉・川越", "country": "JP" },
-          { "name": "みっふぃー蔵のきっちん＆べーかりー 倉敷店", "area": "岡山・倉敷", "country": "JP" }
+          { "name": "みっふぃー桜きっちん＆べーかりー 嵐山店", "officialName": "みっふぃー桜きっちん 嵐山店", "area": "京都・嵐山", "country": "JP" },
+          { "name": "みっふぃー森のきっちん＆べーかりー 輕井澤店", "officialName": "みっふぃー森のきっちん 軽井沢店", "area": "長野・輕井澤", "country": "JP" },
+          { "name": "みっふぃー森のきっちん＆べーかりー 湯布院店", "officialName": "みっふぃー森のきっちん 湯布院店", "area": "大分・湯布院", "country": "JP" },
+          { "name": "小樽 MIFFY PORT TOWN", "officialName": "小樽 MIFFY PORT TOWN", "area": "北海道・小樽", "country": "JP" },
+          { "name": "みっふぃー蔵のきっちん＆べーかりー 川越店", "officialName": "みっふぃー蔵のきっちん 川越店", "area": "埼玉・川越", "country": "JP" },
+          { "name": "みっふぃー蔵のきっちん＆べーかりー 倉敷店", "officialName": "みっふぃー蔵のきっちん 倉敷店", "area": "岡山・倉敷", "country": "JP" }
+        ]
+      },
+      {
+        "label": "みっふぃーおやつ堂",
+        "stores": [
+          { "name": "みっふぃーおやつ堂 鎌倉店", "officialName": "みっふぃーおやつ堂 鎌倉店", "area": "神奈川・鎌倉", "country": "JP" },
+          { "name": "みっふぃーおやつ堂 飛驒高山店", "officialName": "みっふぃーおやつ堂 飛騨高山店", "area": "岐阜・高山", "country": "JP" },
+          { "name": "みっふぃーおやつ堂 祇園店", "officialName": "みっふぃーおやつ堂 祇園店", "area": "京都・祇園", "country": "JP" },
+          { "name": "みっふぃーおやつ堂 伊勢店", "officialName": "みっふぃーおやつ堂 伊勢店", "area": "三重・伊勢", "country": "JP" },
+          { "name": "みっふぃーおやつ堂 太宰府店", "officialName": "みっふぃーおやつ堂 太宰府店", "area": "福岡・太宰府", "country": "JP" }
         ]
       },
       {
         "label": "Flower Miffy（お花屋さん）",
         "stores": [
-          { "name": "Flower Miffy サンシャインシティ アルパ店", "area": "東京・池袋", "country": "JP" },
-          { "name": "Flower Miffy 浅草店", "area": "東京・淺草", "country": "JP" },
-          { "name": "Flower Miffy ルクア大阪店", "area": "大阪・梅田", "country": "JP" },
-          { "name": "Flower Miffy 天王寺MIO店", "area": "大阪・天王寺", "country": "JP" }
+          { "name": "Flower Miffy サンシャインシティ アルパ店", "officialName": "Flower Miffy サンシャインシティアルパ店", "area": "東京・池袋", "country": "JP" },
+          { "name": "Flower Miffy 浅草店", "officialName": "Flower Miffy 浅草店（juice garden併設）", "area": "東京・淺草", "country": "JP" },
+          { "name": "Flower Miffy ルクア大阪店", "officialName": "Flower Miffy ルクア大阪店", "area": "大阪・梅田", "country": "JP" },
+          { "name": "Flower Miffy 天王寺MIO店", "officialName": "Flower Miffy 天王寺店", "area": "大阪・天王寺", "country": "JP" }
+        ]
+      },
+      {
+        "label": "Dick Bruna TABLE",
+        "stores": [
+          { "name": "Dick Bruna TABLE KOBE", "officialName": "Dick Bruna TABLE KOBE", "area": "兵庫・神戶", "country": "JP" }
+        ]
+      },
+      {
+        "label": "Miffy Wonder Square",
+        "stores": [
+          { "name": "豪斯登堡 Miffy Wonder Square", "officialName": "ハウステンボス ミッフィー・ワンダースクエア", "area": "長崎・佐世保", "country": "JP" }
         ]
       }
     ]

@@ -4,6 +4,7 @@ Checks:
 1. Local HEAD equals origin/main.
 2. GitHub Pages data/events.json eventually matches local data/events.json.
 3. GitHub Pages data/today_updates.json eventually matches local data/today_updates.json.
+4. GitHub Pages data/stores.json eventually matches local data/stores.json.
 
 This is meant for the daily agent verification step, where edits are committed
 after the normal scraper. Without this guard, a local agent commit can exist
@@ -22,8 +23,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 EVENTS_JSON = ROOT / "data" / "events.json"
 TODAY_UPDATES_JSON = ROOT / "data" / "today_updates.json"
+STORES_JSON = ROOT / "data" / "stores.json"
 PAGES_EVENTS_URL = "https://jaynimumu41.github.io/chara-radar/data/events.json"
 PAGES_UPDATES_URL = "https://jaynimumu41.github.io/chara-radar/data/today_updates.json"
+PAGES_STORES_URL = "https://jaynimumu41.github.io/chara-radar/data/stores.json"
 
 
 def run_git(args: list[str]) -> str:
@@ -44,7 +47,11 @@ def load_local_updates() -> dict:
     return json.loads(TODAY_UPDATES_JSON.read_text(encoding="utf-8"))
 
 
-def fetch_json(url: str, timeout: int) -> list[dict]:
+def load_local_stores() -> dict:
+    return json.loads(STORES_JSON.read_text(encoding="utf-8"))
+
+
+def fetch_json(url: str, timeout: int):
     cache_buster = f"cb={int(time.time())}"
     sep = "&" if "?" in url else "?"
     req = urllib.request.Request(
@@ -68,10 +75,21 @@ def canonical_json(data) -> str:
     return json.dumps(data, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
 
 
+def store_count(data: dict) -> int:
+    return sum(
+        len(group.get("stores", []))
+        for brand in data.values()
+        if isinstance(brand, dict)
+        for group in brand.get("groups", [])
+        if isinstance(group, dict)
+    )
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--pages-url", default=PAGES_EVENTS_URL)
     parser.add_argument("--updates-url", default=PAGES_UPDATES_URL)
+    parser.add_argument("--stores-url", default=PAGES_STORES_URL)
     parser.add_argument("--timeout", type=int, default=180)
     parser.add_argument("--interval", type=int, default=15)
     args = parser.parse_args()
@@ -89,6 +107,8 @@ def main() -> int:
     local_canon = canonical_events(local_events)
     local_updates = load_local_updates()
     local_updates_canon = canonical_json(local_updates)
+    local_stores = load_local_stores()
+    local_stores_canon = canonical_json(local_stores)
     deadline = time.time() + args.timeout
     attempt = 0
     last_error = ""
@@ -99,11 +119,18 @@ def main() -> int:
             online_canon = canonical_events(online_events)
             online_updates = fetch_json(args.updates_url, timeout=45)
             online_updates_canon = canonical_json(online_updates)
+            online_stores = fetch_json(args.stores_url, timeout=45)
+            online_stores_canon = canonical_json(online_stores)
             print(
                 f"attempt={attempt} online_total={len(online_events)} local_total={len(local_events)} "
-                f"online_new={online_updates.get('newEventCount')} local_new={local_updates.get('newEventCount')}"
+                f"online_new={online_updates.get('newEventCount')} local_new={local_updates.get('newEventCount')} "
+                f"online_stores={store_count(online_stores)} local_stores={store_count(local_stores)}"
             )
-            if online_canon == local_canon and online_updates_canon == local_updates_canon:
+            if (
+                online_canon == local_canon
+                and online_updates_canon == local_updates_canon
+                and online_stores_canon == local_stores_canon
+            ):
                 print("publish_ok=true")
                 return 0
             local_ids = {e.get("id") for e in local_events}
@@ -111,13 +138,17 @@ def main() -> int:
             missing = sorted(local_ids - online_ids)
             extra = sorted(online_ids - local_ids)
             update_match = online_updates_canon == local_updates_canon
-            last_error = f"events mismatch missing={missing[:8]} extra={extra[:8]} updates_match={update_match}"
+            stores_match = online_stores_canon == local_stores_canon
+            last_error = (
+                f"publish mismatch missing={missing[:8]} extra={extra[:8]} "
+                f"updates_match={update_match} stores_match={stores_match}"
+            )
         except Exception as exc:
             last_error = str(exc)
             print(f"attempt={attempt} error={last_error}")
 
         if time.time() >= deadline:
-            print(f"ERROR GitHub Pages did not match local events.json: {last_error}", file=sys.stderr)
+            print(f"ERROR GitHub Pages did not match local data: {last_error}", file=sys.stderr)
             return 1
         time.sleep(args.interval)
 

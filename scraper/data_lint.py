@@ -51,6 +51,77 @@ def valid_date(value: str) -> bool:
         return False
 
 
+def store_data_errors(data: dict) -> list[str]:
+    """Validate permanent-store structure and auditable Miffy identities."""
+    if not isinstance(data, dict):
+        return ["data/stores.json must be a JSON object"]
+
+    errors: list[str] = []
+    missing_brands = sorted(ACTIVE_BRANDS.difference(data.keys()))
+    if missing_brands:
+        errors.append(f"stores.json missing active brands: {', '.join(missing_brands)}")
+
+    for brand in sorted(ACTIVE_BRANDS.intersection(data.keys())):
+        brand_data = data.get(brand)
+        if not isinstance(brand_data, dict):
+            errors.append(f"stores.json {brand} must be an object")
+            continue
+        if brand_data.get("linksOnly"):
+            continue
+        groups = brand_data.get("groups")
+        if not isinstance(groups, list):
+            errors.append(f"stores.json {brand}.groups must be an array")
+            continue
+
+        display_names: defaultdict[str, list[str]] = defaultdict(list)
+        official_names: defaultdict[str, list[str]] = defaultdict(list)
+        for group_index, group in enumerate(groups):
+            prefix = f"stores.json {brand}.groups[{group_index}]"
+            if not isinstance(group, dict):
+                errors.append(f"{prefix} must be an object")
+                continue
+            if not group.get("label"):
+                errors.append(f"{prefix} has blank label")
+            rows = group.get("stores")
+            if not isinstance(rows, list) or not rows:
+                errors.append(f"{prefix}.stores must be a non-empty array")
+                continue
+            for store_index, store in enumerate(rows):
+                row_prefix = f"{prefix}.stores[{store_index}]"
+                if not isinstance(store, dict):
+                    errors.append(f"{row_prefix} must be an object")
+                    continue
+                for field in ("name", "area", "country"):
+                    if not store.get(field):
+                        errors.append(f"{row_prefix} has blank {field}")
+                if store.get("country") not in ALLOWED_COUNTRIES:
+                    errors.append(f"{row_prefix} has invalid country: {store.get('country')}")
+                if store.get("name"):
+                    display_names[norm(store["name"])].append(store["name"])
+                if brand == "miffy":
+                    official_name = store.get("officialName", "")
+                    if not official_name:
+                        errors.append(f"{row_prefix} has blank officialName")
+                    else:
+                        official_names[norm(official_name)].append(official_name)
+
+        for names in display_names.values():
+            if len(names) > 1:
+                errors.append(f"stores.json duplicate {brand} store name: {', '.join(names)}")
+        if brand == "miffy":
+            for names in official_names.values():
+                if len(names) > 1:
+                    errors.append(
+                        f"stores.json duplicate miffy officialName: {', '.join(names)}"
+                    )
+            if brand_data.get("sourceUrl") != "https://dickbruna.jp/shop/":
+                errors.append("stores.json miffy.sourceUrl must be https://dickbruna.jp/shop/")
+            checked_at = brand_data.get("sourceCheckedAt", "")
+            if checked_at and not valid_date(checked_at):
+                errors.append(f"stores.json miffy.sourceCheckedAt is invalid: {checked_at}")
+    return errors
+
+
 def today_update_duplicate_errors(events: list[dict], new_event_ids: list[str]) -> list[str]:
     """Flag newEventIds that still duplicate another visible event."""
     by_id = {ev.get("id", ""): ev for ev in events if isinstance(ev, dict)}
@@ -242,8 +313,7 @@ def main() -> int:
             paused = sorted(PAUSED_BRANDS.intersection(stores.keys()))
             if paused:
                 errors.append(f"paused brands remain in stores.json: {', '.join(paused)}")
-        else:
-            errors.append("data/stores.json must be a JSON object")
+        errors.extend(store_data_errors(stores))
 
     if TODAY_UPDATES_JSON.exists():
         try:
