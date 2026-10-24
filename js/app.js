@@ -3,11 +3,8 @@ let updateData = { newEventIds: [] };
 let storeData = {};
 let activeView = 'events';
 let activeBrand = null;
-let activeType = 'all';
-let activeCountry = 'all';
 let activeTodayOnly = false;
 let activeQuickFilter = null;
-let searchQuery = '';
 
 const DATA_CACHE_BUST = Date.now().toString(36);
 
@@ -151,23 +148,6 @@ function eventLocation(event) {
   return [CITY_LABELS[event.city] || event.city, event.locationName].filter(Boolean).join(' · ');
 }
 
-function normalizeSearch(value) {
-  return String(value || '').normalize('NFKC').toLocaleLowerCase('zh-TW').trim();
-}
-
-function eventSearchText(event) {
-  return normalizeSearch([
-    event.title,
-    event.summaryZh,
-    event.locationName,
-    event.city,
-    CITY_LABELS[event.city],
-    BRAND_LABELS[event.brand],
-    TYPE_LABELS[event.type],
-    ...(event.tags || [])
-  ].filter(Boolean).join(' '));
-}
-
 function getTodayUpdateIds() {
   return new Set(Array.isArray(updateData.newEventIds) ? updateData.newEventIds : []);
 }
@@ -187,11 +167,8 @@ function matchesFilters(event, options = {}) {
   const { ignoreBrand = false, ignoreToday = false, ignoreQuickFilter = false } = options;
   if (!isActive(event)) return false;
   if (!ignoreBrand && activeBrand && event.brand !== activeBrand) return false;
-  if (activeType !== 'all' && event.type !== activeType) return false;
-  if (activeCountry !== 'all' && event.country !== activeCountry) return false;
   if (!ignoreToday && activeTodayOnly && !getTodayUpdateIds().has(event.id)) return false;
   if (!ignoreQuickFilter && !matchesQuickFilter(event)) return false;
-  if (searchQuery && !eventSearchText(event).includes(normalizeSearch(searchQuery))) return false;
   return true;
 }
 
@@ -492,26 +469,16 @@ function updateBrandCounts() {
 }
 
 function hasActiveFilters() {
-  return Boolean(
-    activeBrand ||
-    activeType !== 'all' ||
-    activeCountry !== 'all' ||
-    activeTodayOnly ||
-    activeQuickFilter ||
-    searchQuery
-  );
+  return Boolean(activeBrand || activeTodayOnly || activeQuickFilter);
 }
 
 function activeFilterLabel() {
   const labels = [];
   if (activeBrand) labels.push(BRAND_LABELS[activeBrand]);
-  if (activeType !== 'all') labels.push(TYPE_LABELS[activeType]);
-  if (activeCountry !== 'all') labels.push(activeCountry === 'JP' ? '日本' : '台灣');
   if (activeTodayOnly) labels.push('今日新增');
   if (activeQuickFilter === 'urgent') labels.push('7 天內結束');
   if (activeQuickFilter === 'reservation') labels.push('需要預約');
   if (activeQuickFilter === 'limited') labels.push('有限定商品');
-  if (searchQuery) labels.push(`搜尋「${searchQuery}」`);
   return labels.join(' · ');
 }
 
@@ -529,17 +496,9 @@ function syncControls() {
     button.setAttribute('aria-pressed', String(isActiveButton));
   });
 
-  const searchInput = document.getElementById('filter-search');
-  const typeSelect = document.getElementById('filter-type');
-  const countrySelect = document.getElementById('filter-country');
   const todayButton = document.getElementById('filter-today');
-  searchInput.value = searchQuery;
-  typeSelect.value = activeType;
-  countrySelect.value = activeCountry;
-  document.getElementById('clear-search').hidden = !searchQuery;
   todayButton.classList.toggle('active', activeTodayOnly);
   todayButton.setAttribute('aria-pressed', String(activeTodayOnly));
-  document.getElementById('reset-filters').hidden = !hasActiveFilters();
 
   const updateIds = getTodayUpdateIds();
   const availableToday = allEvents.filter(event => isActive(event) && updateIds.has(event.id)).length;
@@ -552,8 +511,8 @@ function updatePageChrome() {
   document.getElementById('page-description').textContent = isStores
     ? 'Pokémon、Miffy、Chiikawa 在日本與台灣的官方常設據點'
     : 'Pokémon、Miffy、Chiikawa 的期間限定活動與實體情報';
-  document.getElementById('filter-bar').hidden = isStores;
-  document.getElementById('sort-note').hidden = isStores;
+  document.getElementById('workspace-toolbar').hidden = isStores;
+  document.getElementById('filter-today').hidden = isStores;
 }
 
 function renderHome() {
@@ -587,7 +546,7 @@ function renderEvents() {
 
   if (sorted.length === 0) {
     const title = activeTodayOnly ? '目前沒有符合條件的今日新增' : '找不到符合條件的情報';
-    const copy = hasActiveFilters() ? '調整或重設篩選條件後再看看。' : '資料更新後會顯示在這裡。';
+    const copy = hasActiveFilters() ? '切換品牌或概況選項後再看看。' : '資料更新後會顯示在這裡。';
     grid.innerHTML = `
       <div class="no-results">
         ${icon('search', 'ui-icon empty-icon')}
@@ -729,39 +688,8 @@ function bindControls() {
     });
   });
 
-  document.getElementById('filter-search').addEventListener('input', event => {
-    searchQuery = event.target.value.trim();
-    renderHome();
-  });
-
-  document.getElementById('clear-search').addEventListener('click', () => {
-    searchQuery = '';
-    document.getElementById('filter-search').focus();
-    renderHome();
-  });
-
-  document.getElementById('filter-type').addEventListener('change', event => {
-    activeType = event.target.value;
-    renderHome();
-  });
-
-  document.getElementById('filter-country').addEventListener('change', event => {
-    activeCountry = event.target.value;
-    renderHome();
-  });
-
   document.getElementById('filter-today').addEventListener('click', () => {
     activeTodayOnly = !activeTodayOnly;
-    renderHome();
-  });
-
-  document.getElementById('reset-filters').addEventListener('click', () => {
-    activeBrand = null;
-    activeType = 'all';
-    activeCountry = 'all';
-    activeTodayOnly = false;
-    activeQuickFilter = null;
-    searchQuery = '';
     renderHome();
   });
 }

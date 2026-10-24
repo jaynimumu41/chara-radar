@@ -15,7 +15,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Kawaii Radar" />
 
-  <link rel="stylesheet" href="css/app.css?v=20261024-kawaii-radar" />
+  <link rel="stylesheet" href="css/app.css?v=20261024-kawaii-simple" />
 </head>
 <body>
   <!-- Lucide-derived icon sprite, kept local so the dashboard works offline. -->
@@ -74,14 +74,17 @@
   <main class="app-shell">
     <section class="page-intro" aria-labelledby="page-title">
       <div class="page-intro-copy">
-        <span class="scope-label">JAPAN / TAIWAN</span>
-        <div class="page-title-line">
-          <h1 id="page-title">活動情報</h1>
-          <span class="title-sparkle" aria-hidden="true">
-            <svg class="ui-icon"><use href="#icon-sparkles"></use></svg>
-          </span>
+        <img class="intro-mark" src="icon-192.png" alt="" width="64" height="64" />
+        <div class="intro-copy-inner">
+          <span class="scope-label">JAPAN / TAIWAN</span>
+          <div class="page-title-line">
+            <h1 id="page-title">活動情報</h1>
+            <span class="title-sparkle" aria-hidden="true">
+              <svg class="ui-icon"><use href="#icon-sparkles"></use></svg>
+            </span>
+          </div>
+          <p id="page-description">Pokémon、Miffy、Chiikawa 的期間限定活動與實體情報</p>
         </div>
-        <p id="page-description">Pokémon、Miffy、Chiikawa 的期間限定活動與實體情報</p>
       </div>
       <div class="view-tabs" role="group" aria-label="情報檢視">
         <button class="view-tab active" type="button" aria-pressed="true" data-view="events">
@@ -125,7 +128,7 @@
     </section>
 
     <section class="workspace" aria-label="情報清單">
-      <div class="workspace-toolbar">
+      <div class="workspace-toolbar" id="workspace-toolbar">
         <div class="brand-filters" role="group" aria-label="品牌篩選">
           <button class="brand-pill active" type="button" data-brand="all" aria-pressed="true">
             <span class="brand-dot brand-dot-all" aria-hidden="true"></span>
@@ -148,58 +151,18 @@
             <span class="brand-filter-count" id="brand-count-chiikawa">—</span>
           </button>
         </div>
-
-        <div class="filter-bar" id="filter-bar">
-          <div class="search-field" role="search">
-            <svg class="ui-icon" aria-hidden="true"><use href="#icon-search"></use></svg>
-            <input id="filter-search" type="search" autocomplete="off" aria-label="搜尋活動、地點或標籤" placeholder="搜尋活動、地點或標籤" />
-            <button class="clear-search" id="clear-search" type="button" aria-label="清除搜尋" title="清除搜尋" hidden>
-              <svg class="ui-icon" aria-hidden="true"><use href="#icon-x"></use></svg>
-            </button>
-          </div>
-          <label class="select-field">
-            <span class="sr-only">活動類型</span>
-            <select class="filter-select" id="filter-type">
-              <option value="all">所有類型</option>
-              <option value="popup">快閃店</option>
-              <option value="new_product">新商品</option>
-              <option value="campaign">活動</option>
-              <option value="cafe">咖啡廳</option>
-              <option value="lottery">抽選</option>
-              <option value="reservation">預約</option>
-            </select>
-            <svg class="select-chevron" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
-          </label>
-          <label class="select-field">
-            <span class="sr-only">國家</span>
-            <select class="filter-select" id="filter-country">
-              <option value="all">日本＋台灣</option>
-              <option value="JP">日本</option>
-              <option value="TW">台灣</option>
-            </select>
-            <svg class="select-chevron" aria-hidden="true"><use href="#icon-chevron-down"></use></svg>
-          </label>
-          <button class="filter-toggle" id="filter-today" type="button" aria-pressed="false">
-            <svg class="ui-icon" aria-hidden="true"><use href="#icon-sparkles"></use></svg>
-            <span>今日新增</span>
-            <span class="today-count" id="today-filter-count">0</span>
-          </button>
-          <button class="reset-filters" id="reset-filters" type="button" hidden>
-            <svg class="ui-icon" aria-hidden="true"><use href="#icon-rotate-ccw"></use></svg>
-            <span>重設</span>
-          </button>
-        </div>
       </div>
 
       <div class="results-head">
         <div class="results-copy">
           <strong id="events-count">載入中</strong>
+          <button class="filter-toggle" id="filter-today" type="button" aria-pressed="false">
+            <svg class="ui-icon" aria-hidden="true"><use href="#icon-sparkles"></use></svg>
+            <span>今日新增</span>
+            <span class="today-count" id="today-filter-count">0</span>
+          </button>
           <span id="active-filter-summary"></span>
         </div>
-        <span class="sort-note" id="sort-note">
-          <svg class="ui-icon" aria-hidden="true"><use href="#icon-clock"></use></svg>
-          較早結束優先
-        </span>
       </div>
 
       <div class="today-summary" id="today-summary" hidden></div>
@@ -208,6 +171,6 @@
     </section>
   </main>
 
-  <script src="js/app.js?v=20261024-kawaii-radar"></script>
+  <script src="js/app.js?v=20261024-kawaii-simple"></script>
 </body>
 </html>
