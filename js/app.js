@@ -6,6 +6,7 @@ let activeBrand = null;
 let activeType = 'all';
 let activeCountry = 'all';
 let activeTodayOnly = false;
+let activeQuickFilter = null;
 let searchQuery = '';
 
 const DATA_CACHE_BUST = Date.now().toString(36);
@@ -171,13 +172,25 @@ function getTodayUpdateIds() {
   return new Set(Array.isArray(updateData.newEventIds) ? updateData.newEventIds : []);
 }
 
+function matchesQuickFilter(event) {
+  if (!activeQuickFilter) return true;
+  if (activeQuickFilter === 'urgent') {
+    const days = daysUntilEnd(event.endDate);
+    return days !== null && days >= 0 && days <= 7;
+  }
+  if (activeQuickFilter === 'reservation') return Boolean(event.needReservation);
+  if (activeQuickFilter === 'limited') return Boolean(event.hasLimitedGoods);
+  return true;
+}
+
 function matchesFilters(event, options = {}) {
-  const { ignoreBrand = false, ignoreToday = false } = options;
+  const { ignoreBrand = false, ignoreToday = false, ignoreQuickFilter = false } = options;
   if (!isActive(event)) return false;
   if (!ignoreBrand && activeBrand && event.brand !== activeBrand) return false;
   if (activeType !== 'all' && event.type !== activeType) return false;
   if (activeCountry !== 'all' && event.country !== activeCountry) return false;
   if (!ignoreToday && activeTodayOnly && !getTodayUpdateIds().has(event.id)) return false;
+  if (!ignoreQuickFilter && !matchesQuickFilter(event)) return false;
   if (searchQuery && !eventSearchText(event).includes(normalizeSearch(searchQuery))) return false;
   return true;
 }
@@ -406,6 +419,28 @@ function setMetricSlot(index, value, label, tone) {
   metrics[index].className = `metric metric-${tone}`;
 }
 
+function syncMetricButtons() {
+  const eventFilters = [null, 'urgent', 'reservation', 'limited'];
+  const storeBrands = [null, ...BRAND_ORDER];
+  const eventTitles = [
+    '顯示全部情報',
+    '顯示 7 天內結束的情報',
+    '顯示需要預約的情報',
+    '顯示有限定商品的情報'
+  ];
+
+  document.querySelectorAll('.metric').forEach((metric, index) => {
+    const isActiveMetric = activeView === 'stores'
+      ? activeBrand === storeBrands[index]
+      : activeQuickFilter === eventFilters[index];
+    metric.classList.toggle('active', isActiveMetric);
+    metric.setAttribute('aria-pressed', String(isActiveMetric));
+    metric.title = activeView === 'stores'
+      ? (index === 0 ? '顯示全部常設店' : `只顯示 ${BRAND_LABELS[storeBrands[index]]} 常設店`)
+      : eventTitles[index];
+  });
+}
+
 function setEventMetrics(events) {
   const urgentCount = events.filter(event => {
     const days = daysUntilEnd(event.endDate);
@@ -416,6 +451,7 @@ function setEventMetrics(events) {
   setMetricSlot(2, events.filter(event => event.needReservation).length, '需要預約', 'reservation');
   setMetricSlot(3, events.filter(event => event.hasLimitedGoods).length, '有限定商品', 'limited');
   document.getElementById('metrics-context').textContent = '依目前篩選條件';
+  syncMetricButtons();
 }
 
 function brandStoreCount(brand) {
@@ -432,6 +468,7 @@ function setStoreMetrics() {
   setMetricSlot(2, counts.miffy, 'Miffy', 'miffy');
   setMetricSlot(3, counts.chiikawa, 'Chiikawa', 'chiikawa');
   document.getElementById('metrics-context').textContent = '官方常設據點';
+  syncMetricButtons();
 }
 
 function updateBrandCounts() {
@@ -460,6 +497,7 @@ function hasActiveFilters() {
     activeType !== 'all' ||
     activeCountry !== 'all' ||
     activeTodayOnly ||
+    activeQuickFilter ||
     searchQuery
   );
 }
@@ -470,6 +508,9 @@ function activeFilterLabel() {
   if (activeType !== 'all') labels.push(TYPE_LABELS[activeType]);
   if (activeCountry !== 'all') labels.push(activeCountry === 'JP' ? '日本' : '台灣');
   if (activeTodayOnly) labels.push('今日新增');
+  if (activeQuickFilter === 'urgent') labels.push('7 天內結束');
+  if (activeQuickFilter === 'reservation') labels.push('需要預約');
+  if (activeQuickFilter === 'limited') labels.push('有限定商品');
   if (searchQuery) labels.push(`搜尋「${searchQuery}」`);
   return labels.join(' · ');
 }
@@ -533,9 +574,10 @@ function renderEvents() {
   stores.hidden = true;
 
   const filtered = getFiltered();
+  const metricBase = getFiltered({ ignoreQuickFilter: true });
   const sorted = [...filtered].sort(activeTodayOnly ? compareTodayEvents : compareEvents);
   const units = buildEventUnits(sorted, filtered);
-  setEventMetrics(filtered);
+  setEventMetrics(metricBase);
   renderTodaySummary();
 
   const countLabel = activeTodayOnly ? `${filtered.length} 筆今日新增` : `${filtered.length} 筆情報`;
@@ -655,6 +697,23 @@ async function fetchJson(path) {
 }
 
 function bindControls() {
+  const eventFilters = [null, 'urgent', 'reservation', 'limited'];
+  const storeBrands = [null, ...BRAND_ORDER];
+
+  document.querySelectorAll('.metric').forEach(metric => {
+    metric.addEventListener('click', () => {
+      const index = Number(metric.dataset.metricIndex);
+      if (activeView === 'stores') {
+        const brand = storeBrands[index];
+        activeBrand = activeBrand === brand ? null : brand;
+      } else {
+        const quickFilter = eventFilters[index];
+        activeQuickFilter = activeQuickFilter === quickFilter ? null : quickFilter;
+      }
+      renderHome();
+    });
+  });
+
   document.querySelectorAll('.view-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       activeView = tab.dataset.view;
@@ -701,6 +760,7 @@ function bindControls() {
     activeType = 'all';
     activeCountry = 'all';
     activeTodayOnly = false;
+    activeQuickFilter = null;
     searchQuery = '';
     renderHome();
   });

@@ -1,8 +1,8 @@
 :root {
-  --bg: #f4f6f8;
+  --bg: #f7f7fb;
   --surface: #ffffff;
-  --surface-soft: #f8f9fb;
-  --surface-strong: #eef1f4;
+  --surface-soft: #faf9fc;
+  --surface-strong: #f0eff4;
   --border: #dde2e8;
   --border-strong: #cbd2da;
   --text: #181c22;
@@ -24,6 +24,11 @@
   --limited: #b76528;
   --limited-bg: #fff2e8;
   --success: #237a55;
+  --cute-pink: #df7895;
+  --cute-pink-bg: #fff1f5;
+  --cute-yellow: #e8ad27;
+  --cute-blue: #5e9fd6;
+  --cute-mint: #55a88b;
   --radius: 8px;
   --radius-sm: 6px;
   --shadow-sm: 0 1px 2px rgba(24, 28, 34, 0.04);
@@ -141,7 +146,7 @@ summary:focus-visible {
   flex: 0 0 auto;
   border: 1px solid rgba(24, 28, 34, 0.08);
   border-radius: var(--radius);
-  box-shadow: 0 2px 8px rgba(24, 28, 34, 0.08);
+  box-shadow: 0 3px 10px rgba(223, 120, 149, 0.18);
 }
 
 .brand-copy {
@@ -161,7 +166,7 @@ summary:focus-visible {
 }
 
 .brand-copy span {
-  color: var(--text-muted);
+  color: #987080;
   font-size: 11px;
   font-weight: 600;
 }
@@ -209,15 +214,39 @@ summary:focus-visible {
 .scope-label {
   display: block;
   margin-bottom: 7px;
-  color: var(--text-muted);
+  color: #8c7180;
   font-size: 11px;
   font-weight: 750;
+}
+
+.page-title-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .page-intro h1 {
   font-size: 32px;
   font-weight: 760;
   line-height: 1.2;
+}
+
+.title-sparkle {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #f1cbd6;
+  border-radius: var(--radius);
+  background: var(--cute-pink-bg);
+  color: var(--cute-pink);
+  box-shadow: 0 3px 10px rgba(223, 120, 149, 0.1);
+}
+
+.title-sparkle .ui-icon {
+  width: 19px;
+  height: 19px;
 }
 
 .page-intro p {
@@ -263,6 +292,10 @@ summary:focus-visible {
   box-shadow: 0 1px 4px rgba(24, 28, 34, 0.1);
 }
 
+.view-tab.active .ui-icon {
+  color: var(--cute-pink);
+}
+
 .metrics-panel {
   margin-top: 28px;
   overflow: hidden;
@@ -306,11 +339,51 @@ summary:focus-visible {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  border: 0;
   border-right: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  text-align: left;
+  transition: background 0.16s ease, box-shadow 0.16s ease;
 }
 
 .metric:last-child {
   border-right: 0;
+}
+
+.metric:hover {
+  background: #fcfbfd;
+}
+
+.metric.active {
+  background: #fff9fb;
+  box-shadow: inset 0 0 0 2px rgba(223, 120, 149, 0.16);
+}
+
+.metric-urgent.active {
+  background: var(--urgent-bg);
+  box-shadow: inset 0 0 0 2px rgba(197, 68, 71, 0.14);
+}
+
+.metric-reservation.active {
+  background: var(--reservation-bg);
+  box-shadow: inset 0 0 0 2px rgba(122, 84, 162, 0.14);
+}
+
+.metric-limited.active,
+.metric-pokemon.active {
+  background: var(--limited-bg);
+  box-shadow: inset 0 0 0 2px rgba(183, 101, 40, 0.14);
+}
+
+.metric-miffy.active {
+  background: var(--miffy-bg);
+  box-shadow: inset 0 0 0 2px rgba(45, 112, 183, 0.14);
+}
+
+.metric-chiikawa.active {
+  background: var(--chiikawa-bg);
+  box-shadow: inset 0 0 0 2px rgba(198, 94, 125, 0.14);
 }
 
 .metric::before {
@@ -322,6 +395,27 @@ summary:focus-visible {
   border-radius: 0 0 3px 3px;
   background: var(--text);
   content: "";
+}
+
+.metric.active::before {
+  width: 42px;
+}
+
+.metric-filter-icon {
+  position: absolute;
+  top: 17px;
+  right: 17px;
+  width: 15px;
+  height: 15px;
+  color: var(--text-muted);
+  opacity: 0.32;
+  transition: opacity 0.16s ease, color 0.16s ease;
+}
+
+.metric:hover .metric-filter-icon,
+.metric.active .metric-filter-icon {
+  color: currentColor;
+  opacity: 0.82;
 }
 
 .metric-urgent::before {
@@ -410,6 +504,18 @@ summary:focus-visible {
 .brand-pill:hover {
   border-color: var(--border-strong);
   color: var(--text);
+}
+
+.brand-pill[data-brand="pokemon"]:not(.active) {
+  background: #fffdf7;
+}
+
+.brand-pill[data-brand="miffy"]:not(.active) {
+  background: #f8fbff;
+}
+
+.brand-pill[data-brand="chiikawa"]:not(.active) {
+  background: #fff9fb;
 }
 
 .brand-pill.active {
@@ -1403,6 +1509,11 @@ summary:focus-visible {
 
   .metric::before {
     left: 14px;
+  }
+
+  .metric-filter-icon {
+    top: 14px;
+    right: 12px;
   }
 
   .metric-value {

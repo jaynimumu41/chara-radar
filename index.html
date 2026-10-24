@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="light" />
-  <title>Chara Radar｜角色活動情報</title>
+  <title>Kawaii Radar｜角色活動情報</title>
 
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
@@ -13,9 +13,9 @@
   <meta name="theme-color" content="#ffffff" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="Chara Radar" />
+  <meta name="apple-mobile-web-app-title" content="Kawaii Radar" />
 
-  <link rel="stylesheet" href="css/app.css?v=20261024-pro-redesign" />
+  <link rel="stylesheet" href="css/app.css?v=20261024-kawaii-radar" />
 </head>
 <body>
   <!-- Lucide-derived icon sprite, kept local so the dashboard works offline. -->
@@ -57,10 +57,10 @@
 
   <header class="app-header">
     <div class="header-inner">
-      <a class="app-brand" href="#" aria-label="Chara Radar 首頁">
+      <a class="app-brand" href="#" aria-label="Kawaii Radar 首頁">
         <img class="app-mark" src="icon-192.png" alt="" width="40" height="40" />
         <span class="brand-copy">
-          <strong>Chara Radar</strong>
+          <strong>Kawaii Radar</strong>
           <span>角色活動情報</span>
         </span>
       </a>
@@ -75,7 +75,12 @@
     <section class="page-intro" aria-labelledby="page-title">
       <div class="page-intro-copy">
         <span class="scope-label">JAPAN / TAIWAN</span>
-        <h1 id="page-title">活動情報</h1>
+        <div class="page-title-line">
+          <h1 id="page-title">活動情報</h1>
+          <span class="title-sparkle" aria-hidden="true">
+            <svg class="ui-icon"><use href="#icon-sparkles"></use></svg>
+          </span>
+        </div>
         <p id="page-description">Pokémon、Miffy、Chiikawa 的期間限定活動與實體情報</p>
       </div>
       <div class="view-tabs" role="group" aria-label="情報檢視">
@@ -96,22 +101,26 @@
         <span id="metrics-context">依目前篩選條件</span>
       </div>
       <div class="metrics-grid">
-        <div class="metric metric-primary">
+        <button class="metric metric-primary" type="button" data-metric-index="0" aria-pressed="true" title="顯示全部情報">
           <span class="metric-value" id="stat-total">—</span>
           <span class="metric-label" id="stat-total-label">有效情報</span>
-        </div>
-        <div class="metric metric-urgent">
+          <svg class="metric-filter-icon ui-icon" aria-hidden="true"><use href="#icon-filter"></use></svg>
+        </button>
+        <button class="metric metric-urgent" type="button" data-metric-index="1" aria-pressed="false" title="顯示 7 天內結束的情報">
           <span class="metric-value" id="stat-urgent">—</span>
           <span class="metric-label" id="stat-urgent-label">7 天內結束</span>
-        </div>
-        <div class="metric metric-reservation">
+          <svg class="metric-filter-icon ui-icon" aria-hidden="true"><use href="#icon-filter"></use></svg>
+        </button>
+        <button class="metric metric-reservation" type="button" data-metric-index="2" aria-pressed="false" title="顯示需要預約的情報">
           <span class="metric-value" id="stat-reservation">—</span>
           <span class="metric-label" id="stat-reservation-label">需要預約</span>
-        </div>
-        <div class="metric metric-limited">
+          <svg class="metric-filter-icon ui-icon" aria-hidden="true"><use href="#icon-filter"></use></svg>
+        </button>
+        <button class="metric metric-limited" type="button" data-metric-index="3" aria-pressed="false" title="顯示有限定商品的情報">
           <span class="metric-value" id="stat-limited">—</span>
           <span class="metric-label" id="stat-limited-label">有限定商品</span>
-        </div>
+          <svg class="metric-filter-icon ui-icon" aria-hidden="true"><use href="#icon-filter"></use></svg>
+        </button>
       </div>
     </section>
 
@@ -199,6 +208,6 @@
     </section>
   </main>
 
-  <script src="js/app.js?v=20261024-pro-redesign"></script>
+  <script src="js/app.js?v=20261024-kawaii-radar"></script>
 </body>
 </html>
