@@ -23,9 +23,11 @@ if hasattr(sys.stdout, "reconfigure"):
 
 import scrape
 import official_sources
+import audit_chiikawa_stores
 import audit_chiikawa_subpages
 import audit_miffy_stores
 import audit_official_coverage
+import audit_pokemon_stores
 import agent_verify_candidates
 import source_reputation
 import verify_links
@@ -479,9 +481,93 @@ miffy_store_gap = audit_miffy_stores.audit_stores(
 check("Miffy 常設店稽核同時找出漏店與已下架店",
       (miffy_store_gap.missing, miffy_store_gap.stale),
       (("みっふぃーおやつ堂 伊勢店",), ("miffy style 已閉店",)))
+sample_pokemon_shops = """
+<div class="shop-list__element shop-list__element-jp">
+  <div class="shop-list__name">ポケモンセンターオーサカ</div>
+  <table><tr><td>〒530-8373 大阪市北区梅田3-1-1</td></tr></table>
+</div>
+<div class="shop-list__element shop-list__element-overseas">
+  <div class="shop-list__name">ポケモンセンタータイペイ</div>
+  <table><tr><td>新光三越台北信義新天地A11 3F</td></tr></table>
+</div>
+<div class="shop-list__element shop-list__element-overseas">
+  <div class="shop-list__name">ポケモンセンターシンガポール</div>
+  <table><tr><td>Jewel Changi Airport</td></tr></table>
+</div>
+"""
+sample_pokemon_stores = audit_pokemon_stores.extract_official_stores(sample_pokemon_shops)
+check("Pokémon 常設店稽核只收日本與台灣",
+      [store.name for store in sample_pokemon_stores],
+      ["ポケモンセンターオーサカ", "ポケモンセンタータイペイ"])
+sample_chiikawa_sections = """
+<h2>ちいかわらんど(常設店)</h2>
+<h3><a>ちいかわらんど 原宿店</a></h3>
+<h3><a>ちいかわらんど 越谷レイクタウン店</a></h3>
+<h2>ちいかわらんど POP UP SHOP</h2>
+<h3><a>ちいかわらんど POP UP SHOP大分</a></h3>
+"""
+check("Chiikawa 官方常設段落不混入 POP UP",
+      [store.name for store in audit_chiikawa_stores.extract_info_permanent_stores(
+          sample_chiikawa_sections)],
+      ["ちいかわらんど 原宿店", "ちいかわらんど 越谷レイクタウン店"])
+sample_mogumogu_sitemap = """
+<urlset>
+  <url><loc>https://www.chiikawamogumogu.jp/stores/</loc></url>
+  <url><loc>https://www.chiikawamogumogu.jp/stores/fushimi/</loc></url>
+  <url><loc>https://www.chiikawamogumogu.jp/stores/castella/</loc></url>
+</urlset>
+"""
+check("もぐもぐ本舗 sitemap 只取分店頁",
+      audit_chiikawa_stores.extract_mogumogu_store_urls(sample_mogumogu_sitemap),
+      [
+          "https://www.chiikawamogumogu.jp/stores/castella/",
+          "https://www.chiikawamogumogu.jp/stores/fushimi/",
+      ])
+check("もぐもぐ本舗分店頁取正式店名",
+      audit_chiikawa_stores.extract_mogumogu_store(
+          "<title>ちいかわもぐもぐ本舗 京都伏見店 | ちいかわもぐもぐ本舗</title>"
+      ).name,
+      "ちいかわもぐもぐ本舗 京都伏見店")
+sample_yaki = """
+<a class="reserve-store-link reserve-store-btn">名古屋パルコ店</a>
+<a class="reserve-store-link reserve-store-btn">オンラインショップ</a>
+"""
+check("ちいかわ焼き稽核排除線上商店",
+      [store.name for store in audit_chiikawa_stores.extract_yaki_stores(sample_yaki)],
+      ["ちいかわ焼き 名古屋パルコ店"])
+sample_bakery = """
+<section id="shop_tokyo"><p class="shop_name">ちいかわベーカリー</p></section>
+<section id="shop_harajuku"><p class="shop_name">ちいかわベーカリー ポップアップショップ</p></section>
+<section id="shop_osaka"><p class="shop_name">ちいかわベーカリー OSAKA</p></section>
+"""
+check("ちいかわ Bakery 稽核排除 POP UP",
+      [store.name for store in audit_chiikawa_stores.extract_bakery_stores(sample_bakery)],
+      ["ちいかわベーカリー", "ちいかわベーカリー OSAKA"])
+check("ちいかわ Park 與獨立商店都列入常設據點",
+      [store.name for store in audit_chiikawa_stores.extract_park_stores(
+          "施設名 ちいかわパーク サンシャインシティ",
+          "店名 ちいかわパークストア LUCUA SOUTH",
+      )],
+      ["ちいかわパーク", "ちいかわパークストア"])
+check("台北官方頁 title 可辨識常設店",
+      [store.name for store in audit_chiikawa_stores.extract_taipei_store(
+          "<title>CHIIKAWA SHOP in TAIPEI</title>")],
+      ["CHIIKAWA SHOP in TAIPEI"])
 store_lint_fixture = {
-    "pokemon": {"groups": []},
-    "chiikawa": {"groups": []},
+    "pokemon": {
+        "sourceUrl": "https://www.pokemon.co.jp/shop/",
+        "sourceCheckedAt": "2026-10-23",
+        "groups": [{"label": "test", "stores": [
+            {"name": "Pokemon", "officialName": "公式 Pokemon", "area": "東京", "country": "JP"},
+        ]}],
+    },
+    "chiikawa": {
+        "sourceUrls": sorted(data_lint.STORE_SOURCE_URLS["chiikawa"]),
+        "sourceCheckedAt": "2026-10-23",
+        "groups": [{"label": "test", "stores": [
+            {"name": "Chiikawa", "officialName": "公式 Chiikawa", "area": "東京", "country": "JP"},
+        ]}],
+    },
     "miffy": {
         "sourceUrl": "https://dickbruna.jp/shop/",
         "sourceCheckedAt": "2026-10-23",
@@ -2344,6 +2430,67 @@ roundup_after_yurakucho = audit_official_coverage.audit_candidates(
 check("三城市總覽不要求已結束場次但仍要求未來場次",
       (roundup_after_yurakucho[0].status, roundup_after_yurakucho[0].event_ids),
       ("ignored", ("mi-osaka-official", "mi-sapporo-official")))
+
+# 2026-10-23: official aliases, venue-specific dining, and source corrections.
+for marker, venue in (("札幌アピア", "札幌アピア"), ("キデイランド大阪梅田店", "キデイランド大阪梅田店")):
+    heading = f"「miffy style ミッフィースタイル」ポップアップショップが{marker}に期間限定オープン"
+    check("Miffy單店標題取實際會場" + marker,
+          official_sources._miffy_venue_from_title(heading), venue)
+    check("Miffy單店標題保留popup識別" + marker,
+          "POP UP SHOP" in official_sources._miffy_display_name(heading, "miffy style ミッフィースタイル"), True)
+check("非popup不被Miffy店名規則覆蓋",
+      official_sources._miffy_venue_from_title("札幌アピアの新商品"), "")
+canonical_sapporo = ev(id="sapporo-old", brand="miffy", type="popup", city="Hokkaido",
+    title="Miffy miffy style POP UP SHOP in 札幌", locationName="札幌アピア",
+    startDate="2026-11-06", endDate="2026-11-24")
+sapporo_alias = scrape.normalize_source_event(ev(id="sapporo-new", brand="miffy", type="popup",
+    title="Miffy miffy style ミッフィースタイル", city="Hokkaido",
+    sourceUrl="https://dickbruna.jp/news/202610/49227/"))
+check("札幌官方別頁不能成為今日新增", scrape.is_same_event_for_update_diff(canonical_sapporo,sapporo_alias), True)
+check("札幌大阪不同場次不合併", scrape.is_same_event_for_update_diff(canonical_sapporo,
+    scrape.normalize_source_event(ev(brand="miffy",sourceUrl="https://dickbruna.jp/news/202610/49063/"))), False)
+for url in (
+    "https://dickbruna.jp/news/202610/49227/",
+    "https://dickbruna.jp/news/202610/49063/",
+):
+    duplicate_page = audit_official_coverage.OfficialCandidate(
+        "miffy", "miffy-dickbruna-event", url, "miffy style POP UP SHOP"
+    )
+    check("Miffy單店官方頁已有總表場次時不重複告警" + url,
+          audit_official_coverage.audit_candidates(
+              [duplicate_page], ignored_pages=audit_official_coverage.IGNORED_OFFICIAL_PAGES
+          )[0].status,
+          "ignored")
+for rule in scrape.STRONG_EVENT_IDENTITY_RULES[:5]:
+    alias = rule["patterns"][0][0][0]
+    a=ev(brand=rule["brand"],type=next(iter(rule["types"])),title=alias,country="JP",startDate="2026-10-24")
+    b=dict(a, id="other",type=next(iter(rule["types"])))
+    check("明確主題穩定識別"+rule["concept"],scrape.is_same_event_for_update_diff(a,b),True)
+    check("主題識別不同國家不合併"+rule["concept"],scrape.strong_event_identity_key(a)==scrape.strong_event_identity_key(dict(b,country="TW")),False)
+dining=ev(id="dining-tokyo",brand="miffy",type="cafe",city="Tokyo",
+    sourceUrl="https://prtimes.jp/main/html/rd/p/000000334.000086964.html")
+dining_rows,_,_,_=scrape.clean_events([dining])
+check("Miffy餐廳拆成兩地獨立檔期",
+      [(e["city"],e["startDate"],e["endDate"]) for e in dining_rows],
+      [("Tokyo","2026-10-31","2027-01-24"),("Osaka","2026-11-26","2027-01-11")])
+check("餐廳兩地清理可重複執行",len(scrape.clean_events(dining_rows)[0]),2)
+check("台北新品延期只修特定來源",
+      scrape.normalize_source_event(ev(brand="pokemon",sourceUrl="https://www.nownews.com/news/6884725"))["startDate"],"2026-10-31")
+check("日本同日新品不被台北延期改寫",
+      scrape.normalize_source_event(ev(brand="pokemon",startDate="2026-10-24",sourceUrl="https://www.pokemon.co.jp/goods/2026/10/261016_to01.html"))["startDate"],"2026-10-24")
+check("官方餅乾食品不納入商品",len(scrape.clean_events([ev(brand="pokemon",type="new_product",startDate="2026-10-17",sourceTitle="やさしいクッキーが登場",sourceUrl="https://www.pokemon.co.jp/goods/2026/10/261009_fo01.html")])[0]),0)
+check("官方非食品商品不受影響",len(scrape.clean_events([ev(brand="pokemon",type="new_product",startDate="2026-10-24",sourceTitle="クリスマスじゅんびチュウ！",sourceUrl="https://www.pokemon.co.jp/goods/2026/10/261016_to01.html")])[0]),1)
+workshop=audit_official_coverage.OfficialCandidate("pokemon","pokemon-store-events","https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kyoto/events/202610/000608.html","10月伝統工芸体験イベント開催！")
+check("官方手作工作坊明確列為不收",audit_official_coverage.audit_candidates([workshop],ignored_pages=audit_official_coverage.IGNORED_OFFICIAL_PAGES)[0].status,"ignored")
+
+check("一般販售餐具即使公司新聞稿也不收",scrape.is_general_retail_new_product(ev(brand="miffy",type="new_product",sourceTitle="スケーター ミッフィー食器 一般販売開始")),True)
+check("明確店頭一般販售商品不誤刪",scrape.is_general_retail_new_product(ev(brand="miffy",type="new_product",sourceTitle="ミッフィー食器 一般販売開始",locationName="miffy style 原宿店")),False)
+check("快閃店的餐具一般販售字眼不誤刪",scrape.is_general_retail_new_product(ev(brand="miffy",type="popup",sourceTitle="ミッフィー食器 一般販売開始")),False)
+check("Pokexciting新聞日期不能充作活動日期",(scrape.normalize_source_event(ev(brand="pokemon",sourceUrl="https://www.tcpttw.com/life/2026/10/13/319676/"))["startDate"],scrape.normalize_source_event(ev(brand="pokemon",sourceUrl="https://www.tcpttw.com/life/2026/10/13/319676/"))["endDate"]),("2026-10-10","2026-10-11"))
+christmas_official=ev(id="xmas-old",brand="chiikawa",country="JP",city="Chiba",title="吉伊卡哇聖誕市集",type="popup",locationName="豊砂公園",startDate="2026-11-24",endDate="2026-12-25")
+christmas_media=ev(id="xmas-new",brand="chiikawa",country="JP",city="Tokyo",title="ちいかわクリスマスマーケット",type="campaign",locationName="幕張豊砂",startDate="2026-11-24",endDate="2026-12-25")
+check("聖誕市集跨媒體標題類型城市誤植仍只是一筆",len(scrape.dedup_events([christmas_official,christmas_media])[0]),1)
+check("同市集不同年度檔期不得合併",scrape.strong_event_identity_key(christmas_official)==scrape.strong_event_identity_key(dict(christmas_media,startDate="2027-11-24",endDate="2027-12-25")),False)
 
 # ── 結語 ──────────────────────────────────────────────────────────────────────
 print(f"\n{'=' * 40}\n結果：{_passed} 通過、{_failed} 失敗")

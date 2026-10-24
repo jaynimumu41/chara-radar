@@ -29,6 +29,22 @@ REQUIRED_FIELDS = (
     "createdAt", "sourceUrl", "sourceTitle",
 )
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+OPENING_RE = re.compile(r"^\d{4}/\d{2}/\d{2}$")
+STORE_SOURCE_URLS = {
+    "pokemon": {"https://www.pokemon.co.jp/shop/"},
+    "miffy": {"https://dickbruna.jp/shop/"},
+    "chiikawa": {
+        "https://chiikawa-info.jp/ck_land",
+        "https://chiikawa-info.jp/magical_s.html",
+        "https://chiikawa-info.jp/s_fes.html",
+        "https://www.chiikawamogumogu.jp/page-sitemap.xml",
+        "https://www.chiikawa-yaki.com/",
+        "https://chiikawabakery.jp/",
+        "https://chiikawapark-tokyo.jp/",
+        "https://chiikawapark-tokyo.jp/news/x0e64eb94v/",
+        "https://chiikawa-info.jp/ck_w/taipei/index.html",
+    },
+}
 
 
 def load_json(path: Path):
@@ -52,7 +68,7 @@ def valid_date(value: str) -> bool:
 
 
 def store_data_errors(data: dict) -> list[str]:
-    """Validate permanent-store structure and auditable Miffy identities."""
+    """Validate permanent-store structure and auditable official identities."""
     if not isinstance(data, dict):
         return ["data/stores.json must be a JSON object"]
 
@@ -98,27 +114,43 @@ def store_data_errors(data: dict) -> list[str]:
                     errors.append(f"{row_prefix} has invalid country: {store.get('country')}")
                 if store.get("name"):
                     display_names[norm(store["name"])].append(store["name"])
-                if brand == "miffy":
-                    official_name = store.get("officialName", "")
-                    if not official_name:
-                        errors.append(f"{row_prefix} has blank officialName")
+                official_name = store.get("officialName", "")
+                if not official_name:
+                    errors.append(f"{row_prefix} has blank officialName")
+                else:
+                    official_names[norm(official_name)].append(official_name)
+                opening = store.get("opening", "")
+                if opening:
+                    if not OPENING_RE.match(opening):
+                        errors.append(f"{row_prefix} has invalid opening: {opening}")
                     else:
-                        official_names[norm(official_name)].append(official_name)
+                        try:
+                            datetime.strptime(opening, "%Y/%m/%d")
+                        except ValueError:
+                            errors.append(f"{row_prefix} has invalid opening: {opening}")
 
         for names in display_names.values():
             if len(names) > 1:
                 errors.append(f"stores.json duplicate {brand} store name: {', '.join(names)}")
-        if brand == "miffy":
-            for names in official_names.values():
-                if len(names) > 1:
-                    errors.append(
-                        f"stores.json duplicate miffy officialName: {', '.join(names)}"
-                    )
-            if brand_data.get("sourceUrl") != "https://dickbruna.jp/shop/":
-                errors.append("stores.json miffy.sourceUrl must be https://dickbruna.jp/shop/")
-            checked_at = brand_data.get("sourceCheckedAt", "")
-            if checked_at and not valid_date(checked_at):
-                errors.append(f"stores.json miffy.sourceCheckedAt is invalid: {checked_at}")
+        for names in official_names.values():
+            if len(names) > 1:
+                errors.append(
+                    f"stores.json duplicate {brand} officialName: {', '.join(names)}"
+                )
+
+        expected_sources = STORE_SOURCE_URLS.get(brand, set())
+        actual_sources = brand_data.get("sourceUrls")
+        if not isinstance(actual_sources, list):
+            actual_sources = [brand_data.get("sourceUrl", "")]
+        actual_sources = {url for url in actual_sources if isinstance(url, str) and url}
+        missing_sources = sorted(expected_sources.difference(actual_sources))
+        if missing_sources:
+            errors.append(
+                f"stores.json {brand} missing official source URLs: {', '.join(missing_sources)}"
+            )
+        checked_at = brand_data.get("sourceCheckedAt", "")
+        if not checked_at or not valid_date(checked_at):
+            errors.append(f"stores.json {brand}.sourceCheckedAt is invalid: {checked_at}")
     return errors
 
 

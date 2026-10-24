@@ -1629,6 +1629,10 @@ def _miffy_is_flower_birthday(title: str, name: str = "", detail: str = "") -> b
 
 
 def _miffy_venue_from_title(title: str, name: str = "", detail: str = "") -> str:
+    if "miffy style" in title.lower() and "ポップアップ" in title:
+        for marker, venue in (("札幌", "札幌アピア"), ("大阪梅田", "キデイランド大阪梅田店")):
+            if marker in title:
+                return venue
     m = re.search(r"^(.+?)(?:にて|に|で)「", title)
     if m:
         return m.group(1).strip("・ 　")
@@ -1665,6 +1669,10 @@ def _miffy_type(title: str, name: str, detail: str = "") -> str:
 
 
 def _miffy_display_name(title: str, name: str) -> str:
+    if "miffy style" in title.lower() and "ポップアップ" in title:
+        for marker in ("札幌", "大阪梅田"):
+            if marker in title:
+                return f"miffy style POP UP SHOP in {marker}"
     if "KOBE PORT TOWER" in title and "Night Time" in title:
         return "神戶港塔 Night Time 聯名活動"
     if _miffy_is_flower_birthday(title, name):

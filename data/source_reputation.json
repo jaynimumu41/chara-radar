@@ -1,27 +1,27 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-13T14:21:47+00:00",
+  "updatedAt": "2026-10-23T11:49:23+00:00",
   "sources": {
     "domain:nownews.com": {
-      "confirmed": 16,
+      "confirmed": 18,
       "rejected": 4,
       "uncertain": 0,
-      "crossChecked": 21,
+      "crossChecked": 23,
       "score": 95,
       "label": "nownews.com",
       "kind": "news",
       "host": "nownews.com",
       "handle": "",
       "firstSeen": "2026-06-11",
-      "lastReviewed": "2026-10-13",
+      "lastReviewed": "2026-10-23",
       "lastOutcome": "confirmed",
-      "notes": "Corrected to the in-scope Fainted mascot line at Pokemon Center TAIPEI on 2026-10-17; excluded Pokemon GO apparel and transit cards. Pokemon Hubs independently corroborates store, date, and nine mascots.",
+      "notes": "Original explicitly names physical store, 10/20 restock and pink mascot; Pokemon Hubs corroborates. Latest 6885668 says no sales 10/23-24 and expected resume 10/25; updated warning and cleared reservation flag.",
       "byBrand": {
         "pokemon": {
-          "confirmed": 16,
+          "confirmed": 18,
           "rejected": 3,
           "uncertain": 0,
-          "crossChecked": 20,
+          "crossChecked": 22,
           "score": 95
         },
         "chiikawa": {
@@ -34,10 +34,10 @@
       },
       "byType": {
         "new_product": {
-          "confirmed": 16,
+          "confirmed": 18,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 15,
+          "crossChecked": 17,
           "score": 95
         },
         "campaign": {
@@ -64,10 +64,10 @@
       },
       "byCountry": {
         "tw": {
-          "confirmed": 16,
+          "confirmed": 18,
           "rejected": 4,
           "uncertain": 0,
-          "crossChecked": 21,
+          "crossChecked": 23,
           "score": 95
         }
       },
@@ -271,39 +271,59 @@
           "eventId": "po-e3f4cc",
           "evidenceCount": 1,
           "notes": "Corrected to the in-scope Fainted mascot line at Pokemon Center TAIPEI on 2026-10-17; excluded Pokemon GO apparel and transit cards. Pokemon Hubs independently corroborates store, date, and nine mascots."
+        },
+        {
+          "date": "2026-10-23",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-4b976e",
+          "evidenceCount": 1,
+          "notes": "Original NOWnews and Pokemon Hubs explicitly name Taipei store/date/concrete products. Later NOWnews 6885668 reports official 10/22 postponement to 10/31; updated accordingly. Official IG fetch blocked."
+        },
+        {
+          "date": "2026-10-23",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-e53e1b",
+          "evidenceCount": 1,
+          "notes": "Original explicitly names physical store, 10/20 restock and pink mascot; Pokemon Hubs corroborates. Latest 6885668 says no sales 10/23-24 and expected resume 10/25; updated warning and cleared reservation flag."
         }
       ]
     },
     "domain:pokemonhubs.com": {
       "confirmed": 2,
-      "rejected": 1,
+      "rejected": 3,
       "uncertain": 0,
-      "crossChecked": 5,
-      "score": 63,
+      "crossChecked": 7,
+      "score": 41,
       "label": "pokemonhubs.com",
       "kind": "news",
       "host": "pokemonhubs.com",
       "handle": "",
       "firstSeen": "2026-06-11",
-      "lastReviewed": "2026-08-27",
+      "lastReviewed": "2026-10-23",
       "lastOutcome": "rejected",
-      "notes": "Original article, official Pokemon information X, and independent coverage confirm this is only a ZeroBase Shibuya exterior display for PTCG Pocket promotion; no shop, sale, cafe, or limited goods",
+      "notes": "Queue/admission stamp notice, not new store; overlaps existing product restock.",
       "byBrand": {
         "pokemon": {
           "confirmed": 2,
-          "rejected": 1,
+          "rejected": 3,
           "uncertain": 0,
-          "crossChecked": 5,
-          "score": 63
+          "crossChecked": 7,
+          "score": 41
         }
       },
       "byType": {
         "new_product": {
           "confirmed": 2,
-          "rejected": 0,
+          "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 3,
-          "score": 70
+          "crossChecked": 4,
+          "score": 61
         },
         "popup": {
           "confirmed": 0,
@@ -311,15 +331,22 @@
           "uncertain": 0,
           "crossChecked": 2,
           "score": 43
+        },
+        "store": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
         }
       },
       "byCountry": {
         "tw": {
           "confirmed": 2,
-          "rejected": 0,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 3,
-          "score": 70
+          "crossChecked": 5,
+          "score": 52
         },
         "jp": {
           "confirmed": 0,
@@ -359,6 +386,26 @@
           "eventId": "po-21ce64",
           "evidenceCount": 2,
           "notes": "Original article, official Pokemon information X, and independent coverage confirm this is only a ZeroBase Shibuya exterior display for PTCG Pocket promotion; no shop, sale, cafe, or limited goods"
+        },
+        {
+          "date": "2026-10-23",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-cfc1f4",
+          "evidenceCount": 1,
+          "notes": "Same Taipei Unova/Halloween physical-store launch as po-4b976e; now postponed to 10/31."
+        },
+        {
+          "date": "2026-10-23",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "store",
+          "country": "TW",
+          "eventId": "po-27c92d",
+          "evidenceCount": 1,
+          "notes": "Queue/admission stamp notice, not new store; overlaps existing product restock."
         }
       ]
     },
@@ -463,25 +510,25 @@
       ]
     },
     "domain:news.yahoo.co.jp": {
-      "confirmed": 2,
+      "confirmed": 3,
       "rejected": 15,
       "uncertain": 0,
-      "crossChecked": 17,
+      "crossChecked": 19,
       "score": 5,
       "label": "news.yahoo.co.jp",
       "kind": "news",
       "host": "news.yahoo.co.jp",
       "handle": "",
       "firstSeen": "2026-06-15",
-      "lastReviewed": "2026-09-30",
-      "lastOutcome": "rejected",
-      "notes": "Accurate syndication, but duplicate of Pokemon official po-4307fc for Pokemon Timeless Adventure nemuru goods on 2026-09-05",
+      "lastReviewed": "2026-10-23",
+      "lastOutcome": "confirmed",
+      "notes": "Original Yahoo image page inaccessible after reader retry. ANA company launch release, purchase-limit release and ANA FESTA reservation confirm 10/23 store goods; replaced with company release; cleared Tokyo-only city.",
       "byBrand": {
         "chiikawa": {
-          "confirmed": 1,
+          "confirmed": 2,
           "rejected": 9,
           "uncertain": 0,
-          "crossChecked": 8,
+          "crossChecked": 10,
           "score": 5
         },
         "miffy": {
@@ -508,11 +555,11 @@
           "score": 50
         },
         "new_product": {
-          "confirmed": 0,
+          "confirmed": 1,
           "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 30
+          "crossChecked": 3,
+          "score": 41
         },
         "cafe": {
           "confirmed": 0,
@@ -538,10 +585,10 @@
       },
       "byCountry": {
         "jp": {
-          "confirmed": 2,
+          "confirmed": 3,
           "rejected": 15,
           "uncertain": 0,
-          "crossChecked": 17,
+          "crossChecked": 19,
           "score": 5
         }
       },
@@ -715,6 +762,16 @@
           "eventId": "po-19d234",
           "evidenceCount": 1,
           "notes": "Accurate syndication, but duplicate of Pokemon official po-4307fc for Pokemon Timeless Adventure nemuru goods on 2026-09-05"
+        },
+        {
+          "date": "2026-10-23",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "ch-22b7e6",
+          "evidenceCount": 2,
+          "notes": "Original Yahoo image page inaccessible after reader retry. ANA company launch release, purchase-limit release and ANA FESTA reservation confirm 10/23 store goods; replaced with company release; cleared Tokyo-only city."
         }
       ]
     },
@@ -1229,25 +1286,25 @@
       ]
     },
     "domain:collabo-cafe.com": {
-      "confirmed": 9,
-      "rejected": 14,
+      "confirmed": 10,
+      "rejected": 15,
       "uncertain": 0,
-      "crossChecked": 29,
+      "crossChecked": 31,
       "score": 5,
       "label": "collabo-cafe.com",
       "kind": "site",
       "host": "collabo-cafe.com",
       "handle": "",
       "firstSeen": "2026-06-30",
-      "lastReviewed": "2026-10-06",
-      "lastOutcome": "rejected",
-      "notes": "Duplicate of Chiikawa official record ch-3821ff for 2026-10-16 through 2026-11-03; secondary row also added an unsupported cafe claim",
+      "lastReviewed": "2026-10-23",
+      "lastOutcome": "confirmed",
+      "notes": "Chiikawa official Yokohama sushi popup confirms 10/22-11/01. Corrected concrete Sky Building 8F venue, removed unsupported food/cafe claim, upgraded official source.",
       "byBrand": {
         "chiikawa": {
-          "confirmed": 9,
-          "rejected": 13,
+          "confirmed": 10,
+          "rejected": 14,
           "uncertain": 0,
-          "crossChecked": 28,
+          "crossChecked": 30,
           "score": 5
         },
         "miffy": {
@@ -1267,11 +1324,11 @@
           "score": 5
         },
         "popup": {
-          "confirmed": 7,
-          "rejected": 8,
+          "confirmed": 8,
+          "rejected": 9,
           "uncertain": 0,
-          "crossChecked": 20,
-          "score": 21
+          "crossChecked": 22,
+          "score": 17
         },
         "new_product": {
           "confirmed": 2,
@@ -1283,10 +1340,10 @@
       },
       "byCountry": {
         "jp": {
-          "confirmed": 9,
-          "rejected": 14,
+          "confirmed": 10,
+          "rejected": 15,
           "uncertain": 0,
-          "crossChecked": 29,
+          "crossChecked": 31,
           "score": 5
         }
       },
@@ -1520,23 +1577,43 @@
           "eventId": "ch-3f4f90",
           "evidenceCount": 1,
           "notes": "Duplicate of Chiikawa official record ch-3821ff for 2026-10-16 through 2026-11-03; secondary row also added an unsupported cafe claim"
+        },
+        {
+          "date": "2026-10-23",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-f55cd4",
+          "evidenceCount": 1,
+          "notes": "Duplicate official ch-650a2b Oita popup; no cafe supported."
+        },
+        {
+          "date": "2026-10-23",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-6cb20a",
+          "evidenceCount": 1,
+          "notes": "Chiikawa official Yokohama sushi popup confirms 10/22-11/01. Corrected concrete Sky Building 8F venue, removed unsupported food/cafe claim, upgraded official source."
         }
       ]
     },
     "domain:prtimes.jp": {
       "confirmed": 4,
-      "rejected": 4,
+      "rejected": 6,
       "uncertain": 0,
       "crossChecked": 8,
-      "score": 44,
+      "score": 22,
       "label": "prtimes.jp",
       "kind": "news",
       "host": "prtimes.jp",
       "handle": "",
       "firstSeen": "2026-07-01",
-      "lastReviewed": "2026-10-13",
-      "lastOutcome": "confirmed",
-      "notes": "First-party Benelic press release confirms nationwide Flower Miffy physical-store Christmas wreath/tree products planned for early November 2026; official Flower Miffy page independently confirms the launch window.",
+      "lastReviewed": "2026-10-23",
+      "lastOutcome": "rejected",
+      "notes": "Skater general retail curry tableware, no concrete in-scope physical venue or limited event.",
       "byBrand": {
         "chiikawa": {
           "confirmed": 1,
@@ -1547,19 +1624,19 @@
         },
         "miffy": {
           "confirmed": 2,
-          "rejected": 4,
+          "rejected": 6,
           "uncertain": 0,
           "crossChecked": 7,
-          "score": 30
+          "score": 8
         }
       },
       "byType": {
         "new_product": {
           "confirmed": 1,
-          "rejected": 1,
+          "rejected": 3,
           "uncertain": 0,
           "crossChecked": 1,
-          "score": 48
+          "score": 26
         },
         "popup": {
           "confirmed": 1,
@@ -1586,10 +1663,10 @@
       "byCountry": {
         "jp": {
           "confirmed": 3,
-          "rejected": 5,
+          "rejected": 7,
           "uncertain": 0,
           "crossChecked": 8,
-          "score": 26
+          "score": 5
         }
       },
       "history": [
@@ -1672,6 +1749,26 @@
           "eventId": "mi-b11c65",
           "evidenceCount": 1,
           "notes": "First-party Benelic press release confirms nationwide Flower Miffy physical-store Christmas wreath/tree products planned for early November 2026; official Flower Miffy page independently confirms the launch window."
+        },
+        {
+          "date": "2026-10-23",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "mi-813f88",
+          "evidenceCount": 0,
+          "notes": "Skater general retail Chinese tableware, no concrete in-scope physical venue or limited event."
+        },
+        {
+          "date": "2026-10-23",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "mi-6d27dc",
+          "evidenceCount": 0,
+          "notes": "Skater general retail curry tableware, no concrete in-scope physical venue or limited event."
         }
       ]
     },
@@ -1785,25 +1882,25 @@
     },
     "domain:eeo.today": {
       "confirmed": 1,
-      "rejected": 0,
+      "rejected": 1,
       "uncertain": 0,
-      "crossChecked": 1,
-      "score": 59,
+      "crossChecked": 2,
+      "score": 50,
       "label": "eeo.today",
       "kind": "site",
       "host": "eeo.today",
       "handle": "",
       "firstSeen": "2026-07-03",
-      "lastReviewed": "2026-07-03",
-      "lastOutcome": "confirmed",
-      "notes": "Matched House Foods official CoCo壱番屋 campaign page with explicit 2026-07-16 to 2026-08-31 period and venue scope.",
+      "lastReviewed": "2026-10-23",
+      "lastOutcome": "rejected",
+      "notes": "Duplicate official ch-93a675 Christmas Market; Tokyo city is wrong (Chiba).",
       "byBrand": {
         "chiikawa": {
           "confirmed": 1,
-          "rejected": 0,
+          "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 59
+          "crossChecked": 2,
+          "score": 50
         }
       },
       "byType": {
@@ -1813,15 +1910,22 @@
           "uncertain": 0,
           "crossChecked": 1,
           "score": 59
+        },
+        "popup": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 1,
-          "rejected": 0,
+          "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 59
+          "crossChecked": 2,
+          "score": 50
         }
       },
       "history": [
@@ -1834,6 +1938,16 @@
           "eventId": "ch-06f647",
           "evidenceCount": 1,
           "notes": "Matched House Foods official CoCo壱番屋 campaign page with explicit 2026-07-16 to 2026-08-31 period and venue scope."
+        },
+        {
+          "date": "2026-10-23",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-dd9530",
+          "evidenceCount": 1,
+          "notes": "Duplicate official ch-93a675 Christmas Market; Tokyo city is wrong (Chiba)."
         }
       ]
     },
@@ -1893,43 +2007,43 @@
     },
     "domain:famitsu.com": {
       "confirmed": 1,
-      "rejected": 2,
+      "rejected": 3,
       "uncertain": 0,
-      "crossChecked": 3,
-      "score": 41,
+      "crossChecked": 4,
+      "score": 32,
       "label": "famitsu.com",
       "kind": "news",
       "host": "famitsu.com",
       "handle": "",
       "firstSeen": "2026-07-04",
-      "lastReviewed": "2026-09-13",
+      "lastReviewed": "2026-10-23",
       "lastOutcome": "rejected",
-      "notes": "Removed: the article supports a Pokemon Center Online release and virtual waiting room only; it does not establish physical-store availability, so the record is out of scope.",
+      "notes": "Duplicate official po-463672 Miare goods 10/29; also mistranslates Z-A as Arceus.",
       "byBrand": {
         "pokemon": {
           "confirmed": 1,
-          "rejected": 2,
+          "rejected": 3,
           "uncertain": 0,
-          "crossChecked": 3,
-          "score": 41
+          "crossChecked": 4,
+          "score": 32
         }
       },
       "byType": {
         "new_product": {
           "confirmed": 1,
-          "rejected": 2,
+          "rejected": 3,
           "uncertain": 0,
-          "crossChecked": 3,
-          "score": 41
+          "crossChecked": 4,
+          "score": 32
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 1,
-          "rejected": 2,
+          "rejected": 3,
           "uncertain": 0,
-          "crossChecked": 3,
-          "score": 41
+          "crossChecked": 4,
+          "score": 32
         }
       },
       "history": [
@@ -1962,6 +2076,16 @@
           "eventId": "po-bd35c2",
           "evidenceCount": 1,
           "notes": "Removed: the article supports a Pokemon Center Online release and virtual waiting room only; it does not establish physical-store availability, so the record is out of scope."
+        },
+        {
+          "date": "2026-10-23",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "po-8505de",
+          "evidenceCount": 1,
+          "notes": "Duplicate official po-463672 Miare goods 10/29; also mistranslates Z-A as Arceus."
         }
       ]
     },
@@ -2409,34 +2533,34 @@
     },
     "domain:ndw.jp": {
       "confirmed": 7,
-      "rejected": 5,
+      "rejected": 6,
       "uncertain": 0,
-      "crossChecked": 14,
-      "score": 54,
+      "crossChecked": 15,
+      "score": 43,
       "label": "ndw.jp",
       "kind": "site",
       "host": "ndw.jp",
       "handle": "",
       "firstSeen": "2026-07-19",
-      "lastReviewed": "2026-10-06",
+      "lastReviewed": "2026-10-23",
       "lastOutcome": "rejected",
-      "notes": "Accurate article but duplicate of existing Pokémon official record po-e64bed for the same 2026-10-10 physical-store launch",
+      "notes": "Duplicate official po-db8e16 Christmas Junbi goods 10/24.",
       "byBrand": {
         "pokemon": {
           "confirmed": 7,
-          "rejected": 5,
+          "rejected": 6,
           "uncertain": 0,
-          "crossChecked": 14,
-          "score": 54
+          "crossChecked": 15,
+          "score": 43
         }
       },
       "byType": {
         "new_product": {
           "confirmed": 6,
-          "rejected": 4,
+          "rejected": 5,
           "uncertain": 0,
-          "crossChecked": 12,
-          "score": 58
+          "crossChecked": 13,
+          "score": 47
         },
         "campaign": {
           "confirmed": 1,
@@ -2449,10 +2573,10 @@
       "byCountry": {
         "jp": {
           "confirmed": 7,
-          "rejected": 5,
+          "rejected": 6,
           "uncertain": 0,
-          "crossChecked": 14,
-          "score": 54
+          "crossChecked": 15,
+          "score": 43
         }
       },
       "history": [
@@ -2575,6 +2699,16 @@
           "eventId": "po-13b0bd",
           "evidenceCount": 1,
           "notes": "Accurate article but duplicate of existing Pokémon official record po-e64bed for the same 2026-10-10 physical-store launch"
+        },
+        {
+          "date": "2026-10-23",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "po-d423b6",
+          "evidenceCount": 1,
+          "notes": "Duplicate official po-db8e16 Christmas Junbi goods 10/24."
         }
       ]
     },
@@ -3114,25 +3248,25 @@
     },
     "domain:4gamers.com.tw": {
       "confirmed": 2,
-      "rejected": 0,
+      "rejected": 1,
       "uncertain": 0,
-      "crossChecked": 0,
-      "score": 64,
+      "crossChecked": 1,
+      "score": 55,
       "label": "4gamers.com.tw",
       "kind": "news",
       "host": "4gamers.com.tw",
       "handle": "",
       "firstSeen": "2026-08-04",
-      "lastReviewed": "2026-09-13",
-      "lastOutcome": "confirmed",
-      "notes": "Article explicitly identifies Pokemon Center TAIPEI, the 2026-08-22 in-store sale date, product lineup, prices, and in-store purchase procedure; retained under the verified Taiwan store-goods policy.",
+      "lastReviewed": "2026-10-23",
+      "lastOutcome": "rejected",
+      "notes": "Publication date 10/08 is not event start; event ended 10/11 and product is separately represented.",
       "byBrand": {
         "pokemon": {
           "confirmed": 2,
-          "rejected": 0,
+          "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 0,
-          "score": 64
+          "crossChecked": 1,
+          "score": 55
         }
       },
       "byType": {
@@ -3142,15 +3276,22 @@
           "uncertain": 0,
           "crossChecked": 0,
           "score": 64
+        },
+        "popup": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
         }
       },
       "byCountry": {
         "tw": {
           "confirmed": 2,
-          "rejected": 0,
+          "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 0,
-          "score": 64
+          "crossChecked": 1,
+          "score": 55
         }
       },
       "history": [
@@ -3173,6 +3314,16 @@
           "eventId": "po-9cefdb",
           "evidenceCount": 0,
           "notes": "Article explicitly identifies Pokemon Center TAIPEI, the 2026-08-22 in-store sale date, product lineup, prices, and in-store purchase procedure; retained under the verified Taiwan store-goods policy."
+        },
+        {
+          "date": "2026-10-23",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "popup",
+          "country": "TW",
+          "eventId": "po-2ad7d4",
+          "evidenceCount": 1,
+          "notes": "Publication date 10/08 is not event start; event ended 10/11 and product is separately represented."
         }
       ]
     },
@@ -4064,6 +4215,114 @@
           "eventId": "ch-93a675",
           "evidenceCount": 2,
           "notes": "Official event site matches the Chiikawa official index and organizer PR TIMES release for dates, Toyosuna Park venue, ticketing, food, and goods"
+        }
+      ]
+    },
+    "domain:tcpttw.com": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 41,
+      "label": "tcpttw.com",
+      "kind": "site",
+      "host": "tcpttw.com",
+      "handle": "",
+      "firstSeen": "2026-10-23",
+      "lastReviewed": "2026-10-23",
+      "lastOutcome": "rejected",
+      "notes": "Pokexciting stage/parade event ended 2026-10-11; official confirms end; merchandise already has its own product record.",
+      "byBrand": {
+        "pokemon": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byType": {
+        "campaign": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byCountry": {
+        "tw": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "history": [
+        {
+          "date": "2026-10-23",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "campaign",
+          "country": "TW",
+          "eventId": "po-3641de",
+          "evidenceCount": 1,
+          "notes": "Pokexciting stage/parade event ended 2026-10-11; official confirms end; merchandise already has its own product record."
+        }
+      ]
+    },
+    "domain:tetsudo-ch.com": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 41,
+      "label": "tetsudo-ch.com",
+      "kind": "site",
+      "host": "tetsudo-ch.com",
+      "handle": "",
+      "firstSeen": "2026-10-23",
+      "lastReviewed": "2026-10-23",
+      "lastOutcome": "rejected",
+      "notes": "Duplicate official ch-93a675 Christmas Market, same venue and period.",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byType": {
+        "popup": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "history": [
+        {
+          "date": "2026-10-23",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-690f5f",
+          "evidenceCount": 1,
+          "notes": "Duplicate official ch-93a675 Christmas Market, same venue and period."
         }
       ]
     }

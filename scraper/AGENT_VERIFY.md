@@ -71,17 +71,19 @@ page, a broad schedule page, a store-entry notice, or out of scope. If it has a
 clear JP/TW physical venue, date range, and goods/store/cafe signal, add or fix
 a structured parser before reporting that official coverage is clean.
 
-7. Miffy permanent-store coverage audit:
+7. Permanent-store coverage audits:
 
 ```powershell
 $env:PYTHONIOENCODING='utf-8'
+& 'C:\Users\USER\AppData\Local\Python\pythoncore-3.14-64\python.exe' scraper\audit_pokemon_stores.py --format summary --fail-on-review
 & 'C:\Users\USER\AppData\Local\Python\pythoncore-3.14-64\python.exe' scraper\audit_miffy_stores.py --format summary --fail-on-review
+& 'C:\Users\USER\AppData\Local\Python\pythoncore-3.14-64\python.exe' scraper\audit_chiikawa_stores.py --format summary --fail-on-review
 ```
 
-This compares every local Miffy `officialName` with the current physical-shop
-cards on `dickbruna.jp/shop/`. Resolve every `missing`, `stale`, or `duplicate`
-result before reporting the permanent-store list as current. Do not add online
-shops, generic stockists, or temporary pop-ups to `data/stores.json`.
+These compare every local `officialName` with the current official physical-shop
+sources. Resolve every `missing`, `stale`, or `duplicate` result before reporting
+the permanent-store list as current. Do not add online shops, generic stockists,
+or temporary pop-ups to `data/stores.json`.
 
 ## Verification Loop
 

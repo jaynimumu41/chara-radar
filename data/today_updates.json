@@ -1,9 +1,9 @@
 {
   "date": "2026-10-23",
   "baselineDate": "2026-10-22",
-  "generatedAt": "2026-10-23T08:08:03.812058+00:00",
+  "generatedAt": "2026-10-23T11:49:23.211403+00:00",
   "baselineEventCount": 65,
-  "currentEventCount": 70,
+  "currentEventCount": 57,
   "newEventCount": 5,
   "countsByBrand": {
     "miffy": 4,
@@ -11,11 +11,11 @@
     "chiikawa": 1
   },
   "newEventIds": [
-    "mi-68de61",
     "mi-59382d",
     "mi-b04e35",
     "mi-378506",
-    "ch-22b7e6"
+    "ch-22b7e6",
+    "mi-hokahoka-osaka-2026"
   ],
   "replacements": []
 }

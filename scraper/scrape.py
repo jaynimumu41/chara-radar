@@ -367,6 +367,16 @@ def is_out_of_scope_product(ev: dict, source_title: str = "", page_text: str = "
     )
     return not (ev.get("type") in {"popup", "campaign"} and explicit_popup and complete_event)
 
+def is_general_retail_new_product(ev: dict, source_title: str = "", page_text: str = "") -> bool:
+    """A general-release manufacturer notice needs a concrete target store."""
+    if ev.get("type") != "new_product":
+        return False
+    subject = " ".join((ev.get("title", ""), ev.get("summaryZh", ""),
+                        ev.get("sourceTitle", ""), source_title, page_text[:12000]))
+    return any(term in subject for term in ("一般販売", "一般販售")) and not has_physical_store_signal(
+        subject, ev.get("locationName", ""))
+
+
 def is_experience_only_event(ev: dict, source_title: str = "") -> bool:
     """Reject AI rows whose extracted subject is an out-of-scope experience."""
     subject = " ".join([
@@ -1368,6 +1378,11 @@ def _event_blob(ev: dict) -> str:
 
 
 STRONG_EVENT_IDENTITY_RULES = (
+    {'brand': 'chiikawa', 'types': {'campaign', 'cafe', 'popup'}, 'concept': 'chiikawa-christmas-market', 'patterns': ((('ちいかわクリスマスマーケット', '吉伊卡哇聖誕市集'),),), 'scope': 'date', 'country': True},
+    {'brand': 'chiikawa', 'types': {'campaign', 'cafe', 'popup'}, 'concept': 'chiikawa-oita-popup', 'patterns': ((('イオンパークプレイス大分', 'pus_aoit', 'aeon-park-place-oita'),),), 'scope': 'date', 'country': True},
+    {'brand': 'pokemon', 'types': {'new_product'}, 'concept': 'pokemon-christmas-junbi', 'patterns': ((('クリスマスじゅんびチュウ', 'pokemon-goods-261016-01'),),), 'scope': 'date', 'country': True},
+    {'brand': 'pokemon', 'types': {'new_product'}, 'concept': 'pokemon-miare-elegant-day', 'patterns': ((('ミアレの優雅な一日', '261016_go01', 'article/202610/91192'),),), 'scope': 'date', 'country': True},
+    {'brand': 'pokemon', 'types': {'new_product'}, 'concept': 'pokemon-taipei-unova-halloween', 'patterns': ((('6884725', 'pokemon-center-taipei-2026-10-24-new-products'),),), 'scope': 'date', 'country': True},
     {
         "brand": "miffy",
         "types": {"popup", "cafe", "campaign"},
@@ -1609,6 +1624,8 @@ def strong_event_identity_key(ev: dict) -> str | None:
         if not matched:
             continue
         parts = [rule["brand"], rule["concept"]]
+        if rule.get("country"):
+            parts.append(ev.get("country", ""))
         scope = rule["scope"]
         if scope == "date":
             if not ev.get("startDate"):
@@ -1887,6 +1904,39 @@ def normalize_source_event(event: dict, *, source_url: str = "", page_text: str 
         data.get("sourceTitle", ""), visible,
     ])
 
+    miffy_popup_venues = {
+        "https://dickbruna.jp/news/202610/49227/": ("札幌", "Hokkaido", "札幌アピア", "2026-11-06", "2026-11-24"),
+        "https://dickbruna.jp/news/202610/49063/": ("大阪梅田", "Osaka", "キデイランド大阪梅田店", "2026-10-31", "2026-11-17"),
+    }
+    if data.get("brand") == "miffy" and url in miffy_popup_venues:
+        place, city, venue, start, end = miffy_popup_venues[url]
+        data.update(title=f"Miffy miffy style POP UP SHOP in {place}", city=city,
+                    locationName=venue, startDate=start, endDate=end, type="popup")
+    if data.get("brand") == "miffy" and url == "https://prtimes.jp/main/html/rd/p/000000334.000086964.html":
+        osaka = data.get("city") == "Osaka"
+        data.update(
+            title="Miffy ほかほかダイニング " + ("大阪心齋橋" if osaka else "東京押上"),
+            type="cafe", country="JP", city="Osaka" if osaka else "Tokyo",
+            locationName="Collabo_Index SHINSAIBASHI（心斎橋筋1-6-1 2F）" if osaka else "BOX cafe&space 東京ソラマチ店（東京ソラマチ 1F）",
+            startDate="2026-11-26" if osaka else "2026-10-31",
+            endDate="2027-01-11" if osaka else "2027-01-24",
+            summaryZh="Miffy 冬季限定主題餐飲，提供燉菜、焗烤派、甜點與飲品，並販售原創周邊；可事先付費預約座位。",
+            hasLimitedGoods=True, tags=["米飛兔", "限定餐飲", "原創商品"])
+    if data.get("brand") == "pokemon" and url in {
+        "https://www.tcpttw.com/life/2026/10/13/319676/",
+        "https://www.4gamers.com.tw/news/detail/82511/be-prepared-for-pokexciting-in-taipei-2026",
+    }:
+        data.update(startDate="2026-10-10", endDate="2026-10-11")
+    # October 22 postponement supersedes the original October 24 release.
+    if data.get("brand") == "pokemon" and url in {
+        "https://www.nownews.com/news/6884725",
+        "https://pokemonhubs.com/news/pokemon-center-taipei-2026-10-24-new-products/",
+    }:
+        data.update(title="Pokémon Center TAIPEI 合眾周邊與萬聖節蛋糕架（延期）",
+                    startDate="2026-10-31", endDate="",
+                    summaryZh="台北寶可夢中心實體店的 Pokémon Timeless Adventure 合眾文件夾、鑰匙圈、壓克力磚、貼紙組及萬聖節蛋糕架，因颱風由10月24日延至10月31日販售。")
+    if url == "https://www.nownews.com/news/6883605":
+        data.update(summaryZh="粉紅色 PokéXciting! 皮卡丘吉祥物10月20日到貨；最新公告10月23、24日暫停販售，預計10月25日恢復。入店整理券與購買限制依官方現場公告。", needReservation=False)
     known_fainted_article = url.rstrip("/") == _NOWNEWS_FAINTED_URL
     taiwan_store_evidence = known_fainted_article or any(signal in evidence for signal in (
         "Pokémon Center TAIPEI", "Pokemon Center TAIPEI",
@@ -2269,15 +2319,24 @@ def clean_events(events: list[dict]) -> tuple[list[dict], int, int, int]:
         if "kiddyland.co.jp/event/miffy" in url:
             return _kiddy_is_out_of_scope_product(source_title)
         if "pokemon.co.jp/goods/" in url and event.get("type") in SELLING_TYPES:
-            return is_noise(source_title)
+            return is_noise(source_title) or "クッキー" in source_title
         return False
 
-    normalized = [normalize_source_event(e) for e in events]
+    expanded = list(events)
+    dining_url = "https://prtimes.jp/main/html/rd/p/000000334.000086964.html"
+    if any(e.get("sourceUrl") == dining_url for e in events) and not any(
+        e.get("sourceUrl") == dining_url and e.get("city") == "Osaka" for e in events
+    ):
+        osaka = dict(next(e for e in events if e.get("sourceUrl") == dining_url))
+        osaka.update(id="mi-hokahoka-osaka-2026", city="Osaka")
+        expanded.append(osaka)
+    normalized = [normalize_source_event(e) for e in expanded]
     accepted = [
         e for e in normalized
         if not is_rejected_url(e.get("sourceUrl", ""))
         and not is_rejected_title(e.get("sourceTitle", ""))
         and not structured_scope_rejected(e)
+        and not is_general_retail_new_product(e)
         and not (
             e.get("sourceType") != "official_site"
             and is_roundup_title(e.get("sourceTitle", ""))

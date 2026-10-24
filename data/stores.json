@@ -1,46 +1,56 @@
 {
   "_note": "常設店清單（手動維護，不經爬蟲、不花 API）。只放營業中或已確定開幕日的店。資料來源：各品牌官方店舖頁。",
   "pokemon": {
+    "sourceUrl": "https://www.pokemon.co.jp/shop/",
+    "sourceCheckedAt": "2026-10-24",
     "groups": [
       {
         "label": "Pokémon Center",
         "stores": [
-          { "name": "Pokémon Center 札幌", "area": "北海道・札幌", "country": "JP" },
-          { "name": "Pokémon Center 東北（仙台）", "area": "宮城・仙台", "country": "JP" },
-          { "name": "Pokémon Center 東京 DX", "area": "東京・日本橋", "country": "JP" },
-          { "name": "Pokémon Center Mega Tokyo", "area": "東京・池袋", "country": "JP" },
-          { "name": "Pokémon Center 澀谷", "area": "東京・澀谷", "country": "JP" },
-          { "name": "Pokémon Center 晴空塔城", "area": "東京・晴空塔", "country": "JP" },
-          { "name": "Pokémon Center 東京灣", "area": "千葉・船橋", "country": "JP" },
-          { "name": "Pokémon Center 橫濱", "area": "神奈川・橫濱", "country": "JP" },
-          { "name": "Pokémon Center 橫濱 Satellite", "area": "神奈川・橫濱", "country": "JP" },
-          { "name": "Pokémon Center 名古屋", "area": "愛知・名古屋", "country": "JP" },
-          { "name": "Pokémon Center 金澤", "area": "石川・金澤", "country": "JP" },
-          { "name": "Pokémon Center 京都", "area": "京都", "country": "JP" },
-          { "name": "Pokémon Center 大阪 DX", "area": "大阪・梅田", "country": "JP" },
-          { "name": "Pokémon Center 大阪", "area": "大阪・天保山", "country": "JP" },
-          { "name": "Pokémon Center 廣島", "area": "廣島", "country": "JP" },
-          { "name": "Pokémon Center 香川", "area": "香川・高松", "country": "JP" },
-          { "name": "Pokémon Center 福岡", "area": "福岡", "country": "JP" },
-          { "name": "Pokémon Center 沖繩", "area": "沖繩・那霸", "country": "JP" },
-          { "name": "Pokémon Center TAIPEI", "area": "台北・信義（微風南山）", "country": "TW" }
+          { "name": "Pokémon Center 札幌", "officialName": "ポケモンセンターサッポロ", "area": "北海道・札幌", "country": "JP" },
+          { "name": "Pokémon Center 東北（仙台）", "officialName": "ポケモンセンタートウホク", "area": "宮城・仙台", "country": "JP" },
+          { "name": "Pokémon Center 東京 DX", "officialName": "ポケモンセンタートウキョーDX", "area": "東京・日本橋", "country": "JP" },
+          { "name": "Pokémon Center Mega Tokyo", "officialName": "ポケモンセンターメガトウキョー", "area": "東京・池袋", "country": "JP" },
+          { "name": "Pokémon Center 澀谷", "officialName": "ポケモンセンターシブヤ", "area": "東京・澀谷", "country": "JP" },
+          { "name": "Pokémon Center 晴空塔城", "officialName": "ポケモンセンタースカイツリータウン", "area": "東京・晴空塔", "country": "JP" },
+          { "name": "Pokémon Center 東京灣", "officialName": "ポケモンセンタートウキョーベイ", "area": "千葉・船橋", "country": "JP" },
+          { "name": "Pokémon Center 橫濱", "officialName": "ポケモンセンターヨコハマ", "area": "神奈川・橫濱", "country": "JP" },
+          { "name": "Pokémon Center 橫濱 Satellite", "officialName": "ポケモンセンターヨコハマ サテライト", "area": "神奈川・橫濱", "country": "JP" },
+          { "name": "Pokémon Center 名古屋", "officialName": "ポケモンセンターナゴヤ", "area": "愛知・名古屋", "country": "JP" },
+          { "name": "Pokémon Center 金澤", "officialName": "ポケモンセンターカナザワ", "area": "石川・金澤", "country": "JP" },
+          { "name": "Pokémon Center 京都", "officialName": "ポケモンセンターキョウト", "area": "京都", "country": "JP" },
+          { "name": "Pokémon Center 大阪 DX", "officialName": "ポケモンセンターオーサカDX", "area": "大阪・心齋橋", "country": "JP" },
+          { "name": "Pokémon Center 大阪", "officialName": "ポケモンセンターオーサカ", "area": "大阪・梅田", "country": "JP" },
+          { "name": "Pokémon Center 廣島", "officialName": "ポケモンセンターヒロシマ", "area": "廣島", "country": "JP" },
+          { "name": "Pokémon Center 香川", "officialName": "ポケモンセンターカガワ", "area": "香川・高松", "country": "JP" },
+          { "name": "Pokémon Center 福岡", "officialName": "ポケモンセンターフクオカ", "area": "福岡・博多", "country": "JP" },
+          { "name": "Pokémon Center 沖繩", "officialName": "ポケモンセンターオキナワ", "area": "沖繩・北中城", "country": "JP" },
+          { "name": "Pokémon Center TAIPEI", "officialName": "ポケモンセンタータイペイ", "area": "台北・信義（新光三越 A11）", "country": "TW" }
         ]
       },
       {
         "label": "Pokémon Store",
         "stores": [
-          { "name": "Pokémon Store 新千歲機場", "area": "北海道・新千歲機場", "country": "JP" },
-          { "name": "Pokémon Store 東京車站", "area": "東京・東京車站", "country": "JP" },
-          { "name": "Pokémon Store 木更津 Outlet", "area": "千葉・木更津", "country": "JP" },
-          { "name": "Pokémon Store 成田機場", "area": "千葉・成田機場", "country": "JP" },
-          { "name": "Pokémon Store 御殿場", "area": "靜岡・御殿場", "country": "JP" }
+          { "name": "Pokémon Store 新千歲機場", "officialName": "ポケモンストア 新千歳空港店", "area": "北海道・新千歲機場", "country": "JP" },
+          { "name": "Pokémon Store 東京車站", "officialName": "ポケモンストア 東京駅店", "area": "東京・東京車站", "country": "JP" },
+          { "name": "Pokémon Store 木更津 Outlet", "officialName": "ポケモンストア アウトレット 木更津店", "area": "千葉・木更津", "country": "JP" },
+          { "name": "Pokémon Store 成田機場", "officialName": "ポケモンストア 成田空港店", "area": "千葉・成田機場", "country": "JP" },
+          { "name": "Pokémon Store 御殿場", "officialName": "ポケモンストア 御殿場店", "area": "靜岡・御殿場", "country": "JP" }
+        ]
+      },
+      {
+        "label": "Pokémon Cafe / Sweets",
+        "stores": [
+          { "name": "Pokémon Cafe TOKYO", "officialName": "ポケモンカフェ TOKYO", "area": "東京・日本橋", "country": "JP" },
+          { "name": "Pikachu Sweets by Pokémon Cafe", "officialName": "ピカチュウスイーツ by ポケモンカフェ", "area": "東京・池袋", "country": "JP" },
+          { "name": "Pokémon Cafe OSAKA", "officialName": "ポケモンカフェ OSAKA", "area": "大阪・心齋橋", "country": "JP" }
         ]
       }
     ]
   },
   "miffy": {
     "sourceUrl": "https://dickbruna.jp/shop/",
-    "sourceCheckedAt": "2026-10-23",
+    "sourceCheckedAt": "2026-10-24",
     "groups": [
       {
         "label": "miffy style",
@@ -111,31 +121,95 @@
     ]
   },
   "chiikawa": {
+    "sourceUrls": [
+      "https://chiikawa-info.jp/ck_land",
+      "https://chiikawa-info.jp/magical_s.html",
+      "https://chiikawa-info.jp/s_fes.html",
+      "https://www.chiikawamogumogu.jp/page-sitemap.xml",
+      "https://www.chiikawa-yaki.com/",
+      "https://chiikawabakery.jp/",
+      "https://chiikawapark-tokyo.jp/",
+      "https://chiikawapark-tokyo.jp/news/x0e64eb94v/",
+      "https://chiikawa-info.jp/ck_w/taipei/index.html"
+    ],
+    "sourceCheckedAt": "2026-10-24",
     "groups": [
       {
         "label": "ちいかわらんど（常設店）",
         "stores": [
-          { "name": "ちいかわらんど 原宿店", "area": "東京・原宿", "country": "JP" },
-          { "name": "ちいかわらんど 新宿店", "area": "東京・新宿", "country": "JP" },
-          { "name": "ちいかわらんど TOKYO Station", "area": "東京・東京車站", "country": "JP" },
-          { "name": "ちいかわらんど 晴空塔城店", "area": "東京・晴空塔", "country": "JP" },
-          { "name": "ちいかわらんど 池袋 PARCO 店", "area": "東京・池袋", "country": "JP" },
-          { "name": "ちいかわらんど 橫濱店", "area": "神奈川・橫濱", "country": "JP" },
-          { "name": "ちいかわらんど 名古屋 PARCO 店", "area": "愛知・名古屋", "country": "JP" },
-          { "name": "ちいかわらんど 大阪梅田店", "area": "大阪・梅田", "country": "JP" },
-          { "name": "ちいかわらんど 心齋橋 PARCO 店", "area": "大阪・心齋橋", "country": "JP" },
-          { "name": "ちいかわらんど 京都四条河原町店", "area": "京都", "country": "JP" },
-          { "name": "ちいかわらんど 金澤 Forus 店", "area": "石川・金澤", "country": "JP" },
-          { "name": "ちいかわらんど 仙台 PARCO 店", "area": "宮城・仙台", "country": "JP" },
-          { "name": "ちいかわらんど 札幌 PARCO 店", "area": "北海道・札幌", "country": "JP" },
-          { "name": "ちいかわらんど 廣島 PARCO 店", "area": "廣島", "country": "JP" },
-          { "name": "ちいかわらんど 福岡 PARCO 店", "area": "福岡", "country": "JP" }
+          { "name": "ちいかわらんど 原宿店", "officialName": "ちいかわらんど 原宿店", "area": "東京・原宿", "country": "JP" },
+          { "name": "ちいかわらんど 新宿店", "officialName": "ちいかわらんど 新宿店", "area": "東京・新宿", "country": "JP" },
+          { "name": "ちいかわらんど TOKYO Station", "officialName": "ちいかわらんど TOKYO Station", "area": "東京・東京車站", "country": "JP" },
+          { "name": "ちいかわらんど 晴空塔城店", "officialName": "ちいかわらんど 東京スカイツリータウン・ソラマチ店", "area": "東京・晴空塔", "country": "JP" },
+          { "name": "ちいかわらんど 池袋 PARCO 店", "officialName": "ちいかわらんど 池袋パルコ店", "area": "東京・池袋", "country": "JP" },
+          { "name": "ちいかわらんど 橫濱店", "officialName": "ちいかわらんど 横浜店", "area": "神奈川・橫濱", "country": "JP" },
+          { "name": "ちいかわらんど 越谷 LakeTown 店", "officialName": "ちいかわらんど 越谷レイクタウン店", "area": "埼玉・越谷", "country": "JP" },
+          { "name": "ちいかわらんど 名古屋 PARCO 店", "officialName": "ちいかわらんど 名古屋パルコ店", "area": "愛知・名古屋", "country": "JP" },
+          { "name": "ちいかわらんど 大阪梅田店", "officialName": "ちいかわらんど 大阪梅田店", "area": "大阪・梅田", "country": "JP" },
+          { "name": "ちいかわらんど 心齋橋 PARCO 店", "officialName": "ちいかわらんど 心斎橋パルコ店", "area": "大阪・心齋橋", "country": "JP" },
+          { "name": "ちいかわらんど 京都四条河原町店", "officialName": "ちいかわらんど 京都四条河原町店", "area": "京都", "country": "JP" },
+          { "name": "ちいかわらんど 金澤 Forus 店", "officialName": "ちいかわらんど 金沢フォーラス店", "area": "石川・金澤", "country": "JP" },
+          { "name": "ちいかわらんど 仙台 PARCO 店", "officialName": "ちいかわらんど 仙台パルコ店", "area": "宮城・仙台", "country": "JP" },
+          { "name": "ちいかわらんど 札幌 PARCO 店", "officialName": "ちいかわらんど 札幌パルコ店", "area": "北海道・札幌", "country": "JP" },
+          { "name": "ちいかわらんど 廣島 PARCO 店", "officialName": "ちいかわらんど 広島パルコ店", "area": "廣島", "country": "JP" },
+          { "name": "ちいかわらんど 福岡 PARCO 店", "officialName": "ちいかわらんど 福岡パルコ店", "area": "福岡", "country": "JP" }
+        ]
+      },
+      {
+        "label": "まじかるちいかわストア（常設店）",
+        "stores": [
+          { "name": "まじかるちいかわストア 新宿丸井店", "officialName": "まじかるちいかわストア 新宿マルイ店", "area": "東京・新宿", "country": "JP" },
+          { "name": "まじかるちいかわストア 名古屋 PARCO 店", "officialName": "まじかるちいかわストア 名古屋パルコ店", "area": "愛知・名古屋", "country": "JP" },
+          { "name": "まじかるちいかわストア 梅田 HEP FIVE 店", "officialName": "まじかるちいかわストア 梅田HEP FIVE店", "area": "大阪・梅田", "country": "JP" }
+        ]
+      },
+      {
+        "label": "シーサーのおみやげやさん（常設店）",
+        "stores": [
+          { "name": "シーサーのおみやげやさん 那霸機場", "officialName": "シーサーのおみやげやさん 那覇空港", "area": "沖繩・那霸機場", "country": "JP" },
+          { "name": "シーサーのおみやげやさん PARCO CITY", "officialName": "シーサーのおみやげやさん サンエー浦添西海岸 PARCO CITY", "area": "沖繩・浦添", "country": "JP" }
+        ]
+      },
+      {
+        "label": "ちいかわもぐもぐ本舗",
+        "stores": [
+          { "name": "ちいかわもぐもぐ本舗 京都伏見店", "officialName": "ちいかわもぐもぐ本舗 京都伏見店", "area": "京都・伏見", "country": "JP" },
+          { "name": "ちいかわもぐもぐ本舗 川越店", "officialName": "ちいかわもぐもぐ本舗 川越店", "area": "埼玉・川越", "country": "JP" },
+          { "name": "ちいかわもぐもぐ本舗 小樽店", "officialName": "ちいかわもぐもぐ本舗 小樽店", "area": "北海道・小樽", "country": "JP" }
+        ]
+      },
+      {
+        "label": "ちいかわベビーカステラ",
+        "stores": [
+          { "name": "ちいかわベビーカステラ 小樽店", "officialName": "ちいかわベビーカステラ", "area": "北海道・小樽", "country": "JP" }
+        ]
+      },
+      {
+        "label": "ちいかわ焼き",
+        "stores": [
+          { "name": "ちいかわ焼き 名古屋 PARCO 店", "officialName": "ちいかわ焼き 名古屋パルコ店", "area": "愛知・名古屋", "country": "JP" },
+          { "name": "ちいかわ焼き AEON MALL 幕張新都心店", "officialName": "ちいかわ焼き イオンモール幕張新都心店", "area": "千葉・幕張", "country": "JP" },
+          { "name": "ちいかわ焼き 橫濱 World Porters 店", "officialName": "ちいかわ焼き 横浜ワールドポーターズ店", "area": "神奈川・橫濱", "country": "JP" }
+        ]
+      },
+      {
+        "label": "ちいかわベーカリー",
+        "stores": [
+          { "name": "ちいかわベーカリー 東京", "officialName": "ちいかわベーカリー", "area": "東京・原宿", "country": "JP" },
+          { "name": "ちいかわベーカリー OSAKA", "officialName": "ちいかわベーカリー OSAKA", "area": "大阪・梅田", "country": "JP" }
+        ]
+      },
+      {
+        "label": "ちいかわパーク（常設設施／商店）",
+        "stores": [
+          { "name": "ちいかわパーク（館內商店）", "officialName": "ちいかわパーク", "area": "東京・池袋", "country": "JP" },
+          { "name": "ちいかわパークストア", "officialName": "ちいかわパークストア", "area": "大阪・梅田（LUCUA SOUTH）", "country": "JP", "opening": "2026/11/24" }
         ]
       },
       {
         "label": "台灣",
         "stores": [
-          { "name": "CHIIKAWA SHOP in TAIPEI", "area": "台北・中山（長安西路19號）", "country": "TW" }
+          { "name": "CHIIKAWA SHOP in TAIPEI", "officialName": "CHIIKAWA SHOP in TAIPEI", "area": "台北・中山（長安西路19號）", "country": "TW" }
         ]
       }
     ]

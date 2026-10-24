@@ -43,6 +43,15 @@ OFFICIAL_HOSTS = {
 # Pages here are official but either duplicate a richer canonical event source,
 # or are known out-of-scope after human review.
 IGNORED_OFFICIAL_PAGES: dict[str, str] = {
+    "https://dickbruna.jp/news/202610/49227/": (
+        "Sapporo venue-specific duplicate of the parsed official three-city page 48222"
+    ),
+    "https://dickbruna.jp/news/202610/49063/": (
+        "Osaka Umeda venue-specific duplicate of the parsed official three-city page 48222"
+    ),
+    "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kyoto/events/202610/000608.html": (
+        "2026-10-25 paid Kyo-nassen coaster-making workshop; hands-on craft experience, no merchandise sale"
+    ),
     "https://www.pokemon-cafe.jp/ja/cafe/news/260821_3462.html": (
         "Pokemon Cafe October seat-reservation schedule, not a new cafe menu or event"
     ),

@@ -21,7 +21,7 @@ Sanrio（三麗鷗）先暫停，因無結構化來源、新聞/Gemini 污染最
 - 吉伊卡哇除了 POP UP STORE 排程，也抓官方首頁上的活動/店鋪卡片、`p26/mck_scpus/index.html` 電影 POP UP 多會場頁與 `chiikawamogumogu.jp` 專門店頁；這類官方子頁、常設店開幕、限定餐飲與原創周邊不一定會進 Google News/RSS，需走結構化解析。
 - `scraper/audit_chiikawa_subpages.py` 會巡覽 `chiikawa-info.jp/index.html` 連出的 `p26/.../index.html` 子頁，對照 `data/events.json` 標記 `parsed` / `ignored` / `needs_review`。`needs_review` 只是稽核提示，不會自動入庫；有明確會場＋日期＋商品/店鋪訊號的 high risk 頁面，應優先補結構化 parser 或人工標成不收。
 - `scraper/audit_official_coverage.py` 會稽核 Pokémon / Miffy 官方入口（Pokémon Cafe、台灣 Pokémon goods、Pokemon Center 店鋪 news/events、Dick Bruna event/news、Kiddy Land/miffy style 搜尋），標記 `parsed` / `ignored` / `needs_review`。每天 agent 需看 high/medium risk；不是自動入庫，而是用來防「官方有但 parser 沒接」。
-- `scraper/audit_miffy_stores.py` 會把 `data/stores.json` 內每間 Miffy 常設據點的 `officialName`，與 `dickbruna.jp/shop/` 當前實體店總表逐一比對。`missing` 代表官方新增但本地漏列，`stale` 代表官方已下架或改名；常設店資料修改後及每日 agent 驗證都要以 `--fail-on-review` 跑到零差異。
+- `scraper/audit_pokemon_stores.py`、`audit_miffy_stores.py`、`audit_chiikawa_stores.py` 會把 `data/stores.json` 內每間常設據點的 `officialName`，與品牌當前官方實體店來源逐一比對。`missing` 代表官方新增但本地漏列，`stale` 代表官方已下架或改名；常設店資料修改後及每日 agent 驗證都要三支以 `--fail-on-review` 跑到零差異。
 - oneheart65 的 Pokémon Center 出張所不是品牌官方站，但本專案以結構化方式解析其排程，日期已列入可信日期來源；完整起訖日的出張所不再進每日 agent 高風險候選。
 - 台灣寶可夢官方商品頁會解析 Next.js embedded data，只收「內頁明確寫 Pokémon Center TAIPEI 登場／販售」的近期商品；例外是官方頁明確列出 `POP UP Promotion`、活動期間與台灣實體活動店鋪者（例如 K.UNO / U-TREASURE）可收為 `popup`。LINE 貼圖/主題、卡牌、遊戲、純線上授權商品一律過濾。Instagram 僅作 agent/人工驗證輔助，不納入純 Python 抓取主來源。
 - 台灣 Pokémon Center 新品若只出現在 NOWnews / Pokemon Hubs 等二手來源，需列入 agent 高風險候選；但若內文明確寫台灣寶可夢中心 / Pokémon Center TAIPEI、實體店開賣日、商品內容，且沒有官方或其他來源反證，可暫留，不因官方商品頁查無同筆就直接刪除。
@@ -30,7 +30,7 @@ Sanrio（三麗鷗）先暫停，因無結構化來源、新聞/Gemini 污染最
 - Miffy 另補 Kiddy Land / miffy style 站內搜尋（`kiddyland.co.jp/?s=miffy`），抓近期官方店頭活動與新品，避免 Google News/RSS 漏掉官方店鋪消息。
 - Kiddy Land / Dick Bruna 頁面常把「最新記事／関連記事」放在本文後方；日期擷取必須先切出主文章，不能讓側欄或相關文章的日期污染活動期間。
 - Miffy 公開顯示欄位（`title` / `locationName` / `summaryZh` / `tags`）若出現 `フラワーミッフィー`，統一轉成 `Flower Miffy`；`sourceTitle` 保留原文，方便回查來源。
-- Miffy 常設店的 `name` 可使用繁中顯示名稱，但 `officialName` 必須保留官方店舖總表原名，供完整性稽核穩定比對；同一地址的複合設施只列一次（例如小樽 `MIFFY PORT TOWN`）。
+- 三品牌常設店的 `name` 可使用繁中顯示名稱，但 `officialName` 必須保留官方店舖名稱，供完整性稽核穩定比對。只收官方品牌專門常設據點或已有明確開幕日的固定店，不收一般經銷通路、線上商店與期間快閃；同一官方複合設施若官方總表只列一張店卡，也只列一次（例如小樽 `MIFFY PORT TOWN`）。
 - 三麗鷗無可解析的結構化官方頁（`sanrio.co.jp` 503／JS 動態／REST 空），目前暫停預設抓取與前端顯示。
 - 抓取被擋（403/429/503）時自動改走 reader 代理 `r.jina.ai`，不放棄（`verify_links.fetch_html` / `check_url`）。
 
@@ -155,3 +155,10 @@ python smoke_test.py     # exit 0=全過
 `_is_past`、`dedup_events`（含不同城/不同檔期不可併、同活動多媒體應併、泛用店名不同新品不可併、實際資料不誤併）。
 
 新增／調整規則時，**同步在 `smoke_test.py` 補一個正例與一個「不可誤殺」反例**。
+
+### 2026-10-23 agent 驗證補強
+
+- Miffy 單店 POP UP 官方標題須取實際札幌／大阪梅田會場，不能把引號中的品牌名當場館；同場次不同官方網址仍共用識別。
+- Chiikawa 聖誕市集、大分快閃店及已確認的寶可夢商品系列以明確主題、國家及開賣日識別；不同國家或不同檔期不合併。
+- 廠商「一般販売／一般販售」新品若無目標實體店訊號，即使來自公司新聞稿也不入庫；快閃活動不受此新品規則影響。
+- Miffy ほかほかダイニング 東京與大阪須分開記錄各自會場與檔期；台北寶可夢10/24新品依10/22延期公告改至10/31，不能算新情報。
