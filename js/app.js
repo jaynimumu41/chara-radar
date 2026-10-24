@@ -1,11 +1,12 @@
 let allEvents = [];
 let updateData = { newEventIds: [] };
-let storeData = {};       // 常設店資料（data/stores.json）
-let activeView = 'events';// 'events' | 'stores'
-let activeBrand = null;   // null = 全部品牌
+let storeData = {};
+let activeView = 'events';
+let activeBrand = null;
 let activeType = 'all';
 let activeCountry = 'all';
 let activeTodayOnly = false;
+let searchQuery = '';
 
 const DATA_CACHE_BUST = Date.now().toString(36);
 
@@ -14,7 +15,9 @@ const BRAND_LABELS = {
   miffy: 'Miffy',
   chiikawa: 'Chiikawa'
 };
+
 const BRAND_ORDER = ['pokemon', 'miffy', 'chiikawa'];
+
 const TYPE_LABELS = {
   popup: '快閃店',
   new_product: '新商品',
@@ -24,193 +27,292 @@ const TYPE_LABELS = {
   lottery: '抽選',
   reservation: '預約'
 };
+
 const CITY_LABELS = {
   Tokyo: '東京', Osaka: '大阪', Kyoto: '京都', Fukuoka: '福岡', Nagoya: '名古屋',
   Nagasaki: '長崎', Saitama: '埼玉', Hokkaido: '北海道', Okinawa: '沖繩',
   Kanagawa: '神奈川', Hyogo: '兵庫', Hiroshima: '廣島', Mie: '三重',
-  Miyagi: '宮城', Chiba: '千葉', Aomori: '青森', Akita: '秋田', Aichi: '愛知', Hyougo: '兵庫',
-  Shizuoka: '靜岡', Ibaraki: '茨城', Tochigi: '栃木', Gunma: '群馬',
-  Nara: '奈良', Shiga: '滋賀', Okayama: '岡山', Kumamoto: '熊本',
-  Ishikawa: '石川', Niigata: '新潟', Nagano: '長野', Gifu: '岐阜', Kochi: '高知', Ehime: '愛媛', Yamaguchi: '山口', Wakayama: '和歌山',
-  Fukushima: '福島', Kagoshima: '鹿兒島', Iwate: '岩手', Toyama: '富山', Fukui: '福井',
-  Miyazaki: '宮崎', Yamanashi: '山梨',
-  Taipei: '台北', Taichung: '台中', Kaohsiung: '高雄', Tainan: '台南',
-  Taoyuan: '桃園', Hsinchu: '新竹', Keelung: '基隆'
+  Miyagi: '宮城', Chiba: '千葉', Aomori: '青森', Akita: '秋田', Aichi: '愛知',
+  Hyougo: '兵庫', Shizuoka: '靜岡', Ibaraki: '茨城', Tochigi: '栃木',
+  Gunma: '群馬', Nara: '奈良', Shiga: '滋賀', Okayama: '岡山',
+  Kumamoto: '熊本', Ishikawa: '石川', Niigata: '新潟', Nagano: '長野',
+  Gifu: '岐阜', Kochi: '高知', Ehime: '愛媛', Yamaguchi: '山口',
+  Wakayama: '和歌山', Fukushima: '福島', Kagoshima: '鹿兒島',
+  Iwate: '岩手', Toyama: '富山', Fukui: '福井', Miyazaki: '宮崎',
+  Yamanashi: '山梨', Taipei: '台北', Taichung: '台中', Kaohsiung: '高雄',
+  Tainan: '台南', Taoyuan: '桃園', Hsinchu: '新竹', Keelung: '基隆'
 };
 
-// ── Utility ──────────────────────────────────────────────────────────────────
+const HTML_ESCAPES = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#039;'
+};
+
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, character => HTML_ESCAPES[character]);
+}
+
+function escapeAttr(value) {
+  return escapeHtml(value);
+}
+
+function icon(name, className = 'ui-icon') {
+  return `<svg class="${escapeAttr(className)}" aria-hidden="true"><use href="#icon-${escapeAttr(name)}"></use></svg>`;
+}
+
+function safeSourceUrl(value) {
+  try {
+    const url = new URL(value, window.location.href);
+    return ['http:', 'https:'].includes(url.protocol) ? url.href : '#';
+  } catch (error) {
+    return '#';
+  }
+}
+
+function localDateKey(date = new Date()) {
+  const pad = value => String(value).padStart(2, '0');
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+}
 
 function today() {
-  return new Date().toISOString().slice(0, 10);
+  return localDateKey();
 }
 
 function dataUrl(path) {
-  const sep = path.includes('?') ? '&' : '?';
-  return `${path}${sep}v=${DATA_CACHE_BUST}`;
+  const separator = path.includes('?') ? '&' : '?';
+  return `${path}${separator}v=${DATA_CACHE_BUST}`;
 }
 
 function daysUntilEnd(endDate) {
   if (!endDate) return null;
-  return Math.ceil((new Date(endDate) - new Date(today())) / 86400000);
+  const end = new Date(`${endDate}T23:59:59`);
+  const now = new Date(`${today()}T00:00:00`);
+  return Math.floor((end - now) / 86400000);
 }
 
 function dayKey(date) {
-  return date ? new Date(date).getTime() : Number.MAX_SAFE_INTEGER;
+  return date ? new Date(`${date}T00:00:00`).getTime() : Number.MAX_SAFE_INTEGER;
 }
 
-function eventSortKey(ev) {
-  const hasEnd = Boolean(ev.endDate);
-  const isFuture = ev.startDate && ev.startDate > today();
+function eventSortKey(event) {
+  const hasEnd = Boolean(event.endDate);
+  const isFuture = event.startDate && event.startDate > today();
   return [
-    hasEnd ? 0 : 1,                         // 有結束日：仍以快結束優先
-    hasEnd ? dayKey(ev.endDate) : dayKey(ev.startDate),
-    isFuture ? 0 : 1,                       // 同日排序時，未來開跑略優先
-    dayKey(ev.startDate),
-    BRAND_LABELS[ev.brand] || ev.brand,
-    ev.title || ''
+    hasEnd ? 0 : 1,
+    hasEnd ? dayKey(event.endDate) : dayKey(event.startDate),
+    isFuture ? 0 : 1,
+    dayKey(event.startDate),
+    BRAND_LABELS[event.brand] || event.brand,
+    event.title || ''
   ];
 }
 
 function compareEvents(a, b) {
-  const ka = eventSortKey(a);
-  const kb = eventSortKey(b);
-  for (let i = 0; i < ka.length; i++) {
-    if (ka[i] < kb[i]) return -1;
-    if (ka[i] > kb[i]) return 1;
+  const aKey = eventSortKey(a);
+  const bKey = eventSortKey(b);
+  for (let index = 0; index < aKey.length; index += 1) {
+    if (aKey[index] < bKey[index]) return -1;
+    if (aKey[index] > bKey[index]) return 1;
   }
   return 0;
 }
 
 function compareTodayEvents(a, b) {
-  const ba = BRAND_ORDER.indexOf(a.brand);
-  const bb = BRAND_ORDER.indexOf(b.brand);
-  if (ba !== bb) return ba - bb;
-  return compareEvents(a, b);
+  const aBrand = BRAND_ORDER.indexOf(a.brand);
+  const bBrand = BRAND_ORDER.indexOf(b.brand);
+  return aBrand === bBrand ? compareEvents(a, b) : aBrand - bBrand;
 }
 
-function isActive(ev) {
-  const t = today();
-  if (ev.endDate && ev.endDate < t) return false;
-  return true;
+function isActive(event) {
+  return !event.endDate || event.endDate >= today();
 }
 
-function formatDate(d) {
-  if (!d) return '';
-  const [, m, day] = d.split('-');
-  return `${m}/${day}`;
+function formatDate(value) {
+  if (!value) return '';
+  const [year, month, day] = value.split('-');
+  return `${year}.${month}.${day}`;
 }
 
-function dateRange(ev) {
-  if (!ev.startDate && !ev.endDate) return '常設 / 日期未定';
-  if (ev.startDate && !ev.endDate) return `${formatDate(ev.startDate)} 起`;
-  if (!ev.startDate && ev.endDate) return `至 ${formatDate(ev.endDate)}`;
-  return `${formatDate(ev.startDate)} – ${formatDate(ev.endDate)}`;
+function dateRange(event) {
+  if (!event.startDate && !event.endDate) return '日期未定';
+  if (event.startDate && !event.endDate) return `${formatDate(event.startDate)} 起`;
+  if (!event.startDate && event.endDate) return `至 ${formatDate(event.endDate)}`;
+  if (event.startDate.slice(0, 4) === event.endDate.slice(0, 4)) {
+    return `${formatDate(event.startDate)} – ${event.endDate.slice(5).replace('-', '.')}`;
+  }
+  return `${formatDate(event.startDate)} – ${formatDate(event.endDate)}`;
 }
 
-// ── Filtering ─────────────────────────────────────────────────────────────────
+function eventLocation(event) {
+  return [CITY_LABELS[event.city] || event.city, event.locationName].filter(Boolean).join(' · ');
+}
 
-function getFiltered() {
-  const updateIds = getTodayUpdateIds();
-  return allEvents.filter(ev => {
-    if (!isActive(ev)) return false;
-    if (activeBrand && ev.brand !== activeBrand) return false;
-    if (activeType !== 'all' && ev.type !== activeType) return false;
-    if (activeCountry !== 'all' && ev.country !== activeCountry) return false;
-    if (activeTodayOnly && !updateIds.has(ev.id)) return false;
-    return true;
-  });
+function normalizeSearch(value) {
+  return String(value || '').normalize('NFKC').toLocaleLowerCase('zh-TW').trim();
+}
+
+function eventSearchText(event) {
+  return normalizeSearch([
+    event.title,
+    event.summaryZh,
+    event.locationName,
+    event.city,
+    CITY_LABELS[event.city],
+    BRAND_LABELS[event.brand],
+    TYPE_LABELS[event.type],
+    ...(event.tags || [])
+  ].filter(Boolean).join(' '));
 }
 
 function getTodayUpdateIds() {
   return new Set(Array.isArray(updateData.newEventIds) ? updateData.newEventIds : []);
 }
 
+function matchesFilters(event, options = {}) {
+  const { ignoreBrand = false, ignoreToday = false } = options;
+  if (!isActive(event)) return false;
+  if (!ignoreBrand && activeBrand && event.brand !== activeBrand) return false;
+  if (activeType !== 'all' && event.type !== activeType) return false;
+  if (activeCountry !== 'all' && event.country !== activeCountry) return false;
+  if (!ignoreToday && activeTodayOnly && !getTodayUpdateIds().has(event.id)) return false;
+  if (searchQuery && !eventSearchText(event).includes(normalizeSearch(searchQuery))) return false;
+  return true;
+}
+
+function getFiltered(options = {}) {
+  return allEvents.filter(event => matchesFilters(event, options));
+}
+
 function getTodaySummaryEvents() {
   const updateIds = getTodayUpdateIds();
-  return allEvents.filter(ev => {
-    if (!isActive(ev)) return false;
-    if (activeType !== 'all' && ev.type !== activeType) return false;
-    if (activeCountry !== 'all' && ev.country !== activeCountry) return false;
-    return updateIds.has(ev.id);
-  });
+  return allEvents.filter(event =>
+    updateIds.has(event.id) && matchesFilters(event, { ignoreToday: true })
+  );
 }
 
 function renderTodaySummary() {
-  const el = document.getElementById('today-summary');
-  if (!el) return;
+  const element = document.getElementById('today-summary');
+  if (!element) return;
   if (!activeTodayOnly) {
-    el.hidden = true;
-    el.innerHTML = '';
+    element.hidden = true;
+    element.innerHTML = '';
     return;
   }
+
   const counts = Object.fromEntries(BRAND_ORDER.map(brand => [brand, 0]));
-  getTodaySummaryEvents().forEach(ev => {
-    if (Object.prototype.hasOwnProperty.call(counts, ev.brand)) counts[ev.brand] += 1;
+  getTodaySummaryEvents().forEach(event => {
+    if (Object.prototype.hasOwnProperty.call(counts, event.brand)) counts[event.brand] += 1;
   });
-  el.hidden = false;
-  el.innerHTML = BRAND_ORDER.map(brand =>
-    `<span class="today-chip today-${brand}">${BRAND_LABELS[brand]} ${counts[brand]}</span>`
+
+  element.hidden = false;
+  element.innerHTML = BRAND_ORDER.map(brand =>
+    `<span class="today-chip today-${brand}"><span class="brand-dot brand-dot-${brand}" aria-hidden="true"></span>${BRAND_LABELS[brand]} ${counts[brand]}</span>`
   ).join('');
 }
 
-// ── Card rendering ────────────────────────────────────────────────────────────
+function urgentLabel(days) {
+  if (days === 0) return '今天結束';
+  if (days === 1) return '明天結束';
+  return `剩 ${days} 天`;
+}
 
-function renderCard(ev) {
-  const days = daysUntilEnd(ev.endDate);
-  const urgentBadge = (days !== null && days <= 7 && days >= 0)
-    ? `<span class="badge badge-urgent">剩 ${days} 天</span>` : '';
-  const resBadge = ev.needReservation ? `<span class="badge badge-reservation">需預約</span>` : '';
-  const limBadge = ev.hasLimitedGoods ? `<span class="badge badge-limited">限定商品</span>` : '';
-  const countryBadge = `<span class="badge badge-${ev.country.toLowerCase()}">${ev.country === 'JP' ? '🇯🇵 日本' : '🇹🇼 台灣'}</span>`;
+function renderBadges(event, options = {}) {
+  const { grouped = false } = options;
+  const days = daysUntilEnd(event.endDate);
+  const badges = [
+    `<span class="badge badge-brand-${escapeAttr(event.brand)}">${escapeHtml(BRAND_LABELS[event.brand] || event.brand)}</span>`,
+    `<span class="badge badge-type">${grouped ? '系列活動' : escapeHtml(TYPE_LABELS[event.type] || event.type)}</span>`
+  ];
 
-  const location = [CITY_LABELS[ev.city] || ev.city, ev.locationName].filter(Boolean).join(' · ');
-  const tags = (ev.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
+  if (days !== null && days >= 0 && days <= 7) {
+    badges.push(`<span class="badge badge-urgent">${urgentLabel(days)}</span>`);
+  }
+  if (event.needReservation) badges.push('<span class="badge badge-reservation">需預約</span>');
+  if (event.hasLimitedGoods) badges.push('<span class="badge badge-limited">限定商品</span>');
+  badges.push(`<span class="badge badge-${event.country === 'TW' ? 'tw' : 'jp'}">${event.country === 'TW' ? '台灣' : '日本'}</span>`);
+  return badges.join('');
+}
 
+function renderFacts(event) {
+  const location = eventLocation(event);
   return `
-    <div class="event-card" data-brand="${ev.brand}" data-id="${ev.id}">
-      <div class="card-header">
-        <div class="card-badges">
-          <span class="badge badge-brand-${ev.brand}">${BRAND_LABELS[ev.brand]}</span>
-          <span class="badge badge-type">${TYPE_LABELS[ev.type] || ev.type}</span>
-          ${urgentBadge}${resBadge}${limBadge}${countryBadge}
-        </div>
+    <div class="card-facts">
+      <div class="card-fact">
+        ${icon('map-pin')}
+        <span class="fact-copy">
+          <span class="fact-label">地點</span>
+          <span class="fact-value">${escapeHtml(location || '地點未定')}</span>
+        </span>
       </div>
-      <div class="card-title">${ev.title}</div>
-      <div class="card-summary">${ev.summaryZh || ''}</div>
-      <div class="card-meta">
-        ${location ? `<div class="card-meta-row">📍 ${location}</div>` : ''}
-        <div class="card-meta-row">📅 ${dateRange(ev)}</div>
-      </div>
-      <div class="card-footer">
-        <div class="card-tags">${tags}</div>
-        <a class="card-link" href="${ev.sourceUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()">來源 ↗</a>
+      <div class="card-fact">
+        ${icon('calendar')}
+        <span class="fact-copy">
+          <span class="fact-label">期間</span>
+          <span class="fact-value">${escapeHtml(dateRange(event))}</span>
+        </span>
       </div>
     </div>`;
 }
 
+function renderTags(tags) {
+  return (tags || []).map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('');
+}
+
+function sourceLink(event, label = '查看來源') {
+  return `<a class="card-link" href="${escapeAttr(safeSourceUrl(event.sourceUrl))}" target="_blank" rel="noopener">
+    <span>${escapeHtml(label)}</span>${icon('external-link')}
+  </a>`;
+}
+
+function renderCard(event) {
+  const summary = event.summaryZh
+    ? `<p class="card-summary">${escapeHtml(event.summaryZh)}</p>`
+    : '';
+  return `
+    <article class="event-card" data-brand="${escapeAttr(event.brand)}" data-id="${escapeAttr(event.id)}">
+      <div class="event-card-inner">
+        <div class="card-header">
+          <div class="card-badges">${renderBadges(event)}</div>
+        </div>
+        <h2 class="card-title">${escapeHtml(event.title)}</h2>
+        ${summary}
+        ${renderFacts(event)}
+        <div class="card-footer">
+          <div class="card-tags">${renderTags(event.tags)}</div>
+          ${sourceLink(event)}
+        </div>
+      </div>
+    </article>`;
+}
+
 function buildEventUnits(sorted, filtered) {
-  const allById = new Map(allEvents.map(ev => [ev.id, ev]));
-  const visibleIds = new Set(filtered.map(ev => ev.id));
+  const allById = new Map(allEvents.map(event => [event.id, event]));
+  const visibleIds = new Set(filtered.map(event => event.id));
   const visibleChildren = new Map();
   const allChildren = new Map();
 
-  allEvents.forEach(ev => {
-    if (!ev.parentEventId) return;
-    if (!allChildren.has(ev.parentEventId)) allChildren.set(ev.parentEventId, []);
-    allChildren.get(ev.parentEventId).push(ev);
+  allEvents.forEach(event => {
+    if (!event.parentEventId) return;
+    if (!allChildren.has(event.parentEventId)) allChildren.set(event.parentEventId, []);
+    allChildren.get(event.parentEventId).push(event);
   });
-  filtered.forEach(ev => {
-    if (!ev.parentEventId) return;
-    if (!visibleChildren.has(ev.parentEventId)) visibleChildren.set(ev.parentEventId, []);
-    visibleChildren.get(ev.parentEventId).push(ev);
+
+  filtered.forEach(event => {
+    if (!event.parentEventId) return;
+    if (!visibleChildren.has(event.parentEventId)) visibleChildren.set(event.parentEventId, []);
+    visibleChildren.get(event.parentEventId).push(event);
   });
 
   const units = [];
   const renderedGroups = new Set();
-  sorted.forEach(ev => {
-    const parentId = ev.parentEventId || (allChildren.has(ev.id) ? ev.id : '');
+
+  sorted.forEach(event => {
+    const parentId = event.parentEventId || (allChildren.has(event.id) ? event.id : '');
     if (!parentId) {
-      units.push({ kind: 'event', event: ev });
+      units.push({ kind: 'event', event });
       return;
     }
     if (renderedGroups.has(parentId)) return;
@@ -218,74 +320,73 @@ function buildEventUnits(sorted, filtered) {
     const parent = allById.get(parentId);
     const children = (visibleChildren.get(parentId) || []).sort(compareEvents);
     if (!parent || children.length === 0) {
-      if (visibleIds.has(ev.id)) units.push({ kind: 'event', event: ev });
+      if (visibleIds.has(event.id)) units.push({ kind: 'event', event });
       return;
     }
+
     renderedGroups.add(parentId);
     units.push({ kind: 'group', parent, children });
   });
+
   return units;
 }
 
-function renderGroupChild(ev) {
-  const location = [CITY_LABELS[ev.city] || ev.city, ev.locationName].filter(Boolean).join(' · ');
+function renderGroupChild(event) {
   const badges = [
-    `<span class="badge badge-type">${TYPE_LABELS[ev.type] || ev.type}</span>`,
-    ev.needReservation ? '<span class="badge badge-reservation">需預約</span>' : '',
-    ev.hasLimitedGoods ? '<span class="badge badge-limited">限定商品</span>' : ''
+    `<span class="badge badge-type">${escapeHtml(TYPE_LABELS[event.type] || event.type)}</span>`,
+    event.needReservation ? '<span class="badge badge-reservation">需預約</span>' : '',
+    event.hasLimitedGoods ? '<span class="badge badge-limited">限定商品</span>' : ''
   ].join('');
+  const summary = event.summaryZh
+    ? `<p class="group-child-summary">${escapeHtml(event.summaryZh)}</p>`
+    : '';
+  const location = eventLocation(event);
+
   return `
-    <div class="group-child" data-id="${ev.id}">
+    <div class="group-child" data-id="${escapeAttr(event.id)}">
       <div class="group-child-main">
         <div class="group-child-badges">${badges}</div>
-        <div class="group-child-title">${ev.title}</div>
-        <div class="group-child-summary">${ev.summaryZh || ''}</div>
+        <h3 class="group-child-title">${escapeHtml(event.title)}</h3>
+        ${summary}
         <div class="group-child-meta">
-          ${location ? `<span>📍 ${location}</span>` : ''}
-          <span>📅 ${dateRange(ev)}</span>
+          ${location ? `<span>${icon('map-pin')}${escapeHtml(location)}</span>` : ''}
+          <span>${icon('calendar')}${escapeHtml(dateRange(event))}</span>
         </div>
       </div>
-      <a class="group-child-link" href="${ev.sourceUrl}" target="_blank" rel="noopener">來源 ↗</a>
+      <a class="group-child-link" href="${escapeAttr(safeSourceUrl(event.sourceUrl))}" target="_blank" rel="noopener">
+        <span>查看來源</span>${icon('external-link')}
+      </a>
     </div>`;
 }
 
 function renderEventGroup(parent, children) {
-  const days = daysUntilEnd(parent.endDate);
-  const urgentBadge = (days !== null && days <= 7 && days >= 0)
-    ? `<span class="badge badge-urgent">剩 ${days} 天</span>` : '';
-  const hasReservation = parent.needReservation || children.some(ev => ev.needReservation);
-  const hasLimitedGoods = parent.hasLimitedGoods || children.some(ev => ev.hasLimitedGoods);
-  const location = [CITY_LABELS[parent.city] || parent.city, parent.locationName].filter(Boolean).join(' · ');
-  const tags = (parent.tags || []).map(t => `<span class="tag">${t}</span>`).join('');
+  const groupedEvent = {
+    ...parent,
+    needReservation: parent.needReservation || children.some(event => event.needReservation),
+    hasLimitedGoods: parent.hasLimitedGoods || children.some(event => event.hasLimitedGoods)
+  };
+  const summary = parent.summaryZh
+    ? `<p class="card-summary">${escapeHtml(parent.summaryZh)}</p>`
+    : '';
 
   return `
-    <details class="event-card event-group-card" data-brand="${parent.brand}" data-id="${parent.id}">
+    <details class="event-card event-group-card" data-brand="${escapeAttr(parent.brand)}" data-id="${escapeAttr(parent.id)}">
       <summary class="group-summary">
         <div class="card-header">
-          <div class="card-badges">
-            <span class="badge badge-brand-${parent.brand}">${BRAND_LABELS[parent.brand]}</span>
-            <span class="badge badge-type">系列活動</span>
-            ${urgentBadge}
-            ${hasReservation ? '<span class="badge badge-reservation">含需預約</span>' : ''}
-            ${hasLimitedGoods ? '<span class="badge badge-limited">有限定商品</span>' : ''}
-            <span class="badge badge-${parent.country.toLowerCase()}">${parent.country === 'JP' ? '🇯🇵 日本' : '🇹🇼 台灣'}</span>
-          </div>
+          <div class="card-badges">${renderBadges(groupedEvent, { grouped: true })}</div>
         </div>
-        <div class="card-title">${parent.title}</div>
-        <div class="card-summary">${parent.summaryZh || ''}</div>
-        <div class="card-meta">
-          ${location ? `<div class="card-meta-row">📍 ${location}</div>` : ''}
-          <div class="card-meta-row">📅 ${dateRange(parent)}</div>
-        </div>
+        <h2 class="card-title">${escapeHtml(parent.title)}</h2>
+        ${summary}
+        ${renderFacts(parent)}
         <div class="group-toggle">
           <span>${children.length} 個相關場域與方案</span>
-          <span class="group-chevron" aria-hidden="true"></span>
+          ${icon('chevron-down')}
         </div>
       </summary>
       <div class="group-children">${children.map(renderGroupChild).join('')}</div>
       <div class="card-footer group-footer">
-        <div class="card-tags">${tags}</div>
-        <a class="card-link" href="${parent.sourceUrl}" target="_blank" rel="noopener">母活動來源 ↗</a>
+        <div class="card-tags">${renderTags(parent.tags)}</div>
+        ${sourceLink(parent, '母活動來源')}
       </div>
     </details>`;
 }
@@ -296,207 +397,342 @@ function renderEventUnit(unit) {
     : renderCard(unit.event);
 }
 
-// ── Home render ───────────────────────────────────────────────────────────────
+function setMetricSlot(index, value, label, tone) {
+  const metrics = document.querySelectorAll('.metric');
+  const valueIds = ['stat-total', 'stat-urgent', 'stat-reservation', 'stat-limited'];
+  const labelIds = ['stat-total-label', 'stat-urgent-label', 'stat-reservation-label', 'stat-limited-label'];
+  document.getElementById(valueIds[index]).textContent = value ?? '—';
+  document.getElementById(labelIds[index]).textContent = label;
+  metrics[index].className = `metric metric-${tone}`;
+}
+
+function setEventMetrics(events) {
+  const urgentCount = events.filter(event => {
+    const days = daysUntilEnd(event.endDate);
+    return days !== null && days >= 0 && days <= 7;
+  }).length;
+  setMetricSlot(0, events.length, '有效情報', 'primary');
+  setMetricSlot(1, urgentCount, '7 天內結束', 'urgent');
+  setMetricSlot(2, events.filter(event => event.needReservation).length, '需要預約', 'reservation');
+  setMetricSlot(3, events.filter(event => event.hasLimitedGoods).length, '有限定商品', 'limited');
+  document.getElementById('metrics-context').textContent = '依目前篩選條件';
+}
+
+function brandStoreCount(brand) {
+  const brandData = storeData[brand];
+  if (!brandData) return 0;
+  if (brandData.linksOnly) return (brandData.links || []).length;
+  return (brandData.groups || []).reduce((total, group) => total + (group.stores || []).length, 0);
+}
+
+function setStoreMetrics() {
+  const counts = Object.fromEntries(BRAND_ORDER.map(brand => [brand, brandStoreCount(brand)]));
+  setMetricSlot(0, Object.values(counts).reduce((sum, count) => sum + count, 0), '常設店總數', 'primary');
+  setMetricSlot(1, counts.pokemon, 'Pokémon', 'pokemon');
+  setMetricSlot(2, counts.miffy, 'Miffy', 'miffy');
+  setMetricSlot(3, counts.chiikawa, 'Chiikawa', 'chiikawa');
+  document.getElementById('metrics-context').textContent = '官方常設據點';
+}
+
+function updateBrandCounts() {
+  const counts = {};
+  if (activeView === 'stores') {
+    BRAND_ORDER.forEach(brand => {
+      counts[brand] = brandStoreCount(brand);
+    });
+  } else {
+    const candidates = getFiltered({ ignoreBrand: true });
+    BRAND_ORDER.forEach(brand => {
+      counts[brand] = candidates.filter(event => event.brand === brand).length;
+    });
+  }
+
+  const total = BRAND_ORDER.reduce((sum, brand) => sum + counts[brand], 0);
+  document.getElementById('brand-count-all').textContent = total;
+  BRAND_ORDER.forEach(brand => {
+    document.getElementById(`brand-count-${brand}`).textContent = counts[brand];
+  });
+}
+
+function hasActiveFilters() {
+  return Boolean(
+    activeBrand ||
+    activeType !== 'all' ||
+    activeCountry !== 'all' ||
+    activeTodayOnly ||
+    searchQuery
+  );
+}
+
+function activeFilterLabel() {
+  const labels = [];
+  if (activeBrand) labels.push(BRAND_LABELS[activeBrand]);
+  if (activeType !== 'all') labels.push(TYPE_LABELS[activeType]);
+  if (activeCountry !== 'all') labels.push(activeCountry === 'JP' ? '日本' : '台灣');
+  if (activeTodayOnly) labels.push('今日新增');
+  if (searchQuery) labels.push(`搜尋「${searchQuery}」`);
+  return labels.join(' · ');
+}
+
+function syncControls() {
+  document.querySelectorAll('.view-tab').forEach(tab => {
+    const isActiveTab = tab.dataset.view === activeView;
+    tab.classList.toggle('active', isActiveTab);
+    tab.setAttribute('aria-pressed', String(isActiveTab));
+  });
+
+  document.querySelectorAll('.brand-pill').forEach(button => {
+    const brand = button.dataset.brand;
+    const isActiveButton = brand === 'all' ? !activeBrand : activeBrand === brand;
+    button.classList.toggle('active', isActiveButton);
+    button.setAttribute('aria-pressed', String(isActiveButton));
+  });
+
+  const searchInput = document.getElementById('filter-search');
+  const typeSelect = document.getElementById('filter-type');
+  const countrySelect = document.getElementById('filter-country');
+  const todayButton = document.getElementById('filter-today');
+  searchInput.value = searchQuery;
+  typeSelect.value = activeType;
+  countrySelect.value = activeCountry;
+  document.getElementById('clear-search').hidden = !searchQuery;
+  todayButton.classList.toggle('active', activeTodayOnly);
+  todayButton.setAttribute('aria-pressed', String(activeTodayOnly));
+  document.getElementById('reset-filters').hidden = !hasActiveFilters();
+
+  const updateIds = getTodayUpdateIds();
+  const availableToday = allEvents.filter(event => isActive(event) && updateIds.has(event.id)).length;
+  document.getElementById('today-filter-count').textContent = availableToday;
+}
+
+function updatePageChrome() {
+  const isStores = activeView === 'stores';
+  document.getElementById('page-title').textContent = isStores ? '常設店' : '活動情報';
+  document.getElementById('page-description').textContent = isStores
+    ? 'Pokémon、Miffy、Chiikawa 在日本與台灣的官方常設據點'
+    : 'Pokémon、Miffy、Chiikawa 的期間限定活動與實體情報';
+  document.getElementById('filter-bar').hidden = isStores;
+  document.getElementById('sort-note').hidden = isStores;
+}
 
 function renderHome() {
-  if (activeView === 'stores') return renderStores();
-  return renderEvents();
+  syncControls();
+  updatePageChrome();
+  updateBrandCounts();
+  if (activeView === 'stores') {
+    renderStores();
+  } else {
+    renderEvents();
+  }
 }
 
 function renderEvents() {
-  // 顯示活動相關 UI
-  document.getElementById('filter-bar').style.display = '';
-  document.getElementById('events-grid').style.display = '';
-  document.getElementById('stores-wrap').style.display = 'none';
-  document.getElementById('stat-total-label').textContent = '目前有效情報';
+  const grid = document.getElementById('events-grid');
+  const stores = document.getElementById('stores-wrap');
+  grid.hidden = false;
+  stores.hidden = true;
 
   const filtered = getFiltered();
-  renderTodaySummary();
-
-  // 統計（隨篩選動態變化）
-  const urgentCount = filtered.filter(ev => {
-    const d = daysUntilEnd(ev.endDate);
-    return d !== null && d <= 7 && d >= 0;
-  }).length;
-  setStats(filtered.length, urgentCount,
-    filtered.filter(e => e.needReservation).length,
-    filtered.filter(e => e.hasLimitedGoods).length);
-
-  // 排序：有結束日的快結束在前；只有開始日的排在後段並依開始日排序。
   const sorted = [...filtered].sort(activeTodayOnly ? compareTodayEvents : compareEvents);
   const units = buildEventUnits(sorted, filtered);
+  setEventMetrics(filtered);
+  renderTodaySummary();
 
-  document.getElementById('events-count').textContent = activeTodayOnly
-    ? `今日新增 ${filtered.length} 筆`
-    : (units.length === filtered.length
-      ? `共 ${filtered.length} 筆`
-      : `共 ${filtered.length} 筆 · 整理為 ${units.length} 組`);
+  const countLabel = activeTodayOnly ? `${filtered.length} 筆今日新增` : `${filtered.length} 筆情報`;
+  document.getElementById('events-count').textContent = countLabel;
+  const groupingLabel = units.length < filtered.length ? `整理為 ${units.length} 組` : '';
+  document.getElementById('active-filter-summary').textContent = [activeFilterLabel(), groupingLabel].filter(Boolean).join(' · ');
 
-  const grid = document.getElementById('events-grid');
   if (sorted.length === 0) {
-    const emptyText = activeTodayOnly ? '今天沒有比前次版本新增的情報' : '目前沒有符合條件的情報';
-    grid.innerHTML = `<div class="no-results"><p>🔍</p><p>${emptyText}</p></div>`;
+    const title = activeTodayOnly ? '目前沒有符合條件的今日新增' : '找不到符合條件的情報';
+    const copy = hasActiveFilters() ? '調整或重設篩選條件後再看看。' : '資料更新後會顯示在這裡。';
+    grid.innerHTML = `
+      <div class="no-results">
+        ${icon('search', 'ui-icon empty-icon')}
+        <strong>${title}</strong>
+        <span>${copy}</span>
+      </div>`;
     return;
   }
+
   grid.innerHTML = units.map(renderEventUnit).join('');
-}
-
-function setStats(total, urgent, reservation, limited) {
-  const t = v => (v === null ? '—' : v);
-  document.getElementById('stat-total').textContent = t(total);
-  document.getElementById('stat-urgent').textContent = t(urgent);
-  document.getElementById('stat-reservation').textContent = t(reservation);
-  document.getElementById('stat-limited').textContent = t(limited);
-}
-
-// ── 常設店檢視 ──────────────────────────────────────────────────────────────────
-
-function brandStoreCount(brand) {
-  const b = storeData[brand];
-  if (!b) return 0;
-  if (b.linksOnly) return b.links.length;
-  return (b.groups || []).reduce((n, g) => n + g.stores.length, 0);
-}
-
-function renderStores() {
-  // 常設店不需要類型/國家/城市篩選
-  document.getElementById('filter-bar').style.display = 'none';
-  const summary = document.getElementById('today-summary');
-  if (summary) {
-    summary.hidden = true;
-    summary.innerHTML = '';
-  }
-  document.getElementById('events-grid').style.display = 'none';
-  const wrap = document.getElementById('stores-wrap');
-  wrap.style.display = '';
-
-  const brands = activeBrand ? [activeBrand] : ['pokemon', 'miffy', 'chiikawa'];
-
-  // 統計：只顯示「目前有效情報」=常設店數量，其餘三欄留白
-  const total = brands.reduce((n, b) => n + brandStoreCount(b), 0);
-  setStats(total, null, null, null);
-  document.getElementById('stat-total-label').textContent = '常設店';
-  document.getElementById('events-count').textContent = `共 ${total} 間`;
-
-  const sections = brands.map(b => renderBrandStores(b)).filter(Boolean).join('');
-  wrap.innerHTML = sections ||
-    `<div class="no-results"><p>🏬</p><p>這個品牌暫無常設店資料</p></div>`;
 }
 
 function renderBrandStores(brand) {
   const data = storeData[brand];
   if (!data) return '';
-  const head = `<div class="store-brand-head"><span class="badge badge-brand-${brand}">${BRAND_LABELS[brand]}</span></div>`;
+  const total = brandStoreCount(brand);
+  const heading = `
+    <header class="store-brand-head">
+      <div class="store-brand-title">
+        <span class="brand-dot brand-dot-${brand}" aria-hidden="true"></span>
+        <span>${escapeHtml(BRAND_LABELS[brand])}</span>
+      </div>
+      <span class="store-total">${total} 間</span>
+    </header>`;
 
   if (data.linksOnly) {
-    const links = data.links.map(l =>
-      `<a class="store-link" href="${l.url}" target="_blank" rel="noopener">${l.label} ↗</a>`).join('');
-    return `<div class="store-section">${head}
-      <div class="store-note">${data.note || ''}</div>
-      <div class="store-links">${links}</div></div>`;
+    const links = (data.links || []).map(link => `
+      <a class="store-link" href="${escapeAttr(safeSourceUrl(link.url))}" target="_blank" rel="noopener">
+        <span>${escapeHtml(link.label)}</span>${icon('external-link')}
+      </a>`).join('');
+    return `
+      <section class="store-section" data-brand="${brand}">
+        ${heading}
+        ${data.note ? `<p class="store-note">${escapeHtml(data.note)}</p>` : ''}
+        <div class="store-links">${links}</div>
+      </section>`;
   }
 
-  const groups = (data.groups || []).map(g => {
-    const items = g.stores.map(s => {
-      const flag = s.country === 'TW' ? '🇹🇼' : '🇯🇵';
-      const open = s.opening ? `<span class="store-open">（${s.opening} 開幕）</span>` : '';
-      return `<div class="store-item">
-        <span class="store-name">${s.name}${open}</span>
-        <span class="store-area">${flag} ${s.area}</span>
+  const groups = (data.groups || []).map(group => {
+    const items = (group.stores || []).map(store => `
+      <div class="store-item">
+        <div class="store-name">
+          ${escapeHtml(store.name)}
+          ${store.opening ? `<span class="store-open">${escapeHtml(store.opening)} 開幕</span>` : ''}
+        </div>
+        <span class="store-area">${escapeHtml(store.country === 'TW' ? '台灣' : '日本')} · ${escapeHtml(store.area)}</span>
+      </div>`).join('');
+    return `
+      <div class="store-group">
+        <div class="store-group-label">
+          <span>${escapeHtml(group.label)}</span>
+          <span class="store-group-count">${(group.stores || []).length}</span>
+        </div>
+        <div class="store-items">${items}</div>
       </div>`;
-    }).join('');
-    return `<div class="store-group">
-      <div class="store-group-label">${g.label}<span class="store-group-count">${g.stores.length}</span></div>
-      <div class="store-items">${items}</div>
-    </div>`;
   }).join('');
 
-  return `<div class="store-section">${head}${groups}</div>`;
+  return `
+    <section class="store-section" data-brand="${brand}">
+      ${heading}
+      <div class="store-groups">${groups}</div>
+    </section>`;
 }
 
-// ── Init ──────────────────────────────────────────────────────────────────────
+function renderStores() {
+  const grid = document.getElementById('events-grid');
+  const wrap = document.getElementById('stores-wrap');
+  grid.hidden = true;
+  wrap.hidden = false;
+  document.getElementById('today-summary').hidden = true;
+  setStoreMetrics();
+
+  const brands = activeBrand ? [activeBrand] : BRAND_ORDER;
+  const total = brands.reduce((sum, brand) => sum + brandStoreCount(brand), 0);
+  document.getElementById('events-count').textContent = `${total} 間常設店`;
+  document.getElementById('active-filter-summary').textContent = activeBrand
+    ? BRAND_LABELS[activeBrand]
+    : '全部品牌';
+
+  const sections = brands.map(renderBrandStores).filter(Boolean).join('');
+  wrap.innerHTML = sections || `
+    <div class="no-results">
+      ${icon('building', 'ui-icon empty-icon')}
+      <strong>目前沒有常設店資料</strong>
+      <span>切換其他品牌後再看看。</span>
+    </div>`;
+}
 
 function renderLastUpdated(iso) {
-  const el = document.getElementById('last-updated');
-  if (!el) return;
-  const d = iso ? new Date(iso) : null;
-  if (!d || isNaN(d)) { el.textContent = ''; return; }
-  const pad = n => String(n).padStart(2, '0');
-  el.textContent = `最後更新時間：${d.getMonth() + 1}月${d.getDate()}日 ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  const element = document.getElementById('last-updated');
+  const status = element.closest('.sync-status');
+  const date = iso ? new Date(iso) : null;
+  if (!date || Number.isNaN(date.getTime())) {
+    element.textContent = '更新時間未提供';
+    status.classList.add('is-unknown');
+    return;
+  }
+  const pad = value => String(value).padStart(2, '0');
+  element.textContent = `最後更新 ${date.getMonth() + 1}/${date.getDate()} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
+  status.classList.remove('is-unknown');
+}
+
+async function fetchJson(path) {
+  const response = await fetch(dataUrl(path), { cache: 'no-store' });
+  if (!response.ok) throw new Error(`HTTP ${response.status}: ${path}`);
+  return response.json();
+}
+
+function bindControls() {
+  document.querySelectorAll('.view-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      activeView = tab.dataset.view;
+      renderHome();
+    });
+  });
+
+  document.querySelectorAll('.brand-pill').forEach(button => {
+    button.addEventListener('click', () => {
+      const brand = button.dataset.brand;
+      activeBrand = brand === 'all' || activeBrand === brand ? null : brand;
+      renderHome();
+    });
+  });
+
+  document.getElementById('filter-search').addEventListener('input', event => {
+    searchQuery = event.target.value.trim();
+    renderHome();
+  });
+
+  document.getElementById('clear-search').addEventListener('click', () => {
+    searchQuery = '';
+    document.getElementById('filter-search').focus();
+    renderHome();
+  });
+
+  document.getElementById('filter-type').addEventListener('change', event => {
+    activeType = event.target.value;
+    renderHome();
+  });
+
+  document.getElementById('filter-country').addEventListener('change', event => {
+    activeCountry = event.target.value;
+    renderHome();
+  });
+
+  document.getElementById('filter-today').addEventListener('click', () => {
+    activeTodayOnly = !activeTodayOnly;
+    renderHome();
+  });
+
+  document.getElementById('reset-filters').addEventListener('click', () => {
+    activeBrand = null;
+    activeType = 'all';
+    activeCountry = 'all';
+    activeTodayOnly = false;
+    searchQuery = '';
+    renderHome();
+  });
 }
 
 async function init() {
   const grid = document.getElementById('events-grid');
-  if (grid) grid.innerHTML = '<p class="grid-msg">載入中…</p>';
+  grid.innerHTML = '<p class="grid-msg">正在整理最新情報…</p>';
 
-  // 活動情報優先載入；失敗就顯示提示，不要整頁空白
-  try {
-    const evRes = await fetch(dataUrl('data/events.json'), { cache: 'no-store' });
-    if (!evRes.ok) throw new Error('HTTP ' + evRes.status);
-    allEvents = await evRes.json();
-  } catch (e) {
-    if (grid) grid.innerHTML = '<p class="grid-msg">情報載入失敗，請稍後重新整理 🙏</p>';
+  const results = await Promise.allSettled([
+    fetchJson('data/events.json'),
+    fetchJson('data/stores.json'),
+    fetchJson('data/today_updates.json'),
+    fetchJson('data/last_updated.json')
+  ]);
+
+  if (results[0].status !== 'fulfilled') {
+    grid.innerHTML = `
+      <div class="no-results">
+        ${icon('rotate-ccw', 'ui-icon empty-icon')}
+        <strong>情報載入失敗</strong>
+        <span>請稍後重新整理頁面。</span>
+      </div>`;
+    renderLastUpdated(null);
     return;
   }
-  // 常設店資料載入失敗不影響活動顯示
-  try {
-    const stRes = await fetch(dataUrl('data/stores.json'), { cache: 'no-store' });
-    storeData = stRes.ok ? await stRes.json() : (storeData || {});
-  } catch (e) {
-    storeData = storeData || {};
-  }
-  try {
-    const upRes = await fetch(dataUrl('data/today_updates.json'), { cache: 'no-store' });
-    updateData = upRes.ok ? await upRes.json() : { newEventIds: [] };
-  } catch (e) {
-    updateData = { newEventIds: [] };
-  }
 
-  // 最後更新時間（每日 16:00 排程跑完寫入；讀不到就留空不顯示）
-  fetch(dataUrl('data/last_updated.json'), { cache: 'no-store' })
-    .then(r => r.ok ? r.json() : null)
-    .then(j => renderLastUpdated(j && j.updatedAt))
-    .catch(() => {});
-
-  // 檢視切換：活動情報 / 常設店
-  document.querySelectorAll('.view-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      activeView = tab.dataset.view;
-      document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      renderHome();
-    });
-  });
-
-  // Brand pills — 可切換：再點一次取消（回到全部）
-  document.querySelectorAll('.brand-pill').forEach(pill => {
-    pill.addEventListener('click', () => {
-      const b = pill.dataset.brand;
-      if (activeBrand === b) {
-        activeBrand = null;
-        pill.classList.remove('active');
-      } else {
-        activeBrand = b;
-        document.querySelectorAll('.brand-pill').forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
-      }
-      renderHome();
-    });
-  });
-
-  // Dropdown filters
-  document.getElementById('filter-type').addEventListener('change', e => { activeType = e.target.value; renderHome(); });
-  document.getElementById('filter-country').addEventListener('change', e => { activeCountry = e.target.value; renderHome(); });
-  const todayBtn = document.getElementById('filter-today');
-  if (todayBtn) {
-    todayBtn.addEventListener('click', () => {
-      activeTodayOnly = !activeTodayOnly;
-      todayBtn.classList.toggle('active', activeTodayOnly);
-      todayBtn.setAttribute('aria-pressed', activeTodayOnly ? 'true' : 'false');
-      renderHome();
-    });
-  }
-
+  allEvents = results[0].value;
+  storeData = results[1].status === 'fulfilled' ? results[1].value : {};
+  updateData = results[2].status === 'fulfilled' ? results[2].value : { newEventIds: [] };
+  renderLastUpdated(results[3].status === 'fulfilled' ? results[3].value.updatedAt : null);
+  bindControls();
   renderHome();
 }
 

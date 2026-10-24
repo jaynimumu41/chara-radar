@@ -1,12 +1,12 @@
 {
-  "name": "抓住 Pokémon · Miffy · Chiikawa !",
-  "short_name": "抓住情報",
+  "name": "Chara Radar｜角色活動情報",
+  "short_name": "Chara Radar",
   "description": "幫你蒐集日本與台灣的最新活動、快閃、新品、咖啡廳情報",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#fff4de",
-  "theme_color": "#ffd6e8",
+  "background_color": "#f4f6f8",
+  "theme_color": "#ffffff",
   "icons": [
     { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
     { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
