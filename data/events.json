@@ -1368,5 +1368,28 @@
     "sourceType": "official_social",
     "createdAt": "2026-10-23",
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000334.000086964.html"
+  },
+  {
+    "brand": "miffy",
+    "title": "Miffy 暖呼呼餐廳",
+    "type": "cafe",
+    "country": "JP",
+    "city": "",
+    "locationName": "LRT Miffy ほかほかダイニング",
+    "startDate": "2026-10-31",
+    "endDate": "2027-01-24",
+    "summaryZh": "日本推出Miffy主題暖呼呼餐廳，提供多款冬季限定餐點，如焗烤派佐盤等。",
+    "needReservation": false,
+    "hasLimitedGoods": false,
+    "tags": [
+      "主題餐廳",
+      "限定餐點",
+      "日本"
+    ],
+    "id": "mi-e60d7b",
+    "sourceTitle": "グラタンパイ付きプレートなど冬のほかほかメニュー！エルティーアール ミッフィーほかほかダイニング - Dtimes",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-25",
+    "sourceUrl": "https://dtimes.jp/post-1427360/"
   }
 ]
