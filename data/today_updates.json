@@ -1,17 +1,17 @@
 {
   "date": "2026-10-25",
   "baselineDate": "2026-10-24",
-  "generatedAt": "2026-10-25T08:07:05.486565+00:00",
+  "generatedAt": "2026-10-25T10:06:13.776572+00:00",
   "baselineEventCount": 57,
   "currentEventCount": 58,
   "newEventCount": 1,
   "countsByBrand": {
-    "miffy": 1,
-    "pokemon": 0,
+    "miffy": 0,
+    "pokemon": 1,
     "chiikawa": 0
   },
   "newEventIds": [
-    "mi-e60d7b"
+    "po-sapporo-gold-20261030"
   ],
   "replacements": []
 }

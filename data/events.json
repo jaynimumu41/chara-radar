@@ -78,10 +78,10 @@
     "country": "JP",
     "city": "Osaka",
     "locationName": "LUCUA SOUTH 11F",
-    "startDate": "",
+    "startDate": "2026-11-24",
     "endDate": "",
-    "summaryZh": "全國首間「ちいかわパークストア」預計2026年11月於大阪LUCUA SOUTH 11F開幕，確切日期待官方公布。",
-    "needReservation": false,
+    "summaryZh": "大阪 LUCUA SOUTH 11F 的 Chiikawa Park Store 將於2026年11月24日開幕，販售池袋 Chiikawa Park 周邊。開幕初期須持事前抽選或先到先得的入場整理券，入場免費；詳情依官方公告。",
+    "needReservation": true,
     "hasLimitedGoods": true,
     "tags": [
       "吉伊卡哇",
@@ -90,10 +90,10 @@
       "2026年11月"
     ],
     "id": "ch-6d9bb5",
-    "sourceTitle": "全国初『ちいかわパークストア』 『サンリオ ハローステージ』梅田上陸『LUCUA SOUTH』第2期、21ブランドを先行公開",
+    "sourceTitle": "ちいかわパークストア、大阪・LUCUA SOUTHに2026年11月24日(火) GRAND OPEN！",
     "sourceType": "official_social",
     "createdAt": "2026-08-05",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000231.000014414.html"
+    "sourceUrl": "https://chiikawapark-tokyo.jp/news/x0e64eb94v/"
   },
   {
     "brand": "chiikawa",
@@ -1370,26 +1370,26 @@
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000334.000086964.html"
   },
   {
-    "brand": "miffy",
-    "title": "Miffy 暖呼呼餐廳",
-    "type": "cafe",
+    "brand": "pokemon",
+    "title": "Pokémon 札幌三越大黃金展：純金賽富豪販售",
+    "type": "popup",
     "country": "JP",
-    "city": "",
-    "locationName": "LRT Miffy ほかほかダイニング",
-    "startDate": "2026-10-31",
-    "endDate": "2027-01-24",
-    "summaryZh": "日本推出Miffy主題暖呼呼餐廳，提供多款冬季限定餐點，如焗烤派佐盤等。",
+    "city": "Sapporo",
+    "locationName": "札幌三越 本館8階",
+    "startDate": "2026-10-30",
+    "endDate": "2026-11-08",
+    "summaryZh": "札幌三越大黃金展現場販售約15克的 K24 純金賽富豪，並展示等身大賽富豪及皮卡丘金箔像。免費入場，最終日17:00閉場；商品數量及價格依現場公告。",
     "needReservation": false,
     "hasLimitedGoods": false,
     "tags": [
-      "主題餐廳",
-      "限定餐點",
-      "日本"
+      "寶可夢",
+      "展示販售",
+      "札幌"
     ],
-    "id": "mi-e60d7b",
-    "sourceTitle": "グラタンパイ付きプレートなど冬のほかほかメニュー！エルティーアール ミッフィーほかほかダイニング - Dtimes",
+    "id": "po-sapporo-gold-20261030",
     "sourceType": "official_social",
     "createdAt": "2026-10-25",
-    "sourceUrl": "https://dtimes.jp/post-1427360/"
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000084.000063374.html",
+    "sourceTitle": "10月30日(金)から開催する札幌三越の「大黄金展」でポケモンのサーフゴーが純金になって登場！"
   }
 ]
