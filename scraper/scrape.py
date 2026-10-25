@@ -1074,7 +1074,9 @@ def parse_published_baseline(events_raw: str, updated_raw: str) -> tuple[list[di
     return events, parse_last_updated_date(updated_raw)
 
 
-def load_published_baseline(fallback_events: list[dict]) -> tuple[list[dict], str]:
+def load_published_baseline(fallback_events: list[dict], *,
+                            today: str | None = None,
+                            updates: dict | None = None) -> tuple[list[dict], str]:
     """Load yesterday's public snapshot from Git HEAD, not a dirty worktree.
 
     Agent verification may leave legitimate local changes before the scheduled
@@ -1082,6 +1084,7 @@ def load_published_baseline(fallback_events: list[dict]) -> tuple[list[dict], st
     not silently become the baseline for today_updates.json.
     """
     repo = DATA_DIR.parent
+    comparison_date = today or TODAY
     try:
         events_raw = subprocess.check_output(
             ["git", "show", "HEAD:data/events.json"], cwd=repo,
@@ -1092,26 +1095,40 @@ def load_published_baseline(fallback_events: list[dict]) -> tuple[list[dict], st
             text=True, encoding="utf-8",
         )
         head_events, head_date = parse_published_baseline(events_raw, updated_raw)
-        if head_date == TODAY and UPDATE_DIFF_JSON.exists():
-            updates = json.loads(UPDATE_DIFF_JSON.read_text(encoding="utf-8-sig"))
-            baseline_date = updates.get("baselineDate", "") if updates.get("date") == TODAY else ""
-            if baseline_date and baseline_date != TODAY:
-                commits = subprocess.check_output(
-                    ["git", "log", "--format=%H", "--", "data/last_updated.json"],
+        if head_date == comparison_date:
+            if updates is None and UPDATE_DIFF_JSON.exists():
+                updates = json.loads(UPDATE_DIFF_JSON.read_text(encoding="utf-8-sig"))
+            updates = updates if isinstance(updates, dict) else {}
+            preferred_date = (
+                str(updates.get("baselineDate", ""))
+                if updates.get("date") == comparison_date
+                else ""
+            )
+            if preferred_date >= comparison_date:
+                preferred_date = ""
+
+            commits = subprocess.check_output(
+                ["git", "log", "--format=%H", "--", "data/last_updated.json"],
+                cwd=repo, text=True, encoding="utf-8",
+            ).splitlines()
+            for commit in commits:
+                historic_updated = subprocess.check_output(
+                    ["git", "show", f"{commit}:data/last_updated.json"],
                     cwd=repo, text=True, encoding="utf-8",
-                ).splitlines()
-                for commit in commits:
-                    historic_updated = subprocess.check_output(
-                        ["git", "show", f"{commit}:data/last_updated.json"],
-                        cwd=repo, text=True, encoding="utf-8",
-                    )
-                    if parse_last_updated_date(historic_updated) != baseline_date:
-                        continue
-                    historic_events = subprocess.check_output(
-                        ["git", "show", f"{commit}:data/events.json"],
-                        cwd=repo, text=True, encoding="utf-8",
-                    )
-                    return parse_published_baseline(historic_events, historic_updated)
+                )
+                historic_date = parse_last_updated_date(historic_updated)
+                if not historic_date or historic_date >= comparison_date:
+                    continue
+                if preferred_date and historic_date != preferred_date:
+                    continue
+                historic_events = subprocess.check_output(
+                    ["git", "show", f"{commit}:data/events.json"],
+                    cwd=repo, text=True, encoding="utf-8",
+                )
+                return parse_published_baseline(historic_events, historic_updated)
+
+            target = preferred_date or f"the latest snapshot before {comparison_date}"
+            raise RuntimeError(f"cannot find published baseline for {target}")
         return head_events, head_date
     except Exception as exc:
         print(f"    ⚠️  無法讀取 Git 公開 baseline，改用目前資料：{exc}")

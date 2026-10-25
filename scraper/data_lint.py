@@ -190,6 +190,23 @@ def today_update_count_errors(events: list[dict], updates: dict, new_event_ids: 
     return errors
 
 
+def today_update_date_errors(updates: dict) -> list[str]:
+    """Require each daily diff to compare against an earlier public date."""
+    errors: list[str] = []
+    update_date = str(updates.get("date", ""))
+    baseline_date = str(updates.get("baselineDate", ""))
+    if not valid_date(update_date):
+        errors.append(f"today_updates.json date is invalid: {update_date}")
+    if not valid_date(baseline_date):
+        errors.append(f"today_updates.json baselineDate is invalid: {baseline_date}")
+    elif valid_date(update_date) and baseline_date >= update_date:
+        errors.append(
+            "today_updates.json baselineDate must be earlier than date: "
+            f"{baseline_date} >= {update_date}"
+        )
+    return errors
+
+
 def stable_identity_duplicate_errors(events: list[dict]) -> list[str]:
     """Reject duplicate rows for activities with a deterministic real-world identity."""
     groups: defaultdict[str, list[str]] = defaultdict(list)
@@ -361,6 +378,7 @@ def main() -> int:
                 missing_update_ids = sorted(str(x) for x in new_event_ids if x not in event_ids)
                 if missing_update_ids:
                     errors.append(f"today_updates.json references missing event ids: {', '.join(missing_update_ids)}")
+                errors.extend(today_update_date_errors(updates))
                 errors.extend(today_update_count_errors(events, updates, [str(x) for x in new_event_ids]))
                 errors.extend(replacement_mapping_errors(updates))
                 counts = Counter(e.get("brand", "") for e in events if e.get("id") in set(new_event_ids))

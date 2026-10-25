@@ -23,6 +23,69 @@ Set-Location $dir
 "" | Out-File -FilePath $log -Append -Encoding utf8
 "========== START $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') ==========" | Out-File -FilePath $log -Append -Encoding utf8
 
+function Finish-Daily {
+  param([int]$Code)
+  ("DAILY EXIT CODE: " + $Code) | Out-File -FilePath $log -Append -Encoding utf8
+  "========== END $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') ==========" | Out-File -FilePath $log -Append -Encoding utf8
+  Get-ChildItem $logDir -Filter "scrape-*.log" | Sort-Object LastWriteTime -Descending |
+    Select-Object -Skip 14 | Remove-Item -Force -ErrorAction SilentlyContinue
+  exit $Code
+}
+
+# Never mix an automated data commit with unfinished manual work or an
+# out-of-date checkout. Fetch first so a different machine cannot be silently
+# overwritten by this task.
+$branch = (& git -C $repo branch --show-current 2>&1 | Out-String).Trim()
+$gitCode = $LASTEXITCODE
+if ($null -eq $gitCode) { $gitCode = 0 }
+if ($gitCode -ne 0 -or $branch -ne "main") {
+  ("PREFLIGHT: expected clean main branch, got '" + $branch + "'.") | Out-File -FilePath $log -Append -Encoding utf8
+  Finish-Daily 1
+}
+
+$status = (& git -C $repo status --porcelain --untracked-files=no 2>&1 | Out-String).Trim()
+$gitCode = $LASTEXITCODE
+if ($null -eq $gitCode) { $gitCode = 0 }
+if ($gitCode -ne 0 -or $status) {
+  "PREFLIGHT: tracked worktree changes found; skip automated scrape." | Out-File -FilePath $log -Append -Encoding utf8
+  if ($status) { $status | Out-File -FilePath $log -Append -Encoding utf8 }
+  Finish-Daily 1
+}
+
+$fetchOutput = (& git -C $repo fetch --quiet origin main 2>&1 | Out-String).Trim()
+$gitCode = $LASTEXITCODE
+if ($null -eq $gitCode) { $gitCode = 0 }
+if ($fetchOutput) { $fetchOutput | Out-File -FilePath $log -Append -Encoding utf8 }
+if ($gitCode -ne 0) {
+  "PREFLIGHT: git fetch failed." | Out-File -FilePath $log -Append -Encoding utf8
+  Finish-Daily $gitCode
+}
+
+$head = (& git -C $repo rev-parse HEAD 2>&1 | Out-String).Trim()
+$headCode = $LASTEXITCODE
+$remote = (& git -C $repo rev-parse origin/main 2>&1 | Out-String).Trim()
+$remoteCode = $LASTEXITCODE
+if ($headCode -ne 0 -or $remoteCode -ne 0) {
+  "PREFLIGHT: cannot resolve local or remote main." | Out-File -FilePath $log -Append -Encoding utf8
+  Finish-Daily 1
+}
+if ($head -ne $remote) {
+  $mergeBase = (& git -C $repo merge-base HEAD origin/main 2>&1 | Out-String).Trim()
+  $gitCode = $LASTEXITCODE
+  if ($gitCode -ne 0 -or $mergeBase -ne $head) {
+    "PREFLIGHT: local main is ahead of or diverged from origin/main." | Out-File -FilePath $log -Append -Encoding utf8
+    Finish-Daily 1
+  }
+  $mergeOutput = (& git -C $repo merge --ff-only origin/main 2>&1 | Out-String).Trim()
+  $gitCode = $LASTEXITCODE
+  if ($mergeOutput) { $mergeOutput | Out-File -FilePath $log -Append -Encoding utf8 }
+  if ($gitCode -ne 0) {
+    "PREFLIGHT: fast-forward to origin/main failed." | Out-File -FilePath $log -Append -Encoding utf8
+    Finish-Daily $gitCode
+  }
+}
+"PREFLIGHT: clean main synchronized with origin/main." | Out-File -FilePath $log -Append -Encoding utf8
+
 # Keep the pre-run generated state. A failed scrape or validation must not
 # poison tomorrow's run with partially written or invalid data.
 $backupDir = Join-Path $env:TEMP ("chara-radar-" + [guid]::NewGuid().ToString("N"))
@@ -44,7 +107,10 @@ try {
   }
 } catch {
   ("BACKUP: failed before scrape: " + $_.Exception.Message) | Out-File -FilePath $log -Append -Encoding utf8
-  exit 1
+  if (Test-Path -LiteralPath $backupDir) {
+    Remove-Item -LiteralPath $backupDir -Recurse -Force -ErrorAction SilentlyContinue
+  }
+  Finish-Daily 1
 }
 
 function Clear-ScrapeBackups {
@@ -76,8 +142,7 @@ if ($null -eq $pyCode) { $pyCode = 0 }
 if ($pyCode -ne 0) {
   "DEPLOY: scrape failed, skip commit and push." | Out-File -FilePath $log -Append -Encoding utf8
   Restore-ScrapeState
-  "========== END $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') ==========" | Out-File -FilePath $log -Append -Encoding utf8
-  exit $pyCode
+  Finish-Daily $pyCode
 }
 
 # Block publication when deterministic regression or data checks fail.
@@ -88,8 +153,7 @@ foreach ($check in @("smoke_test.py", "data_lint.py")) {
   if ($checkCode -ne 0) {
     ("DEPLOY: " + $check + " failed, skip commit and push.") | Out-File -FilePath $log -Append -Encoding utf8
     Restore-ScrapeState
-    "========== END $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') ==========" | Out-File -FilePath $log -Append -Encoding utf8
-    exit $checkCode
+    Finish-Daily $checkCode
   }
 }
 
@@ -101,23 +165,22 @@ Clear-ScrapeBackups
 # changed events.json; GitHub Pages rebuilds automatically.
 # Write last-updated timestamp (ISO 8601 with timezone; frontend shows local time)
 $nowIso = Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz"
-'{ "updatedAt": "' + $nowIso + '" }' | Out-File -FilePath (Join-Path $repo "data\last_updated.json") -Encoding utf8 -NoNewline
+$lastUpdatedJson = "{`n  `"updatedAt`": `"$nowIso`"`n}`n"
+[IO.File]::WriteAllText((Join-Path $repo "data\last_updated.json"), $lastUpdatedJson, $utf8NoBom)
 
 & git -C $repo add data/events.json data/today_updates.json data/last_updated.json 2>&1 | Out-File -FilePath $log -Append -Encoding utf8
 $gitCode = $LASTEXITCODE
 if ($null -eq $gitCode) { $gitCode = 0 }
 if ($gitCode -ne 0) {
   "DEPLOY: git add failed." | Out-File -FilePath $log -Append -Encoding utf8
-  "========== END $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') ==========" | Out-File -FilePath $log -Append -Encoding utf8
-  exit $gitCode
+  Finish-Daily $gitCode
 }
 $staged = & git -C $repo diff --cached --name-only
 $gitCode = $LASTEXITCODE
 if ($null -eq $gitCode) { $gitCode = 0 }
 if ($gitCode -ne 0) {
   "DEPLOY: git diff failed." | Out-File -FilePath $log -Append -Encoding utf8
-  "========== END $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') ==========" | Out-File -FilePath $log -Append -Encoding utf8
-  exit $gitCode
+  Finish-Daily $gitCode
 }
 if ($staged) {
   "DEPLOY: pushing to GitHub Pages ($($staged -join ', '))..." | Out-File -FilePath $log -Append -Encoding utf8
@@ -126,35 +189,32 @@ if ($staged) {
   if ($null -eq $gitCode) { $gitCode = 0 }
   if ($gitCode -ne 0) {
     "DEPLOY: git commit failed." | Out-File -FilePath $log -Append -Encoding utf8
-    "========== END $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') ==========" | Out-File -FilePath $log -Append -Encoding utf8
-    exit $gitCode
+    Finish-Daily $gitCode
   }
-  & git -C $repo push --porcelain --no-progress origin main 2>&1 | Out-File -FilePath $log -Append -Encoding utf8
-  $gitCode = $LASTEXITCODE
-  if ($null -eq $gitCode) { $gitCode = 0 }
+  $gitCode = 1
+  for ($attempt = 1; $attempt -le 3; $attempt++) {
+    ("DEPLOY: git push attempt " + $attempt + "/3.") | Out-File -FilePath $log -Append -Encoding utf8
+    & git -C $repo push --porcelain --no-progress origin main 2>&1 | Out-File -FilePath $log -Append -Encoding utf8
+    $gitCode = $LASTEXITCODE
+    if ($null -eq $gitCode) { $gitCode = 0 }
+    if ($gitCode -eq 0) { break }
+    if ($attempt -lt 3) { Start-Sleep -Seconds 10 }
+  }
   if ($gitCode -ne 0) {
-    "DEPLOY: git push failed." | Out-File -FilePath $log -Append -Encoding utf8
-    "========== END $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') ==========" | Out-File -FilePath $log -Append -Encoding utf8
-    exit $gitCode
+    "DEPLOY: git push failed after 3 attempts." | Out-File -FilePath $log -Append -Encoding utf8
+    Finish-Daily $gitCode
   }
   & $py verify_publish.py 2>&1 | Out-File -FilePath $log -Append -Encoding utf8
   $publishCode = $LASTEXITCODE
   if ($null -eq $publishCode) { $publishCode = 0 }
   if ($publishCode -ne 0) {
     "DEPLOY: publish verification failed." | Out-File -FilePath $log -Append -Encoding utf8
-    "========== END $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') ==========" | Out-File -FilePath $log -Append -Encoding utf8
-    exit $publishCode
+    Finish-Daily $publishCode
   }
   "DEPLOY: publish verified." | Out-File -FilePath $log -Append -Encoding utf8
 } else {
   "DEPLOY: nothing changed, skip push." | Out-File -FilePath $log -Append -Encoding utf8
 }
 
-"========== END $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') ==========" | Out-File -FilePath $log -Append -Encoding utf8
-
-# Keep only the latest 14 daily logs
-Get-ChildItem $logDir -Filter "scrape-*.log" | Sort-Object LastWriteTime -Descending |
-  Select-Object -Skip 14 | Remove-Item -Force -ErrorAction SilentlyContinue
-
 # Every scrape, validation, git and publish step succeeded.
-exit 0
+Finish-Daily 0

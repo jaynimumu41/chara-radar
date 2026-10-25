@@ -15,6 +15,7 @@ if hasattr(sys.stdout, "reconfigure"):
 ROOT = Path(__file__).resolve().parents[1]
 LOG_DIR = ROOT / "scraper" / "logs"
 LAST_UPDATED_JSON = ROOT / "data" / "last_updated.json"
+TODAY_UPDATES_JSON = ROOT / "data" / "today_updates.json"
 TW = timezone(timedelta(hours=8))
 
 
@@ -35,6 +36,13 @@ def parse_iso(value: str) -> datetime | None:
     try:
         return datetime.fromisoformat(value)
     except ValueError:
+        return None
+
+
+def parse_date(value: str):
+    try:
+        return datetime.strptime(value, "%Y-%m-%d").date()
+    except (TypeError, ValueError):
         return None
 
 
@@ -67,6 +75,29 @@ def main() -> int:
         except Exception as exc:
             fail(f"cannot read data/last_updated.json: {exc}", errors)
 
+    if not TODAY_UPDATES_JSON.exists():
+        fail("data/today_updates.json is missing", errors)
+    else:
+        try:
+            updates = json.loads(TODAY_UPDATES_JSON.read_text(encoding="utf-8-sig"))
+            update_date_raw = updates.get("date", "")
+            baseline_date_raw = updates.get("baselineDate", "")
+            update_date = parse_date(update_date_raw)
+            baseline_date = parse_date(baseline_date_raw)
+            print(f"today_updates date={update_date_raw} baseline={baseline_date_raw}")
+            if update_date != now.date():
+                fail(f"today_updates date is not today: {update_date_raw}", errors)
+            if not baseline_date:
+                fail(f"today_updates baselineDate is invalid: {baseline_date_raw!r}", errors)
+            elif update_date and baseline_date >= update_date:
+                fail(
+                    "today_updates baselineDate is not earlier than date: "
+                    f"{baseline_date_raw} >= {update_date_raw}",
+                    errors,
+                )
+        except Exception as exc:
+            fail(f"cannot read data/today_updates.json: {exc}", errors)
+
     scrape_log = LOG_DIR / f"scrape-{today}.log"
     if not scrape_log.exists():
         fail(f"today scrape log is missing: {scrape_log}", errors)
@@ -79,6 +110,13 @@ def main() -> int:
             fail(f"latest scrape exit code is {matches[-1]}", errors)
         else:
             print("scrape_exit_code=0")
+        daily_matches = re.findall(r"DAILY EXIT CODE:\s*(-?\d+)", text)
+        if not daily_matches:
+            fail("today scrape log has no DAILY EXIT CODE", errors)
+        elif daily_matches[-1] != "0":
+            fail(f"latest daily exit code is {daily_matches[-1]}", errors)
+        else:
+            print("daily_exit_code=0")
 
     code, branch = run_git(["branch", "--show-current"])
     if code != 0:

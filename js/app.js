@@ -149,6 +149,7 @@ function eventLocation(event) {
 }
 
 function getTodayUpdateIds() {
+  if (updateData.date !== today()) return new Set();
   return new Set(Array.isArray(updateData.newEventIds) ? updateData.newEventIds : []);
 }
 

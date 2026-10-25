@@ -13,7 +13,7 @@ automation unless a human explicitly re-enables the brand.
 
 ## Schedule
 
-- Run daily at 16:30 Asia/Taipei, after `scraper/run_daily.ps1` finishes its
+- Run daily at 16:45 Asia/Taipei, after `scraper/run_daily.ps1` finishes its
   16:00 scrape and push.
 - Work in `C:\Users\USER\Documents\claude\chara-radar`.
 - Do not use Gemini or `scraper/.env`; use Codex web search/fetch capability.
@@ -34,6 +34,12 @@ $env:PYTHONIOENCODING='utf-8'
 
 Stop if preflight or lint fails; report the reason instead of editing old or
 dirty data.
+
+The daily diff must use the latest public snapshot whose `last_updated` date is
+strictly earlier than today's Asia/Taipei date. Never accept a same-day manual
+commit as the `today_updates.json` baseline. Require `date` to equal today,
+`baselineDate` to be earlier than `date`, and independently recompute the diff
+from that prior-date Git snapshot before reporting the new-event count as clean.
 
 4. Candidate list:
 

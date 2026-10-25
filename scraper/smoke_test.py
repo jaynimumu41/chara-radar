@@ -17,6 +17,7 @@
 """
 import sys
 from datetime import datetime, timezone
+from unittest import mock
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -29,6 +30,7 @@ import audit_miffy_stores
 import audit_official_coverage
 import audit_pokemon_stores
 import agent_verify_candidates
+import agent_preflight
 import source_reputation
 import verify_links
 import data_lint
@@ -416,6 +418,38 @@ published_events, published_date = scrape.parse_published_baseline(
 check("今日更新baseline使用Git公開快照而非執行中工作區",
       ([event["id"] for event in published_events], published_date),
       (["public-a", "public-b"], "2026-08-04"))
+
+def same_day_baseline_git_output(args, **_kwargs):
+    outputs = {
+        ("git", "show", "HEAD:data/events.json"): '[{"id":"same-day"}]',
+        ("git", "show", "HEAD:data/last_updated.json"): '{"updatedAt":"2026-10-24T09:03:01+08:00"}',
+        ("git", "log", "--format=%H", "--", "data/last_updated.json"): "same-day\nprior-day\n",
+        ("git", "show", "same-day:data/last_updated.json"): '{"updatedAt":"2026-10-24T09:03:01+08:00"}',
+        ("git", "show", "prior-day:data/last_updated.json"): '{"updatedAt":"2026-10-23T19:52:24+08:00"}',
+        ("git", "show", "prior-day:data/events.json"): '[{"id":"prior-day"}]',
+    }
+    return outputs[tuple(args)]
+
+with mock.patch.object(scrape.subprocess, "check_output", side_effect=same_day_baseline_git_output):
+    prior_events, prior_date = scrape.load_published_baseline(
+        [{"id": "working-tree"}],
+        today="2026-10-24",
+        updates={"date": "2026-10-23", "baselineDate": "2026-10-22"},
+    )
+check("同日人工更新不可成為今日新增baseline",
+      ([event["id"] for event in prior_events], prior_date),
+      (["prior-day"], "2026-10-23"))
+check("lint阻擋同日today_updates baseline",
+      data_lint.today_update_date_errors({
+          "date": "2026-10-24", "baselineDate": "2026-10-24",
+      }),
+      ["today_updates.json baselineDate must be earlier than date: 2026-10-24 >= 2026-10-24"])
+check("agent preflight可解析last_updated時區",
+      agent_preflight.parse_iso("2026-10-25T11:17:39+08:00"),
+      datetime.fromisoformat("2026-10-25T11:17:39+08:00"))
+check("agent preflight可解析today_updates日期",
+      str(agent_preflight.parse_date("2026-10-24")),
+      "2026-10-24")
 flower_event = ev(
     brand="miffy",
     title="フラワーミッフィー限定活動",
