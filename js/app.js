@@ -7,6 +7,7 @@ let activeTodayOnly = false;
 let activeQuickFilter = null;
 
 const DATA_CACHE_BUST = Date.now().toString(36);
+const STALE_AFTER_MS = 30 * 60 * 60 * 1000;
 
 const BRAND_LABELS = {
   pokemon: 'Pokémon',
@@ -650,6 +651,49 @@ function renderLastUpdated(iso) {
   status.classList.remove('is-unknown');
 }
 
+function renderSystemHealth(health, updatedAt) {
+  const alert = document.getElementById('system-health-alert');
+  const message = document.getElementById('system-health-message');
+  const status = document.getElementById('last-updated').closest('.sync-status');
+  status.classList.remove('is-limited', 'is-stale');
+  status.removeAttribute('title');
+
+  const updated = updatedAt ? new Date(updatedAt) : null;
+  const stale = Boolean(
+    updated
+    && !Number.isNaN(updated.getTime())
+    && Date.now() - updated.getTime() > STALE_AFTER_MS
+  );
+  const failed = health?.status === 'failed';
+  const metrics = health?.metrics && typeof health.metrics === 'object'
+    ? health.metrics
+    : {};
+
+  if (stale || failed) {
+    status.classList.add('is-stale');
+    alert.hidden = false;
+    message.textContent = failed
+      ? '最近一次自動更新未完成，目前保留上一版已驗證資料。'
+      : '資料已超過一天未成功同步，目前保留上一版已驗證資料。';
+    return;
+  }
+
+  alert.hidden = true;
+  message.textContent = '';
+  if (health?.status === 'limited') {
+    status.classList.add('is-limited');
+    const details = [];
+    if (metrics.agentCandidateCount) details.push(`${metrics.agentCandidateCount} 筆待人工確認`);
+    if (metrics.pendingArticleCount) details.push(`${metrics.pendingArticleCount} 筆延後處理`);
+    if (metrics.extractionFailureCount) details.push(`${metrics.extractionFailureCount} 筆等待重試`);
+    if (metrics.rateLimited) details.push('AI 額度已輪替或受限');
+    if (metrics.structuredSourceFailureCount) {
+      details.push(`${metrics.structuredSourceFailureCount} 個官方來源暫時失敗`);
+    }
+    status.title = details.join('，') || '本次同步完成，部分來源將於下次繼續處理';
+  }
+}
+
 async function fetchJson(path) {
   const response = await fetch(dataUrl(path), { cache: 'no-store' });
   if (!response.ok) throw new Error(`HTTP ${response.status}: ${path}`);
@@ -703,7 +747,8 @@ async function init() {
     fetchJson('data/events.json'),
     fetchJson('data/stores.json'),
     fetchJson('data/today_updates.json'),
-    fetchJson('data/last_updated.json')
+    fetchJson('data/last_updated.json'),
+    fetchJson('data/health.json')
   ]);
 
   if (results[0].status !== 'fulfilled') {
@@ -720,7 +765,10 @@ async function init() {
   allEvents = results[0].value;
   storeData = results[1].status === 'fulfilled' ? results[1].value : {};
   updateData = results[2].status === 'fulfilled' ? results[2].value : { newEventIds: [] };
-  renderLastUpdated(results[3].status === 'fulfilled' ? results[3].value.updatedAt : null);
+  const updatedAt = results[3].status === 'fulfilled' ? results[3].value.updatedAt : null;
+  const health = results[4].status === 'fulfilled' ? results[4].value : null;
+  renderLastUpdated(updatedAt);
+  renderSystemHealth(health, updatedAt);
   bindControls();
   renderHome();
 }

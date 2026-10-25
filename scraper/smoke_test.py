@@ -31,9 +31,11 @@ import audit_official_coverage
 import audit_pokemon_stores
 import agent_verify_candidates
 import agent_preflight
+import audit_similar_events
 import source_reputation
 import verify_links
 import data_lint
+import write_health
 
 _passed = 0
 _failed = 0
@@ -450,6 +452,20 @@ check("agent preflight可解析last_updated時區",
 check("agent preflight可解析today_updates日期",
       str(agent_preflight.parse_date("2026-10-24")),
       "2026-10-24")
+rotator = scrape.KeyRotator("gemini", ["first", "second"])
+rotator._once = mock.Mock(side_effect=[scrape.RateLimitError("quota"), "{}"])
+check("API key配額用盡後輪替並留下健康計數",
+      (rotator.call("prompt"), rotator.rotation_count, rotator.exhausted, rotator.idx),
+      ("{}", 1, {0}, 1))
+single_rotator = scrape.KeyRotator("gemini", ["only"])
+single_rotator._once = mock.Mock(side_effect=scrape.RateLimitError("quota"))
+try:
+    single_rotator.call("prompt")
+except scrape.RateLimitError:
+    pass
+check("最後一把key耗盡不虛增輪替次數",
+      (single_rotator.rotation_count, single_rotator.exhausted),
+      (0, {0}))
 flower_event = ev(
     brand="miffy",
     title="フラワーミッフィー限定活動",
@@ -2525,6 +2541,158 @@ christmas_official=ev(id="xmas-old",brand="chiikawa",country="JP",city="Chiba",t
 christmas_media=ev(id="xmas-new",brand="chiikawa",country="JP",city="Tokyo",title="ちいかわクリスマスマーケット",type="campaign",locationName="幕張豊砂",startDate="2026-11-24",endDate="2026-12-25")
 check("聖誕市集跨媒體標題類型城市誤植仍只是一筆",len(scrape.dedup_events([christmas_official,christmas_media])[0]),1)
 check("同市集不同年度檔期不得合併",scrape.strong_event_identity_key(christmas_official)==scrape.strong_event_identity_key(dict(christmas_media,startDate="2027-11-24",endDate="2027-12-25")),False)
+
+similar_left = ev(
+    id="similar-left", brand="miffy", type="popup", city="Nagasaki",
+    title="Miffy 生日季限定活動", locationName="ハウステンボス",
+    startDate="2026-05-29", endDate="2026-08-30",
+)
+similar_right = ev(
+    id="similar-right", brand="miffy", type="campaign", city="Tokyo",
+    title="Miffy 生日季活動限定商品", locationName="豪斯登堡",
+    startDate="2026-05-29", endDate="2026-08-30",
+)
+check("發布閘門攔截同場館同檔期但城市誤植的相似活動",
+      bool(audit_similar_events.suspicious_pair(similar_left, similar_right)), True)
+check("發布閘門不誤擋同日不同具體場館",
+      audit_similar_events.suspicious_pair(
+          similar_left,
+          dict(similar_right, id="other-venue", city="Nagasaki", locationName="長崎美術館"),
+      ),
+      None)
+check("發布閘門保留明確母子活動",
+      audit_similar_events.suspicious_pair(
+          similar_left,
+          dict(similar_right, id="child", parentEventId="similar-left"),
+      ),
+      None)
+
+health_metrics = scrape.new_run_metrics(
+    scrape.DEFAULT_BRANDS,
+    False,
+    ("gemini", ["secret-key-marker-a", "secret-key-marker-b"]),
+)
+health_metrics["runDate"] = "2026-10-25"
+health_metrics["brands"]["miffy"]["pendingArticles"] = 2
+health = write_health.build_health(
+    [],
+    {"date": "2026-10-25", "newEventCount": 0},
+    health_metrics,
+    now=datetime.fromisoformat("2026-10-25T16:20:00+08:00"),
+)
+check("健康快照公開積壓但不洩漏key內容",
+      (
+          health["status"],
+          health["metrics"]["pendingArticleCount"],
+          health["metrics"]["keyCount"],
+          "secret-key-marker" in str(health),
+      ),
+      ("limited", 2, 2, False))
+check("健康快照與正式資料一致時通過lint",
+      data_lint.health_data_errors(
+          [],
+          {"date": "2026-10-25", "newEventCount": 0},
+          health,
+          {"updatedAt": health["generatedAt"]},
+      ),
+      [])
+
+with mock.patch.object(
+    data_lint.agent_verify_candidates,
+    "build_candidates",
+    return_value=[{"id": "unexpected-candidate"}],
+):
+    candidate_count_errors = data_lint.health_data_errors(
+        [],
+        {"date": "2026-10-25", "newEventCount": 0},
+        health,
+        {"updatedAt": health["generatedAt"]},
+    )
+check("lint重新計算候選數而非盲信health快照",
+      any("agentCandidateCount mismatch" in error for error in candidate_count_errors),
+      True)
+
+with mock.patch.object(
+    write_health.agent_verify_candidates,
+    "build_candidates",
+    return_value=[{"id": "needs-review"}],
+):
+    candidate_health = write_health.build_health(
+        [],
+        {"date": "2026-10-25", "newEventCount": 0},
+        {},
+        now=datetime.fromisoformat("2026-10-25T16:20:00+08:00"),
+    )
+check("待人工確認候選會明確標示為limited",
+      (
+          candidate_health["status"],
+          candidate_health["metrics"]["agentCandidateCount"],
+      ),
+      ("limited", 1))
+
+stale_health_metrics = scrape.new_run_metrics(
+    scrape.DEFAULT_BRANDS,
+    False,
+    ("gemini", ["key"]),
+)
+stale_health_metrics["runDate"] = "2026-10-24"
+stale_health_metrics["brands"]["miffy"]["pendingArticles"] = 9
+stale_health = write_health.build_health(
+    [],
+    {"date": "2026-10-25", "newEventCount": 0},
+    stale_health_metrics,
+    now=datetime.fromisoformat("2026-10-25T16:20:00+08:00"),
+)
+check("健康快照不沿用前一天的執行積壓",
+      (
+          stale_health["status"],
+          stale_health["metrics"]["pendingArticleCount"],
+          stale_health["metrics"]["aiBackend"],
+      ),
+      ("healthy", 0, "unknown"))
+
+metric_items = [
+    {
+        "title": f"ミッフィー期間限定候補{i}",
+        "description": "",
+        "source": "PR TIMES",
+        "pubDate": "",
+        "link": f"https://example.com/{i}",
+    }
+    for i in range(15)
+]
+captured_metrics = []
+with (
+    mock.patch.object(scrape, "load_rejected", return_value={}),
+    mock.patch.object(scrape, "load_env", return_value={}),
+    mock.patch.object(scrape, "detect_ai_backend", return_value=("gemini", ["key"])),
+    mock.patch.object(scrape, "load_events", return_value=[]),
+    mock.patch.object(scrape, "load_published_baseline", return_value=([], "2026-10-24")),
+    mock.patch.object(scrape, "fetch_miffy_events", return_value=[]),
+    mock.patch.object(scrape, "fetch_official", return_value=metric_items),
+    mock.patch.object(scrape, "fetch_rss", return_value=[]),
+    mock.patch.object(scrape, "load_processed", return_value=set()),
+    mock.patch.object(scrape, "save_processed"),
+    mock.patch.object(scrape, "extract_event", return_value=None),
+    mock.patch.object(scrape, "pubdate_age_days", return_value=0),
+    mock.patch.object(scrape, "is_rejected_title", return_value=False),
+    mock.patch.object(scrape, "save_events"),
+    mock.patch.object(scrape, "clean_events", side_effect=lambda rows: (rows, 0, 0, 0)),
+    mock.patch.object(scrape, "ai_dedup", side_effect=lambda rows, _rotator: (rows, 0)),
+    mock.patch.object(scrape, "save_update_diff", return_value={"newEventCount": 0}),
+    mock.patch.object(scrape, "save_run_metrics", side_effect=captured_metrics.append),
+    mock.patch.object(scrape.time, "sleep"),
+):
+    scrape.run(["miffy"])
+metric_brand = captured_metrics[0]["brands"]["miffy"]
+check("單品牌處理上限留下可見積壓而不標記processed",
+      (
+          metric_brand["eligibleArticles"],
+          metric_brand["processedArticles"],
+          metric_brand["pendingArticles"],
+          metric_brand["capReached"],
+      ),
+      (15, 13, 2, True))
 
 # ── 結語 ──────────────────────────────────────────────────────────────────────
 print(f"\n{'=' * 40}\n結果：{_passed} 通過、{_failed} 失敗")

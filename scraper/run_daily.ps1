@@ -95,6 +95,8 @@ try {
   $stateFiles = @(
     (Join-Path $repo "data\events.json"),
     (Join-Path $repo "data\today_updates.json"),
+    (Join-Path $repo "data\health.json"),
+    (Join-Path $repo "data\last_updated.json"),
     (Join-Path $dir "processed.json")
   )
   foreach ($path in $stateFiles) {
@@ -145,13 +147,22 @@ if ($pyCode -ne 0) {
   Finish-Daily $pyCode
 }
 
-# Block publication when deterministic regression or data checks fail.
-foreach ($check in @("smoke_test.py", "data_lint.py")) {
-  & $py $check 2>&1 | Out-File -FilePath $log -Append -Encoding utf8
+# Block publication when deterministic regression, similarity, health, or data
+# checks fail. write_health.py runs only after the earlier release gates pass;
+# a later lint failure rolls all generated state back.
+$checks = @(
+  [PSCustomObject]@{ Name = "smoke_test.py"; Args = @("smoke_test.py") },
+  [PSCustomObject]@{ Name = "audit_similar_events.py"; Args = @("audit_similar_events.py", "--fail-on-review") },
+  [PSCustomObject]@{ Name = "write_health.py"; Args = @("write_health.py") },
+  [PSCustomObject]@{ Name = "data_lint.py"; Args = @("data_lint.py") }
+)
+foreach ($check in $checks) {
+  $checkArgs = $check.Args
+  & $py @checkArgs 2>&1 | Out-File -FilePath $log -Append -Encoding utf8
   $checkCode = $LASTEXITCODE
   if ($null -eq $checkCode) { $checkCode = 0 }
   if ($checkCode -ne 0) {
-    ("DEPLOY: " + $check + " failed, skip commit and push.") | Out-File -FilePath $log -Append -Encoding utf8
+    ("DEPLOY: " + $check.Name + " failed, skip commit and push.") | Out-File -FilePath $log -Append -Encoding utf8
     Restore-ScrapeState
     Finish-Daily $checkCode
   }
@@ -160,15 +171,8 @@ foreach ($check in @("smoke_test.py", "data_lint.py")) {
 Clear-ScrapeBackups
 
 # ---- Auto-deploy to GitHub Pages (viewable on phone) ----------------------
-# Every run writes last_updated.json (heartbeat: even if data is unchanged, the
-# frontend can still show "last updated time"). Commit + push together with any
-# changed events.json; GitHub Pages rebuilds automatically.
-# Write last-updated timestamp (ISO 8601 with timezone; frontend shows local time)
-$nowIso = Get-Date -Format "yyyy-MM-ddTHH:mm:sszzz"
-$lastUpdatedJson = "{`n  `"updatedAt`": `"$nowIso`"`n}`n"
-[IO.File]::WriteAllText((Join-Path $repo "data\last_updated.json"), $lastUpdatedJson, $utf8NoBom)
-
-& git -C $repo add data/events.json data/today_updates.json data/last_updated.json 2>&1 | Out-File -FilePath $log -Append -Encoding utf8
+# write_health.py writes both the heartbeat and public run diagnostics.
+& git -C $repo add data/events.json data/today_updates.json data/health.json data/last_updated.json 2>&1 | Out-File -FilePath $log -Append -Encoding utf8
 $gitCode = $LASTEXITCODE
 if ($null -eq $gitCode) { $gitCode = 0 }
 if ($gitCode -ne 0) {

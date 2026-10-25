@@ -15,7 +15,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Kawaii Radar" />
 
-  <link rel="stylesheet" href="css/app.css?v=20261024-kawaii-simple" />
+  <link rel="stylesheet" href="css/app.css?v=20261025-health" />
 </head>
 <body>
   <!-- Lucide-derived icon sprite, kept local so the dashboard works offline. -->
@@ -53,6 +53,10 @@
     <symbol id="icon-filter" viewBox="0 0 24 24">
       <path d="M4 6h16M7 12h10M10 18h4"></path>
     </symbol>
+    <symbol id="icon-alert-triangle" viewBox="0 0 24 24">
+      <path d="M21.7 18 13.7 4a2 2 0 0 0-3.4 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3Z"></path>
+      <path d="M12 9v4M12 17h.01"></path>
+    </symbol>
   </svg>
 
   <header class="app-header">
@@ -70,6 +74,13 @@
       </div>
     </div>
   </header>
+
+  <div class="system-health-alert" id="system-health-alert" role="status" hidden>
+    <div class="system-health-inner">
+      <svg class="ui-icon" aria-hidden="true"><use href="#icon-alert-triangle"></use></svg>
+      <span id="system-health-message"></span>
+    </div>
+  </div>
 
   <main class="app-shell">
     <section class="page-intro" aria-labelledby="page-title">
@@ -171,6 +182,6 @@
     </section>
   </main>
 
-  <script src="js/app.js?v=20261025-daily-guard"></script>
+  <script src="js/app.js?v=20261025-health"></script>
 </body>
 </html>

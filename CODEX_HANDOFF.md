@@ -37,7 +37,7 @@
 
 - 三麗鷗**沒有**可解析的結構化官方頁（`sanrio.co.jp` 503／JS 動態／REST 空，已確認不可行），且全靠新聞段＋Gemini，品質最弱；目前已暫停預設抓取與前端顯示。
 - 前端純靜態：`index.html` + `js/app.js` + `css/app.css`，讀 `data/events.json`、`data/stores.json`（常設店手動清單）、`data/last_updated.json`（心跳）。
-- **每日排程**：Windows 工作排程 `CharaRadar-DailyScrape` 每天 16:00 → `scraper/run_daily.ps1` → `python scrape.py` → 寫心跳 → git commit+push → GitHub Pages 自動重建。
+- **每日排程**：Windows 工作排程 `CharaRadar-DailyScrape` 每天 16:00 → `scraper/run_daily.ps1` → `python scrape.py` → smoke／相似重複／health／lint 發布閘門 → git commit+push → `verify_publish.py` 精確核對 GitHub Pages。
 - **Miffy 補漏**：`dickbruna.jp/event/` 不含所有 miffy style / Kiddy Land 店頭新品，已新增 `dickbruna.jp/news/` 指定活動與 `kiddyland.co.jp/?s=miffy` 結構化解析，零 Gemini 抓官方店頭活動。Kiddy/Dick Bruna 頁面需先切主文章，避免「最新記事／関連記事」日期污染。
 - **台灣寶可夢補漏**：`tw.portal-pokemon.com/goods/` 已新增結構化解析，收內頁明確寫 `Pokémon Center TAIPEI` 登場／販售的近期商品，並收官方頁明確列出活動期間與台灣實體店鋪的 POP UP Promotion（例如 K.UNO / U-TREASURE）；LINE 貼圖/主題、卡牌、遊戲、純線上授權商品過濾。官方 Instagram `pokemon_taiwan` 適合 agent 驗證輔助，不適合純 Python 每日抓取主來源。
 
@@ -432,3 +432,12 @@ automation 的職責不是再跑一次爬蟲，而是依第 5 節對高風險筆
 - 今日更新檢視目前應為 8 筆：Pokémon 3、Miffy 3、Chiikawa 2；資料總數 69 筆。
 - 新增 smoke tests：官方覆蓋稽核 URL/分類、Kiddy Land 主文章日期切片、Birthday Fair 期間、台灣 Pokémon K.UNO POP UP。
 - 後續仍需人工稽核：`audit_official_coverage.py --format summary` 仍可能列出 Miffy 展覽頁（如廣島 70 周年展、鹿兒島美術館展）與官方 schedule page。不要直接全收；先確認是否有限定商品/實體特展、是否單一會場與日期完整，再補 parser 或標 ignored。
+
+## 30. 2026-10-25 健康監控、積壓統計與雙層發布驗證
+
+- 新增 `scraper/run_metrics.json`（gitignored）：每日記錄各品牌找到、合格、已處理、待續、可重試失敗、新增與是否達上限；只記 key 數量／輪替次數，絕不寫 key 值。
+- 新增 `scraper/write_health.py` 與公開 `data/health.json`。`data_lint.py` 會驗證其事件數、今日新增數、待續加總、檢查狀態及 `last_updated.json` 時間完全一致。
+- 前端正常時不新增區塊；超過 30 小時未成功同步才顯示警告。有積壓但正式資料仍正確時只以琥珀色同步點提示。
+- 新增 `scraper/audit_similar_events.py`。每日發布前若仍有同品牌、重疊日期、同一具體／已知場館且標題相似的高信心重複組合，直接阻擋發布；明確母子活動與不同分店不擋。
+- 新增 `.github/workflows/validate.yml`，每次 push / pull request 在乾淨環境重跑 compile、smoke、lint 與相似重複閘門，不使用 API key。
+- 每日 Codex agent 16:45 會讀 health 指標並處理候選；另有 `chararadar-weekly-deep-audit` 每週日 18:00 依 `scraper/WEEKLY_AUDIT.md` 回溯七天，補查額度延後、RSS 漏抓與官方新版型。

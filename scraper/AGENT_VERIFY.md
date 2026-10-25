@@ -35,6 +35,12 @@ $env:PYTHONIOENCODING='utf-8'
 Stop if preflight or lint fails; report the reason instead of editing old or
 dirty data.
 
+Read `data/health.json` after preflight. Report `pendingArticleCount`,
+`extractionFailureCount`, `structuredSourceFailureCount`, key count/rotations,
+and per-brand `capReached` values. A `limited` run is not automatically wrong:
+verify its pending/retry signals and continue the audit. Never expose key values;
+the health file intentionally contains counts only.
+
 The daily diff must use the latest public snapshot whose `last_updated` date is
 strictly earlier than today's Asia/Taipei date. Never accept a same-day manual
 commit as the `today_updates.json` baseline. Require `date` to equal today,
@@ -220,6 +226,22 @@ Set-Location scraper
 ```
 
 Run `python verify_links.py` if any `sourceUrl` is changed.
+
+Before publishing, run the generic duplicate release gate. Any row is a blocker
+that must be resolved or proven to be a legitimate parent/child pair:
+
+```powershell
+& 'C:\Users\USER\AppData\Local\Python\pythoncore-3.14-64\python.exe' scraper\audit_similar_events.py --format markdown --fail-on-review
+```
+
+When formal public data changes, regenerate `data/health.json` and
+`data/last_updated.json` together after smoke and similarity checks, then run
+the final lint:
+
+```powershell
+& 'C:\Users\USER\AppData\Local\Python\pythoncore-3.14-64\python.exe' scraper\write_health.py
+& 'C:\Users\USER\AppData\Local\Python\pythoncore-3.14-64\python.exe' scraper\data_lint.py
+```
 
 If files changed and tests pass, commit and push:
 

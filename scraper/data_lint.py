@@ -9,6 +9,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import scrape
+import agent_verify_candidates
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -18,6 +19,7 @@ EVENTS_JSON = ROOT / "data" / "events.json"
 STORES_JSON = ROOT / "data" / "stores.json"
 TODAY_UPDATES_JSON = ROOT / "data" / "today_updates.json"
 LAST_UPDATED_JSON = ROOT / "data" / "last_updated.json"
+HEALTH_JSON = ROOT / "data" / "health.json"
 
 ACTIVE_BRANDS = set(scrape.DEFAULT_BRANDS)
 PAUSED_BRANDS = {"sanrio"}
@@ -289,6 +291,117 @@ def replacement_mapping_errors(updates: dict) -> list[str]:
     return errors
 
 
+def health_data_errors(
+    events: list[dict],
+    updates: dict,
+    health: dict,
+    last_updated: dict,
+) -> list[str]:
+    """Keep the public operational snapshot consistent with formal data."""
+    if not isinstance(health, dict):
+        return ["data/health.json must be a JSON object"]
+    errors: list[str] = []
+    if health.get("schemaVersion") != 1:
+        errors.append("health.json schemaVersion must be 1")
+    if health.get("status") not in {"healthy", "limited"}:
+        errors.append(f"health.json status is invalid: {health.get('status')!r}")
+
+    generated_at = str(health.get("generatedAt", ""))
+    try:
+        datetime.fromisoformat(generated_at)
+    except ValueError:
+        errors.append(f"health.json generatedAt is invalid: {generated_at!r}")
+    if str(last_updated.get("updatedAt", "")) != generated_at:
+        errors.append("health.json generatedAt must match last_updated.json updatedAt")
+
+    data_date = str(health.get("dataDate", ""))
+    if not data_date or not valid_date(data_date):
+        errors.append(f"health.json dataDate is invalid: {data_date!r}")
+    if isinstance(updates, dict) and data_date != str(updates.get("date", "")):
+        errors.append(
+            "health.json dataDate must match today_updates.json date: "
+            f"{data_date!r} != {updates.get('date', '')!r}"
+        )
+
+    metrics = health.get("metrics")
+    if not isinstance(metrics, dict):
+        errors.append("health.json metrics must be an object")
+        metrics = {}
+    numeric_fields = (
+        "eventCount", "todayNewCount", "agentCandidateCount",
+        "pendingArticleCount", "extractionFailureCount",
+        "structuredSourceFailureCount", "keyCount",
+        "exhaustedKeyCount", "keyRotationCount",
+    )
+    for field in numeric_fields:
+        value = metrics.get(field)
+        if not isinstance(value, int) or isinstance(value, bool) or value < 0:
+            errors.append(f"health.json metrics.{field} must be a non-negative integer")
+    if metrics.get("eventCount") != len(events):
+        errors.append(
+            f"health.json eventCount mismatch: expected {len(events)}, "
+            f"got {metrics.get('eventCount')}"
+        )
+    if isinstance(updates, dict) and metrics.get("todayNewCount") != updates.get("newEventCount"):
+        errors.append(
+            "health.json todayNewCount mismatch: "
+            f"expected {updates.get('newEventCount')}, got {metrics.get('todayNewCount')}"
+        )
+    candidate_count = len(agent_verify_candidates.build_candidates(events))
+    if metrics.get("agentCandidateCount") != candidate_count:
+        errors.append(
+            "health.json agentCandidateCount mismatch: "
+            f"expected {candidate_count}, got {metrics.get('agentCandidateCount')}"
+        )
+
+    limited = bool(
+        metrics.get("agentCandidateCount")
+        or metrics.get("pendingArticleCount")
+        or metrics.get("extractionFailureCount")
+        or metrics.get("structuredSourceFailureCount")
+        or metrics.get("aiUnavailable")
+        or metrics.get("rateLimited")
+    )
+    expected_status = "limited" if limited else "healthy"
+    if health.get("status") != expected_status:
+        errors.append(
+            f"health.json status mismatch: expected {expected_status}, "
+            f"got {health.get('status')}"
+        )
+
+    brands = health.get("brands")
+    if not isinstance(brands, dict):
+        errors.append("health.json brands must be an object")
+        brands = {}
+    missing_brands = sorted(ACTIVE_BRANDS.difference(brands.keys()))
+    if missing_brands:
+        errors.append(f"health.json missing brands: {', '.join(missing_brands)}")
+    pending_sum = 0
+    for brand in ACTIVE_BRANDS.intersection(brands.keys()):
+        row = brands.get(brand)
+        if not isinstance(row, dict):
+            errors.append(f"health.json brands.{brand} must be an object")
+            continue
+        value = row.get("pendingArticles")
+        if not isinstance(value, int) or isinstance(value, bool) or value < 0:
+            errors.append(
+                f"health.json brands.{brand}.pendingArticles must be a non-negative integer"
+            )
+        else:
+            pending_sum += value
+    if metrics.get("pendingArticleCount") != pending_sum:
+        errors.append(
+            "health.json pendingArticleCount mismatch: "
+            f"expected {pending_sum}, got {metrics.get('pendingArticleCount')}"
+        )
+
+    checks = health.get("checks")
+    expected_checks = {"scrape", "smoke", "similarity", "lint"}
+    if not isinstance(checks, dict) or any(checks.get(name) != "ok" for name in expected_checks):
+        errors.append("health.json checks must mark scrape, smoke, similarity, and lint as ok")
+    return errors
+
+
 def main() -> int:
     errors: list[str] = []
     warnings: list[str] = []
@@ -364,6 +477,7 @@ def main() -> int:
                 errors.append(f"paused brands remain in stores.json: {', '.join(paused)}")
         errors.extend(store_data_errors(stores))
 
+    updates: dict = {}
     if TODAY_UPDATES_JSON.exists():
         try:
             updates = load_json(TODAY_UPDATES_JSON)
@@ -391,13 +505,25 @@ def main() -> int:
         except Exception as exc:
             errors.append(f"today_updates.json is not parseable: {exc}")
 
+    last_updated: dict = {}
     if LAST_UPDATED_JSON.exists():
         try:
-            updated_at = load_json(LAST_UPDATED_JSON).get("updatedAt", "")
+            last_updated = load_json(LAST_UPDATED_JSON)
+            updated_at = last_updated.get("updatedAt", "")
             if updated_at:
                 datetime.fromisoformat(updated_at)
         except Exception as exc:
-            warnings.append(f"last_updated.json is not parseable: {exc}")
+            last_updated = {}
+            errors.append(f"last_updated.json is not parseable: {exc}")
+
+    if not HEALTH_JSON.exists():
+        errors.append("data/health.json is missing")
+    else:
+        try:
+            health = load_json(HEALTH_JSON)
+            errors.extend(health_data_errors(events, updates, health, last_updated))
+        except Exception as exc:
+            errors.append(f"health.json is not parseable: {exc}")
 
     print(f"events={len(events)} active_brands={','.join(scrape.DEFAULT_BRANDS)}")
     for warning in warnings:

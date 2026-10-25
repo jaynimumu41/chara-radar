@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "status": "healthy",
+  "generatedAt": "2026-10-25T11:50:17+08:00",
+  "dataDate": "2026-10-24",
+  "metrics": {
+    "eventCount": 57,
+    "todayNewCount": 1,
+    "agentCandidateCount": 0,
+    "pendingArticleCount": 0,
+    "extractionFailureCount": 0,
+    "structuredSourceFailureCount": 0,
+    "aiBackend": "unknown",
+    "aiUnavailable": false,
+    "keyCount": 0,
+    "exhaustedKeyCount": 0,
+    "keyRotationCount": 0,
+    "rateLimited": false
+  },
+  "brands": {
+    "miffy": {
+      "articlesFound": 0,
+      "eligibleArticles": 0,
+      "processedArticles": 0,
+      "pendingArticles": 0,
+      "retryableFailures": 0,
+      "addedRecords": 0,
+      "capReached": false,
+      "skippedDueRateLimit": false
+    },
+    "pokemon": {
+      "articlesFound": 0,
+      "eligibleArticles": 0,
+      "processedArticles": 0,
+      "pendingArticles": 0,
+      "retryableFailures": 0,
+      "addedRecords": 0,
+      "capReached": false,
+      "skippedDueRateLimit": false
+    },
+    "chiikawa": {
+      "articlesFound": 0,
+      "eligibleArticles": 0,
+      "processedArticles": 0,
+      "pendingArticles": 0,
+      "retryableFailures": 0,
+      "addedRecords": 0,
+      "capReached": false,
+      "skippedDueRateLimit": false
+    }
+  },
+  "checks": {
+    "scrape": "ok",
+    "smoke": "ok",
+    "similarity": "ok",
+    "lint": "ok"
+  }
+}

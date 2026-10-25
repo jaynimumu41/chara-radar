@@ -5,6 +5,7 @@ scraper/.env
 scraper/__pycache__/
 scraper/logs/
 scraper/processed.json
+scraper/run_metrics.json
 
 # 本機開發設定
 .claude/

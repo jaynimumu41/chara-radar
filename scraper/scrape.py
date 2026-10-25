@@ -54,6 +54,7 @@ DATA_DIR = Path(__file__).parent.parent / "data"
 EVENTS_JSON = DATA_DIR / "events.json"
 UPDATE_DIFF_JSON = DATA_DIR / "today_updates.json"
 LAST_UPDATED_JSON = DATA_DIR / "last_updated.json"
+RUN_METRICS_JSON = Path(__file__).parent / "run_metrics.json"
 TAIPEI_TZ = timezone(timedelta(hours=8))
 
 
@@ -66,6 +67,51 @@ def taipei_today(now: datetime | None = None) -> str:
 
 TODAY = taipei_today()
 MAX_PER_BRAND = 13  # 每品牌單次最多用 AI 判斷幾筆（控制速度與額度）
+
+
+def new_run_metrics(brands: list[str], official_only: bool, backend) -> dict:
+    """Create a public-safe run summary without exposing API key values."""
+    kind = backend[0] if backend else "none"
+    key_count = len(backend[1]) if backend else 0
+    return {
+        "schemaVersion": 1,
+        "runDate": TODAY,
+        "generatedAt": "",
+        "officialOnly": bool(official_only),
+        "aiBackend": kind,
+        "aiUnavailable": not official_only and backend is None,
+        "keyCount": key_count,
+        "exhaustedKeyCount": 0,
+        "keyRotationCount": 0,
+        "rateLimited": False,
+        "structuredSourceFailures": [],
+        "extractionFailureCount": 0,
+        "newRecordCount": 0,
+        "finalEventCount": 0,
+        "todayNewCount": 0,
+        "removedCount": 0,
+        "brands": {
+            brand: {
+                "articlesFound": 0,
+                "eligibleArticles": 0,
+                "processedArticles": 0,
+                "pendingArticles": 0,
+                "retryableFailures": 0,
+                "addedRecords": 0,
+                "capReached": False,
+                "skippedDueRateLimit": False,
+            }
+            for brand in brands
+        },
+    }
+
+
+def save_run_metrics(metrics: dict) -> None:
+    metrics["generatedAt"] = datetime.now(TAIPEI_TZ).isoformat(timespec="seconds")
+    RUN_METRICS_JSON.write_text(
+        json.dumps(metrics, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
 
 # ── RSS 搜尋條件 ───────────────────────────────────────────────────────────────
 
@@ -693,6 +739,7 @@ class KeyRotator:
         self.keys = keys
         self.idx = 0
         self.exhausted: set[int] = set()
+        self.rotation_count = 0
         self._once = call_claude_once if kind == "anthropic" else call_gemini_once
 
     @property
@@ -700,20 +747,24 @@ class KeyRotator:
         return f"key #{self.idx + 1}/{len(self.keys)}"
 
     def call(self, prompt: str) -> str:
-        tried = 0
-        while tried < len(self.keys):
-            if self.idx in self.exhausted:
+        while len(self.exhausted) < len(self.keys):
+            while self.idx in self.exhausted:
                 self.idx = (self.idx + 1) % len(self.keys)
-                tried += 1
-                continue
             try:
                 return self._once(self.keys[self.idx], prompt)
             except RateLimitError:
-                self.exhausted.add(self.idx)
-                if len(self.keys) > 1:
-                    print(f"        （{self.active_label} 配額用盡，換下一把）")
+                exhausted_idx = self.idx
+                self.exhausted.add(exhausted_idx)
+                if len(self.exhausted) >= len(self.keys):
+                    break
                 self.idx = (self.idx + 1) % len(self.keys)
-                tried += 1
+                while self.idx in self.exhausted:
+                    self.idx = (self.idx + 1) % len(self.keys)
+                self.rotation_count += 1
+                print(
+                    f"        （key #{exhausted_idx + 1}/{len(self.keys)} "
+                    "配額用盡，換下一把）"
+                )
         raise RateLimitError("所有 key 配額都用盡")
 
 # ── RSS 抓取 ──────────────────────────────────────────────────────────────────
@@ -2630,6 +2681,7 @@ def run(brands: list[str], official_only: bool = False):
     _REJECTED = load_rejected()
     env = load_env()
     backend = None if official_only else detect_ai_backend(env)
+    metrics = new_run_metrics(brands, official_only, backend)
     rotator = None
     if backend:
         kind, keys = backend
@@ -2665,6 +2717,7 @@ def run(brands: list[str], official_only: bool = False):
                 print(f"🏛️  吉伊卡哇官方排程/店鋪（結構化，免 AI）→ {len(structured)} 筆現行")
                 save_events(events)
         except Exception as e:
+            metrics["structuredSourceFailures"].append("chiikawa")
             print(f"    ⚠️  吉伊卡哇結構化來源失敗（略過）：{e}")
     if "pokemon" in brands:
         try:
@@ -2681,6 +2734,7 @@ def run(brands: list[str], official_only: bool = False):
                 print(f"🏛️  Pokémon Cafe 官方公告（結構化，免 AI）→ {len(cafe)} 筆現行")
                 save_events(events)
         except Exception as e:
+            metrics["structuredSourceFailures"].append("pokemon-cafe")
             print(f"    ⚠️  Pokémon Cafe 官方公告來源失敗（略過）：{e}")
         try:
             store_events = fetch_pokemon_store_events(correct_city=correct_city)
@@ -2694,6 +2748,7 @@ def run(brands: list[str], official_only: bool = False):
                 print(f"🏛️  Pokémon Center 官方店頭活動（結構化，免 AI）→ {len(store_events)} 筆現行")
                 save_events(events)
         except Exception as e:
+            metrics["structuredSourceFailures"].append("pokemon-store-events")
             print(f"    ⚠️  Pokémon Center 官方店頭活動來源失敗（略過）：{e}")
         try:
             poke = fetch_pokemon_popups(correct_city=correct_city)
@@ -2707,6 +2762,7 @@ def run(brands: list[str], official_only: bool = False):
                 print(f"🏛️  寶可夢出張所排程（結構化，免 AI）→ {len(poke)} 筆現行")
                 save_events(events)
         except Exception as e:
+            metrics["structuredSourceFailures"].append("pokemon-popups")
             print(f"    ⚠️  寶可夢結構化來源失敗（略過）：{e}")
         try:
             poke_jp = fetch_pokemon_jp_goods()
@@ -2720,6 +2776,7 @@ def run(brands: list[str], official_only: bool = False):
                 print(f"🏛️  日本 Pokémon Center 官方商品（結構化，免 AI）→ {len(poke_jp)} 筆現行")
                 save_events(events)
         except Exception as e:
+            metrics["structuredSourceFailures"].append("pokemon-jp-goods")
             print(f"    ⚠️  日本 Pokémon 官方商品來源失敗（略過）：{e}")
         try:
             poke_tw = fetch_pokemon_tw_goods(correct_city=correct_city)
@@ -2735,6 +2792,7 @@ def run(brands: list[str], official_only: bool = False):
                 print(f"🏛️  台灣寶可夢官方商品（結構化，免 AI）→ {len(poke_tw)} 筆現行")
                 save_events(events)
         except Exception as e:
+            metrics["structuredSourceFailures"].append("pokemon-tw-goods")
             print(f"    ⚠️  台灣寶可夢官方商品來源失敗（略過）：{e}")
     if "miffy" in brands:
         try:
@@ -2749,12 +2807,17 @@ def run(brands: list[str], official_only: bool = False):
                 print(f"🏛️  Miffy 官方活動（dickbruna，結構化，免 AI）→ {len(mf)} 筆現行")
                 save_events(events)
         except Exception as e:
+            metrics["structuredSourceFailures"].append("miffy")
             print(f"    ⚠️  Miffy 結構化來源失敗（略過）：{e}")
 
     if not rotator:
         events, past_removed, dup_removed, rejected_removed = clean_events(events)
         save_events(events)
         update_diff = save_update_diff(previous_events, events, baseline_date)
+        metrics["finalEventCount"] = len(events)
+        metrics["todayNewCount"] = update_diff["newEventCount"]
+        metrics["removedCount"] = past_removed + dup_removed + rejected_removed
+        save_run_metrics(metrics)
         print("\n✨  官方來源更新完成（媒體 AI 萃取已略過）")
         print(f"    今日新增檢視：相對前次版本新增 {update_diff['newEventCount']} 筆")
         if past_removed or dup_removed or rejected_removed:
@@ -2767,10 +2830,12 @@ def run(brands: list[str], official_only: bool = False):
     processed_cache = load_processed()  # 跑過的（採用或略過）原始標題，避免重複送 AI
     new_count = 0
     rate_limited = False
+    visited_brands: set[str] = set()
 
     for brand in brands:
         if rate_limited:
             break
+        visited_brands.add(brand)
         print(f"\n🔍  {BRAND_LABELS[brand]}")
         all_items: list[dict] = []
 
@@ -2796,13 +2861,11 @@ def run(brands: list[str], official_only: bool = False):
         # 官方優先：把 PR TIMES／官方來源排到最前面先花配額（穩定排序保留原順序）
         unique.sort(key=lambda it: 0 if is_official_source(it.get("source", "")) else 1)
 
+        brand_metrics = metrics["brands"][brand]
+        brand_metrics["articlesFound"] = len(unique)
         kws = BRAND_KEYWORDS[brand]
-        new_for_brand = 0
-        processed = 0
+        eligible = []
         for item in unique:
-            if processed >= MAX_PER_BRAND:
-                print(f"    （已達單品牌處理上限 {MAX_PER_BRAND} 筆，其餘下次再抓）")
-                break
             tl = item["title"].lower()
             if not any(k.lower() in tl for k in kws):
                 continue
@@ -2821,6 +2884,17 @@ def run(brands: list[str], official_only: bool = False):
             age = pubdate_age_days(item["pubDate"])  # 過舊新聞跳過（多半已結束）
             if age is not None and age > MAX_NEWS_AGE_DAYS:
                 continue
+            eligible.append(item)
+
+        brand_metrics["eligibleArticles"] = len(eligible)
+        new_for_brand = 0
+        processed = 0
+        completed = 0
+        for item in eligible:
+            if processed >= MAX_PER_BRAND:
+                print(f"    （已達單品牌處理上限 {MAX_PER_BRAND} 筆，其餘下次再抓）")
+                brand_metrics["capReached"] = True
+                break
 
             processed += 1
             print(f"    → {item['title'][:55]}", end=" … ")
@@ -2836,13 +2910,17 @@ def run(brands: list[str], official_only: bool = False):
 
             if ev is None:
                 processed_cache.add(item["title"])
+                completed += 1
                 print("略過")
                 continue
             if ev.get("_skipNoProcess"):
+                brand_metrics["retryableFailures"] += 1
+                metrics["extractionFailureCount"] += 1
                 print("略過")
                 continue
             if ev["sourceUrl"] in seen_urls:
                 processed_cache.add(item["title"])
+                completed += 1
                 print("重複")
                 continue
 
@@ -2853,11 +2931,20 @@ def run(brands: list[str], official_only: bool = False):
                 processed_cache.add(item["title"])
             new_count += 1
             new_for_brand += 1
+            completed += 1
             save_events(events)  # 即時存檔：中途中斷也不會丟失
             print(f"✅ {ev['title']}")
 
+        brand_metrics["processedArticles"] = processed
+        brand_metrics["pendingArticles"] = max(0, len(eligible) - completed)
+        brand_metrics["addedRecords"] = new_for_brand
         if new_for_brand == 0 and not rate_limited:
             print("    本次無新情報")
+
+    if rate_limited:
+        for brand in brands:
+            if brand not in visited_brands:
+                metrics["brands"][brand]["skippedDueRateLimit"] = True
 
     save_processed(processed_cache)
     # 收尾：移除過期 + 啟發式去重
@@ -2868,6 +2955,14 @@ def run(brands: list[str], official_only: bool = False):
         events, ai_removed = ai_dedup(events, rotator)
     save_events(events)
     update_diff = save_update_diff(previous_events, events, baseline_date)
+    metrics["keyRotationCount"] = rotator.rotation_count
+    metrics["exhaustedKeyCount"] = len(rotator.exhausted)
+    metrics["rateLimited"] = rate_limited or len(rotator.exhausted) == len(rotator.keys)
+    metrics["newRecordCount"] = new_count
+    metrics["finalEventCount"] = len(events)
+    metrics["todayNewCount"] = update_diff["newEventCount"]
+    metrics["removedCount"] = past_removed + dup_removed + ai_removed + rejected_removed
+    save_run_metrics(metrics)
 
     status = "中途因配額停止" if rate_limited else "完成"
     print(f"\n✨  {status}！本次新增 {new_count} 筆")

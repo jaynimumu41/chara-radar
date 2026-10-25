@@ -18,6 +18,8 @@ Sanrio（三麗鷗）先暫停，因無結構化來源、新聞/Gemini 污染最
 
 - 結構化來源每次跑都以官方最新清單覆蓋同來源 URL 的舊資料（過期由 `clean_events` 移除）。
 - `data/today_updates.json` 是前端「今日更新」的依據：每日 scraper 會用日期嚴格早於今天的最後公開資料與跑後資料比對，只列出前次版本沒有的新情報；同日較早的人工提交不可成為 baseline，且 `baselineDate` 必須早於 `date`。`createdAt` 不能直接當作今日新增，因為結構化來源重建、修正或來源替換也可能寫成今天。前端只在檔案的 `date` 等於台北當日時顯示其中 IDs，避免隔日排程前仍把昨天資料標成今日新增。
+- `scraper/run_metrics.json` 是 gitignored 的單次執行統計，不含任何 key 值；`scraper/write_health.py` 會把安全的數量摘要寫入 `data/health.json`，包含每品牌找到、處理、延後、重試、新增筆數，以及 key 輪替和官方來源失敗數。
+- `data/health.json` 只代表最後一次通過發布閘門的資料狀態。前端超過 30 小時沒有成功同步才顯示警告；有延後候選但資料仍正確時只顯示琥珀色同步狀態，不把有限覆蓋誤報成整體失敗。
 - 吉伊卡哇除了 POP UP STORE 排程，也抓官方首頁上的活動/店鋪卡片、`p26/mck_scpus/index.html` 電影 POP UP 多會場頁與 `chiikawamogumogu.jp` 專門店頁；這類官方子頁、常設店開幕、限定餐飲與原創周邊不一定會進 Google News/RSS，需走結構化解析。
 - `scraper/audit_chiikawa_subpages.py` 會巡覽 `chiikawa-info.jp/index.html` 連出的 `p26/.../index.html` 子頁，對照 `data/events.json` 標記 `parsed` / `ignored` / `needs_review`。`needs_review` 只是稽核提示，不會自動入庫；有明確會場＋日期＋商品/店鋪訊號的 high risk 頁面，應優先補結構化 parser 或人工標成不收。
 - `scraper/audit_official_coverage.py` 會稽核 Pokémon / Miffy 官方入口（Pokémon Cafe、台灣 Pokémon goods、Pokemon Center 店鋪 news/events、Dick Bruna event/news、Kiddy Land/miffy style 搜尋），標記 `parsed` / `ignored` / `needs_review`。每天 agent 需看 high/medium risk；不是自動入庫，而是用來防「官方有但 parser 沒接」。
@@ -124,6 +126,8 @@ Sanrio（三麗鷗）先暫停，因無結構化來源、新聞/Gemini 污染最
 
 **AI 群組去重**（`ai_dedup`，配額足時收尾跑）：補抓改寫標題的同一活動；安全防呆＝只合併同品牌、城市相容、開始日相差 ≤21 天者。
 
+**發布前相似閘門**（`audit_similar_events.py`）：不直接刪資料，只在高信心重複仍殘留時阻擋自動發布。條件限同品牌，並要求決定性同活動證據，或活動型資料具有重疊日期、同一具體／已知場館及足夠標題相似度。明確 `parentEventId` 母子活動與不同具體分店不攔截。
+
 ---
 
 ## 6. 過期判定（`_is_past`）
@@ -149,12 +153,16 @@ Agent 每日驗證另有固定 SOP：`scraper/AGENT_VERIFY.md`；候選清單可
 cd scraper
 set PYTHONIOENCODING=utf-8
 python smoke_test.py     # exit 0=全過
+python audit_similar_events.py --fail-on-review
+python data_lint.py
 ```
 
 涵蓋：`correct_city`、`canon_venue`、`stale_by_year`、`is_roundup_title`、`extract_dates`、
 `_is_past`、`dedup_events`（含不同城/不同檔期不可併、同活動多媒體應併、泛用店名不同新品不可併、實際資料不誤併）。
 
 新增／調整規則時，**同步在 `smoke_test.py` 補一個正例與一個「不可誤殺」反例**。
+
+`.github/workflows/validate.yml` 會在每次 push / pull request 以乾淨 Linux 環境重跑編譯、smoke、lint 與相似重複閘門，不使用任何 API key。每日 Windows 工作仍會在本機先跑同一組發布檢查，兩邊互為獨立安全網。
 
 ### 2026-10-23 agent 驗證補強
 

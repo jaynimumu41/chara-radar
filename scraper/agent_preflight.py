@@ -16,6 +16,8 @@ ROOT = Path(__file__).resolve().parents[1]
 LOG_DIR = ROOT / "scraper" / "logs"
 LAST_UPDATED_JSON = ROOT / "data" / "last_updated.json"
 TODAY_UPDATES_JSON = ROOT / "data" / "today_updates.json"
+EVENTS_JSON = ROOT / "data" / "events.json"
+HEALTH_JSON = ROOT / "data" / "health.json"
 TW = timezone(timedelta(hours=8))
 
 
@@ -97,6 +99,39 @@ def main() -> int:
                 )
         except Exception as exc:
             fail(f"cannot read data/today_updates.json: {exc}", errors)
+
+    if not HEALTH_JSON.exists():
+        fail("data/health.json is missing", errors)
+    else:
+        try:
+            health = json.loads(HEALTH_JSON.read_text(encoding="utf-8-sig"))
+            status = health.get("status", "")
+            data_date = health.get("dataDate", "")
+            metrics = health.get("metrics", {})
+            event_count = len(json.loads(EVENTS_JSON.read_text(encoding="utf-8-sig")))
+            print(
+                "health "
+                f"status={status} data_date={data_date} "
+                f"events={metrics.get('eventCount')} "
+                f"pending={metrics.get('pendingArticleCount')} "
+                f"failures={metrics.get('extractionFailureCount')} "
+                f"key_rotations={metrics.get('keyRotationCount')}"
+            )
+            if status not in {"healthy", "limited"}:
+                fail(f"health status is invalid: {status!r}", errors)
+            if data_date != today:
+                fail(f"health dataDate is not today: {data_date}", errors)
+            if metrics.get("eventCount") != event_count:
+                fail(
+                    "health eventCount does not match events.json: "
+                    f"{metrics.get('eventCount')} != {event_count}",
+                    errors,
+                )
+            checks = health.get("checks", {})
+            if any(checks.get(name) != "ok" for name in ("scrape", "smoke", "similarity", "lint")):
+                fail("health checks are incomplete", errors)
+        except Exception as exc:
+            fail(f"cannot read data/health.json: {exc}", errors)
 
     scrape_log = LOG_DIR / f"scrape-{today}.log"
     if not scrape_log.exists():

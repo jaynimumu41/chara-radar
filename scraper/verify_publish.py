@@ -6,6 +6,7 @@ Checks:
 3. GitHub Pages data/today_updates.json eventually matches local data/today_updates.json.
 4. GitHub Pages data/stores.json eventually matches local data/stores.json.
 5. GitHub Pages data/last_updated.json eventually matches the local heartbeat.
+6. GitHub Pages data/health.json eventually matches local run diagnostics.
 
 This is meant for the daily agent verification step, where edits are committed
 after the normal scraper. Without this guard, a local agent commit can exist
@@ -26,10 +27,12 @@ EVENTS_JSON = ROOT / "data" / "events.json"
 TODAY_UPDATES_JSON = ROOT / "data" / "today_updates.json"
 STORES_JSON = ROOT / "data" / "stores.json"
 LAST_UPDATED_JSON = ROOT / "data" / "last_updated.json"
+HEALTH_JSON = ROOT / "data" / "health.json"
 PAGES_EVENTS_URL = "https://jaynimumu41.github.io/chara-radar/data/events.json"
 PAGES_UPDATES_URL = "https://jaynimumu41.github.io/chara-radar/data/today_updates.json"
 PAGES_STORES_URL = "https://jaynimumu41.github.io/chara-radar/data/stores.json"
 PAGES_LAST_UPDATED_URL = "https://jaynimumu41.github.io/chara-radar/data/last_updated.json"
+PAGES_HEALTH_URL = "https://jaynimumu41.github.io/chara-radar/data/health.json"
 
 
 def run_git(args: list[str]) -> str:
@@ -56,6 +59,10 @@ def load_local_stores() -> dict:
 
 def load_local_last_updated() -> dict:
     return json.loads(LAST_UPDATED_JSON.read_text(encoding="utf-8-sig"))
+
+
+def load_local_health() -> dict:
+    return json.loads(HEALTH_JSON.read_text(encoding="utf-8-sig"))
 
 
 def fetch_json(url: str, timeout: int):
@@ -98,6 +105,7 @@ def main() -> int:
     parser.add_argument("--updates-url", default=PAGES_UPDATES_URL)
     parser.add_argument("--stores-url", default=PAGES_STORES_URL)
     parser.add_argument("--last-updated-url", default=PAGES_LAST_UPDATED_URL)
+    parser.add_argument("--health-url", default=PAGES_HEALTH_URL)
     parser.add_argument("--timeout", type=int, default=180)
     parser.add_argument("--interval", type=int, default=15)
     args = parser.parse_args()
@@ -119,6 +127,8 @@ def main() -> int:
     local_stores_canon = canonical_json(local_stores)
     local_last_updated = load_local_last_updated()
     local_last_updated_canon = canonical_json(local_last_updated)
+    local_health = load_local_health()
+    local_health_canon = canonical_json(local_health)
     deadline = time.time() + args.timeout
     attempt = 0
     last_error = ""
@@ -133,18 +143,23 @@ def main() -> int:
             online_stores_canon = canonical_json(online_stores)
             online_last_updated = fetch_json(args.last_updated_url, timeout=45)
             online_last_updated_canon = canonical_json(online_last_updated)
+            online_health = fetch_json(args.health_url, timeout=45)
+            online_health_canon = canonical_json(online_health)
             print(
                 f"attempt={attempt} online_total={len(online_events)} local_total={len(local_events)} "
                 f"online_new={online_updates.get('newEventCount')} local_new={local_updates.get('newEventCount')} "
                 f"online_stores={store_count(online_stores)} local_stores={store_count(local_stores)} "
                 f"online_updated={online_last_updated.get('updatedAt')} "
-                f"local_updated={local_last_updated.get('updatedAt')}"
+                f"local_updated={local_last_updated.get('updatedAt')} "
+                f"online_health={online_health.get('status')} "
+                f"local_health={local_health.get('status')}"
             )
             if (
                 online_canon == local_canon
                 and online_updates_canon == local_updates_canon
                 and online_stores_canon == local_stores_canon
                 and online_last_updated_canon == local_last_updated_canon
+                and online_health_canon == local_health_canon
             ):
                 print("publish_ok=true")
                 return 0
@@ -155,10 +170,11 @@ def main() -> int:
             update_match = online_updates_canon == local_updates_canon
             stores_match = online_stores_canon == local_stores_canon
             last_updated_match = online_last_updated_canon == local_last_updated_canon
+            health_match = online_health_canon == local_health_canon
             last_error = (
                 f"publish mismatch missing={missing[:8]} extra={extra[:8]} "
                 f"updates_match={update_match} stores_match={stores_match} "
-                f"last_updated_match={last_updated_match}"
+                f"last_updated_match={last_updated_match} health_match={health_match}"
             )
         except Exception as exc:
             last_error = str(exc)
