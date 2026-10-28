@@ -1438,5 +1438,28 @@
     "sourceType": "official_social",
     "createdAt": "2026-10-27",
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000080.000168561.html"
+  },
+  {
+    "brand": "miffy",
+    "title": "Miffy ハウステンボス×クリスマスアドベント 限定ミッフィーマグカップ登場　ハウステンボス",
+    "type": "popup",
+    "country": "JP",
+    "city": "Nagasaki",
+    "locationName": "ハウステンボス",
+    "startDate": "2026-11-06",
+    "endDate": "2026-12-25",
+    "summaryZh": "Miffy（米飛兔）官方活動「ハウステンボス×クリスマスアドベント 限定ミッフィーマグカップ登場」於ハウステンボス期間限定登場，販售限定周邊／餐點。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "期間限定",
+      "日本"
+    ],
+    "id": "mi-ac8eef",
+    "sourceType": "official_site",
+    "createdAt": "2026-10-28",
+    "sourceTitle": "ハウステンボス×クリスマスアドベント 限定ミッフィーマグカップ登場 - dickbruna.jp",
+    "sourceUrl": "https://dickbruna.jp/news/202610/49404/"
   }
 ]
