@@ -168,30 +168,6 @@
   },
   {
     "brand": "pokemon",
-    "title": "寶可夢中心新品Flapping Fins系列",
-    "type": "new_product",
-    "country": "TW",
-    "city": "Taipei",
-    "locationName": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3F）",
-    "startDate": "2026-08-29",
-    "endDate": "",
-    "summaryZh": "台灣寶可夢中心將於8月29日開賣新品Flapping Fins系列，包含4款可動玩偶。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "新品",
-      "玩偶",
-      "台灣"
-    ],
-    "id": "po-e5aeff",
-    "sourceTitle": "台灣寶可夢中心新品Flapping Fins系列亮相！4款可動玩偶8/29開賣 - NOWnews今日新聞",
-    "sourceType": "official_social",
-    "createdAt": "2026-08-24",
-    "sourceUrl": "https://www.nownews.com/news/6868783"
-  },
-  {
-    "brand": "pokemon",
     "title": "Pokémon Sleep 模型登場",
     "type": "new_product",
     "country": "JP",
@@ -1461,5 +1437,77 @@
     "createdAt": "2026-10-28",
     "sourceTitle": "ハウステンボス×クリスマスアドベント 限定ミッフィーマグカップ登場 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202610/49404/"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇 POP UP STORE イオンモール神戸北",
+    "type": "popup",
+    "country": "JP",
+    "city": "Hyogo",
+    "locationName": "イオンモール神戸北 専門店1階 さざんかコート",
+    "startDate": "2026-11-11",
+    "endDate": "2026-11-25",
+    "summaryZh": "ちいかわ POP UP STORE 於イオンモール神戸北期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "吉伊卡哇",
+      "快閃店",
+      "日本",
+      "限定周邊"
+    ],
+    "id": "ch-6747f9",
+    "sourceType": "official_site",
+    "createdAt": "2026-10-29",
+    "sourceTitle": "ちいかわPOP UP STORE イオンモール神戸北(2026-11-11～2026-11-25) - ちいかわ公式",
+    "sourceUrl": "https://chiikawa-info.jp/p26/pus_kbkt/index.html"
+  },
+  {
+    "brand": "miffy",
+    "title": "米飛聖誕花圈快閃店",
+    "type": "popup",
+    "country": "JP",
+    "city": "Kanagawa",
+    "locationName": "横浜赤レンガ倉庫",
+    "startDate": "2026-11-06",
+    "endDate": "2026-12-08",
+    "summaryZh": "米飛兔聖誕花圈於橫濱赤煉瓦倉庫快閃店登場，販售限定周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "聖誕",
+      "快閃店",
+      "橫濱"
+    ],
+    "id": "mi-1da27b",
+    "sourceTitle": "ミッフィーのクリスマスリースが今年も登場！ 横浜赤レンガ倉庫に「Flower Miffy Pop-Up Marche」期間限定オープン - Yahoo!ニュース",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-29",
+    "sourceUrl": "https://news.yahoo.co.jp/articles/5bef92e97fcda09a007ed699cb01afb15df54add"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇大判燒台北店開幕",
+    "type": "store",
+    "country": "TW",
+    "city": "Taipei",
+    "locationName": "CHIIKAWA OBANYAKI in TAIPEI",
+    "startDate": "",
+    "endDate": "",
+    "summaryZh": "吉伊卡哇首間大判燒專賣店「CHIIKAWA OBANYAKI in TAIPEI」將於2026年11月21日在台北開幕，販售限定商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "吉伊卡哇",
+      "大判燒",
+      "台北",
+      "新店開幕"
+    ],
+    "id": "ch-654d03",
+    "sourceTitle": "【ちいかわ】台北エリアに“台北初！”のお店が誕生‼「CHIIKAWA OBANYAKI in TAIPEI」吉伊卡哇大判燒台北店が2026年11月21日（土）にグランドオープン！",
+    "sourceType": "official_social",
+    "createdAt": "2026-10-29",
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000004.000187317.html"
   }
 ]
