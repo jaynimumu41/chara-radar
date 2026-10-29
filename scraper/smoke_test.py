@@ -2694,6 +2694,46 @@ check("單品牌處理上限留下可見積壓而不標記processed",
       ),
       (15, 13, 2, True))
 
+# Opening-date guard must recognize the actual quoted OBANYAKI shop name.
+obanyaki_fixture = '「CHIIKAWA OBANYAKI in TAIPEI」常設店舗を2026年11月21日（土）にグランドオープン。場所：台北市大同區赤峰街41巷9號'
+obanyaki_event = ev(brand="chiikawa", type="store", startDate="2026-11-21",
+                    sourceTitle='「CHIIKAWA OBANYAKI in TAIPEI」台北店オープン')
+check("OBANYAKI明確開幕日不被清除",
+      scrape.clear_unsubstantiated_store_dates(obanyaki_event, obanyaki_fixture), False)
+unrelated_opening = dict(obanyaki_event)
+check("OBANYAKI不能借用其他店的開幕日",
+      scrape.clear_unsubstantiated_store_dates(unrelated_opening,
+          '「別のショップ」2026年11月21日にグランドオープン'), True)
+check("台北大判燒常設店納入官方稽核",
+      [x.name for x in audit_chiikawa_stores.extract_obanyaki_store(obanyaki_fixture)],
+      ["CHIIKAWA OBANYAKI in TAIPEI"])
+check("台北大判燒快閃不能當常設店",
+      audit_chiikawa_stores.extract_obanyaki_store(obanyaki_fixture.replace("常設店舗", "期間限定")), [])
+mini_product = scrape.normalize_source_event(ev(brand="pokemon", type="new_product",
+    sourceUrl="https://www.nownews.com/news/6886951", title="台灣寶可夢中心10月底新品"))
+check("10月底報導只列新迷你持有物避免重複延期商品",
+      (mini_product["title"], "蛋糕架" in mini_product["summaryZh"]),
+      ("Pokémon Center TAIPEI 迷你持有物系列", False))
+other_product = scrape.normalize_source_event(ev(brand="pokemon", type="new_product",
+    sourceUrl="https://www.nownews.com/news/6884725", title="合眾延期商品"))
+check("延期商品原紀錄仍保留蛋糕架", "蛋糕架" in other_product["summaryZh"], True)
+
+marche_old = ev(id="marche-old", brand="miffy", type="popup", city="Kanagawa",
+    title="Flower Miffy Pop-Up Marche", locationName="横浜赤レンガ倉庫 2号館1F",
+    startDate="2026-11-06", endDate="2026-12-08")
+marche_alias = ev(id="marche-alias", brand="miffy", type="campaign", city="Kanagawa",
+    title="Miffy Flower Miffy Pop-Up Marche", locationName="Flower Miffy Pop-Up Marche",
+    sourceTitle="Flower Miffy Pop-Up Marche 横浜赤レンガ倉庫にオープン",
+    startDate="2026-11-06", endDate="2026-12-08")
+check("橫濱Marche跨媒體類型仍為同場", scrape.special_activity_key(marche_old), scrape.special_activity_key(marche_alias))
+marche_later = dict(marche_alias, startDate="2027-11-06")
+check("橫濱Marche不同年度不合併", scrape.is_same_event_for_update_diff(marche_old, marche_later), False)
+check("Marche官方頁取實際場館不是品牌名稱",
+      official_sources._miffy_venue_from_title('「Flower Miffy Pop-Up Marche」が横浜赤レンガ倉庫に期間限定オープン', 'Flower Miffy Pop-Up Marche'),
+      "横浜赤レンガ倉庫 2号館1F")
+check("Marche購物特典不改變快閃類型",
+      official_sources._miffy_type('Flower Miffy Pop-Up Marche 横浜赤レンガ倉庫', '', 'キャンペーン'), "popup")
+
 # ── 結語 ──────────────────────────────────────────────────────────────────────
 print(f"\n{'=' * 40}\n結果：{_passed} 通過、{_failed} 失敗")
 sys.exit(1 if _failed else 0)

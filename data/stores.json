@@ -209,7 +209,8 @@
       {
         "label": "台灣",
         "stores": [
-          { "name": "CHIIKAWA SHOP in TAIPEI", "officialName": "CHIIKAWA SHOP in TAIPEI", "area": "台北・中山（長安西路19號）", "country": "TW" }
+          { "name": "CHIIKAWA SHOP in TAIPEI", "officialName": "CHIIKAWA SHOP in TAIPEI", "area": "台北・中山（長安西路19號）", "country": "TW" },
+          { "name": "吉伊卡哇大判燒台北店", "officialName": "CHIIKAWA OBANYAKI in TAIPEI", "area": "台北・大同（赤峰街41巷9號）", "country": "TW", "opening": "2026/11/21" }
         ]
       }
     ]

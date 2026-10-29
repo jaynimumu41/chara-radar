@@ -1629,6 +1629,8 @@ def _miffy_is_flower_birthday(title: str, name: str = "", detail: str = "") -> b
 
 
 def _miffy_venue_from_title(title: str, name: str = "", detail: str = "") -> str:
+    if "flower miffy pop-up marche" in (title + " " + name).lower() and "横浜赤レンガ" in (title + detail):
+        return "横浜赤レンガ倉庫 2号館1F"
     if "miffy style" in title.lower() and "ポップアップ" in title:
         for marker, venue in (("札幌", "札幌アピア"), ("大阪梅田", "キデイランド大阪梅田店")):
             if marker in title:
@@ -1656,6 +1658,8 @@ def _miffy_is_exhibition(title: str, name: str, detail: str = "") -> bool:
 
 
 def _miffy_type(title: str, name: str, detail: str = "") -> str:
+    if "flower miffy pop-up marche" in (title + " " + name).lower():
+        return "popup"
     blob = "\n".join(part for part in (title, name, detail[:1200]) if part)
     if "Cosme Kitchen" in blob or "コスメキッチン" in blob:
         return "new_product"

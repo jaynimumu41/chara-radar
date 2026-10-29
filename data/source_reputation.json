@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-25T10:06:13+00:00",
+  "updatedAt": "2026-10-29T08:52:38+00:00",
   "sources": {
     "domain:nownews.com": {
-      "confirmed": 18,
+      "confirmed": 19,
       "rejected": 4,
       "uncertain": 0,
       "crossChecked": 23,
@@ -13,12 +13,12 @@
       "host": "nownews.com",
       "handle": "",
       "firstSeen": "2026-06-11",
-      "lastReviewed": "2026-10-23",
+      "lastReviewed": "2026-10-29",
       "lastOutcome": "confirmed",
-      "notes": "Original explicitly names physical store, 10/20 restock and pink mascot; Pokemon Hubs corroborates. Latest 6885668 says no sales 10/23-24 and expected resume 10/25; updated warning and cleared reservation flag.",
+      "notes": "NOWnews original explicitly names Pokemon Center TAIPEI, 2026-10-31 in-store sale and five concrete mini held-item mascots. Retained under Taiwan physical-store exception; official Instagram and reader inaccessible, no independent Taiwan-date corroboration counted. Narrowed to new mini items; postponed Timeless Adventure/cake stand already in po-4b976e.",
       "byBrand": {
         "pokemon": {
-          "confirmed": 18,
+          "confirmed": 19,
           "rejected": 3,
           "uncertain": 0,
           "crossChecked": 22,
@@ -34,7 +34,7 @@
       },
       "byType": {
         "new_product": {
-          "confirmed": 18,
+          "confirmed": 19,
           "rejected": 0,
           "uncertain": 0,
           "crossChecked": 17,
@@ -64,7 +64,7 @@
       },
       "byCountry": {
         "tw": {
-          "confirmed": 18,
+          "confirmed": 19,
           "rejected": 4,
           "uncertain": 0,
           "crossChecked": 23,
@@ -291,6 +291,16 @@
           "eventId": "po-e53e1b",
           "evidenceCount": 1,
           "notes": "Original explicitly names physical store, 10/20 restock and pink mascot; Pokemon Hubs corroborates. Latest 6885668 says no sales 10/23-24 and expected resume 10/25; updated warning and cleared reservation flag."
+        },
+        {
+          "date": "2026-10-29",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-e834aa",
+          "evidenceCount": 0,
+          "notes": "NOWnews original explicitly names Pokemon Center TAIPEI, 2026-10-31 in-store sale and five concrete mini held-item mascots. Retained under Taiwan physical-store exception; official Instagram and reader inaccessible, no independent Taiwan-date corroboration counted. Narrowed to new mini items; postponed Timeless Adventure/cake stand already in po-4b976e."
         }
       ]
     },
@@ -511,18 +521,18 @@
     },
     "domain:news.yahoo.co.jp": {
       "confirmed": 3,
-      "rejected": 15,
+      "rejected": 16,
       "uncertain": 0,
-      "crossChecked": 19,
+      "crossChecked": 21,
       "score": 5,
       "label": "news.yahoo.co.jp",
       "kind": "news",
       "host": "news.yahoo.co.jp",
       "handle": "",
       "firstSeen": "2026-06-15",
-      "lastReviewed": "2026-10-23",
-      "lastOutcome": "confirmed",
-      "notes": "Original Yahoo image page inaccessible after reader retry. ANA company launch release, purchase-limit release and ANA FESTA reservation confirm 10/23 store goods; replaced with company release; cleared Tokyo-only city.",
+      "lastReviewed": "2026-10-29",
+      "lastOutcome": "rejected",
+      "notes": "Duplicate of existing mi-b04e35 and structured alias mi-eb7bed. Operator news-356 and Dick Bruna 49311 confirm same Yokohama venue, 2026-11-06 to 12-08 and goods. Removed both aliases; retained original canonical ID with official source. Original Yahoo and reader inaccessible.",
       "byBrand": {
         "chiikawa": {
           "confirmed": 2,
@@ -533,10 +543,10 @@
         },
         "miffy": {
           "confirmed": 1,
-          "rejected": 5,
+          "rejected": 6,
           "uncertain": 0,
-          "crossChecked": 8,
-          "score": 12
+          "crossChecked": 10,
+          "score": 5
         },
         "pokemon": {
           "confirmed": 0,
@@ -570,9 +580,9 @@
         },
         "popup": {
           "confirmed": 1,
-          "rejected": 6,
+          "rejected": 7,
           "uncertain": 0,
-          "crossChecked": 6,
+          "crossChecked": 8,
           "score": 5
         },
         "campaign": {
@@ -586,9 +596,9 @@
       "byCountry": {
         "jp": {
           "confirmed": 3,
-          "rejected": 15,
+          "rejected": 16,
           "uncertain": 0,
-          "crossChecked": 19,
+          "crossChecked": 21,
           "score": 5
         }
       },
@@ -772,6 +782,16 @@
           "eventId": "ch-22b7e6",
           "evidenceCount": 2,
           "notes": "Original Yahoo image page inaccessible after reader retry. ANA company launch release, purchase-limit release and ANA FESTA reservation confirm 10/23 store goods; replaced with company release; cleared Tokyo-only city."
+        },
+        {
+          "date": "2026-10-29",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "mi-1da27b",
+          "evidenceCount": 2,
+          "notes": "Duplicate of existing mi-b04e35 and structured alias mi-eb7bed. Operator news-356 and Dick Bruna 49311 confirm same Yokohama venue, 2026-11-06 to 12-08 and goods. Removed both aliases; retained original canonical ID with official source. Original Yahoo and reader inaccessible."
         }
       ]
     },
@@ -1611,26 +1631,26 @@
       ]
     },
     "domain:prtimes.jp": {
-      "confirmed": 4,
+      "confirmed": 6,
       "rejected": 6,
       "uncertain": 0,
-      "crossChecked": 8,
-      "score": 22,
+      "crossChecked": 9,
+      "score": 36,
       "label": "prtimes.jp",
       "kind": "news",
       "host": "prtimes.jp",
       "handle": "",
       "firstSeen": "2026-07-01",
-      "lastReviewed": "2026-10-23",
-      "lastOutcome": "rejected",
-      "notes": "Skater general retail curry tableware, no concrete in-scope physical venue or limited event.",
+      "lastReviewed": "2026-10-29",
+      "lastOutcome": "confirmed",
+      "notes": "GPS company release explicitly lists 2026-11-06 sale at 16 permanent Chiikawa Land stores. Official Chiikawa Market product page independently confirms product/date. Added physical venues; other venues may start later.",
       "byBrand": {
         "chiikawa": {
-          "confirmed": 1,
+          "confirmed": 3,
           "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 48
+          "crossChecked": 2,
+          "score": 64
         },
         "miffy": {
           "confirmed": 2,
@@ -1642,11 +1662,11 @@
       },
       "byType": {
         "new_product": {
-          "confirmed": 1,
+          "confirmed": 2,
           "rejected": 3,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 26
+          "crossChecked": 2,
+          "score": 35
         },
         "popup": {
           "confirmed": 1,
@@ -1656,11 +1676,11 @@
           "score": 32
         },
         "store": {
-          "confirmed": 1,
+          "confirmed": 2,
           "rejected": 0,
           "uncertain": 0,
           "crossChecked": 1,
-          "score": 59
+          "score": 66
         },
         "campaign": {
           "confirmed": 0,
@@ -1672,11 +1692,18 @@
       },
       "byCountry": {
         "jp": {
-          "confirmed": 3,
+          "confirmed": 4,
           "rejected": 7,
           "uncertain": 0,
-          "crossChecked": 8,
-          "score": 5
+          "crossChecked": 9,
+          "score": 11
+        },
+        "tw": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
         }
       },
       "history": [
@@ -1779,6 +1806,26 @@
           "eventId": "mi-6d27dc",
           "evidenceCount": 0,
           "notes": "Skater general retail curry tableware, no concrete in-scope physical venue or limited event."
+        },
+        {
+          "date": "2026-10-29",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "store",
+          "country": "TW",
+          "eventId": "ch-654d03",
+          "evidenceCount": 0,
+          "notes": "OMOLABO official company release confirms permanent Taipei store, 2026-11-21 opening, Chifeng address, original goods and mandatory reservations. Corrected missing start/address/reservation. Direct authoritative source; no independent signal counted."
+        },
+        {
+          "date": "2026-10-29",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "ch-888ed2",
+          "evidenceCount": 1,
+          "notes": "GPS company release explicitly lists 2026-11-06 sale at 16 permanent Chiikawa Land stores. Official Chiikawa Market product page independently confirms product/date. Added physical venues; other venues may start later."
         }
       ]
     },

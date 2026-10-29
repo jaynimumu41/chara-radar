@@ -1205,27 +1205,27 @@
   },
   {
     "brand": "miffy",
-    "title": "Flower Miffy Pop-Up Marche",
+    "title": "Miffy Flower Miffy Pop-Up Marche 橫濱",
     "type": "popup",
     "country": "JP",
     "city": "Kanagawa",
     "locationName": "横浜赤レンガ倉庫 2号館1F",
     "startDate": "2026-11-06",
     "endDate": "2026-12-08",
-    "summaryZh": "每年都受歡迎的米飛兔聖誕花圈與冬季禮物推薦商品齊聚一堂。於橫濱紅磚倉庫期間限定舉辦。",
+    "summaryZh": "11月6日至12月8日於橫濱赤煉瓦倉庫2號館1樓舉辦Flower Miffy Pop-Up Marche，販售冬季花藝禮品與會場限定設計商品，並依消費門檻分階段贈送玻璃盤、托特包及平日限定明信片。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "米飛兔",
-      "快閃店",
       "聖誕",
-      "禮物"
+      "快閃店",
+      "橫濱"
     ],
     "id": "mi-b04e35",
-    "sourceTitle": "毎年人気のミッフィーのクリスマスリースや冬の贈り物におすすめのアイテムが集結 「Flower Miffy Pop-Up Marche」2026年11月6日(金)より横浜赤レンガ倉庫で期間限定開催",
-    "sourceType": "official_social",
+    "sourceTitle": "「Flower Miffy Pop-Up Marche」が横浜赤レンガ倉庫に期間限定オープン - dickbruna.jp",
+    "sourceType": "official_site",
     "createdAt": "2026-10-23",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002255.000022901.html"
+    "sourceUrl": "https://dickbruna.jp/news/202610/49311/"
   },
   {
     "brand": "miffy",
@@ -1345,45 +1345,22 @@
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_aszk/index.html"
   },
   {
-    "brand": "miffy",
-    "title": "Miffy Flower Miffy Pop-Up Marche",
-    "type": "campaign",
-    "country": "JP",
-    "city": "Kanagawa",
-    "locationName": "Flower Miffy Pop-Up Marche",
-    "startDate": "2026-11-06",
-    "endDate": "2026-12-08",
-    "summaryZh": "Miffy（米飛兔）官方活動「Flower Miffy Pop-Up Marche」於Flower Miffy Pop-Up Marche期間限定登場，販售限定周邊／餐點。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "期間限定",
-      "日本"
-    ],
-    "id": "mi-eb7bed",
-    "sourceType": "official_site",
-    "createdAt": "2026-10-27",
-    "sourceTitle": "「Flower Miffy Pop-Up Marche」が横浜赤レンガ倉庫に期間限定オープン - dickbruna.jp",
-    "sourceUrl": "https://dickbruna.jp/news/202610/49311/"
-  },
-  {
     "brand": "pokemon",
-    "title": "台灣寶可夢中心10月底新品",
+    "title": "Pokémon Center TAIPEI 迷你持有物系列",
     "type": "new_product",
     "country": "TW",
     "city": "Taipei",
     "locationName": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3F）",
     "startDate": "2026-10-31",
     "endDate": "",
-    "summaryZh": "台灣寶可夢中心將於10月底推出迷你持有物系列新品，並開賣萬聖蛋糕架。",
+    "summaryZh": "台北寶可夢中心實體店10月31日開賣迷你持有物系列：莓莓果、木子果、文柚果、安撫之鈴及護符金幣，共5款，各150元，可搭配毛絨玩具使用。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "新品",
       "寶可夢中心",
       "台灣",
-      "萬聖節"
+      "迷你持有物"
     ],
     "id": "po-e834aa",
     "sourceTitle": "台灣寶可夢中心10月底新品！迷你持有物系列登場　萬聖蛋糕架開賣 - NOWnews今日新聞",
@@ -1397,10 +1374,10 @@
     "type": "new_product",
     "country": "JP",
     "city": "",
-    "locationName": "",
+    "locationName": "日本ちいかわらんど常設店等指定實體店",
     "startDate": "2026-11-06",
     "endDate": "",
-    "summaryZh": "推出「ちいかわ Kiramekko Teddy Bear Christmas」系列商品，以泰迪熊造型的吉伊卡哇角色們換上聖誕裝扮。",
+    "summaryZh": "11月6日起於日本ちいかわらんど常設店等指定實體店販售Kiramekko Teddy Bear Christmas，共吉伊卡哇、小八貓、兔兔3款，各2,420日圓；部分其他會場有不同開賣日，依各店公告。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1463,40 +1440,16 @@
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_kbkt/index.html"
   },
   {
-    "brand": "miffy",
-    "title": "米飛聖誕花圈快閃店",
-    "type": "popup",
-    "country": "JP",
-    "city": "Kanagawa",
-    "locationName": "横浜赤レンガ倉庫",
-    "startDate": "2026-11-06",
-    "endDate": "2026-12-08",
-    "summaryZh": "米飛兔聖誕花圈於橫濱赤煉瓦倉庫快閃店登場，販售限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "聖誕",
-      "快閃店",
-      "橫濱"
-    ],
-    "id": "mi-1da27b",
-    "sourceTitle": "ミッフィーのクリスマスリースが今年も登場！ 横浜赤レンガ倉庫に「Flower Miffy Pop-Up Marche」期間限定オープン - Yahoo!ニュース",
-    "sourceType": "official_social",
-    "createdAt": "2026-10-29",
-    "sourceUrl": "https://news.yahoo.co.jp/articles/5bef92e97fcda09a007ed699cb01afb15df54add"
-  },
-  {
     "brand": "chiikawa",
     "title": "吉伊卡哇大判燒台北店開幕",
     "type": "store",
     "country": "TW",
     "city": "Taipei",
-    "locationName": "CHIIKAWA OBANYAKI in TAIPEI",
-    "startDate": "",
+    "locationName": "CHIIKAWA OBANYAKI in TAIPEI（台北市大同區赤峰街41巷9號）",
+    "startDate": "2026-11-21",
     "endDate": "",
-    "summaryZh": "吉伊卡哇首間大判燒專賣店「CHIIKAWA OBANYAKI in TAIPEI」將於2026年11月21日在台北開幕，販售限定商品。",
-    "needReservation": false,
+    "summaryZh": "吉伊卡哇大判燒台北常設店11月21日開幕，販售三種口味大判燒、茶飲與原創抱枕、玩偶吊飾；入店需事前預約，辦法由0% TAIPEI官方社群公布。",
+    "needReservation": true,
     "hasLimitedGoods": true,
     "tags": [
       "吉伊卡哇",

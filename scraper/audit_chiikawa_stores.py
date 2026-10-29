@@ -31,6 +31,7 @@ YAKI_URL = "https://www.chiikawa-yaki.com/"
 BAKERY_URL = "https://chiikawabakery.jp/"
 PARK_URL = "https://chiikawapark-tokyo.jp/"
 PARK_STORE_URL = "https://chiikawapark-tokyo.jp/news/x0e64eb94v/"
+OBANYAKI_URL = "https://prtimes.jp/main/html/rd/p/000000004.000187317.html"
 TAIPEI_URL = "https://chiikawa-info.jp/ck_w/taipei/index.html"
 
 
@@ -208,6 +209,15 @@ def extract_taipei_store(page_html: str) -> list[OfficialStore]:
     return []
 
 
+def extract_obanyaki_store(page_html: str) -> list[OfficialStore]:
+    text = clean(re.sub(r"<[^>]+>", " ", html.unescape(page_html or "")))
+    if all(signal in text for signal in (
+        "CHIIKAWA OBANYAKI in TAIPEI", "常設店舗", "2026年11月21日", "台北市大同區赤峰街41巷9號",
+    )):
+        return [OfficialStore("CHIIKAWA OBANYAKI in TAIPEI", "Taiwan")]
+    return []
+
+
 def _dedupe(stores: list[OfficialStore]) -> list[OfficialStore]:
     seen: set[str] = set()
     result: list[OfficialStore] = []
@@ -242,7 +252,7 @@ def fetch_official_stores(timeout: int = 30) -> list[OfficialStore]:
             stores.append(store)
 
     pages = {}
-    for url in (YAKI_URL, BAKERY_URL, PARK_URL, PARK_STORE_URL, TAIPEI_URL):
+    for url in (YAKI_URL, BAKERY_URL, PARK_URL, PARK_STORE_URL, TAIPEI_URL, OBANYAKI_URL):
         pages[url] = fetch_html(url, timeout=timeout)
         if not pages[url]:
             raise RuntimeError(f"could not fetch {url}")
@@ -250,6 +260,7 @@ def fetch_official_stores(timeout: int = 30) -> list[OfficialStore]:
     stores.extend(extract_bakery_stores(pages[BAKERY_URL]))
     stores.extend(extract_park_stores(pages[PARK_URL], pages[PARK_STORE_URL]))
     stores.extend(extract_taipei_store(pages[TAIPEI_URL]))
+    stores.extend(extract_obanyaki_store(pages[OBANYAKI_URL]))
     return _dedupe(stores)
 
 

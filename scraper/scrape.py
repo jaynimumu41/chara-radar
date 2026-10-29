@@ -978,7 +978,7 @@ def clear_unsubstantiated_store_dates(data: dict, page_text: str) -> bool:
     )
     identity_terms = [
         term for term in quoted
-        if re.search(r"ストア|ショップ|store|shop|カフェ|cafe|パーク", term, re.I)
+        if re.search(r"ストア|ショップ|store|shop|カフェ|cafe|パーク|OBANYAKI|大判焼き|大判燒", term, re.I)
     ]
     for date_form in date_forms:
         start_at = 0
@@ -1675,6 +1675,15 @@ STRONG_EVENT_IDENTITY_RULES = (
 )
 
 
+STRONG_EVENT_IDENTITY_RULES += ({
+    "brand": "miffy", "types": {"popup", "campaign", "new_product"},
+    "concept": "flower-miffy-yokohama-marche",
+    "patterns": ((("Flower Miffy Pop-Up Marche",),
+                  ("横浜赤レンガ", "橫濱赤煉瓦", "橫濱紅磚")),),
+    "scope": "date",
+},)
+
+
 def strong_event_identity_key(ev: dict) -> str | None:
     """Stable identity for named events/stores whose media wording varies widely."""
     for rule in STRONG_EVENT_IDENTITY_RULES:
@@ -1971,6 +1980,22 @@ def normalize_source_event(event: dict, *, source_url: str = "", page_text: str 
         data.get("title", ""), data.get("summaryZh", ""),
         data.get("sourceTitle", ""), visible,
     ])
+
+    if data.get("brand") == "chiikawa" and url == "https://prtimes.jp/main/html/rd/p/000000004.000187317.html":
+        data.update(type="store", country="TW", city="Taipei", startDate="2026-11-21", endDate="",
+                    locationName="CHIIKAWA OBANYAKI in TAIPEI（台北市大同區赤峰街41巷9號）",
+                    needReservation=True, hasLimitedGoods=True,
+                    summaryZh="吉伊卡哇大判燒台北常設店11月21日開幕，販售三種口味大判燒、茶飲與原創抱枕、玩偶吊飾；入店需事前預約，辦法由0% TAIPEI官方社群公布。")
+    if data.get("brand") == "chiikawa" and url == "https://prtimes.jp/main/html/rd/p/000000080.000168561.html":
+        data.update(locationName="日本ちいかわらんど常設店等指定實體店",
+                    summaryZh="11月6日起於日本ちいかわらんど常設店等指定實體店販售Kiramekko Teddy Bear Christmas，共吉伊卡哇、小八貓、兔兔3款，各2,420日圓；部分其他會場有不同開賣日，依各店公告。")
+    if data.get("brand") == "pokemon" and url.rstrip("/") in {
+        "https://www.nownews.com/news/6886951", "https://www.nownews.com/amp/news/6886951",
+    }:
+        # The same article also recaps already represented postponed products.
+        data.update(title="Pokémon Center TAIPEI 迷你持有物系列", startDate="2026-10-31", endDate="",
+                    summaryZh="台北寶可夢中心實體店10月31日開賣迷你持有物系列：莓莓果、木子果、文柚果、安撫之鈴及護符金幣，共5款，各150元，可搭配毛絨玩具使用。",
+                    tags=["新品", "寶可夢中心", "台灣", "迷你持有物"])
 
     miffy_popup_venues = {
         "https://dickbruna.jp/news/202610/49227/": ("札幌", "Hokkaido", "札幌アピア", "2026-11-06", "2026-11-24"),
