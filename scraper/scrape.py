@@ -21,6 +21,7 @@ import re
 import subprocess
 import sys
 import time
+import unicodedata
 import uuid
 from difflib import SequenceMatcher
 from email.utils import parsedate_to_datetime
@@ -1308,19 +1309,88 @@ def replace_in_place(events: list[dict], fresh: list[dict], should_replace) -> l
 # ── 已處理新聞記錄（避免重跑時重複送 AI，省配額）──────────────────────────────
 
 PROCESSED_JSON = Path(__file__).parent / "processed.json"
+PROCESSED_RETENTION_DAYS = 365
+PROCESSED_MAX_ITEMS = 20000
 
-def load_processed() -> set[str]:
-    if PROCESSED_JSON.exists():
+
+def processed_title_key(title: str) -> str:
+    """Normalize harmless typography changes without merging rewritten headlines."""
+    normalized = unicodedata.normalize("NFKC", title or "").casefold()
+    return re.sub(r"[^0-9a-z\u3040-\u30ff\u3400-\u9fff]+", "", normalized)
+
+
+class ProcessedTitles:
+    """Processed headlines with stable retention dates and normalized lookup."""
+
+    def __init__(self, entries: dict[str, str] | None = None):
+        self.entries = dict(entries or {})
+        self._keys = {processed_title_key(title) for title in self.entries if title}
+
+    def __contains__(self, title: object) -> bool:
+        if not isinstance(title, str):
+            return False
+        return title in self.entries or processed_title_key(title) in self._keys
+
+    def __len__(self) -> int:
+        return len(self.entries)
+
+    def add(self, title: str):
+        if not title:
+            return
+        self.entries[title] = TODAY
+        self._keys.add(processed_title_key(title))
+
+
+def load_processed() -> ProcessedTitles:
+    if not PROCESSED_JSON.exists():
+        return ProcessedTitles()
+    try:
+        raw = json.loads(PROCESSED_JSON.read_text(encoding="utf-8"))
+    except Exception:
+        return ProcessedTitles()
+
+    if isinstance(raw, list):
+        # v1 migration: the old unordered set/list had no reliable recency.
+        return ProcessedTitles({str(title): TODAY for title in raw if title})
+    if isinstance(raw, dict) and isinstance(raw.get("titles"), dict):
+        entries = {
+            str(title): str(last_seen)
+            for title, last_seen in raw["titles"].items()
+            if title
+        }
+        return ProcessedTitles(entries)
+    return ProcessedTitles()
+
+
+def save_processed(seen: ProcessedTitles | set[str]):
+    if isinstance(seen, ProcessedTitles):
+        entries = dict(seen.entries)
+    else:
+        entries = {str(title): TODAY for title in seen if title}
+
+    today = datetime.fromisoformat(TODAY).date()
+    cutoff = today - timedelta(days=PROCESSED_RETENTION_DAYS)
+    retained: list[tuple[str, str]] = []
+    for title, last_seen in entries.items():
         try:
-            return set(json.loads(PROCESSED_JSON.read_text(encoding="utf-8")))
-        except Exception:
-            return set()
-    return set()
+            seen_date = datetime.fromisoformat(last_seen).date()
+        except (TypeError, ValueError):
+            seen_date = today
+            last_seen = TODAY
+        if seen_date >= cutoff:
+            retained.append((title, last_seen))
 
-def save_processed(seen: set[str]):
-    # 只保留最近 2000 筆，避免無限長大
-    arr = list(seen)[-2000:]
-    PROCESSED_JSON.write_text(json.dumps(arr, ensure_ascii=False), encoding="utf-8")
+    retained.sort(key=lambda row: (row[1], row[0]))
+    retained = retained[-PROCESSED_MAX_ITEMS:]
+    payload = {
+        "schemaVersion": 2,
+        "updatedAt": TODAY,
+        "titles": dict(retained),
+    }
+    PROCESSED_JSON.write_text(
+        json.dumps(payload, ensure_ascii=False, separators=(",", ":")),
+        encoding="utf-8",
+    )
 
 # ── 壞資料黑名單（已確認移除的，新聞再抓到就自動擋，防反覆復活）──────────────────
 REJECTED_JSON = Path(__file__).parent / "rejected.json"
@@ -1344,11 +1414,11 @@ def is_rejected_url(url: str) -> bool:
         return value.replace("/amp/article/", "/article/").replace("/amp/", "/")
 
     u = normalized(url)
-    return any(normalized(fragment) in u for fragment in _REJECTED["url_contains"])
+    return any(normalized(fragment) in u for fragment in _REJECTED.get("url_contains", []))
 
 def is_rejected_title(title: str) -> bool:
     t = title or ""
-    return any(s in t for s in _REJECTED["title_contains"])
+    return any(s in t for s in _REJECTED.get("title_contains", []))
 
 # ── 年份驗證：擋「舊文復活」。掃頁面前段的「20XX年」，若最大年份 < 今年 → 整篇是舊活動 ──
 # 抓「日期型年份」：20XX 後面接 年 / . / / / - 再接數字（如 2016年、2016.04.19、2026/6/1）
@@ -1374,6 +1444,44 @@ def pubdate_age_days(pub: str) -> float | None:
         return (datetime.now(timezone.utc) - dt).total_seconds() / 86400
     except Exception:
         return None
+
+
+def article_queue_sort_key(item: dict) -> tuple:
+    """Official sources first, then oldest unseen news so backlog cannot starve."""
+    age = pubdate_age_days(item.get("pubDate", ""))
+    return (
+        0 if is_official_source(item.get("source", "")) else 1,
+        1 if age is None else 0,
+        -(age or 0),
+        item.get("title", ""),
+    )
+
+
+def allocate_processing_limits(eligible_by_brand: dict[str, list[dict]]) -> dict[str, int]:
+    """Share the existing total budget so unused brand slots drain other backlogs."""
+    limits = {
+        brand: min(len(items), MAX_PER_BRAND)
+        for brand, items in eligible_by_brand.items()
+    }
+    total_budget = MAX_PER_BRAND * len(eligible_by_brand)
+    spare = total_budget - sum(limits.values())
+    while spare > 0:
+        backlogged = [
+            brand for brand, items in eligible_by_brand.items()
+            if limits[brand] < len(items)
+        ]
+        if not backlogged:
+            break
+        backlogged.sort(
+            key=lambda brand: len(eligible_by_brand[brand]) - limits[brand],
+            reverse=True,
+        )
+        for brand in backlogged:
+            if spare <= 0:
+                break
+            limits[brand] += 1
+            spare -= 1
+    return limits
 
 # ── 去重（同一活動不同媒體報導）────────────────────────────────────────────────
 
@@ -2916,11 +3024,9 @@ def run(brands: list[str], official_only: bool = False):
     new_count = 0
     rate_limited = False
     visited_brands: set[str] = set()
+    eligible_by_brand: dict[str, list[dict]] = {}
 
     for brand in brands:
-        if rate_limited:
-            break
-        visited_brands.add(brand)
         print(f"\n🔍  {BRAND_LABELS[brand]}")
         all_items: list[dict] = []
 
@@ -2943,9 +3049,6 @@ def run(brands: list[str], official_only: bool = False):
                 seen_run.add(it["title"])
                 unique.append(it)
 
-        # 官方優先：把 PR TIMES／官方來源排到最前面先花配額（穩定排序保留原順序）
-        unique.sort(key=lambda it: 0 if is_official_source(it.get("source", "")) else 1)
-
         brand_metrics = metrics["brands"][brand]
         brand_metrics["articlesFound"] = len(unique)
         kws = BRAND_KEYWORDS[brand]
@@ -2957,6 +3060,9 @@ def run(brands: list[str], official_only: bool = False):
             if item["title"] in seen_ttls:
                 continue
             if item["title"] in processed_cache:  # 之前已送 AI 判斷過，不重複花配額
+                continue
+            if item.get("link") in seen_urls or is_rejected_url(item.get("link", "")):
+                processed_cache.add(item["title"])
                 continue
             if is_noise(item["title"]):  # 事前過濾雜訊，不浪費 API 額度
                 continue
@@ -2971,15 +3077,38 @@ def run(brands: list[str], official_only: bool = False):
                 continue
             eligible.append(item)
 
+        eligible.sort(key=article_queue_sort_key)
+        eligible_by_brand[brand] = eligible
         brand_metrics["eligibleArticles"] = len(eligible)
+
+    processing_limits = allocate_processing_limits(eligible_by_brand)
+
+    for brand in brands:
+        if rate_limited:
+            break
+        visited_brands.add(brand)
+        eligible = eligible_by_brand[brand]
+        processing_limit = processing_limits[brand]
+        brand_metrics = metrics["brands"][brand]
+        print(f"\n🧠  {BRAND_LABELS[brand]}：{len(eligible)} 筆待判斷")
+        if processing_limit > MAX_PER_BRAND:
+            borrowed = processing_limit - MAX_PER_BRAND
+            print(f"    ♻️  自動借用 {borrowed} 筆未用額度，本次可處理 {processing_limit} 筆")
+
         new_for_brand = 0
         processed = 0
         completed = 0
         for item in eligible:
-            if processed >= MAX_PER_BRAND:
-                print(f"    （已達單品牌處理上限 {MAX_PER_BRAND} 筆，其餘下次再抓）")
+            if processed >= processing_limit:
+                print(f"    （已用完本次分配額度 {processing_limit} 筆，其餘保留到下次）")
                 brand_metrics["capReached"] = True
                 break
+
+            # Queues are collected before extraction. Recheck shared state in case
+            # another brand just handled the same article or source URL.
+            if item["title"] in processed_cache or item.get("link") in seen_urls:
+                completed += 1
+                continue
 
             processed += 1
             print(f"    → {item['title'][:55]}", end=" … ")
@@ -3023,6 +3152,7 @@ def run(brands: list[str], official_only: bool = False):
         brand_metrics["processedArticles"] = processed
         brand_metrics["pendingArticles"] = max(0, len(eligible) - completed)
         brand_metrics["addedRecords"] = new_for_brand
+        save_processed(processed_cache)
         if new_for_brand == 0 and not rate_limited:
             print("    本次無新情報")
 
@@ -3030,6 +3160,7 @@ def run(brands: list[str], official_only: bool = False):
         for brand in brands:
             if brand not in visited_brands:
                 metrics["brands"][brand]["skippedDueRateLimit"] = True
+                metrics["brands"][brand]["pendingArticles"] = len(eligible_by_brand[brand])
 
     save_processed(processed_cache)
     # 收尾：移除過期 + 啟發式去重

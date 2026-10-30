@@ -15,8 +15,11 @@
 每次改去重/過濾規則前後都跑一次，確保不破壞已通過的行為。
 回傳 exit code 0=全過，非 0=有失敗（方便 CI / 排程串接）。
 """
+import json
 import sys
+import tempfile
 from datetime import datetime, timezone
+from pathlib import Path
 from unittest import mock
 
 if hasattr(sys.stdout, "reconfigure"):
@@ -2654,6 +2657,62 @@ check("健康快照不沿用前一天的執行積壓",
           stale_health["metrics"]["aiBackend"],
       ),
       ("healthy", 0, "unknown"))
+
+with tempfile.TemporaryDirectory() as processed_tmp:
+    processed_path = Path(processed_tmp) / "processed.json"
+    legacy_titles = [f"legacy title {i}" for i in range(2001)]
+    legacy_titles.append("ちいかわ　新商品！")
+    processed_path.write_text(
+        json.dumps(legacy_titles, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    with mock.patch.object(scrape, "PROCESSED_JSON", processed_path):
+        processed_cache = scrape.load_processed()
+        normalized_hit = "ちいかわ 新商品" in processed_cache
+        processed_cache.add("new title")
+        scrape.save_processed(processed_cache)
+        processed_payload = json.loads(processed_path.read_text(encoding="utf-8"))
+        processed_reload = scrape.load_processed()
+check("processed舊格式穩定遷移且不再隨機裁成2000筆",
+      (
+          processed_payload.get("schemaVersion"),
+          len(processed_payload.get("titles", {})),
+          normalized_hit,
+          "new title" in processed_reload,
+      ),
+      (2, 2003, True, True))
+
+shared_budget = scrape.allocate_processing_limits({
+    "miffy": [{} for _ in range(5)],
+    "pokemon": [{} for _ in range(10)],
+    "chiikawa": [{} for _ in range(45)],
+})
+check("未用品牌額度自動借給積壓品牌且不提高總上限",
+      (
+          shared_budget["miffy"],
+          shared_budget["pokemon"],
+          shared_budget["chiikawa"],
+          sum(shared_budget.values()),
+      ),
+      (5, 10, 24, 39))
+
+queue_items = [
+    {"title": "fresh media", "source": "media", "pubDate": "fresh"},
+    {"title": "official", "source": "PR TIMES", "pubDate": "fresh"},
+    {"title": "old media", "source": "media", "pubDate": "old"},
+]
+with mock.patch.object(
+    scrape,
+    "pubdate_age_days",
+    side_effect=lambda value: {"fresh": 1, "old": 20}.get(value),
+):
+    queue_order = [
+        item["title"]
+        for item in sorted(queue_items, key=scrape.article_queue_sort_key)
+    ]
+check("新聞佇列官方優先且舊積壓不被每日新文餓死",
+      queue_order,
+      ["official", "old media", "fresh media"])
 
 metric_items = [
     {
