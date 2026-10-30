@@ -806,6 +806,10 @@ check("官方稽核忽略單日營業公告",
       bool(audit_official_coverage.detect_signals(
           "9月8日（火）の営業について ポケモンセンタートウキョーベイ"
       ).auto_ignore_reason), True)
+check("官方稽核忽略已收錄商品的分店販售方式公告",
+      bool(audit_official_coverage.detect_signals(
+          "「My Pokémon Party」の販売方法につきまして"
+      ).auto_ignore_reason), True)
 
 coverage_candidates = [
     audit_official_coverage.OfficialCandidate(
@@ -2710,13 +2714,71 @@ check("台北大判燒常設店納入官方稽核",
 check("台北大判燒快閃不能當常設店",
       audit_chiikawa_stores.extract_obanyaki_store(obanyaki_fixture.replace("常設店舗", "期間限定")), [])
 mini_product = scrape.normalize_source_event(ev(brand="pokemon", type="new_product",
-    sourceUrl="https://www.nownews.com/news/6886951", title="台灣寶可夢中心10月底新品"))
+    sourceUrl="https://www.nownews.com/news/6886951", title="台灣寶可夢中心10月底新品",
+    sourceTitle="台灣寶可夢中心10月底新品！迷你持有物系列登場",
+    startDate="2026-10-31"))
 check("10月底報導只列新迷你持有物避免重複延期商品",
-      (mini_product["title"], "蛋糕架" in mini_product["summaryZh"]),
-      ("Pokémon Center TAIPEI 迷你持有物系列", False))
+      (mini_product["title"], "蛋糕架" in mini_product["summaryZh"], mini_product["sourceType"]),
+      ("Pokémon Center TAIPEI 迷你持有物系列", False, "media"))
 other_product = scrape.normalize_source_event(ev(brand="pokemon", type="new_product",
-    sourceUrl="https://www.nownews.com/news/6884725", title="合眾延期商品"))
-check("延期商品原紀錄仍保留蛋糕架", "蛋糕架" in other_product["summaryZh"], True)
+    sourceUrl="https://www.nownews.com/news/6884725", title="合眾延期商品",
+    sourceTitle="台北寶可夢中心10/24新品", startDate="2026-10-24"))
+check("延期公告優先於媒體標題的原定日期",
+      ("蛋糕架" in other_product["summaryZh"], other_product["startDate"]),
+      (True, "2026-10-31"))
+
+mini_hubs = scrape.normalize_source_event(ev(
+    id="mini-hubs", brand="pokemon", type="new_product", country="TW", city="Taipei",
+    title="台北寶可夢中心 新品開賣", startDate="2026-10-30", createdAt="2026-10-30",
+    locationName="Pokémon Center TAIPEI",
+    sourceTitle="台北寶可夢中心 新品10/31開賣！5款迷你持有物每款150元",
+    sourceUrl="https://pokemonhubs.com/news/pokemon-center-taipei-mini-held-items/",
+))
+check("台北迷你持有物媒體文改用實體店開賣日並標為媒體",
+      (mini_hubs["startDate"], mini_hubs["title"], mini_hubs["sourceType"]),
+      ("2026-10-31", "Pokémon Center TAIPEI 迷你持有物系列", "media"))
+check("台北迷你持有物跨媒體來源具有相同穩定身分",
+      scrape.strong_event_identity_key(mini_product),
+      scrape.strong_event_identity_key(mini_hubs))
+check("台北迷你持有物跨媒體重複只留一筆",
+      len(scrape.dedup_events([mini_product, mini_hubs])[0]), 1)
+
+erabu_official = scrape.normalize_source_event(ev(
+    id="erabu-official", brand="pokemon", type="new_product", country="JP",
+    title="Pokémon Center ピックアップテーマ「えらぶ」のイラストを使用したグッズ",
+    startDate="2026-11-07", locationName="日本全國 Pokémon Center",
+    sourceUrl="https://www.pokemon.co.jp/goods/2026/10/261030_to01.html",
+))
+erabu_media = scrape.normalize_source_event(ev(
+    id="erabu-media", brand="pokemon", type="new_product", country="JP",
+    title="Pokémon Timeless Adventure 周邊登場", startDate="2026-11-07",
+    sourceTitle="ポケモン30周年テーマ「えらぶ」を描いたグッズ「Pokémon Timeless Adventure」",
+    sourceUrl="https://www.ndw.jp/pokemon-goods-261030-04/",
+))
+check("えらぶ官方頁與媒體轉載具有相同穩定身分",
+      scrape.strong_event_identity_key(erabu_official),
+      scrape.strong_event_identity_key(erabu_media))
+erabu_rows, _ = scrape.dedup_events([erabu_media, erabu_official])
+check("えらぶ跨來源重複只留官方資料",
+      (len(erabu_rows), erabu_rows[0]["id"], erabu_media["sourceType"]),
+      (1, "erabu-official", "media"))
+party_official = scrape.normalize_source_event(ev(
+    id="party-official", brand="pokemon", type="new_product", country="JP",
+    title="キミだけの「てもち」が作れるカスタマイズグッズがポケモンセンターに登場",
+    startDate="2026-11-07", locationName="日本全國 Pokémon Center",
+    sourceUrl="https://www.pokemon.co.jp/goods/2026/10/261030_to02.html",
+))
+check("同日My Pokémon Party與えらぶ主題一般周邊保持分開",
+      len(scrape.dedup_events([erabu_official, party_official])[0]), 2)
+check("新聞稿、品牌官網與媒體依網域分類",
+      [scrape.source_type_for_url(url) for url in (
+          "https://prtimes.jp/main/html/rd/p/example.html",
+          "https://www.pokemon.co.jp/goods/example.html",
+          "https://chiikawapark-tokyo.jp/news/example/",
+          "https://contents-abema.com/chiikawa-christmas-market/",
+          "https://www.ndw.jp/example/",
+      )],
+      ["official_social", "official_site", "official_site", "official_site", "media"])
 
 marche_old = ev(id="marche-old", brand="miffy", type="popup", city="Kanagawa",
     title="Flower Miffy Pop-Up Marche", locationName="横浜赤レンガ倉庫 2号館1F",

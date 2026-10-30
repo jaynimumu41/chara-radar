@@ -19,7 +19,7 @@
     ],
     "id": "ch-b0dade",
     "sourceUrl": "https://www.tokyo-skytree.jp/press/post/712/",
-    "sourceType": "official_social",
+    "sourceType": "official_site",
     "createdAt": "2026-06-02",
     "sourceTitle": "「ちいかわ☆星ふるスカイツリー®とひみつの島」開催決定！【公式】東京スカイツリー TOKYO SKYTREE - tokyo-skytree.jp"
   },
@@ -91,7 +91,7 @@
     ],
     "id": "ch-6d9bb5",
     "sourceTitle": "ちいかわパークストア、大阪・LUCUA SOUTHに2026年11月24日(火) GRAND OPEN！",
-    "sourceType": "official_social",
+    "sourceType": "official_site",
     "createdAt": "2026-08-05",
     "sourceUrl": "https://chiikawapark-tokyo.jp/news/x0e64eb94v/"
   },
@@ -186,7 +186,7 @@
     ],
     "id": "po-b0a992",
     "sourceTitle": "「フィギュアコレクション Pokémon Sleep トープ洞窟」がポケモンセンターに登場！｜ポケットモンスターオフィシャルサイト - ポケットモンスターオフィシャルサイト",
-    "sourceType": "official_social",
+    "sourceType": "official_site",
     "createdAt": "2026-08-28",
     "sourceUrl": "https://www.pokemon.co.jp/goods/2026/08/260828_to02.html"
   },
@@ -306,7 +306,7 @@
     ],
     "id": "po-4aeb10",
     "sourceTitle": "寶可夢中心9/12新品！30周年相遇系列登場　加碼社群日貼紙免費送 - NOWnews今日新聞",
-    "sourceType": "official_social",
+    "sourceType": "media",
     "createdAt": "2026-09-08",
     "sourceUrl": "https://www.nownews.com/amp/news/6873238"
   },
@@ -428,7 +428,7 @@
     ],
     "id": "po-521834",
     "sourceTitle": "台灣寶可夢中心新品！Pokopia淺淺丘LED燈、吉祥物吊飾9/19開賣 - NOWnews今日新聞",
-    "sourceType": "official_social",
+    "sourceType": "media",
     "createdAt": "2026-09-14",
     "sourceUrl": "https://www.nownews.com/amp/news/6874887"
   },
@@ -598,7 +598,7 @@
     ],
     "id": "po-900338",
     "sourceTitle": "寶可夢中心南瓜皮卡丘中秋連假再到貨！10月領新光三越限定明信片 - NOWnews今日新聞",
-    "sourceType": "official_social",
+    "sourceType": "media",
     "createdAt": "2026-09-28",
     "sourceUrl": "https://www.nownews.com/news/6878252"
   },
@@ -646,7 +646,7 @@
     ],
     "id": "po-05d98b",
     "sourceTitle": "寶可夢中心10/3新品！Disguise! Ditto系列上架　6款玩偶搶先看 - nownews.com",
-    "sourceType": "official_social",
+    "sourceType": "media",
     "createdAt": "2026-09-29",
     "sourceUrl": "https://www.nownews.com/news/6879023"
   },
@@ -866,7 +866,7 @@
     ],
     "id": "po-e3f4cc",
     "sourceTitle": "寶可夢中心10月中新品！戰敗系列玩偶登場　皮卡丘刺繡帽子超萌 - NOWnews今日新聞",
-    "sourceType": "official_social",
+    "sourceType": "media",
     "createdAt": "2026-10-12",
     "sourceUrl": "https://www.nownews.com/news/6882679"
   },
@@ -958,7 +958,7 @@
       "日本"
     ],
     "id": "po-17540a",
-    "sourceType": "official_social",
+    "sourceType": "official_site",
     "createdAt": "2026-10-14",
     "sourceTitle": "ポケモンセンター出張所inイオンモール甲府昭和（2026-09-18～2026-11-03）",
     "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
@@ -983,7 +983,7 @@
     ],
     "id": "po-e53e1b",
     "sourceTitle": "寶可夢「爆炸頭皮卡丘」10/20補貨！整理券限領1張　官方加強查驗 - NOWnews今日新聞",
-    "sourceType": "official_social",
+    "sourceType": "media",
     "createdAt": "2026-10-15",
     "sourceUrl": "https://www.nownews.com/news/6883605"
   },
@@ -1176,7 +1176,7 @@
     ],
     "id": "po-4b976e",
     "sourceTitle": "寶可夢中心光復連假新品！30週年合眾周邊、萬聖蛋糕架10/24登場 - NOWnews今日新聞",
-    "sourceType": "official_social",
+    "sourceType": "media",
     "createdAt": "2026-10-19",
     "sourceUrl": "https://www.nownews.com/news/6884725"
   },
@@ -1246,7 +1246,7 @@
     ],
     "id": "ch-22b7e6",
     "sourceTitle": "ちいかわ×ANA オリジナルグッズ第一弾 - 全日空商事",
-    "sourceType": "official_site",
+    "sourceType": "official_social",
     "createdAt": "2026-10-23",
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000018.000035055.html"
   },
@@ -1340,7 +1340,7 @@
     ],
     "id": "po-e834aa",
     "sourceTitle": "台灣寶可夢中心10月底新品！迷你持有物系列登場　萬聖蛋糕架開賣 - NOWnews今日新聞",
-    "sourceType": "official_social",
+    "sourceType": "media",
     "createdAt": "2026-10-27",
     "sourceUrl": "https://www.nownews.com/news/6886951"
   },
@@ -1513,51 +1513,27 @@
     "sourceUrl": "https://dickbruna.jp/news/202610/49311/"
   },
   {
-    "brand": "pokemon",
-    "title": "台北寶可夢中心 新品開賣",
-    "type": "new_product",
-    "country": "TW",
-    "city": "Taipei",
-    "locationName": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3F）",
-    "startDate": "2026-10-30",
-    "endDate": "",
-    "summaryZh": "台北寶可夢中心將於10月31日開賣5款迷你持有物新品，每款售價150元。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "新品",
-      "寶可夢",
-      "台北",
-      "周邊"
-    ],
-    "id": "po-0b7ebf",
-    "sourceTitle": "台北寶可夢中心 新品10/31開賣！5款迷你持有物每款150元 - Pokemon Hubs",
-    "sourceType": "official_social",
-    "createdAt": "2026-10-30",
-    "sourceUrl": "https://pokemonhubs.com/news/pokemon-center-taipei-mini-held-items/"
-  },
-  {
-    "brand": "pokemon",
-    "title": "Pokémon Timeless Adventure 周邊登場",
-    "type": "new_product",
+    "brand": "chiikawa",
+    "title": "吉伊卡哇 POP UP STORE 東武宇都宮百貨店",
+    "type": "popup",
     "country": "JP",
-    "city": "Tokyo",
-    "locationName": "ポケモンセンター",
-    "startDate": "2026-11-07",
-    "endDate": "",
-    "summaryZh": "為慶祝寶可夢30週年，推出以「えらぶ」為主題的「Pokémon Timeless Adventure」系列周邊商品，將於11月7日起在寶可夢中心登場販售。",
+    "city": "Tochigi",
+    "locationName": "東武宇都宮百貨店 5階 イベントプラザ",
+    "startDate": "2026-11-13",
+    "endDate": "2026-12-01",
+    "summaryZh": "ちいかわ POP UP STORE 於東武宇都宮百貨店期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
-      "寶可夢中心",
-      "30週年",
-      "限定商品",
-      "新品"
+      "吉伊卡哇",
+      "快閃店",
+      "日本",
+      "限定周邊"
     ],
-    "id": "po-dc7e9a",
-    "sourceTitle": "ポケモン30周年テーマ「えらぶ」を描いたグッズ「Pokémon Timeless Adventure」が11月7日よりポケモンセンターに登場！ - Nintendo DREAM WEB",
-    "sourceType": "official_social",
+    "id": "ch-66cc93",
+    "sourceType": "official_site",
     "createdAt": "2026-10-30",
-    "sourceUrl": "https://www.ndw.jp/pokemon-goods-261030-04/"
+    "sourceTitle": "ちいかわPOP UP STORE 東武宇都宮百貨店(2026-11-13～2026-12-01) - ちいかわ公式",
+    "sourceUrl": "https://chiikawa-info.jp/p26/pus_tbun/index.html"
   }
 ]

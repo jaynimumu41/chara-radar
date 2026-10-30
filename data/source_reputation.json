@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-29T08:52:38+00:00",
+  "updatedAt": "2026-10-30T13:21:46+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 19,
@@ -306,34 +306,34 @@
     },
     "domain:pokemonhubs.com": {
       "confirmed": 2,
-      "rejected": 3,
+      "rejected": 4,
       "uncertain": 0,
-      "crossChecked": 7,
-      "score": 41,
+      "crossChecked": 9,
+      "score": 30,
       "label": "pokemonhubs.com",
       "kind": "news",
       "host": "pokemonhubs.com",
       "handle": "",
       "firstSeen": "2026-06-11",
-      "lastReviewed": "2026-10-23",
+      "lastReviewed": "2026-10-30",
       "lastOutcome": "rejected",
-      "notes": "Queue/admission stamp notice, not new store; overlaps existing product restock.",
+      "notes": "Duplicate of existing po-e834aa; article date was extracted instead of the 2026-10-31 physical-store launch.",
       "byBrand": {
         "pokemon": {
           "confirmed": 2,
-          "rejected": 3,
+          "rejected": 4,
           "uncertain": 0,
-          "crossChecked": 7,
-          "score": 41
+          "crossChecked": 9,
+          "score": 30
         }
       },
       "byType": {
         "new_product": {
           "confirmed": 2,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 4,
-          "score": 61
+          "crossChecked": 6,
+          "score": 52
         },
         "popup": {
           "confirmed": 0,
@@ -353,10 +353,10 @@
       "byCountry": {
         "tw": {
           "confirmed": 2,
-          "rejected": 2,
+          "rejected": 3,
           "uncertain": 0,
-          "crossChecked": 5,
-          "score": 52
+          "crossChecked": 7,
+          "score": 41
         },
         "jp": {
           "confirmed": 0,
@@ -416,6 +416,16 @@
           "eventId": "po-27c92d",
           "evidenceCount": 1,
           "notes": "Queue/admission stamp notice, not new store; overlaps existing product restock."
+        },
+        {
+          "date": "2026-10-30",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-0b7ebf",
+          "evidenceCount": 2,
+          "notes": "Duplicate of existing po-e834aa; article date was extracted instead of the 2026-10-31 physical-store launch."
         }
       ]
     },
@@ -2590,34 +2600,34 @@
     },
     "domain:ndw.jp": {
       "confirmed": 7,
-      "rejected": 6,
+      "rejected": 7,
       "uncertain": 0,
-      "crossChecked": 15,
-      "score": 43,
+      "crossChecked": 17,
+      "score": 32,
       "label": "ndw.jp",
       "kind": "site",
       "host": "ndw.jp",
       "handle": "",
       "firstSeen": "2026-07-19",
-      "lastReviewed": "2026-10-23",
+      "lastReviewed": "2026-10-30",
       "lastOutcome": "rejected",
-      "notes": "Duplicate official po-db8e16 Christmas Junbi goods 10/24.",
+      "notes": "Secondary-media duplicate of official Pokemon row po-18888b for the 2026-11-07 Erabu / Pokemon Timeless Adventure release.",
       "byBrand": {
         "pokemon": {
           "confirmed": 7,
-          "rejected": 6,
+          "rejected": 7,
           "uncertain": 0,
-          "crossChecked": 15,
-          "score": 43
+          "crossChecked": 17,
+          "score": 32
         }
       },
       "byType": {
         "new_product": {
           "confirmed": 6,
-          "rejected": 5,
+          "rejected": 6,
           "uncertain": 0,
-          "crossChecked": 13,
-          "score": 47
+          "crossChecked": 15,
+          "score": 36
         },
         "campaign": {
           "confirmed": 1,
@@ -2630,10 +2640,10 @@
       "byCountry": {
         "jp": {
           "confirmed": 7,
-          "rejected": 6,
+          "rejected": 7,
           "uncertain": 0,
-          "crossChecked": 15,
-          "score": 43
+          "crossChecked": 17,
+          "score": 32
         }
       },
       "history": [
@@ -2766,6 +2776,16 @@
           "eventId": "po-d423b6",
           "evidenceCount": 1,
           "notes": "Duplicate official po-db8e16 Christmas Junbi goods 10/24."
+        },
+        {
+          "date": "2026-10-30",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "po-dc7e9a",
+          "evidenceCount": 2,
+          "notes": "Secondary-media duplicate of official Pokemon row po-18888b for the 2026-11-07 Erabu / Pokemon Timeless Adventure release."
         }
       ]
     },

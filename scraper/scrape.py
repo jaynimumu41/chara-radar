@@ -336,6 +336,7 @@ PHYSICAL_STORE_SIGNALS = (
 FIRST_PARTY_PRODUCT_DOMAINS = (
     "pokemon.co.jp", "pokemon.com.tw", "tw.portal-pokemon.com",
     "chiikawa-info.jp", "chiikawa-market.com", "chiikawamogumogu.jp",
+    "chiikawapark-tokyo.jp", "contents-abema.com",
     "dickbruna.jp", "miffykitchenbakery.jp", "kiddyland.co.jp",
 )
 
@@ -541,6 +542,7 @@ TRUSTED_DATE_DOMAINS = [
     "oneheart65.net",
     "sanrio.co.jp", "sanrio.com.tw",
     "chiikawa-info.jp", "chiikawa-market.com", "chiikawamogumogu.jp", "benelic.com", "kiddyland.co.jp",
+    "chiikawapark-tokyo.jp", "contents-abema.com",
     "dickbruna.jp", "miffykitchenbakery.jp",
     # 場館 / 百貨 / 商場 / Outlet（單一活動頁，日期通常只有該活動）
     "tokyo-skytree.jp", "sunshinecity.jp", "parco.jp", "lucua.jp", "aeonmall.com",
@@ -566,6 +568,25 @@ def is_trusted_date_source(url: str) -> bool:
 def is_unstable_source_url(url: str) -> bool:
     u = (url or "").strip().lower()
     return not u or "google.com/search" in u or "news.google.com" in u
+
+
+PRESS_RELEASE_DOMAINS = ("prtimes.jp", "atpress.ne.jp", "dreamnews.jp")
+
+
+def source_type_for_url(url: str) -> str:
+    """Classify evidence by its actual host, never by words in the headline."""
+    try:
+        host = (urlparse(url).hostname or "").lower()
+    except Exception:
+        return "media"
+    if host.startswith("www."):
+        host = host[4:]
+    if any(host == domain or host.endswith("." + domain)
+           for domain in PRESS_RELEASE_DOMAINS):
+        return "official_social"
+    if is_first_party_product_source(url) or is_trusted_date_source(url):
+        return "official_site"
+    return "media"
 
 GN_RSS    = "https://news.google.com/rss/search?q={q}&hl=ja&gl=JP&ceid=JP:ja"
 GN_RSS_TW = "https://news.google.com/rss/search?q={q}&hl=zh-TW&gl=TW&ceid=TW:zh-Hant"
@@ -1661,6 +1682,29 @@ STRONG_EVENT_IDENTITY_RULES = (
         "scope": "year",
     },
     {
+        "brand": "pokemon",
+        "types": {"new_product"},
+        "concept": "pokemon-timeless-adventure-erabu",
+        "patterns": (
+            (("ピックアップテーマ「えらぶ」", "テーマ「えらぶ」", "30周年テーマ「えらぶ」"),),
+            (("Pokémon Timeless Adventure",), ("えらぶ",)),
+        ),
+        "scope": "date",
+        "country": True,
+    },
+    {
+        "brand": "pokemon",
+        "types": {"new_product"},
+        "concept": "pokemon-taipei-mini-held-items",
+        "patterns": (
+            (("迷你持有物",),
+             ("Pokémon Center TAIPEI", "Pokemon Center TAIPEI",
+              "台北寶可夢中心", "台灣寶可夢中心")),
+        ),
+        "scope": "date",
+        "country": True,
+    },
+    {
         "brand": "chiikawa",
         "types": {"store"},
         "concept": "chiikawa-park-store-lucua",
@@ -1948,10 +1992,10 @@ def _taiwan_store_sale_date(text: str, ref_year: int | None) -> str:
     if not text or not ref_year:
         return ""
     patterns = (
-        r"(\d{1,2})月(\d{1,2})日(?:（[^）]*）|\([^)]*\))?"
-        r"[^。！？\n]{0,180}?(?:上架|發售|販售|登場)",
-        r"(?:上架|發售|販售)日?[^。！？\n]{0,80}?"
-        r"(\d{1,2})月(\d{1,2})日",
+        r"(?<!\d)(\d{1,2})(?:月|/)(\d{1,2})(?:日)?(?:（[^）]*）|\([^)]*\))?"
+        r"[^。！？\n]{0,180}?(?:上架|發售|販售|登場|開賣|推出)",
+        r"(?:上架|發售|販售|開賣|推出)日?[^。！？\n]{0,80}?"
+        r"(?<!\d)(\d{1,2})(?:月|/)(\d{1,2})(?:日)?",
     )
     for pattern in patterns:
         match = re.search(pattern, text, re.I)
@@ -1975,6 +2019,8 @@ def normalize_source_event(event: dict, *, source_url: str = "", page_text: str 
     """
     data = dict(event)
     url = source_url or data.get("sourceUrl", "")
+    if url:
+        data["sourceType"] = source_type_for_url(url)
     visible = _source_visible_text(page_text)
     evidence = " ".join([
         data.get("title", ""), data.get("summaryZh", ""),
@@ -1989,14 +2035,6 @@ def normalize_source_event(event: dict, *, source_url: str = "", page_text: str 
     if data.get("brand") == "chiikawa" and url == "https://prtimes.jp/main/html/rd/p/000000080.000168561.html":
         data.update(locationName="日本ちいかわらんど常設店等指定實體店",
                     summaryZh="11月6日起於日本ちいかわらんど常設店等指定實體店販售Kiramekko Teddy Bear Christmas，共吉伊卡哇、小八貓、兔兔3款，各2,420日圓；部分其他會場有不同開賣日，依各店公告。")
-    if data.get("brand") == "pokemon" and url.rstrip("/") in {
-        "https://www.nownews.com/news/6886951", "https://www.nownews.com/amp/news/6886951",
-    }:
-        # The same article also recaps already represented postponed products.
-        data.update(title="Pokémon Center TAIPEI 迷你持有物系列", startDate="2026-10-31", endDate="",
-                    summaryZh="台北寶可夢中心實體店10月31日開賣迷你持有物系列：莓莓果、木子果、文柚果、安撫之鈴及護符金幣，共5款，各150元，可搭配毛絨玩具使用。",
-                    tags=["新品", "寶可夢中心", "台灣", "迷你持有物"])
-
     miffy_popup_venues = {
         "https://dickbruna.jp/news/202610/49227/": ("札幌", "Hokkaido", "札幌アピア", "2026-11-06", "2026-11-24"),
         "https://dickbruna.jp/news/202610/49063/": ("大阪梅田", "Osaka", "キデイランド大阪梅田店", "2026-10-31", "2026-11-17"),
@@ -2021,10 +2059,11 @@ def normalize_source_event(event: dict, *, source_url: str = "", page_text: str 
     }:
         data.update(startDate="2026-10-10", endDate="2026-10-11")
     # October 22 postponement supersedes the original October 24 release.
-    if data.get("brand") == "pokemon" and url in {
+    taipei_postponed_article = data.get("brand") == "pokemon" and url in {
         "https://www.nownews.com/news/6884725",
         "https://pokemonhubs.com/news/pokemon-center-taipei-2026-10-24-new-products/",
-    }:
+    }
+    if taipei_postponed_article:
         data.update(title="Pokémon Center TAIPEI 合眾周邊與萬聖節蛋糕架（延期）",
                     startDate="2026-10-31", endDate="",
                     summaryZh="台北寶可夢中心實體店的 Pokémon Timeless Adventure 合眾文件夾、鑰匙圈、壓克力磚、貼紙組及萬聖節蛋糕架，因颱風由10月24日延至10月31日販售。")
@@ -2045,12 +2084,33 @@ def normalize_source_event(event: dict, *, source_url: str = "", page_text: str 
         if not year:
             year_match = re.match(r"(20\d{2})", data.get("createdAt", ""))
             year = int(year_match.group(1)) if year_match else None
-        sale_date = _taiwan_store_sale_date(visible, year)
+        sale_date = "" if taipei_postponed_article else _taiwan_store_sale_date(evidence, year)
         if known_fainted_article and not sale_date:
             sale_date = "2026-10-17"
         if sale_date:
             data["startDate"] = sale_date
             data["endDate"] = ""
+
+        if "迷你持有物" in evidence:
+            # Media articles may recap unrelated delayed products or use the
+            # article date as the sale date. Anchor this named product family
+            # to the store launch described by the source instead.
+            start_match = re.fullmatch(r"\d{4}-(\d{2})-(\d{2})", data.get("startDate", ""))
+            sale_phrase = (
+                f"{int(start_match.group(1))}月{int(start_match.group(2))}日開賣"
+                if start_match else "販售"
+            )
+            data.update({
+                "title": "Pokémon Center TAIPEI 迷你持有物系列",
+                "type": "new_product",
+                "summaryZh": (
+                    f"台北寶可夢中心實體店{sale_phrase}迷你持有物系列：莓莓果、木子果、"
+                    "文柚果、安撫之鈴及護符金幣，共5款，各150元，可搭配毛絨玩具使用。"
+                ),
+                "needReservation": False,
+                "hasLimitedGoods": True,
+                "tags": ["新品", "寶可夢中心", "台灣", "迷你持有物"],
+            })
 
         fainted_evidence = known_fainted_article or any(signal in evidence for signal in (
             "Fainted", "戰敗系列", "失去戰鬥能力",
@@ -2604,7 +2664,7 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
             data["city"] = fixed
         data["id"]          = brand[:2] + "-" + uuid.uuid4().hex[:6]
         data["sourceTitle"] = item["title"]  # 原始日文標題（備用）
-        data["sourceType"]  = "official_social"
+        data["sourceType"]  = "media"
         data["createdAt"]   = TODAY
         data.setdefault("tags", [])
         # 來源連結：優先解出真實文章 URL，並做兩道驗證才採用——
