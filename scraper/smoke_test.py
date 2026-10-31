@@ -2855,6 +2855,25 @@ check("Marche官方頁取實際場館不是品牌名稱",
 check("Marche購物特典不改變快閃類型",
       official_sources._miffy_type('Flower Miffy Pop-Up Marche 横浜赤レンガ倉庫', '', 'キャンペーン'), "popup")
 
+# Taipei Xinyi A9 aliases must not create a new event or evade the release gate.
+xinyi_official = ev(id="xinyi-official", brand="chiikawa", type="popup", country="TW", city="Taipei",
+    title="吉伊卡哇 POP UP STORE 新光三越台北信義新天地",
+    locationName="新光三越台北信義新天地 A9 9F 宴會展演館",
+    startDate="2026-10-07", endDate="2026-11-15",
+    sourceUrl="https://chiikawa-info.jp/p26/pus_smtk/index.html")
+xinyi_media = dict(xinyi_official, id="xinyi-media", title="吉伊卡哇快閃店 台北信義新光三越登場",
+    locationName="信義新光三越", sourceUrl="https://universe.oneone.com.tw/posts/6969", sourceType="media")
+check("信義A9場館簡稱共用穩定身分", scrape.special_activity_key(xinyi_official), scrape.special_activity_key(xinyi_media))
+check("信義A9跨媒體重複只留一筆", len(scrape.dedup_events([xinyi_official, xinyi_media])[0]), 1)
+check("信義A9媒體別名不算新情報", scrape.build_update_diff([xinyi_official], [xinyi_media])["newEventCount"], 0)
+check("信義A9別名重複阻擋發布", bool(audit_similar_events.suspicious_pair(xinyi_official, xinyi_media)), True)
+check("信義不同A11館不可誤併", scrape.is_same_event_for_update_diff(xinyi_official,
+    dict(xinyi_media, locationName="新光三越台北信義新天地 A11 6F")), False)
+check("信義A9不同檔期不可誤併", scrape.is_same_event_for_update_diff(xinyi_official,
+    dict(xinyi_media, startDate="2027-10-07", endDate="2027-11-15")), False)
+check("台中中港不可誤併信義A9", scrape.is_same_event_for_update_diff(xinyi_official,
+    dict(xinyi_media, city="Taichung", locationName="新光三越台中中港店")), False)
+
 # ── 結語 ──────────────────────────────────────────────────────────────────────
 print(f"\n{'=' * 40}\n結果：{_passed} 通過、{_failed} 失敗")
 sys.exit(1 if _failed else 0)

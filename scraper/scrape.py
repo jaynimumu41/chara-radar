@@ -1936,6 +1936,13 @@ def chiikawa_popup_venue_key(ev: dict) -> str | None:
             family = name
             break
     venue = _norm(location)
+    # The Taipei A9 popup is also reported with the reversed mall shorthand.
+    # Full-match the known branch aliases so A11 and other SKM venues stay distinct.
+    if ev.get("country") == "TW" and re.fullmatch(
+        r"(?:信義新光三越|新光三越台北信義新天地)(?:a9(?:9f|9樓)?(?:宴會展演館)?)?",
+        venue,
+    ):
+        venue = "taipei-xinyi-skm-a9"
     venue = re.sub(r"(?:本館|東館|西館|南館|北館)?\d+(?:階|f).*$", "", venue, flags=re.I)
     if len(venue) < 3:
         return None

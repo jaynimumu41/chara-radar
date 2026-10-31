@@ -1,17 +1,15 @@
 {
   "date": "2026-10-31",
   "baselineDate": "2026-10-30",
-  "generatedAt": "2026-10-31T08:07:26.807469+00:00",
+  "generatedAt": "2026-10-31T08:51:15.611570+00:00",
   "baselineEventCount": 64,
-  "currentEventCount": 65,
-  "newEventCount": 1,
+  "currentEventCount": 64,
+  "newEventCount": 0,
   "countsByBrand": {
     "miffy": 0,
     "pokemon": 0,
-    "chiikawa": 1
+    "chiikawa": 0
   },
-  "newEventIds": [
-    "ch-e50e7b"
-  ],
+  "newEventIds": [],
   "replacements": []
 }

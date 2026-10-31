@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-30T13:21:46+00:00",
+  "updatedAt": "2026-10-31T08:51:01+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 19,
@@ -3406,18 +3406,18 @@
     },
     "domain:universe.oneone.com.tw": {
       "confirmed": 1,
-      "rejected": 0,
+      "rejected": 1,
       "uncertain": 0,
-      "crossChecked": 2,
-      "score": 61,
+      "crossChecked": 3,
+      "score": 52,
       "label": "universe.oneone.com.tw",
       "kind": "site",
       "host": "universe.oneone.com.tw",
       "handle": "",
       "firstSeen": "2026-08-21",
-      "lastReviewed": "2026-08-21",
-      "lastOutcome": "confirmed",
-      "notes": "Official Pokemon Asia page confirmed Taipei venue and 2026-10-10 to 2026-10-11 period",
+      "lastReviewed": "2026-10-31",
+      "lastOutcome": "rejected",
+      "notes": "Accurate dates and goods but duplicate of official ch-332c96, Taipei Xinyi SKM A9 9F, 2026-10-07 through 2026-11-15. Official chiikawa-info.jp/p26/pus_smtk/index.html corroborates; retain official row.",
       "byBrand": {
         "pokemon": {
           "confirmed": 1,
@@ -3425,6 +3425,13 @@
           "uncertain": 0,
           "crossChecked": 2,
           "score": 61
+        },
+        "chiikawa": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
         }
       },
       "byType": {
@@ -3434,15 +3441,22 @@
           "uncertain": 0,
           "crossChecked": 2,
           "score": 61
+        },
+        "popup": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
         }
       },
       "byCountry": {
         "tw": {
           "confirmed": 1,
-          "rejected": 0,
+          "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 2,
-          "score": 61
+          "crossChecked": 3,
+          "score": 52
         }
       },
       "history": [
@@ -3455,6 +3469,16 @@
           "eventId": "po-de81e3",
           "evidenceCount": 2,
           "notes": "Official Pokemon Asia page confirmed Taipei venue and 2026-10-10 to 2026-10-11 period"
+        },
+        {
+          "date": "2026-10-31",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "TW",
+          "eventId": "ch-e50e7b",
+          "evidenceCount": 1,
+          "notes": "Accurate dates and goods but duplicate of official ch-332c96, Taipei Xinyi SKM A9 9F, 2026-10-07 through 2026-11-15. Official chiikawa-info.jp/p26/pus_smtk/index.html corroborates; retain official row."
         }
       ]
     },
