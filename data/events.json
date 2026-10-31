@@ -1535,5 +1535,29 @@
     "createdAt": "2026-10-30",
     "sourceTitle": "ちいかわPOP UP STORE 東武宇都宮百貨店(2026-11-13～2026-12-01) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_tbun/index.html"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇快閃店 台北信義新光三越登場",
+    "type": "popup",
+    "country": "TW",
+    "city": "Taipei",
+    "locationName": "信義新光三越",
+    "startDate": "2026-10-07",
+    "endDate": "2026-11-15",
+    "summaryZh": "吉伊卡哇快閃店於台北信義新光三越登場，販售萬聖節限定變裝娃娃等周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "快閃店",
+      "限定商品",
+      "萬聖節",
+      "吉伊卡哇"
+    ],
+    "id": "ch-e50e7b",
+    "sourceTitle": "「吉伊卡哇快閃店ちいかわPOP UP STORE」10月台北信義新光三越登場！萬聖節限定變裝娃娃超萌開賣 - oneone宇宙",
+    "sourceType": "media",
+    "createdAt": "2026-10-31",
+    "sourceUrl": "https://universe.oneone.com.tw/posts/6969"
   }
 ]
