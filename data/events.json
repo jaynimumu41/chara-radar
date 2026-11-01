@@ -1,29 +1,5 @@
 [
   {
-    "brand": "chiikawa",
-    "title": "Chiikawa x 東京晴空塔 聯名活動",
-    "type": "campaign",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "東京晴空塔",
-    "startDate": "2026-07-10",
-    "endDate": "2026-10-31",
-    "summaryZh": "Chiikawa 與東京晴空塔再度聯名，推出活動限定周邊商品與主題咖啡廳餐點，7月10日起登場。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "聯名",
-      "限定商品",
-      "主題咖啡廳",
-      "晴空塔"
-    ],
-    "id": "ch-b0dade",
-    "sourceUrl": "https://www.tokyo-skytree.jp/press/post/712/",
-    "sourceType": "official_site",
-    "createdAt": "2026-06-02",
-    "sourceTitle": "「ちいかわ☆星ふるスカイツリー®とひみつの島」開催決定！【公式】東京スカイツリー TOKYO SKYTREE - tokyo-skytree.jp"
-  },
-  {
     "brand": "pokemon",
     "title": "Pokémon K.UNO × U-TREASURE POP UP Promotion",
     "type": "popup",
@@ -334,31 +310,6 @@
     "createdAt": "2026-09-13",
     "sourceTitle": "10/10より「ブルーナフェア」開催 ショッピングバッグプレゼント - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202609/48228/"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 Park Halloween 秋季限定活動",
-    "type": "campaign",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "ちいかわパーク（東京・池袋）",
-    "startDate": "2026-09-25",
-    "endDate": "2026-10-31",
-    "summaryZh": "東京池袋的吉伊卡哇 Park 推出 Halloween 限定裝飾、見面活動與園區限定商品，商品數量有限。",
-    "needReservation": true,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "Halloween",
-      "池袋",
-      "限定活動",
-      "限定商品"
-    ],
-    "id": "ch-a40e26",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-13",
-    "sourceTitle": "ちいかわパークがハロウィーンに染まる 秋の限定企画 - ちいかわパーク",
-    "sourceUrl": "https://chiikawapark-tokyo.jp/news/9lofnm5f5wy/"
   },
   {
     "brand": "miffy",
@@ -1535,5 +1486,53 @@
     "createdAt": "2026-10-30",
     "sourceTitle": "ちいかわPOP UP STORE 東武宇都宮百貨店(2026-11-13～2026-12-01) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_tbun/index.html"
+  },
+  {
+    "brand": "pokemon",
+    "title": "寶可夢客製化周邊登場",
+    "type": "new_product",
+    "country": "JP",
+    "city": "",
+    "locationName": "ポケモンセンター",
+    "startDate": "2026-11-07",
+    "endDate": "",
+    "summaryZh": "日本寶可夢中心將推出可從1025種寶可夢中選擇，客製化成鑰匙圈等周邊商品的服務。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢",
+      "客製化",
+      "周邊商品",
+      "日本"
+    ],
+    "id": "po-07954f",
+    "sourceTitle": "11月7日よりポケモン1025匹から自分だけの「てもち」を作れるグッズがポケモンセンターに登場！ 好きなポケモンをキーホルダーなどにカスタマイズ - Nintendo DREAM WEB",
+    "sourceType": "media",
+    "createdAt": "2026-11-01",
+    "sourceUrl": "https://www.ndw.jp/pokemon-goods-261030-05/"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇京都錦市場新店開幕",
+    "type": "store",
+    "country": "JP",
+    "city": "Kyoto",
+    "locationName": "錦市場",
+    "startDate": "",
+    "endDate": "",
+    "summaryZh": "吉伊卡哇於京都錦市場開設新店，11月18日開幕，同步推出限定玩偶杯套與迷你蜂蜜蛋糕。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "新店開幕",
+      "限定商品",
+      "京都",
+      "玩偶"
+    ],
+    "id": "ch-55ec0f",
+    "sourceTitle": "吉伊卡哇京都錦市場新店 11 月 18 日開幕！限定玩偶杯套、迷你蜂蜜蛋糕同步登場 - SouNova 少女星",
+    "sourceType": "media",
+    "createdAt": "2026-11-01",
+    "sourceUrl": "https://sounova.com/anime/chiikawa-baby-castella-kyoto-nishiki-market"
   }
 ]
