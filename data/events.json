@@ -1417,40 +1417,16 @@
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_tbun/index.html"
   },
   {
-    "brand": "pokemon",
-    "title": "寶可夢客製化周邊登場",
-    "type": "new_product",
-    "country": "JP",
-    "city": "",
-    "locationName": "ポケモンセンター",
-    "startDate": "2026-11-07",
-    "endDate": "",
-    "summaryZh": "日本寶可夢中心將推出可從1025種寶可夢中選擇，客製化成鑰匙圈等周邊商品的服務。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "客製化",
-      "周邊商品",
-      "日本"
-    ],
-    "id": "po-07954f",
-    "sourceTitle": "11月7日よりポケモン1025匹から自分だけの「てもち」を作れるグッズがポケモンセンターに登場！ 好きなポケモンをキーホルダーなどにカスタマイズ - Nintendo DREAM WEB",
-    "sourceType": "media",
-    "createdAt": "2026-11-01",
-    "sourceUrl": "https://www.ndw.jp/pokemon-goods-261030-05/"
-  },
-  {
     "brand": "chiikawa",
-    "title": "吉伊卡哇京都錦市場新店開幕",
+    "title": "吉伊卡哇京都錦店 Baby Castella 開幕",
     "type": "store",
     "country": "JP",
     "city": "Kyoto",
-    "locationName": "錦市場",
-    "startDate": "",
+    "locationName": "ちいかわベビーカステラ 京都錦店（京都府京都市中京区鍛冶屋町205番地）",
+    "startDate": "2026-11-18",
     "endDate": "",
-    "summaryZh": "吉伊卡哇於京都錦市場開設新店，11月18日開幕，同步推出限定玩偶杯套與迷你蜂蜜蛋糕。",
-    "needReservation": false,
+    "summaryZh": "11月18日開幕，販售現烤 Baby Castella、店頭限定玩偶套組與杯套。11月18日至2027年1月3日採事前抽選預約；此為入店管制期間，非閉店日期。",
+    "needReservation": true,
     "hasLimitedGoods": true,
     "tags": [
       "新店開幕",
@@ -1459,9 +1435,9 @@
       "玩偶"
     ],
     "id": "ch-55ec0f",
-    "sourceTitle": "吉伊卡哇京都錦市場新店 11 月 18 日開幕！限定玩偶杯套、迷你蜂蜜蛋糕同步登場 - SouNova 少女星",
-    "sourceType": "media",
+    "sourceTitle": "ちいかわベビーカステラ 京都錦店 2026年11月18日(水) NEW OPEN！ - ちいかわもぐもぐ本舗",
+    "sourceType": "official_site",
     "createdAt": "2026-11-01",
-    "sourceUrl": "https://sounova.com/anime/chiikawa-baby-castella-kyoto-nishiki-market"
+    "sourceUrl": "https://www.chiikawamogumogu.jp/stores/castella/"
   }
 ]

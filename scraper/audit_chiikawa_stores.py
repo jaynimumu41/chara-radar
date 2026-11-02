@@ -110,6 +110,20 @@ def extract_mogumogu_store(page_html: str) -> OfficialStore | None:
     return None
 
 
+def extract_mogumogu_stores(page_html: str) -> list[OfficialStore]:
+    # A single Castella page now has multiple physical branches in ACCESS cards.
+    names = []
+    for heading in re.findall(r"<h3\b[^>]*>([\s\S]*?)</h3>", page_html or "", re.I):
+        name = clean(re.sub(r"<[^>]+>", " ", html.unescape(heading)))
+        match = re.fullmatch(r"(ちいかわベビーカステラ\s+[^（）()<>]+?店)(?:\s*[（(][^）)]*OPEN[）)])?", name)
+        if match:
+            names.append(OfficialStore(match.group(1), "ちいかわベビーカステラ"))
+    if names:
+        return names
+    store = extract_mogumogu_store(page_html)
+    return [store] if store else []
+
+
 class _YakiStoreParser(HTMLParser):
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
@@ -247,9 +261,7 @@ def fetch_official_stores(timeout: int = 30) -> list[OfficialStore]:
         page = fetch_html(url, timeout=timeout)
         if not page:
             raise RuntimeError(f"could not fetch {url}")
-        store = extract_mogumogu_store(page)
-        if store:
-            stores.append(store)
+        stores.extend(extract_mogumogu_stores(page))
 
     pages = {}
     for url in (YAKI_URL, BAKERY_URL, PARK_URL, PARK_STORE_URL, TAIPEI_URL, OBANYAKI_URL):

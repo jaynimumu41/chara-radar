@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-31T08:51:01+00:00",
+  "updatedAt": "2026-11-02T08:53:50+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 19,
@@ -2600,34 +2600,34 @@
     },
     "domain:ndw.jp": {
       "confirmed": 7,
-      "rejected": 7,
+      "rejected": 8,
       "uncertain": 0,
-      "crossChecked": 17,
-      "score": 32,
+      "crossChecked": 18,
+      "score": 21,
       "label": "ndw.jp",
       "kind": "site",
       "host": "ndw.jp",
       "handle": "",
       "firstSeen": "2026-07-19",
-      "lastReviewed": "2026-10-30",
+      "lastReviewed": "2026-11-02",
       "lastOutcome": "rejected",
-      "notes": "Secondary-media duplicate of official Pokemon row po-18888b for the 2026-11-07 Erabu / Pokemon Timeless Adventure release.",
+      "notes": "Accurate article, duplicate of existing official My Pokemon Party goods record; official goods and Center pages confirm November 7 release.",
       "byBrand": {
         "pokemon": {
           "confirmed": 7,
-          "rejected": 7,
+          "rejected": 8,
           "uncertain": 0,
-          "crossChecked": 17,
-          "score": 32
+          "crossChecked": 18,
+          "score": 21
         }
       },
       "byType": {
         "new_product": {
           "confirmed": 6,
-          "rejected": 6,
+          "rejected": 7,
           "uncertain": 0,
-          "crossChecked": 15,
-          "score": 36
+          "crossChecked": 16,
+          "score": 25
         },
         "campaign": {
           "confirmed": 1,
@@ -2640,10 +2640,10 @@
       "byCountry": {
         "jp": {
           "confirmed": 7,
-          "rejected": 7,
+          "rejected": 8,
           "uncertain": 0,
-          "crossChecked": 17,
-          "score": 32
+          "crossChecked": 18,
+          "score": 21
         }
       },
       "history": [
@@ -2786,6 +2786,16 @@
           "eventId": "po-dc7e9a",
           "evidenceCount": 2,
           "notes": "Secondary-media duplicate of official Pokemon row po-18888b for the 2026-11-07 Erabu / Pokemon Timeless Adventure release."
+        },
+        {
+          "date": "2026-11-02",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "po-07954f",
+          "evidenceCount": 1,
+          "notes": "Accurate article, duplicate of existing official My Pokemon Party goods record; official goods and Center pages confirm November 7 release."
         }
       ]
     },
@@ -4424,6 +4434,60 @@
           "eventId": "ch-690f5f",
           "evidenceCount": 1,
           "notes": "Duplicate official ch-93a675 Christmas Market, same venue and period."
+        }
+      ]
+    },
+    "domain:sounova.com": {
+      "confirmed": 1,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 59,
+      "label": "sounova.com",
+      "kind": "site",
+      "host": "sounova.com",
+      "handle": "",
+      "firstSeen": "2026-11-02",
+      "lastReviewed": "2026-11-02",
+      "lastOutcome": "confirmed",
+      "notes": "Operator official shop access card and Terakoya PR TIMES release confirm November 18 opening/address/goods/reservations; replaced source with official page.",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "byType": {
+        "store": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "history": [
+        {
+          "date": "2026-11-02",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "store",
+          "country": "JP",
+          "eventId": "ch-55ec0f",
+          "evidenceCount": 1,
+          "notes": "Operator official shop access card and Terakoya PR TIMES release confirm November 18 opening/address/goods/reservations; replaced source with official page."
         }
       ]
     }

@@ -2518,8 +2518,8 @@ for url in (
               [duplicate_page], ignored_pages=audit_official_coverage.IGNORED_OFFICIAL_PAGES
           )[0].status,
           "ignored")
-for rule in scrape.STRONG_EVENT_IDENTITY_RULES[:5]:
-    alias = rule["patterns"][0][0][0]
+for rule in scrape.STRONG_EVENT_IDENTITY_RULES[:7]:
+    alias = " ".join(group[0] for group in rule["patterns"][0])
     a=ev(brand=rule["brand"],type=next(iter(rule["types"])),title=alias,country="JP",startDate="2026-10-24")
     b=dict(a, id="other",type=next(iter(rule["types"])))
     check("明確主題穩定識別"+rule["concept"],scrape.is_same_event_for_update_diff(a,b),True)
@@ -2873,6 +2873,30 @@ check("信義A9不同檔期不可誤併", scrape.is_same_event_for_update_diff(x
     dict(xinyi_media, startDate="2027-10-07", endDate="2027-11-15")), False)
 check("台中中港不可誤併信義A9", scrape.is_same_event_for_update_diff(xinyi_official,
     dict(xinyi_media, city="Taichung", locationName="新光三越台中中港店")), False)
+
+# Daily verification 2026-11-02: media aliases and multi-branch Castella cards.
+party_media = ev(id="party-media", brand="pokemon", type="new_product", country="JP",
+    title="寶可夢客製化周邊登場", startDate="2026-11-07", locationName="ポケモンセンター",
+    sourceTitle="1025匹から自分だけの「てもち」を作れるグッズ",
+    sourceUrl="https://www.ndw.jp/pokemon-goods-261030-05/")
+check("Party媒體與官方共用身分", scrape.special_activity_key(party_media), scrape.special_activity_key(party_official))
+check("Party別名重複只留一筆", len(scrape.dedup_events([party_official, party_media])[0]), 1)
+check("Party重複阻擋發布", bool(audit_similar_events.suspicious_pair(party_official, party_media)), True)
+check("Party別名不是今日新增", scrape.build_update_diff([party_media], [party_official])["newEventCount"], 0)
+check("Party不同國家不併", scrape.is_same_event_for_update_diff(party_official, dict(party_media, country="TW")), False)
+check("Party不同發售日不併", scrape.is_same_event_for_update_diff(party_official, dict(party_media, startDate="2027-11-07")), False)
+kyoto_shop = "ちいかわベビーカステラ 京都錦店（2026年11月18日OPEN） 京都府京都市中京区鍛冶屋町205番地 GOODS オリジナルグッズ 入店予約"
+kyoto_event = official_sources._chiikawa_kyoto_castella_event(kyoto_shop)
+check("京都開幕日期與常設店型態", (kyoto_event["startDate"], kyoto_event["endDate"], kyoto_event["city"], kyoto_event["type"]), ("2026-11-18", "", "Kyoto", "store"))
+check("京都不採旁邊的抽選日期", official_sources._chiikawa_kyoto_castella_event("2026年11月4日 抽選受付 " + kyoto_shop)["startDate"], "2026-11-18")
+check("京都缺開幕卡不可猜日期", official_sources._chiikawa_kyoto_castella_event(kyoto_shop.replace("（2026年11月18日OPEN）", "")), None)
+check("京都無周邊不入庫", official_sources._chiikawa_kyoto_castella_event(kyoto_shop.replace("GOODS オリジナルグッズ", "")), None)
+castella_cards = '<title>ちいかわ ベビーカステラ | ちいかわもぐもぐ本舗</title><h3>ちいかわベビーカステラ 小樽店</h3><h3>ちいかわベビーカステラ 京都錦店<br>（2026年11月18日OPEN）</h3><h3>ちいかわベビーカステラ京都錦店の入店予約について</h3>'
+check("同頁小樽與京都分店都列入常設店稽核", [x.name for x in audit_chiikawa_stores.extract_mogumogu_stores(castella_cards)], ["ちいかわベビーカステラ 小樽店", "ちいかわベビーカステラ 京都錦店"])
+check("京都商品與開幕母體不拆紀錄", scrape.special_activity_key(dict(kyoto_event, id="old", title="吉伊卡哇京都錦市場新店開幕", startDate="")), scrape.special_activity_key(kyoto_event))
+
+check("錦市場不同業態店不可誤併", scrape.special_activity_key(ev(brand="chiikawa", type="store", city="Kyoto", country="JP", title="吉伊卡哇京都錦市場新店開幕", locationName="錦市場")), None)
+check("未來新Castella分店不可漏接", [x.name for x in audit_chiikawa_stores.extract_mogumogu_stores('<title>Castella</title><h3>ちいかわベビーカステラ 神戸店</h3><h3>ちいかわベビーカステラ 京都錦店の入店予約について</h3>')], ["ちいかわベビーカステラ 神戸店"])
 
 # ── 結語 ──────────────────────────────────────────────────────────────────────
 print(f"\n{'=' * 40}\n結果：{_passed} 通過、{_failed} 失敗")

@@ -1,9 +1,9 @@
 {
   "date": "2026-11-02",
   "baselineDate": "2026-11-01",
-  "generatedAt": "2026-11-02T08:08:42.475694+00:00",
+  "generatedAt": "2026-11-02T08:54:35.415426+00:00",
   "baselineEventCount": 64,
-  "currentEventCount": 61,
+  "currentEventCount": 60,
   "newEventCount": 0,
   "countsByBrand": {
     "miffy": 0,

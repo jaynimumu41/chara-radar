@@ -588,6 +588,30 @@ def _chiikawa_otaru_castella_event(info_text: str, shop_text: str, correct_city=
     }
 
 
+def _chiikawa_kyoto_castella_event(shop_text: str) -> dict | None:
+    # Scope the opening date to Kyoto's access card, never Otaru or reservation dates.
+    match = re.search(r"ちいかわベビーカステラ\s*京都錦店\s*[（(]\s*(20\d{2})年(\d{1,2})月(\d{1,2})日OPEN[）)]", shop_text)
+    if not match or "京都府京都市中京区鍛冶屋町205番地" not in shop_text:
+        return None
+    if not any(word in shop_text for word in ("オリジナルグッズ", "GOODS")):
+        return None
+    year, month, day = map(int, match.groups())
+    start = f"{year:04d}-{month:02d}-{day:02d}"
+    return {
+        "brand": "chiikawa", "title": "吉伊卡哇京都錦店 Baby Castella 開幕",
+        "type": "store", "country": "JP", "city": "Kyoto",
+        "locationName": "ちいかわベビーカステラ 京都錦店（京都府京都市中京区鍛冶屋町205番地）",
+        "startDate": start, "endDate": "",
+        "summaryZh": "京都錦市場新店販售現烤 Baby Castella 與店頭限定原創周邊；入店預約方式依官方公告。",
+        "needReservation": "入店予約" in shop_text, "hasLimitedGoods": True,
+        "tags": ["吉伊卡哇", "京都", "常設店", "限定周邊"],
+        "id": _stable_id("ch", _CHIIKAWA_MOGUMOGU_CASTELLA + "kyoto-nishiki" + start),
+        "sourceType": "official_site", "createdAt": _today_iso(),
+        "sourceTitle": "ちいかわベビーカステラ 京都錦店 NEW OPEN！ - ちいかわもぐもぐ本舗",
+        "sourceUrl": _CHIIKAWA_MOGUMOGU_CASTELLA,
+    }
+
+
 def fetch_chiikawa_mogumogu(correct_city=None) -> list[dict]:
     """解析ちいかわインフォ首頁與もぐもぐ本舗店鋪頁，抓常設店／限定餐飲／原創周邊情報。"""
     info_page = _page_text(_CHIIKAWA_INFO_TOP)
@@ -601,7 +625,8 @@ def fetch_chiikawa_mogumogu(correct_city=None) -> list[dict]:
     event = _chiikawa_otaru_castella_event(info_text, shop_text, correct_city=correct_city)
     if not event:
         print("    ⚠️  吉伊卡哇もぐもぐ本舗頁可達，但目前版型無法解析")
-    return [event] if event else []
+    kyoto = _chiikawa_kyoto_castella_event(shop_text)
+    return [row for row in (event, kyoto) if row]
 
 
 def _chiikawa_movie_popup_events_from_text(

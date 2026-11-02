@@ -1575,6 +1575,8 @@ def _event_blob(ev: dict) -> str:
 
 
 STRONG_EVENT_IDENTITY_RULES = (
+    {"brand": "chiikawa", "types": {"store"}, "concept": "chiikawa-kyoto-nishiki-castella", "patterns": ((("京都錦店", "京都錦市場", "kyoto-nishiki-market"), ("ベビーカステラ", "Baby Castella", "baby-castella")),), "scope": "city", "country": True},
+    {"brand": "pokemon", "types": {"new_product", "lottery", "reservation"}, "concept": "pokemon-my-party", "patterns": ((("My Pokémon Party", "My Pokemon Party", "キミだけの「てもち」", "自分だけの「てもち」", "pokemon-goods-261030-05", "261030_to02"),),), "scope": "date", "country": True},
     {'brand': 'chiikawa', 'types': {'campaign', 'cafe', 'popup'}, 'concept': 'chiikawa-christmas-market', 'patterns': ((('ちいかわクリスマスマーケット', '吉伊卡哇聖誕市集'),),), 'scope': 'date', 'country': True},
     {'brand': 'chiikawa', 'types': {'campaign', 'cafe', 'popup'}, 'concept': 'chiikawa-oita-popup', 'patterns': ((('イオンパークプレイス大分', 'pus_aoit', 'aeon-park-place-oita'),),), 'scope': 'date', 'country': True},
     {'brand': 'pokemon', 'types': {'new_product'}, 'concept': 'pokemon-christmas-junbi', 'patterns': ((('クリスマスじゅんびチュウ', 'pokemon-goods-261016-01'),),), 'scope': 'date', 'country': True},
