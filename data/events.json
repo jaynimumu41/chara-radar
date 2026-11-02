@@ -458,30 +458,6 @@
   },
   {
     "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE 町田モディ",
-    "type": "popup",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "町田モディ 4F イベントスペース",
-    "startDate": "2026-10-09",
-    "endDate": "2026-11-01",
-    "summaryZh": "ちいかわ POP UP STORE 於町田モディ期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-a71004",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-25",
-    "sourceTitle": "ちいかわPOP UP STORE 町田モディ(2026-10-09～2026-11-01) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_matd/index.html"
-  },
-  {
-    "brand": "chiikawa",
     "title": "まじかるちいかわ POP UP STORE グランデュオ立川",
     "type": "popup",
     "country": "JP",
@@ -552,30 +528,6 @@
     "sourceType": "media",
     "createdAt": "2026-09-28",
     "sourceUrl": "https://www.nownews.com/news/6878252"
-  },
-  {
-    "brand": "pokemon",
-    "title": "Pokémon Center TAIPEI #記憶的旅途",
-    "type": "campaign",
-    "country": "TW",
-    "city": "Taipei",
-    "locationName": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3F）",
-    "startDate": "2026-10-02",
-    "endDate": "2026-11-01",
-    "summaryZh": "Pokémon Center TAIPEI 舉辦30週年「#記憶的旅途」活動，單筆消費滿NT$300可兌換原創圓形扇，並可在信義新天地指定地點完成任務領取冒險紀念證。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "Pokémon Center TAIPEI",
-      "30週年",
-      "消費贈品",
-      "冒險紀念證"
-    ],
-    "id": "po-de907f",
-    "sourceTitle": "【Pokémon Center TAIPEI】Pokémon Center TAIPEI #記憶的旅途 活動登場！",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-28",
-    "sourceUrl": "https://tw.portal-pokemon.com/topics/post-6716/"
   },
   {
     "brand": "pokemon",
@@ -1083,29 +1035,6 @@
     "createdAt": "2026-10-17",
     "sourceTitle": "渋谷ヒカリエに「DICK BRUNA STAND BY MIIA」期間限定オープン - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202610/49089/"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇壽司快閃店",
-    "type": "popup",
-    "country": "JP",
-    "city": "Kanagawa",
-    "locationName": "横浜スカイビル 8F イベントスペース by マルイ",
-    "startDate": "2026-10-22",
-    "endDate": "2026-11-01",
-    "summaryZh": "Chiikawa 壽司主題快閃商品店於橫濱 Sky Building 8F 舉辦，販售餐碗、茶杯、筷架等活動紀念周邊。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "限定周邊"
-    ],
-    "id": "ch-6cb20a",
-    "sourceTitle": "むちゃうま!!ちいかわ寿司 POP UP STORE 横浜スカイビル - ちいかわ公式",
-    "sourceType": "official_site",
-    "createdAt": "2026-10-17",
-    "sourceUrl": "https://chiikawa-info.jp/p26/muchauma-chiikawasushi/yokohama/"
   },
   {
     "brand": "pokemon",
