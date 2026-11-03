@@ -1425,19 +1425,43 @@
     "locationName": "ちいかわベビーカステラ 京都錦店（京都府京都市中京区鍛冶屋町205番地）",
     "startDate": "2026-11-18",
     "endDate": "",
-    "summaryZh": "11月18日開幕，販售現烤 Baby Castella、店頭限定玩偶套組與杯套。11月18日至2027年1月3日採事前抽選預約；此為入店管制期間，非閉店日期。",
+    "summaryZh": "京都錦市場新店販售現烤 Baby Castella 與店頭限定原創周邊；入店預約方式依官方公告。",
     "needReservation": true,
     "hasLimitedGoods": true,
     "tags": [
-      "新店開幕",
-      "限定商品",
+      "吉伊卡哇",
       "京都",
-      "玩偶"
+      "常設店",
+      "限定周邊"
     ],
-    "id": "ch-55ec0f",
-    "sourceTitle": "ちいかわベビーカステラ 京都錦店 2026年11月18日(水) NEW OPEN！ - ちいかわもぐもぐ本舗",
+    "id": "ch-73f791",
     "sourceType": "official_site",
-    "createdAt": "2026-11-01",
+    "createdAt": "2026-11-03",
+    "sourceTitle": "ちいかわベビーカステラ 京都錦店 NEW OPEN！ - ちいかわもぐもぐ本舗",
     "sourceUrl": "https://www.chiikawamogumogu.jp/stores/castella/"
+  },
+  {
+    "brand": "pokemon",
+    "title": "像素皮卡丘 台北寶可夢中心再到貨",
+    "type": "new_product",
+    "country": "TW",
+    "city": "Taipei",
+    "locationName": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3F）",
+    "startDate": "2026-10-30",
+    "endDate": "",
+    "summaryZh": "像素皮卡丘系列商品於台北寶可夢中心補貨到貨，包含毛絨玩具與吉祥物等。",
+    "needReservation": false,
+    "hasLimitedGoods": false,
+    "tags": [
+      "寶可夢",
+      "皮卡丘",
+      "台北",
+      "補貨"
+    ],
+    "id": "po-68980a",
+    "sourceTitle": "像素皮卡丘 11/7 台北寶可夢中心再到貨！毛絨玩具、吉祥物價格與購買資訊 - Pokemon Hubs",
+    "sourceType": "media",
+    "createdAt": "2026-11-03",
+    "sourceUrl": "https://pokemonhubs.com/news/pixel-pikachu-pokemon-center-taipei-restock-2026/"
   }
 ]
