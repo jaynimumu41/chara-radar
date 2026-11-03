@@ -2109,8 +2109,8 @@ def _taiwan_store_sale_date(text: str, ref_year: int | None) -> str:
     if not text or not ref_year:
         return ""
     patterns = (
-        r"(?<!\d)(\d{1,2})(?:月|/)(\d{1,2})(?:日)?(?:（[^）]*）|\([^)]*\))?"
-        r"[^。！？\n]{0,180}?(?:上架|發售|販售|登場|開賣|推出)",
+        r"(?<!\d)(\d{1,2})\s*(?:月|/)\s*(\d{1,2})\s*(?:日)?(?:（[^）]*）|\([^)]*\))?"
+        r"[^。！？\n]{0,180}?(?:上架|發售|販售|登場|開賣|推出|再到貨)",
         r"(?:上架|發售|販售|開賣|推出)日?[^。！？\n]{0,80}?"
         r"(?<!\d)(\d{1,2})(?:月|/)(\d{1,2})(?:日)?",
     )
@@ -2201,7 +2201,14 @@ def normalize_source_event(event: dict, *, source_url: str = "", page_text: str 
         if not year:
             year_match = re.match(r"(20\d{2})", data.get("createdAt", ""))
             year = int(year_match.group(1)) if year_match else None
-        sale_date = "" if taipei_postponed_article else _taiwan_store_sale_date(evidence, year)
+        # Original title is scoped to this story; generated summaries and full
+        # pages can contain unrelated dates (including related articles).
+        source_title = data.get("sourceTitle", "")
+        sale_date = "" if taipei_postponed_article else (
+            _taiwan_store_sale_date(source_title, year)
+            or _taiwan_store_sale_date(visible, year)
+            or ("" if source_title or visible else _taiwan_store_sale_date(evidence, year))
+        )
         if known_fainted_article and not sale_date:
             sale_date = "2026-10-17"
         if sale_date:

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-02T08:53:50+00:00",
+  "updatedAt": "2026-11-03T08:53:34+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 19,
@@ -305,35 +305,35 @@
       ]
     },
     "domain:pokemonhubs.com": {
-      "confirmed": 2,
+      "confirmed": 3,
       "rejected": 4,
       "uncertain": 0,
-      "crossChecked": 9,
-      "score": 30,
+      "crossChecked": 10,
+      "score": 37,
       "label": "pokemonhubs.com",
       "kind": "news",
       "host": "pokemonhubs.com",
       "handle": "",
       "firstSeen": "2026-06-11",
-      "lastReviewed": "2026-10-30",
-      "lastOutcome": "rejected",
-      "notes": "Duplicate of existing po-e834aa; article date was extracted instead of the 2026-10-31 physical-store launch.",
+      "lastReviewed": "2026-11-03",
+      "lastOutcome": "confirmed",
+      "notes": "Kept under Taiwan physical-store exception. Original article fetched HTTP200: Red Green plush/mascot restock November 7, not October 30. JUKSY 153956 independently corroborates sale date/products; official portal post-6861 confirms November 7 entry tickets/venue only. Official Instagram and Codex reader fetch unavailable.",
       "byBrand": {
         "pokemon": {
-          "confirmed": 2,
+          "confirmed": 3,
           "rejected": 4,
           "uncertain": 0,
-          "crossChecked": 9,
-          "score": 30
+          "crossChecked": 10,
+          "score": 37
         }
       },
       "byType": {
         "new_product": {
-          "confirmed": 2,
+          "confirmed": 3,
           "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 6,
-          "score": 52
+          "crossChecked": 7,
+          "score": 59
         },
         "popup": {
           "confirmed": 0,
@@ -352,11 +352,11 @@
       },
       "byCountry": {
         "tw": {
-          "confirmed": 2,
+          "confirmed": 3,
           "rejected": 3,
           "uncertain": 0,
-          "crossChecked": 7,
-          "score": 41
+          "crossChecked": 8,
+          "score": 48
         },
         "jp": {
           "confirmed": 0,
@@ -426,6 +426,16 @@
           "eventId": "po-0b7ebf",
           "evidenceCount": 2,
           "notes": "Duplicate of existing po-e834aa; article date was extracted instead of the 2026-10-31 physical-store launch."
+        },
+        {
+          "date": "2026-11-03",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-68980a",
+          "evidenceCount": 1,
+          "notes": "Kept under Taiwan physical-store exception. Original article fetched HTTP200: Red Green plush/mascot restock November 7, not October 30. JUKSY 153956 independently corroborates sale date/products; official portal post-6861 confirms November 7 entry tickets/venue only. Official Instagram and Codex reader fetch unavailable."
         }
       ]
     },

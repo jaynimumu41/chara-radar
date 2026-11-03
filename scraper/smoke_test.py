@@ -2898,6 +2898,20 @@ check("京都商品與開幕母體不拆紀錄", scrape.special_activity_key(dic
 check("錦市場不同業態店不可誤併", scrape.special_activity_key(ev(brand="chiikawa", type="store", city="Kyoto", country="JP", title="吉伊卡哇京都錦市場新店開幕", locationName="錦市場")), None)
 check("未來新Castella分店不可漏接", [x.name for x in audit_chiikawa_stores.extract_mogumogu_stores('<title>Castella</title><h3>ちいかわベビーカステラ 神戸店</h3><h3>ちいかわベビーカステラ 京都錦店の入店予約について</h3>')], ["ちいかわベビーカステラ 神戸店"])
 
+# Daily verification 2026-11-03: restock dates must come from the story.
+pixel_source = "像素皮卡丘 11/7 台北寶可夢中心再到貨！毛絨玩具、吉祥物價格與購買資訊"
+pixel_input = ev(brand="pokemon", country="TW", type="new_product", startDate="2026-10-30",
+    title="像素皮卡丘 台北寶可夢中心再到貨", sourceTitle=pixel_source,
+    summaryZh="10月30日開賣", sourceUrl="https://pokemonhubs.com/news/pixel-pikachu-pokemon-center-taipei-restock-2026/")
+pixel_fixed = scrape.normalize_source_event(pixel_input, ref_year=2026,
+    page_text="PChome 11月6日販售。相關文章 UNIQLO 新加坡10月30日開賣")
+check("補貨日取原標題不取AI摘要或線上販售與相關文章", pixel_fixed["startDate"], "2026-11-07")
+check("空白分隔實體店再到貨日期", scrape._taiwan_store_sale_date("2026 年 11 月 7 日（六）在 Pokémon Center TAIPEI 再到貨。", 2026), "2026-11-07")
+check("無販售訊號不把文章日期當開賣日", scrape._taiwan_store_sale_date("11/3 像素皮卡丘新聞", 2026), "")
+check("無效補貨日期不接受", scrape._taiwan_store_sale_date("11/31 再到貨", 2026), "")
+check("來源無日期不採生成摘要日期", scrape.normalize_source_event(dict(pixel_input,
+    startDate="", sourceTitle="台北寶可夢中心商品消息"), ref_year=2026)["startDate"], "")
+
 # ── 結語 ──────────────────────────────────────────────────────────────────────
 print(f"\n{'=' * 40}\n結果：{_passed} 通過、{_failed} 失敗")
 sys.exit(1 if _failed else 0)
