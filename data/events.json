@@ -120,29 +120,6 @@
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_naha/index.html"
   },
   {
-    "brand": "miffy",
-    "title": "Miffy ミッフィー・ハロウィン　ハウステンボス",
-    "type": "popup",
-    "country": "JP",
-    "city": "Nagasaki",
-    "locationName": "ハウステンボス",
-    "startDate": "2026-09-18",
-    "endDate": "2026-11-03",
-    "summaryZh": "Miffy（米飛兔）官方活動「ミッフィー・ハロウィン」於ハウステンボス期間限定登場，販售限定周邊／餐點。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "期間限定",
-      "日本"
-    ],
-    "id": "mi-6e44af",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-13",
-    "sourceTitle": "ハウステンボス「ミッフィー・ハロウィン」 - dickbruna.jp",
-    "sourceUrl": "https://dickbruna.jp/news/202608/47757/"
-  },
-  {
     "brand": "pokemon",
     "title": "Pokémon Sleep 模型登場",
     "type": "new_product",
@@ -385,30 +362,6 @@
   },
   {
     "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE 福岡三越",
-    "type": "popup",
-    "country": "JP",
-    "city": "Fukuoka",
-    "locationName": "福岡三越 9階 三越ギャラリー",
-    "startDate": "2026-10-16",
-    "endDate": "2026-11-03",
-    "summaryZh": "ちいかわ POP UP STORE 於福岡三越期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-341c48",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-25",
-    "sourceTitle": "ちいかわPOP UP STORE 福岡三越(2026-10-16～2026-11-03) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_fkmk/index.html"
-  },
-  {
-    "brand": "chiikawa",
     "title": "吉伊卡哇 POP UP STORE 新光三越台北信義新天地",
     "type": "popup",
     "country": "TW",
@@ -479,31 +432,6 @@
     "createdAt": "2026-09-27",
     "sourceTitle": "まじかるちいかわPOP UP STORE グランデュオ立川(2026/9/30～11/8) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/mg_tckw/index.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "まじかるちいかわ キデイランド POP UP SHOP 札幌",
-    "type": "popup",
-    "country": "JP",
-    "city": "Hokkaido",
-    "locationName": "札幌アピア ファッションウォーク B1F キデイランド POP UP SHOP",
-    "startDate": "2026-10-02",
-    "endDate": "2026-11-03",
-    "summaryZh": "まじかるちいかわ於札幌 Apia 的 Kiddy Land POP UP SHOP 期間限定登場，販售角色周邊商品。",
-    "needReservation": true,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "まじかるちいかわ",
-      "快閃店",
-      "限定周邊",
-      "札幌"
-    ],
-    "id": "ch-f4e275",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-27",
-    "sourceTitle": "まじかるちいかわ キデイランド POP UP SHOP 札幌(2026/10/2～11/3) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/magical_store/kd_spr/index.html"
   },
   {
     "brand": "pokemon",
@@ -577,30 +505,6 @@
     "createdAt": "2026-10-02",
     "sourceTitle": "電気を求めてやってきたデデンネとバチュルの日常を描いたグッズがポケモンセンターに登場！ - ポケットモンスターオフィシャルサイト",
     "sourceUrl": "https://www.pokemon.co.jp/goods/2026/10/261002_to01.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE イオンモール常滑",
-    "type": "popup",
-    "country": "JP",
-    "city": "Aichi",
-    "locationName": "イオンモール常滑 1F ヴィレッジヴァンガード横 特設会場",
-    "startDate": "2026-10-16",
-    "endDate": "2026-11-03",
-    "summaryZh": "ちいかわ POP UP STORE 於イオンモール常滑期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-3821ff",
-    "sourceType": "official_site",
-    "createdAt": "2026-10-03",
-    "sourceTitle": "ちいかわPOP UP STORE イオンモール常滑(2026-10-16～2026-11-03) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_tknm/index.html"
   },
   {
     "brand": "miffy",
@@ -841,30 +745,6 @@
     "createdAt": "2026-10-13",
     "sourceTitle": "2026年9月5日(土)発売予定!miffy style限定 ハロウィンアイテム - キデイランド",
     "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_20260905/"
-  },
-  {
-    "brand": "pokemon",
-    "title": "Pokemon Center 出張所 in イオンモール甲府昭和",
-    "type": "popup",
-    "country": "JP",
-    "city": "Yamanashi",
-    "locationName": "イオンモール甲府昭和 3階 イオンホール",
-    "startDate": "2026-09-18",
-    "endDate": "2026-11-03",
-    "summaryZh": "寶可夢中心出張所於山梨県イオンモール甲府昭和期間限定登場，販售多樣寶可夢周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "出張所",
-      "快閃店",
-      "日本"
-    ],
-    "id": "po-17540a",
-    "sourceType": "official_site",
-    "createdAt": "2026-10-14",
-    "sourceTitle": "ポケモンセンター出張所inイオンモール甲府昭和（2026-09-18～2026-11-03）",
-    "sourceUrl": "https://oneheart65.net/pokemoncenterbranch_schedule_2/"
   },
   {
     "brand": "pokemon",
@@ -1463,5 +1343,29 @@
     "sourceType": "media",
     "createdAt": "2026-11-03",
     "sourceUrl": "https://pokemonhubs.com/news/pixel-pikachu-pokemon-center-taipei-restock-2026/"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "「ちいかわ」×「東京ばな奈」沖縄ポップアップ",
+    "type": "popup",
+    "country": "JP",
+    "city": "Tokyo",
+    "locationName": "東京ばな奈ワールド",
+    "startDate": "2026-10-30",
+    "endDate": "2026-11-08",
+    "summaryZh": "「ちいかわ」與「東京ばな奈」聯名快閃店首次登陸沖繩，販售限定的香蕉布丁蛋糕與環保袋套組。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "沖繩",
+      "快閃店",
+      "東京ばな奈",
+      "限定商品"
+    ],
+    "id": "ch-44466f",
+    "sourceTitle": "バナナプリンケーキとエコバッグセットが沖縄初登場！東京ばな奈ワールド「ちいかわ」×「東京ばな奈」沖縄県初上陸ポップアップ - Dtimes",
+    "sourceType": "media",
+    "createdAt": "2026-11-04",
+    "sourceUrl": "https://dtimes.jp/post-1436887/"
   }
 ]
