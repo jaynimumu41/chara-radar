@@ -1346,14 +1346,14 @@
   },
   {
     "brand": "chiikawa",
-    "title": "「ちいかわ」×「東京ばな奈」沖縄ポップアップ",
+    "title": "吉伊卡哇 × 東京香蕉 沖繩 PARCO CITY 限定販售",
     "type": "popup",
     "country": "JP",
-    "city": "Tokyo",
-    "locationName": "東京ばな奈ワールド",
+    "city": "Okinawa",
+    "locationName": "サンエー浦添西海岸 PARCO CITY 2階センタープラザ",
     "startDate": "2026-10-30",
     "endDate": "2026-11-08",
-    "summaryZh": "「ちいかわ」與「東京ばな奈」聯名快閃店首次登陸沖繩，販售限定的香蕉布丁蛋糕與環保袋套組。",
+    "summaryZh": "10月30日至11月8日於沖繩浦添 PARCO CITY 2樓中央廣場限定販售香蕉布丁蛋糕、餅乾及托特包／環保袋套組；營業時間10:00至20:00，商品可能提早售罄。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1364,8 +1364,8 @@
     ],
     "id": "ch-44466f",
     "sourceTitle": "バナナプリンケーキとエコバッグセットが沖縄初登場！東京ばな奈ワールド「ちいかわ」×「東京ばな奈」沖縄県初上陸ポップアップ - Dtimes",
-    "sourceType": "media",
+    "sourceType": "official",
     "createdAt": "2026-11-04",
-    "sourceUrl": "https://dtimes.jp/post-1436887/"
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002181.000025606.html"
   }
 ]

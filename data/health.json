@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
   "status": "limited",
-  "generatedAt": "2026-11-04T16:07:49+08:00",
+  "generatedAt": "2026-11-04T16:51:44+08:00",
   "dataDate": "2026-11-04",
   "metrics": {
     "eventCount": 57,
     "todayNewCount": 1,
-    "agentCandidateCount": 1,
+    "agentCandidateCount": 0,
     "pendingArticleCount": 7,
     "extractionFailureCount": 7,
     "structuredSourceFailureCount": 0,

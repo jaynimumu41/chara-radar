@@ -2912,6 +2912,16 @@ check("無效補貨日期不接受", scrape._taiwan_store_sale_date("11/31 再�
 check("來源無日期不採生成摘要日期", scrape.normalize_source_event(dict(pixel_input,
     startDate="", sourceTitle="台北寶可夢中心商品消息"), ref_year=2026)["startDate"], "")
 
+# Okinawa event venue must not inherit Tokyo from the product brand.
+banana = ev(brand="chiikawa", country="JP", city="Tokyo", locationName="東京ばな奈ワールド",
+            sourceUrl="https://dtimes.jp/post-1436887/")
+banana_fixed = scrape.normalize_source_event(banana)
+check("東京香蕉沖繩會場校正", banana_fixed["city"], "Okinawa")
+check("東京香蕉沖繩實際樓層", banana_fixed["locationName"], "サンエー浦添西海岸 PARCO CITY 2階センタープラザ")
+check("東京香蕉沖繩官方檔期", (banana_fixed["startDate"], banana_fixed["endDate"]), ("2026-10-30", "2026-11-08"))
+check("其他東京香蕉場次不改城市", scrape.normalize_source_event(dict(banana, sourceUrl="https://dtimes.jp/post-other/"))["city"], "Tokyo")
+check("其他品牌不採沖繩校正", scrape.normalize_source_event(dict(banana, brand="miffy"))["city"], "Tokyo")
+
 # ── 結語 ──────────────────────────────────────────────────────────────────────
 print(f"\n{'=' * 40}\n結果：{_passed} 通過、{_failed} 失敗")
 sys.exit(1 if _failed else 0)

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-03T08:53:34+00:00",
+  "updatedAt": "2026-11-04T08:50:41+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 19,
@@ -880,19 +880,19 @@
       ]
     },
     "domain:dtimes.jp": {
-      "confirmed": 0,
+      "confirmed": 1,
       "rejected": 5,
       "uncertain": 0,
-      "crossChecked": 9,
-      "score": 5,
+      "crossChecked": 10,
+      "score": 12,
       "label": "dtimes.jp",
       "kind": "news",
       "host": "dtimes.jp",
       "handle": "",
       "firstSeen": "2026-06-19",
-      "lastReviewed": "2026-10-25",
-      "lastOutcome": "rejected",
-      "notes": "Weekly audit 2026-10-25: duplicate of mi-378506 Tokyo dining event, not a separate venue. Dtimes and organizer PR TIMES 000000334.000086964 both specify BOX cafe&space Tokyo Solamachi, 2026-10-31 to 2027-01-24. Osaka remains separate.",
+      "lastReviewed": "2026-11-04",
+      "lastOutcome": "confirmed",
+      "notes": "Grapestone official PR TIMES release confirms period, physical PARCO CITY venue and bags; corrected Tokyo city and brand-only venue. Original web and reader fetch inaccessible; authoritative full release checked.",
       "byBrand": {
         "miffy": {
           "confirmed": 0,
@@ -909,11 +909,11 @@
           "score": 41
         },
         "chiikawa": {
-          "confirmed": 0,
+          "confirmed": 1,
           "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 2,
-          "score": 43
+          "crossChecked": 3,
+          "score": 52
         }
       },
       "byType": {
@@ -932,20 +932,20 @@
           "score": 38
         },
         "popup": {
-          "confirmed": 0,
+          "confirmed": 1,
           "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 2,
-          "score": 43
+          "crossChecked": 3,
+          "score": 52
         }
       },
       "byCountry": {
         "jp": {
-          "confirmed": 0,
+          "confirmed": 1,
           "rejected": 5,
           "uncertain": 0,
-          "crossChecked": 9,
-          "score": 5
+          "crossChecked": 10,
+          "score": 12
         }
       },
       "history": [
@@ -998,6 +998,16 @@
           "eventId": "mi-e60d7b",
           "evidenceCount": 2,
           "notes": "Weekly audit 2026-10-25: duplicate of mi-378506 Tokyo dining event, not a separate venue. Dtimes and organizer PR TIMES 000000334.000086964 both specify BOX cafe&space Tokyo Solamachi, 2026-10-31 to 2027-01-24. Osaka remains separate."
+        },
+        {
+          "date": "2026-11-04",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-44466f",
+          "evidenceCount": 1,
+          "notes": "Grapestone official PR TIMES release confirms period, physical PARCO CITY venue and bags; corrected Tokyo city and brand-only venue. Original web and reader fetch inaccessible; authoritative full release checked."
         }
       ]
     },

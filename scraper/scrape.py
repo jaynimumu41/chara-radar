@@ -2144,6 +2144,15 @@ def normalize_source_event(event: dict, *, source_url: str = "", page_text: str 
         data.get("sourceTitle", ""), visible,
     ])
 
+    # Official Grapestone release confirms this specific Okinawa sales event.
+    if data.get("brand") == "chiikawa" and url in {
+        "https://dtimes.jp/post-1436887/",
+        "https://prtimes.jp/main/html/rd/p/000002181.000025606.html",
+    }:
+        data.update(country="JP", city="Okinawa",
+                    locationName="サンエー浦添西海岸 PARCO CITY 2階センタープラザ",
+                    startDate="2026-10-30", endDate="2026-11-08")
+
     if data.get("brand") == "chiikawa" and url == "https://prtimes.jp/main/html/rd/p/000000004.000187317.html":
         data.update(type="store", country="TW", city="Taipei", startDate="2026-11-21", endDate="",
                     locationName="CHIIKAWA OBANYAKI in TAIPEI（台北市大同區赤峰街41巷9號）",
