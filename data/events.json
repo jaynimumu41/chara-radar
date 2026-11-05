@@ -1252,14 +1252,14 @@
   },
   {
     "brand": "chiikawa",
-    "title": "吉伊卡哇餐廳",
+    "title": "吉伊卡哇餐廳「討伐祭」靜岡飲品攤與商品店",
     "type": "cafe",
     "country": "JP",
     "city": "Shizuoka",
-    "locationName": "ちいかわレストラン",
+    "locationName": "静岡PARCO 1F ぱるけカフェ／イベントスペース",
     "startDate": "2026-11-06",
     "endDate": "2026-12-13",
-    "summaryZh": "吉伊卡哇餐廳於靜岡縣舉辦，提供特別餐飲及周邊商品，為期五週。",
+    "summaryZh": "11月6日至12月13日於靜岡PARCO 1樓舉辦討伐主題飲品攤與餐廳原創商品店，提供奶油蘇打、冰淇淋甜點及小八青椒鑲肉；無須預約，繁忙時可能發放入場整理券。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1268,9 +1268,9 @@
       "靜岡"
     ],
     "id": "ch-1f47f1",
-    "sourceTitle": "「ちいかわレストラン」が静岡県に 特別メニューやグッズ登場 11月6日から5週間限定 - 静岡ライフ",
-    "sourceType": "media",
+    "sourceTitle": "ちいかわレストラン”討伐フェア”ドリンクスタンド ＠静岡ドリンクスタンド",
+    "sourceType": "official_social",
     "createdAt": "2026-11-05",
-    "sourceUrl": "https://www.shizuoka-life.jp/post-15788/"
+    "sourceUrl": "https://cafe.parco.jp/event/chiikawarestaurant_drinkT_shizuoka?area=031750"
   }
 ]
