@@ -1,9 +1,9 @@
 {
-  "date": "2026-11-04",
-  "baselineDate": "2026-11-03",
-  "generatedAt": "2026-11-04T08:07:48.455303+00:00",
-  "baselineEventCount": 61,
-  "currentEventCount": 57,
+  "date": "2026-11-05",
+  "baselineDate": "2026-11-04",
+  "generatedAt": "2026-11-05T08:08:01.785647+00:00",
+  "baselineEventCount": 57,
+  "currentEventCount": 53,
   "newEventCount": 1,
   "countsByBrand": {
     "miffy": 0,
@@ -11,7 +11,7 @@
     "chiikawa": 1
   },
   "newEventIds": [
-    "ch-44466f"
+    "ch-1f47f1"
   ],
   "replacements": []
 }
