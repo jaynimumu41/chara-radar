@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-05T08:46:17+00:00",
+  "updatedAt": "2026-11-06T08:46:24+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 19,
@@ -881,25 +881,25 @@
     },
     "domain:dtimes.jp": {
       "confirmed": 1,
-      "rejected": 5,
+      "rejected": 7,
       "uncertain": 0,
-      "crossChecked": 10,
-      "score": 12,
+      "crossChecked": 12,
+      "score": 5,
       "label": "dtimes.jp",
       "kind": "news",
       "host": "dtimes.jp",
       "handle": "",
       "firstSeen": "2026-06-19",
-      "lastReviewed": "2026-11-04",
-      "lastOutcome": "confirmed",
-      "notes": "Grapestone official PR TIMES release confirms period, physical PARCO CITY venue and bags; corrected Tokyo city and brand-only venue. Original web and reader fetch inaccessible; authoritative full release checked.",
+      "lastReviewed": "2026-11-06",
+      "lastOutcome": "rejected",
+      "notes": "Duplicate official Christmas event menu detail; venue confirms.",
       "byBrand": {
         "miffy": {
           "confirmed": 0,
-          "rejected": 3,
+          "rejected": 5,
           "uncertain": 0,
-          "crossChecked": 6,
-          "score": 27
+          "crossChecked": 8,
+          "score": 5
         },
         "pokemon": {
           "confirmed": 0,
@@ -926,10 +926,10 @@
         },
         "cafe": {
           "confirmed": 0,
-          "rejected": 2,
+          "rejected": 4,
           "uncertain": 0,
-          "crossChecked": 5,
-          "score": 38
+          "crossChecked": 7,
+          "score": 16
         },
         "popup": {
           "confirmed": 1,
@@ -942,10 +942,10 @@
       "byCountry": {
         "jp": {
           "confirmed": 1,
-          "rejected": 5,
+          "rejected": 7,
           "uncertain": 0,
-          "crossChecked": 10,
-          "score": 12
+          "crossChecked": 12,
+          "score": 5
         }
       },
       "history": [
@@ -1008,6 +1008,26 @@
           "eventId": "ch-44466f",
           "evidenceCount": 1,
           "notes": "Grapestone official PR TIMES release confirms period, physical PARCO CITY venue and bags; corrected Tokyo city and brand-only venue. Original web and reader fetch inaccessible; authoritative full release checked."
+        },
+        {
+          "date": "2026-11-06",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "cafe",
+          "country": "JP",
+          "eventId": "mi-bd1909",
+          "evidenceCount": 1,
+          "notes": "Duplicate official Christmas event menu detail; venue confirms."
+        },
+        {
+          "date": "2026-11-06",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "cafe",
+          "country": "JP",
+          "eventId": "mi-f3200f",
+          "evidenceCount": 1,
+          "notes": "Duplicate official Christmas event menu detail; venue confirms."
         }
       ]
     },
@@ -4562,6 +4582,60 @@
           "eventId": "ch-1f47f1",
           "evidenceCount": 1,
           "notes": "PARCO official event page and company release confirm Nov6-Dec13 Shizuoka 1F drink stand and goods shop; precise venue and title corrected. Same organizer corroboration counted once."
+        }
+      ]
+    },
+    "domain:n.yam.com": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 0,
+      "score": 41,
+      "label": "n.yam.com",
+      "kind": "site",
+      "host": "n.yam.com",
+      "handle": "",
+      "firstSeen": "2026-11-06",
+      "lastReviewed": "2026-11-06",
+      "lastOutcome": "rejected",
+      "notes": "Original full article has no standalone Pokemon popup details; organizer page search consulted but full fetch403 and reader unavailable, so no independent corroboration counted.",
+      "byBrand": {
+        "pokemon": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 41
+        }
+      },
+      "byType": {
+        "popup": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 41
+        }
+      },
+      "byCountry": {
+        "tw": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 41
+        }
+      },
+      "history": [
+        {
+          "date": "2026-11-06",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "popup",
+          "country": "TW",
+          "eventId": "po-2ab8b2",
+          "evidenceCount": 0,
+          "notes": "Original full article has no standalone Pokemon popup details; organizer page search consulted but full fetch403 and reader unavailable, so no independent corroboration counted."
         }
       ]
     }

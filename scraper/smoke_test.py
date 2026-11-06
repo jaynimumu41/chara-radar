@@ -2922,6 +2922,13 @@ check("東京香蕉沖繩官方檔期", (banana_fixed["startDate"], banana_fixed
 check("其他東京香蕉場次不改城市", scrape.normalize_source_event(dict(banana, sourceUrl="https://dtimes.jp/post-other/"))["city"], "Tokyo")
 check("其他品牌不採沖繩校正", scrape.normalize_source_event(dict(banana, brand="miffy"))["city"], "Tokyo")
 
+# Christmas menu articles share the existing venue campaign identity.
+winter_parent = ev(brand="miffy", type="campaign", country="JP", startDate="2026-11-06", title="ミッフィー・クリスマス", locationName="ハウステンボス")
+for menu in ("ミッフィーのサンタチーズケーキバー", "ミッフィーのストロベリーティーオーレ"):
+    detail = dict(winter_parent, type="cafe", title=menu, sourceTitle=menu)
+    check("Christmas menu identity " + menu, scrape.special_activity_key(detail), scrape.special_activity_key(winter_parent))
+    check("Other venue menu separate " + menu, scrape.special_activity_key(dict(detail, locationName="神戸店")) == scrape.special_activity_key(winter_parent), False)
+
 # ── 結語 ──────────────────────────────────────────────────────────────────────
 print(f"\n{'=' * 40}\n結果：{_passed} 通過、{_failed} 失敗")
 sys.exit(1 if _failed else 0)

@@ -1703,7 +1703,8 @@ STRONG_EVENT_IDENTITY_RULES = (
         "patterns": (
             (("ハウステンボス", "Huis Ten Bosch", "豪斯登堡", "huistenbosch"),
              ("ウィンターホリデー", "Winter Holiday", "冬季假期",
-              "ミッフィー・クリスマス", "Miffy聖誕", "ディック・ブルーナ テーブル")),
+              "ミッフィー・クリスマス", "Miffy聖誕", "ディック・ブルーナ テーブル",
+              "ミッフィーのサンタチーズケーキバー", "ミッフィーのストロベリーティーオーレ")),
         ),
         "scope": "year",
     },
