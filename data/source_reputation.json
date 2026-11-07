@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-06T08:46:24+00:00",
+  "updatedAt": "2026-11-07T08:46:40+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 19,
@@ -2060,43 +2060,43 @@
     },
     "domain:lp.p.pia.jp": {
       "confirmed": 0,
-      "rejected": 1,
+      "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 0,
-      "score": 39,
+      "crossChecked": 1,
+      "score": 30,
       "label": "lp.p.pia.jp",
       "kind": "site",
       "host": "lp.p.pia.jp",
       "handle": "",
       "firstSeen": "2026-07-03",
-      "lastReviewed": "2026-07-03",
+      "lastReviewed": "2026-11-07",
       "lastOutcome": "rejected",
-      "notes": "Fresh secondary roundup without authoritative corroboration or explicit sale period beyond a 2026-07-24 goods launch mention; removed under accuracy-over-coverage.",
+      "notes": "Duplicate of ch-44466f; official Grapestone release confirms identical venue and dates.",
       "byBrand": {
         "chiikawa": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 0,
-          "score": 39
+          "crossChecked": 1,
+          "score": 30
         }
       },
       "byType": {
         "popup": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 0,
-          "score": 39
+          "crossChecked": 1,
+          "score": 30
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 0,
-          "score": 39
+          "crossChecked": 1,
+          "score": 30
         }
       },
       "history": [
@@ -2109,6 +2109,16 @@
           "eventId": "ch-67411d",
           "evidenceCount": 0,
           "notes": "Fresh secondary roundup without authoritative corroboration or explicit sale period beyond a 2026-07-24 goods launch mention; removed under accuracy-over-coverage."
+        },
+        {
+          "date": "2026-11-07",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-d2edf7",
+          "evidenceCount": 1,
+          "notes": "Duplicate of ch-44466f; official Grapestone release confirms identical venue and dates."
         }
       ]
     },
@@ -4636,6 +4646,60 @@
           "eventId": "po-2ab8b2",
           "evidenceCount": 0,
           "notes": "Original full article has no standalone Pokemon popup details; organizer page search consulted but full fetch403 and reader unavailable, so no independent corroboration counted."
+        }
+      ]
+    },
+    "domain:news.pchome.com.tw": {
+      "confirmed": 1,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 59,
+      "label": "news.pchome.com.tw",
+      "kind": "news",
+      "host": "news.pchome.com.tw",
+      "handle": "",
+      "firstSeen": "2026-11-07",
+      "lastReviewed": "2026-11-07",
+      "lastOutcome": "confirmed",
+      "notes": "Corrected anniversary dates to popup Nov13-Nov22 using TVBS full article; official SKM search corroborates but not counted as full-page evidence.",
+      "byBrand": {
+        "pokemon": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "byType": {
+        "popup": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "byCountry": {
+        "tw": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "history": [
+        {
+          "date": "2026-11-07",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "popup",
+          "country": "TW",
+          "eventId": "po-69fbe4",
+          "evidenceCount": 1,
+          "notes": "Corrected anniversary dates to popup Nov13-Nov22 using TVBS full article; official SKM search corroborates but not counted as full-page evidence."
         }
       ]
     }

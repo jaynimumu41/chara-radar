@@ -1372,14 +1372,14 @@
   },
   {
     "brand": "pokemon",
-    "title": "寶可夢30週年限定快閃店",
+    "title": "Pokémon Center POP-UP STORE 高雄左營",
     "type": "popup",
     "country": "TW",
     "city": "Kaohsiung",
     "locationName": "新光三越高雄左營店",
-    "startDate": "2026-11-05",
-    "endDate": "2026-11-29",
-    "summaryZh": "寶可夢30週年限定快閃店於新光三越高雄左營店舉辦，販售限定周邊商品，粉絲可前往朝聖搶購。",
+    "startDate": "2026-11-13",
+    "endDate": "2026-11-22",
+    "summaryZh": "11月13日至22日於新光三越高雄左營店限時販售寶可夢官方原創周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1392,30 +1392,6 @@
     "sourceTitle": "新光三越高雄左營店11/5(四)-11/29(日)週年慶重磅登場寶可夢30週年話題引爆！限定快閃店粉絲朝聖排隊搶購- 社會新聞 - PChome Online 新聞",
     "sourceType": "media",
     "createdAt": "2026-11-07",
-    "sourceUrl": "https://news.pchome.com.tw/society/news586/20261105/index-79388506644076290002.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "ちいかわ×東京ばな奈 沖縄限定",
-    "type": "popup",
-    "country": "JP",
-    "city": "Okinawa",
-    "locationName": "沖縄",
-    "startDate": "2026-10-30",
-    "endDate": "2026-11-08",
-    "summaryZh": "ちいかわ與東京ばな奈在沖繩舉辦快閃活動，販售限定包裝點心與周邊商品，活動至11月8日止。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "沖繩",
-      "限定",
-      "東京ばな奈",
-      "甜點"
-    ],
-    "id": "ch-d2edf7",
-    "sourceTitle": "【11/8まで！】沖縄初上陸の「ちいかわ×東京ばな奈」で限定バッグ＆スイーツをゲットしよう♪ - ぴあエンタメ情報",
-    "sourceType": "media",
-    "createdAt": "2026-11-07",
-    "sourceUrl": "https://lp.p.pia.jp/article/news/516352/index.html"
+    "sourceUrl": "https://news.tvbs.com.tw/life/4042585"
   }
 ]

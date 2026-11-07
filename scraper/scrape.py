@@ -1575,6 +1575,13 @@ def _event_blob(ev: dict) -> str:
 
 
 STRONG_EVENT_IDENTITY_RULES = (
+    {
+        "brand": "chiikawa", "types": {"popup", "campaign", "new_product"},
+        "concept": "chiikawa-tokyobanana-okinawa", "country": True,
+        "patterns": ((("東京ばな奈", "東京香蕉"), ("沖縄", "沖繩", "PARCO CITY")),),
+        "scope": "date",
+    },
+
     {"brand": "chiikawa", "types": {"store"}, "concept": "chiikawa-kyoto-nishiki-castella", "patterns": ((("京都錦店", "京都錦市場", "kyoto-nishiki-market"), ("ベビーカステラ", "Baby Castella", "baby-castella")),), "scope": "city", "country": True},
     {"brand": "pokemon", "types": {"new_product", "lottery", "reservation"}, "concept": "pokemon-my-party", "patterns": ((("My Pokémon Party", "My Pokemon Party", "キミだけの「てもち」", "自分だけの「てもち」", "pokemon-goods-261030-05", "261030_to02"),),), "scope": "date", "country": True},
     {'brand': 'chiikawa', 'types': {'campaign', 'cafe', 'popup'}, 'concept': 'chiikawa-christmas-market', 'patterns': ((('ちいかわクリスマスマーケット', '吉伊卡哇聖誕市集'),),), 'scope': 'date', 'country': True},
@@ -2144,6 +2151,11 @@ def normalize_source_event(event: dict, *, source_url: str = "", page_text: str 
         data.get("title", ""), data.get("summaryZh", ""),
         data.get("sourceTitle", ""), visible,
     ])
+
+    # Venue popup period differs from the department store anniversary period.
+    if data.get("brand") == "pokemon" and url == "https://news.pchome.com.tw/society/news586/20261105/index-79388506644076290002.html":
+        data.update(startDate="2026-11-13", endDate="2026-11-22",
+                    locationName="新光三越高雄左營店")
 
     # Official Grapestone release confirms this specific Okinawa sales event.
     if data.get("brand") == "chiikawa" and url in {

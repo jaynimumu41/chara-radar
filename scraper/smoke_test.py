@@ -2929,6 +2929,17 @@ for menu in ("ミッフィーのサンタチーズケーキバー", "ミッフ�
     check("Christmas menu identity " + menu, scrape.special_activity_key(detail), scrape.special_activity_key(winter_parent))
     check("Other venue menu separate " + menu, scrape.special_activity_key(dict(detail, locationName="神戸店")) == scrape.special_activity_key(winter_parent), False)
 
+# Daily verification 2026-11-07: cross-media venue identity and popup dates.
+banana_parent = ev(brand="chiikawa", country="JP", type="popup", title="東京ばな奈 沖縄", startDate="2026-10-30")
+banana_detail = dict(banana_parent, type="new_product", title="東京ばな奈 限定バッグ", locationName="PARCO CITY")
+check("Okinawa banana cross-type identity", scrape.special_activity_key(banana_parent), scrape.special_activity_key(banana_detail))
+check("Other banana venue separate", scrape.special_activity_key(dict(banana_detail, locationName="秋田")) == scrape.special_activity_key(banana_parent), False)
+check("Other banana period separate", scrape.special_activity_key(dict(banana_detail, startDate="2026-12-01")) == scrape.special_activity_key(banana_parent), False)
+zuoying = ev(brand="pokemon", sourceUrl="https://news.pchome.com.tw/society/news586/20261105/index-79388506644076290002.html", startDate="2026-11-05", endDate="2026-11-29")
+fixed = scrape.normalize_source_event(zuoying)
+check("Zuoying popup dates not anniversary", (fixed["startDate"],fixed["endDate"]), ("2026-11-13","2026-11-22"))
+check("Other article dates unchanged", scrape.normalize_source_event(dict(zuoying,sourceUrl="https://example.com/other"))["startDate"], "2026-11-05")
+
 # ── 結語 ──────────────────────────────────────────────────────────────────────
 print(f"\n{'=' * 40}\n結果：{_passed} 通過、{_failed} 失敗")
 sys.exit(1 if _failed else 0)
