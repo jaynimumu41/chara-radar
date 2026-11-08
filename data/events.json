@@ -1274,31 +1274,6 @@
     "sourceUrl": "https://cafe.parco.jp/event/chiikawarestaurant_drinkT_shizuoka?area=031750"
   },
   {
-    "brand": "pokemon",
-    "title": "Pokémon Center 『ポケットモンスター』シリーズの変遷にフォーカスしたグッズが、ポケモンセンターオンラインに登場",
-    "type": "new_product",
-    "country": "JP",
-    "city": "",
-    "locationName": "日本全國 Pokémon Center",
-    "startDate": "2026-11-12",
-    "endDate": "",
-    "summaryZh": "日本 Pokémon 官方公告「『ポケットモンスター』シリーズの変遷にフォーカスしたグッズが、ポケモンセンターオンラインに登場！」於2026-11-12起在日本各地 Pokémon Center 實體店販售。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "Pokémon Center",
-      "新品",
-      "日本",
-      "官方"
-    ],
-    "id": "po-9994da",
-    "sourceType": "official_site",
-    "createdAt": "2026-11-06",
-    "sourceTitle": "『ポケットモンスター』シリーズの変遷にフォーカスしたグッズが、ポケモンセンターオンラインに登場！ - ポケットモンスターオフィシャルサイト",
-    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/11/261106_to01.html"
-  },
-  {
     "brand": "chiikawa",
     "title": "吉伊卡哇 POP UP STORE イオンモール旭川駅前",
     "type": "popup",
@@ -1393,5 +1368,49 @@
     "sourceType": "media",
     "createdAt": "2026-11-07",
     "sourceUrl": "https://news.tvbs.com.tw/life/4042585"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "Chiikawa 烘焙坊聖誕限定麵包",
+    "type": "cafe",
+    "country": "JP",
+    "city": "",
+    "locationName": "東京表參道 OMOKADO 3F／大阪 KITTE 3F",
+    "startDate": "2026-11-13",
+    "endDate": "2026-12-27",
+    "summaryZh": "東京與大阪烘焙坊同步推出吉伊卡哇、小八、兔兔聖誕造型麵包，三個一組附限定包裝；官方提供附購物券的優先入場預約。",
+    "needReservation": true,
+    "hasLimitedGoods": false,
+    "tags": [
+      "chiikawa",
+      "限定餐飲"
+    ],
+    "id": "ch-bakery-xmas-20261113",
+    "sourceType": "official_site",
+    "createdAt": "2026-11-08",
+    "sourceTitle": "Chiikawa 烘焙坊聖誕限定麵包",
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000335.000086964.html"
+  },
+  {
+    "brand": "miffy",
+    "title": "Miffy Juice Garden 冬季焦糖熱飲",
+    "type": "cafe",
+    "country": "JP",
+    "city": "",
+    "locationName": "Flower Miffy 淺草店／天王寺 MIO 店",
+    "startDate": "2026-11-06",
+    "endDate": "",
+    "summaryZh": "兩店同步供應期間限定焦糖奶油咖啡與蘋果焦糖奶茶，各600日圓，附冬季圖案杯套；僅供外帶，官方未公告結束日。",
+    "needReservation": false,
+    "hasLimitedGoods": false,
+    "tags": [
+      "miffy",
+      "限定餐飲"
+    ],
+    "id": "mi-juice-winter-20261106",
+    "sourceType": "official_site",
+    "createdAt": "2026-11-08",
+    "sourceTitle": "Miffy Juice Garden 冬季焦糖熱飲",
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002267.000022901.html"
   }
 ]
