@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-07T08:46:40+00:00",
+  "updatedAt": "2026-11-09T08:45:39+00:00",
   "sources": {
     "domain:nownews.com": {
-      "confirmed": 19,
+      "confirmed": 20,
       "rejected": 4,
       "uncertain": 0,
       "crossChecked": 23,
@@ -13,12 +13,12 @@
       "host": "nownews.com",
       "handle": "",
       "firstSeen": "2026-06-11",
-      "lastReviewed": "2026-10-29",
+      "lastReviewed": "2026-11-09",
       "lastOutcome": "confirmed",
-      "notes": "NOWnews original explicitly names Pokemon Center TAIPEI, 2026-10-31 in-store sale and five concrete mini held-item mascots. Retained under Taiwan physical-store exception; official Instagram and reader inaccessible, no independent Taiwan-date corroboration counted. Narrowed to new mini items; postponed Timeless Adventure/cake stand already in po-4b976e.",
+      "notes": "Codex web search retrieved full original article with explicit Nov 14 physical TAIPEI sale and four concrete Timeless Adventure Kalos goods/prices. Direct/reader open failed. Official Nov entry notice confirms venue/access only, not independent product corroboration. Retained under Taiwan physical-store goods exception; clarified product title.",
       "byBrand": {
         "pokemon": {
-          "confirmed": 19,
+          "confirmed": 20,
           "rejected": 3,
           "uncertain": 0,
           "crossChecked": 22,
@@ -34,7 +34,7 @@
       },
       "byType": {
         "new_product": {
-          "confirmed": 19,
+          "confirmed": 20,
           "rejected": 0,
           "uncertain": 0,
           "crossChecked": 17,
@@ -64,7 +64,7 @@
       },
       "byCountry": {
         "tw": {
-          "confirmed": 19,
+          "confirmed": 20,
           "rejected": 4,
           "uncertain": 0,
           "crossChecked": 23,
@@ -301,6 +301,16 @@
           "eventId": "po-e834aa",
           "evidenceCount": 0,
           "notes": "NOWnews original explicitly names Pokemon Center TAIPEI, 2026-10-31 in-store sale and five concrete mini held-item mascots. Retained under Taiwan physical-store exception; official Instagram and reader inaccessible, no independent Taiwan-date corroboration counted. Narrowed to new mini items; postponed Timeless Adventure/cake stand already in po-4b976e."
+        },
+        {
+          "date": "2026-11-09",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-4dc06f",
+          "evidenceCount": 0,
+          "notes": "Codex web search retrieved full original article with explicit Nov 14 physical TAIPEI sale and four concrete Timeless Adventure Kalos goods/prices. Direct/reader open failed. Official Nov entry notice confirms venue/access only, not independent product corroboration. Retained under Taiwan physical-store goods exception; clarified product title."
         }
       ]
     },
@@ -1681,19 +1691,19 @@
       ]
     },
     "domain:prtimes.jp": {
-      "confirmed": 6,
+      "confirmed": 7,
       "rejected": 6,
       "uncertain": 0,
       "crossChecked": 9,
-      "score": 36,
+      "score": 43,
       "label": "prtimes.jp",
       "kind": "news",
       "host": "prtimes.jp",
       "handle": "",
       "firstSeen": "2026-07-01",
-      "lastReviewed": "2026-10-29",
+      "lastReviewed": "2026-11-09",
       "lastOutcome": "confirmed",
-      "notes": "GPS company release explicitly lists 2026-11-06 sale at 16 permanent Chiikawa Land stores. Official Chiikawa Market product page independently confirms product/date. Added physical venues; other venues may start later.",
+      "notes": "Full organizer release confirms Nov 6 start, Asakusa/Tennoji MIO, two 600 yen takeaway hot drinks and winter sleeves. No end date announced; retain open-ended period. Original official release is evidence, no independent corroboration counted.",
       "byBrand": {
         "chiikawa": {
           "confirmed": 3,
@@ -1703,11 +1713,11 @@
           "score": 64
         },
         "miffy": {
-          "confirmed": 2,
+          "confirmed": 3,
           "rejected": 6,
           "uncertain": 0,
           "crossChecked": 7,
-          "score": 8
+          "score": 15
         }
       },
       "byType": {
@@ -1738,15 +1748,22 @@
           "uncertain": 0,
           "crossChecked": 2,
           "score": 43
+        },
+        "cafe": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 0,
+          "score": 57
         }
       },
       "byCountry": {
         "jp": {
-          "confirmed": 4,
+          "confirmed": 5,
           "rejected": 7,
           "uncertain": 0,
           "crossChecked": 9,
-          "score": 11
+          "score": 18
         },
         "tw": {
           "confirmed": 1,
@@ -1876,6 +1893,16 @@
           "eventId": "ch-888ed2",
           "evidenceCount": 1,
           "notes": "GPS company release explicitly lists 2026-11-06 sale at 16 permanent Chiikawa Land stores. Official Chiikawa Market product page independently confirms product/date. Added physical venues; other venues may start later."
+        },
+        {
+          "date": "2026-11-09",
+          "outcome": "confirmed",
+          "brand": "miffy",
+          "type": "cafe",
+          "country": "JP",
+          "eventId": "mi-juice-winter-20261106",
+          "evidenceCount": 0,
+          "notes": "Full organizer release confirms Nov 6 start, Asakusa/Tennoji MIO, two 600 yen takeaway hot drinks and winter sleeves. No end date announced; retain open-ended period. Original official release is evidence, no independent corroboration counted."
         }
       ]
     },
