@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "status": "healthy",
-  "generatedAt": "2026-11-09T16:46:21+08:00",
-  "dataDate": "2026-11-09",
+  "status": "limited",
+  "generatedAt": "2026-11-10T16:05:51+08:00",
+  "dataDate": "2026-11-10",
   "metrics": {
     "eventCount": 55,
     "todayNewCount": 1,
-    "agentCandidateCount": 0,
+    "agentCandidateCount": 1,
     "pendingArticleCount": 0,
     "extractionFailureCount": 0,
     "structuredSourceFailureCount": 0,
@@ -19,9 +19,9 @@
   },
   "brands": {
     "miffy": {
-      "articlesFound": 126,
-      "eligibleArticles": 3,
-      "processedArticles": 3,
+      "articlesFound": 124,
+      "eligibleArticles": 1,
+      "processedArticles": 1,
       "pendingArticles": 0,
       "retryableFailures": 0,
       "addedRecords": 0,
@@ -29,22 +29,22 @@
       "skippedDueRateLimit": false
     },
     "pokemon": {
-      "articlesFound": 156,
-      "eligibleArticles": 10,
-      "processedArticles": 10,
+      "articlesFound": 161,
+      "eligibleArticles": 4,
+      "processedArticles": 4,
       "pendingArticles": 0,
       "retryableFailures": 0,
-      "addedRecords": 1,
+      "addedRecords": 0,
       "capReached": false,
       "skippedDueRateLimit": false
     },
     "chiikawa": {
-      "articlesFound": 172,
+      "articlesFound": 173,
       "eligibleArticles": 18,
       "processedArticles": 18,
       "pendingArticles": 0,
       "retryableFailures": 0,
-      "addedRecords": 0,
+      "addedRecords": 1,
       "capReached": false,
       "skippedDueRateLimit": false
     }

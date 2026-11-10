@@ -170,31 +170,6 @@
   },
   {
     "brand": "miffy",
-    "title": "Miffy 全國 Bruna Fair 限定購物袋贈禮",
-    "type": "campaign",
-    "country": "JP",
-    "city": "",
-    "locationName": "日本全國 Bruna 商品販售店",
-    "startDate": "2026-10-10",
-    "endDate": "",
-    "summaryZh": "日本全國 Bruna 商品販售店自2026年10月10日起舉辦 Bruna Fair；購買含稅滿2,000日圓贈限定購物袋，數量有限、送完為止。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "Bruna Fair",
-      "店頭贈品",
-      "數量限定",
-      "日本"
-    ],
-    "id": "mi-94c48f",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-13",
-    "sourceTitle": "10/10より「ブルーナフェア」開催 ショッピングバッグプレゼント - dickbruna.jp",
-    "sourceUrl": "https://dickbruna.jp/news/202609/48228/"
-  },
-  {
-    "brand": "miffy",
     "title": "Miffy miffy style POP UP SHOP in 大阪梅田",
     "type": "popup",
     "country": "JP",
@@ -1318,5 +1293,29 @@
     "sourceType": "media",
     "createdAt": "2026-11-09",
     "sourceUrl": "https://www.nownews.com/news/6890707"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "ちいかわ「ちいぽけ」快閃店",
+    "type": "popup",
+    "country": "JP",
+    "city": "Tokyo",
+    "locationName": "全國5箇所",
+    "startDate": "2026-10-24",
+    "endDate": "2026-11-23",
+    "summaryZh": "ちいかわ「ちいぽけ」系列推出「便當」與「店家」主題周邊，並於東京、大阪等全國5處舉辦快閃店活動。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "chiikawa",
+      "快閃店",
+      "周邊",
+      "ちいぽけ"
+    ],
+    "id": "ch-e8f09f",
+    "sourceTitle": "【ちいかわ】『ちいぽけ』公式グッズ第4弾は「お弁当」＆「お店屋さん」モチーフ！東京・大阪など全国5箇所でポップアップストアも開催！ - めざましmedia",
+    "sourceType": "media",
+    "createdAt": "2026-11-10",
+    "sourceUrl": "https://mezamashi.media/articles/-/359207"
   }
 ]
