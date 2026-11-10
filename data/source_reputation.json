@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-09T08:45:39+00:00",
+  "updatedAt": "2026-11-10T08:48:05+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 20,
@@ -4727,6 +4727,60 @@
           "eventId": "po-69fbe4",
           "evidenceCount": 1,
           "notes": "Corrected anniversary dates to popup Nov13-Nov22 using TVBS full article; official SKM search corroborates but not counted as full-page evidence."
+        }
+      ]
+    },
+    "domain:mezamashi.media": {
+      "confirmed": 1,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 59,
+      "label": "mezamashi.media",
+      "kind": "site",
+      "host": "mezamashi.media",
+      "handle": "",
+      "firstSeen": "2026-11-10",
+      "lastReviewed": "2026-11-10",
+      "lastOutcome": "confirmed",
+      "notes": "Original full article and organizer release confirm tour; narrowed generic record to Tokyo venue and period. Other four stops not added; accuracy over coverage.",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "byType": {
+        "popup": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "history": [
+        {
+          "date": "2026-11-10",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-e8f09f",
+          "evidenceCount": 1,
+          "notes": "Original full article and organizer release confirm tour; narrowed generic record to Tokyo venue and period. Other four stops not added; accuracy over coverage."
         }
       ]
     }

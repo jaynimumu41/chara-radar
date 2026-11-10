@@ -2940,6 +2940,11 @@ fixed = scrape.normalize_source_event(zuoying)
 check("Zuoying popup dates not anniversary", (fixed["startDate"],fixed["endDate"]), ("2026-11-13","2026-11-22"))
 check("Other article dates unchanged", scrape.normalize_source_event(dict(zuoying,sourceUrl="https://example.com/other"))["startDate"], "2026-11-05")
 
+tour = ev(brand="chiikawa", sourceUrl="https://mezamashi.media/articles/-/359207", locationName="全國5箇所")
+check("Pocket tour generic row selects concrete Tokyo venue", scrape.normalize_source_event(tour)["locationName"], "池袋PARCO 本館6F 0% IKEBUKURO")
+check("Pocket specific Osaka stop preserved", scrape.normalize_source_event(dict(tour, locationName="天王寺ミオ", city="Osaka"))["city"], "Osaka")
+check("Other tour source unchanged", scrape.normalize_source_event(dict(tour, sourceUrl="https://example.com/tour"))["locationName"], "全國5箇所")
+
 # ── 結語 ──────────────────────────────────────────────────────────────────────
 print(f"\n{'=' * 40}\n結果：{_passed} 通過、{_failed} 失敗")
 sys.exit(1 if _failed else 0)

@@ -1296,14 +1296,14 @@
   },
   {
     "brand": "chiikawa",
-    "title": "ちいかわ「ちいぽけ」快閃店",
+    "title": "吉伊卡哇 Pocket POP UP STORE 池袋PARCO",
     "type": "popup",
     "country": "JP",
     "city": "Tokyo",
-    "locationName": "全國5箇所",
+    "locationName": "池袋PARCO 本館6F 0% IKEBUKURO",
     "startDate": "2026-10-24",
     "endDate": "2026-11-23",
-    "summaryZh": "ちいかわ「ちいぽけ」系列推出「便當」與「店家」主題周邊，並於東京、大阪等全國5處舉辦快閃店活動。",
+    "summaryZh": "吉伊卡哇Pocket第四彈便當與店家主題周邊於池袋PARCO期間限定販售。其他城市各有獨立檔期。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1313,9 +1313,9 @@
       "ちいぽけ"
     ],
     "id": "ch-e8f09f",
-    "sourceTitle": "【ちいかわ】『ちいぽけ』公式グッズ第4弾は「お弁当」＆「お店屋さん」モチーフ！東京・大阪など全国5箇所でポップアップストアも開催！ - めざましmedia",
-    "sourceType": "media",
+    "sourceTitle": "ちいかわぽけっと公式グッズ第4弾・POP UP STORE開催概要 - Applibot",
+    "sourceType": "official_site",
     "createdAt": "2026-11-10",
-    "sourceUrl": "https://mezamashi.media/articles/-/359207"
+    "sourceUrl": "https://www.applibot.co.jp/news/202610131319554757/"
   }
 ]

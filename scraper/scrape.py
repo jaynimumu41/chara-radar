@@ -2152,6 +2152,16 @@ def normalize_source_event(event: dict, *, source_url: str = "", page_text: str 
         data.get("sourceTitle", ""), visible,
     ])
 
+    # This tour has five different venue periods; a generic extracted row must
+    # represent the Tokyo stop only, never apply its dates to the whole tour.
+    if (data.get("brand") == "chiikawa"
+            and url == "https://mezamashi.media/articles/-/359207"
+            and data.get("locationName") in {"全國5箇所", "全国5箇所"}):
+        data.update(city="Tokyo", locationName="池袋PARCO 本館6F 0% IKEBUKURO",
+                    startDate="2026-10-24", endDate="2026-11-23",
+                    title="吉伊卡哇 Pocket POP UP STORE 池袋PARCO",
+                    summaryZh="吉伊卡哇Pocket第四彈便當與店家主題周邊於池袋PARCO期間限定販售。其他城市各有獨立檔期。")
+
     # Venue popup period differs from the department store anniversary period.
     if data.get("brand") == "pokemon" and url == "https://news.pchome.com.tw/society/news586/20261105/index-79388506644076290002.html":
         data.update(startDate="2026-11-13", endDate="2026-11-22",
