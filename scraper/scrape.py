@@ -1575,6 +1575,8 @@ def _event_blob(ev: dict) -> str:
 
 
 STRONG_EVENT_IDENTITY_RULES = (
+    {"brand": "pokemon", "types": {"new_product"}, "concept": "pokemon-taipei-kalos", "patterns": ((("卡洛斯", "kalos"), ("Timeless Adventure", "30週年")),), "scope": "date", "country": True},
+
     {
         "brand": "chiikawa", "types": {"popup", "campaign", "new_product"},
         "concept": "chiikawa-tokyobanana-okinawa", "country": True,
@@ -2151,6 +2153,14 @@ def normalize_source_event(event: dict, *, source_url: str = "", page_text: str 
         data.get("title", ""), data.get("summaryZh", ""),
         data.get("sourceTitle", ""), visible,
     ])
+
+    # Main popup dates, excluding the unrelated stamp rally in this roundup.
+    if data.get("brand") == "chiikawa" and url == "https://kobe-journal.com/archives/5635643478.html":
+        data.update(startDate="2026-11-11", endDate="2026-11-25", city="Kobe",
+                    locationName="イオンモール神戸北 専門店1階 さざんかコート")
+    if data.get("brand") == "chiikawa" and url == "https://report.iko-yo.net/articles/35571":
+        data.update(startDate="2026-11-24", endDate="", city="Osaka",
+                    locationName="LUCUA SOUTH 11F ナガノマーケット UMEDA")
 
     # This tour has five different venue periods; a generic extracted row must
     # represent the Tokyo stop only, never apply its dates to the whole tour.

@@ -2945,6 +2945,17 @@ check("Pocket tour generic row selects concrete Tokyo venue", scrape.normalize_s
 check("Pocket specific Osaka stop preserved", scrape.normalize_source_event(dict(tour, locationName="天王寺ミオ", city="Osaka"))["city"], "Osaka")
 check("Other tour source unchanged", scrape.normalize_source_event(dict(tour, sourceUrl="https://example.com/tour"))["locationName"], "全國5箇所")
 
+# Daily verification: same Kalos goods, unrelated roundup dates, named store opening.
+kalos = ev(brand="pokemon", country="TW", type="new_product", title="Pokémon Timeless Adventure 卡洛斯", startDate="2026-11-14")
+check("Kalos media identity", scrape.special_activity_key(kalos), scrape.special_activity_key(dict(kalos,title="台北新品",sourceTitle="30週年卡洛斯週邊")))
+check("Kalos other period separate", scrape.special_activity_key(kalos) == scrape.special_activity_key(dict(kalos,startDate="2026-12-14")), False)
+kobe = ev(brand="chiikawa",sourceUrl="https://kobe-journal.com/archives/5635643478.html",startDate="2026-11-13",endDate="2026-12-13")
+check("Kobe popup not stamp rally", (scrape.normalize_source_event(kobe)["startDate"],scrape.normalize_source_event(kobe)["endDate"]), ("2026-11-11","2026-11-25"))
+check("Other Kobe source unchanged", scrape.normalize_source_event(dict(kobe,sourceUrl="https://example.com/"))["startDate"], "2026-11-13")
+nagano = ev(brand="chiikawa",sourceUrl="https://report.iko-yo.net/articles/35571")
+check("Nagano opening date", scrape.normalize_source_event(nagano)["startDate"], "2026-11-24")
+check("Other shop date unchanged", scrape.normalize_source_event(dict(nagano,sourceUrl="https://example.com/" )).get("startDate", ""), nagano.get("startDate", ""))
+
 # ── 結語 ──────────────────────────────────────────────────────────────────────
 print(f"\n{'=' * 40}\n結果：{_passed} 通過、{_failed} 失敗")
 sys.exit(1 if _failed else 0)

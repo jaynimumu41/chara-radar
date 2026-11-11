@@ -175,3 +175,8 @@ python data_lint.py
 
 - Pokémon My Pokémon Party 客製化商品以系列、國家及開賣日識別；媒體「てもち」標題不可另外算新情報，也不可合併同日不同系列的えらぶ商品。
 - ちいかわベビーカステラ同頁的小樽／京都錦分店須逐張 ACCESS 店卡稽核；京都開幕日只取京都店卡，不採抽選期間作營業期限。
+
+### 2026-11-11 agent 驗證補強
+
+- 台北 Pokémon Timeless Adventure 卡洛斯系列以國家、系列與開賣日識別，媒體標題不同不另算新增。
+- 神戶北快閃店指定報導只採11/11至11/25，不採同頁冬季集章11/13至12/13；NAGANO MARKET UMEDA指定報導校正為11/24、LUCUA SOUTH 11F，與 Chiikawa Park Store 分開。

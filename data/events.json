@@ -1319,39 +1319,15 @@
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_ikek/index.html"
   },
   {
-    "brand": "pokemon",
-    "title": "台北寶可夢中心新品登場",
-    "type": "new_product",
-    "country": "TW",
-    "city": "Taipei",
-    "locationName": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3F）",
-    "startDate": "2026-11-14",
-    "endDate": "",
-    "summaryZh": "台北寶可夢中心於11/14推出寶可夢30週年卡洛斯系列周邊新品及限定貼紙。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "新品",
-      "卡洛斯",
-      "周邊"
-    ],
-    "id": "po-6cf7cc",
-    "sourceTitle": "【台北寶可夢中心】11/14新品登場！寶可夢30週年卡洛斯週邊、限定貼紙一次看 - Pokemon Hubs",
-    "sourceType": "media",
-    "createdAt": "2026-11-11",
-    "sourceUrl": "https://pokemonhubs.com/news/pokemon-center-taipei-kalos-2026/"
-  },
-  {
     "brand": "chiikawa",
-    "title": "Chiikawa官方店舖於LUCUA OSAKA開幕",
+    "title": "Chiikawa 周邊專門店 NAGANO MARKET UMEDA 開幕",
     "type": "store",
     "country": "JP",
     "city": "Osaka",
-    "locationName": "LUCUA OSAKA",
-    "startDate": "",
+    "locationName": "LUCUA SOUTH 11F ナガノマーケット UMEDA",
+    "startDate": "2026-11-24",
     "endDate": "",
-    "summaryZh": "Chiikawa官方店舖「NAGANO MARKET」於大阪LUCUA開幕，設有常設拍照點。",
+    "summaryZh": "NAGANO MARKET UMEDA 於11月24日在大阪 LUCUA SOUTH 11F 開幕，販售含 Chiikawa 的角色周邊；開幕初期須依官方公告取得樓層入場整理券。",
     "needReservation": false,
     "hasLimitedGoods": false,
     "tags": [
@@ -1360,33 +1336,9 @@
       "拍照點"
     ],
     "id": "ch-dbadbe",
-    "sourceTitle": "ちいかわ公式店がルクア大阪にオープン！フォトスポット常設「ナガノマーケット」誕生 - いこーよニュース",
+    "sourceTitle": "ナガノマーケット UMEDA店(2026/11/24(火)～)",
     "sourceType": "media",
     "createdAt": "2026-11-11",
-    "sourceUrl": "https://report.iko-yo.net/articles/35571"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "ちいかわ POP UP",
-    "type": "popup",
-    "country": "JP",
-    "city": "Hyogo",
-    "locationName": "イオンモール神戸北",
-    "startDate": "2026-11-13",
-    "endDate": "2026-12-13",
-    "summaryZh": "日本神戶的永旺夢樂城北館將舉辦Black Friday活動，其中包含ちいかわ的快閃店。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "快閃店",
-      "限定商品",
-      "日本",
-      "神戶"
-    ],
-    "id": "ch-9ef855",
-    "sourceTitle": "イオンモール神戸北で『ブラックフライデー』が開催。M-1王者の「たくろう」も出演する「お笑いライブ」や「ちいかわPOP UP」も - 神戸ジャーナル",
-    "sourceType": "media",
-    "createdAt": "2026-11-11",
-    "sourceUrl": "https://kobe-journal.com/archives/5635643478.html"
+    "sourceUrl": "https://nagano-info.jp/tenpo_nm/umeda/"
   }
 ]

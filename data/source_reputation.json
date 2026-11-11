@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-10T08:48:05+00:00",
+  "updatedAt": "2026-11-11T08:45:41+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 20,
@@ -316,34 +316,34 @@
     },
     "domain:pokemonhubs.com": {
       "confirmed": 3,
-      "rejected": 4,
+      "rejected": 5,
       "uncertain": 0,
-      "crossChecked": 10,
-      "score": 37,
+      "crossChecked": 11,
+      "score": 26,
       "label": "pokemonhubs.com",
       "kind": "news",
       "host": "pokemonhubs.com",
       "handle": "",
       "firstSeen": "2026-06-11",
-      "lastReviewed": "2026-11-03",
-      "lastOutcome": "confirmed",
-      "notes": "Kept under Taiwan physical-store exception. Original article fetched HTTP200: Red Green plush/mascot restock November 7, not October 30. JUKSY 153956 independently corroborates sale date/products; official portal post-6861 confirms November 7 entry tickets/venue only. Official Instagram and Codex reader fetch unavailable.",
+      "lastReviewed": "2026-11-11",
+      "lastOutcome": "rejected",
+      "notes": "Duplicate of retained po-4dc06f Nov14 Kalos goods. Original and reader inaccessible; full NOWnews6890707 independently confirms exact products/store/date.",
       "byBrand": {
         "pokemon": {
           "confirmed": 3,
-          "rejected": 4,
+          "rejected": 5,
           "uncertain": 0,
-          "crossChecked": 10,
-          "score": 37
+          "crossChecked": 11,
+          "score": 26
         }
       },
       "byType": {
         "new_product": {
           "confirmed": 3,
-          "rejected": 2,
+          "rejected": 3,
           "uncertain": 0,
-          "crossChecked": 7,
-          "score": 59
+          "crossChecked": 8,
+          "score": 48
         },
         "popup": {
           "confirmed": 0,
@@ -363,10 +363,10 @@
       "byCountry": {
         "tw": {
           "confirmed": 3,
-          "rejected": 3,
+          "rejected": 4,
           "uncertain": 0,
-          "crossChecked": 8,
-          "score": 48
+          "crossChecked": 9,
+          "score": 37
         },
         "jp": {
           "confirmed": 0,
@@ -446,6 +446,16 @@
           "eventId": "po-68980a",
           "evidenceCount": 1,
           "notes": "Kept under Taiwan physical-store exception. Original article fetched HTTP200: Red Green plush/mascot restock November 7, not October 30. JUKSY 153956 independently corroborates sale date/products; official portal post-6861 confirms November 7 entry tickets/venue only. Official Instagram and Codex reader fetch unavailable."
+        },
+        {
+          "date": "2026-11-11",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-6cf7cc",
+          "evidenceCount": 1,
+          "notes": "Duplicate of retained po-4dc06f Nov14 Kalos goods. Original and reader inaccessible; full NOWnews6890707 independently confirms exact products/store/date."
         }
       ]
     },
@@ -2942,25 +2952,25 @@
     },
     "domain:kobe-journal.com": {
       "confirmed": 0,
-      "rejected": 2,
+      "rejected": 3,
       "uncertain": 0,
-      "crossChecked": 4,
-      "score": 36,
+      "crossChecked": 5,
+      "score": 27,
       "label": "kobe-journal.com",
       "kind": "site",
       "host": "kobe-journal.com",
       "handle": "",
       "firstSeen": "2026-07-19",
-      "lastReviewed": "2026-09-01",
+      "lastReviewed": "2026-11-11",
       "lastOutcome": "rejected",
-      "notes": "Roundup mixed Kobe Hankyu and Kobe Airport periods already covered by official parent and popup records",
+      "notes": "Duplicate of existing official Kobe Kita popup Nov11-Nov25; extracted stamp rally dates wrong. Original and official venue full pages checked.",
       "byBrand": {
         "chiikawa": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 2,
+          "score": 32
         },
         "miffy": {
           "confirmed": 0,
@@ -2980,19 +2990,19 @@
         },
         "popup": {
           "confirmed": 0,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 3,
-          "score": 45
+          "crossChecked": 4,
+          "score": 36
         }
       },
       "byCountry": {
         "jp": {
           "confirmed": 0,
-          "rejected": 2,
+          "rejected": 3,
           "uncertain": 0,
-          "crossChecked": 4,
-          "score": 36
+          "crossChecked": 5,
+          "score": 27
         }
       },
       "history": [
@@ -3015,6 +3025,16 @@
           "eventId": "mi-572d60",
           "evidenceCount": 3,
           "notes": "Roundup mixed Kobe Hankyu and Kobe Airport periods already covered by official parent and popup records"
+        },
+        {
+          "date": "2026-11-11",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-9ef855",
+          "evidenceCount": 1,
+          "notes": "Duplicate of existing official Kobe Kita popup Nov11-Nov25; extracted stamp rally dates wrong. Original and official venue full pages checked."
         }
       ]
     },
@@ -3948,19 +3968,19 @@
       ]
     },
     "domain:report.iko-yo.net": {
-      "confirmed": 0,
+      "confirmed": 1,
       "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 2,
-      "score": 32,
+      "crossChecked": 3,
+      "score": 41,
       "label": "report.iko-yo.net",
       "kind": "site",
       "host": "report.iko-yo.net",
       "handle": "",
       "firstSeen": "2026-08-21",
-      "lastReviewed": "2026-09-13",
-      "lastOutcome": "rejected",
-      "notes": "Removed as a secondary duplicate of the structured Chiikawa Baby Haneda official record for 2026-08-18 through 2026-09-28.",
+      "lastReviewed": "2026-11-11",
+      "lastOutcome": "confirmed",
+      "notes": "Corrected opening Nov24 and LUCUA SOUTH11F from Nagano official full page; original403 and reader unavailable. Distinct from Chiikawa Park Store.",
       "byBrand": {
         "miffy": {
           "confirmed": 0,
@@ -3970,11 +3990,11 @@
           "score": 41
         },
         "chiikawa": {
-          "confirmed": 0,
+          "confirmed": 1,
           "rejected": 1,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 41
+          "crossChecked": 2,
+          "score": 50
         }
       },
       "byType": {
@@ -3984,15 +4004,22 @@
           "uncertain": 0,
           "crossChecked": 2,
           "score": 32
+        },
+        "store": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
         }
       },
       "byCountry": {
         "jp": {
-          "confirmed": 0,
+          "confirmed": 1,
           "rejected": 2,
           "uncertain": 0,
-          "crossChecked": 2,
-          "score": 32
+          "crossChecked": 3,
+          "score": 41
         }
       },
       "history": [
@@ -4015,6 +4042,16 @@
           "eventId": "ch-a4c133",
           "evidenceCount": 1,
           "notes": "Removed as a secondary duplicate of the structured Chiikawa Baby Haneda official record for 2026-08-18 through 2026-09-28."
+        },
+        {
+          "date": "2026-11-11",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "store",
+          "country": "JP",
+          "eventId": "ch-dbadbe",
+          "evidenceCount": 1,
+          "notes": "Corrected opening Nov24 and LUCUA SOUTH11F from Nagano official full page; original403 and reader unavailable. Distinct from Chiikawa Park Store."
         }
       ]
     },
