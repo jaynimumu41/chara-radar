@@ -34,7 +34,7 @@ import requests
 
 from verify_links import check_url, page_mentions  # 存檔前驗證來源連結：連得過去 + 內容與品牌相關
 from official_sources import (fetch_official, fetch_chiikawa_popups,
-                              fetch_chiikawa_campaign_popups,
+                              fetch_chiikawa_campaign_popups, fetch_chiikawa_clinic,
                               fetch_chiikawa_park_events,
                               fetch_chiikawa_mogumogu,
                               fetch_chiikawa_movie_goods,
@@ -2154,6 +2154,16 @@ def normalize_source_event(event: dict, *, source_url: str = "", page_text: str 
         data.get("sourceTitle", ""), visible,
     ])
 
+    if data.get("brand") == "chiikawa" and url == "https://sounova.com/anime/chiikawa-clinic-pop-up-store-taiwan":
+        data.update(startDate="2026-12-18", endDate="2027-01-10", country="TW", city="Taipei",
+                    locationName="華山1914文化創意產業園區 中2館")
+
+    if data.get("brand") == "chiikawa" and url == "https://prtimes.jp/main/html/rd/p/000000412.000001117.html":
+        data.update(startDate="2026-11-27", endDate="2026-12-24", country="JP", city="Tokyo",
+                    title="吉伊卡哇診所 POP UP STORE 東京駅",
+                    locationName="東京駅一番街 東京キャラクターストリートいちばんプラザ",
+                    sourceUrl="https://chiikawa-info.jp/p26/chiikawaclinic/tokyo.html", sourceType="official_site")
+
     # Main popup dates, excluding the unrelated stamp rally in this roundup.
     if data.get("brand") == "chiikawa" and url == "https://kobe-journal.com/archives/5635643478.html":
         data.update(startDate="2026-11-11", endDate="2026-11-25", city="Kobe",
@@ -2953,6 +2963,7 @@ def run(brands: list[str], official_only: bool = False):
             structured = (
                 fetch_chiikawa_popups(correct_city=correct_city)
                 + fetch_chiikawa_campaign_popups(correct_city=correct_city)
+                + fetch_chiikawa_clinic()
                 + fetch_chiikawa_park_events(correct_city=correct_city)
                 + fetch_chiikawa_mogumogu(correct_city=correct_city)
                 + fetch_chiikawa_movie_goods(correct_city=correct_city)

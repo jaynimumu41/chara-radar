@@ -399,6 +399,53 @@ def _chiikawa_popup_events_from_text(
     return out
 
 
+CLINIC_BASE = "https://chiikawa-info.jp/p26/chiikawaclinic/"
+CLINIC_VENUES = {"tokyo": "Tokyo", "ginza": "Tokyo", "nagoya": "Nagoya",
+                 "umeda": "Osaka", "hiroshima": "Hiroshima", "sapporo": "Sapporo",
+                 "sendai": "Sendai", "kumamoto": "Kumamoto", "kazan": "Taipei"}
+
+
+def _clinic_event(page: str, slug: str) -> dict | None:
+    """Read the bounded venue metadata, never lottery dates or image filenames."""
+    if slug not in CLINIC_VENUES:
+        return None
+    description = re.search(r'<meta name="description" content="([^"]+)"', page or "")
+    if not description:
+        return None
+    match = re.fullmatch(r'(20\d{2})/(\d{1,2})/(\d{1,2})\([^)]*\)～(?:(20\d{2})/)?(\d{1,2})/(\d{1,2})\([^)]*\)(.+?)にて「ちいかわクリニック[^」]*」.*', description[1])
+    if not match:
+        return None
+    y, m, d, ey, em, ed, venue = match.groups()
+    try:
+        start = datetime(int(y), int(m), int(d)).date().isoformat()
+        end = datetime(int(ey or y), int(em), int(ed)).date().isoformat()
+    except ValueError:
+        return None
+    if end < start or end < datetime.now(timezone(timedelta(hours=8))).date().isoformat():
+        return None
+    url = CLINIC_BASE + slug + ".html"
+    return dict(brand="chiikawa", title="吉伊卡哇診所 POP UP STORE " + venue,
+                type="popup", country="TW" if slug == "kazan" else "JP",
+                city=CLINIC_VENUES[slug], locationName=venue, startDate=start, endDate=end,
+                summaryZh=f"吉伊卡哇診所主題周邊於{venue}期間限定販售。",
+                needReservation=False, hasLimitedGoods=True, tags=["吉伊卡哇", "期間限定店"],
+                id=_stable_id("ch", url), sourceType="official_site",
+                createdAt=datetime.now(timezone(timedelta(hours=8))).date().isoformat(),
+                sourceUrl=url, sourceTitle=html_lib.unescape(re.search(r'<title>(.*?)</title>', page)[1]))
+
+
+def fetch_chiikawa_clinic() -> list[dict]:
+    index = fetch_html(CLINIC_BASE + "index.html") or ""
+    out = []
+    for slug in CLINIC_VENUES:
+        if f'"{slug}.html"' not in index:
+            continue
+        event = _clinic_event(fetch_html(CLINIC_BASE + slug + ".html") or "", slug)
+        if event:
+            out.append(event)
+    return out
+
+
 def fetch_chiikawa_popups(correct_city=None) -> list[dict]:
     """解析吉伊卡哇官方 pus.html，回傳「現行（未過期）」POP UP STORE 的成品情報清單。
     零 Gemini。correct_city(可選)＝scrape.correct_city，用來判城市。"""

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-11T08:45:41+00:00",
+  "updatedAt": "2026-11-12T08:52:08+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 20,
@@ -1702,18 +1702,18 @@
     },
     "domain:prtimes.jp": {
       "confirmed": 7,
-      "rejected": 6,
+      "rejected": 7,
       "uncertain": 0,
       "crossChecked": 9,
-      "score": 43,
+      "score": 32,
       "label": "prtimes.jp",
       "kind": "news",
       "host": "prtimes.jp",
       "handle": "",
       "firstSeen": "2026-07-01",
-      "lastReviewed": "2026-11-09",
-      "lastOutcome": "confirmed",
-      "notes": "Full organizer release confirms Nov 6 start, Asakusa/Tennoji MIO, two 600 yen takeaway hot drinks and winter sleeves. No end date announced; retain open-ended period. Original official release is evidence, no independent corroboration counted.",
+      "lastReviewed": "2026-11-12",
+      "lastOutcome": "rejected",
+      "notes": "Original company release explicitly identifies marcs STORE as EC/online store; no physical popup. Removed and rejected stable URL.",
       "byBrand": {
         "chiikawa": {
           "confirmed": 3,
@@ -1724,10 +1724,10 @@
         },
         "miffy": {
           "confirmed": 3,
-          "rejected": 6,
+          "rejected": 7,
           "uncertain": 0,
           "crossChecked": 7,
-          "score": 15
+          "score": 5
         }
       },
       "byType": {
@@ -1740,10 +1740,10 @@
         },
         "popup": {
           "confirmed": 1,
-          "rejected": 3,
+          "rejected": 4,
           "uncertain": 0,
           "crossChecked": 4,
-          "score": 32
+          "score": 21
         },
         "store": {
           "confirmed": 2,
@@ -1770,10 +1770,10 @@
       "byCountry": {
         "jp": {
           "confirmed": 5,
-          "rejected": 7,
+          "rejected": 8,
           "uncertain": 0,
           "crossChecked": 9,
-          "score": 18
+          "score": 7
         },
         "tw": {
           "confirmed": 1,
@@ -1913,6 +1913,16 @@
           "eventId": "mi-juice-winter-20261106",
           "evidenceCount": 0,
           "notes": "Full organizer release confirms Nov 6 start, Asakusa/Tennoji MIO, two 600 yen takeaway hot drinks and winter sleeves. No end date announced; retain open-ended period. Original official release is evidence, no independent corroboration counted."
+        },
+        {
+          "date": "2026-11-12",
+          "outcome": "rejected",
+          "brand": "miffy",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "mi-e86993",
+          "evidenceCount": 0,
+          "notes": "Original company release explicitly identifies marcs STORE as EC/online store; no physical popup. Removed and rejected stable URL."
         }
       ]
     },
@@ -4552,26 +4562,26 @@
       ]
     },
     "domain:sounova.com": {
-      "confirmed": 1,
+      "confirmed": 2,
       "rejected": 0,
       "uncertain": 0,
-      "crossChecked": 1,
-      "score": 59,
+      "crossChecked": 2,
+      "score": 68,
       "label": "sounova.com",
       "kind": "site",
       "host": "sounova.com",
       "handle": "",
       "firstSeen": "2026-11-02",
-      "lastReviewed": "2026-11-02",
+      "lastReviewed": "2026-11-12",
       "lastOutcome": "confirmed",
-      "notes": "Operator official shop access card and Terakoya PR TIMES release confirm November 18 opening/address/goods/reservations; replaced source with official page.",
+      "notes": "Full indexed original text agrees with official clinic kazan venue metadata: 2026-12-18 to 2027-01-10 Huashan Hall 2. Corrected extraction; replaced by official structured venue record. Web direct/reader unavailable; native official HTML fetched successfully.",
       "byBrand": {
         "chiikawa": {
-          "confirmed": 1,
+          "confirmed": 2,
           "rejected": 0,
           "uncertain": 0,
-          "crossChecked": 1,
-          "score": 59
+          "crossChecked": 2,
+          "score": 68
         }
       },
       "byType": {
@@ -4581,10 +4591,24 @@
           "uncertain": 0,
           "crossChecked": 1,
           "score": 59
+        },
+        "popup": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
         }
       },
       "byCountry": {
         "jp": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        },
+        "tw": {
           "confirmed": 1,
           "rejected": 0,
           "uncertain": 0,
@@ -4602,6 +4626,16 @@
           "eventId": "ch-55ec0f",
           "evidenceCount": 1,
           "notes": "Operator official shop access card and Terakoya PR TIMES release confirm November 18 opening/address/goods/reservations; replaced source with official page."
+        },
+        {
+          "date": "2026-11-12",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "TW",
+          "eventId": "ch-84e635",
+          "evidenceCount": 1,
+          "notes": "Full indexed original text agrees with official clinic kazan venue metadata: 2026-12-18 to 2027-01-10 Huashan Hall 2. Corrected extraction; replaced by official structured venue record. Web direct/reader unavailable; native official HTML fetched successfully."
         }
       ]
     },

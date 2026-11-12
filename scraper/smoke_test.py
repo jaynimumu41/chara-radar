@@ -2956,6 +2956,27 @@ nagano = ev(brand="chiikawa",sourceUrl="https://report.iko-yo.net/articles/35571
 check("Nagano opening date", scrape.normalize_source_event(nagano)["startDate"], "2026-11-24")
 check("Other shop date unchanged", scrape.normalize_source_event(dict(nagano,sourceUrl="https://example.com/" )).get("startDate", ""), nagano.get("startDate", ""))
 
+# Clinic venue metadata is bounded separately; overseas non-JP/TW venues are excluded.
+clinic_fixture = '<title>ちいかわクリニック 華山</title><meta name="description" content="2026/12/18(金)～2027/1/10(日)華山1914文化創意産業園區 中2館にて「ちいかわクリニック POP UP STORE」を開催！">'
+check("Clinic explicit cross-year period", official_sources._clinic_event(clinic_fixture, "kazan")["endDate"], "2027-01-10")
+check("Clinic overseas excluded", official_sources._clinic_event(clinic_fixture, "seoul"), None)
+check("Clinic missing period rejected", official_sources._clinic_event('<title>clinic</title>', "tokyo"), None)
+check("Clinic media wrong dates corrected", scrape.normalize_source_event(ev(brand="chiikawa",sourceUrl="https://sounova.com/anime/chiikawa-clinic-pop-up-store-taiwan"))["startDate"], "2026-12-18")
+check("Clinic JP generic becomes Tokyo venue", scrape.normalize_source_event(ev(brand="chiikawa",sourceUrl="https://prtimes.jp/main/html/rd/p/000000412.000001117.html"))["locationName"], "東京駅一番街 東京キャラクターストリートいちばんプラザ")
+with mock.patch.object(scrape, "_REJECTED", scrape.load_rejected()):
+    check("Online holiday campaign blocked", scrape.is_rejected_url("https://prtimes.jp/main/html/rd/p/000000181.000050227.html"), True)
+    check("Other Miffy release allowed", scrape.is_rejected_url("https://prtimes.jp/main/html/rd/p/000000182.000050227.html"), False)
+
+
+with tempfile.TemporaryDirectory() as clinic_tmp:
+    import audit_chiikawa_subpages as clinic_audit
+    clinic_path = Path(clinic_tmp) / "events.json"
+    clinic_rows = [dict(brand="chiikawa", id=slug, sourceUrl=official_sources.CLINIC_BASE + slug + ".html") for slug in official_sources.CLINIC_VENUES]
+    clinic_path.write_text(json.dumps(clinic_rows), encoding="utf-8")
+    check("Clinic complete venue coverage maps parent", official_sources.CLINIC_BASE + "index.html" in clinic_audit.load_parsed_event_pages(clinic_path), True)
+    clinic_path.write_text(json.dumps(clinic_rows[:-1]), encoding="utf-8")
+    check("Clinic incomplete venue coverage remains review", official_sources.CLINIC_BASE + "index.html" in clinic_audit.load_parsed_event_pages(clinic_path), False)
+
 # ── 結語 ──────────────────────────────────────────────────────────────────────
 print(f"\n{'=' * 40}\n結果：{_passed} 通過、{_failed} 失敗")
 sys.exit(1 if _failed else 0)

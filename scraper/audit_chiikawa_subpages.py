@@ -197,6 +197,7 @@ def load_parsed_event_pages(events_path: Path = EVENTS_JSON) -> dict[str, list[s
     parsed: dict[str, list[str]] = {}
     if not events_path.exists():
         return parsed
+    from official_sources import CLINIC_BASE, CLINIC_VENUES
     events = json.loads(events_path.read_text(encoding="utf-8"))
     for event in events:
         if event.get("brand") != "chiikawa":
@@ -205,6 +206,10 @@ def load_parsed_event_pages(events_path: Path = EVENTS_JSON) -> dict[str, list[s
         if not url:
             continue
         parsed.setdefault(url, []).append(event.get("id", ""))
+    clinic = [event for event in events if event.get("sourceUrl", "") in
+              {CLINIC_BASE + slug + ".html" for slug in CLINIC_VENUES}]
+    if len({e["sourceUrl"] for e in clinic}) == len(CLINIC_VENUES):
+        parsed[CLINIC_BASE + "index.html"] = [e["id"] for e in clinic]
     return parsed
 
 

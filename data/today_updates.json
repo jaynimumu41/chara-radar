@@ -1,20 +1,26 @@
 {
   "date": "2026-11-12",
   "baselineDate": "2026-11-11",
-  "generatedAt": "2026-11-12T08:08:14.103473+00:00",
+  "generatedAt": "2026-11-12T08:51:57.504427+00:00",
   "baselineEventCount": 56,
-  "currentEventCount": 58,
-  "newEventCount": 4,
+  "currentEventCount": 64,
+  "newEventCount": 10,
   "countsByBrand": {
-    "miffy": 2,
+    "miffy": 1,
     "pokemon": 0,
-    "chiikawa": 2
+    "chiikawa": 9
   },
   "newEventIds": [
-    "mi-e86993",
     "mi-26fda9",
-    "ch-bf7bb0",
-    "ch-84e635"
+    "ch-83dbb1",
+    "ch-92bcaf",
+    "ch-0a4256",
+    "ch-fb7275",
+    "ch-47a610",
+    "ch-4bd713",
+    "ch-735186",
+    "ch-f4c6c3",
+    "ch-d473da"
   ],
   "replacements": []
 }
