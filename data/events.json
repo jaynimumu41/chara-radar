@@ -96,55 +96,6 @@
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_naha/index.html"
   },
   {
-    "brand": "pokemon",
-    "title": "Pokémon Center ハロウィンをテーマにしたグッズ「Pokémon Magic Hour Illusion!」が、ポケモンセンターに登場",
-    "type": "new_product",
-    "country": "JP",
-    "city": "",
-    "locationName": "日本全國 Pokémon Center",
-    "startDate": "2026-09-12",
-    "endDate": "",
-    "summaryZh": "日本 Pokémon 官方公告「ハロウィンをテーマにしたグッズ「Pokémon Magic Hour Illusion!」が、ポケモンセンターに登場！」於2026-09-12起在日本各地 Pokémon Center 實體店販售。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "Pokémon Center",
-      "新品",
-      "日本",
-      "官方"
-    ],
-    "id": "po-08f99d",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-13",
-    "sourceTitle": "ハロウィンをテーマにしたグッズ「Pokémon Magic Hour Illusion!」が、ポケモンセンターに登場！ - ポケットモンスターオフィシャルサイト",
-    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/09/260904_to01.html"
-  },
-  {
-    "brand": "pokemon",
-    "title": "Pokémon Center TAIPEI 9/12 Pokémon Timeless Adventure 與歷代遊戲包裝周邊",
-    "type": "new_product",
-    "country": "TW",
-    "city": "Taipei",
-    "locationName": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3F）",
-    "startDate": "2026-09-12",
-    "endDate": "",
-    "summaryZh": "Pokémon Center TAIPEI 於9月12日實體開賣 Pokémon Timeless Adventure「相遇」（神奧）系列與2019-2025歷代遊戲包裝主題周邊；30週年原創貼紙隨購贈送，數量有限。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "Pokémon Center TAIPEI",
-      "Pokémon Timeless Adventure",
-      "歷代遊戲包裝周邊",
-      "實體店新品"
-    ],
-    "id": "po-4aeb10",
-    "sourceTitle": "寶可夢中心9/12新品！30周年相遇系列登場　加碼社群日貼紙免費送 - NOWnews今日新聞",
-    "sourceType": "media",
-    "createdAt": "2026-09-08",
-    "sourceUrl": "https://www.nownews.com/amp/news/6873238"
-  },
-  {
     "brand": "miffy",
     "title": "Miffy miffy style POP UP SHOP in 大阪梅田",
     "type": "popup",
@@ -1340,5 +1291,100 @@
     "sourceType": "media",
     "createdAt": "2026-11-11",
     "sourceUrl": "https://nagano-info.jp/tenpo_nm/umeda/"
+  },
+  {
+    "brand": "miffy",
+    "title": "MIFFY HOLIDAY CAMPAIGN",
+    "type": "popup",
+    "country": "JP",
+    "city": "",
+    "locationName": "marcs STORE",
+    "startDate": "2026-11-19",
+    "endDate": "",
+    "summaryZh": "marcs STORE 舉辦 MIFFY HOLIDAY CAMPAIGN，有機會買到限定周邊商品，迎接歡樂的假期。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "快閃店",
+      "假期",
+      "限定商品"
+    ],
+    "id": "mi-e86993",
+    "sourceTitle": "今年も、楽しいホリデーシーズンをミッフィーと！marcs STOREにて『MIFFY HOLIDAY CAMPAIGN』開催中！",
+    "sourceType": "official_social",
+    "createdAt": "2026-11-12",
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000181.000050227.html"
+  },
+  {
+    "brand": "miffy",
+    "title": "maison des perles × 米飛兔 聯名飾品",
+    "type": "popup",
+    "country": "JP",
+    "city": "Tokyo",
+    "locationName": "青山スパイラル",
+    "startDate": "2026-11-27",
+    "endDate": "2026-11-29",
+    "summaryZh": "於青山スパイラル舉辦maison des perles與米飛兔的聯名活動，販售オートクチュール刺繍的米飛兔飾品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "飾品",
+      "聯名",
+      "快閃店"
+    ],
+    "id": "mi-26fda9",
+    "sourceTitle": "【11/27~】maison des perles × ディック・ブルーナとの特別なコラボレーションが実現　オートクチュール刺繍で仕立てる「ミッフィー」のアクセサリーを青山スパイラルで販売",
+    "sourceType": "official_social",
+    "createdAt": "2026-11-12",
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000002.000186421.html"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇診所期間限定店",
+    "type": "popup",
+    "country": "JP",
+    "city": "Tokyo",
+    "locationName": "KIDDY LAND",
+    "startDate": "2026-11-27",
+    "endDate": "2026-12-24",
+    "summaryZh": "吉伊卡哇診所期間限定店於11月27日起在KIDDY LAND舉辦，販售限定周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "期間限定店",
+      "周邊商品",
+      "吉伊卡哇",
+      "KIDDY LAND"
+    ],
+    "id": "ch-bf7bb0",
+    "sourceTitle": "ちいかわの期間限定ショップ『ちいかわクリニック』が11月27日(金)より開催！",
+    "sourceType": "official_social",
+    "createdAt": "2026-11-12",
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000412.000001117.html"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇診所快閃店",
+    "type": "popup",
+    "country": "TW",
+    "city": "Taipei",
+    "locationName": "華山",
+    "startDate": "2026-11-11",
+    "endDate": "2026-12-10",
+    "summaryZh": "吉伊卡哇診所快閃店於12月進駐華山，販售周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "快閃店",
+      "限定商品",
+      "吉伊卡哇"
+    ],
+    "id": "ch-84e635",
+    "sourceTitle": "吉伊卡哇診所真的開到台灣了！「ちいかわクリニック」快閃店12 月進駐華山吉友們準備好看診了嗎？ - SouNova 少女星",
+    "sourceType": "media",
+    "createdAt": "2026-11-12",
+    "sourceUrl": "https://sounova.com/anime/chiikawa-clinic-pop-up-store-taiwan"
   }
 ]
