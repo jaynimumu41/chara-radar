@@ -2154,6 +2154,13 @@ def normalize_source_event(event: dict, *, source_url: str = "", page_text: str 
         data.get("sourceTitle", ""), visible,
     ])
 
+    # This article describes goods at an existing shop, not a bounded popup.
+    if data.get("brand") == "chiikawa" and url.rstrip("/") == "https://yashion.jp/event/46928":
+        data.update(type="new_product", startDate="2026-11-27", endDate="",
+                    country="JP", city="Koshigaya",
+                    title="吉伊卡哇診所第一彈商品 越谷レイクタウン店",
+                    locationName="イオンレイクタウンmori 3F ちいかわらんど 越谷レイクタウン店")
+
     if data.get("brand") == "chiikawa" and url == "https://sounova.com/anime/chiikawa-clinic-pop-up-store-taiwan":
         data.update(startDate="2026-12-18", endDate="2027-01-10", country="TW", city="Taipei",
                     locationName="華山1914文化創意產業園區 中2館")

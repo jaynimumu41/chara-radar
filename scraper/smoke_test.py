@@ -2977,6 +2977,12 @@ with tempfile.TemporaryDirectory() as clinic_tmp:
     clinic_path.write_text(json.dumps(clinic_rows[:-1]), encoding="utf-8")
     check("Clinic incomplete venue coverage remains review", official_sources.CLINIC_BASE + "index.html" in clinic_audit.load_parsed_event_pages(clinic_path), False)
 
+clinic_shop = scrape.normalize_source_event(ev(brand="chiikawa", type="popup", endDate="2026-12-24", sourceUrl="https://yashion.jp/event/46928/"))
+check("Clinic permanent shop goods are not popup", clinic_shop["type"], "new_product")
+check("Clinic permanent shop has no invented end", clinic_shop["endDate"], "")
+check("Clinic permanent shop precise venue", "mori 3F" in clinic_shop["locationName"], True)
+check("Other shop article unchanged", scrape.normalize_source_event(ev(brand="chiikawa", type="popup", sourceUrl="https://yashion.jp/event/other"))["type"], "popup")
+
 # ── 結語 ──────────────────────────────────────────────────────────────────────
 print(f"\n{'=' * 40}\n結果：{_passed} 通過、{_failed} 失敗")
 sys.exit(1 if _failed else 0)

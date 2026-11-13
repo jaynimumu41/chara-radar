@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-12T08:52:08+00:00",
+  "updatedAt": "2026-11-13T08:47:47+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 20,
@@ -4852,6 +4852,60 @@
           "eventId": "ch-e8f09f",
           "evidenceCount": 1,
           "notes": "Original full article and organizer release confirm tour; narrowed generic record to Tokyo venue and period. Other four stops not added; accuracy over coverage."
+        }
+      ]
+    },
+    "domain:yashion.jp": {
+      "confirmed": 1,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 59,
+      "label": "yashion.jp",
+      "kind": "site",
+      "host": "yashion.jp",
+      "handle": "",
+      "firstSeen": "2026-11-13",
+      "lastReviewed": "2026-11-13",
+      "lastOutcome": "confirmed",
+      "notes": "Full original article confirms permanent mori 3F shop goods Nov27 open end; Kiddy Land official PR TIMES 412.1117 corroborates sale date/products/shop. Corrected extracted popup type.",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "byType": {
+        "new_product": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 1,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 59
+        }
+      },
+      "history": [
+        {
+          "date": "2026-11-13",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "ch-76ea58",
+          "evidenceCount": 1,
+          "notes": "Full original article confirms permanent mori 3F shop goods Nov27 open end; Kiddy Land official PR TIMES 412.1117 corroborates sale date/products/shop. Corrected extracted popup type."
         }
       ]
     }
