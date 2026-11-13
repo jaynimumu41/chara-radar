@@ -1513,5 +1513,53 @@
     "createdAt": "2026-11-12",
     "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/kazan.html",
     "sourceTitle": "ちいかわクリニック POP UP STORE 華山(2026/12/18(金)～2027/1/10(日))"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇 POP UP STORE エキマル ア・ラ・モードJR京都駅西口店",
+    "type": "popup",
+    "country": "JP",
+    "city": "Kyoto",
+    "locationName": "エキマル ア・ラ・モードJR京都駅西口店",
+    "startDate": "2026-11-26",
+    "endDate": "2026-12-10",
+    "summaryZh": "ちいかわ POP UP STORE 於エキマル ア・ラ・モードJR京都駅西口店期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "吉伊卡哇",
+      "快閃店",
+      "日本",
+      "限定周邊"
+    ],
+    "id": "ch-ea75d6",
+    "sourceType": "official_site",
+    "createdAt": "2026-11-13",
+    "sourceTitle": "ちいかわPOP UP STORE エキマル ア・ラ・モードJR京都駅西口店(2026-11-26～2026-12-10) - ちいかわ公式",
+    "sourceUrl": "https://chiikawa-info.jp/p26/pus_ekky/index.html"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇診所快閃店",
+    "type": "popup",
+    "country": "JP",
+    "city": "Saitama",
+    "locationName": "越谷レイクタウン",
+    "startDate": "2026-11-27",
+    "endDate": "",
+    "summaryZh": "吉伊卡哇診所主題快閃店將於11月27日在越谷レイクタウン登場，可見護士打扮的吉伊卡哇角色。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "快閃店",
+      "限定商品",
+      "護士造型",
+      "越谷"
+    ],
+    "id": "ch-76ea58",
+    "sourceTitle": "越谷レイクタウンに「ちいかわクリニック」 ナース姿のちいかわたちが11月27日から登場 - やしおん",
+    "sourceType": "media",
+    "createdAt": "2026-11-13",
+    "sourceUrl": "https://yashion.jp/event/46928"
   }
 ]
