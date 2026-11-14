@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-13T08:47:47+00:00",
+  "updatedAt": "2026-11-14T08:47:59+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 20,
@@ -1387,24 +1387,24 @@
     },
     "domain:collabo-cafe.com": {
       "confirmed": 10,
-      "rejected": 15,
+      "rejected": 16,
       "uncertain": 0,
-      "crossChecked": 31,
+      "crossChecked": 32,
       "score": 5,
       "label": "collabo-cafe.com",
       "kind": "site",
       "host": "collabo-cafe.com",
       "handle": "",
       "firstSeen": "2026-06-30",
-      "lastReviewed": "2026-10-23",
-      "lastOutcome": "confirmed",
-      "notes": "Chiikawa official Yokohama sushi popup confirms 10/22-11/01. Corrected concrete Sky Building 8F venue, removed unsupported food/cafe claim, upgraded official source.",
+      "lastReviewed": "2026-11-14",
+      "lastOutcome": "rejected",
+      "notes": "Duplicate official venue record",
       "byBrand": {
         "chiikawa": {
           "confirmed": 10,
-          "rejected": 14,
+          "rejected": 15,
           "uncertain": 0,
-          "crossChecked": 30,
+          "crossChecked": 31,
           "score": 5
         },
         "miffy": {
@@ -1425,10 +1425,10 @@
         },
         "popup": {
           "confirmed": 8,
-          "rejected": 9,
+          "rejected": 10,
           "uncertain": 0,
-          "crossChecked": 22,
-          "score": 17
+          "crossChecked": 23,
+          "score": 6
         },
         "new_product": {
           "confirmed": 2,
@@ -1441,9 +1441,9 @@
       "byCountry": {
         "jp": {
           "confirmed": 10,
-          "rejected": 15,
+          "rejected": 16,
           "uncertain": 0,
-          "crossChecked": 31,
+          "crossChecked": 32,
           "score": 5
         }
       },
@@ -1697,30 +1697,40 @@
           "eventId": "ch-6cb20a",
           "evidenceCount": 1,
           "notes": "Chiikawa official Yokohama sushi popup confirms 10/22-11/01. Corrected concrete Sky Building 8F venue, removed unsupported food/cafe claim, upgraded official source."
+        },
+        {
+          "date": "2026-11-14",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-04e033",
+          "evidenceCount": 1,
+          "notes": "Duplicate official venue record"
         }
       ]
     },
     "domain:prtimes.jp": {
       "confirmed": 7,
-      "rejected": 7,
+      "rejected": 8,
       "uncertain": 0,
       "crossChecked": 9,
-      "score": 32,
+      "score": 21,
       "label": "prtimes.jp",
       "kind": "news",
       "host": "prtimes.jp",
       "handle": "",
       "firstSeen": "2026-07-01",
-      "lastReviewed": "2026-11-12",
+      "lastReviewed": "2026-11-14",
       "lastOutcome": "rejected",
-      "notes": "Original company release explicitly identifies marcs STORE as EC/online store; no physical popup. Removed and rejected stable URL.",
+      "notes": "Manufacturer confirms broad music-retail launch; outside scoped destination-store goods",
       "byBrand": {
         "chiikawa": {
           "confirmed": 3,
-          "rejected": 1,
+          "rejected": 2,
           "uncertain": 0,
           "crossChecked": 2,
-          "score": 64
+          "score": 53
         },
         "miffy": {
           "confirmed": 3,
@@ -1733,10 +1743,10 @@
       "byType": {
         "new_product": {
           "confirmed": 2,
-          "rejected": 3,
+          "rejected": 4,
           "uncertain": 0,
           "crossChecked": 2,
-          "score": 35
+          "score": 24
         },
         "popup": {
           "confirmed": 1,
@@ -1770,10 +1780,10 @@
       "byCountry": {
         "jp": {
           "confirmed": 5,
-          "rejected": 8,
+          "rejected": 9,
           "uncertain": 0,
           "crossChecked": 9,
-          "score": 7
+          "score": 5
         },
         "tw": {
           "confirmed": 1,
@@ -1923,6 +1933,16 @@
           "eventId": "mi-e86993",
           "evidenceCount": 0,
           "notes": "Original company release explicitly identifies marcs STORE as EC/online store; no physical popup. Removed and rejected stable URL."
+        },
+        {
+          "date": "2026-11-14",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "new_product",
+          "country": "JP",
+          "eventId": "ch-751ac2",
+          "evidenceCount": 0,
+          "notes": "Manufacturer confirms broad music-retail launch; outside scoped destination-store goods"
         }
       ]
     },
@@ -4239,20 +4259,27 @@
     },
     "domain:news.infoseek.co.jp": {
       "confirmed": 0,
-      "rejected": 1,
+      "rejected": 2,
       "uncertain": 0,
-      "crossChecked": 1,
-      "score": 41,
+      "crossChecked": 2,
+      "score": 32,
       "label": "news.infoseek.co.jp",
       "kind": "news",
       "host": "news.infoseek.co.jp",
       "handle": "",
       "firstSeen": "2026-09-02",
-      "lastReviewed": "2026-09-02",
+      "lastReviewed": "2026-11-14",
       "lastOutcome": "rejected",
-      "notes": "Duplicate of existing official Pokemon Sleep campaign po-d330c0",
+      "notes": "Duplicate official venue record",
       "byBrand": {
         "pokemon": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        },
+        "chiikawa": {
           "confirmed": 0,
           "rejected": 1,
           "uncertain": 0,
@@ -4267,15 +4294,22 @@
           "uncertain": 0,
           "crossChecked": 1,
           "score": 41
-        }
-      },
-      "byCountry": {
-        "jp": {
+        },
+        "popup": {
           "confirmed": 0,
           "rejected": 1,
           "uncertain": 0,
           "crossChecked": 1,
           "score": 41
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 2,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 32
         }
       },
       "history": [
@@ -4288,6 +4322,16 @@
           "eventId": "po-2cfc57",
           "evidenceCount": 1,
           "notes": "Duplicate of existing official Pokemon Sleep campaign po-d330c0"
+        },
+        {
+          "date": "2026-11-14",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-78d5f5",
+          "evidenceCount": 1,
+          "notes": "Duplicate official venue record"
         }
       ]
     },

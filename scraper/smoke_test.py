@@ -2983,6 +2983,17 @@ check("Clinic permanent shop has no invented end", clinic_shop["endDate"], "")
 check("Clinic permanent shop precise venue", "mori 3F" in clinic_shop["locationName"], True)
 check("Other shop article unchanged", scrape.normalize_source_event(ev(brand="chiikawa", type="popup", sourceUrl="https://yashion.jp/event/other"))["type"], "popup")
 
+# Daily verification 2026-11-14: media aliases preserve official venue identity.
+for source, target in [
+    ("https://news.infoseek.co.jp/article/20261113bgmania20262704040/", "https://chiikawa-info.jp/p26/chiikawaclinic/tokyo.html"),
+    ("https://collabo-cafe.com/events/collabo/chiikawa-nov-popup-ekimaru-jr-kyoto-2026/", "https://chiikawa-info.jp/p26/pus_ekky/index.html"),
+]:
+    check("Media resolves official venue " + source, scrape.normalize_source_event(ev(brand="chiikawa",sourceUrl=source))["sourceUrl"], target)
+    check("Other brand alias unchanged " + source, scrape.normalize_source_event(ev(brand="miffy",sourceUrl=source))["sourceUrl"], source)
+with mock.patch.object(scrape, "_REJECTED", scrape.load_rejected()):
+    check("Broad retail tuner excluded", scrape.is_rejected_url("https://prtimes.jp/main/html/rd/p/000000004.000135390.html"), True)
+    check("Other manufacturer release unaffected", scrape.is_rejected_url("https://prtimes.jp/main/html/rd/p/000000005.000135390.html"), False)
+
 # ── 結語 ──────────────────────────────────────────────────────────────────────
 print(f"\n{'=' * 40}\n結果：{_passed} 通過、{_failed} 失敗")
 sys.exit(1 if _failed else 0)

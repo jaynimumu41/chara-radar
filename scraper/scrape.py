@@ -2154,6 +2154,16 @@ def normalize_source_event(event: dict, *, source_url: str = "", page_text: str 
         data.get("sourceTitle", ""), visible,
     ])
 
+    # Verified media aliases must resolve to the existing official venue record.
+    if data.get("brand") == "chiikawa" and url == "https://news.infoseek.co.jp/article/20261113bgmania20262704040/":
+        data.update(startDate="2026-11-27", endDate="2026-12-24", country="JP", city="Tokyo",
+                    locationName="東京駅一番街 東京キャラクターストリートいちばんプラザ",
+                    sourceUrl="https://chiikawa-info.jp/p26/chiikawaclinic/tokyo.html", sourceType="official_site")
+    if data.get("brand") == "chiikawa" and url == "https://collabo-cafe.com/events/collabo/chiikawa-nov-popup-ekimaru-jr-kyoto-2026/":
+        data.update(startDate="2026-11-26", endDate="2026-12-10", country="JP", city="Kyoto",
+                    locationName="エキマル ア・ラ・モードJR京都駅西口店",
+                    sourceUrl="https://chiikawa-info.jp/p26/pus_ekky/index.html", sourceType="official_site")
+
     # This article describes goods at an existing shop, not a bounded popup.
     if data.get("brand") == "chiikawa" and url.rstrip("/") == "https://yashion.jp/event/46928":
         data.update(type="new_product", startDate="2026-11-27", endDate="",
