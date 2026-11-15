@@ -2155,6 +2155,10 @@ def normalize_source_event(event: dict, *, source_url: str = "", page_text: str 
     ])
 
     # Verified media aliases must resolve to the existing official venue record.
+    if data.get("brand") == "chiikawa" and url.rstrip("/") == "https://utsunomiya.goguynet.jp/2026/11/14/chiikawa_tobu-2":
+        data.update(startDate="2026-11-13", endDate="2026-12-01", country="JP", city="Tochigi",
+                    locationName="東武宇都宮百貨店 5階 イベントプラザ",
+                    sourceUrl="https://chiikawa-info.jp/p26/pus_tbun/index.html", sourceType="official_site")
     if data.get("brand") == "chiikawa" and url == "https://news.infoseek.co.jp/article/20261113bgmania20262704040/":
         data.update(startDate="2026-11-27", endDate="2026-12-24", country="JP", city="Tokyo",
                     locationName="東京駅一番街 東京キャラクターストリートいちばんプラザ",

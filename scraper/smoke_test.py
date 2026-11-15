@@ -2995,5 +2995,10 @@ with mock.patch.object(scrape, "_REJECTED", scrape.load_rejected()):
     check("Other manufacturer release unaffected", scrape.is_rejected_url("https://prtimes.jp/main/html/rd/p/000000005.000135390.html"), False)
 
 # ── 結語 ──────────────────────────────────────────────────────────────────────
+utsunomiya_url = "https://utsunomiya.goguynet.jp/2026/11/14/chiikawa_tobu-2/"
+check("Utsunomiya Christmas goods resolve popup identity", scrape.normalize_source_event(ev(brand="chiikawa", sourceUrl=utsunomiya_url))["sourceUrl"], "https://chiikawa-info.jp/p26/pus_tbun/index.html")
+check("Other Utsunomiya article unchanged", scrape.normalize_source_event(ev(brand="chiikawa", sourceUrl=utsunomiya_url.replace("tobu-2", "other")))["sourceUrl"], utsunomiya_url.replace("tobu-2", "other"))
+check("Other brand Utsunomiya unchanged", scrape.normalize_source_event(ev(brand="miffy", sourceUrl=utsunomiya_url))["sourceUrl"], utsunomiya_url)
+
 print(f"\n{'=' * 40}\n結果：{_passed} 通過、{_failed} 失敗")
 sys.exit(1 if _failed else 0)

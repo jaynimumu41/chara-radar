@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-14T08:47:59+00:00",
+  "updatedAt": "2026-11-15T08:48:48+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 20,
@@ -4950,6 +4950,60 @@
           "eventId": "ch-76ea58",
           "evidenceCount": 1,
           "notes": "Full original article confirms permanent mori 3F shop goods Nov27 open end; Kiddy Land official PR TIMES 412.1117 corroborates sale date/products/shop. Corrected extracted popup type."
+        }
+      ]
+    },
+    "domain:utsunomiya.goguynet.jp": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 2,
+      "score": 43,
+      "label": "utsunomiya.goguynet.jp",
+      "kind": "site",
+      "host": "utsunomiya.goguynet.jp",
+      "handle": "",
+      "firstSeen": "2026-11-15",
+      "lastReviewed": "2026-11-15",
+      "lastOutcome": "rejected",
+      "notes": "Duplicate of official ch-66cc93; official popup schedule and Tobu department-store calendar confirm same venue and Nov13-Dec1 period, Christmas goods are part of the same popup.",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 43
+        }
+      },
+      "byType": {
+        "popup": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 43
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 43
+        }
+      },
+      "history": [
+        {
+          "date": "2026-11-15",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-bfc53e",
+          "evidenceCount": 2,
+          "notes": "Duplicate of official ch-66cc93; official popup schedule and Tobu department-store calendar confirm same venue and Nov13-Dec1 period, Christmas goods are part of the same popup."
         }
       ]
     }
