@@ -1,15 +1,26 @@
 {
   "date": "2026-11-15",
   "baselineDate": "2026-11-14",
-  "generatedAt": "2026-11-15T08:48:29.820456+00:00",
+  "generatedAt": "2026-11-15T09:59:57.993715+00:00",
   "baselineEventCount": 68,
-  "currentEventCount": 68,
-  "newEventCount": 0,
+  "currentEventCount": 78,
+  "newEventCount": 10,
   "countsByBrand": {
-    "miffy": 0,
-    "pokemon": 0,
+    "miffy": 1,
+    "pokemon": 9,
     "chiikawa": 0
   },
-  "newEventIds": [],
+  "newEventIds": [
+    "po-flowering-sunshine-2026",
+    "po-flowering-newoman-2026",
+    "po-flowering-porta-2026",
+    "po-flowering-hakata-2026",
+    "po-flowering-tsudanuma-2026",
+    "po-flowering-omiya-2026",
+    "po-flowering-keihan-2026",
+    "po-flowering-ikebukuro-2026",
+    "po-flowering-kokura-2026",
+    "mi-poinsettia-20261113"
+  ],
   "replacements": []
 }
