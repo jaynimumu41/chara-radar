@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "status": "limited",
-  "generatedAt": "2026-11-14T16:48:42+08:00",
-  "dataDate": "2026-11-14",
+  "generatedAt": "2026-11-15T16:07:20+08:00",
+  "dataDate": "2026-11-15",
   "metrics": {
-    "eventCount": 68,
-    "todayNewCount": 2,
-    "agentCandidateCount": 0,
-    "pendingArticleCount": 12,
-    "extractionFailureCount": 3,
+    "eventCount": 69,
+    "todayNewCount": 1,
+    "agentCandidateCount": 1,
+    "pendingArticleCount": 2,
+    "extractionFailureCount": 2,
     "structuredSourceFailureCount": 0,
     "aiBackend": "gemini",
     "aiUnavailable": false,
@@ -19,7 +19,7 @@
   },
   "brands": {
     "miffy": {
-      "articlesFound": 124,
+      "articlesFound": 119,
       "eligibleArticles": 1,
       "processedArticles": 1,
       "pendingArticles": 0,
@@ -29,9 +29,9 @@
       "skippedDueRateLimit": false
     },
     "pokemon": {
-      "articlesFound": 142,
-      "eligibleArticles": 6,
-      "processedArticles": 6,
+      "articlesFound": 143,
+      "eligibleArticles": 1,
+      "processedArticles": 1,
       "pendingArticles": 0,
       "retryableFailures": 0,
       "addedRecords": 0,
@@ -39,13 +39,13 @@
       "skippedDueRateLimit": false
     },
     "chiikawa": {
-      "articlesFound": 171,
-      "eligibleArticles": 41,
-      "processedArticles": 32,
-      "pendingArticles": 12,
-      "retryableFailures": 3,
-      "addedRecords": 6,
-      "capReached": true,
+      "articlesFound": 167,
+      "eligibleArticles": 26,
+      "processedArticles": 26,
+      "pendingArticles": 2,
+      "retryableFailures": 2,
+      "addedRecords": 1,
+      "capReached": false,
       "skippedDueRateLimit": false
     }
   },

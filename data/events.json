@@ -1609,5 +1609,29 @@
     "createdAt": "2026-11-14",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール成田(2026-11-27～2026-12-14) - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/p26/pus_anrt/index.html"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "吉伊卡哇聖誕限定快閃店",
+    "type": "popup",
+    "country": "JP",
+    "city": "Tochigi",
+    "locationName": "東武宇都宮",
+    "startDate": "2026-11-13",
+    "endDate": "2026-12-01",
+    "summaryZh": "宇都宮市東武宇都宮舉辦吉伊卡哇快閃店，販售聖誕限定周邊商品，活動至12月1日止。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "快閃店",
+      "限定商品",
+      "聖誕節",
+      "宇都宮"
+    ],
+    "id": "ch-bfc53e",
+    "sourceTitle": "【宇都宮市】クリスマス限定グッズも販売！ただいま東武宇都宮にて『ちいかわ POP UP STORE』が開催中！最終日は12/1。 - 号外NET 宇都宮市",
+    "sourceType": "media",
+    "createdAt": "2026-11-15",
+    "sourceUrl": "https://utsunomiya.goguynet.jp/2026/11/14/chiikawa_tobu-2/"
   }
 ]
