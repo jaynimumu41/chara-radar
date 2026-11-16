@@ -2154,6 +2154,20 @@ def normalize_source_event(event: dict, *, source_url: str = "", page_text: str 
         data.get("sourceTitle", ""), visible,
     ])
 
+    # Verified 2026-11-16: media titles cannot create a second venue identity.
+    if data.get("brand") == "chiikawa":
+        aliases = {
+            "https://ure.pia.co.jp/articles/-/3560227": ("https://chiikawa-info.jp/p26/chiikawaclinic/tokyo.html", "Tokyo", "東京駅一番街 東京キャラクターストリートいちばんプラザ", "2026-11-27", "2026-12-24"),
+            "https://collabo-cafe.com/events/collabo/chiikawa-nov-popup-aeonmall-hanyu-2026/": ("https://chiikawa-info.jp/p26/pus_ahny/index.html", "Saitama", "イオンモール羽生 1F 東コート", "2026-11-28", "2026-12-13"),
+            "https://collabo-cafe.com/events/collabo/chiikawa-muchauma-sushi-popup-new-chitose-2026/": ("https://chiikawa-info.jp/p26/muchauma-chiikawasushi/new_chitose/index.html", "Chitose", "新千歳空港 国内線旅客ターミナルビル2階 センタープラザ", "2026-11-27", "2026-12-20"),
+        }
+        if url in aliases:
+            target, city, venue, start, end = aliases[url]
+            data.update(sourceUrl=target, sourceType="official_site", country="JP", city=city,
+                        locationName=venue, startDate=start, endDate=end, type="popup")
+            if "muchauma-sushi" in url:
+                data.update(summaryZh="吉伊卡哇壽司主題快閃店於新千歲機場販售主題周邊商品。", tags=["快閃店", "限定商品", "北海道"])
+
     # Verified media aliases must resolve to the existing official venue record.
     if data.get("brand") == "chiikawa" and url.rstrip("/") == "https://utsunomiya.goguynet.jp/2026/11/14/chiikawa_tobu-2":
         data.update(startDate="2026-11-13", endDate="2026-12-01", country="JP", city="Tochigi",

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-15T08:48:48+00:00",
+  "updatedAt": "2026-11-16T08:44:47+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 20,
@@ -1386,25 +1386,25 @@
       ]
     },
     "domain:collabo-cafe.com": {
-      "confirmed": 10,
-      "rejected": 16,
+      "confirmed": 11,
+      "rejected": 17,
       "uncertain": 0,
-      "crossChecked": 32,
+      "crossChecked": 33,
       "score": 5,
       "label": "collabo-cafe.com",
       "kind": "site",
       "host": "collabo-cafe.com",
       "handle": "",
       "firstSeen": "2026-06-30",
-      "lastReviewed": "2026-11-14",
-      "lastOutcome": "rejected",
-      "notes": "Duplicate official venue record",
+      "lastReviewed": "2026-11-16",
+      "lastOutcome": "confirmed",
+      "notes": "Codex official full-page verification 2026-11-16; official organizer schedule for all nine Flowering venues; clinic and Hanyu duplicate existing official records; sushi corrected airport venue and removed unsupported dining.",
       "byBrand": {
         "chiikawa": {
-          "confirmed": 10,
-          "rejected": 15,
+          "confirmed": 11,
+          "rejected": 16,
           "uncertain": 0,
-          "crossChecked": 31,
+          "crossChecked": 32,
           "score": 5
         },
         "miffy": {
@@ -1424,11 +1424,11 @@
           "score": 5
         },
         "popup": {
-          "confirmed": 8,
-          "rejected": 10,
+          "confirmed": 9,
+          "rejected": 11,
           "uncertain": 0,
-          "crossChecked": 23,
-          "score": 6
+          "crossChecked": 24,
+          "score": 5
         },
         "new_product": {
           "confirmed": 2,
@@ -1440,10 +1440,10 @@
       },
       "byCountry": {
         "jp": {
-          "confirmed": 10,
-          "rejected": 16,
+          "confirmed": 11,
+          "rejected": 17,
           "uncertain": 0,
-          "crossChecked": 32,
+          "crossChecked": 33,
           "score": 5
         }
       },
@@ -1707,6 +1707,26 @@
           "eventId": "ch-04e033",
           "evidenceCount": 1,
           "notes": "Duplicate official venue record"
+        },
+        {
+          "date": "2026-11-16",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-9d6dce",
+          "evidenceCount": 1,
+          "notes": "Codex official full-page verification 2026-11-16; official organizer schedule for all nine Flowering venues; clinic and Hanyu duplicate existing official records; sushi corrected airport venue and removed unsupported dining."
+        },
+        {
+          "date": "2026-11-16",
+          "outcome": "confirmed",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-2fc781",
+          "evidenceCount": 0,
+          "notes": "Codex official full-page verification 2026-11-16; official organizer schedule for all nine Flowering venues; clinic and Hanyu duplicate existing official records; sushi corrected airport venue and removed unsupported dining."
         }
       ]
     },
@@ -5004,6 +5024,194 @@
           "eventId": "ch-bfc53e",
           "evidenceCount": 2,
           "notes": "Duplicate of official ch-66cc93; official popup schedule and Tobu department-store calendar confirm same venue and Nov13-Dec1 period, Christmas goods are part of the same popup."
+        }
+      ]
+    },
+    "domain:flowering.co.jp": {
+      "confirmed": 9,
+      "rejected": 0,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 95,
+      "label": "flowering.co.jp",
+      "kind": "site",
+      "host": "flowering.co.jp",
+      "handle": "",
+      "firstSeen": "2026-11-16",
+      "lastReviewed": "2026-11-16",
+      "lastOutcome": "confirmed",
+      "notes": "Codex official full-page verification 2026-11-16; official organizer schedule for all nine Flowering venues; clinic and Hanyu duplicate existing official records; sushi corrected airport venue and removed unsupported dining.",
+      "byBrand": {
+        "pokemon": {
+          "confirmed": 9,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 95
+        }
+      },
+      "byType": {
+        "popup": {
+          "confirmed": 9,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 95
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 9,
+          "rejected": 0,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 95
+        }
+      },
+      "history": [
+        {
+          "date": "2026-11-16",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "po-flowering-sunshine-2026",
+          "evidenceCount": 1,
+          "notes": "Codex official full-page verification 2026-11-16; official organizer schedule for all nine Flowering venues; clinic and Hanyu duplicate existing official records; sushi corrected airport venue and removed unsupported dining."
+        },
+        {
+          "date": "2026-11-16",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "po-flowering-newoman-2026",
+          "evidenceCount": 0,
+          "notes": "Codex official full-page verification 2026-11-16; official organizer schedule for all nine Flowering venues; clinic and Hanyu duplicate existing official records; sushi corrected airport venue and removed unsupported dining."
+        },
+        {
+          "date": "2026-11-16",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "po-flowering-porta-2026",
+          "evidenceCount": 0,
+          "notes": "Codex official full-page verification 2026-11-16; official organizer schedule for all nine Flowering venues; clinic and Hanyu duplicate existing official records; sushi corrected airport venue and removed unsupported dining."
+        },
+        {
+          "date": "2026-11-16",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "po-flowering-hakata-2026",
+          "evidenceCount": 0,
+          "notes": "Codex official full-page verification 2026-11-16; official organizer schedule for all nine Flowering venues; clinic and Hanyu duplicate existing official records; sushi corrected airport venue and removed unsupported dining."
+        },
+        {
+          "date": "2026-11-16",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "po-flowering-tsudanuma-2026",
+          "evidenceCount": 0,
+          "notes": "Codex official full-page verification 2026-11-16; official organizer schedule for all nine Flowering venues; clinic and Hanyu duplicate existing official records; sushi corrected airport venue and removed unsupported dining."
+        },
+        {
+          "date": "2026-11-16",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "po-flowering-omiya-2026",
+          "evidenceCount": 0,
+          "notes": "Codex official full-page verification 2026-11-16; official organizer schedule for all nine Flowering venues; clinic and Hanyu duplicate existing official records; sushi corrected airport venue and removed unsupported dining."
+        },
+        {
+          "date": "2026-11-16",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "po-flowering-keihan-2026",
+          "evidenceCount": 0,
+          "notes": "Codex official full-page verification 2026-11-16; official organizer schedule for all nine Flowering venues; clinic and Hanyu duplicate existing official records; sushi corrected airport venue and removed unsupported dining."
+        },
+        {
+          "date": "2026-11-16",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "po-flowering-ikebukuro-2026",
+          "evidenceCount": 0,
+          "notes": "Codex official full-page verification 2026-11-16; official organizer schedule for all nine Flowering venues; clinic and Hanyu duplicate existing official records; sushi corrected airport venue and removed unsupported dining."
+        },
+        {
+          "date": "2026-11-16",
+          "outcome": "confirmed",
+          "brand": "pokemon",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "po-flowering-kokura-2026",
+          "evidenceCount": 0,
+          "notes": "Codex official full-page verification 2026-11-16; official organizer schedule for all nine Flowering venues; clinic and Hanyu duplicate existing official records; sushi corrected airport venue and removed unsupported dining."
+        }
+      ]
+    },
+    "domain:ure.pia.co.jp": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 2,
+      "score": 43,
+      "label": "ure.pia.co.jp",
+      "kind": "site",
+      "host": "ure.pia.co.jp",
+      "handle": "",
+      "firstSeen": "2026-11-16",
+      "lastReviewed": "2026-11-16",
+      "lastOutcome": "rejected",
+      "notes": "Codex official full-page verification 2026-11-16; official organizer schedule for all nine Flowering venues; clinic and Hanyu duplicate existing official records; sushi corrected airport venue and removed unsupported dining.",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 43
+        }
+      },
+      "byType": {
+        "popup": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 43
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 2,
+          "score": 43
+        }
+      },
+      "history": [
+        {
+          "date": "2026-11-16",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-c03024",
+          "evidenceCount": 2,
+          "notes": "Codex official full-page verification 2026-11-16; official organizer schedule for all nine Flowering venues; clinic and Hanyu duplicate existing official records; sushi corrected airport venue and removed unsupported dining."
         }
       ]
     }

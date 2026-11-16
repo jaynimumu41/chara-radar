@@ -3000,5 +3000,15 @@ check("Utsunomiya Christmas goods resolve popup identity", scrape.normalize_sour
 check("Other Utsunomiya article unchanged", scrape.normalize_source_event(ev(brand="chiikawa", sourceUrl=utsunomiya_url.replace("tobu-2", "other")))["sourceUrl"], utsunomiya_url.replace("tobu-2", "other"))
 check("Other brand Utsunomiya unchanged", scrape.normalize_source_event(ev(brand="miffy", sourceUrl=utsunomiya_url))["sourceUrl"], utsunomiya_url)
 
+for source, target, city, venue, start, end in [
+    ("https://ure.pia.co.jp/articles/-/3560227", "https://chiikawa-info.jp/p26/chiikawaclinic/tokyo.html", "Tokyo", "", "", ""),
+    ("https://collabo-cafe.com/events/collabo/chiikawa-nov-popup-aeonmall-hanyu-2026/", "https://chiikawa-info.jp/p26/pus_ahny/index.html", "Saitama", "", "", ""),
+    ("https://collabo-cafe.com/events/collabo/chiikawa-muchauma-sushi-popup-new-chitose-2026/", "https://chiikawa-info.jp/p26/muchauma-chiikawasushi/new_chitose/index.html", "Chitose", "", "", ""),
+]:
+    result = scrape.normalize_source_event(ev(brand="chiikawa",sourceUrl=source))
+    check("Nov16 official identity " + source, result["sourceUrl"], target)
+    check("Nov16 venue city " + source, result["city"], city)
+    check("Nov16 other brand preserved " + source, scrape.normalize_source_event(ev(brand="miffy",sourceUrl=source))["sourceUrl"], source)
+
 print(f"\n{'=' * 40}\n結果：{_passed} 通過、{_failed} 失敗")
 sys.exit(1 if _failed else 0)
