@@ -483,54 +483,6 @@
     "sourceUrl": "https://www.nownews.com/news/6883605"
   },
   {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE イオンモール倉敷",
-    "type": "popup",
-    "country": "JP",
-    "city": "Okayama",
-    "locationName": "イオンモール倉敷 2F サウスコート",
-    "startDate": "2026-10-30",
-    "endDate": "2026-11-16",
-    "summaryZh": "ちいかわ POP UP STORE 於イオンモール倉敷期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-f4daca",
-    "sourceType": "official_site",
-    "createdAt": "2026-10-17",
-    "sourceTitle": "ちいかわPOP UP STORE イオンモール倉敷(2026-10-30～2026-11-16) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_akrs/index.html"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE イオンモール春日部",
-    "type": "popup",
-    "country": "JP",
-    "city": "",
-    "locationName": "イオンモール春日部 1F 藤の広場",
-    "startDate": "2026-10-30",
-    "endDate": "2026-11-16",
-    "summaryZh": "ちいかわ POP UP STORE 於イオンモール春日部期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-8e2643",
-    "sourceType": "official_site",
-    "createdAt": "2026-10-17",
-    "sourceTitle": "ちいかわPOP UP STORE イオンモール春日部(2026-10-30～2026-11-16) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_aksk/index.html"
-  },
-  {
     "brand": "pokemon",
     "title": "Pokémon Center クリスマスをテーマにしたグッズ「クリスマスじゅんびチュウ！」が、ポケモンセンターに登場",
     "type": "new_product",
@@ -1838,5 +1790,29 @@
     "sourceType": "official_site",
     "createdAt": "2026-11-16",
     "sourceUrl": "https://chiikawa-info.jp/p26/muchauma-chiikawasushi/new_chitose/index.html"
+  },
+  {
+    "brand": "miffy",
+    "title": "Miffy 草莓鬆餅主題咖啡廳",
+    "type": "cafe",
+    "country": "JP",
+    "city": "Nagasaki",
+    "locationName": "Huis Ten Bosch",
+    "startDate": "2027-03-06",
+    "endDate": "2027-06-27",
+    "summaryZh": "日本豪斯登堡推出Miffy主題的「Holiday Picnic Cafe」，販售Miffy造型的草莓鬆餅等限定餐點。",
+    "needReservation": false,
+    "hasLimitedGoods": false,
+    "tags": [
+      "米飛兔",
+      "主題咖啡廳",
+      "豪斯登堡",
+      "限定餐飲"
+    ],
+    "id": "mi-994ad0",
+    "sourceTitle": "顔と蝶ネクタイをかたどったピンクのワッフル！ハウステンボス／ホリデー・ピクニックカフェ ミッフィーのストロベリーワッフル - Dtimes",
+    "sourceType": "media",
+    "createdAt": "2026-11-17",
+    "sourceUrl": "https://dtimes.jp/post-1472435/"
   }
 ]
