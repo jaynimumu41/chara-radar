@@ -19,7 +19,11 @@ from email.utils import format_datetime
 from urllib.parse import urljoin
 
 import requests
-from verify_links import fetch_html  # 抓頁；被 bot 防護擋住時自動改用 reader 代理硬取
+from verify_links import (  # 抓頁；被 bot 防護擋住時自動改用 reader 代理硬取
+    _is_unusable_reader_page,
+    _polite_wait,
+    fetch_html,
+)
 
 # 每品牌在 PR TIMES 用的關鍵字（日文官方名稱命中率最高）+ 標題須含的關聯字
 PRTIMES_KEYWORD = {
@@ -186,15 +190,36 @@ def _table_cell_texts(html_text: str) -> list[str]:
 
 def _proxy_markdown(url: str, *, fresh: bool = False) -> str:
     """用 reader 代理取頁面 markdown（官方站常擋 bot）。失敗回 ''。"""
-    try:
-        target = url
-        if fresh:
-            separator = "&" if "?" in target else "?"
-            target += separator + "chara_radar=" + datetime.now(timezone.utc).strftime("%Y%m%d%H")
-        r = requests.get(READER + target, headers={"User-Agent": HEADERS_UA}, timeout=70)
-        return r.text if r.status_code == 200 else ""
-    except Exception:
-        return ""
+    targets: list[tuple[str, bool]] = []
+    if fresh:
+        separator = "&" if "?" in url else "?"
+        targets.append((
+            url + separator + "chara_radar="
+            + datetime.now(timezone.utc).strftime("%Y%m%d%H"),
+            True,
+        ))
+    # Preserve the reader's canonical cache.  For protected official sites it
+    # can be valid even while a forced refresh only captures the challenge.
+    targets.append((url, False))
+    for attempt, (target, no_cache) in enumerate(dict.fromkeys(targets)):
+        try:
+            reader_url = READER + target
+            _polite_wait(reader_url)
+            headers = {"User-Agent": HEADERS_UA}
+            if no_cache:
+                headers["X-No-Cache"] = "true"
+            r = requests.get(
+                reader_url,
+                headers=headers,
+                timeout=70,
+            )
+            if r.status_code == 200 and r.text.strip() and not _is_unusable_reader_page(r.text):
+                return r.text
+        except Exception:
+            pass
+        if attempt < len(targets) - 1:
+            time.sleep(2 * (attempt + 1))
+    return ""
 
 
 HEADERS_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -203,6 +228,7 @@ HEADERS_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
 _CHIIKAWA_PUS = "https://chiikawa-info.jp/pus.html"
 _CHIIKAWA_BABY = "https://chiikawa-info.jp/ckbaby.html"
 _CHIIKAWA_POCKET = "https://chiikawa-info.jp/ck_pocket.html"
+_CHIIKAWA_SUSHI = "https://chiikawa-info.jp/ck_sushi.html"
 _CHIIKAWA_PARK_HALLOWEEN = "https://chiikawapark-tokyo.jp/news/9lofnm5f5wy/"
 _CHIIKAWA_INFO_TOP = "https://chiikawa-info.jp/"
 _CHIIKAWA_MOGUMOGU_CASTELLA = "https://www.chiikawamogumogu.jp/stores/castella/"
@@ -238,6 +264,14 @@ _CHIIKAWA_CAMPAIGN_CARD = re.compile(
     r"<article[^>]*>[\s\S]*?<h3[^>]*>[\s\S]*?"
     r"<a[^>]+href=[\"']([^\"']+)[\"'][^>]*>([\s\S]*?)</a>[\s\S]*?</h3>"
     r"[\s\S]*?<p[^>]+class=[\"'][^\"']*setumei[^\"']*[\"'][^>]*>([\s\S]*?)</p>",
+    re.I,
+)
+_CHIIKAWA_SUSHI_ROW = re.compile(
+    r"\[([^\]]*?ちいかわ寿司\s*POP\s*UP\s*STORE[^\]]*?)\]"
+    r"\((https://chiikawa-info\.jp/p26/muchauma-chiikawasushi/([^/]+)/index\.html)\)\s*"
+    r"(20\d\d)年(\d{1,2})月(\d{1,2})日[^〜～]*?[〜～]\s*"
+    r"(?:(20\d\d)年)?(\d{1,2})月(\d{1,2})日(?:\([^)]*\))?\s*"
+    r"([^\n\[]{0,140})",
     re.I,
 )
 
@@ -423,15 +457,16 @@ def _clinic_event(page: str, slug: str) -> dict | None:
         return None
     if end < start or end < datetime.now(timezone(timedelta(hours=8))).date().isoformat():
         return None
-    url = CLINIC_BASE + slug + ".html"
+    child_url = CLINIC_BASE + slug + ".html"
+    source_url = CLINIC_BASE + "index.html#" + slug
     return dict(brand="chiikawa", title="吉伊卡哇診所 POP UP STORE " + venue,
                 type="popup", country="TW" if slug == "kazan" else "JP",
                 city=CLINIC_VENUES[slug], locationName=venue, startDate=start, endDate=end,
                 summaryZh=f"吉伊卡哇診所主題周邊於{venue}期間限定販售。",
                 needReservation=False, hasLimitedGoods=True, tags=["吉伊卡哇", "期間限定店"],
-                id=_stable_id("ch", url), sourceType="official_site",
+                id=_stable_id("ch", child_url), sourceType="official_site",
                 createdAt=datetime.now(timezone(timedelta(hours=8))).date().isoformat(),
-                sourceUrl=url, sourceTitle=html_lib.unescape(re.search(r'<title>(.*?)</title>', page)[1]))
+                sourceUrl=source_url, sourceTitle=html_lib.unescape(re.search(r'<title>(.*?)</title>', page)[1]))
 
 
 def fetch_chiikawa_clinic() -> list[dict]:
@@ -554,6 +589,69 @@ def fetch_chiikawa_campaign_popups(correct_city=None) -> list[dict]:
         out.extend(_chiikawa_campaign_events_from_text(
             md, campaign, correct_city=correct_city))
     return out
+
+
+def _chiikawa_sushi_events_from_text(md: str, correct_city=None,
+                                      today: str | None = None) -> list[dict]:
+    """Parse active venue rows from the official Chiikawa Sushi index."""
+    today = today or _today_iso()
+    out: list[dict] = []
+    # Keep the already-published random ID while migrating this record from a
+    # secondary article to the structured official index. New venues use a
+    # deterministic ID derived from their official child URL.
+    legacy_ids = {("new_chitose", "2026-11-27"): "ch-2fc781"}
+    for match in _CHIIKAWA_SUSHI_ROW.finditer(md or ""):
+        title, child_url, slug, sy, sm, sd, ey, em, ed, raw_location = match.groups()
+        title = re.sub(r"\s+", " ", title).strip()
+        if "終了" in title:
+            continue
+        start, end = _date_range_to_iso(sy, sm, sd, ey, em, ed)
+        if end < today:
+            continue
+        venue = re.sub(
+            r"^.*?ちいかわ寿司\s*POP\s*UP\s*STORE\s*", "", title, flags=re.I
+        ).strip()
+        location = re.sub(r"(?:にて)?開催[！!]?$", "", raw_location.strip()).strip()
+        city = correct_city(location, venue, title) if correct_city else ""
+        city = {"new_chitose": "Chitose"}.get(slug, city)
+        out.append({
+            "brand": "chiikawa",
+            "title": f"吉伊卡哇壽司快閃店 {venue}",
+            "type": "popup",
+            "country": "TW" if city in _TAIWAN_CITIES else "JP",
+            "city": city or "",
+            "locationName": location or venue,
+            "startDate": start,
+            "endDate": end,
+            "summaryZh": f"吉伊卡哇壽司主題快閃店於{location or venue}販售活動紀念與限定周邊商品。",
+            "needReservation": False,
+            "hasLimitedGoods": True,
+            "tags": ["吉伊卡哇", "壽司", "快閃店", "限定商品"],
+            "id": legacy_ids.get(
+                (slug, start), _stable_id("ch", f"{child_url}|{start}")
+            ),
+            "sourceType": "official_site",
+            "createdAt": _today_iso(),
+            "sourceTitle": f"{title}（{start}～{end}） - ちいかわ公式",
+            "sourceUrl": f"{_CHIIKAWA_SUSHI}#{slug}-{start}",
+        })
+    return out
+
+
+def fetch_chiikawa_sushi_popups(correct_city=None) -> list[dict]:
+    """Fetch current Chiikawa Sushi popups from the official aggregate page."""
+    md = (
+        _proxy_markdown(_CHIIKAWA_SUSHI, fresh=True)
+        or _proxy_markdown(_CHIIKAWA_SUSHI)
+        or fetch_html(_CHIIKAWA_SUSHI)
+    )
+    if not md:
+        raise RuntimeError(f"吉伊卡哇壽司排程抓取失敗：{_CHIIKAWA_SUSHI}")
+    if not _CHIIKAWA_SUSHI_ROW.search(md):
+        raise RuntimeError(
+            f"吉伊卡哇壽司排程未解析到任何場次列：{_CHIIKAWA_SUSHI}"
+        )
+    return _chiikawa_sushi_events_from_text(md, correct_city=correct_city)
 
 
 def _chiikawa_park_halloween_event_from_text(

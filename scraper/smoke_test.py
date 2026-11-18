@@ -596,6 +596,18 @@ sample_bakery = """
 check("ちいかわ Bakery 稽核排除 POP UP",
       [store.name for store in audit_chiikawa_stores.extract_bakery_stores(sample_bakery)],
       ["ちいかわベーカリー", "ちいかわベーカリー OSAKA"])
+sample_bakery_reader = """
+<title>ちいかわベーカリー</title>
+ちいかわベーカリー
+住所〒150-0001 東京都渋谷区神宮前4-30-3
+ちいかわベーカリー ポップアップショップ
+住所〒150-0001 東京都渋谷区神宮前1-11-6
+ちいかわベーカリー OSAKA
+住所〒530-0001 大阪府大阪市北区梅田3-2-2
+"""
+check("ちいかわ Bakery reader fallback 仍排除 POP UP",
+      [store.name for store in audit_chiikawa_stores.extract_bakery_stores(sample_bakery_reader)],
+      ["ちいかわベーカリー", "ちいかわベーカリー OSAKA"])
 check("ちいかわ Park 與獨立商店都列入常設據點",
       [store.name for store in audit_chiikawa_stores.extract_park_stores(
           "施設名 ちいかわパーク サンシャインシティ",
@@ -2962,7 +2974,9 @@ check("Clinic explicit cross-year period", official_sources._clinic_event(clinic
 check("Clinic overseas excluded", official_sources._clinic_event(clinic_fixture, "seoul"), None)
 check("Clinic missing period rejected", official_sources._clinic_event('<title>clinic</title>', "tokyo"), None)
 check("Clinic media wrong dates corrected", scrape.normalize_source_event(ev(brand="chiikawa",sourceUrl="https://sounova.com/anime/chiikawa-clinic-pop-up-store-taiwan"))["startDate"], "2026-12-18")
-check("Clinic JP generic becomes Tokyo venue", scrape.normalize_source_event(ev(brand="chiikawa",sourceUrl="https://prtimes.jp/main/html/rd/p/000000412.000001117.html"))["locationName"], "東京駅一番街 東京キャラクターストリートいちばんプラザ")
+clinic_from_pr = scrape.normalize_source_event(ev(brand="chiikawa",sourceUrl="https://prtimes.jp/main/html/rd/p/000000412.000001117.html"))
+check("Clinic JP generic becomes Tokyo venue", clinic_from_pr["locationName"], "東京駅一番街 東京キャラクターストリートいちばんプラザ")
+check("Clinic aliases use official aggregate source", clinic_from_pr["sourceUrl"], "https://chiikawa-info.jp/p26/chiikawaclinic/index.html#tokyo")
 with mock.patch.object(scrape, "_REJECTED", scrape.load_rejected()):
     check("Online holiday campaign blocked", scrape.is_rejected_url("https://prtimes.jp/main/html/rd/p/000000181.000050227.html"), True)
     check("Other Miffy release allowed", scrape.is_rejected_url("https://prtimes.jp/main/html/rd/p/000000182.000050227.html"), False)
@@ -2976,6 +2990,14 @@ with tempfile.TemporaryDirectory() as clinic_tmp:
     check("Clinic complete venue coverage maps parent", official_sources.CLINIC_BASE + "index.html" in clinic_audit.load_parsed_event_pages(clinic_path), True)
     clinic_path.write_text(json.dumps(clinic_rows[:-1]), encoding="utf-8")
     check("Clinic incomplete venue coverage remains review", official_sources.CLINIC_BASE + "index.html" in clinic_audit.load_parsed_event_pages(clinic_path), False)
+    clinic_fragment_rows = [dict(
+        brand="chiikawa", id=slug,
+        sourceUrl=official_sources.CLINIC_BASE + "index.html#" + slug,
+    ) for slug in official_sources.CLINIC_VENUES]
+    clinic_path.write_text(json.dumps(clinic_fragment_rows), encoding="utf-8")
+    check("Clinic complete aggregate fragments map parent", official_sources.CLINIC_BASE + "index.html" in clinic_audit.load_parsed_event_pages(clinic_path), True)
+    clinic_path.write_text(json.dumps(clinic_fragment_rows[:-1]), encoding="utf-8")
+    check("Clinic incomplete aggregate fragments remain review", official_sources.CLINIC_BASE + "index.html" in clinic_audit.load_parsed_event_pages(clinic_path), False)
 
 clinic_shop = scrape.normalize_source_event(ev(brand="chiikawa", type="popup", endDate="2026-12-24", sourceUrl="https://yashion.jp/event/46928/"))
 check("Clinic permanent shop goods are not popup", clinic_shop["type"], "new_product")
@@ -2985,7 +3007,7 @@ check("Other shop article unchanged", scrape.normalize_source_event(ev(brand="ch
 
 # Daily verification 2026-11-14: media aliases preserve official venue identity.
 for source, target in [
-    ("https://news.infoseek.co.jp/article/20261113bgmania20262704040/", "https://chiikawa-info.jp/p26/chiikawaclinic/tokyo.html"),
+    ("https://news.infoseek.co.jp/article/20261113bgmania20262704040/", "https://chiikawa-info.jp/p26/chiikawaclinic/index.html#tokyo"),
     ("https://collabo-cafe.com/events/collabo/chiikawa-nov-popup-ekimaru-jr-kyoto-2026/", "https://chiikawa-info.jp/p26/pus_ekky/index.html"),
 ]:
     check("Media resolves official venue " + source, scrape.normalize_source_event(ev(brand="chiikawa",sourceUrl=source))["sourceUrl"], target)
@@ -3001,14 +3023,263 @@ check("Other Utsunomiya article unchanged", scrape.normalize_source_event(ev(bra
 check("Other brand Utsunomiya unchanged", scrape.normalize_source_event(ev(brand="miffy", sourceUrl=utsunomiya_url))["sourceUrl"], utsunomiya_url)
 
 for source, target, city, venue, start, end in [
-    ("https://ure.pia.co.jp/articles/-/3560227", "https://chiikawa-info.jp/p26/chiikawaclinic/tokyo.html", "Tokyo", "", "", ""),
+    ("https://ure.pia.co.jp/articles/-/3560227", "https://chiikawa-info.jp/p26/chiikawaclinic/index.html#tokyo", "Tokyo", "", "", ""),
     ("https://collabo-cafe.com/events/collabo/chiikawa-nov-popup-aeonmall-hanyu-2026/", "https://chiikawa-info.jp/p26/pus_ahny/index.html", "Saitama", "", "", ""),
-    ("https://collabo-cafe.com/events/collabo/chiikawa-muchauma-sushi-popup-new-chitose-2026/", "https://chiikawa-info.jp/p26/muchauma-chiikawasushi/new_chitose/index.html", "Chitose", "", "", ""),
+    ("https://collabo-cafe.com/events/collabo/chiikawa-muchauma-sushi-popup-new-chitose-2026/", "https://chiikawa-info.jp/ck_sushi.html#new_chitose-2026-11-27", "Chitose", "", "", ""),
 ]:
     result = scrape.normalize_source_event(ev(brand="chiikawa",sourceUrl=source))
     check("Nov16 official identity " + source, result["sourceUrl"], target)
     check("Nov16 venue city " + source, result["city"], city)
     check("Nov16 other brand preserved " + source, scrape.normalize_source_event(ev(brand="miffy",sourceUrl=source))["sourceUrl"], source)
+
+
+# Nov18: apparel launch and challenge-page audit regressions.
+check("Crocs shoe launch excluded", scrape.is_apparel_new_product(ev(type="new_product", title="寶可夢 Crocs 聯名鞋")), True)
+check("Footwear popup retained", scrape.is_apparel_new_product(ev(type="popup", title="Crocs 快閃店", summaryZh="鞋款", locationName="Tokyo", startDate="2026-11-18", endDate="2026-11-30")), False)
+import verify_links as vl
+with mock.patch.object(vl, "_raw_fetch", return_value=(True, 200, "<title>Just a moment...</title>")), mock.patch.object(vl.requests, "get") as get:
+    get.return_value.status_code = 200
+    get.return_value.content = b"<title>Official source</title><h2>Stores</h2>"
+    check("HTTP200 challenge invokes reader", vl.fetch_html("https://example.com"), "<title>Official source</title><h2>Stores</h2>")
+    get.return_value.content = b"<title>Just a moment...</title>"
+    check("Reader challenge rejected", vl.fetch_html("https://example.com"), "")
+vl._CHECK_CACHE.clear()
+with mock.patch.object(vl, "_raw_fetch", side_effect=[
+    (True, 200, "<title>Just a moment...</title>"),
+    (True, 200, "Title: Official source"),
+]) as raw_fetch:
+    check("check_url rejects direct HTTP200 challenge", vl.check_url("https://challenge.example/direct"), (True, 200))
+    check("check_url HTTP200 challenge uses proxy", raw_fetch.call_count, 2)
+vl._CHECK_CACHE.clear()
+with mock.patch.object(vl, "_proxy_fetch", return_value=(False, 403, "")) as proxy_fetch, mock.patch.object(
+    vl, "_raw_fetch", return_value=(False, 403, "")
+), mock.patch.object(
+    vl, "_reader_markdown_fetch", return_value="<title>Official Chiikawa page</title>"
+) as markdown_fetch:
+    check("check_url Chiikawa 403 uses canonical markdown fallback", vl.check_url(
+        "https://chiikawa-info.jp/p26/current/index.html"
+    ), (True, 200))
+    check("check_url does not repeat failed preferred proxy", proxy_fetch.call_count, 1)
+    check("check_url requests Chiikawa markdown fallback", markdown_fetch.call_count, 1)
+with mock.patch.object(vl, "_reader_markdown_fetch", return_value=(
+    '<a href="https://chiikawa-info.jp/p26/pus_example/index.html">Current popup</a>'
+)):
+    check("Official PUS listing corroborates exact protected child", vl._official_listing_confirms_url(
+        "https://chiikawa-info.jp/p26/pus_example/index.html", 20
+    ), True)
+    check("Official PUS listing rejects an unlisted child", vl._official_listing_confirms_url(
+        "https://chiikawa-info.jp/p26/pus_other/index.html", 20
+    ), False)
+vl._CHECK_CACHE.clear()
+vl._OFFICIAL_LISTING_CACHE.clear()
+with mock.patch.object(vl, "_proxy_fetch", return_value=(False, 403, "")), mock.patch.object(
+    vl, "_raw_fetch", return_value=(False, 403, "")
+), mock.patch.object(vl, "_reader_markdown_fetch", side_effect=[
+    "", '<a href="https://chiikawa-info.jp/p26/pus_example/index.html">Current popup</a>'
+]):
+    check("Listing corroboration cannot satisfy return_text callers", vl.check_url(
+        "https://chiikawa-info.jp/p26/pus_example/index.html", return_text=True
+    ), (False, 403, ""))
+clinic_page_fixture = '<title>Clinic</title><meta name="description" content="2026/11/27(金)～2026/12/24(木)東京駅一番街にて「ちいかわクリニック POP UP STORE」を開催">'
+check("Clinic parser cites official aggregate with venue fragment", official_sources._clinic_event(
+    clinic_page_fixture, "tokyo"
+)["sourceUrl"], "https://chiikawa-info.jp/p26/chiikawaclinic/index.html#tokyo")
+challenge = mock.Mock(status_code=200, content=b"## chiikawa-info.jp\n## Performing security verification")
+reader_page = mock.Mock(status_code=200, content=(
+    "Title: ちいかわらんど ｜ スパイラルキュート\n"
+    "## ちいかわらんど(常設店)\n"
+    "### [ちいかわらんど 原宿店](https://chiikawa-info.jp/land/harajuku/)\n"
+    "## ちいかわらんど POP UP SHOP\n"
+    "### [ちいかわらんど POP UP SHOP大分](https://chiikawa-info.jp/p26/example/index.html)\n"
+).encode("utf-8"))
+with mock.patch.object(vl, "_raw_fetch", return_value=(True, 200, "<title>Just a moment...</title>")), mock.patch.object(
+    vl.requests, "get", side_effect=[challenge, challenge, reader_page]
+) as get:
+    compatible = vl.fetch_html("https://chiikawa-info.jp/ck_land")
+    check("Chiikawa reader markdown cache-busts challenge", any("chara_radar=" in call.args[0] for call in get.call_args_list), True)
+    reader_headers = [call.kwargs["headers"] for call in get.call_args_list]
+    check("Canonical reader cache remains enabled", (
+        "X-No-Cache" not in reader_headers[0],
+        reader_headers[1].get("X-No-Cache"),
+        "X-No-Cache" not in reader_headers[2],
+    ), (True, "true", True))
+    check("Reader markdown keeps official permanent section", [store.name for store in audit_chiikawa_stores.extract_info_permanent_stores(compatible)], ["ちいかわらんど 原宿店"])
+check("Reader markdown title remains parser compatible", [store.name for store in audit_chiikawa_stores.extract_taipei_store(vl._reader_markdown_as_html("Title: CHIIKAWA SHOP in TAIPEI(2025/12/27(土)～)"))], ["CHIIKAWA SHOP in TAIPEI"])
+check("Markdown challenge detected", vl._is_challenge_page("Title: Just a moment...\n## Performing security verification"), True)
+check("Reader terminal 404 rejected", vl._is_unusable_reader_page(
+    "Warning: Target URL returned error 404: Not Found"
+), True)
+check("Reader terminal 410 rejected", vl._is_unusable_reader_page(
+    "Warning: Target URL returned error 410: Gone"
+), True)
+check("Reader rate warning with cached content remains usable", vl._is_unusable_reader_page(
+    "Warning: Target URL returned error 429: Too Many Requests\n## Current official schedule"
+), False)
+check("Taipei homepage evidence remains usable", [store.name for store in audit_chiikawa_stores.extract_taipei_store("<h3>CHIIKAWA SHOP in TAIPEI</h3> 2025年12月27日 台北市中山區長安西路19號")], ["CHIIKAWA SHOP in TAIPEI"])
+with mock.patch.object(audit_chiikawa_stores, "fetch_html", return_value="<html>unexpected official response</html>"):
+    try:
+        audit_chiikawa_stores.fetch_official_stores()
+        empty_store_source_blocked = False
+    except RuntimeError:
+        empty_store_source_blocked = True
+    check("Nonempty official page with zero stores blocks audit", empty_store_source_blocked, True)
+proxy_challenge = mock.Mock(status_code=200, text="Title: Just a moment...\nPerforming security verification")
+proxy_official = mock.Mock(status_code=200, text="Title: Official Chiikawa page\n## Store")
+with mock.patch.object(official_sources.requests, "get", side_effect=[proxy_challenge, proxy_official]) as proxy_get, mock.patch.object(official_sources, "_polite_wait"):
+    check("Fresh reader challenge falls back to canonical", official_sources._proxy_markdown("https://chiikawa-info.jp/index.html", fresh=True), proxy_official.text)
+    check("Official source canonical request keeps reader cache", (
+        proxy_get.call_args_list[0].kwargs["headers"].get("X-No-Cache"),
+        "X-No-Cache" not in proxy_get.call_args_list[1].kwargs["headers"],
+    ), ("true", True))
+with mock.patch.object(vl, "_raw_fetch", return_value=(True, 200, "<title>Official</title>")):
+    check("Normal source preserved", vl.fetch_html("https://example.com"), "<title>Official</title>")
+with mock.patch.object(audit_chiikawa_subpages, "fetch_html", return_value="<html>unexpected response</html>"):
+    try:
+        audit_chiikawa_subpages.fetch_homepage_links()
+        empty_blocked = False
+    except RuntimeError:
+        empty_blocked = True
+    check("Empty official coverage blocks publication", empty_blocked, True)
+home_listing = '<a href="/p26/home_current/index.html">Current event</a>'
+pus_listing = '<a href="/p26/pus_current/index.html">Current popup</a>'
+with mock.patch.object(audit_chiikawa_subpages, "fetch_html", side_effect=lambda url: {
+    audit_chiikawa_subpages.HOME_URL: home_listing,
+    audit_chiikawa_subpages.PUS_URL: pus_listing,
+}.get(url, "")) as coverage_fetch:
+    coverage_links = audit_chiikawa_subpages.fetch_homepage_links()
+    check("Chiikawa coverage uses canonical PUS URL", [call.args[0] for call in coverage_fetch.call_args_list], [
+        audit_chiikawa_subpages.HOME_URL, audit_chiikawa_subpages.PUS_URL,
+    ])
+    check("Chiikawa coverage unions home and PUS", len(coverage_links), 2)
+with mock.patch.object(audit_chiikawa_subpages, "fetch_html", side_effect=lambda url: {
+    audit_chiikawa_subpages.HOME_URL: home_listing,
+    audit_chiikawa_subpages.PUS_URL: "",
+    audit_chiikawa_subpages.PUS_FALLBACK_URL: pus_listing,
+}.get(url, "")) as fallback_coverage_fetch:
+    fallback_coverage_links = audit_chiikawa_subpages.fetch_homepage_links()
+    check("Chiikawa coverage falls back to official extensionless PUS", (
+        [call.args[0] for call in fallback_coverage_fetch.call_args_list],
+        len(fallback_coverage_links),
+    ), ([
+        audit_chiikawa_subpages.HOME_URL,
+        audit_chiikawa_subpages.PUS_URL,
+        audit_chiikawa_subpages.PUS_FALLBACK_URL,
+    ], 2))
+with mock.patch.object(audit_chiikawa_subpages, "fetch_html", side_effect=lambda url: home_listing if url == audit_chiikawa_subpages.HOME_URL else ""):
+    try:
+        audit_chiikawa_subpages.fetch_homepage_links()
+        missing_pus_blocked = False
+    except RuntimeError:
+        missing_pus_blocked = True
+    check("Missing Chiikawa PUS listing blocks publication", missing_pus_blocked, True)
+unknown_link = audit_chiikawa_subpages.ChiikawaLink(
+    "https://chiikawa-info.jp/p26/unknown_current/index.html", "Unknown current event"
+)
+with mock.patch.object(audit_chiikawa_subpages, "fetch_html", return_value=""):
+    try:
+        audit_chiikawa_subpages.fetch_review_details([unknown_link], {})
+        missing_detail_blocked = False
+    except RuntimeError:
+        missing_detail_blocked = True
+    check("Unclassified Chiikawa detail fetch failure blocks publication", missing_detail_blocked, True)
+expired_link = audit_chiikawa_subpages.ChiikawaLink(
+    "https://chiikawa-info.jp/p26/pus_expired/index.html",
+    "ちいかわPOP UP STORE 新光三越(2026/10/7(水)～11/15(日))",
+)
+with mock.patch.object(audit_chiikawa_subpages, "fetch_html") as expired_fetch:
+    expired_details = audit_chiikawa_subpages.fetch_review_details(
+        [expired_link], {}, today="2026-11-18"
+    )
+    check("Expired official listing does not require blocked child", (
+        expired_link.url in expired_details, expired_fetch.call_count,
+    ), (True, 0))
+expired_listing_html = """
+<h3><a href="/p26/pus_aonr/index.html">ちいかわPOP UP STORE 0%OKINAWA</a></h3>
+2026年6月5日(金)～8月30日(日)
+イオンモール沖縄ライカム 2F 0%OKINAWA
+<h3><a href="/p26/pus_current/index.html">ちいかわPOP UP STORE 現行会場</a></h3>
+2026年11月28日(土)～12月13日(日)
+"""
+listing_context_links = audit_chiikawa_subpages.extract_p26_links(expired_listing_html)
+check("Official PUS link keeps adjacent schedule context", [
+    (link.url.rsplit("/p26/", 1)[1], link.title) for link in listing_context_links
+], [
+    ("pus_aonr/index.html", "ちいかわPOP UP STORE 0%OKINAWA(2026年6月5日(金)～8月30日(日))"),
+    ("pus_current/index.html", "ちいかわPOP UP STORE 現行会場(2026年11月28日(土)～12月13日(日))"),
+])
+with mock.patch.object(audit_chiikawa_subpages, "fetch_html") as listing_context_fetch:
+    listing_context_details = audit_chiikawa_subpages.fetch_review_details(
+        listing_context_links, {}, today="2026-11-18"
+    )
+    check("Expired adjacent PUS schedule avoids protected child", (
+        listing_context_links[0].url in listing_context_details,
+        listing_context_fetch.call_args_list[0].args[0],
+    ), (
+        True, listing_context_links[1].url,
+    ))
+check("Press-release source type mismatch fails lint", len(data_lint.source_metadata_errors([
+    ev(id="bad-pr", sourceUrl="https://prtimes.jp/main/html/rd/p/example.html", sourceType="official_site")
+])), 1)
+published_events = json.loads(data_lint.EVENTS_JSON.read_text(encoding="utf-8-sig"))
+waffle = next(event for event in published_events if event.get("id") == "mi-994ad0")
+check("Miffy PR replacement metadata stays synchronized", (
+    waffle["sourceType"], "Dtimes" in waffle["sourceTitle"],
+), ("official_social", False))
+sushi_fixture = """
+### [むちゃうま!!ちいかわ寿司 POP UP STORE 新千歳空港](https://chiikawa-info.jp/p26/muchauma-chiikawasushi/new_chitose/index.html)
+2026年11月27日(金)～12月20日(日)
+新千歳空港 国内線旅客ターミナルビル 2階 センタープラザにて開催！
+### [【終了】むちゃうま!!ちいかわ寿司 POP UP STORE 横浜スカイビル](https://chiikawa-info.jp/p26/muchauma-chiikawasushi/yokohama/index.html)
+2026年10月22日(木)～11月1日(日)
+横浜スカイビル 8階 イベントスペース byマルイにて開催！
+"""
+sushi_events = official_sources._chiikawa_sushi_events_from_text(
+    sushi_fixture, correct_city=scrape.correct_city, today="2026-11-18"
+)
+check("Chiikawa Sushi official index keeps only current venue", len(sushi_events), 1)
+check("Chiikawa Sushi official index preserves published identity", (
+    sushi_events[0]["id"], sushi_events[0]["city"], sushi_events[0]["startDate"],
+    sushi_events[0]["endDate"], sushi_events[0]["sourceUrl"],
+), (
+    "ch-2fc781", "Chitose", "2026-11-27", "2026-12-20",
+    "https://chiikawa-info.jp/ck_sushi.html#new_chitose-2026-11-27",
+))
+tw_sushi_fixture = """
+### [むちゃうま!!ちいかわ寿司 POP UP STORE 華山](https://chiikawa-info.jp/p26/muchauma-chiikawasushi/taipei/index.html)
+2026年12月18日(金)～2027年1月10日(日)
+華山1914文化創意産業園區 中2館にて開催！
+"""
+tw_sushi = official_sources._chiikawa_sushi_events_from_text(
+    tw_sushi_fixture, correct_city=scrape.correct_city, today="2026-11-18"
+)
+check("Chiikawa Sushi Taiwan venue is not mislabeled JP", (
+    tw_sushi[0]["country"], tw_sushi[0]["city"],
+), ("TW", "Taipei"))
+future_sushi = official_sources._chiikawa_sushi_events_from_text(
+    sushi_fixture.replace("2026年11月27日", "2027年11月27日").replace(
+        "12月20日", "2027年12月20日", 1
+    ), correct_city=scrape.correct_city, today="2027-01-01"
+)
+check("Chiikawa Sushi reused slug gets a new annual identity", (
+    future_sushi[0]["id"] != "ch-2fc781",
+    future_sushi[0]["sourceUrl"],
+), (True, "https://chiikawa-info.jp/ck_sushi.html#new_chitose-2027-11-27"))
+with mock.patch.object(official_sources, "_proxy_markdown", return_value=""), mock.patch.object(
+    official_sources, "fetch_html", return_value=""
+):
+    try:
+        official_sources.fetch_chiikawa_sushi_popups()
+        missing_sushi_blocked = False
+    except RuntimeError:
+        missing_sushi_blocked = True
+    check("Missing Chiikawa Sushi source records structured failure", missing_sushi_blocked, True)
+with mock.patch.object(official_sources, "_proxy_markdown", return_value="unexpected layout"):
+    try:
+        official_sources.fetch_chiikawa_sushi_popups()
+        malformed_sushi_blocked = False
+    except RuntimeError:
+        malformed_sushi_blocked = True
+    check("Malformed Chiikawa Sushi source records structured failure", malformed_sushi_blocked, True)
 
 print(f"\n{'=' * 40}\n結果：{_passed} 通過、{_failed} 失敗")
 sys.exit(1 if _failed else 0)

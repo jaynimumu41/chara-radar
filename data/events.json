@@ -1239,7 +1239,7 @@
     "id": "ch-83dbb1",
     "sourceType": "official_site",
     "createdAt": "2026-11-12",
-    "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/tokyo.html",
+    "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/index.html#tokyo",
     "sourceTitle": "ちいかわクリニック 東京駅(2026/11/27(金)～12/24(木))"
   },
   {
@@ -1261,7 +1261,7 @@
     "id": "ch-92bcaf",
     "sourceType": "official_site",
     "createdAt": "2026-11-12",
-    "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/ginza.html",
+    "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/index.html#ginza",
     "sourceTitle": "ちいかわクリニック 銀座(2026/11/27(金)～12/27(日))"
   },
   {
@@ -1283,7 +1283,7 @@
     "id": "ch-0a4256",
     "sourceType": "official_site",
     "createdAt": "2026-11-12",
-    "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/nagoya.html",
+    "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/index.html#nagoya",
     "sourceTitle": "ちいかわクリニック 名古屋(2026/11/27(金)～12/20(日))"
   },
   {
@@ -1305,7 +1305,7 @@
     "id": "ch-fb7275",
     "sourceType": "official_site",
     "createdAt": "2026-11-12",
-    "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/umeda.html",
+    "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/index.html#umeda",
     "sourceTitle": "ちいかわクリニック 大阪梅田(2026/11/27(金)～12/9(水))"
   },
   {
@@ -1327,7 +1327,7 @@
     "id": "ch-47a610",
     "sourceType": "official_site",
     "createdAt": "2026-11-12",
-    "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/hiroshima.html",
+    "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/index.html#hiroshima",
     "sourceTitle": "ちいかわクリニック 広島(2026/11/27(金)～2027/1/6(水))"
   },
   {
@@ -1349,7 +1349,7 @@
     "id": "ch-4bd713",
     "sourceType": "official_site",
     "createdAt": "2026-11-12",
-    "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/sapporo.html",
+    "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/index.html#sapporo",
     "sourceTitle": "ちいかわクリニック 札幌(2026/11/27(金)～2027/1/5(火))"
   },
   {
@@ -1371,7 +1371,7 @@
     "id": "ch-735186",
     "sourceType": "official_site",
     "createdAt": "2026-11-12",
-    "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/sendai.html",
+    "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/index.html#sendai",
     "sourceTitle": "ちいかわクリニック 仙台(2026/11/27(金)～12/20(日))"
   },
   {
@@ -1393,7 +1393,7 @@
     "id": "ch-f4c6c3",
     "sourceType": "official_site",
     "createdAt": "2026-11-12",
-    "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/kumamoto.html",
+    "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/index.html#kumamoto",
     "sourceTitle": "ちいかわクリニック 熊本(2026/11/27(金)～2027/1/11(月祝))"
   },
   {
@@ -1415,7 +1415,7 @@
     "id": "ch-d473da",
     "sourceType": "official_site",
     "createdAt": "2026-11-12",
-    "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/kazan.html",
+    "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/index.html#kazan",
     "sourceTitle": "ちいかわクリニック POP UP STORE 華山(2026/12/18(金)～2027/1/10(日))"
   },
   {
@@ -1762,21 +1762,21 @@
       "北海道"
     ],
     "id": "ch-2fc781",
-    "sourceTitle": "ちいかわ寿司 ポップアップストア in 北海道 11月27日より開催! - コラボカフェ",
+    "sourceTitle": "むちゃうま!!ちいかわ寿司 POP UP STORE 新千歳空港（2026-11-27～2026-12-20） - ちいかわ公式",
     "sourceType": "official_site",
     "createdAt": "2026-11-16",
-    "sourceUrl": "https://chiikawa-info.jp/p26/muchauma-chiikawasushi/new_chitose/index.html"
+    "sourceUrl": "https://chiikawa-info.jp/ck_sushi.html#new_chitose-2026-11-27"
   },
   {
     "brand": "miffy",
-    "title": "Miffy 草莓鬆餅主題咖啡廳",
+    "title": "Miffy 草莓鬆餅限定餐點",
     "type": "cafe",
     "country": "JP",
     "city": "Nagasaki",
-    "locationName": "Huis Ten Bosch",
+    "locationName": "ハウステンボス／ホリデー・ピクニックカフェ",
     "startDate": "2027-03-06",
     "endDate": "2027-06-27",
-    "summaryZh": "日本豪斯登堡推出Miffy主題的「Holiday Picnic Cafe」，販售Miffy造型的草莓鬆餅等限定餐點。",
+    "summaryZh": "豪斯登堡 Miffy Celebration 期間，Holiday Picnic Cafe 販售 Miffy 造型草莓鬆餅限定餐點。",
     "needReservation": false,
     "hasLimitedGoods": false,
     "tags": [
@@ -1786,10 +1786,10 @@
       "限定餐飲"
     ],
     "id": "mi-994ad0",
-    "sourceTitle": "顔と蝶ネクタイをかたどったピンクのワッフル！ハウステンボス／ホリデー・ピクニックカフェ ミッフィーのストロベリーワッフル - Dtimes",
-    "sourceType": "media",
+    "sourceTitle": "日本最大のミッフィーイベントがハウステンボス開業35周年でさらに進化　ミッフィーのパレードが一大リニューアル。新しいなかまたちも登場　パーク全体がミッフィーのかわいさと祝祭感に包まれる春が到来",
+    "sourceType": "official_social",
     "createdAt": "2026-11-17",
-    "sourceUrl": "https://dtimes.jp/post-1472435/"
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000739.000023462.html"
   },
   {
     "brand": "miffy",
@@ -1813,30 +1813,6 @@
     "createdAt": "2026-11-18",
     "sourceTitle": "八戸ショッピングセンター ラピアで「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
     "sourceUrl": "https://dickbruna.jp/news/202611/49701/"
-  },
-  {
-    "brand": "pokemon",
-    "title": "寶可夢 30 週年 Crocs 聯名鞋",
-    "type": "new_product",
-    "country": "TW",
-    "city": "Taipei",
-    "locationName": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3F）",
-    "startDate": "2026-11-17",
-    "endDate": "",
-    "summaryZh": "寶可夢 30 週年 Crocs 聯名鞋登場，皮卡丘、耿鬼、胖丁款式於 11 月 17 日開賣。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "聯名",
-      "鞋款",
-      "寶可夢",
-      "新品"
-    ],
-    "id": "po-a31b0c",
-    "sourceTitle": "寶可夢 30 週年 Crocs 聯名鞋登場！皮卡丘、耿鬼、胖丁 11月17日開賣 - Pokemon Hubs",
-    "sourceType": "media",
-    "createdAt": "2026-11-18",
-    "sourceUrl": "https://pokemonhubs.com/news/pokemon-crocs-30th-anniversary-2026/"
   },
   {
     "brand": "chiikawa",

@@ -33,6 +33,7 @@ PARK_URL = "https://chiikawapark-tokyo.jp/"
 PARK_STORE_URL = "https://chiikawapark-tokyo.jp/news/x0e64eb94v/"
 OBANYAKI_URL = "https://prtimes.jp/main/html/rd/p/000000004.000187317.html"
 TAIPEI_URL = "https://chiikawa-info.jp/ck_w/taipei/index.html"
+INFO_HOME_URL = "https://chiikawa-info.jp/index.html"
 
 
 class _PermanentSectionParser(HTMLParser):
@@ -202,7 +203,15 @@ class _BakeryStoreParser(HTMLParser):
 def extract_bakery_stores(page_html: str) -> list[OfficialStore]:
     parser = _BakeryStoreParser()
     parser.feed(page_html or "")
-    return [OfficialStore(name, "ちいかわベーカリー") for name in dict.fromkeys(parser.names)]
+    names = list(parser.names)
+    # Reader markdown keeps the official address blocks but not the original
+    # section ids/classes. Accept only the two exact permanent-shop labels;
+    # the similarly named POP UP line must remain excluded.
+    for line in (page_html or "").splitlines():
+        name = clean(re.sub(r"<[^>]+>", " ", html.unescape(line)))
+        if name in {"ちいかわベーカリー", "ちいかわベーカリー OSAKA"}:
+            names.append(name)
+    return [OfficialStore(name, "ちいかわベーカリー") for name in dict.fromkeys(names)]
 
 
 def extract_park_stores(park_html: str, store_html: str) -> list[OfficialStore]:
@@ -218,7 +227,11 @@ def extract_park_stores(park_html: str, store_html: str) -> list[OfficialStore]:
 
 def extract_taipei_store(page_html: str) -> list[OfficialStore]:
     title = extract_page_title(page_html)
-    if "CHIIKAWA SHOP in TAIPEI" in title:
+    visible = clean(re.sub(r"<[^>]+>", " ", html.unescape(page_html or "")))
+    if "CHIIKAWA SHOP in TAIPEI" in title or (
+        "CHIIKAWA SHOP in TAIPEI" in visible
+        and ("2025年12月27日" in visible or "台北市中山區長安西路19號" in visible)
+    ):
         return [OfficialStore("CHIIKAWA SHOP in TAIPEI", "Taiwan")]
     return []
 
@@ -249,7 +262,10 @@ def fetch_official_stores(timeout: int = 30) -> list[OfficialStore]:
         page = fetch_html(url, timeout=timeout)
         if not page:
             raise RuntimeError(f"could not fetch {url}")
-        stores.extend(extract_info_permanent_stores(page))
+        parsed = extract_info_permanent_stores(page)
+        if not parsed:
+            raise RuntimeError(f"official permanent-store section returned no stores: {url}")
+        stores.extend(parsed)
 
     sitemap = fetch_html(MOGUMOGU_SITEMAP_URL, timeout=timeout)
     if not sitemap:
@@ -261,18 +277,29 @@ def fetch_official_stores(timeout: int = 30) -> list[OfficialStore]:
         page = fetch_html(url, timeout=timeout)
         if not page:
             raise RuntimeError(f"could not fetch {url}")
-        stores.extend(extract_mogumogu_stores(page))
+        parsed = extract_mogumogu_stores(page)
+        if not parsed:
+            raise RuntimeError(f"official Mogumogu store page returned no stores: {url}")
+        stores.extend(parsed)
 
     pages = {}
     for url in (YAKI_URL, BAKERY_URL, PARK_URL, PARK_STORE_URL, TAIPEI_URL, OBANYAKI_URL):
         pages[url] = fetch_html(url, timeout=timeout)
+        if not pages[url] and url == TAIPEI_URL:
+            pages[url] = fetch_html(INFO_HOME_URL, timeout=timeout)
         if not pages[url]:
             raise RuntimeError(f"could not fetch {url}")
-    stores.extend(extract_yaki_stores(pages[YAKI_URL]))
-    stores.extend(extract_bakery_stores(pages[BAKERY_URL]))
-    stores.extend(extract_park_stores(pages[PARK_URL], pages[PARK_STORE_URL]))
-    stores.extend(extract_taipei_store(pages[TAIPEI_URL]))
-    stores.extend(extract_obanyaki_store(pages[OBANYAKI_URL]))
+    expected = (
+        (YAKI_URL, extract_yaki_stores(pages[YAKI_URL])),
+        (BAKERY_URL, extract_bakery_stores(pages[BAKERY_URL])),
+        (PARK_URL, extract_park_stores(pages[PARK_URL], pages[PARK_STORE_URL])),
+        (TAIPEI_URL, extract_taipei_store(pages[TAIPEI_URL])),
+        (OBANYAKI_URL, extract_obanyaki_store(pages[OBANYAKI_URL])),
+    )
+    for url, parsed in expected:
+        if not parsed:
+            raise RuntimeError(f"official permanent-store parser returned no stores: {url}")
+        stores.extend(parsed)
     return _dedupe(stores)
 
 

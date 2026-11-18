@@ -225,6 +225,23 @@ def stable_identity_duplicate_errors(events: list[dict]) -> list[str]:
     ]
 
 
+def source_metadata_errors(events: list[dict]) -> list[str]:
+    """Press-release hosts must keep their deterministic source classification."""
+    errors: list[str] = []
+    for ev in events:
+        if not isinstance(ev, dict):
+            continue
+        url = str(ev.get("sourceUrl", ""))
+        if scrape.source_type_for_url(url) != "official_social":
+            continue
+        if ev.get("sourceType") != "official_social":
+            errors.append(
+                f"{ev.get('id', '#')}: press-release sourceType must be "
+                f"official_social: {url}"
+            )
+    return errors
+
+
 def event_hierarchy_errors(events: list[dict]) -> list[str]:
     """Validate one-level parent/child grouping without weakening event identity."""
     by_id = {
@@ -467,6 +484,7 @@ def main() -> int:
             warnings.append(f"possible duplicate cluster {key}: {', '.join(ids_for_key)}")
 
     errors.extend(stable_identity_duplicate_errors(events))
+    errors.extend(source_metadata_errors(events))
     errors.extend(event_hierarchy_errors(events))
 
     if STORES_JSON.exists():

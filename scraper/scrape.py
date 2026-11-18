@@ -35,6 +35,7 @@ import requests
 from verify_links import check_url, page_mentions  # 存檔前驗證來源連結：連得過去 + 內容與品牌相關
 from official_sources import (fetch_official, fetch_chiikawa_popups,
                               fetch_chiikawa_campaign_popups, fetch_chiikawa_clinic,
+                              fetch_chiikawa_sushi_popups,
                               fetch_chiikawa_park_events,
                               fetch_chiikawa_mogumogu,
                               fetch_chiikawa_movie_goods,
@@ -294,6 +295,7 @@ GENERIC_MERCH_TITLE_KEYWORDS = (
 )
 
 APPAREL_PRODUCT_KEYWORDS = (
+    "聯名鞋", "鞋款", "クロッグ", "フットウェア",
     "服裝", "服装", "服飾", "衣服", "衣料", "衣類", "衣著",
     "アパレル", "ウェア", "wear",
     "tシャツ", "t-shirt", "tee", "シャツ", "パーカー", "スウェット",
@@ -2157,9 +2159,9 @@ def normalize_source_event(event: dict, *, source_url: str = "", page_text: str 
     # Verified 2026-11-16: media titles cannot create a second venue identity.
     if data.get("brand") == "chiikawa":
         aliases = {
-            "https://ure.pia.co.jp/articles/-/3560227": ("https://chiikawa-info.jp/p26/chiikawaclinic/tokyo.html", "Tokyo", "東京駅一番街 東京キャラクターストリートいちばんプラザ", "2026-11-27", "2026-12-24"),
+            "https://ure.pia.co.jp/articles/-/3560227": ("https://chiikawa-info.jp/p26/chiikawaclinic/index.html#tokyo", "Tokyo", "東京駅一番街 東京キャラクターストリートいちばんプラザ", "2026-11-27", "2026-12-24"),
             "https://collabo-cafe.com/events/collabo/chiikawa-nov-popup-aeonmall-hanyu-2026/": ("https://chiikawa-info.jp/p26/pus_ahny/index.html", "Saitama", "イオンモール羽生 1F 東コート", "2026-11-28", "2026-12-13"),
-            "https://collabo-cafe.com/events/collabo/chiikawa-muchauma-sushi-popup-new-chitose-2026/": ("https://chiikawa-info.jp/p26/muchauma-chiikawasushi/new_chitose/index.html", "Chitose", "新千歳空港 国内線旅客ターミナルビル2階 センタープラザ", "2026-11-27", "2026-12-20"),
+            "https://collabo-cafe.com/events/collabo/chiikawa-muchauma-sushi-popup-new-chitose-2026/": ("https://chiikawa-info.jp/ck_sushi.html#new_chitose-2026-11-27", "Chitose", "新千歳空港 国内線旅客ターミナルビル2階 センタープラザ", "2026-11-27", "2026-12-20"),
         }
         if url in aliases:
             target, city, venue, start, end = aliases[url]
@@ -2176,7 +2178,7 @@ def normalize_source_event(event: dict, *, source_url: str = "", page_text: str 
     if data.get("brand") == "chiikawa" and url == "https://news.infoseek.co.jp/article/20261113bgmania20262704040/":
         data.update(startDate="2026-11-27", endDate="2026-12-24", country="JP", city="Tokyo",
                     locationName="東京駅一番街 東京キャラクターストリートいちばんプラザ",
-                    sourceUrl="https://chiikawa-info.jp/p26/chiikawaclinic/tokyo.html", sourceType="official_site")
+                    sourceUrl="https://chiikawa-info.jp/p26/chiikawaclinic/index.html#tokyo", sourceType="official_site")
     if data.get("brand") == "chiikawa" and url == "https://collabo-cafe.com/events/collabo/chiikawa-nov-popup-ekimaru-jr-kyoto-2026/":
         data.update(startDate="2026-11-26", endDate="2026-12-10", country="JP", city="Kyoto",
                     locationName="エキマル ア・ラ・モードJR京都駅西口店",
@@ -2197,7 +2199,7 @@ def normalize_source_event(event: dict, *, source_url: str = "", page_text: str 
         data.update(startDate="2026-11-27", endDate="2026-12-24", country="JP", city="Tokyo",
                     title="吉伊卡哇診所 POP UP STORE 東京駅",
                     locationName="東京駅一番街 東京キャラクターストリートいちばんプラザ",
-                    sourceUrl="https://chiikawa-info.jp/p26/chiikawaclinic/tokyo.html", sourceType="official_site")
+                    sourceUrl="https://chiikawa-info.jp/p26/chiikawaclinic/index.html#tokyo", sourceType="official_site")
 
     # Main popup dates, excluding the unrelated stamp rally in this roundup.
     if data.get("brand") == "chiikawa" and url == "https://kobe-journal.com/archives/5635643478.html":
@@ -2998,6 +3000,7 @@ def run(brands: list[str], official_only: bool = False):
             structured = (
                 fetch_chiikawa_popups(correct_city=correct_city)
                 + fetch_chiikawa_campaign_popups(correct_city=correct_city)
+                + fetch_chiikawa_sushi_popups(correct_city=correct_city)
                 + fetch_chiikawa_clinic()
                 + fetch_chiikawa_park_events(correct_city=correct_city)
                 + fetch_chiikawa_mogumogu(correct_city=correct_city)

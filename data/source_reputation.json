@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-16T08:44:47+00:00",
+  "updatedAt": "2026-11-18T13:23:38+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 20,
@@ -316,34 +316,34 @@
     },
     "domain:pokemonhubs.com": {
       "confirmed": 3,
-      "rejected": 5,
+      "rejected": 6,
       "uncertain": 0,
-      "crossChecked": 11,
-      "score": 26,
+      "crossChecked": 12,
+      "score": 15,
       "label": "pokemonhubs.com",
       "kind": "news",
       "host": "pokemonhubs.com",
       "handle": "",
       "firstSeen": "2026-06-11",
-      "lastReviewed": "2026-11-11",
+      "lastReviewed": "2026-11-18",
       "lastOutcome": "rejected",
-      "notes": "Duplicate of retained po-4dc06f Nov14 Kalos goods. Original and reader inaccessible; full NOWnews6890707 independently confirms exact products/store/date.",
+      "notes": "Original explicitly Japan Crocs channels, no Taipei Center sale; apparel out of scope. Official atmos product launch corroborates footwear.",
       "byBrand": {
         "pokemon": {
           "confirmed": 3,
-          "rejected": 5,
+          "rejected": 6,
           "uncertain": 0,
-          "crossChecked": 11,
-          "score": 26
+          "crossChecked": 12,
+          "score": 15
         }
       },
       "byType": {
         "new_product": {
           "confirmed": 3,
-          "rejected": 3,
+          "rejected": 4,
           "uncertain": 0,
-          "crossChecked": 8,
-          "score": 48
+          "crossChecked": 9,
+          "score": 37
         },
         "popup": {
           "confirmed": 0,
@@ -363,10 +363,10 @@
       "byCountry": {
         "tw": {
           "confirmed": 3,
-          "rejected": 4,
+          "rejected": 5,
           "uncertain": 0,
-          "crossChecked": 9,
-          "score": 37
+          "crossChecked": 10,
+          "score": 26
         },
         "jp": {
           "confirmed": 0,
@@ -456,6 +456,16 @@
           "eventId": "po-6cf7cc",
           "evidenceCount": 1,
           "notes": "Duplicate of retained po-4dc06f Nov14 Kalos goods. Original and reader inaccessible; full NOWnews6890707 independently confirms exact products/store/date."
+        },
+        {
+          "date": "2026-11-18",
+          "outcome": "rejected",
+          "brand": "pokemon",
+          "type": "new_product",
+          "country": "TW",
+          "eventId": "po-a31b0c",
+          "evidenceCount": 1,
+          "notes": "Original explicitly Japan Crocs channels, no Taipei Center sale; apparel out of scope. Official atmos product launch corroborates footwear."
         }
       ]
     },
@@ -900,26 +910,26 @@
       ]
     },
     "domain:dtimes.jp": {
-      "confirmed": 1,
+      "confirmed": 2,
       "rejected": 7,
       "uncertain": 0,
-      "crossChecked": 12,
+      "crossChecked": 13,
       "score": 5,
       "label": "dtimes.jp",
       "kind": "news",
       "host": "dtimes.jp",
       "handle": "",
       "firstSeen": "2026-06-19",
-      "lastReviewed": "2026-11-06",
-      "lastOutcome": "rejected",
-      "notes": "Duplicate official Christmas event menu detail; venue confirms.",
+      "lastReviewed": "2026-11-18",
+      "lastOutcome": "confirmed",
+      "notes": "Explicit labeled period and cafe match venue company PR TIMES release; switched to company source and precise cafe location.",
       "byBrand": {
         "miffy": {
-          "confirmed": 0,
+          "confirmed": 1,
           "rejected": 5,
           "uncertain": 0,
-          "crossChecked": 8,
-          "score": 5
+          "crossChecked": 9,
+          "score": 12
         },
         "pokemon": {
           "confirmed": 0,
@@ -945,11 +955,11 @@
           "score": 32
         },
         "cafe": {
-          "confirmed": 0,
+          "confirmed": 1,
           "rejected": 4,
           "uncertain": 0,
-          "crossChecked": 7,
-          "score": 16
+          "crossChecked": 8,
+          "score": 23
         },
         "popup": {
           "confirmed": 1,
@@ -961,10 +971,10 @@
       },
       "byCountry": {
         "jp": {
-          "confirmed": 1,
+          "confirmed": 2,
           "rejected": 7,
           "uncertain": 0,
-          "crossChecked": 12,
+          "crossChecked": 13,
           "score": 5
         }
       },
@@ -1048,6 +1058,16 @@
           "eventId": "mi-f3200f",
           "evidenceCount": 1,
           "notes": "Duplicate official Christmas event menu detail; venue confirms."
+        },
+        {
+          "date": "2026-11-18",
+          "outcome": "confirmed",
+          "brand": "miffy",
+          "type": "cafe",
+          "country": "JP",
+          "eventId": "mi-994ad0",
+          "evidenceCount": 1,
+          "notes": "Explicit labeled period and cafe match venue company PR TIMES release; switched to company source and precise cafe location."
         }
       ]
     },

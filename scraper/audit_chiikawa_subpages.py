@@ -30,6 +30,7 @@ from verify_links import fetch_html
 BASE_URL = "https://chiikawa-info.jp/"
 HOME_URL = "https://chiikawa-info.jp/index.html"
 PUS_URL = "https://chiikawa-info.jp/pus.html"
+PUS_FALLBACK_URL = "https://chiikawa-info.jp/pus"
 EVENTS_JSON = Path(__file__).parent.parent / "data" / "events.json"
 
 # Add pages here only after a human has checked that they are out of scope for
@@ -54,7 +55,7 @@ HTML_TAG_RE = re.compile(r"<[^>]+>")
 DATE_RE = re.compile(r"20\d{2}年\d{1,2}月\d{1,2}日")
 DATE_RANGE_RE = re.compile(
     r"20\d{2}年\d{1,2}月\d{1,2}日(?:\([^)]*\))?\s*[〜～~-]\s*"
-    r"(?:20\d{2}年)?\d{1,2}月\d{1,2}日"
+    r"(?:20\d{2}年)?\d{1,2}月\d{1,2}日(?:\([^)]*\))?"
 )
 COLLECTIBLE_RE = re.compile(
     r"POP\s*UP|ポップアップ|期間限定|限定|グッズ|商品|STORE|SHOP|ショップ|"
@@ -112,11 +113,31 @@ class _P26HTMLParser(HTMLParser):
         self.base_url = base_url
         self._active_url = ""
         self._active_text: list[str] = []
+        self._pending_url = ""
+        self._pending_title = ""
+        self._pending_tail: list[str] = []
         self.links: list[ChiikawaLink] = []
+
+    def _flush_pending(self):
+        if not self._pending_url:
+            return
+        title = self._pending_title
+        trailing = _clean_text(" ".join(self._pending_tail))
+        schedule = DATE_RANGE_RE.search(trailing)
+        if schedule and not DATE_RANGE_RE.search(title):
+            title = f"{title}({schedule.group(0)})"
+        self.links.append(ChiikawaLink(self._pending_url, title))
+        self._pending_url = ""
+        self._pending_title = ""
+        self._pending_tail = []
 
     def handle_starttag(self, tag, attrs):
         if tag.lower() != "a":
             return
+        # Official PUS cards put the bounded schedule immediately after the
+        # linked heading.  Preserve that context before starting the next
+        # card, including when reader markdown was converted to light HTML.
+        self._flush_pending()
         href = ""
         for key, value in attrs:
             if key.lower() == "href" and value:
@@ -130,14 +151,22 @@ class _P26HTMLParser(HTMLParser):
     def handle_data(self, data):
         if self._active_url and data:
             self._active_text.append(data)
+        elif self._pending_url and data:
+            self._pending_tail.append(data)
 
     def handle_endtag(self, tag):
         if tag.lower() != "a" or not self._active_url:
             return
         title = _clean_text(" ".join(self._active_text))
-        self.links.append(ChiikawaLink(self._active_url, title))
+        self._pending_url = self._active_url
+        self._pending_title = title
+        self._pending_tail = []
         self._active_url = ""
         self._active_text = []
+
+    def close(self):
+        super().close()
+        self._flush_pending()
 
 
 def normalize_p26_url(raw_url: str, base_url: str = BASE_URL) -> str:
@@ -176,6 +205,7 @@ def extract_p26_links(text: str, base_url: str = HOME_URL) -> list[ChiikawaLink]
 
     parser = _P26HTMLParser(base_url)
     parser.feed(text or "")
+    parser.close()
     for link in parser.links:
         if link.url not in found or (link.title and not found[link.url]):
             found[link.url] = link.title
@@ -199,17 +229,35 @@ def load_parsed_event_pages(events_path: Path = EVENTS_JSON) -> dict[str, list[s
         return parsed
     from official_sources import CLINIC_BASE, CLINIC_VENUES
     events = json.loads(events_path.read_text(encoding="utf-8"))
+    clinic_ids: dict[str, list[str]] = {}
+    clinic_parent = CLINIC_BASE + "index.html"
     for event in events:
         if event.get("brand") != "chiikawa":
             continue
-        url = normalize_p26_url(event.get("sourceUrl", ""))
+        source_url = event.get("sourceUrl", "")
+        source_parts = urlparse(source_url)
+        if source_parts.path == urlparse(clinic_parent).path:
+            slug = source_parts.fragment
+            if slug in CLINIC_VENUES:
+                clinic_ids.setdefault(slug, []).append(event.get("id", ""))
+            # A parent URL represents full coverage only when every venue
+            # fragment is present; never let one fragment mark it parsed.
+            continue
+        clinic_prefix = urlparse(CLINIC_BASE).path
+        if source_parts.path.startswith(clinic_prefix) and source_parts.path.endswith(".html"):
+            slug = source_parts.path.rsplit("/", 1)[-1][:-5]
+            if slug in CLINIC_VENUES:
+                clinic_ids.setdefault(slug, []).append(event.get("id", ""))
+        url = normalize_p26_url(source_url)
         if not url:
             continue
         parsed.setdefault(url, []).append(event.get("id", ""))
-    clinic = [event for event in events if event.get("sourceUrl", "") in
-              {CLINIC_BASE + slug + ".html" for slug in CLINIC_VENUES}]
-    if len({e["sourceUrl"] for e in clinic}) == len(CLINIC_VENUES):
-        parsed[CLINIC_BASE + "index.html"] = [e["id"] for e in clinic]
+    if set(clinic_ids) == set(CLINIC_VENUES):
+        parsed[clinic_parent] = [
+            event_id
+            for slug in sorted(CLINIC_VENUES)
+            for event_id in clinic_ids[slug]
+        ]
     return parsed
 
 
@@ -303,26 +351,61 @@ def audit_links(
 
 def fetch_homepage_links() -> list[ChiikawaLink]:
     home_text = fetch_html(HOME_URL) or fetch_html(BASE_URL)
-    cache_key = datetime.now(timezone.utc).strftime("%Y%m%d%H")
-    pus_text = fetch_html(f"{PUS_URL}?chara_radar={cache_key}")
-    if not home_text and not pus_text:
+    # Use the canonical PUS URL so the reader may reuse its last valid cache.
+    # Both independent listings must be live and parseable; accepting the
+    # homepage alone would silently lose the much larger POP UP inventory.
+    pus_text = fetch_html(PUS_URL)
+    if not pus_text:
+        # The official site exposes the same listing without the legacy .html
+        # suffix.  This route often remains readable when one reader cache is
+        # temporarily throttled; both routes still fail closed below.
+        pus_text = fetch_html(PUS_FALLBACK_URL)
+    if not home_text:
         raise RuntimeError("failed to fetch Chiikawa official homepage")
+    if not pus_text:
+        raise RuntimeError("failed to fetch Chiikawa official POP UP listing")
     found: dict[str, ChiikawaLink] = {}
     for text, base_url in ((home_text, HOME_URL), (pus_text, PUS_URL)):
-        for link in extract_p26_links(text or "", base_url):
+        source_links = extract_p26_links(text, base_url)
+        if not source_links:
+            raise RuntimeError(
+                f"official Chiikawa source returned no p26 links: {base_url}"
+            )
+        for link in source_links:
             if is_ended_listing_title(link.title):
                 continue
             if link.url not in found or (link.title and not found[link.url].title):
                 found[link.url] = link
+    if not found:
+        raise RuntimeError("official Chiikawa sources returned no p26 links; coverage cannot be verified")
     return [found[url] for url in sorted(found)]
 
 
-def fetch_review_details(links: list[ChiikawaLink], parsed_pages: dict[str, list[str]]) -> dict[str, str]:
+def fetch_review_details(
+    links: list[ChiikawaLink],
+    parsed_pages: dict[str, list[str]],
+    *,
+    today: str | None = None,
+) -> dict[str, str]:
+    today = today or datetime.now().astimezone().date().isoformat()
     details: dict[str, str] = {}
     for link in links:
-        if link.url in parsed_pages:
+        if link.url in parsed_pages or link.url in IGNORED_P26_PAGES:
             continue
-        details[link.url] = fetch_html(link.url) or link.title
+        # The official PUS listing title itself carries a complete bounded
+        # schedule.  If it already proves the venue is over, no child request
+        # is needed; current or dateless pages still fail closed below.
+        listing_detail = f"<title>{link.title}</title>"
+        listing_fields = _chiikawa_popup_detail_fields(listing_detail)
+        if listing_fields and listing_fields[2] < today:
+            details[link.url] = listing_detail
+            continue
+        detail = fetch_html(link.url)
+        if not detail:
+            raise RuntimeError(
+                f"failed to fetch unclassified Chiikawa official detail: {link.url}"
+            )
+        details[link.url] = detail
     return details
 
 

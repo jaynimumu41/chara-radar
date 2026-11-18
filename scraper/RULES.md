@@ -34,7 +34,7 @@ Sanrio（三麗鷗）先暫停，因無結構化來源、新聞/Gemini 污染最
 - Miffy 公開顯示欄位（`title` / `locationName` / `summaryZh` / `tags`）若出現 `フラワーミッフィー`，統一轉成 `Flower Miffy`；`sourceTitle` 保留原文，方便回查來源。
 - 三品牌常設店的 `name` 可使用繁中顯示名稱，但 `officialName` 必須保留官方店舖名稱，供完整性稽核穩定比對。只收官方品牌專門常設據點或已有明確開幕日的固定店，不收一般經銷通路、線上商店與期間快閃；同一官方複合設施若官方總表只列一張店卡，也只列一次（例如小樽 `MIFFY PORT TOWN`）。
 - 三麗鷗無可解析的結構化官方頁（`sanrio.co.jp` 503／JS 動態／REST 空），目前暫停預設抓取與前端顯示。
-- 抓取被擋（403/429/503）時自動改走 reader 代理 `r.jina.ai`，不放棄（`verify_links.fetch_html` / `check_url`）。
+- 抓取被擋（403/429/503）或 HTTP 200 實際回傳安全驗證頁時，自動改走 reader 代理 `r.jina.ai`。若 reader HTML 仍是 challenge，改取 markdown 並轉成 parser 相容的標題／連結／段落；官方 coverage 或常設店來源仍無法解析時必須 fail closed，不可把空清單當成稽核通過（`verify_links.fetch_html` / `check_url`）。
 
 ### 非官方來源信譽
 

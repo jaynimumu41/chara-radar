@@ -1,7 +1,7 @@
 """驗證 events.json 每一筆的 sourceUrl 是否真的連得過去（不花 Gemini 配額）。
 用瀏覽器 UA、跟隨轉址。回報每一筆的 HTTP 狀態，列出壞掉的（非 2xx/3xx）。
 可被 scrape.py 匯入：check_url(url) -> (ok: bool, code: int)。"""
-import sys, json, urllib.error, urllib.parse, time
+import html, json, re, sys, time, urllib.error, urllib.parse
 from pathlib import Path
 
 import requests
@@ -15,11 +15,105 @@ READER_PROXY = "https://r.jina.ai/"
 _BLOCKED_CODES = {401, 403, 429, 451, 503}
 _PROTECTED_OFFICIAL_BLOCKS = {("www.kiddyland.co.jp", 403)}
 _CHECK_CACHE = {}
+_OFFICIAL_LISTING_CACHE = {}
 _LAST_REQUEST_AT = {}
 _HOST_MIN_INTERVAL = {
     "chiikawa-info.jp": 0.8,
-    "r.jina.ai": 3.0,
+    "r.jina.ai": 4.0,
 }
+
+_CHALLENGE_MARKERS = (
+    "<title>just a moment",
+    "title: just a moment",
+    "performing security verification",
+    "challenge-platform",
+    "cf-chl-",
+    "verify you are human",
+)
+
+
+def _is_challenge_page(text: str) -> bool:
+    low = (text or "").lower()
+    return any(marker in low for marker in _CHALLENGE_MARKERS)
+
+
+def _is_unusable_reader_page(text: str) -> bool:
+    """Reject reader challenges and terminal upstream 404/410 responses."""
+    return _is_challenge_page(text) or bool(re.search(
+        r"(?im)^Warning:\s*Target URL returned error (?:404|410)\b",
+        text or "",
+    ))
+
+
+def _markdown_inline_html(text: str) -> str:
+    """Preserve reader markdown links while escaping the visible label."""
+    parts = []
+    offset = 0
+    for match in re.finditer(r"\[([^\]]+)\]\((https?://[^)\s]+)\)", text or ""):
+        parts.append(html.escape(text[offset:match.start()]))
+        label, url = match.groups()
+        parts.append(
+            f'<a href="{html.escape(url, quote=True)}">{html.escape(label)}</a>'
+        )
+        offset = match.end()
+    parts.append(html.escape((text or "")[offset:]))
+    return "".join(parts)
+
+
+def _reader_markdown_as_html(text: str) -> str:
+    """Convert the reader's useful structure to small parser-compatible HTML."""
+    result = []
+    for line in (text or "").splitlines():
+        if line.startswith("Title: "):
+            result.append(f"<title>{html.escape(line[7:].strip())}</title>")
+            continue
+        heading = re.match(r"^(#{1,6})\s+(.+?)\s*$", line)
+        if heading:
+            level = len(heading.group(1))
+            result.append(
+                f"<h{level}>{_markdown_inline_html(heading.group(2))}</h{level}>"
+            )
+            continue
+        result.append(html.escape(line))
+    return "\n".join(result)
+
+
+def _reader_markdown_fetch(url: str, timeout: int) -> str:
+    """Fetch reader markdown, retrying a cached challenge only for Chiikawa."""
+    # The unmodified canonical URL is intentionally requested without
+    # X-No-Cache: Jina's canonical cache is often the only copy that survives
+    # an origin-side Cloudflare challenge.  Only the cache-busted target asks
+    # the reader to refresh its cache.
+    targets: list[tuple[str, bool]] = [(url, False)]
+    if (urllib.parse.urlparse(url).hostname or "") == "chiikawa-info.jp":
+        separator = "&" if "?" in url else "?"
+        fresh = f"{url}{separator}chara_radar={int(time.time())}"
+        targets.extend(((fresh, True), (url, False)))
+        if url.endswith("/index.html"):
+            targets.append((url[:-len("index.html")], False))
+        if url.startswith("https://"):
+            targets.append(("http://" + url[len("https://"):], False))
+    for attempt, (target, no_cache) in enumerate(targets):
+        reader_url = READER_PROXY + target
+        try:
+            _polite_wait(reader_url)
+            headers = {"User-Agent": UA}
+            if no_cache:
+                headers["X-No-Cache"] = "true"
+            response = requests.get(
+                reader_url,
+                headers=headers,
+                timeout=max(timeout, 45),
+            )
+            if 200 <= response.status_code < 400:
+                result = response.content[:500000].decode("utf-8", "replace")
+                if result.strip() and not _is_unusable_reader_page(result):
+                    return _reader_markdown_as_html(result)
+        except Exception:
+            pass
+        if attempt < len(targets) - 1:
+            time.sleep(2 * (attempt + 1))
+    return ""
 
 
 def _network_url(url: str) -> str:
@@ -54,6 +148,30 @@ def _is_protected_official_block(url: str, code: int) -> bool:
     return (host, code) in _PROTECTED_OFFICIAL_BLOCKS
 
 
+def _official_listing_confirms_url(url: str, timeout: int) -> bool:
+    """Confirm protected Chiikawa pages through a live official listing.
+
+    This is deliberately pattern-based rather than a seed allowlist: the exact
+    target URL must still be present in the current official aggregate page.
+    """
+    parsed = urllib.parse.urlparse(url)
+    if (parsed.hostname or "") != "chiikawa-info.jp":
+        return False
+    if re.fullmatch(r"/p26/pus_[^/]+/index\.html", parsed.path):
+        listing_url = "https://chiikawa-info.jp/pus.html"
+    elif parsed.path == "/p26/chiikawaclinic/index.html":
+        listing_url = "https://chiikawa-info.jp/index.html"
+    else:
+        return False
+    listing = _OFFICIAL_LISTING_CACHE.get(listing_url, "")
+    if not listing:
+        listing = _reader_markdown_fetch(listing_url, timeout)
+        if listing:
+            _OFFICIAL_LISTING_CACHE[listing_url] = listing
+    target = urllib.parse.urlunparse(parsed._replace(query="", fragment=""))
+    return bool(listing and target in html.unescape(listing))
+
+
 def _raw_fetch(url, timeout, want_text):
     """單次抓取，回傳 (ok, code, text)。例外往外丟。"""
     _polite_wait(url)
@@ -84,7 +202,13 @@ def _proxy_fetch(url: str, timeout: int) -> tuple[bool, int, str]:
     last_error = None
     for attempt in range(3):
         try:
-            return _raw_fetch(READER_PROXY + url, max(timeout, 45), True)
+            result = _raw_fetch(READER_PROXY + url, max(timeout, 45), True)
+            if result[0] and _is_unusable_reader_page(result[2]):
+                if attempt == 2:
+                    return False, result[1], result[2]
+                time.sleep(3 * (attempt + 1))
+                continue
+            return result
         except urllib.error.HTTPError as exc:
             last_error = exc
             if exc.code not in _BLOCKED_CODES or attempt == 2:
@@ -113,7 +237,9 @@ def check_url(url, timeout=20, return_text=False):
         ok, code, text = _CHECK_CACHE[cache_key]
         return pack(ok, code, text if return_text else "")
 
+    proxy_tried = False
     if _prefer_reader_proxy(net_url):
+        proxy_tried = True
         try:
             pok, _pcode, ptext = _proxy_fetch(net_url, timeout)
             if pok and ptext.strip():
@@ -124,11 +250,15 @@ def check_url(url, timeout=20, return_text=False):
 
     code, blocked = -1, True
     try:
-        ok, code, text = _raw_fetch(net_url, timeout, return_text)
-        if ok:
-            _CHECK_CACHE[cache_key] = (True, code, text)
-            return pack(True, code, text)
-        blocked = code in _BLOCKED_CODES
+        # Always inspect a bounded response body: a Cloudflare challenge often
+        # returns HTTP 200, so status-only verification can report a false OK.
+        ok, code, text = _raw_fetch(net_url, timeout, True)
+        challenge = ok and _is_challenge_page(text)
+        if ok and not challenge:
+            cached_text = text if return_text else ""
+            _CHECK_CACHE[cache_key] = (True, code, cached_text)
+            return pack(True, code, cached_text)
+        blocked = code in _BLOCKED_CODES or challenge
     except urllib.error.HTTPError as e:
         code, blocked = e.code, e.code in _BLOCKED_CODES
     except Exception:
@@ -136,11 +266,21 @@ def check_url(url, timeout=20, return_text=False):
 
     # 被擋或失敗 → reader 代理 fallback（代理回純文字，當作可達且取得內容）
     if blocked:
+        if (urllib.parse.urlparse(net_url).hostname or "") == "chiikawa-info.jp":
+            markdown_html = _reader_markdown_fetch(net_url, timeout)
+            if markdown_html:
+                cached_text = markdown_html if return_text else ""
+                _CHECK_CACHE[cache_key] = (True, 200, cached_text)
+                return pack(True, 200, cached_text)
+            if not return_text and _official_listing_confirms_url(net_url, timeout):
+                _CHECK_CACHE[cache_key] = (True, 200, "")
+                return pack(True, 200)
         try:
-            pok, _pcode, ptext = _proxy_fetch(net_url, timeout)
-            if pok and ptext.strip():
-                _CHECK_CACHE[cache_key] = (True, 200, ptext if return_text else "")
-                return pack(True, 200, ptext if return_text else "")
+            if not proxy_tried:
+                pok, _pcode, ptext = _proxy_fetch(net_url, timeout)
+                if pok and ptext.strip():
+                    _CHECK_CACHE[cache_key] = (True, 200, ptext if return_text else "")
+                    return pack(True, 200, ptext if return_text else "")
         except Exception:
             pass
     if _is_protected_official_block(net_url, code):
@@ -157,14 +297,19 @@ def fetch_html(url, timeout=20):
         return ""
     try:
         ok, code, text = _raw_fetch(url, timeout, True)
-        if ok and text:
+        if ok and text and not _is_challenge_page(text):
             return text
-        blocked = code in _BLOCKED_CODES
+        blocked = code in _BLOCKED_CODES or _is_challenge_page(text)
     except urllib.error.HTTPError as e:
         blocked = e.code in _BLOCKED_CODES
     except Exception:
         blocked = True
     if blocked:
+        # Chiikawa's challenge is reproduced by the reader's HTML renderer.
+        # Its markdown renderer is independently cached and remains usable;
+        # convert that structured text back to lightweight compatible HTML.
+        if (urllib.parse.urlparse(url).hostname or "") == "chiikawa-info.jp":
+            return _reader_markdown_fetch(url, timeout)
         try:
             response = requests.get(
                 READER_PROXY + url,
@@ -172,9 +317,18 @@ def fetch_html(url, timeout=20):
                 timeout=max(timeout, 45),
             )
             if 200 <= response.status_code < 400:
-                return response.content[:500000].decode("utf-8", "replace")
+                result = response.content[:500000].decode("utf-8", "replace")
+                if result.strip() and not _is_unusable_reader_page(result):
+                    return result
         except Exception:
             pass
+        # Some protected sites make the reader's HTML renderer reproduce the
+        # challenge page while its default markdown renderer has the real
+        # document. Convert only headings, titles and links back to lightweight
+        # HTML so existing deterministic parsers keep their contract.
+        markdown_html = _reader_markdown_fetch(url, timeout)
+        if markdown_html:
+            return markdown_html
     return ""
 
 
