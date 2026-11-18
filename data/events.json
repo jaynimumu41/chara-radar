@@ -97,30 +97,6 @@
   },
   {
     "brand": "miffy",
-    "title": "Miffy miffy style POP UP SHOP in 大阪梅田",
-    "type": "popup",
-    "country": "JP",
-    "city": "Osaka",
-    "locationName": "キデイランド大阪梅田店",
-    "startDate": "2026-10-31",
-    "endDate": "2026-11-17",
-    "summaryZh": "Miffy 官方快閃店「miffy style POP UP SHOP in 大阪梅田」於キデイランド大阪梅田店期間限定登場，販售限定與先行商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "快閃店",
-      "限定周邊",
-      "日本"
-    ],
-    "id": "mi-a432fa",
-    "sourceType": "official_site",
-    "createdAt": "2026-09-13",
-    "sourceTitle": "miffy style POP UP SHOPが有楽町・梅田・札幌に期間限定オープン - dickbruna.jp",
-    "sourceUrl": "https://dickbruna.jp/news/202609/48222/"
-  },
-  {
-    "brand": "miffy",
     "title": "Miffy miffy style POP UP SHOP in 札幌",
     "type": "popup",
     "country": "JP",
@@ -1814,5 +1790,76 @@
     "sourceType": "media",
     "createdAt": "2026-11-17",
     "sourceUrl": "https://dtimes.jp/post-1472435/"
+  },
+  {
+    "brand": "miffy",
+    "title": "Miffy ミッフィーzakkaフェスタ　八戸ショッピングセンター ラピア",
+    "type": "popup",
+    "country": "JP",
+    "city": "",
+    "locationName": "八戸ショッピングセンター ラピア",
+    "startDate": "2026-12-19",
+    "endDate": "2027-01-12",
+    "summaryZh": "Miffy（米飛兔）官方活動「ミッフィーzakkaフェスタ」於八戸ショッピングセンター ラピア期間限定登場，販售限定周邊／餐點。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "期間限定",
+      "日本"
+    ],
+    "id": "mi-8e6205",
+    "sourceType": "official_site",
+    "createdAt": "2026-11-18",
+    "sourceTitle": "八戸ショッピングセンター ラピアで「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
+    "sourceUrl": "https://dickbruna.jp/news/202611/49701/"
+  },
+  {
+    "brand": "pokemon",
+    "title": "寶可夢 30 週年 Crocs 聯名鞋",
+    "type": "new_product",
+    "country": "TW",
+    "city": "Taipei",
+    "locationName": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3F）",
+    "startDate": "2026-11-17",
+    "endDate": "",
+    "summaryZh": "寶可夢 30 週年 Crocs 聯名鞋登場，皮卡丘、耿鬼、胖丁款式於 11 月 17 日開賣。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "聯名",
+      "鞋款",
+      "寶可夢",
+      "新品"
+    ],
+    "id": "po-a31b0c",
+    "sourceTitle": "寶可夢 30 週年 Crocs 聯名鞋登場！皮卡丘、耿鬼、胖丁 11月17日開賣 - Pokemon Hubs",
+    "sourceType": "media",
+    "createdAt": "2026-11-18",
+    "sourceUrl": "https://pokemonhubs.com/news/pokemon-crocs-30th-anniversary-2026/"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "「ちいかわ」×「東京ばな奈」快閃店",
+    "type": "popup",
+    "country": "JP",
+    "city": "Tokyo",
+    "locationName": "グランスタ東京",
+    "startDate": "2026-11-24",
+    "endDate": "2026-12-13",
+    "summaryZh": "「ちいかわ」與「東京ばな奈」於東京車站一番街的グランスタ東京舉辦快閃店，販售限定商品，包含熱門的餅乾三明治與環保袋套組。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "快閃店",
+      "東京",
+      "東京ばな奈",
+      "限定商品"
+    ],
+    "id": "ch-a27833",
+    "sourceTitle": "【グランスタ東京】「ちいかわ」×「東京ばな奈」のポップアップストアがOPEN。エコバッグセットに人気のクッキーサンドも - PR TIMES",
+    "sourceType": "official_social",
+    "createdAt": "2026-11-18",
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002201.000025606.html"
   }
 ]
