@@ -121,30 +121,6 @@
   },
   {
     "brand": "pokemon",
-    "title": "台灣寶可夢中心新品",
-    "type": "new_product",
-    "country": "TW",
-    "city": "Taipei",
-    "locationName": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3F）",
-    "startDate": "2026-09-19",
-    "endDate": "",
-    "summaryZh": "台灣寶可夢中心將於9月19日開賣Pokopia淺淺丘LED燈、吉祥物吊飾等新品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "新品",
-      "寶可夢",
-      "台灣",
-      "周邊"
-    ],
-    "id": "po-521834",
-    "sourceTitle": "台灣寶可夢中心新品！Pokopia淺淺丘LED燈、吉祥物吊飾9/19開賣 - NOWnews今日新聞",
-    "sourceType": "media",
-    "createdAt": "2026-09-14",
-    "sourceUrl": "https://www.nownews.com/amp/news/6874887"
-  },
-  {
-    "brand": "pokemon",
     "title": "Pokémon Center ピックアップテーマ「つながる」のイラストを使用したグッズが、ポケモンセンターに登場",
     "type": "new_product",
     "country": "JP",
@@ -1746,25 +1722,26 @@
   },
   {
     "brand": "chiikawa",
-    "title": "吉伊卡哇壽司快閃店",
+    "title": "吉伊卡哇壽司快閃店 新千歳空港",
     "type": "popup",
     "country": "JP",
     "city": "Chitose",
-    "locationName": "新千歳空港 国内線旅客ターミナルビル2階 センタープラザ",
+    "locationName": "新千歳空港 国内線旅客ターミナルビル 2階 センタープラザ",
     "startDate": "2026-11-27",
     "endDate": "2026-12-20",
-    "summaryZh": "吉伊卡哇壽司主題快閃店於新千歲機場販售主題周邊商品。",
+    "summaryZh": "吉伊卡哇壽司主題快閃店於新千歳空港 国内線旅客ターミナルビル 2階 センタープラザ販售活動紀念與限定周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
+      "吉伊卡哇",
+      "壽司",
       "快閃店",
-      "限定商品",
-      "北海道"
+      "限定商品"
     ],
     "id": "ch-2fc781",
-    "sourceTitle": "むちゃうま!!ちいかわ寿司 POP UP STORE 新千歳空港（2026-11-27～2026-12-20） - ちいかわ公式",
     "sourceType": "official_site",
     "createdAt": "2026-11-16",
+    "sourceTitle": "むちゃうま!!ちいかわ寿司 POP UP STORE 新千歳空港（2026-11-27～2026-12-20） - ちいかわ公式",
     "sourceUrl": "https://chiikawa-info.jp/ck_sushi.html#new_chitose-2026-11-27"
   },
   {
@@ -1837,5 +1814,76 @@
     "sourceType": "official_social",
     "createdAt": "2026-11-18",
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002201.000025606.html"
+  },
+  {
+    "brand": "miffy",
+    "title": "Miffy ミッフィーzakkaフェスタ　遠鉄百貨店",
+    "type": "popup",
+    "country": "JP",
+    "city": "Shizuoka",
+    "locationName": "遠鉄百貨店",
+    "startDate": "2026-12-24",
+    "endDate": "2027-01-05",
+    "summaryZh": "Miffy（米飛兔）官方活動「ミッフィーzakkaフェスタ」於遠鉄百貨店期間限定登場，販售限定周邊／餐點。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "期間限定",
+      "日本"
+    ],
+    "id": "mi-70eef7",
+    "sourceType": "official_site",
+    "createdAt": "2026-11-19",
+    "sourceTitle": "遠鉄百貨店で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
+    "sourceUrl": "https://dickbruna.jp/news/202611/49729/"
+  },
+  {
+    "brand": "miffy",
+    "title": "米飛 x 梵谷 預約限定娃娃",
+    "type": "reservation",
+    "country": "JP",
+    "city": "",
+    "locationName": "Museum Box",
+    "startDate": "2026-11-20",
+    "endDate": "2026-11-21",
+    "summaryZh": "日本Museum Box將於11月20日起，限時兩天開放預約販售，以梵谷名畫為主題的米飛兔娃娃。",
+    "needReservation": true,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "梵谷",
+      "預約限定",
+      "娃娃"
+    ],
+    "id": "mi-2ceaa9",
+    "sourceTitle": "世界のミュージアムグッズを扱う「Museum Box」が、ゴッホの名画をドレスにまとったミッフィーのぬいぐるみ4種を、11月20日より2日間限定で予約受付",
+    "sourceType": "official_social",
+    "createdAt": "2026-11-19",
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000015.000186695.html"
+  },
+  {
+    "brand": "chiikawa",
+    "title": "Chiikawa x 東京ばな奈 快閃店",
+    "type": "popup",
+    "country": "JP",
+    "city": "Tokyo",
+    "locationName": "東京駅",
+    "startDate": "2026-11-24",
+    "endDate": "2026-12-13",
+    "summaryZh": "Chiikawa與東京ばな奈合作的快閃店將於東京車站登場，販售香蕉布丁蛋糕、環保袋、托特包等限定周邊商品。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "快閃店",
+      "限定商品",
+      "東京",
+      "東京ばな奈"
+    ],
+    "id": "ch-a38a1f",
+    "sourceTitle": "『ちいかわ』×「東京ばな奈」コラボが東京駅に進出！ちいかわバナナプリンケーキ、エコバッグ、トートバッグなどが販売されるポップアップストアが2026年11月24日（火）より開催！ - 電撃ホビーウェブ",
+    "sourceType": "media",
+    "createdAt": "2026-11-19",
+    "sourceUrl": "https://hobby.dengeki.com/news/3237091/"
   }
 ]
