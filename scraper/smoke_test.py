@@ -16,6 +16,7 @@
 回傳 exit code 0=全過，非 0=有失敗（方便 CI / 排程串接）。
 """
 import json
+import re
 import sys
 import tempfile
 from datetime import datetime, timezone
@@ -38,6 +39,7 @@ import audit_similar_events
 import source_reputation
 import verify_links
 import data_lint
+import display_zh
 import write_health
 
 _passed = 0
@@ -889,6 +891,28 @@ check("官方稽核自動處理替代頁、同日單品、過期與範圍外頁"
           ("ignored", ()),
           ("ignored", ()),
       ])
+kiddy_repost_url = "https://www.kiddyland.co.jp/event/miffy_nove202612/"
+kiddy_repost_rows = audit_official_coverage.audit_candidates(
+    [audit_official_coverage.OfficialCandidate(
+        "miffy", "miffy-kiddyland-search", kiddy_repost_url,
+        "2026年11月7日(土)～スタート!miffy style 各店ノベルティデイ")],
+    details_by_url={
+        kiddy_repost_url:
+            "2026年11月7日(土)～スタート!miffy style 各店ノベルティデイ "
+            "一会計につき1点、なくなり次第終了",
+    },
+    current_events=[
+        ev(id="mi-59382d", brand="miffy", type="campaign",
+           title="Miffy miffy style 各店ノベルティデイ",
+           locationName="miffy style 各店＋キデイランド対象店",
+           startDate="2026-11-07", endDate="",
+           sourceUrl="https://www.kiddyland.co.jp/event/miffy_nove202611/"),
+    ],
+    today="2026-11-22",
+)
+check("官方稽核將 Kiddy Land 重刊頁連回既有活動",
+      (kiddy_repost_rows[0].status, kiddy_repost_rows[0].event_ids),
+      ("ignored", ("mi-59382d",)))
 kiddy_birthday_title = "2026年6月6日(土)より開催miffy’s Birthday Fair2026"
 kiddy_birthday_page = (
     f"<h1>{kiddy_birthday_title}</h1>"
@@ -988,6 +1012,38 @@ check("Kiddy Land全店活動不可與指定分店活動模糊合併", len(chain
 check("Kiddy Land 東京駅店 location",
       official_sources._kiddy_location("2026年7月4日(土)発売予定!miffy style東京駅店限定 駅長さんミッフィー"),
       ("miffy style 東京駅店", "Tokyo"))
+check("Kiddy Land 京都四條河原町限定商品 location",
+      official_sources._kiddy_location(
+          "2026年12月5日(土)発売予定!miffy style 京都四条河原町限定 ミッフィーマスコット"),
+      ("miffy style 京都四条河原町店", "Kyoto"))
+check("Kiddy Land miffy style 全店限定系列 location",
+      official_sources._kiddy_location(
+          "2026年12月5日(土)発売予定!miffy style 限定 干支ひつじ アイテム"),
+      ("miffy style 各店", ""))
+check("Kiddy Land miffy style 無空格限定系列 location",
+      official_sources._kiddy_location(
+          "2026年9月5日(土)発売予定!miffy style限定 ハロウィンアイテム"),
+      ("miffy style 各店", ""))
+check("Kiddy Land 重刊贈品頁回到已驗證的原活動 URL",
+      official_sources._kiddy_canonical_url(
+          "https://www.kiddyland.co.jp/event/miffy_nove202612/",
+          "2026年11月7日(土)～スタート!miffy style 各店ノベルティデイ"),
+      "https://www.kiddyland.co.jp/event/miffy_nove202611/")
+check("Kiddy Land 未審核 slug 不可猜測不存在的 canonical URL",
+      official_sources._kiddy_canonical_url(
+          "https://www.kiddyland.co.jp/event/miffy_nove202701/",
+          "2026年12月5日(土)～スタート!miffy style 各店ノベルティデイ"),
+      "https://www.kiddyland.co.jp/event/miffy_nove202701/")
+same_day_distinct_kiddy, _ = scrape.dedup_events([
+    ev(id="mi-sheep", brand="miffy", type="new_product",
+       title="Miffy miffy style 限定 干支ひつじ アイテム",
+       startDate="2026-12-05", locationName="miffy style 各店"),
+    ev(id="mi-kyoto", brand="miffy", type="new_product", city="Kyoto",
+       title="Miffy miffy style 京都四条河原町限定 ミッフィーマスコット",
+       startDate="2026-12-05", locationName="miffy style 京都四条河原町店"),
+])
+check("Kiddy Land 同日不同系列與販售範圍不可合併",
+      len(same_day_distinct_kiddy), 2)
 same_day_kiddy = official_sources._drop_same_day_kiddy_product_details([
     ev(brand="miffy", type="campaign", title="Miffy miffy style 各店ノベルティデイ",
        startDate="2026-07-04", locationName="miffy style 各店＋キデイランド対象店",
@@ -1393,6 +1449,47 @@ check("Pokémon Center TOKYO-BAY身高調查隊官方活動解析",
        pokemon_height_survey["startDate"], pokemon_height_survey["endDate"],
        pokemon_height_survey["hasLimitedGoods"]),
       ("campaign", "Chiba", "2026-09-18", "2026-09-27", True))
+
+with mock.patch.object(official_sources, "fetch_html", return_value=""):
+    try:
+        official_sources.fetch_pokemon_cafe_events()
+        cafe_fetch_failure_blocked = False
+    except RuntimeError:
+        cafe_fetch_failure_blocked = True
+check("Pokémon Cafe部分抓取失敗不可當成官方撤下", cafe_fetch_failure_blocked, True)
+
+with mock.patch.object(official_sources, "_page_text", return_value=""):
+    try:
+        official_sources.fetch_pokemon_popups()
+        popup_fetch_failure_blocked = False
+    except RuntimeError:
+        popup_fetch_failure_blocked = True
+check("寶可夢期間限定店抓取失敗不可回傳權威空清單", popup_fetch_failure_blocked, True)
+
+with mock.patch.object(official_sources, "fetch_html", return_value=""):
+    try:
+        official_sources._tw_goods_entries(max_pages=1)
+        tw_list_failure_blocked = False
+    except RuntimeError:
+        tw_list_failure_blocked = True
+check("台灣寶可夢商品列表抓取失敗不可回傳部分清單", tw_list_failure_blocked, True)
+
+tw_detail_entry = {
+    "url": "https://tw.portal-pokemon.com/goods/post-test/",
+    "title": "實體門市新品",
+    "category": "玩具、玩偶、模型類",
+    "published": "2026-11-20",
+}
+with (
+    mock.patch.object(official_sources, "_tw_goods_entries", return_value=[tw_detail_entry]),
+    mock.patch.object(official_sources, "fetch_html", return_value=""),
+):
+    try:
+        official_sources.fetch_pokemon_tw_goods(max_pages=1)
+        tw_detail_failure_blocked = False
+    except RuntimeError:
+        tw_detail_failure_blocked = True
+check("台灣寶可夢商品單頁抓取失敗不可刪除既有資料", tw_detail_failure_blocked, True)
 
 # ── _is_past ──────────────────────────────────────────────────────────────────
 print("\n[_is_past] 過期判定（含無結束日補洞）")
@@ -2593,6 +2690,7 @@ health_metrics = scrape.new_run_metrics(
 )
 health_metrics["runDate"] = "2026-10-25"
 health_metrics["brands"]["miffy"]["pendingArticles"] = 2
+health_metrics["translationPendingCount"] = 1
 health = write_health.build_health(
     [],
     {"date": "2026-10-25", "newEventCount": 0},
@@ -2603,10 +2701,11 @@ check("健康快照公開積壓但不洩漏key內容",
       (
           health["status"],
           health["metrics"]["pendingArticleCount"],
+          health["metrics"]["translationPendingCount"],
           health["metrics"]["keyCount"],
           "secret-key-marker" in str(health),
       ),
-      ("limited", 2, 2, False))
+      ("limited", 2, 1, 2, False))
 check("健康快照與正式資料一致時通過lint",
       data_lint.health_data_errors(
           [],
@@ -2615,6 +2714,24 @@ check("健康快照與正式資料一致時通過lint",
           {"updatedAt": health["generatedAt"]},
       ),
       [])
+
+translation_only_metrics = scrape.new_run_metrics(
+    scrape.DEFAULT_BRANDS,
+    True,
+    None,
+)
+translation_only_metrics["runDate"] = "2026-10-25"
+translation_only_metrics["translationPendingCount"] = 1
+translation_only_health = write_health.build_health(
+    [],
+    {"date": "2026-10-25", "newEventCount": 0},
+    translation_only_metrics,
+    now=datetime.fromisoformat("2026-10-25T16:20:00+08:00"),
+)
+check("僅有待翻譯結構化事件也會標示limited", (
+    translation_only_health["status"],
+    translation_only_health["metrics"]["translationPendingCount"],
+), ("limited", 1))
 
 with mock.patch.object(
     data_lint.agent_verify_candidates,
@@ -3280,6 +3397,283 @@ with mock.patch.object(official_sources, "_proxy_markdown", return_value="unexpe
     except RuntimeError:
         malformed_sushi_blocked = True
     check("Malformed Chiikawa Sushi source records structured failure", malformed_sushi_blocked, True)
+
+# Public UI copy is zh-TW only; original Japanese stays available for identity
+# matching and source verification without ever becoming a frontend fallback.
+check("Japanese kana is rejected from public display", (
+    display_zh.contains_japanese_display("ちいかわ快閃店"),
+    display_zh.contains_japanese_display("イオンモール成田"),
+    display_zh.contains_japanese_display("Pokémon Center 出張所 in 東京"),
+    display_zh.contains_japanese_display("特設会場で先着販売"),
+    display_zh.contains_japanese_display("京都四条河原町店"),
+), (True, True, True, True, True))
+check("Traditional Chinese address separator remains valid",
+      display_zh.contains_japanese_display("東京・池袋"), False)
+gransta_raw = {
+    "brand": "chiikawa",
+    "id": "ch-a27833",
+    "type": "popup",
+    "country": "JP",
+    "city": "Tokyo",
+    "title": "「ちいかわ」×「東京ばな奈」快閃店",
+    "locationName": "グランスタ東京",
+    "sourceTitle": "ちいかわ×東京ばな奈 POP UP",
+    "startDate": "2026-11-24",
+    "endDate": "2026-12-07",
+    "needReservation": False,
+    "hasLimitedGoods": True,
+    "sourceUrl": "https://example.test/gransta",
+}
+translated_gransta = display_zh.apply_event_display({
+    **gransta_raw,
+    "titleZh": "吉伊卡哇 × 東京香蕉（Tokyo Banana）快閃店",
+    "locationNameZh": "GRANSTA 東京 POP UP GRANSTA GREEN（JR東京站1樓閘內）",
+    "summaryZh": "販售吉伊卡哇與東京香蕉聯名限定商品。",
+    "tags": ["快閃店", "限定商品"],
+}, approve_current=True)
+check("Display translation preserves internal Japanese identity", (
+    translated_gransta["title"],
+    translated_gransta["locationName"],
+    translated_gransta["titleZh"],
+    translated_gransta["locationNameZh"],
+    translated_gransta["displaySourceHash"],
+), (
+    "「ちいかわ」×「東京ばな奈」快閃店",
+    "グランスタ東京",
+    "吉伊卡哇 × 東京香蕉（Tokyo Banana）快閃店",
+    "GRANSTA 東京 POP UP GRANSTA GREEN（JR東京站1樓閘內）",
+    display_zh.display_source_fingerprint(gransta_raw),
+))
+fresh_gransta = dict(gransta_raw)
+check("Verified display copy carries only across the same fingerprint", (
+    display_zh.carry_event_display(translated_gransta, fresh_gransta),
+    fresh_gransta.get("titleZh"),
+    display_zh.event_display_errors(fresh_gransta),
+), (True, translated_gransta["titleZh"], []))
+changed_gransta = dict(gransta_raw, locationName="東京ビッグサイト")
+stale_gransta = display_zh.apply_event_display({
+    **translated_gransta,
+    "locationName": "東京ビッグサイト",
+})
+check("Changed source identity cannot reuse or re-stamp stale display copy", (
+    display_zh.carry_event_display(translated_gransta, changed_gransta),
+    stale_gransta.get("displaySourceHash"),
+), (False, None))
+check("City and reservation changes invalidate translated copy", (
+    display_zh.carry_event_display(translated_gransta, dict(gransta_raw, city="Osaka")),
+    display_zh.carry_event_display(translated_gransta, dict(gransta_raw, needReservation=True)),
+), (False, False))
+source_proof = display_zh.apply_event_display({
+    "brand": "chiikawa",
+    "id": "source-proof",
+    "title": "ちいかわポップアップストア",
+    "locationName": "東京駅",
+    "titleZh": "吉伊卡哇快閃店",
+    "locationNameZh": "東京站",
+    "summaryZh": "販售限定周邊商品。",
+    "tags": ["快閃店"],
+    "sourceTitle": "ちいかわポップアップストア",
+    "startDate": "2026-11-24",
+    "endDate": "2026-12-07",
+}, approve_current=True)
+check("Original Japanese source title is allowed",
+      display_zh.event_display_errors(source_proof), [])
+bad_display_errors = display_zh.event_display_errors({
+    "id": "bad-display",
+    "titleZh": "ちいかわ快閃店",
+    "locationNameZh": "",
+    "summaryZh": "繁中摘要",
+    "tags": ["限定商品"],
+})
+check("Missing or Japanese public translation is blocked", (
+    any("titleZh contains Japanese" in error for error in bad_display_errors),
+    any("blank public display field locationNameZh" in error for error in bad_display_errors),
+    any("stale public translation fingerprint" in error for error in bad_display_errors),
+), (True, True, True))
+corrected_identity = {
+    "title": "same title",
+    "locationName": "old venue",
+    "type": "popup",
+    "country": "JP",
+    "city": "Tokyo",
+    "startDate": "2026-10-10",
+    "endDate": "2026-10-11",
+    "titleZh": "相同標題",
+    "locationNameZh": "舊場館",
+    "summaryZh": "活動於舊場館舉辦。",
+    "tags": ["快閃店"],
+    "displaySourceHash": "old",
+}
+corrected_snapshot = scrape.display_identity_snapshot(corrected_identity)
+corrected_identity["locationName"] = "corrected venue"
+scrape.invalidate_changed_display_identity(corrected_identity, corrected_snapshot)
+check("Source venue correction invalidates unchanged public copy", (
+    corrected_identity.get("titleZh"),
+    corrected_identity.get("locationNameZh"),
+    corrected_identity.get("summaryZh"),
+    corrected_identity.get("tags"),
+    corrected_identity.get("displaySourceHash"),
+), (None, None, None, None, None))
+corrected_dates = {
+    "title": "same title",
+    "locationName": "same venue",
+    "type": "popup",
+    "country": "JP",
+    "city": "Tokyo",
+    "startDate": "2026-10-13",
+    "endDate": "",
+    "titleZh": "10月13日活動",
+    "locationNameZh": "相同場館",
+    "summaryZh": "活動於10月13日舉辦。",
+    "tags": ["快閃店"],
+    "displaySourceHash": "old",
+}
+date_snapshot = scrape.display_identity_snapshot(corrected_dates)
+corrected_dates.update(startDate="2026-10-10", endDate="2026-10-11")
+scrape.invalidate_changed_display_identity(corrected_dates, date_snapshot)
+check("Source date correction invalidates dated public copy", (
+    corrected_dates.get("titleZh"),
+    corrected_dates.get("summaryZh"),
+    corrected_dates.get("displaySourceHash"),
+), (None, None, None))
+
+simplified_event = display_zh.apply_event_display({
+    "brand": "pokemon", "id": "simplified", "type": "popup",
+    "country": "JP", "city": "Tokyo", "title": "internal",
+    "locationName": "internal", "sourceTitle": "internal",
+    "startDate": "2026-12-01", "endDate": "2026-12-02",
+    "titleZh": "宝可梦快闪店", "locationNameZh": "东京车站一楼",
+    "summaryZh": "现场贩卖限定商品。", "tags": ["限定商品"],
+}, approve_current=True)
+check("Simplified Chinese public copy is blocked", (
+    display_zh.contains_simplified_display("宝可梦快闪店"),
+    any("simplified Chinese" in error for error in display_zh.event_display_errors(simplified_event)),
+    simplified_event.get("displaySourceHash"),
+), (True, True, None))
+
+mito_raw = official_sources._chiikawa_popup_event(
+    "水戸エクセル本館",
+    "https://chiikawa-info.jp/p26/pus_mtes/index.html",
+    "2026-12-04",
+    "2026-12-20",
+    correct_city=scrape.correct_city,
+)
+mito_display = display_zh.apply_event_display(mito_raw)
+check("New Mito official popup uses exact-fingerprint zh-TW override", (
+    display_zh.display_source_fingerprint(mito_raw),
+    mito_display.get("titleZh"),
+    mito_display.get("locationNameZh"),
+    display_zh.event_display_errors(mito_display),
+), (
+    "fe1d55a0803d74d0f41e",
+    "吉伊卡哇快閃店 水戶 EXCEL 本館",
+    "水戶 EXCEL 本館",
+    [],
+))
+
+kiddy_product_raw = [
+    {
+        "brand": "miffy", "id": "mi-6b73fb", "type": "new_product",
+        "country": "JP", "city": "",
+        "title": "Miffy miffy style 限定 干支ひつじ アイテム",
+        "locationName": "miffy style 各店",
+        "sourceTitle": (
+            "2026年12月5日(土)発売予定!miffy style 限定 干支ひつじ "
+            "アイテム - キデイランド"
+        ),
+        "startDate": "2026-12-05", "endDate": "",
+        "needReservation": False, "hasLimitedGoods": True,
+    },
+    {
+        "brand": "miffy", "id": "mi-9a386e", "type": "new_product",
+        "country": "JP", "city": "Kyoto",
+        "title": "Miffy miffy style 京都四条河原町限定 ミッフィーマスコット",
+        "locationName": "miffy style 京都四条河原町店",
+        "sourceTitle": (
+            "2026年12月5日(土)発売予定!miffy style 京都四条河原町限定 "
+            "ミッフィーマスコット - キデイランド"
+        ),
+        "startDate": "2026-12-05", "endDate": "",
+        "needReservation": False, "hasLimitedGoods": True,
+    },
+]
+kiddy_product_display = [
+    display_zh.apply_event_display(dict(event)) for event in kiddy_product_raw
+]
+check("New Kiddy Land products use exact-fingerprint zh-TW overrides", (
+    [display_zh.display_source_fingerprint(event) for event in kiddy_product_raw],
+    [event.get("titleZh") for event in kiddy_product_display],
+    [display_zh.event_display_errors(event) for event in kiddy_product_display],
+), (
+    ["d6b173ac7cd927949c67", "13bfb0aaa2439b24dc40"],
+    [
+        "miffy style 生肖羊系列限定商品",
+        "miffy style 京都四條河原町店限定巫女造型米飛兔小布偶",
+    ],
+    [[], []],
+))
+
+structured_fresh = dict(gransta_raw)
+translation_metrics = {"translationPendingCount": 0}
+ready, pending_ids, pending_urls = scrape.translated_events_only(
+    [structured_fresh], [translated_gransta], "test", translation_metrics
+)
+changed_structured = dict(gransta_raw, locationName="東京ビッグサイト")
+pending_metrics = {"translationPendingCount": 0}
+pending_ready, changed_pending_ids, changed_pending_urls = scrape.translated_events_only(
+    [changed_structured], [translated_gransta], "test", pending_metrics
+)
+pending_kept = scrape.replace_in_place(
+    [translated_gransta],
+    [],
+    lambda event: (
+        event.get("id") not in changed_pending_ids
+        and event.get("sourceUrl") not in changed_pending_urls
+    ),
+)
+withdrawn_removed = scrape.replace_in_place(
+    [translated_gransta],
+    [],
+    lambda event: True,
+)
+check("Structured sources carry exact translations and hold changed identities", (
+    len(ready), pending_ids, pending_urls, translation_metrics["translationPendingCount"],
+    len(pending_ready), changed_pending_ids, changed_pending_urls,
+    pending_metrics["translationPendingCount"], len(pending_kept), len(withdrawn_removed),
+), (
+    1, set(), set(), 0,
+    0, {gransta_raw["id"]}, {gransta_raw["sourceUrl"]}, 1, 1, 0,
+))
+check("All published events have zh-TW display fields", sum(
+    len(display_zh.event_display_errors(event)) for event in published_events
+), 0)
+frontend_source = (data_lint.ROOT / "js" / "app.js").read_text(encoding="utf-8")
+city_map_match = re.search(r"const CITY_LABELS = \{(.*?)\};", frontend_source, re.DOTALL)
+frontend_city_keys = set(re.findall(
+    r"\b([A-Z][A-Za-z]+)\s*:", city_map_match.group(1) if city_map_match else ""
+))
+check("Frontend renders translated event fields only", (
+    "event?.titleZh" in frontend_source,
+    "event?.locationNameZh" in frontend_source,
+    '${escapeHtml(event.title)}' not in frontend_source,
+    "CITY_LABELS[event.city] || event.city" not in frontend_source,
+    "等待繁中整理" in frontend_source,
+), (True, True, True, True, True))
+check("Frontend has a Chinese label for every published city", sorted(
+    {event.get("city") for event in published_events if event.get("city")}
+    - frontend_city_keys
+), [])
+check("AI extraction explicitly requests zh-TW display fields", (
+    '"titleZh"' in scrape.EXTRACT_PROMPT,
+    '"locationNameZh"' in scrape.EXTRACT_PROMPT,
+), (True, True))
+
+# Gransta popup media aliases share one venue/product/date identity.
+gransta = ev(brand="chiikawa", country="JP", type="popup", title="東京ばな奈", locationName="グランスタ東京", startDate="2026-11-24")
+gransta_media = dict(gransta, type="new_product", locationName="東京駅", title="Chiikawa x 東京ばな奈")
+check("Gransta cross-media identity", scrape.special_activity_key(gransta), scrape.special_activity_key(gransta_media))
+check("Gransta different period", scrape.special_activity_key(gransta) == scrape.special_activity_key(dict(gransta_media,startDate="2027-11-24")), False)
+check("Gransta different venue", scrape.special_activity_key(gransta) == scrape.special_activity_key(dict(gransta_media,locationName="大阪駅")), False)
 
 print(f"\n{'=' * 40}\n結果：{_passed} 通過、{_failed} 失敗")
 sys.exit(1 if _failed else 0)

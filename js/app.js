@@ -23,7 +23,7 @@ const TYPE_LABELS = {
   campaign: '活動',
   store: '常設店',
   cafe: '咖啡廳',
-  lottery: '抽選',
+  lottery: '抽籤',
   reservation: '預約'
 };
 
@@ -38,6 +38,8 @@ const CITY_LABELS = {
   Gifu: '岐阜', Kochi: '高知', Ehime: '愛媛', Yamaguchi: '山口',
   Wakayama: '和歌山', Fukushima: '福島', Kagoshima: '鹿兒島',
   Iwate: '岩手', Toyama: '富山', Fukui: '福井', Miyazaki: '宮崎',
+  Chitose: '千歲', Kagawa: '香川', Kitakyushu: '北九州', Koshigaya: '越谷',
+  Sapporo: '札幌', Sendai: '仙台',
   Yamanashi: '山梨', Taipei: '台北', Taichung: '台中', Kaohsiung: '高雄',
   Tainan: '台南', Taoyuan: '桃園', Hsinchu: '新竹', Keelung: '基隆'
 };
@@ -105,7 +107,7 @@ function eventSortKey(event) {
     isFuture ? 0 : 1,
     dayKey(event.startDate),
     BRAND_LABELS[event.brand] || event.brand,
-    event.title || ''
+    displayTitle(event)
   ];
 }
 
@@ -145,8 +147,14 @@ function dateRange(event) {
   return `${formatDate(event.startDate)} – ${formatDate(event.endDate)}`;
 }
 
+function displayTitle(event) {
+  return event?.titleZh || '翻譯整理中';
+}
+
 function eventLocation(event) {
-  return [CITY_LABELS[event.city] || event.city, event.locationName].filter(Boolean).join(' · ');
+  const location = event?.locationNameZh || '地點翻譯整理中';
+  const city = event?.city ? (CITY_LABELS[event.city] || '地區翻譯整理中') : '';
+  return [city, location].filter(Boolean).join(' · ');
 }
 
 function getTodayUpdateIds() {
@@ -269,7 +277,7 @@ function renderCard(event) {
         <div class="card-header">
           <div class="card-badges">${renderBadges(event)}</div>
         </div>
-        <h2 class="card-title">${escapeHtml(event.title)}</h2>
+        <h2 class="card-title">${escapeHtml(displayTitle(event))}</h2>
         ${summary}
         ${renderFacts(event)}
         <div class="card-footer">
@@ -338,7 +346,7 @@ function renderGroupChild(event) {
     <div class="group-child" data-id="${escapeAttr(event.id)}">
       <div class="group-child-main">
         <div class="group-child-badges">${badges}</div>
-        <h3 class="group-child-title">${escapeHtml(event.title)}</h3>
+        <h3 class="group-child-title">${escapeHtml(displayTitle(event))}</h3>
         ${summary}
         <div class="group-child-meta">
           ${location ? `<span>${icon('map-pin')}${escapeHtml(location)}</span>` : ''}
@@ -367,7 +375,7 @@ function renderEventGroup(parent, children) {
         <div class="card-header">
           <div class="card-badges">${renderBadges(groupedEvent, { grouped: true })}</div>
         </div>
-        <h2 class="card-title">${escapeHtml(parent.title)}</h2>
+        <h2 class="card-title">${escapeHtml(displayTitle(parent))}</h2>
         ${summary}
         ${renderFacts(parent)}
         <div class="group-toggle">
@@ -685,6 +693,7 @@ function renderSystemHealth(health, updatedAt) {
     const details = [];
     if (metrics.agentCandidateCount) details.push(`${metrics.agentCandidateCount} 筆待人工確認`);
     if (metrics.pendingArticleCount) details.push(`${metrics.pendingArticleCount} 筆延後處理`);
+    if (metrics.translationPendingCount) details.push(`${metrics.translationPendingCount} 筆等待繁中整理`);
     if (metrics.extractionFailureCount) details.push(`${metrics.extractionFailureCount} 筆等待重試`);
     if (metrics.rateLimited) details.push('AI 額度已輪替或受限');
     if (metrics.structuredSourceFailureCount) {

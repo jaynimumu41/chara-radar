@@ -13,8 +13,7 @@
     "hasLimitedGoods": true,
     "tags": [
       "寶可夢",
-      "台灣",
-      "POP UP",
+      "珠寶快閃展示",
       "K.UNO",
       "U-TREASURE"
     ],
@@ -22,7 +21,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-09-13",
     "sourceTitle": "≪K.UNO × U-TREASURE POP UP Promotion≫開展！ - 台灣寶可夢官方網站",
-    "sourceUrl": "https://tw.portal-pokemon.com/goods/post-5267/"
+    "sourceUrl": "https://tw.portal-pokemon.com/goods/post-5267/",
+    "titleZh": "Pokémon K.UNO × U-TREASURE 珠寶快閃展示",
+    "locationNameZh": "K.UNO台北忠孝旗艦店／K.UNO新光三越南西店／K.UNO新光三越台南新天地西門店",
+    "displaySourceHash": "3c24d7e1d8498a0417da"
   },
   {
     "brand": "miffy",
@@ -45,7 +47,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-07-29",
     "sourceTitle": "岐阜・多治見 こども陶器博物館で企画展「ミッフィーとこどものじかん」開催 - dickbruna.jp",
-    "sourceUrl": "https://dickbruna.jp/news/202607/47552/"
+    "sourceUrl": "https://dickbruna.jp/news/202607/47552/",
+    "titleZh": "Miffy「米飛兔與孩子的時光」企劃展",
+    "locationNameZh": "兒童陶瓷博物館（岐阜縣多治見市旭丘10-6-67）",
+    "displaySourceHash": "9508df8ec8f1dc51e967"
   },
   {
     "brand": "chiikawa",
@@ -56,7 +61,7 @@
     "locationName": "LUCUA SOUTH 11F",
     "startDate": "2026-11-24",
     "endDate": "",
-    "summaryZh": "大阪 LUCUA SOUTH 11F 的 Chiikawa Park Store 將於2026年11月24日開幕，販售池袋 Chiikawa Park 周邊。開幕初期須持事前抽選或先到先得的入場整理券，入場免費；詳情依官方公告。",
+    "summaryZh": "大阪 LUCUA SOUTH 11樓的吉伊卡哇樂園商店將於2026年11月24日開幕，販售池袋吉伊卡哇樂園周邊商品。開幕初期須持事前抽選或現場依序發放的入場號碼牌，入場免費；詳情依官方公告。",
     "needReservation": true,
     "hasLimitedGoods": true,
     "tags": [
@@ -69,7 +74,10 @@
     "sourceTitle": "ちいかわパークストア、大阪・LUCUA SOUTHに2026年11月24日(火) GRAND OPEN！",
     "sourceType": "official_site",
     "createdAt": "2026-08-05",
-    "sourceUrl": "https://chiikawapark-tokyo.jp/news/x0e64eb94v/"
+    "sourceUrl": "https://chiikawapark-tokyo.jp/news/x0e64eb94v/",
+    "titleZh": "吉伊卡哇樂園商店 LUCUA SOUTH",
+    "locationNameZh": "LUCUA SOUTH 11樓",
+    "displaySourceHash": "d44af61151a1508a2669"
   },
   {
     "brand": "chiikawa",
@@ -80,7 +88,7 @@
     "locationName": "プチミーII 2階 0%NAHA",
     "startDate": "2026-08-13",
     "endDate": "2027-02-14",
-    "summaryZh": "ちいかわ POP UP STORE 於0%NAHA期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
+    "summaryZh": "吉伊卡哇期間限定快閃店於0%NAHA登場，販售活動紀念與限定周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -93,7 +101,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-09-13",
     "sourceTitle": "ちいかわPOP UP STORE 0%NAHA(2026-08-13～2027-02-14) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_naha/index.html"
+    "sourceUrl": "https://chiikawa-info.jp/p26/pus_naha/index.html",
+    "titleZh": "吉伊卡哇 0%NAHA 快閃店",
+    "locationNameZh": "0%NAHA（Petit Mee II 2樓）",
+    "displaySourceHash": "260d16e23b885f72e54e"
   },
   {
     "brand": "miffy",
@@ -104,7 +115,7 @@
     "locationName": "札幌アピア",
     "startDate": "2026-11-06",
     "endDate": "2026-11-24",
-    "summaryZh": "Miffy 官方快閃店「miffy style POP UP SHOP in 札幌」於札幌アピア期間限定登場，販售限定與先行商品。",
+    "summaryZh": "miffy style 札幌快閃店於札幌 APIA 期間限定登場，販售活動限定與搶先販售商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -117,7 +128,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-09-13",
     "sourceTitle": "miffy style POP UP SHOPが有楽町・梅田・札幌に期間限定オープン - dickbruna.jp",
-    "sourceUrl": "https://dickbruna.jp/news/202609/48222/"
+    "sourceUrl": "https://dickbruna.jp/news/202609/48222/",
+    "titleZh": "Miffy miffy style 札幌快閃店",
+    "locationNameZh": "札幌 APIA",
+    "displaySourceHash": "39685c26fdce4914e85e"
   },
   {
     "brand": "pokemon",
@@ -128,7 +142,7 @@
     "locationName": "日本全國 Pokémon Center",
     "startDate": "2026-10-03",
     "endDate": "",
-    "summaryZh": "日本 Pokémon 官方公告「ピックアップテーマ「つながる」のイラストを使用したグッズが、ポケモンセンターに登場！」於2026-10-03起在日本各地 Pokémon Center 實體店販售。",
+    "summaryZh": "Pokémon Center 自2026年10月3日起推出「連結」精選主題插畫周邊，於日本各地 Pokémon Center 實體店販售。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -142,7 +156,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-09-25",
     "sourceTitle": "ピックアップテーマ「つながる」のイラストを使用したグッズが、ポケモンセンターに登場！ - ポケットモンスターオフィシャルサイト",
-    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/09/260925_to01.html"
+    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/09/260925_to01.html",
+    "titleZh": "Pokémon Center「連結」主題插畫周邊",
+    "locationNameZh": "日本全國 Pokémon Center",
+    "displaySourceHash": "6b27b3f47ac69c846bb6"
   },
   {
     "brand": "pokemon",
@@ -153,7 +170,7 @@
     "locationName": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3F）",
     "startDate": "2026-09-25",
     "endDate": "",
-    "summaryZh": "Pokémon Center TAIPEI 於9月25日實體發售南瓜皮卡丘玩偶、超夢SUPER CARD造型悠遊卡與精靈球扣環吉祥物等新品；9月25日至28日僅為入店整理券管理日期，並非販售截止日。",
+    "summaryZh": "Pokémon Center TAIPEI 於9月25日實體發售南瓜皮卡丘玩偶、超夢SUPER CARD造型悠遊卡與精靈球扣環吉祥物等新品；9月25日至28日僅為入店號碼牌管制日期，並非販售截止日。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -166,7 +183,10 @@
     "sourceTitle": "寶可夢中心南瓜皮卡丘中秋連假再到貨！10月領新光三越限定明信片 - NOWnews今日新聞",
     "sourceType": "media",
     "createdAt": "2026-09-28",
-    "sourceUrl": "https://www.nownews.com/news/6878252"
+    "sourceUrl": "https://www.nownews.com/news/6878252",
+    "titleZh": "Pokémon Center TAIPEI 9/25 南瓜皮卡丘與新品發售",
+    "locationNameZh": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3樓）",
+    "displaySourceHash": "eed394d1e2f16d92ab16"
   },
   {
     "brand": "pokemon",
@@ -190,7 +210,10 @@
     "sourceTitle": "寶可夢中心10/3新品！Disguise! Ditto系列上架　6款玩偶搶先看 - nownews.com",
     "sourceType": "media",
     "createdAt": "2026-09-29",
-    "sourceUrl": "https://www.nownews.com/news/6879023"
+    "sourceUrl": "https://www.nownews.com/news/6879023",
+    "titleZh": "Pokémon Center TAIPEI「Disguise! Ditto 百變怪變裝」系列新品",
+    "locationNameZh": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3樓）",
+    "displaySourceHash": "959ed998eeb780866c7c"
   },
   {
     "brand": "pokemon",
@@ -201,7 +224,7 @@
     "locationName": "日本全國 Pokémon Center",
     "startDate": "2026-10-10",
     "endDate": "",
-    "summaryZh": "日本 Pokémon 官方公告「電気を求めてやってきたデデンネとバチュルの日常を描いたグッズがポケモンセンターに登場！」於2026-10-10起在日本各地 Pokémon Center 實體店販售。",
+    "summaryZh": "以尋找電力而來的咚咚鼠與電電蟲日常為主題的周邊商品，自2026年10月10日起於日本各地 Pokémon Center 實體店販售。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -215,7 +238,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-10-02",
     "sourceTitle": "電気を求めてやってきたデデンネとバチュルの日常を描いたグッズがポケモンセンターに登場！ - ポケットモンスターオフィシャルサイト",
-    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/10/261002_to01.html"
+    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/10/261002_to01.html",
+    "titleZh": "Pokémon Center 咚咚鼠與電電蟲日常主題周邊",
+    "locationNameZh": "日本全國 Pokémon Center",
+    "displaySourceHash": "066735875ef118fd4043"
   },
   {
     "brand": "miffy",
@@ -226,7 +252,7 @@
     "locationName": "仙台・藤崎百貨店",
     "startDate": "2026-11-25",
     "endDate": "2026-12-08",
-    "summaryZh": "Miffy（米飛兔）官方活動「ミッフィーzakkaフェスタ」於仙台・藤崎百貨店期間限定登場，販售限定周邊／餐點。",
+    "summaryZh": "米飛兔雜貨祭於仙台藤崎百貨期間限定舉辦，販售活動限定與會場搶先周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -238,7 +264,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-10-05",
     "sourceTitle": "仙台・藤崎百貨店で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
-    "sourceUrl": "https://dickbruna.jp/news/202610/48945/"
+    "sourceUrl": "https://dickbruna.jp/news/202610/48945/",
+    "titleZh": "Miffy 米飛兔雜貨祭｜仙台藤崎百貨",
+    "locationNameZh": "仙台藤崎百貨",
+    "displaySourceHash": "472ab0134420a6b04fa2"
   },
   {
     "brand": "pokemon",
@@ -263,7 +292,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-10-08",
     "sourceTitle": "ポケモンセンターカガワがオープン1周年を迎えるよ！",
-    "sourceUrl": "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kagawa/events/202610/000571.html"
+    "sourceUrl": "https://shop.pokemon.co.jp/ja/shop/pokemoncenter-kagawa/events/202610/000571.html",
+    "titleZh": "Pokémon Center 香川一週年雨天限定貼紙",
+    "locationNameZh": "Pokémon Center 香川",
+    "displaySourceHash": "294f68c2c3582b994398"
   },
   {
     "brand": "chiikawa",
@@ -274,7 +306,7 @@
     "locationName": "豊砂公園（イオンモール幕張新都心前）",
     "startDate": "2026-11-24",
     "endDate": "2026-12-25",
-    "summaryZh": "吉伊卡哇聖誕市集於千葉市豐砂公園舉辦，設有期間限定原創餐飲、限定周邊、體驗遊戲與約6公尺高的聖誕樹；採日時指定票券入場。",
+    "summaryZh": "吉伊卡哇聖誕市集於千葉市豐砂公園舉辦，設有期間限定原創餐飲、限定周邊、體驗遊戲與約6公尺高的聖誕樹；入場須購買指定日期與時段的票券。",
     "needReservation": true,
     "hasLimitedGoods": true,
     "tags": [
@@ -288,7 +320,10 @@
     "sourceTitle": "ちいかわクリスマスマーケット",
     "sourceType": "official_site",
     "createdAt": "2026-10-08",
-    "sourceUrl": "https://contents-abema.com/chiikawa-christmas-market/"
+    "sourceUrl": "https://contents-abema.com/chiikawa-christmas-market/",
+    "locationNameZh": "豐砂公園（AEON MALL 幕張新都心前）",
+    "titleZh": "吉伊卡哇聖誕市集",
+    "displaySourceHash": "c8b91ac84bcbe52c1817"
   },
   {
     "brand": "miffy",
@@ -299,7 +334,7 @@
     "locationName": "日本全國 Flower Miffy 實體店",
     "startDate": "",
     "endDate": "",
-    "summaryZh": "Flower Miffy 預計自 2026 年 11 月上旬起陸續推出聖誕花圈與聖誕樹擺飾；部分款式於日本全國實體店及 Flower Miffy Pop-Up Marche 販售。",
+    "summaryZh": "Flower Miffy 預計自2026年11月上旬起陸續推出聖誕花圈與聖誕樹擺飾；部分款式於日本全國實體店及 Flower Miffy 快閃市集販售。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -313,7 +348,10 @@
     "sourceTitle": "「ミッフィーマム」やブランコに乗ったミッフィーをあしらったお部屋をクリスマスムードに仕立てる毎年人気のリースとツリーが登場！2026年11月上旬よりミッフィーのお花屋さん「フラワーミッフィー」にて",
     "sourceType": "official_social",
     "createdAt": "2026-10-09",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002237.000022901.html"
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002237.000022901.html",
+    "locationNameZh": "日本全國 Flower Miffy 實體店及快閃市集",
+    "titleZh": "Flower Miffy 2026 聖誕花禮",
+    "displaySourceHash": "1f34ad4eb84a52ceaaba"
   },
   {
     "brand": "chiikawa",
@@ -324,7 +362,7 @@
     "locationName": "海老名マルイ 5F イベントスペース",
     "startDate": "2026-10-23",
     "endDate": "2026-11-29",
-    "summaryZh": "ちいかわ POP UP STORE 於海老名マルイ期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
+    "summaryZh": "吉伊卡哇期間限定快閃店於海老名丸井百貨登場，販售活動紀念與限定周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -337,7 +375,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-10-10",
     "sourceTitle": "ちいかわPOP UP STORE 海老名マルイ(2026-10-23～2026-11-29) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_ebmr/index.html"
+    "sourceUrl": "https://chiikawa-info.jp/p26/pus_ebmr/index.html",
+    "titleZh": "吉伊卡哇快閃店 海老名丸井百貨",
+    "locationNameZh": "海老名丸井百貨 5樓活動空間",
+    "displaySourceHash": "8f007cc3cf05221027ef"
   },
   {
     "brand": "pokemon",
@@ -356,13 +397,16 @@
       "Pokémon Center TAIPEI",
       "Fainted",
       "吉祥物",
-      "店頭新品"
+      "門市新品"
     ],
     "id": "po-e3f4cc",
     "sourceTitle": "寶可夢中心10月中新品！戰敗系列玩偶登場　皮卡丘刺繡帽子超萌 - NOWnews今日新聞",
     "sourceType": "media",
     "createdAt": "2026-10-12",
-    "sourceUrl": "https://www.nownews.com/news/6882679"
+    "sourceUrl": "https://www.nownews.com/news/6882679",
+    "titleZh": "Pokémon Center TAIPEI「Fainted 倒下」系列吉祥物",
+    "locationNameZh": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3樓）",
+    "displaySourceHash": "fcce5938b21c0fd25d70"
   },
   {
     "brand": "miffy",
@@ -373,7 +417,7 @@
     "locationName": "新潟伊勢丹",
     "startDate": "2026-11-18",
     "endDate": "2026-11-30",
-    "summaryZh": "Miffy（米飛兔）官方活動「ミッフィーzakkaフェスタ」於新潟伊勢丹期間限定登場，販售限定周邊／餐點。",
+    "summaryZh": "米飛兔雜貨祭於新潟伊勢丹期間限定舉辦，販售活動限定與會場搶先周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -385,7 +429,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-10-13",
     "sourceTitle": "新潟伊勢丹で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
-    "sourceUrl": "https://dickbruna.jp/news/202610/49033/"
+    "sourceUrl": "https://dickbruna.jp/news/202610/49033/",
+    "titleZh": "Miffy 米飛兔雜貨祭｜新潟伊勢丹",
+    "locationNameZh": "新潟伊勢丹",
+    "displaySourceHash": "7744d5cfa6fc3ea38882"
   },
   {
     "brand": "miffy",
@@ -396,7 +443,7 @@
     "locationName": "ハウステンボス",
     "startDate": "2026-11-06",
     "endDate": "2027-02-25",
-    "summaryZh": "Miffy（米飛兔）官方活動「ミッフィー・クリスマス」於ハウステンボス期間限定登場，販售限定周邊／餐點。",
+    "summaryZh": "豪斯登堡舉辦米飛兔聖誕節主題活動，推出期間限定周邊與餐飲；詳情依官方公告。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -408,7 +455,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-10-14",
     "sourceTitle": "ハウステンボス「ミッフィー・クリスマス」&「ハウステンボス × ディック・ブルーナ テーブル」 - dickbruna.jp",
-    "sourceUrl": "https://dickbruna.jp/news/202610/49038/"
+    "sourceUrl": "https://dickbruna.jp/news/202610/49038/",
+    "titleZh": "Miffy 豪斯登堡米飛兔聖誕節",
+    "locationNameZh": "豪斯登堡",
+    "displaySourceHash": "875c3b1c4f221fa3c75a"
   },
   {
     "brand": "pokemon",
@@ -419,7 +469,7 @@
     "locationName": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3F）",
     "startDate": "2026-10-20",
     "endDate": "",
-    "summaryZh": "粉紅色 PokéXciting! 皮卡丘吉祥物10月20日到貨；最新公告10月23、24日暫停販售，預計10月25日恢復。入店整理券與購買限制依官方現場公告。",
+    "summaryZh": "粉紅色 PokéXciting! 皮卡丘吉祥物10月20日到貨；最新公告10月23、24日暫停販售，預計10月25日恢復。入店號碼牌與購買限制依官方現場公告。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -432,7 +482,10 @@
     "sourceTitle": "寶可夢「爆炸頭皮卡丘」10/20補貨！整理券限領1張　官方加強查驗 - NOWnews今日新聞",
     "sourceType": "media",
     "createdAt": "2026-10-15",
-    "sourceUrl": "https://www.nownews.com/news/6883605"
+    "sourceUrl": "https://www.nownews.com/news/6883605",
+    "titleZh": "爆炸頭皮卡丘補貨",
+    "locationNameZh": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3樓）",
+    "displaySourceHash": "60d6946e0d225bdff526"
   },
   {
     "brand": "pokemon",
@@ -443,7 +496,7 @@
     "locationName": "日本全國 Pokémon Center",
     "startDate": "2026-10-24",
     "endDate": "",
-    "summaryZh": "日本 Pokémon 官方公告「クリスマスをテーマにしたグッズ「クリスマスじゅんびチュウ！」が、ポケモンセンターに登場！」於2026-10-24起在日本各地 Pokémon Center 實體店販售。",
+    "summaryZh": "Pokémon Center 自2026年10月24日起推出「聖誕準備中！」系列商品，於日本各地 Pokémon Center 實體店販售。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -457,7 +510,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-10-17",
     "sourceTitle": "クリスマスをテーマにしたグッズ「クリスマスじゅんびチュウ！」が、ポケモンセンターに登場！ - ポケットモンスターオフィシャルサイト",
-    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/10/261016_to01.html"
+    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/10/261016_to01.html",
+    "titleZh": "Pokémon Center「聖誕準備中！」系列周邊",
+    "locationNameZh": "日本全國 Pokémon Center",
+    "displaySourceHash": "b2480d43fc5295281fb0"
   },
   {
     "brand": "pokemon",
@@ -468,7 +524,7 @@
     "locationName": "日本全國 Pokémon Center",
     "startDate": "2026-10-29",
     "endDate": "",
-    "summaryZh": "日本 Pokémon 官方公告「『Pokémon LEGENDS Z-A』の舞台であるミアレシティでの優雅で楽しい暮らしを描いたグッズがポケモンセンターに登場！」於2026-10-29起在日本各地 Pokémon Center 實體店販售。",
+    "summaryZh": "以《Pokémon LEGENDS Z-A》舞台密阿雷市的優雅有趣生活為主題的周邊，自2026年10月29日起於日本各地 Pokémon Center 實體店販售。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -482,7 +538,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-10-17",
     "sourceTitle": "『Pokémon LEGENDS Z-A』の舞台であるミアレシティでの優雅で楽しい暮らしを描いたグッズがポケモンセンターに登場！ - ポケットモンスターオフィシャルサイト",
-    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/10/261016_go01.html"
+    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/10/261016_go01.html",
+    "titleZh": "Pokémon LEGENDS Z-A 密阿雷市生活主題周邊",
+    "locationNameZh": "日本全國 Pokémon Center",
+    "displaySourceHash": "84241cf5b4654a1c4073"
   },
   {
     "brand": "pokemon",
@@ -493,7 +552,7 @@
     "locationName": "日本全國 Pokémon Center",
     "startDate": "2026-10-29",
     "endDate": "",
-    "summaryZh": "日本 Pokémon 官方公告「『ぽこ あ ポケモン』に登場するメタモンの立体ラバーキーホルダーが、ポケモンセンターに登場！」於2026-10-29起在日本各地 Pokémon Center 實體店販售。",
+    "summaryZh": "以《Pokémon Pokopia》登場的百變怪為造型的立體橡膠鑰匙圈，自2026年10月29日起於日本各地 Pokémon Center 實體店販售。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -507,7 +566,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-10-17",
     "sourceTitle": "『ぽこ あ ポケモン』に登場するメタモンの立体ラバーキーホルダーが、ポケモンセンターに登場！ - ポケットモンスターオフィシャルサイト",
-    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/10/261016_go02.html"
+    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/10/261016_go02.html",
+    "titleZh": "Pokémon Pokopia 百變怪立體橡膠鑰匙圈",
+    "locationNameZh": "日本全國 Pokémon Center",
+    "displaySourceHash": "551ec396c86559a08434"
   },
   {
     "brand": "pokemon",
@@ -531,7 +593,10 @@
     "sourceTitle": "寶可夢中心光復連假新品！30週年合眾周邊、萬聖蛋糕架10/24登場 - NOWnews今日新聞",
     "sourceType": "media",
     "createdAt": "2026-10-19",
-    "sourceUrl": "https://www.nownews.com/news/6884725"
+    "sourceUrl": "https://www.nownews.com/news/6884725",
+    "titleZh": "Pokémon Center TAIPEI 合眾周邊與萬聖節蛋糕架（延期）",
+    "locationNameZh": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3樓）",
+    "displaySourceHash": "159447248c1cdd53afcb"
   },
   {
     "brand": "miffy",
@@ -542,7 +607,7 @@
     "locationName": "miffy style 各店＋キデイランド対象店",
     "startDate": "2026-11-07",
     "endDate": "",
-    "summaryZh": "miffy style 各店自 2026-11-07 起舉辦店頭購入特典活動，贈品送完為止，線上店不適用。",
+    "summaryZh": "miffy style 各店自2026年11月7日起舉辦店內購物贈品活動，贈品送完為止，線上商店不適用。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -554,7 +619,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-10-23",
     "sourceTitle": "2026年11月7日(土)～スタート!miffy style 各店ノベルティデイ - キデイランド",
-    "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_nove202611/"
+    "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_nove202611/",
+    "titleZh": "Miffy miffy style 各店來店贈品日",
+    "locationNameZh": "miffy style 各店及 KIDDY LAND 指定門市",
+    "displaySourceHash": "021d02c1a1f37f3e473b"
   },
   {
     "brand": "miffy",
@@ -577,7 +645,10 @@
     "sourceTitle": "ミッフィーのスペシャルなテーマカフェが東京・大阪で開催決定「ミッフィーほかほかダイニング」期間限定オープン - PR TIMES",
     "sourceType": "official_social",
     "createdAt": "2026-10-23",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000334.000086964.html"
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000334.000086964.html",
+    "titleZh": "Miffy「暖呼呼餐桌」冬季主題餐廳｜東京押上",
+    "locationNameZh": "BOX cafe&space 東京晴空街道店（東京晴空街道 1樓）",
+    "displaySourceHash": "0d874788f94db02c941a"
   },
   {
     "brand": "chiikawa",
@@ -588,7 +659,7 @@
     "locationName": "日本 ANA FESTA 指定實體店及ちいかわらんど各店",
     "startDate": "2026-10-23",
     "endDate": "",
-    "summaryZh": "Chiikawa × ANA 制服造型吉祥物、玩偶與壓克力鑰匙圈等第一彈周邊，10月23日起於日本指定 ANA FESTA 實體店及ちいかわらんど各店販售；部分機場店初期採預約入店。",
+    "summaryZh": "吉伊卡哇 × ANA 第一波聯名周邊包含制服造型吉祥物、玩偶與壓克力鑰匙圈等商品，10月23日起於日本指定 ANA FESTA 實體店及吉伊卡哇樂園各店販售；部分機場店初期採預約入店。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -601,7 +672,10 @@
     "sourceTitle": "ちいかわ×ANA オリジナルグッズ第一弾 - 全日空商事",
     "sourceType": "official_social",
     "createdAt": "2026-10-23",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000018.000035055.html"
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000018.000035055.html",
+    "titleZh": "吉伊卡哇 × ANA 聯名商品",
+    "locationNameZh": "日本 ANA FESTA 指定實體店及吉伊卡哇樂園各店",
+    "displaySourceHash": "eee74d00f258ced312a4"
   },
   {
     "brand": "miffy",
@@ -624,7 +698,10 @@
     "sourceTitle": "ミッフィーのスペシャルなテーマカフェが東京・大阪で開催決定「ミッフィーほかほかダイニング」期間限定オープン - PR TIMES",
     "sourceType": "official_social",
     "createdAt": "2026-10-23",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000334.000086964.html"
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000334.000086964.html",
+    "titleZh": "Miffy「暖呼呼餐桌」冬季主題餐廳｜大阪心齋橋",
+    "locationNameZh": "Collabo_Index SHINSAIBASHI（心齋橋筋 1-6-1 2樓）",
+    "displaySourceHash": "6a5d84dd6d512c13793c"
   },
   {
     "brand": "chiikawa",
@@ -635,7 +712,7 @@
     "locationName": "イオンモール須坂 1F Goolightコート",
     "startDate": "2026-11-06",
     "endDate": "2026-11-23",
-    "summaryZh": "ちいかわ POP UP STORE 於イオンモール須坂期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
+    "summaryZh": "吉伊卡哇期間限定快閃店於 AEON MALL 須坂登場，販售活動紀念與限定周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -648,7 +725,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-10-27",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール須坂(2026-11-06～2026-11-23) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_aszk/index.html"
+    "sourceUrl": "https://chiikawa-info.jp/p26/pus_aszk/index.html",
+    "titleZh": "吉伊卡哇快閃店 AEON MALL 須坂",
+    "locationNameZh": "AEON MALL 須坂 1樓 Goolight 廣場",
+    "displaySourceHash": "5c1eb7455b03f4de60c8"
   },
   {
     "brand": "pokemon",
@@ -672,7 +752,10 @@
     "sourceTitle": "台灣寶可夢中心10月底新品！迷你持有物系列登場　萬聖蛋糕架開賣 - NOWnews今日新聞",
     "sourceType": "media",
     "createdAt": "2026-10-27",
-    "sourceUrl": "https://www.nownews.com/news/6886951"
+    "sourceUrl": "https://www.nownews.com/news/6886951",
+    "titleZh": "Pokémon Center TAIPEI 迷你持有物系列",
+    "locationNameZh": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3樓）",
+    "displaySourceHash": "c16bf716f55041040baf"
   },
   {
     "brand": "chiikawa",
@@ -683,7 +766,7 @@
     "locationName": "日本ちいかわらんど常設店等指定實體店",
     "startDate": "2026-11-06",
     "endDate": "",
-    "summaryZh": "11月6日起於日本ちいかわらんど常設店等指定實體店販售Kiramekko Teddy Bear Christmas，共吉伊卡哇、小八貓、兔兔3款，各2,420日圓；部分其他會場有不同開賣日，依各店公告。",
+    "summaryZh": "11月6日起於日本吉伊卡哇樂園常設店等指定實體店販售 Kiramekko Teddy Bear Christmas，共有吉伊卡哇、小八貓、兔兔3款，每款2,420日圓；部分其他場地有不同開賣日，依各店公告。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -696,7 +779,10 @@
     "sourceTitle": "テディベア姿のちいかわたちがクリスマス仕様におめかし！「ちいかわ Kiramekko Teddy Bear Christmas」11月6日（金）から販売開始",
     "sourceType": "official_social",
     "createdAt": "2026-10-27",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000080.000168561.html"
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000080.000168561.html",
+    "locationNameZh": "日本吉伊卡哇樂園常設店等指定實體店",
+    "titleZh": "吉伊卡哇 Kiramekko 泰迪熊聖誕系列",
+    "displaySourceHash": "5cfe4a17182b385d1ca8"
   },
   {
     "brand": "miffy",
@@ -707,7 +793,7 @@
     "locationName": "ハウステンボス",
     "startDate": "2026-11-06",
     "endDate": "2026-12-25",
-    "summaryZh": "Miffy（米飛兔）官方活動「ハウステンボス×クリスマスアドベント 限定ミッフィーマグカップ登場」於ハウステンボス期間限定登場，販售限定周邊／餐點。",
+    "summaryZh": "豪斯登堡聖誕市集推出米飛兔限定馬克杯，於活動期間在園區指定地點販售；數量與供應方式依官方公告。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -719,7 +805,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-10-28",
     "sourceTitle": "ハウステンボス×クリスマスアドベント 限定ミッフィーマグカップ登場 - dickbruna.jp",
-    "sourceUrl": "https://dickbruna.jp/news/202610/49404/"
+    "sourceUrl": "https://dickbruna.jp/news/202610/49404/",
+    "titleZh": "Miffy 豪斯登堡聖誕市集限定馬克杯",
+    "locationNameZh": "豪斯登堡",
+    "displaySourceHash": "f3770fc022a8fd4f1abf"
   },
   {
     "brand": "chiikawa",
@@ -730,7 +819,7 @@
     "locationName": "イオンモール神戸北 専門店1階 さざんかコート",
     "startDate": "2026-11-11",
     "endDate": "2026-11-25",
-    "summaryZh": "ちいかわ POP UP STORE 於イオンモール神戸北期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
+    "summaryZh": "吉伊卡哇期間限定快閃店於 AEON MALL 神戶北登場，販售活動紀念與限定周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -743,7 +832,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-10-29",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール神戸北(2026-11-11～2026-11-25) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_kbkt/index.html"
+    "sourceUrl": "https://chiikawa-info.jp/p26/pus_kbkt/index.html",
+    "titleZh": "吉伊卡哇快閃店 AEON MALL 神戶北",
+    "locationNameZh": "AEON MALL 神戶北 專門店區1樓 山茶花廣場",
+    "displaySourceHash": "89d203335b06f8948e8f"
   },
   {
     "brand": "chiikawa",
@@ -754,12 +846,12 @@
     "locationName": "CHIIKAWA OBANYAKI in TAIPEI（台北市大同區赤峰街41巷9號）",
     "startDate": "2026-11-21",
     "endDate": "",
-    "summaryZh": "吉伊卡哇大判燒台北常設店11月21日開幕，販售三種口味大判燒、茶飲與原創抱枕、玩偶吊飾；入店需事前預約，辦法由0% TAIPEI官方社群公布。",
+    "summaryZh": "吉伊卡哇日式車輪餅台北常設店於11月21日開幕，販售三種口味的日式車輪餅（大判燒）、茶飲，以及原創抱枕與玩偶吊飾；入店須事前預約，辦法由0% TAIPEI官方社群公布。",
     "needReservation": true,
     "hasLimitedGoods": true,
     "tags": [
       "吉伊卡哇",
-      "大判燒",
+      "日式車輪餅",
       "台北",
       "新店開幕"
     ],
@@ -767,7 +859,10 @@
     "sourceTitle": "【ちいかわ】台北エリアに“台北初！”のお店が誕生‼「CHIIKAWA OBANYAKI in TAIPEI」吉伊卡哇大判燒台北店が2026年11月21日（土）にグランドオープン！",
     "sourceType": "official_social",
     "createdAt": "2026-10-29",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000004.000187317.html"
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000004.000187317.html",
+    "titleZh": "吉伊卡哇日式車輪餅台北店開幕",
+    "locationNameZh": "吉伊卡哇日式車輪餅台北店（台北市大同區赤峰街41巷9號）",
+    "displaySourceHash": "2cbe8f8cbce663963a09"
   },
   {
     "brand": "pokemon",
@@ -778,7 +873,7 @@
     "locationName": "日本全國 Pokémon Center",
     "startDate": "2026-11-07",
     "endDate": "",
-    "summaryZh": "日本 Pokémon 官方公告「ピックアップテーマ「えらぶ」のイラストを使用したグッズが、ポケモンセンターに登場！」於2026-11-07起在日本各地 Pokémon Center 實體店販售。",
+    "summaryZh": "Pokémon Center 自2026年11月7日起推出「選擇」精選主題插畫周邊，於日本各地 Pokémon Center 實體店販售。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -792,7 +887,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-10-30",
     "sourceTitle": "ピックアップテーマ「えらぶ」のイラストを使用したグッズが、ポケモンセンターに登場！ - ポケットモンスターオフィシャルサイト",
-    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/10/261030_to01.html"
+    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/10/261030_to01.html",
+    "titleZh": "Pokémon Center「選擇」主題插畫周邊",
+    "locationNameZh": "日本全國 Pokémon Center",
+    "displaySourceHash": "8f677268a7e13df59193"
   },
   {
     "brand": "pokemon",
@@ -803,7 +901,7 @@
     "locationName": "日本全國 Pokémon Center",
     "startDate": "2026-11-07",
     "endDate": "",
-    "summaryZh": "日本 Pokémon 官方公告「キミだけの「てもち」が作れるカスタマイズグッズがポケモンセンターに登場！」於2026-11-07起在日本各地 Pokémon Center 實體店販售。",
+    "summaryZh": "可自由組合出專屬手持寶可夢隊伍的客製化周邊，自2026年11月7日起於日本各地 Pokémon Center 實體店販售。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -817,7 +915,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-10-30",
     "sourceTitle": "キミだけの「てもち」が作れるカスタマイズグッズがポケモンセンターに登場！ - ポケットモンスターオフィシャルサイト",
-    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/10/261030_to02.html"
+    "sourceUrl": "https://www.pokemon.co.jp/goods/2026/10/261030_to02.html",
+    "titleZh": "Pokémon Center 專屬寶可夢隊伍客製化周邊",
+    "locationNameZh": "日本全國 Pokémon Center",
+    "displaySourceHash": "e284de9fde25e76b635e"
   },
   {
     "brand": "miffy",
@@ -828,7 +929,7 @@
     "locationName": "横浜赤レンガ倉庫 2号館1F",
     "startDate": "2026-11-06",
     "endDate": "2026-12-08",
-    "summaryZh": "Miffy（米飛兔）官方活動「Flower Miffy Pop-Up Marche」於横浜赤レンガ倉庫 2号館1F期間限定登場，販售限定周邊／餐點。",
+    "summaryZh": "Flower Miffy 快閃市集於橫濱紅磚倉庫期間限定登場，販售季節花禮、活動限定商品及米飛兔周邊。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -840,7 +941,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-10-30",
     "sourceTitle": "「Flower Miffy Pop-Up Marche」が横浜赤レンガ倉庫に期間限定オープン - dickbruna.jp",
-    "sourceUrl": "https://dickbruna.jp/news/202610/49311/"
+    "sourceUrl": "https://dickbruna.jp/news/202610/49311/",
+    "titleZh": "Flower Miffy 快閃市集｜橫濱紅磚倉庫",
+    "locationNameZh": "橫濱紅磚倉庫 2號館 1樓",
+    "displaySourceHash": "a42b782d9819c2c0b405"
   },
   {
     "brand": "chiikawa",
@@ -851,7 +955,7 @@
     "locationName": "東武宇都宮百貨店 5階 イベントプラザ",
     "startDate": "2026-11-13",
     "endDate": "2026-12-01",
-    "summaryZh": "ちいかわ POP UP STORE 於東武宇都宮百貨店期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
+    "summaryZh": "吉伊卡哇期間限定快閃店於東武宇都宮百貨登場，販售活動紀念與限定周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -864,7 +968,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-10-30",
     "sourceTitle": "ちいかわPOP UP STORE 東武宇都宮百貨店(2026-11-13～2026-12-01) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_tbun/index.html"
+    "sourceUrl": "https://chiikawa-info.jp/p26/pus_tbun/index.html",
+    "titleZh": "吉伊卡哇快閃店 東武宇都宮百貨",
+    "locationNameZh": "東武宇都宮百貨 5樓活動廣場",
+    "displaySourceHash": "f72d45e2c5a02eb40388"
   },
   {
     "brand": "chiikawa",
@@ -875,7 +982,7 @@
     "locationName": "ちいかわベビーカステラ 京都錦店（京都府京都市中京区鍛冶屋町205番地）",
     "startDate": "2026-11-18",
     "endDate": "",
-    "summaryZh": "京都錦市場新店販售現烤 Baby Castella 與店頭限定原創周邊；入店預約方式依官方公告。",
+    "summaryZh": "京都錦市場新店販售現烤迷你蜂蜜蛋糕與店鋪限定原創周邊；入店預約方式依官方公告。",
     "needReservation": true,
     "hasLimitedGoods": true,
     "tags": [
@@ -888,7 +995,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-11-03",
     "sourceTitle": "ちいかわベビーカステラ 京都錦店 NEW OPEN！ - ちいかわもぐもぐ本舗",
-    "sourceUrl": "https://www.chiikawamogumogu.jp/stores/castella/"
+    "sourceUrl": "https://www.chiikawamogumogu.jp/stores/castella/",
+    "titleZh": "吉伊卡哇迷你蜂蜜蛋糕 京都錦店開幕",
+    "locationNameZh": "吉伊卡哇迷你蜂蜜蛋糕 京都錦店（京都府京都市中京區鍛冶屋町205號）",
+    "displaySourceHash": "8c591d33d1c8fb11ec6e"
   },
   {
     "brand": "pokemon",
@@ -899,7 +1009,7 @@
     "locationName": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3F）",
     "startDate": "2026-11-07",
     "endDate": "",
-    "summaryZh": "台北寶可夢中心實體店11月7日再到貨 Red Green 皮卡丘毛絨玩具（630元）與吉祥物（220元），數量有限；當日須依官方公告領取入店整理券。",
+    "summaryZh": "台北寶可夢中心實體店於11月7日再次到貨「紅／綠」系列皮卡丘毛絨玩具（630元）與吉祥物（220元），數量有限；當日須依官方公告領取入店號碼牌。",
     "needReservation": false,
     "hasLimitedGoods": false,
     "tags": [
@@ -912,7 +1022,10 @@
     "sourceTitle": "像素皮卡丘 11/7 台北寶可夢中心再到貨！毛絨玩具、吉祥物價格與購買資訊 - Pokemon Hubs",
     "sourceType": "media",
     "createdAt": "2026-11-03",
-    "sourceUrl": "https://pokemonhubs.com/news/pixel-pikachu-pokemon-center-taipei-restock-2026/"
+    "sourceUrl": "https://pokemonhubs.com/news/pixel-pikachu-pokemon-center-taipei-restock-2026/",
+    "titleZh": "Pokémon Center TAIPEI「紅／綠」皮卡丘再到貨",
+    "locationNameZh": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3樓）",
+    "displaySourceHash": "6b150e3476b509ba24ef"
   },
   {
     "brand": "chiikawa",
@@ -923,7 +1036,7 @@
     "locationName": "静岡PARCO 1F ぱるけカフェ／イベントスペース",
     "startDate": "2026-11-06",
     "endDate": "2026-12-13",
-    "summaryZh": "11月6日至12月13日於靜岡PARCO 1樓舉辦討伐主題飲品攤與餐廳原創商品店，提供奶油蘇打、冰淇淋甜點及小八青椒鑲肉；無須預約，繁忙時可能發放入場整理券。",
+    "summaryZh": "11月6日至12月13日於靜岡 PARCO 1樓舉辦討伐主題飲品攤與餐廳原創商品店，提供奶油蘇打、冰淇淋甜點及小八貓青椒鑲肉；無須預約，繁忙時可能發放入場號碼牌。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -935,7 +1048,10 @@
     "sourceTitle": "ちいかわレストラン”討伐フェア”ドリンクスタンド ＠静岡ドリンクスタンド",
     "sourceType": "official_site",
     "createdAt": "2026-11-05",
-    "sourceUrl": "https://cafe.parco.jp/event/chiikawarestaurant_drinkT_shizuoka?area=031750"
+    "sourceUrl": "https://cafe.parco.jp/event/chiikawarestaurant_drinkT_shizuoka?area=031750",
+    "locationNameZh": "靜岡 PARCO 1樓 PARCHE 咖啡廳／活動空間",
+    "titleZh": "吉伊卡哇餐廳「討伐祭」靜岡飲品攤與商品店",
+    "displaySourceHash": "1bfae6b5b73a355529b9"
   },
   {
     "brand": "chiikawa",
@@ -946,7 +1062,7 @@
     "locationName": "イオンモール旭川駅前 4F イオンホール",
     "startDate": "2026-11-21",
     "endDate": "2026-12-06",
-    "summaryZh": "ちいかわ POP UP STORE 於イオンモール旭川駅前期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
+    "summaryZh": "吉伊卡哇期間限定快閃店於 AEON MALL 旭川站前登場，販售活動紀念與限定周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -959,7 +1075,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-11-07",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール旭川駅前(2026-11-21～2026-12-06) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_aake/index.html"
+    "sourceUrl": "https://chiikawa-info.jp/p26/pus_aake/index.html",
+    "titleZh": "吉伊卡哇快閃店 AEON MALL 旭川站前",
+    "locationNameZh": "AEON MALL 旭川站前 4樓 AEON HALL",
+    "displaySourceHash": "077573f6788fff916566"
   },
   {
     "brand": "chiikawa",
@@ -970,7 +1089,7 @@
     "locationName": "イオンモール浜松市野 1F シンフォニーコート",
     "startDate": "2026-11-20",
     "endDate": "2026-12-07",
-    "summaryZh": "ちいかわ POP UP STORE 於イオンモール浜松市野期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
+    "summaryZh": "吉伊卡哇期間限定快閃店於 AEON MALL 濱松市野登場，販售活動紀念與限定周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -983,7 +1102,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-11-07",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール浜松市野(2026-11-20～2026-12-07) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_ahmi/index.html"
+    "sourceUrl": "https://chiikawa-info.jp/p26/pus_ahmi/index.html",
+    "titleZh": "吉伊卡哇快閃店 AEON MALL 濱松市野",
+    "locationNameZh": "AEON MALL 濱松市野 1樓 Symphony Court",
+    "displaySourceHash": "7a22fdc9ca2b293f100c"
   },
   {
     "brand": "chiikawa",
@@ -994,7 +1116,7 @@
     "locationName": "イオンモール太田 ウエストモール1F 無印良品前",
     "startDate": "2026-11-20",
     "endDate": "2026-12-07",
-    "summaryZh": "ちいかわ POP UP STORE 於イオンモール太田期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
+    "summaryZh": "吉伊卡哇期間限定快閃店於 AEON MALL 太田登場，販售活動紀念與限定周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1007,7 +1129,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-11-07",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール太田(2026-11-20～2026-12-07) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_amot/index.html"
+    "sourceUrl": "https://chiikawa-info.jp/p26/pus_amot/index.html",
+    "titleZh": "吉伊卡哇快閃店 AEON MALL 太田",
+    "locationNameZh": "AEON MALL 太田 West Mall 1樓 無印良品前",
+    "displaySourceHash": "1763713425d80dda95db"
   },
   {
     "brand": "pokemon",
@@ -1031,7 +1156,10 @@
     "sourceTitle": "新光三越高雄左營店11/5(四)-11/29(日)週年慶重磅登場寶可夢30週年話題引爆！限定快閃店粉絲朝聖排隊搶購- 社會新聞 - PChome Online 新聞",
     "sourceType": "media",
     "createdAt": "2026-11-07",
-    "sourceUrl": "https://news.tvbs.com.tw/life/4042585"
+    "sourceUrl": "https://news.tvbs.com.tw/life/4042585",
+    "titleZh": "Pokémon Center 高雄左營快閃店",
+    "locationNameZh": "新光三越高雄左營店",
+    "displaySourceHash": "c1064abc221462660a46"
   },
   {
     "brand": "chiikawa",
@@ -1046,14 +1174,17 @@
     "needReservation": true,
     "hasLimitedGoods": false,
     "tags": [
-      "chiikawa",
+      "吉伊卡哇",
       "限定餐飲"
     ],
     "id": "ch-bakery-xmas-20261113",
     "sourceType": "official_social",
     "createdAt": "2026-11-08",
     "sourceTitle": "Chiikawa 烘焙坊聖誕限定麵包",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000335.000086964.html"
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000335.000086964.html",
+    "titleZh": "吉伊卡哇烘焙坊聖誕限定麵包",
+    "locationNameZh": "東京表參道 OMOKADO 3樓／大阪 KITTE 3樓",
+    "displaySourceHash": "2a57047620f065ca8f11"
   },
   {
     "brand": "miffy",
@@ -1075,7 +1206,10 @@
     "sourceType": "official_social",
     "createdAt": "2026-11-08",
     "sourceTitle": "Miffy Juice Garden 冬季焦糖熱飲",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002267.000022901.html"
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002267.000022901.html",
+    "titleZh": "Miffy Juice Garden 冬季焦糖熱飲",
+    "locationNameZh": "Flower Miffy 淺草店／天王寺 MIO 店",
+    "displaySourceHash": "4f1b7c32b00800d031a3"
   },
   {
     "brand": "pokemon",
@@ -1099,7 +1233,10 @@
     "sourceTitle": "台灣寶可夢中心11/14新品！卡洛斯地區週邊登場　30週年貼紙發放 - NOWnews今日新聞",
     "sourceType": "media",
     "createdAt": "2026-11-09",
-    "sourceUrl": "https://www.nownews.com/news/6890707"
+    "sourceUrl": "https://www.nownews.com/news/6890707",
+    "titleZh": "台灣寶可夢中心 Pokémon Timeless Adventure 卡洛斯系列",
+    "locationNameZh": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3樓）",
+    "displaySourceHash": "177ba45f2de6eb3eb7d2"
   },
   {
     "brand": "chiikawa",
@@ -1110,20 +1247,23 @@
     "locationName": "池袋PARCO 本館6F 0% IKEBUKURO",
     "startDate": "2026-10-24",
     "endDate": "2026-11-23",
-    "summaryZh": "吉伊卡哇Pocket第四彈便當與店家主題周邊於池袋PARCO期間限定販售。其他城市各有獨立檔期。",
+    "summaryZh": "吉伊卡哇 Pocket 第四波便當與店家主題周邊於池袋 PARCO 期間限定販售；其他城市各有獨立檔期。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
-      "chiikawa",
+      "吉伊卡哇",
       "快閃店",
       "周邊",
-      "ちいぽけ"
+      "吉伊卡哇 Pocket"
     ],
     "id": "ch-e8f09f",
     "sourceTitle": "ちいかわぽけっと公式グッズ第4弾・POP UP STORE開催概要 - Applibot",
     "sourceType": "media",
     "createdAt": "2026-11-10",
-    "sourceUrl": "https://www.applibot.co.jp/news/202610131319554757/"
+    "sourceUrl": "https://www.applibot.co.jp/news/202610131319554757/",
+    "titleZh": "吉伊卡哇 Pocket 快閃店 池袋 PARCO",
+    "locationNameZh": "池袋 PARCO 本館6樓 0% IKEBUKURO",
+    "displaySourceHash": "93fd45cf607d29294e48"
   },
   {
     "brand": "chiikawa",
@@ -1134,7 +1274,7 @@
     "locationName": "JR池袋駅 南改札外イベントスペース",
     "startDate": "2026-11-24",
     "endDate": "2026-12-07",
-    "summaryZh": "ちいかわ POP UP STORE 於JR池袋駅期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
+    "summaryZh": "吉伊卡哇期間限定快閃店於 JR池袋站登場，販售活動紀念與限定周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1147,7 +1287,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-11-11",
     "sourceTitle": "ちいかわPOP UP STORE JR池袋駅(2026-11-24～2026-12-07) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_ikek/index.html"
+    "sourceUrl": "https://chiikawa-info.jp/p26/pus_ikek/index.html",
+    "titleZh": "吉伊卡哇快閃店 JR池袋站",
+    "locationNameZh": "JR池袋站 南驗票閘門外活動空間",
+    "displaySourceHash": "236b109c503ca37d5b57"
   },
   {
     "brand": "chiikawa",
@@ -1158,7 +1301,7 @@
     "locationName": "LUCUA SOUTH 11F ナガノマーケット UMEDA",
     "startDate": "2026-11-24",
     "endDate": "",
-    "summaryZh": "NAGANO MARKET UMEDA 於11月24日在大阪 LUCUA SOUTH 11F 開幕，販售含 Chiikawa 的角色周邊；開幕初期須依官方公告取得樓層入場整理券。",
+    "summaryZh": "NAGANO MARKET UMEDA 於11月24日在大阪 LUCUA SOUTH 11樓開幕，販售包含吉伊卡哇在內的角色周邊；開幕初期須依官方公告取得樓層入場號碼牌。",
     "needReservation": false,
     "hasLimitedGoods": false,
     "tags": [
@@ -1170,7 +1313,10 @@
     "sourceTitle": "ナガノマーケット UMEDA店(2026/11/24(火)～)",
     "sourceType": "media",
     "createdAt": "2026-11-11",
-    "sourceUrl": "https://nagano-info.jp/tenpo_nm/umeda/"
+    "sourceUrl": "https://nagano-info.jp/tenpo_nm/umeda/",
+    "titleZh": "吉伊卡哇周邊專門店 NAGANO MARKET UMEDA 開幕",
+    "locationNameZh": "LUCUA SOUTH 11樓 NAGANO MARKET UMEDA",
+    "displaySourceHash": "b53f4225387626316522"
   },
   {
     "brand": "miffy",
@@ -1181,7 +1327,7 @@
     "locationName": "青山スパイラル",
     "startDate": "2026-11-27",
     "endDate": "2026-11-29",
-    "summaryZh": "於青山スパイラル舉辦maison des perles與米飛兔的聯名活動，販售オートクチュール刺繍的米飛兔飾品。",
+    "summaryZh": "maison des perles 與米飛兔於青山 Spiral 舉辦聯名活動，販售採用高級訂製刺繡工藝製作的米飛兔飾品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1194,7 +1340,10 @@
     "sourceTitle": "【11/27~】maison des perles × ディック・ブルーナとの特別なコラボレーションが実現　オートクチュール刺繍で仕立てる「ミッフィー」のアクセサリーを青山スパイラルで販売",
     "sourceType": "official_social",
     "createdAt": "2026-11-12",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000002.000186421.html"
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000002.000186421.html",
+    "locationNameZh": "青山 Spiral",
+    "titleZh": "maison des perles × 米飛兔 聯名飾品",
+    "displaySourceHash": "124d64420cd1a034ead5"
   },
   {
     "brand": "chiikawa",
@@ -1205,7 +1354,7 @@
     "locationName": "東京駅一番街 東京キャラクターストリートいちばんプラザ",
     "startDate": "2026-11-27",
     "endDate": "2026-12-24",
-    "summaryZh": "吉伊卡哇診所主題周邊於東京駅一番街 東京キャラクターストリートいちばんプラザ期間限定販售。",
+    "summaryZh": "吉伊卡哇診所主題周邊於東京站一番街的東京角色街第一廣場期間限定販售。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1216,7 +1365,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-11-12",
     "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/index.html#tokyo",
-    "sourceTitle": "ちいかわクリニック 東京駅(2026/11/27(金)～12/24(木))"
+    "sourceTitle": "ちいかわクリニック 東京駅(2026/11/27(金)～12/24(木))",
+    "titleZh": "吉伊卡哇診所快閃店 東京站一番街",
+    "locationNameZh": "東京站一番街 東京角色街第一廣場",
+    "displaySourceHash": "0738cdb41af6deb918fd"
   },
   {
     "brand": "chiikawa",
@@ -1227,7 +1379,7 @@
     "locationName": "ギンザミライミュージアム",
     "startDate": "2026-11-27",
     "endDate": "2026-12-27",
-    "summaryZh": "吉伊卡哇診所主題周邊於ギンザミライミュージアム期間限定販售。",
+    "summaryZh": "吉伊卡哇診所主題周邊於銀座未來博物館期間限定販售。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1238,7 +1390,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-11-12",
     "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/index.html#ginza",
-    "sourceTitle": "ちいかわクリニック 銀座(2026/11/27(金)～12/27(日))"
+    "sourceTitle": "ちいかわクリニック 銀座(2026/11/27(金)～12/27(日))",
+    "titleZh": "吉伊卡哇診所快閃店 銀座未來博物館",
+    "locationNameZh": "銀座未來博物館",
+    "displaySourceHash": "c1433a276cb4b1e2ee02"
   },
   {
     "brand": "chiikawa",
@@ -1249,7 +1404,7 @@
     "locationName": "名古屋PARCO東館 B1F PARCO BOX",
     "startDate": "2026-11-27",
     "endDate": "2026-12-20",
-    "summaryZh": "吉伊卡哇診所主題周邊於名古屋PARCO東館 B1F PARCO BOX期間限定販售。",
+    "summaryZh": "吉伊卡哇診所主題周邊於名古屋 PARCO 東館 B1樓的 PARCO BOX 期間限定販售。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1260,7 +1415,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-11-12",
     "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/index.html#nagoya",
-    "sourceTitle": "ちいかわクリニック 名古屋(2026/11/27(金)～12/20(日))"
+    "sourceTitle": "ちいかわクリニック 名古屋(2026/11/27(金)～12/20(日))",
+    "titleZh": "吉伊卡哇診所快閃店 名古屋 PARCO",
+    "locationNameZh": "名古屋 PARCO 東館 B1樓 PARCO BOX",
+    "displaySourceHash": "6a505fbeea9d8ca64cf0"
   },
   {
     "brand": "chiikawa",
@@ -1271,7 +1429,7 @@
     "locationName": "キデイランド大阪梅田店 POP UP 1",
     "startDate": "2026-11-27",
     "endDate": "2026-12-09",
-    "summaryZh": "吉伊卡哇診所主題周邊於キデイランド大阪梅田店 POP UP 1期間限定販售。",
+    "summaryZh": "吉伊卡哇診所主題周邊於 KIDDY LAND 大阪梅田店 POP UP 1 期間限定販售。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1282,7 +1440,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-11-12",
     "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/index.html#umeda",
-    "sourceTitle": "ちいかわクリニック 大阪梅田(2026/11/27(金)～12/9(水))"
+    "sourceTitle": "ちいかわクリニック 大阪梅田(2026/11/27(金)～12/9(水))",
+    "titleZh": "吉伊卡哇診所快閃店 KIDDY LAND 大阪梅田店",
+    "locationNameZh": "KIDDY LAND 大阪梅田店 POP UP 1",
+    "displaySourceHash": "8890d7478f73b0a2332e"
   },
   {
     "brand": "chiikawa",
@@ -1293,7 +1454,7 @@
     "locationName": "キデイランド広島パルコ店 POP UP",
     "startDate": "2026-11-27",
     "endDate": "2027-01-06",
-    "summaryZh": "吉伊卡哇診所主題周邊於キデイランド広島パルコ店 POP UP期間限定販售。",
+    "summaryZh": "吉伊卡哇診所主題周邊於 KIDDY LAND 廣島 PARCO 店快閃區期間限定販售。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1304,7 +1465,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-11-12",
     "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/index.html#hiroshima",
-    "sourceTitle": "ちいかわクリニック 広島(2026/11/27(金)～2027/1/6(水))"
+    "sourceTitle": "ちいかわクリニック 広島(2026/11/27(金)～2027/1/6(水))",
+    "titleZh": "吉伊卡哇診所快閃店 KIDDY LAND 廣島 PARCO 店",
+    "locationNameZh": "KIDDY LAND 廣島 PARCO 店快閃區",
+    "displaySourceHash": "5efd0d71b60c24c5c672"
   },
   {
     "brand": "chiikawa",
@@ -1315,7 +1479,7 @@
     "locationName": "札幌アピア",
     "startDate": "2026-11-27",
     "endDate": "2027-01-05",
-    "summaryZh": "吉伊卡哇診所主題周邊於札幌アピア期間限定販售。",
+    "summaryZh": "吉伊卡哇診所主題周邊於札幌 APIA 期間限定販售。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1326,7 +1490,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-11-12",
     "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/index.html#sapporo",
-    "sourceTitle": "ちいかわクリニック 札幌(2026/11/27(金)～2027/1/5(火))"
+    "sourceTitle": "ちいかわクリニック 札幌(2026/11/27(金)～2027/1/5(火))",
+    "titleZh": "吉伊卡哇診所快閃店 札幌 APIA",
+    "locationNameZh": "札幌 APIA",
+    "displaySourceHash": "79180ef2d6c438d2f1bf"
   },
   {
     "brand": "chiikawa",
@@ -1337,7 +1504,7 @@
     "locationName": "仙台PARCO1/5F PARCO FACTORY SENDAI",
     "startDate": "2026-11-27",
     "endDate": "2026-12-20",
-    "summaryZh": "吉伊卡哇診所主題周邊於仙台PARCO1/5F PARCO FACTORY SENDAI期間限定販售。",
+    "summaryZh": "吉伊卡哇診所主題周邊於仙台 PARCO 1館5樓的 PARCO FACTORY SENDAI 期間限定販售。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1348,7 +1515,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-11-12",
     "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/index.html#sendai",
-    "sourceTitle": "ちいかわクリニック 仙台(2026/11/27(金)～12/20(日))"
+    "sourceTitle": "ちいかわクリニック 仙台(2026/11/27(金)～12/20(日))",
+    "titleZh": "吉伊卡哇診所快閃店 仙台 PARCO",
+    "locationNameZh": "仙台 PARCO 1館 5樓 PARCO FACTORY SENDAI",
+    "displaySourceHash": "7fd8ffac7e17223810fe"
   },
   {
     "brand": "chiikawa",
@@ -1359,7 +1529,7 @@
     "locationName": "アミュプラザくまもと2階 特設会場",
     "startDate": "2026-11-27",
     "endDate": "2027-01-11",
-    "summaryZh": "吉伊卡哇診所主題周邊於アミュプラザくまもと2階 特設会場期間限定販售。",
+    "summaryZh": "吉伊卡哇診所主題周邊於 AMU PLAZA 熊本 2樓特設會場期間限定販售。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1370,7 +1540,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-11-12",
     "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/index.html#kumamoto",
-    "sourceTitle": "ちいかわクリニック 熊本(2026/11/27(金)～2027/1/11(月祝))"
+    "sourceTitle": "ちいかわクリニック 熊本(2026/11/27(金)～2027/1/11(月祝))",
+    "titleZh": "吉伊卡哇診所快閃店 AMU PLAZA 熊本",
+    "locationNameZh": "AMU PLAZA 熊本 2樓特設會場",
+    "displaySourceHash": "a67a3c7162eacae84ab2"
   },
   {
     "brand": "chiikawa",
@@ -1381,7 +1554,7 @@
     "locationName": "華山1914文化創意産業園區 中2館",
     "startDate": "2026-12-18",
     "endDate": "2027-01-10",
-    "summaryZh": "吉伊卡哇診所主題周邊於華山1914文化創意産業園區 中2館期間限定販售。",
+    "summaryZh": "吉伊卡哇診所主題周邊於華山1914文化創意產業園區中2館期間限定販售。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1392,7 +1565,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-11-12",
     "sourceUrl": "https://chiikawa-info.jp/p26/chiikawaclinic/index.html#kazan",
-    "sourceTitle": "ちいかわクリニック POP UP STORE 華山(2026/12/18(金)～2027/1/10(日))"
+    "sourceTitle": "ちいかわクリニック POP UP STORE 華山(2026/12/18(金)～2027/1/10(日))",
+    "titleZh": "吉伊卡哇診所快閃店 華山1914文化創意產業園區",
+    "locationNameZh": "華山1914文化創意產業園區 中2館",
+    "displaySourceHash": "fe853e7643946c16d3bc"
   },
   {
     "brand": "chiikawa",
@@ -1403,7 +1579,7 @@
     "locationName": "エキマル ア・ラ・モードJR京都駅西口店",
     "startDate": "2026-11-26",
     "endDate": "2026-12-10",
-    "summaryZh": "ちいかわ POP UP STORE 於エキマル ア・ラ・モードJR京都駅西口店期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
+    "summaryZh": "吉伊卡哇期間限定快閃店於 EKI MARU A LA MODE JR京都站西口店登場，販售活動紀念與限定周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1416,7 +1592,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-11-13",
     "sourceTitle": "ちいかわPOP UP STORE エキマル ア・ラ・モードJR京都駅西口店(2026-11-26～2026-12-10) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_ekky/index.html"
+    "sourceUrl": "https://chiikawa-info.jp/p26/pus_ekky/index.html",
+    "titleZh": "吉伊卡哇快閃店 EKI MARU A LA MODE JR京都站西口店",
+    "locationNameZh": "EKI MARU A LA MODE JR京都站西口店",
+    "displaySourceHash": "a24ca34c462d2660d9ef"
   },
   {
     "brand": "chiikawa",
@@ -1427,7 +1606,7 @@
     "locationName": "イオンレイクタウンmori 3F ちいかわらんど 越谷レイクタウン店",
     "startDate": "2026-11-27",
     "endDate": "",
-    "summaryZh": "11月27日起於イオンレイクタウンmori 3F 的ちいかわらんど常設店販售診所第一彈商品，包括護士造型玩偶、藥袋風收納包及視力檢查托特包；未公告結束日，入店方式請確認店方公告。",
+    "summaryZh": "11月27日起於 AEON LakeTown mori 3樓的吉伊卡哇樂園常設店販售診所第一波商品，包括護士造型玩偶、藥袋風收納包及視力檢查托特包；未公告結束日，入店方式請確認店方公告。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1440,7 +1619,10 @@
     "sourceTitle": "越谷レイクタウンに「ちいかわクリニック」 ナース姿のちいかわたちが11月27日から登場 - やしおん",
     "sourceType": "media",
     "createdAt": "2026-11-13",
-    "sourceUrl": "https://yashion.jp/event/46928"
+    "sourceUrl": "https://yashion.jp/event/46928",
+    "titleZh": "吉伊卡哇診所第一波商品 越谷 LakeTown 店",
+    "locationNameZh": "AEON LakeTown mori 3樓 吉伊卡哇樂園 越谷 LakeTown 店",
+    "displaySourceHash": "c383b2dcd4ade4471e80"
   },
   {
     "brand": "chiikawa",
@@ -1451,7 +1633,7 @@
     "locationName": "イオンモール羽生 1F 東コート",
     "startDate": "2026-11-28",
     "endDate": "2026-12-13",
-    "summaryZh": "ちいかわ POP UP STORE 於イオンモール羽生期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
+    "summaryZh": "吉伊卡哇期間限定快閃店於 AEON MALL 羽生登場，販售活動紀念與限定周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1464,7 +1646,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-11-14",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール羽生(2026-11-28～2026-12-13) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_ahny/index.html"
+    "sourceUrl": "https://chiikawa-info.jp/p26/pus_ahny/index.html",
+    "titleZh": "吉伊卡哇快閃店 AEON MALL 羽生",
+    "locationNameZh": "AEON MALL 羽生 1樓東廣場",
+    "displaySourceHash": "c28fee409d79c25b8c47"
   },
   {
     "brand": "chiikawa",
@@ -1475,7 +1660,7 @@
     "locationName": "イオンモール成田 専門店街1F 和み広場",
     "startDate": "2026-11-27",
     "endDate": "2026-12-14",
-    "summaryZh": "ちいかわ POP UP STORE 於イオンモール成田期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
+    "summaryZh": "吉伊卡哇期間限定快閃店於 AEON MALL 成田登場，販售活動紀念與限定周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1488,7 +1673,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-11-14",
     "sourceTitle": "ちいかわPOP UP STORE イオンモール成田(2026-11-27～2026-12-14) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_anrt/index.html"
+    "sourceUrl": "https://chiikawa-info.jp/p26/pus_anrt/index.html",
+    "titleZh": "吉伊卡哇快閃店 AEON MALL 成田",
+    "locationNameZh": "AEON MALL 成田 專門店街1樓 Nagomi 廣場",
+    "displaySourceHash": "da805dd114692da97001"
   },
   {
     "id": "po-flowering-sunshine-2026",
@@ -1500,18 +1688,21 @@
     "locationName": "池袋サンシャインシティ 噴水広場(アルパB1F)",
     "startDate": "2026-11-16",
     "endDate": "2026-11-29",
-    "summaryZh": "Flowering 官方巡迴快閃店，販售胖丁等寶可夢周邊與先行商品，並提供滿額贈品；數量有限，入場方式依現場公告。",
+    "summaryZh": "FLOWERING 官方巡迴快閃店，販售 PokéPeace 寶可夢角色周邊與搶先販售商品，並提供滿額贈品；數量有限，入場方式依現場公告。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "寶可夢",
-      "ポケピース",
-      "POP UP"
+      "PokéPeace",
+      "快閃店"
     ],
     "sourceType": "media",
     "sourceTitle": "ポケピース POP UP STORE BY FLOWERING開催のお知らせ",
     "sourceUrl": "https://flowering.co.jp/info/pokepeace-pop-up-store/",
-    "createdAt": "2026-11-15"
+    "createdAt": "2026-11-15",
+    "titleZh": "Pokémon PokéPeace × FLOWERING 巡迴快閃店｜池袋 Sunshine City",
+    "locationNameZh": "池袋 Sunshine City 噴水廣場（ALPA 地下1樓）",
+    "displaySourceHash": "bcd94f26af45158b67cb"
   },
   {
     "id": "po-flowering-newoman-2026",
@@ -1523,18 +1714,21 @@
     "locationName": "ニュウマン新宿 2F エキナカイベントスペース",
     "startDate": "2026-11-16",
     "endDate": "2026-12-07",
-    "summaryZh": "Flowering 官方巡迴快閃店，販售胖丁等寶可夢周邊與先行商品，並提供滿額贈品；數量有限，入場方式依現場公告。",
+    "summaryZh": "FLOWERING 官方巡迴快閃店，販售 PokéPeace 寶可夢角色周邊與搶先販售商品，並提供滿額贈品；數量有限，入場方式依現場公告。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "寶可夢",
-      "ポケピース",
-      "POP UP"
+      "PokéPeace",
+      "快閃店"
     ],
     "sourceType": "media",
     "sourceTitle": "ポケピース POP UP STORE BY FLOWERING開催のお知らせ",
     "sourceUrl": "https://flowering.co.jp/info/pokepeace-pop-up-store/",
-    "createdAt": "2026-11-15"
+    "createdAt": "2026-11-15",
+    "titleZh": "Pokémon PokéPeace × FLOWERING 巡迴快閃店｜NEWoMan 新宿",
+    "locationNameZh": "NEWoMan 新宿 2樓站內活動空間",
+    "displaySourceHash": "add9ca44fc873eb65c07"
   },
   {
     "id": "po-flowering-porta-2026",
@@ -1546,18 +1740,21 @@
     "locationName": "京都ポルタ B1Fポルタプラザ北側",
     "startDate": "2026-11-25",
     "endDate": "2026-12-14",
-    "summaryZh": "Flowering 官方巡迴快閃店，販售胖丁等寶可夢周邊與先行商品，並提供滿額贈品；數量有限，入場方式依現場公告。",
+    "summaryZh": "FLOWERING 官方巡迴快閃店，販售 PokéPeace 寶可夢角色周邊與搶先販售商品，並提供滿額贈品；數量有限，入場方式依現場公告。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "寶可夢",
-      "ポケピース",
-      "POP UP"
+      "PokéPeace",
+      "快閃店"
     ],
     "sourceType": "media",
     "sourceTitle": "ポケピース POP UP STORE BY FLOWERING開催のお知らせ",
     "sourceUrl": "https://flowering.co.jp/info/pokepeace-pop-up-store/",
-    "createdAt": "2026-11-15"
+    "createdAt": "2026-11-15",
+    "titleZh": "Pokémon PokéPeace × FLOWERING 巡迴快閃店｜京都 Porta",
+    "locationNameZh": "京都 Porta 地下1樓 Porta Plaza 北側",
+    "displaySourceHash": "6d84a5dbaf8b25e4b239"
   },
   {
     "id": "po-flowering-hakata-2026",
@@ -1569,18 +1766,21 @@
     "locationName": "アミュプラザ博多 6F北側エスカレーター横",
     "startDate": "2026-12-12",
     "endDate": "2026-12-28",
-    "summaryZh": "Flowering 官方巡迴快閃店，販售胖丁等寶可夢周邊與先行商品，並提供滿額贈品；數量有限，入場方式依現場公告。",
+    "summaryZh": "FLOWERING 官方巡迴快閃店，販售 PokéPeace 寶可夢角色周邊與搶先販售商品，並提供滿額贈品；數量有限，入場方式依現場公告。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "寶可夢",
-      "ポケピース",
-      "POP UP"
+      "PokéPeace",
+      "快閃店"
     ],
     "sourceType": "media",
     "sourceTitle": "ポケピース POP UP STORE BY FLOWERING開催のお知らせ",
     "sourceUrl": "https://flowering.co.jp/info/pokepeace-pop-up-store/",
-    "createdAt": "2026-11-15"
+    "createdAt": "2026-11-15",
+    "titleZh": "Pokémon PokéPeace × FLOWERING 巡迴快閃店｜AMU PLAZA 博多",
+    "locationNameZh": "AMU PLAZA 博多 6樓北側手扶梯旁",
+    "displaySourceHash": "e097bd28deedeec0dfde"
   },
   {
     "id": "po-flowering-tsudanuma-2026",
@@ -1592,18 +1792,21 @@
     "locationName": "イオンモール津田沼South 3Fスターバックス前",
     "startDate": "2026-12-21",
     "endDate": "2027-01-07",
-    "summaryZh": "Flowering 官方巡迴快閃店，販售胖丁等寶可夢周邊與先行商品，並提供滿額贈品；數量有限，入場方式依現場公告。",
+    "summaryZh": "FLOWERING 官方巡迴快閃店，販售 PokéPeace 寶可夢角色周邊與搶先販售商品，並提供滿額贈品；數量有限，入場方式依現場公告。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "寶可夢",
-      "ポケピース",
-      "POP UP"
+      "PokéPeace",
+      "快閃店"
     ],
     "sourceType": "media",
     "sourceTitle": "ポケピース POP UP STORE BY FLOWERING開催のお知らせ",
     "sourceUrl": "https://flowering.co.jp/info/pokepeace-pop-up-store/",
-    "createdAt": "2026-11-15"
+    "createdAt": "2026-11-15",
+    "titleZh": "Pokémon PokéPeace × FLOWERING 巡迴快閃店｜AEON MALL 津田沼",
+    "locationNameZh": "AEON MALL 津田沼 South 3樓星巴克前",
+    "displaySourceHash": "cb6b331acca71645d890"
   },
   {
     "id": "po-flowering-omiya-2026",
@@ -1615,18 +1818,21 @@
     "locationName": "JR大宮駅 改札内イベントスペース",
     "startDate": "2026-12-24",
     "endDate": "2027-01-18",
-    "summaryZh": "Flowering 官方巡迴快閃店，販售胖丁等寶可夢周邊與先行商品，並提供滿額贈品；數量有限，入場方式依現場公告。",
+    "summaryZh": "FLOWERING 官方巡迴快閃店，販售 PokéPeace 寶可夢角色周邊與搶先販售商品，並提供滿額贈品；數量有限，入場方式依現場公告。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "寶可夢",
-      "ポケピース",
-      "POP UP"
+      "PokéPeace",
+      "快閃店"
     ],
     "sourceType": "media",
     "sourceTitle": "ポケピース POP UP STORE BY FLOWERING開催のお知らせ",
     "sourceUrl": "https://flowering.co.jp/info/pokepeace-pop-up-store/",
-    "createdAt": "2026-11-15"
+    "createdAt": "2026-11-15",
+    "titleZh": "Pokémon PokéPeace × FLOWERING 巡迴快閃店｜JR 大宮站",
+    "locationNameZh": "JR 大宮站閘門內活動空間",
+    "displaySourceHash": "661e11168a07e552118b"
   },
   {
     "id": "po-flowering-keihan-2026",
@@ -1638,18 +1844,21 @@
     "locationName": "京阪シティーモール 4Fイベントスペース(イノブン側)",
     "startDate": "2027-01-07",
     "endDate": "2027-01-26",
-    "summaryZh": "Flowering 官方巡迴快閃店，販售胖丁等寶可夢周邊與先行商品，並提供滿額贈品；數量有限，入場方式依現場公告。",
+    "summaryZh": "FLOWERING 官方巡迴快閃店，販售 PokéPeace 寶可夢角色周邊與搶先販售商品，並提供滿額贈品；數量有限，入場方式依現場公告。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "寶可夢",
-      "ポケピース",
-      "POP UP"
+      "PokéPeace",
+      "快閃店"
     ],
     "sourceType": "media",
     "sourceTitle": "ポケピース POP UP STORE BY FLOWERING開催のお知らせ",
     "sourceUrl": "https://flowering.co.jp/info/pokepeace-pop-up-store/",
-    "createdAt": "2026-11-15"
+    "createdAt": "2026-11-15",
+    "titleZh": "Pokémon PokéPeace × FLOWERING 巡迴快閃店｜京阪 City Mall",
+    "locationNameZh": "京阪 City Mall 4樓活動空間（INOBUN 側）",
+    "displaySourceHash": "68197a11054d31e71f01"
   },
   {
     "id": "po-flowering-ikebukuro-2026",
@@ -1661,18 +1870,21 @@
     "locationName": "JR池袋駅 アゼリアマルシェ",
     "startDate": "2027-02-16",
     "endDate": "2027-02-28",
-    "summaryZh": "Flowering 官方巡迴快閃店，販售胖丁等寶可夢周邊與先行商品，並提供滿額贈品；數量有限，入場方式依現場公告。",
+    "summaryZh": "FLOWERING 官方巡迴快閃店，販售 PokéPeace 寶可夢角色周邊與搶先販售商品，並提供滿額贈品；數量有限，入場方式依現場公告。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "寶可夢",
-      "ポケピース",
-      "POP UP"
+      "PokéPeace",
+      "快閃店"
     ],
     "sourceType": "media",
     "sourceTitle": "ポケピース POP UP STORE BY FLOWERING開催のお知らせ",
     "sourceUrl": "https://flowering.co.jp/info/pokepeace-pop-up-store/",
-    "createdAt": "2026-11-15"
+    "createdAt": "2026-11-15",
+    "titleZh": "Pokémon PokéPeace × FLOWERING 巡迴快閃店｜JR 池袋站",
+    "locationNameZh": "JR 池袋站 Azalea Marche",
+    "displaySourceHash": "a8ca323adaeed8c0e777"
   },
   {
     "id": "po-flowering-kokura-2026",
@@ -1684,18 +1896,21 @@
     "locationName": "JR小倉駅 JAM広場イベントスペース",
     "startDate": "2027-02-26",
     "endDate": "2027-03-07",
-    "summaryZh": "Flowering 官方巡迴快閃店，販售胖丁等寶可夢周邊與先行商品，並提供滿額贈品；數量有限，入場方式依現場公告。",
+    "summaryZh": "FLOWERING 官方巡迴快閃店，販售 PokéPeace 寶可夢角色周邊與搶先販售商品，並提供滿額贈品；數量有限，入場方式依現場公告。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "寶可夢",
-      "ポケピース",
-      "POP UP"
+      "PokéPeace",
+      "快閃店"
     ],
     "sourceType": "media",
     "sourceTitle": "ポケピース POP UP STORE BY FLOWERING開催のお知らせ",
     "sourceUrl": "https://flowering.co.jp/info/pokepeace-pop-up-store/",
-    "createdAt": "2026-11-15"
+    "createdAt": "2026-11-15",
+    "titleZh": "Pokémon PokéPeace × FLOWERING 巡迴快閃店｜JR 小倉站",
+    "locationNameZh": "JR 小倉站 JAM 廣場活動空間",
+    "displaySourceHash": "b55d50bc11bbb359152d"
   },
   {
     "id": "mi-poinsettia-20261113",
@@ -1718,7 +1933,10 @@
     "sourceType": "official_social",
     "sourceTitle": "フラワーミッフィー ポインセチアをイメージしたお洋服とマスコット 2026年11月13日発売",
     "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002269.000022901.html",
-    "createdAt": "2026-11-15"
+    "createdAt": "2026-11-15",
+    "locationNameZh": "日本全國 Flower Miffy 實體店及快閃市集",
+    "titleZh": "Flower Miffy 聖誕紅冬季吊飾與玩偶斗篷",
+    "displaySourceHash": "e9883575eb8a032094f7"
   },
   {
     "brand": "chiikawa",
@@ -1729,7 +1947,7 @@
     "locationName": "新千歳空港 国内線旅客ターミナルビル 2階 センタープラザ",
     "startDate": "2026-11-27",
     "endDate": "2026-12-20",
-    "summaryZh": "吉伊卡哇壽司主題快閃店於新千歳空港 国内線旅客ターミナルビル 2階 センタープラザ販售活動紀念與限定周邊商品。",
+    "summaryZh": "吉伊卡哇壽司主題快閃店於新千歲機場國內線航廈2樓中央廣場販售活動紀念與限定周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1742,7 +1960,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-11-16",
     "sourceTitle": "むちゃうま!!ちいかわ寿司 POP UP STORE 新千歳空港（2026-11-27～2026-12-20） - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/ck_sushi.html#new_chitose-2026-11-27"
+    "sourceUrl": "https://chiikawa-info.jp/ck_sushi.html#new_chitose-2026-11-27",
+    "titleZh": "吉伊卡哇壽司快閃店 新千歲機場",
+    "locationNameZh": "新千歲機場 國內線航廈2樓中央廣場",
+    "displaySourceHash": "f037ecb4a5c5fed102b4"
   },
   {
     "brand": "miffy",
@@ -1766,7 +1987,10 @@
     "sourceTitle": "日本最大のミッフィーイベントがハウステンボス開業35周年でさらに進化　ミッフィーのパレードが一大リニューアル。新しいなかまたちも登場　パーク全体がミッフィーのかわいさと祝祭感に包まれる春が到来",
     "sourceType": "official_social",
     "createdAt": "2026-11-17",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000739.000023462.html"
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000739.000023462.html",
+    "locationNameZh": "豪斯登堡／Holiday Picnic Cafe",
+    "titleZh": "Miffy 草莓鬆餅限定餐點",
+    "displaySourceHash": "2220492f10978e53bcb4"
   },
   {
     "brand": "miffy",
@@ -1777,7 +2001,7 @@
     "locationName": "八戸ショッピングセンター ラピア",
     "startDate": "2026-12-19",
     "endDate": "2027-01-12",
-    "summaryZh": "Miffy（米飛兔）官方活動「ミッフィーzakkaフェスタ」於八戸ショッピングセンター ラピア期間限定登場，販售限定周邊／餐點。",
+    "summaryZh": "米飛兔雜貨祭於八戶購物中心 Lapia 期間限定舉辦，販售活動限定與會場搶先周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1789,7 +2013,10 @@
     "sourceType": "official_site",
     "createdAt": "2026-11-18",
     "sourceTitle": "八戸ショッピングセンター ラピアで「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
-    "sourceUrl": "https://dickbruna.jp/news/202611/49701/"
+    "sourceUrl": "https://dickbruna.jp/news/202611/49701/",
+    "titleZh": "Miffy 米飛兔雜貨祭｜八戶購物中心 Lapia",
+    "locationNameZh": "八戶購物中心 Lapia",
+    "displaySourceHash": "11a58a04eaa611da16e8"
   },
   {
     "brand": "chiikawa",
@@ -1797,23 +2024,26 @@
     "type": "popup",
     "country": "JP",
     "city": "Tokyo",
-    "locationName": "グランスタ東京",
+    "locationName": "グランスタ東京 POP UP GRANSTA GREEN（JR東京駅 1階 改札内）",
     "startDate": "2026-11-24",
     "endDate": "2026-12-13",
-    "summaryZh": "「ちいかわ」與「東京ばな奈」於東京車站一番街的グランスタ東京舉辦快閃店，販售限定商品，包含熱門的餅乾三明治與環保袋套組。",
+    "summaryZh": "吉伊卡哇與東京香蕉（Tokyo Banana）於 JR東京站1樓閘內舉辦快閃店，販售聯名環保袋、托特包，以及香蕉布丁蛋糕等甜點套組。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
       "快閃店",
       "東京",
-      "東京ばな奈",
+      "東京香蕉",
       "限定商品"
     ],
     "id": "ch-a27833",
     "sourceTitle": "【グランスタ東京】「ちいかわ」×「東京ばな奈」のポップアップストアがOPEN。エコバッグセットに人気のクッキーサンドも - PR TIMES",
     "sourceType": "official_social",
     "createdAt": "2026-11-18",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002201.000025606.html"
+    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000002201.000025606.html",
+    "titleZh": "吉伊卡哇 × 東京香蕉（Tokyo Banana）快閃店",
+    "locationNameZh": "GRANSTA 東京 POP UP GRANSTA GREEN（JR東京站1樓閘內）",
+    "displaySourceHash": "a4083ef97ffbb56a0ab7"
   },
   {
     "brand": "miffy",
@@ -1824,7 +2054,7 @@
     "locationName": "遠鉄百貨店",
     "startDate": "2026-12-24",
     "endDate": "2027-01-05",
-    "summaryZh": "Miffy（米飛兔）官方活動「ミッフィーzakkaフェスタ」於遠鉄百貨店期間限定登場，販售限定周邊／餐點。",
+    "summaryZh": "米飛兔雜貨祭於遠鐵百貨期間限定舉辦，販售活動限定與會場搶先周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -1836,54 +2066,91 @@
     "sourceType": "official_site",
     "createdAt": "2026-11-19",
     "sourceTitle": "遠鉄百貨店で「ミッフィーzakkaフェスタ」開催 - dickbruna.jp",
-    "sourceUrl": "https://dickbruna.jp/news/202611/49729/"
-  },
-  {
-    "brand": "miffy",
-    "title": "米飛 x 梵谷 預約限定娃娃",
-    "type": "reservation",
-    "country": "JP",
-    "city": "",
-    "locationName": "Museum Box",
-    "startDate": "2026-11-20",
-    "endDate": "2026-11-21",
-    "summaryZh": "日本Museum Box將於11月20日起，限時兩天開放預約販售，以梵谷名畫為主題的米飛兔娃娃。",
-    "needReservation": true,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "梵谷",
-      "預約限定",
-      "娃娃"
-    ],
-    "id": "mi-2ceaa9",
-    "sourceTitle": "世界のミュージアムグッズを扱う「Museum Box」が、ゴッホの名画をドレスにまとったミッフィーのぬいぐるみ4種を、11月20日より2日間限定で予約受付",
-    "sourceType": "official_social",
-    "createdAt": "2026-11-19",
-    "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000015.000186695.html"
+    "sourceUrl": "https://dickbruna.jp/news/202611/49729/",
+    "titleZh": "Miffy 米飛兔雜貨祭｜遠鐵百貨",
+    "locationNameZh": "遠鐵百貨",
+    "displaySourceHash": "273564b0a7a31360f588"
   },
   {
     "brand": "chiikawa",
-    "title": "Chiikawa x 東京ばな奈 快閃店",
+    "title": "吉伊卡哇 POP UP STORE 水戸エクセル本館",
     "type": "popup",
     "country": "JP",
-    "city": "Tokyo",
-    "locationName": "東京駅",
-    "startDate": "2026-11-24",
-    "endDate": "2026-12-13",
-    "summaryZh": "Chiikawa與東京ばな奈合作的快閃店將於東京車站登場，販售香蕉布丁蛋糕、環保袋、托特包等限定周邊商品。",
+    "city": "Ibaraki",
+    "locationName": "水戸エクセル本館",
+    "startDate": "2026-12-04",
+    "endDate": "2026-12-20",
+    "summaryZh": "吉伊卡哇快閃店於水戶 EXCEL 本館期間限定登場，販售限定周邊商品。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
+      "吉伊卡哇",
       "快閃店",
-      "限定商品",
-      "東京",
-      "東京ばな奈"
+      "日本",
+      "限定周邊"
     ],
-    "id": "ch-a38a1f",
-    "sourceTitle": "『ちいかわ』×「東京ばな奈」コラボが東京駅に進出！ちいかわバナナプリンケーキ、エコバッグ、トートバッグなどが販売されるポップアップストアが2026年11月24日（火）より開催！ - 電撃ホビーウェブ",
-    "sourceType": "media",
-    "createdAt": "2026-11-19",
-    "sourceUrl": "https://hobby.dengeki.com/news/3237091/"
+    "id": "ch-645de1",
+    "sourceType": "official_site",
+    "createdAt": "2026-11-22",
+    "sourceTitle": "ちいかわPOP UP STORE 水戸エクセル本館(2026-12-04～2026-12-20) - ちいかわ公式",
+    "sourceUrl": "https://chiikawa-info.jp/p26/pus_mtes/index.html",
+    "titleZh": "吉伊卡哇快閃店 水戶 EXCEL 本館",
+    "locationNameZh": "水戶 EXCEL 本館",
+    "displaySourceHash": "fe1d55a0803d74d0f41e"
+  },
+  {
+    "brand": "miffy",
+    "title": "Miffy miffy style 限定 干支ひつじ アイテム",
+    "type": "new_product",
+    "country": "JP",
+    "city": "",
+    "locationName": "miffy style 各店",
+    "startDate": "2026-12-05",
+    "endDate": "",
+    "summaryZh": "miffy style 日本各門市自2026年12月5日起推出生肖羊系列限定商品；首日每款每筆交易最多購買2個，部分品項與店內贈品僅於實體店提供。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "miffy style",
+      "生肖羊系列",
+      "日本門市新品"
+    ],
+    "id": "mi-6b73fb",
+    "sourceType": "official_site",
+    "createdAt": "2026-11-22",
+    "sourceTitle": "2026年12月5日(土)発売予定!miffy style 限定 干支ひつじ アイテム - キデイランド",
+    "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_hitsuji20261205/",
+    "titleZh": "miffy style 生肖羊系列限定商品",
+    "locationNameZh": "miffy style 日本各門市",
+    "displaySourceHash": "d6b173ac7cd927949c67"
+  },
+  {
+    "brand": "miffy",
+    "title": "Miffy miffy style 京都四条河原町限定 ミッフィーマスコット",
+    "type": "new_product",
+    "country": "JP",
+    "city": "Kyoto",
+    "locationName": "miffy style 京都四条河原町店",
+    "startDate": "2026-12-05",
+    "endDate": "",
+    "summaryZh": "miffy style 京都四條河原町店自2026年12月5日起販售店舖限定的巫女造型米飛兔小布偶；每筆交易最多購買2個，解除限購日期未定。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "米飛兔",
+      "miffy style",
+      "京都限定",
+      "小布偶",
+      "日本"
+    ],
+    "id": "mi-9a386e",
+    "sourceType": "official_site",
+    "createdAt": "2026-11-22",
+    "sourceTitle": "2026年12月5日(土)発売予定!miffy style 京都四条河原町限定 ミッフィーマスコット - キデイランド",
+    "sourceUrl": "https://www.kiddyland.co.jp/event/miffy_kyouto20261205/",
+    "titleZh": "miffy style 京都四條河原町店限定巫女造型米飛兔小布偶",
+    "locationNameZh": "miffy style 京都四條河原町店",
+    "displaySourceHash": "13bfb0aaa2439b24dc40"
   }
 ]

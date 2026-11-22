@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-18T13:23:38+00:00",
+  "updatedAt": "2026-11-19T08:49:14+00:00",
   "sources": {
     "domain:nownews.com": {
       "confirmed": 20,
@@ -5232,6 +5232,60 @@
           "eventId": "ch-c03024",
           "evidenceCount": 2,
           "notes": "Codex official full-page verification 2026-11-16; official organizer schedule for all nine Flowering venues; clinic and Hanyu duplicate existing official records; sushi corrected airport venue and removed unsupported dining."
+        }
+      ]
+    },
+    "domain:hobby.dengeki.com": {
+      "confirmed": 0,
+      "rejected": 1,
+      "uncertain": 0,
+      "crossChecked": 1,
+      "score": 41,
+      "label": "hobby.dengeki.com",
+      "kind": "site",
+      "host": "hobby.dengeki.com",
+      "handle": "",
+      "firstSeen": "2026-11-19",
+      "lastReviewed": "2026-11-19",
+      "lastOutcome": "rejected",
+      "notes": "Duplicate of ch-a27833; original and Grapestone company release confirm same Gransta venue Nov24-Dec13.",
+      "byBrand": {
+        "chiikawa": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byType": {
+        "popup": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "byCountry": {
+        "jp": {
+          "confirmed": 0,
+          "rejected": 1,
+          "uncertain": 0,
+          "crossChecked": 1,
+          "score": 41
+        }
+      },
+      "history": [
+        {
+          "date": "2026-11-19",
+          "outcome": "rejected",
+          "brand": "chiikawa",
+          "type": "popup",
+          "country": "JP",
+          "eventId": "ch-a38a1f",
+          "evidenceCount": 1,
+          "notes": "Duplicate of ch-a27833; original and Grapestone company release confirm same Gransta venue Nov24-Dec13."
         }
       ]
     }

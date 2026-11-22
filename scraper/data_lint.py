@@ -10,6 +10,11 @@ from pathlib import Path
 
 import scrape
 import agent_verify_candidates
+from display_zh import (
+    contains_japanese_display,
+    contains_simplified_display,
+    event_display_errors,
+)
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -26,9 +31,9 @@ PAUSED_BRANDS = {"sanrio"}
 ALLOWED_TYPES = {"popup", "new_product", "campaign", "store", "cafe", "lottery", "reservation"}
 ALLOWED_COUNTRIES = {"JP", "TW"}
 REQUIRED_FIELDS = (
-    "brand", "title", "type", "country", "city", "locationName", "startDate", "endDate",
+    "brand", "title", "titleZh", "type", "country", "city", "locationName", "locationNameZh", "startDate", "endDate",
     "summaryZh", "needReservation", "hasLimitedGoods", "tags", "id", "sourceType",
-    "createdAt", "sourceUrl", "sourceTitle",
+    "createdAt", "sourceUrl", "sourceTitle", "displaySourceHash",
 )
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 OPENING_RE = re.compile(r"^\d{4}/\d{2}/\d{2}$")
@@ -85,6 +90,15 @@ def store_data_errors(data: dict) -> list[str]:
             errors.append(f"stores.json {brand} must be an object")
             continue
         if brand_data.get("linksOnly"):
+            note = brand_data.get("note", "")
+            if contains_japanese_display(note) or contains_simplified_display(note):
+                errors.append(f"stores.json {brand}.note is not zh-TW public text: {note}")
+            for link_index, link in enumerate(brand_data.get("links", [])):
+                label = link.get("label", "") if isinstance(link, dict) else ""
+                if contains_japanese_display(label) or contains_simplified_display(label):
+                    errors.append(
+                        f"stores.json {brand}.links[{link_index}].label is not zh-TW public text: {label}"
+                    )
             continue
         groups = brand_data.get("groups")
         if not isinstance(groups, list):
@@ -100,6 +114,11 @@ def store_data_errors(data: dict) -> list[str]:
                 continue
             if not group.get("label"):
                 errors.append(f"{prefix} has blank label")
+            elif (
+                contains_japanese_display(group.get("label", ""))
+                or contains_simplified_display(group.get("label", ""))
+            ):
+                errors.append(f"{prefix}.label is not zh-TW public text: {group.get('label')}")
             rows = group.get("stores")
             if not isinstance(rows, list) or not rows:
                 errors.append(f"{prefix}.stores must be a non-empty array")
@@ -112,6 +131,14 @@ def store_data_errors(data: dict) -> list[str]:
                 for field in ("name", "area", "country"):
                     if not store.get(field):
                         errors.append(f"{row_prefix} has blank {field}")
+                for field in ("name", "area"):
+                    if (
+                        contains_japanese_display(store.get(field, ""))
+                        or contains_simplified_display(store.get(field, ""))
+                    ):
+                        errors.append(
+                            f"{row_prefix}.{field} is not zh-TW public text: {store.get(field)}"
+                        )
                 if store.get("country") not in ALLOWED_COUNTRIES:
                     errors.append(f"{row_prefix} has invalid country: {store.get('country')}")
                 if store.get("name"):
@@ -346,7 +373,7 @@ def health_data_errors(
         metrics = {}
     numeric_fields = (
         "eventCount", "todayNewCount", "agentCandidateCount",
-        "pendingArticleCount", "extractionFailureCount",
+        "pendingArticleCount", "extractionFailureCount", "translationPendingCount",
         "structuredSourceFailureCount", "keyCount",
         "exhaustedKeyCount", "keyRotationCount",
     )
@@ -375,6 +402,7 @@ def health_data_errors(
         metrics.get("agentCandidateCount")
         or metrics.get("pendingArticleCount")
         or metrics.get("extractionFailureCount")
+        or metrics.get("translationPendingCount")
         or metrics.get("structuredSourceFailureCount")
         or metrics.get("aiUnavailable")
         or metrics.get("rateLimited")
@@ -442,6 +470,7 @@ def main() -> int:
         missing = [f for f in REQUIRED_FIELDS if f not in ev]
         if missing:
             errors.append(f"{ev.get('id', '#' + str(idx))}: missing fields {', '.join(missing)}")
+        errors.extend(event_display_errors(ev))
 
         brand = ev.get("brand", "")
         if brand in PAUSED_BRANDS:

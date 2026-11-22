@@ -31,7 +31,7 @@ Sanrio（三麗鷗）先暫停，因無結構化來源、新聞/Gemini 污染最
 - Pokémon Cafe 官方 news（`pokemon-cafe.jp/ja/cafe/news/`）屬結構化官方來源；日本橋／心齋橋 café 重新開張、店內翻新、新菜單與 show 更新可收為 `store` 型情報，沒有明確結束日不可硬填 endDate。
 - Miffy 另補 Kiddy Land / miffy style 站內搜尋（`kiddyland.co.jp/?s=miffy`），抓近期官方店頭活動與新品，避免 Google News/RSS 漏掉官方店鋪消息。
 - Kiddy Land / Dick Bruna 頁面常把「最新記事／関連記事」放在本文後方；日期擷取必須先切出主文章，不能讓側欄或相關文章的日期污染活動期間。
-- Miffy 公開顯示欄位（`title` / `locationName` / `summaryZh` / `tags`）若出現 `フラワーミッフィー`，統一轉成 `Flower Miffy`；`sourceTitle` 保留原文，方便回查來源。
+- 網站只顯示繁中公開欄位：事件使用 `titleZh` / `locationNameZh` / `summaryZh` / `tags`，常設店使用 `name` / `area` / `group.label`。官方英文品牌名可保留，但不得出現日文假名或日文簡化字。內部 `title` / `locationName`、`sourceTitle` 與常設店 `officialName` 保留官方原文，供去重、城市判斷與來源稽核；前端不可用原文作 fallback。結構化來源若尚無可靠翻譯，寧可暫緩該筆，也不可發布日文或猜測翻譯。
 - 三品牌常設店的 `name` 可使用繁中顯示名稱，但 `officialName` 必須保留官方店舖名稱，供完整性稽核穩定比對。只收官方品牌專門常設據點或已有明確開幕日的固定店，不收一般經銷通路、線上商店與期間快閃；同一官方複合設施若官方總表只列一張店卡，也只列一次（例如小樽 `MIFFY PORT TOWN`）。
 - 三麗鷗無可解析的結構化官方頁（`sanrio.co.jp` 503／JS 動態／REST 空），目前暫停預設抓取與前端顯示。
 - 抓取被擋（403/429/503）或 HTTP 200 實際回傳安全驗證頁時，自動改走 reader 代理 `r.jina.ai`。若 reader HTML 仍是 challenge，改取 markdown 並轉成 parser 相容的標題／連結／段落；官方 coverage 或常設店來源仍無法解析時必須 fail closed，不可把空清單當成稽核通過（`verify_links.fetch_html` / `check_url`）。

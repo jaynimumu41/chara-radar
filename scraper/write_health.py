@@ -69,6 +69,7 @@ def build_health(
 
     pending = sum(row["pendingArticles"] for row in public_brands.values())
     failures = _nonnegative(run_metrics.get("extractionFailureCount"))
+    translation_pending = _nonnegative(run_metrics.get("translationPendingCount"))
     source_failures = run_metrics.get("structuredSourceFailures", [])
     if not isinstance(source_failures, list):
         source_failures = []
@@ -79,6 +80,7 @@ def build_health(
         candidates
         or pending
         or failures
+        or translation_pending
         or source_failures
         or ai_unavailable
         or rate_limited
@@ -95,6 +97,7 @@ def build_health(
             "agentCandidateCount": len(candidates),
             "pendingArticleCount": pending,
             "extractionFailureCount": failures,
+            "translationPendingCount": translation_pending,
             "structuredSourceFailureCount": len(source_failures),
             "aiBackend": str(run_metrics.get("aiBackend", "unknown")),
             "aiUnavailable": ai_unavailable,
@@ -136,7 +139,8 @@ def main() -> int:
     print(
         f"health={health['status']} events={metrics['eventCount']} "
         f"new={metrics['todayNewCount']} candidates={metrics['agentCandidateCount']} "
-        f"pending={metrics['pendingArticleCount']} failures={metrics['extractionFailureCount']}"
+        f"pending={metrics['pendingArticleCount']} translations={metrics['translationPendingCount']} "
+        f"failures={metrics['extractionFailureCount']}"
     )
     return 0
 

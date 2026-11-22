@@ -32,6 +32,7 @@ from urllib.parse import urlparse
 
 import requests
 
+from display_zh import apply_event_display, carry_event_display, event_display_errors
 from verify_links import check_url, page_mentions  # 存檔前驗證來源連結：連得過去 + 內容與品牌相關
 from official_sources import (fetch_official, fetch_chiikawa_popups,
                               fetch_chiikawa_campaign_popups, fetch_chiikawa_clinic,
@@ -87,6 +88,7 @@ def new_run_metrics(brands: list[str], official_only: bool, backend) -> dict:
         "keyRotationCount": 0,
         "rateLimited": False,
         "structuredSourceFailures": [],
+        "translationPendingCount": 0,
         "extractionFailureCount": 0,
         "newRecordCount": 0,
         "finalEventCount": 0,
@@ -685,11 +687,13 @@ EXTRACT_PROMPT = """你是角色周邊情報萃取助手，專門幫旅人篩選
 {{
   "relevant": true,
   "brand": "{brand}",
-  "title": "品牌名保留英文，其餘繁中，20字內",
+  "title": "內部活動識別名稱；可保留來源中的官方原名",
+  "titleZh": "使用者畫面顯示的繁體中文標題；品牌官方英文可保留，但不得含日文，20字內",
   "type": "popup|new_product|campaign|store|cafe|lottery|reservation 擇一",
   "country": "JP 或 TW",
   "city": "活動實際所在的城市/縣，用英文（如 Tokyo/Osaka/Nagasaki/Saitama/Taipei…）；⚠️務必正確，絕不可把非該城市的場館硬塞成別的城市；無法確定就留空 ''",
-  "locationName": "地點全名，不明填空",
+  "locationName": "來源中的官方地點原名，不明填空",
+  "locationNameZh": "地點的繁體中文名稱；官方拉丁名稱可保留，但不得含日文，不明填空",
   "startDate": "YYYY-MM-DD，不明填空",
   "endDate": "YYYY-MM-DD，未結束或不明填空",
   "summaryZh": "繁中摘要，60字內，說明地點、內容、注意事項",
@@ -1107,7 +1111,7 @@ def normalize_display_terms(ev: dict) -> dict:
     replacements = DISPLAY_REPLACEMENTS.get(ev.get("brand", ""), {})
     if not replacements:
         return ev
-    for field in ("title", "locationName", "summaryZh"):
+    for field in ("title", "titleZh", "locationName", "locationNameZh", "summaryZh"):
         value = ev.get(field)
         if isinstance(value, str):
             for src, dst in replacements.items():
@@ -1124,11 +1128,99 @@ def normalize_display_terms(ev: dict) -> dict:
         ev["tags"] = normalized_tags
     return ev
 
+
+DISPLAY_IDENTITY_FIELDS = (
+    "title", "locationName", "startDate", "endDate", "type", "country", "city",
+    "needReservation", "hasLimitedGoods",
+)
+
+
+def display_identity_snapshot(event: dict) -> dict:
+    """Capture raw identity and the AI copy derived from it before correction."""
+    display: dict = {}
+    for field in ("titleZh", "locationNameZh", "summaryZh", "tags"):
+        value = event.get(field)
+        display[field] = value[:] if isinstance(value, list) else value
+    return {
+        "identity": {field: event.get(field, "") for field in DISPLAY_IDENTITY_FIELDS},
+        "display": display,
+    }
+
+
+def invalidate_changed_display_identity(event: dict, previous: dict) -> dict:
+    """Drop copy derived from identity fields changed by source-backed correction.
+
+    A normalizer may explicitly replace a public field with verified copy. Such a
+    changed value is retained; unchanged AI output is removed and must be
+    regenerated. This prevents a corrected city/date/type from receiving a valid
+    fingerprint while its title, summary, or tags still describe the old facts.
+    """
+    identity_before = previous.get("identity", {})
+    changed = any(
+        event.get(field, "") != identity_before.get(field, "")
+        for field in DISPLAY_IDENTITY_FIELDS
+    )
+    if not changed:
+        return event
+
+    display_before = previous.get("display", {})
+    event.pop("displaySourceHash", None)
+    for field in ("titleZh", "locationNameZh", "summaryZh", "tags"):
+        if event.get(field) == display_before.get(field):
+            event.pop(field, None)
+    return event
+
+
 def save_events(events: list[dict]):
     apply_event_hierarchy(events)
     for ev in events:
         normalize_display_terms(ev)
+        apply_event_display(ev)
     EVENTS_JSON.write_text(json.dumps(events, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def translated_events_only(
+    events: list[dict],
+    existing: list[dict],
+    source_label: str,
+    metrics: dict | None = None,
+) -> tuple[list[dict], set[str], set[str]]:
+    """Keep structured records only when their public zh-TW copy is complete.
+
+    Structured official parsers bypass the AI extraction prompt. A new venue or
+    product therefore stays unpublished until an exact source-fingerprint
+    translation is added. Pending IDs/URLs let callers preserve the previous
+    verified record while still removing records withdrawn by the official list.
+    """
+    previous_by_id = {event.get("id"): event for event in existing if event.get("id")}
+    ready: list[dict] = []
+    pending_ids: set[str] = set()
+    pending_urls: set[str] = set()
+    pending_count = 0
+    for event in events:
+        normalize_display_terms(event)
+        previous = previous_by_id.get(event.get("id"))
+        if previous:
+            carry_event_display(previous, event)
+        apply_event_display(event)
+        errors = event_display_errors(event)
+        if errors:
+            pending_count += 1
+            if event.get("id"):
+                pending_ids.add(event["id"])
+            if event.get("sourceUrl"):
+                pending_urls.add(event["sourceUrl"])
+            print(
+                f"    ⚠️  {source_label} 暫緩未翻譯事件 "
+                f"{event.get('id', '<missing-id>')}：{'；'.join(errors)}"
+            )
+            continue
+        ready.append(event)
+    if metrics is not None:
+        metrics["translationPendingCount"] = (
+            int(metrics.get("translationPendingCount", 0)) + pending_count
+        )
+    return ready, pending_ids, pending_urls
 
 def parse_last_updated_date(raw: str) -> str:
     data = json.loads((raw or "").lstrip("\ufeff"))
@@ -1577,6 +1669,10 @@ def _event_blob(ev: dict) -> str:
 
 
 STRONG_EVENT_IDENTITY_RULES = (
+    {"brand": "chiikawa", "types": {"popup", "campaign", "new_product"},
+     "concept": "chiikawa-tokyobanana-gransta", "country": True,
+     "patterns": ((("東京ばな奈", "東京香蕉"), ("グランスタ東京", "GRANSTA", "東京駅")),),
+     "scope": "date"},
     {"brand": "pokemon", "types": {"new_product"}, "concept": "pokemon-taipei-kalos", "patterns": ((("卡洛斯", "kalos"), ("Timeless Adventure", "30週年")),), "scope": "date", "country": True},
 
     {
@@ -2240,7 +2336,7 @@ def normalize_source_event(event: dict, *, source_url: str = "", page_text: str 
                     summaryZh="吉伊卡哇大判燒台北常設店11月21日開幕，販售三種口味大判燒、茶飲與原創抱枕、玩偶吊飾；入店需事前預約，辦法由0% TAIPEI官方社群公布。")
     if data.get("brand") == "chiikawa" and url == "https://prtimes.jp/main/html/rd/p/000000080.000168561.html":
         data.update(locationName="日本ちいかわらんど常設店等指定實體店",
-                    summaryZh="11月6日起於日本ちいかわらんど常設店等指定實體店販售Kiramekko Teddy Bear Christmas，共吉伊卡哇、小八貓、兔兔3款，各2,420日圓；部分其他會場有不同開賣日，依各店公告。")
+                    summaryZh="11月6日起於日本吉伊卡哇樂園常設店等指定實體店販售 Kiramekko Teddy Bear Christmas，共有吉伊卡哇、小八貓、兔兔3款，每款2,420日圓；部分其他場地有不同開賣日，依各店公告。")
     miffy_popup_venues = {
         "https://dickbruna.jp/news/202610/49227/": ("札幌", "Hokkaido", "札幌アピア", "2026-11-06", "2026-11-24"),
         "https://dickbruna.jp/news/202610/49063/": ("大阪梅田", "Osaka", "キデイランド大阪梅田店", "2026-10-31", "2026-11-17"),
@@ -2274,7 +2370,7 @@ def normalize_source_event(event: dict, *, source_url: str = "", page_text: str 
                     startDate="2026-10-31", endDate="",
                     summaryZh="台北寶可夢中心實體店的 Pokémon Timeless Adventure 合眾文件夾、鑰匙圈、壓克力磚、貼紙組及萬聖節蛋糕架，因颱風由10月24日延至10月31日販售。")
     if url == "https://www.nownews.com/news/6883605":
-        data.update(summaryZh="粉紅色 PokéXciting! 皮卡丘吉祥物10月20日到貨；最新公告10月23、24日暫停販售，預計10月25日恢復。入店整理券與購買限制依官方現場公告。", needReservation=False)
+        data.update(summaryZh="粉紅色 PokéXciting! 皮卡丘吉祥物10月20日到貨；最新公告10月23、24日暫停販售，預計10月25日恢復。入店號碼牌與購買限制依官方現場公告。", needReservation=False)
     known_fainted_article = url.rstrip("/") == _NOWNEWS_FAINTED_URL
     taiwan_store_evidence = known_fainted_article or any(signal in evidence for signal in (
         "Pokémon Center TAIPEI", "Pokemon Center TAIPEI",
@@ -2338,7 +2434,7 @@ def normalize_source_event(event: dict, *, source_url: str = "", page_text: str 
                 ),
                 "needReservation": False,
                 "hasLimitedGoods": False,
-                "tags": ["寶可夢", "Pokémon Center TAIPEI", "Fainted", "吉祥物", "店頭新品"],
+                "tags": ["寶可夢", "Pokémon Center TAIPEI", "Fainted", "吉祥物", "門市新品"],
             })
             if page_text:
                 data["_sourceScopedProduct"] = True
@@ -2871,10 +2967,16 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
             return None
         data.pop("relevant", None)
         data["brand"] = brand  # 強制用程式的小寫品牌，別信 AI 大小寫
+        normalize_display_terms(data)
+        display_snapshot = display_identity_snapshot(data)
         # 用地點關鍵字修正城市（AI 常把非目標城市硬塞成目標城市）
         fixed = correct_city(data.get("locationName"), item["title"], data.get("title"))
         if fixed:
             data["city"] = fixed
+            # Filling an omitted city from the same venue is benign. A conflicting
+            # non-empty AI city remains in the snapshot and invalidates its copy.
+            if not display_snapshot["identity"].get("city"):
+                display_snapshot["identity"]["city"] = fixed
         data["id"]          = brand[:2] + "-" + uuid.uuid4().hex[:6]
         data["sourceTitle"] = item["title"]  # 原始日文標題（備用）
         data["sourceType"]  = "media"
@@ -2927,6 +3029,8 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
             page_text=source_html,
             ref_year=_pub_year(item["pubDate"]),
         )
+        normalize_display_terms(data)
+        invalidate_changed_display_identity(data, display_snapshot)
         if is_online_only_merchandise(
             data,
             source_title=item.get("title", ""),
@@ -2965,6 +3069,11 @@ def extract_event(rotator: "KeyRotator", brand: str, item: dict) -> dict | None:
             return {"_skipNoProcess": True}
         data.pop("_sourceScopedProduct", None)
         data["sourceUrl"]   = real
+        apply_event_display(data, approve_current=True)
+        display_errors = event_display_errors(data)
+        if display_errors:
+            print("    ⚠️  繁中顯示欄位不完整，保留隔天重試：" + "；".join(display_errors))
+            return {"_skipNoProcess": True}
         return data
     except RateLimitError:
         raise  # 讓主程式接住、乾淨收工
@@ -2997,7 +3106,7 @@ def run(brands: list[str], official_only: bool = False):
     #    覆蓋同來源 URL 的舊資料；過期的由後面的 clean_events 自動移除。 ──────────────
     if "chiikawa" in brands:
         try:
-            structured = (
+            structured_raw = (
                 fetch_chiikawa_popups(correct_city=correct_city)
                 + fetch_chiikawa_campaign_popups(correct_city=correct_city)
                 + fetch_chiikawa_sushi_popups(correct_city=correct_city)
@@ -3006,6 +3115,9 @@ def run(brands: list[str], official_only: bool = False):
                 + fetch_chiikawa_mogumogu(correct_city=correct_city)
                 + fetch_chiikawa_movie_goods(correct_city=correct_city)
                 + fetch_chiikawa_movie_popups(correct_city=correct_city)
+            )
+            structured, _, _ = translated_events_only(
+                structured_raw, events, "吉伊卡哇官方來源", metrics
             )
             if structured:
                 surls = {e["sourceUrl"] for e in structured}
@@ -3021,23 +3133,30 @@ def run(brands: list[str], official_only: bool = False):
             print(f"    ⚠️  吉伊卡哇結構化來源失敗（略過）：{e}")
     if "pokemon" in brands:
         try:
-            cafe = fetch_pokemon_cafe_events(correct_city=correct_city)
-            if cafe:
-                events = replace_in_place(
-                    events,
-                    cafe,
-                    lambda e: (
-                        e.get("brand") == "pokemon"
-                        and "pokemon-cafe.jp/ja/cafe/news/" in e.get("sourceUrl", "")
-                    ),
-                )
-                print(f"🏛️  Pokémon Cafe 官方公告（結構化，免 AI）→ {len(cafe)} 筆現行")
-                save_events(events)
+            cafe_raw = fetch_pokemon_cafe_events(correct_city=correct_city)
+            cafe, pending_ids, pending_urls = translated_events_only(
+                cafe_raw, events, "Pokémon Cafe 官方來源", metrics
+            )
+            events = replace_in_place(
+                events,
+                cafe,
+                lambda e: (
+                    e.get("brand") == "pokemon"
+                    and "pokemon-cafe.jp/ja/cafe/news/" in e.get("sourceUrl", "")
+                    and e.get("id") not in pending_ids
+                    and e.get("sourceUrl") not in pending_urls
+                ),
+            )
+            print(f"🏛️  Pokémon Cafe 官方公告（結構化，免 AI）→ {len(cafe)} 筆現行")
+            save_events(events)
         except Exception as e:
             metrics["structuredSourceFailures"].append("pokemon-cafe")
             print(f"    ⚠️  Pokémon Cafe 官方公告來源失敗（略過）：{e}")
         try:
-            store_events = fetch_pokemon_store_events(correct_city=correct_city)
+            store_events_raw = fetch_pokemon_store_events(correct_city=correct_city)
+            store_events, _, _ = translated_events_only(
+                store_events_raw, events, "Pokémon Center 店頭活動", metrics
+            )
             if store_events:
                 urls = {e["sourceUrl"] for e in store_events}
                 events = replace_in_place(
@@ -3051,21 +3170,32 @@ def run(brands: list[str], official_only: bool = False):
             metrics["structuredSourceFailures"].append("pokemon-store-events")
             print(f"    ⚠️  Pokémon Center 官方店頭活動來源失敗（略過）：{e}")
         try:
-            poke = fetch_pokemon_popups(correct_city=correct_city)
-            if poke:
-                # 出張所以官方排程為準，但保留既有排序，避免每日產生只有順序變動的 diff。
-                events = replace_in_place(
-                    events,
-                    poke,
-                    lambda e: e.get("brand") == "pokemon" and "出張所" in e.get("title", ""),
-                )
-                print(f"🏛️  寶可夢出張所排程（結構化，免 AI）→ {len(poke)} 筆現行")
-                save_events(events)
+            poke_raw = fetch_pokemon_popups(correct_city=correct_city)
+            poke, pending_ids, pending_urls = translated_events_only(
+                poke_raw, events, "Pokémon Center 期間限定店", metrics
+            )
+            # 期間限定店以完整官方排程為準。已撤下項目要移除，但本次
+            # 原文有變、尚待重譯的項目保留上一版已驗證資料。
+            events = replace_in_place(
+                events,
+                poke,
+                lambda e: (
+                    e.get("brand") == "pokemon"
+                    and "出張所" in e.get("title", "")
+                    and e.get("id") not in pending_ids
+                    and e.get("sourceUrl") not in pending_urls
+                ),
+            )
+            print(f"🏛️  寶可夢期間限定店排程（結構化，免 AI）→ {len(poke)} 筆現行")
+            save_events(events)
         except Exception as e:
             metrics["structuredSourceFailures"].append("pokemon-popups")
             print(f"    ⚠️  寶可夢結構化來源失敗（略過）：{e}")
         try:
-            poke_jp = fetch_pokemon_jp_goods()
+            poke_jp_raw = fetch_pokemon_jp_goods()
+            poke_jp, _, _ = translated_events_only(
+                poke_jp_raw, events, "日本 Pokémon Center 官方商品", metrics
+            )
             if poke_jp:
                 urls = {e["sourceUrl"] for e in poke_jp}
                 events = replace_in_place(
@@ -3079,24 +3209,31 @@ def run(brands: list[str], official_only: bool = False):
             metrics["structuredSourceFailures"].append("pokemon-jp-goods")
             print(f"    ⚠️  日本 Pokémon 官方商品來源失敗（略過）：{e}")
         try:
-            poke_tw = fetch_pokemon_tw_goods(correct_city=correct_city)
-            if poke_tw:
-                events = replace_in_place(
-                    events,
-                    poke_tw,
-                    lambda e: (
-                        e.get("brand") == "pokemon"
-                        and "tw.portal-pokemon.com/goods/" in e.get("sourceUrl", "")
-                    ),
-                )
-                print(f"🏛️  台灣寶可夢官方商品（結構化，免 AI）→ {len(poke_tw)} 筆現行")
-                save_events(events)
+            poke_tw_raw = fetch_pokemon_tw_goods(correct_city=correct_city)
+            poke_tw, pending_ids, pending_urls = translated_events_only(
+                poke_tw_raw, events, "台灣 Pokémon Center 官方商品", metrics
+            )
+            events = replace_in_place(
+                events,
+                poke_tw,
+                lambda e: (
+                    e.get("brand") == "pokemon"
+                    and "tw.portal-pokemon.com/goods/" in e.get("sourceUrl", "")
+                    and e.get("id") not in pending_ids
+                    and e.get("sourceUrl") not in pending_urls
+                ),
+            )
+            print(f"🏛️  台灣寶可夢官方商品（結構化，免 AI）→ {len(poke_tw)} 筆現行")
+            save_events(events)
         except Exception as e:
             metrics["structuredSourceFailures"].append("pokemon-tw-goods")
             print(f"    ⚠️  台灣寶可夢官方商品來源失敗（略過）：{e}")
     if "miffy" in brands:
         try:
-            mf = fetch_miffy_events(extract_dates, correct_city)
+            mf_raw = fetch_miffy_events(extract_dates, correct_city)
+            mf, _, _ = translated_events_only(
+                mf_raw, events, "Miffy 官方活動", metrics
+            )
             if mf:
                 surls = {e["sourceUrl"] for e in mf}
                 events = replace_in_place(

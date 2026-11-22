@@ -517,6 +517,17 @@ def _covered_event_ids(candidate: OfficialCandidate, title: str, detail: str,
     if not current_events or candidate.brand != "miffy":
         return ()
 
+    if candidate.source == "miffy-kiddyland-search":
+        canonical_url = official_sources._kiddy_canonical_url(candidate.url, title)
+        if canonical_url != candidate.url:
+            alias_matches = tuple(
+                event.get("id", "") for event in current_events
+                if normalize_url(event.get("sourceUrl", "")) == canonical_url
+                and event.get("id")
+            )
+            if alias_matches:
+                return alias_matches
+
     pseudo_events: list[dict] = []
     lower_title = title.lower()
     is_miffy_popup = (

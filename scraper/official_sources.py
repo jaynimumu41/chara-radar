@@ -396,7 +396,7 @@ def _chiikawa_popup_event(
         "type": "popup", "country": country, "city": city or "",
         "locationName": location,
         "startDate": start, "endDate": end,
-        "summaryZh": f"ちいかわ POP UP STORE 於{venue}期間限定登場，販售豐富的吉伊卡哇限定周邊商品。",
+        "summaryZh": f"吉伊卡哇快閃店於{venue}期間限定登場，販售豐富的限定周邊商品。",
         "needReservation": False, "hasLimitedGoods": True,
         "tags": ["吉伊卡哇", "快閃店", country_tag, "限定周邊"],
         "id": _stable_id("ch", url),
@@ -1079,6 +1079,7 @@ def _pokemon_cafe_latte_event_from_text(text: str, source_url: str,
 def fetch_pokemon_cafe_events(correct_city=None) -> list[dict]:
     """Parse official Pokemon Cafe news for high-confidence physical cafe updates."""
     out: list[dict] = []
+    failed_urls: list[str] = []
     for url, parser in (
         (_POKEMON_CAFE_TOKYO_RENEWAL, _pokemon_cafe_tokyo_renewal_event_from_text),
         (_POKEMON_CAFE_LATTE, _pokemon_cafe_latte_event_from_text),
@@ -1086,11 +1087,16 @@ def fetch_pokemon_cafe_events(correct_city=None) -> list[dict]:
         html_text = fetch_html(url)
         if not html_text:
             print(f"    ⚠️  Pokémon Cafe 官方公告抓取失敗：{url}")
+            failed_urls.append(url)
             continue
         text = _visible_text(html_text)
         ev = parser(text, url, correct_city=correct_city)
         if ev:
             out.append(ev)
+    if failed_urls:
+        raise RuntimeError(
+            "Pokémon Cafe official source incomplete: " + ", ".join(failed_urls)
+        )
     return out
 
 
@@ -1171,12 +1177,11 @@ def fetch_pokemon_popups(correct_city=None) -> list[dict]:
     （oneheart65 為維護良好的排程彙整站，羽生等日期經官方 AEON 頁交叉驗證一致。）"""
     page = _page_text(_POKE_SCHED, max_bytes=800000)
     if not page:
-        print("    ⚠️  寶可夢出張所排程抓取失敗（直連＋代理都不行）")
-        return []
+        raise RuntimeError("寶可夢期間限定店排程抓取失敗（直連＋代理都不行）")
     out, parsed_rows = _pokemon_popup_events_from_text(
         page, correct_city=correct_city)
     if not parsed_rows:
-        print("    ⚠️  寶可夢出張所排程頁可達，但目前版型無法解析")
+        raise RuntimeError("寶可夢期間限定店排程頁可達，但目前版型無法解析")
     return out
 
 
@@ -1363,7 +1368,8 @@ def _tw_goods_entries(max_pages: int = 2) -> list[dict]:
     for page in range(1, max_pages + 1):
         h = fetch_html(_POKE_TW_GOODS.format(page=page))
         if not h:
-            break
+            raise RuntimeError(f"台灣寶可夢官方商品列表第 {page} 頁抓取失敗")
+        page_start = len(out)
         for entry in _tw_goods_entries_from_next_html(h):
             if entry["url"] in seen:
                 continue
@@ -1385,6 +1391,8 @@ def _tw_goods_entries(max_pages: int = 2) -> list[dict]:
                 "category": category,
                 "published": f"{year}-{mo}-{day}",
             })
+        if page == 1 and len(out) == page_start:
+            raise RuntimeError("台灣寶可夢官方商品列表可達，但目前版型無法解析")
     return out
 
 
@@ -1463,7 +1471,7 @@ def fetch_pokemon_tw_goods(correct_city=None, max_pages: int = 5, fresh_days: in
             continue
         h = fetch_html(entry["url"])
         if not h:
-            continue
+            raise RuntimeError(f"台灣寶可夢官方商品頁抓取失敗：{entry['url']}")
         text = _visible_text(h)
         partner_popup = _tw_partner_popup_event(entry, text, correct_city=correct_city)
         if partner_popup:
@@ -1476,7 +1484,7 @@ def fetch_pokemon_tw_goods(correct_city=None, max_pages: int = 5, fresh_days: in
             continue
         start = _tw_store_sale_date(text, entry["published"])
         if not start:
-            continue
+            raise RuntimeError(f"台灣寶可夢官方商品頁缺少可解析的門市開賣日：{entry['url']}")
         age = (date.fromisoformat(today) - date.fromisoformat(start)).days
         if age > fresh_days:
             continue
@@ -1532,6 +1540,13 @@ _KIDDY_OUT_OF_SCOPE_PRODUCT = [
     "ハンカチ", "トレーナー", "アパレル", "ファッション",
     "Tシャツ", "パーカー", "ソックス", "靴下", "ジュエリー", "チャーム",
 ]
+# Human-reviewed duplicate CMS pages. The target must be a verified live page
+# for the exact same title, date, venue, and giveaway/product conditions; do
+# not derive or guess a canonical URL from a slug alone.
+_KIDDY_DUPLICATE_PAGE_ALIASES = {
+    "https://www.kiddyland.co.jp/event/miffy_nove202612/":
+        "https://www.kiddyland.co.jp/event/miffy_nove202611/",
+}
 _KIDDY_SITE_SUFFIX = " | キデイランドへようこそ！"
 _KIDDY_RANGE = re.compile(
     r"(?:(20\d{2})年)?(\d{1,2})月(\d{1,2})日[^。\n]{0,30}?"
@@ -1623,6 +1638,11 @@ def _kiddy_display_title(title: str) -> str:
     return title or "miffy style 店頭活動"
 
 
+def _kiddy_canonical_url(url: str, title: str = "") -> str:
+    """Return a verified canonical page for a reviewed Kiddy Land repost."""
+    return _KIDDY_DUPLICATE_PAGE_ALIASES.get(url, url)
+
+
 def _kiddy_period(title: str, detail: str, extract_dates) -> tuple[str, str]:
     ref_year_m = re.search(r"(20\d{2})年", title)
     ref_year = int(ref_year_m.group(1)) if ref_year_m else _today_date().year
@@ -1680,6 +1700,8 @@ def _kiddy_period(title: str, detail: str, extract_dates) -> tuple[str, str]:
 def _kiddy_location(title: str) -> tuple[str, str]:
     if "Birthday Fair" in title or "各店" in title:
         return "miffy style 各店＋キデイランド対象店", ""
+    if "京都四条河原町" in title or "京都四條河原町" in title:
+        return "miffy style 京都四条河原町店", "Kyoto"
     if "東京駅店" in title:
         return "miffy style 東京駅店", "Tokyo"
     if "原宿店" in title:
@@ -1694,6 +1716,8 @@ def _kiddy_location(title: str) -> tuple[str, str]:
         return "miffy style 心齋橋PARCO店", "Osaka"
     if "神戸店" in title or "三宮店" in title:
         return "miffy style 神戸店・三宮店", "Hyogo"
+    if re.search(r"miffy\s*style\s*限定", title, re.I):
+        return "miffy style 各店", ""
     return "miffy style 各店＋一部キデイランド店舗", ""
 
 
@@ -2025,6 +2049,9 @@ def fetch_kiddyland_miffy_events(extract_dates, correct_city, max_articles=8, fr
         title = _first_heading(detail)
         if not title or not any(k.lower() in title.lower() for k in ["miffy", "ミッフィー"]):
             continue
+        canonical_url = _kiddy_canonical_url(url, title)
+        if canonical_url in seen:
+            continue
         detail_text = _main_article_text(detail, title)
         if any(k in title for k in _KIDDY_SKIP):
             continue
@@ -2033,10 +2060,10 @@ def fetch_kiddyland_miffy_events(extract_dates, correct_city, max_articles=8, fr
         ref_year_m = re.search(r"(20\d{2})年", title)
         ref_year = int(ref_year_m.group(1)) if ref_year_m else _today_date().year
         multi_venue = _miffy_multi_venue_events(
-            title, url, detail_text, ref_year, extract_dates, correct_city, today=today)
+            title, canonical_url, detail_text, ref_year, extract_dates, correct_city, today=today)
         if multi_venue is not None:
             out.extend(multi_venue)
-            seen.add(url)
+            seen.add(canonical_url)
             continue
         pub_m = re.search(r"On\s+(\d{1,2})月\s*(\d{1,2}),\s*(20\d{2})", detail_text)
         if pub_m:
@@ -2064,6 +2091,13 @@ def fetch_kiddyland_miffy_events(extract_dates, correct_city, max_articles=8, fr
             summary = "Miffy 聯名商品於 miffy style 店頭期間限定受注，需於指定期間到店辦理。"
         elif typ == "new_product":
             summary = "Miffy style 店頭限定新品發售；若同日已有較大的店頭活動，單品頁不另列為正式情報。"
+        if "干支ひつじ" in title:
+            summary = "miffy style 各店推出生肖羊系列限定新品，部分品項與店內贈品僅於實體店提供。"
+        elif (
+            ("京都四条河原町限定" in title or "京都四條河原町限定" in title)
+            and "ミッフィーマスコット" in title
+        ):
+            summary = "miffy style 京都四條河原町店推出店舖限定的巫女造型米飛兔小布偶。"
         display_title = _kiddy_display_title(title)
         out.append({
             "brand": "miffy",
@@ -2076,12 +2110,12 @@ def fetch_kiddyland_miffy_events(extract_dates, correct_city, max_articles=8, fr
             "needReservation": typ == "reservation" or "抽選" in title or "予約" in title,
             "hasLimitedGoods": True,
             "tags": ["米飛兔", "miffy style", "日本"],
-            "id": _stable_id("mi", url),
+            "id": _stable_id("mi", canonical_url),
             "sourceType": "official_site", "createdAt": today,
             "sourceTitle": f"{title} - キデイランド",
-            "sourceUrl": url,
+            "sourceUrl": canonical_url,
         })
-        seen.add(url)
+        seen.add(canonical_url)
     return _drop_same_day_kiddy_product_details(out, today=today)
 
 

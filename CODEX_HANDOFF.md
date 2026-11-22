@@ -128,7 +128,7 @@ X(twitter) 貼文用 snowflake ID 可推發文年。
 - 程式自動補日期只限可信網域（`TRUSTED_DATE_DOMAINS`）——**你（agent）可以突破這限制**，因為你會抓原頁多方查證；但同樣要遵守「年份陷阱」「只取主活動區間」。
 
 ### 6.4 events.json 欄位格式（每筆）
-`brand`(小寫) / `title`(品牌名留英文其餘繁中) / `type`(popup|new_product|campaign|store|cafe|lottery|reservation) / `country`(JP|TW) / `city`(英文如 Tokyo/Osaka/Taipei，不確定留空) / `locationName` / `startDate`(YYYY-MM-DD) / `endDate` / `summaryZh`(繁中) / `needReservation` / `hasLimitedGoods` / `tags` / `id` / `sourceType` / `createdAt` / `sourceUrl` / `sourceTitle`。
+`brand`(小寫) / `title`(內部官方原名或穩定識別名) / `titleZh`(前端繁中標題) / `type`(popup|new_product|campaign|store|cafe|lottery|reservation) / `country`(JP|TW) / `city`(英文如 Tokyo/Osaka/Taipei，不確定留空) / `locationName`(內部官方場館原名) / `locationNameZh`(前端繁中場館名) / `startDate`(YYYY-MM-DD) / `endDate` / `summaryZh`(繁中) / `needReservation` / `hasLimitedGoods` / `tags`(繁中) / `id` / `sourceType` / `createdAt` / `sourceUrl` / `sourceTitle` / `displaySourceHash`（綁定原文、場館、來源標題與檔期的翻譯指紋）。前端不可 fallback 到 `title` / `locationName`；官方原文只供查證與去重。原文指紋改變時不得沿用舊翻譯。
 
 ---
 

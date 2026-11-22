@@ -57,6 +57,15 @@ $env:PYTHONIOENCODING='utf-8'
 The candidate script is only a triage tool. It does not prove correctness and it
 does not replace web verification.
 
+Before publication, verify every user-visible field is understandable zh-TW:
+`titleZh`, `locationNameZh`, `summaryZh`, and `tags`. Official Latin brand or
+venue names may remain, but Japanese kana/shinjitai may appear only in internal
+`title`, `locationName`, `sourceTitle`, or store `officialName`. Never "fix" the
+official originals. If a reusable structured-source event needs translation,
+add or correct its exact source-fingerprint mapping in `scraper/display_zh.py`
+and add a smoke regression; never key the mapping by event ID alone, and do not
+patch only the generated JSON.
+
 5. Chiikawa official homepage subpage audit:
 
 ```powershell
