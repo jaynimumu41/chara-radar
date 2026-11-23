@@ -334,7 +334,7 @@
     "locationName": "日本全國 Flower Miffy 實體店",
     "startDate": "",
     "endDate": "",
-    "summaryZh": "Flower Miffy 預計自2026年11月上旬起陸續推出聖誕花圈與聖誕樹擺飾；部分款式於日本全國實體店及 Flower Miffy 快閃市集販售。",
+    "summaryZh": "Flower Miffy 預計自 2026 年 11 月上旬起陸續推出聖誕花圈與聖誕樹擺飾；部分款式於日本全國實體店及 Flower Miffy Pop-Up Marche 販售。",
     "needReservation": false,
     "hasLimitedGoods": true,
     "tags": [
@@ -846,7 +846,7 @@
     "locationName": "CHIIKAWA OBANYAKI in TAIPEI（台北市大同區赤峰街41巷9號）",
     "startDate": "2026-11-21",
     "endDate": "",
-    "summaryZh": "吉伊卡哇日式車輪餅台北常設店於11月21日開幕，販售三種口味的日式車輪餅（大判燒）、茶飲，以及原創抱枕與玩偶吊飾；入店須事前預約，辦法由0% TAIPEI官方社群公布。",
+    "summaryZh": "吉伊卡哇大判燒台北常設店11月21日開幕，販售三種口味大判燒、茶飲與原創抱枕、玩偶吊飾；入店需事前預約，辦法由0% TAIPEI官方社群公布。",
     "needReservation": true,
     "hasLimitedGoods": true,
     "tags": [
@@ -1133,33 +1133,6 @@
     "titleZh": "吉伊卡哇快閃店 AEON MALL 太田",
     "locationNameZh": "AEON MALL 太田 West Mall 1樓 無印良品前",
     "displaySourceHash": "1763713425d80dda95db"
-  },
-  {
-    "brand": "pokemon",
-    "title": "Pokémon Center POP-UP STORE 高雄左營",
-    "type": "popup",
-    "country": "TW",
-    "city": "Kaohsiung",
-    "locationName": "新光三越高雄左營店",
-    "startDate": "2026-11-13",
-    "endDate": "2026-11-22",
-    "summaryZh": "11月13日至22日於新光三越高雄左營店限時販售寶可夢官方原創周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "寶可夢",
-      "快閃店",
-      "限定商品",
-      "高雄"
-    ],
-    "id": "po-69fbe4",
-    "sourceTitle": "新光三越高雄左營店11/5(四)-11/29(日)週年慶重磅登場寶可夢30週年話題引爆！限定快閃店粉絲朝聖排隊搶購- 社會新聞 - PChome Online 新聞",
-    "sourceType": "media",
-    "createdAt": "2026-11-07",
-    "sourceUrl": "https://news.tvbs.com.tw/life/4042585",
-    "titleZh": "Pokémon Center 高雄左營快閃店",
-    "locationNameZh": "新光三越高雄左營店",
-    "displaySourceHash": "c1064abc221462660a46"
   },
   {
     "brand": "chiikawa",
