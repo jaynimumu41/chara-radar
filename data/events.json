@@ -27,32 +27,6 @@
     "displaySourceHash": "3c24d7e1d8498a0417da"
   },
   {
-    "brand": "miffy",
-    "title": "Miffy「米飛兔與孩子的時光」企劃展",
-    "type": "campaign",
-    "country": "JP",
-    "city": "Gifu",
-    "locationName": "兒童陶瓷博物館（岐阜縣多治見市旭丘10-6-67）",
-    "startDate": "2026-08-01",
-    "endDate": "2026-11-23",
-    "summaryZh": "岐阜多治見兒童陶瓷博物館舉辦米飛兔主題企劃展，現場販售相關繪本與博物館限定原創餐具。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "米飛兔",
-      "企劃展",
-      "博物館限定商品"
-    ],
-    "id": "mi-92d441",
-    "sourceType": "official_site",
-    "createdAt": "2026-07-29",
-    "sourceTitle": "岐阜・多治見 こども陶器博物館で企画展「ミッフィーとこどものじかん」開催 - dickbruna.jp",
-    "sourceUrl": "https://dickbruna.jp/news/202607/47552/",
-    "titleZh": "Miffy「米飛兔與孩子的時光」企劃展",
-    "locationNameZh": "兒童陶瓷博物館（岐阜縣多治見市旭丘10-6-67）",
-    "displaySourceHash": "9508df8ec8f1dc51e967"
-  },
-  {
     "brand": "chiikawa",
     "title": "Chiikawa ちいかわパークストア LUCUA SOUTH",
     "type": "store",
@@ -704,33 +678,6 @@
     "displaySourceHash": "6a5d84dd6d512c13793c"
   },
   {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 POP UP STORE イオンモール須坂",
-    "type": "popup",
-    "country": "JP",
-    "city": "Nagano",
-    "locationName": "イオンモール須坂 1F Goolightコート",
-    "startDate": "2026-11-06",
-    "endDate": "2026-11-23",
-    "summaryZh": "吉伊卡哇期間限定快閃店於 AEON MALL 須坂登場，販售活動紀念與限定周邊商品。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "日本",
-      "限定周邊"
-    ],
-    "id": "ch-7385fa",
-    "sourceType": "official_site",
-    "createdAt": "2026-10-27",
-    "sourceTitle": "ちいかわPOP UP STORE イオンモール須坂(2026-11-06～2026-11-23) - ちいかわ公式",
-    "sourceUrl": "https://chiikawa-info.jp/p26/pus_aszk/index.html",
-    "titleZh": "吉伊卡哇快閃店 AEON MALL 須坂",
-    "locationNameZh": "AEON MALL 須坂 1樓 Goolight 廣場",
-    "displaySourceHash": "5c1eb7455b03f4de60c8"
-  },
-  {
     "brand": "pokemon",
     "title": "Pokémon Center TAIPEI 迷你持有物系列",
     "type": "new_product",
@@ -1210,33 +1157,6 @@
     "titleZh": "台灣寶可夢中心 Pokémon Timeless Adventure 卡洛斯系列",
     "locationNameZh": "Pokémon Center TAIPEI（新光三越台北信義新天地 A11 3樓）",
     "displaySourceHash": "177ba45f2de6eb3eb7d2"
-  },
-  {
-    "brand": "chiikawa",
-    "title": "吉伊卡哇 Pocket POP UP STORE 池袋PARCO",
-    "type": "popup",
-    "country": "JP",
-    "city": "Tokyo",
-    "locationName": "池袋PARCO 本館6F 0% IKEBUKURO",
-    "startDate": "2026-10-24",
-    "endDate": "2026-11-23",
-    "summaryZh": "吉伊卡哇 Pocket 第四波便當與店家主題周邊於池袋 PARCO 期間限定販售；其他城市各有獨立檔期。",
-    "needReservation": false,
-    "hasLimitedGoods": true,
-    "tags": [
-      "吉伊卡哇",
-      "快閃店",
-      "周邊",
-      "吉伊卡哇 Pocket"
-    ],
-    "id": "ch-e8f09f",
-    "sourceTitle": "ちいかわぽけっと公式グッズ第4弾・POP UP STORE開催概要 - Applibot",
-    "sourceType": "media",
-    "createdAt": "2026-11-10",
-    "sourceUrl": "https://www.applibot.co.jp/news/202610131319554757/",
-    "titleZh": "吉伊卡哇 Pocket 快閃店 池袋 PARCO",
-    "locationNameZh": "池袋 PARCO 本館6樓 0% IKEBUKURO",
-    "displaySourceHash": "93fd45cf607d29294e48"
   },
   {
     "brand": "chiikawa",
@@ -2125,5 +2045,32 @@
     "titleZh": "miffy style 京都四條河原町店限定巫女造型米飛兔小布偶",
     "locationNameZh": "miffy style 京都四條河原町店",
     "displaySourceHash": "13bfb0aaa2439b24dc40"
+  },
+  {
+    "brand": "pokemon",
+    "title": "ポケモン ウールーに寄り添うピカチュウの陶飾りがかわいい。ダルマッカたちも金屏風付きでお正月にぴったり。ポケセンで11月28日発売",
+    "titleZh": "寶可夢聖誕裝飾與新年擺飾",
+    "type": "new_product",
+    "country": "JP",
+    "city": "Tokyo",
+    "locationName": "ポケモンセンター",
+    "locationNameZh": "寶可夢中心",
+    "startDate": "2026-11-28",
+    "endDate": "",
+    "summaryZh": "寶可夢中心將於11月28日發售新款陶飾，包含皮卡丘與伊布依偎的擺飾，以及帶有金屏風的達摩娃娃擺飾，適合新年裝飾。",
+    "needReservation": false,
+    "hasLimitedGoods": true,
+    "tags": [
+      "寶可夢",
+      "新品",
+      "擺飾",
+      "新年"
+    ],
+    "id": "po-bb191c",
+    "sourceTitle": "『ポケモン』ウールーに寄り添うピカチュウの陶飾りがかわいい。ダルマッカたちも金屏風付きでお正月にぴったり。ポケセンで11月28日発売 - ファミ通",
+    "sourceType": "media",
+    "createdAt": "2026-11-24",
+    "sourceUrl": "https://www.famitsu.com/article/202611/94632",
+    "displaySourceHash": "93829a7cac8e42f03cff"
   }
 ]
